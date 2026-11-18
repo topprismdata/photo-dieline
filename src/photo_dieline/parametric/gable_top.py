@@ -82,6 +82,8 @@ def build_ir(params: dict | None = None) -> dict:
     ]
     # 山墙三角归属(拓扑标注): wallL/wallR 顶三角即 gable_end 区, 同板无折线
     panels[1]["wall_of"] = "wallL"
+    # 注: polygon_2d 顶点序是 M1 冻结合同 (G04 索引配对依赖), 不改;
+    # 法线外向归一由渲染器侧处理 (twin.py)
 
     lean = math.asin(min(1.0, (gap / 2) / Ef)) if Ef > 0 else 0.0
     # 全部折线显式 target_dir_3d (模板解析已知封闭盒: wallL x=-W/2 平面 y 0..D;

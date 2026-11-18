@@ -101,15 +101,16 @@ def render_cmd(
     ir_path: str = typer.Option(..., "--ir", help="geometry-ir.json"),
     photo: str = typer.Option(..., "--photo", help="实拍参照照"),
     out: str = typer.Option(..., "--out", help="对比图输出 PNG"),
-    az: float = typer.Option(-32.0, help="相机方位角(度)"),
-    el: float = typer.Option(12.0, help="相机仰角(度)"),
+    az: float = typer.Option(-22.0, help="相机方位角(度)"),
+    el: float = typer.Option(16.0, help="相机仰角(度)"),
+    debug_ids: bool = typer.Option(False, "--debug-ids", help="面板ID调试渲染(异色+背面剔除+图例)"),
 ) -> None:
     """逆向孪生折叠渲染 + 与实拍并排对比 (photo-alignment 人工确认件)."""
     from .core.ir import from_raw
     from .render.twin import compare_side_by_side, render_twin
 
     ir = from_raw(json.loads(Path(ir_path).read_text()))
-    twin = render_twin(ir, az_deg=az, el_deg=el)
+    twin = render_twin(ir, az_deg=az, el_deg=el, debug_ids=debug_ids)
     twin_path = Path(out).with_name(Path(out).stem + "_twin.png")
     twin.save(twin_path)
     compare_side_by_side(photo, twin, out)
