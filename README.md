@@ -37,6 +37,13 @@ pip install -e ".[dev]"
 photo-dieline build --spec examples/gable_top/spec.json \
   --photo examples/gable_top/reference_photo.jpg --out examples/gable_top/artifacts
 
+# 逆向闭环: 实拍 → 逆向刀版/CAD → 折叠孪生渲染 → 与实拍并排对比
+photo-dieline build --spec examples/gable_top/spec_usda_halfpint.json \
+  --photo examples/gable_top/reference_photo.jpg --out examples/gable_top/artifacts
+photo-dieline render --ir examples/gable_top/artifacts/geometry-ir.json \
+  --photo examples/gable_top/reference_photo.jpg \
+  --out examples/gable_top/artifacts/compare_usda.png
+
 pytest tests/   # 13 项机器验收 (16 项合同的可自动判定部分)
 ```
 

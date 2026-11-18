@@ -96,6 +96,27 @@ def _layer_geo(ir):
     return geo
 
 
+@app.command("render")
+def render_cmd(
+    ir_path: str = typer.Option(..., "--ir", help="geometry-ir.json"),
+    photo: str = typer.Option(..., "--photo", help="实拍参照照"),
+    out: str = typer.Option(..., "--out", help="对比图输出 PNG"),
+    az: float = typer.Option(-32.0, help="相机方位角(度)"),
+    el: float = typer.Option(12.0, help="相机仰角(度)"),
+) -> None:
+    """逆向孪生折叠渲染 + 与实拍并排对比 (photo-alignment 人工确认件)."""
+    from .core.ir import from_raw
+    from .render.twin import compare_side_by_side, render_twin
+
+    ir = from_raw(json.loads(Path(ir_path).read_text()))
+    twin = render_twin(ir, az_deg=az, el_deg=el)
+    twin_path = Path(out).with_name(Path(out).stem + "_twin.png")
+    twin.save(twin_path)
+    compare_side_by_side(photo, twin, out)
+    typer.echo(f"twin: {twin_path}")
+    typer.echo(f"compare: {out}")
+
+
 def main():
     app()
 

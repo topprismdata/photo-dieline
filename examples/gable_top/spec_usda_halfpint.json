@@ -1,0 +1,62 @@
+{
+  "package": "gable_top",
+  "params": {
+    "W": 57.15,
+    "D": 57.15,
+    "Hb": 75.0,
+    "Hr": 20.25,
+    "Ef": 12.0,
+    "fin_gap_mm": 3.0,
+    "glue_w": 12.0,
+    "board_t": 0.42
+  },
+  "measurements": [
+    {
+      "name": "W",
+      "value_mm": 57.15,
+      "status": "VERIFIED_SOURCE",
+      "source": "US half-pint gable-top 标称 2.25in (weprintboxes.com milk-carton-dimensions, 多源一致)"
+    },
+    {
+      "name": "D",
+      "value_mm": 57.15,
+      "status": "VERIFIED_SOURCE",
+      "source": "同上"
+    },
+    {
+      "name": "Hb",
+      "value_mm": 75.0,
+      "status": "DERIVED",
+      "source": "总高 95.25mm(3.75in) 减人字顶估高; 待像素级校准"
+    },
+    {
+      "name": "Hr",
+      "value_mm": 20.25,
+      "status": "DERIVED",
+      "source": "总高-Hb; ASSUMED 比例, 待像素级校准"
+    },
+    {
+      "name": "Ef",
+      "value_mm": 12.0,
+      "status": "DERIVED",
+      "source": "ASSUMED 典型值 (枚举收敛为 DERIVED), 待像素校准"
+    },
+    {
+      "name": "fin_gap_mm",
+      "value_mm": 3.0,
+      "status": "DERIVED",
+      "source": "双层板厚叠层"
+    },
+    {
+      "name": "glue_w",
+      "value_mm": 12.0,
+      "status": "DEFAULTED"
+    },
+    {
+      "name": "board_t",
+      "value_mm": 0.42,
+      "status": "DEFAULTED",
+      "source": "液体包装纸板典型 320-450gsm"
+    }
+  ]
+}

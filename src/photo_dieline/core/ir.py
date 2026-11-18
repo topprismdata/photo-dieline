@@ -114,5 +114,18 @@ def to_dict(ir: GeometryIR) -> dict:
     return d
 
 
+def from_raw(raw: dict) -> GeometryIR:
+    """已保存的 geometry-ir.json → GeometryIR (重校验)."""
+    validate_dict(raw)
+    edges = [FoldEdge(
+        id=e["id"],
+        seg_2d=((e["seg_2d"][0][0], e["seg_2d"][0][1]), (e["seg_2d"][1][0], e["seg_2d"][1][1])),
+        mt_va=e["fold"]["mt_va"], parent=e["fold"]["parent"], child=e["fold"]["child"],
+        target_angle_deg=e["fold"].get("target_angle_deg"),
+        target_dir_3d=tuple(e["fold"]["target_dir_3d"]) if e["fold"].get("target_dir_3d") else None,
+    ) for e in raw["edges"]]
+    return GeometryIR(raw["meta"], raw["package"], raw["panels"], edges, raw["features"], raw)
+
+
 def save(ir: GeometryIR, path: str | Path) -> None:
     Path(path).write_text(json.dumps(to_dict(ir), indent=2, ensure_ascii=False))
