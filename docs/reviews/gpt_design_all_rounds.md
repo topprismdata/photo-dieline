@@ -2,8 +2,8 @@
 
 - 会话: 6afda74e-a9fc-83ea-9e58-1144b40273fd (chatgpt.com, 2026-11-18)
 - 抓取: backend-api Bearer + mapping 时间序全量
-- 三轮: R1 总体方案 V1.0 / R2 六项裁决+M1冻结 / R3 TDE孪生训练方向
-- 共 4 条 assistant 消息, 49256 字符
+- 四轮: R1 总体方案 V1.0 / R2 六项裁决+M1冻结 / R3 TDE孪生训练方向 / R4 TDE合成规范V0.1冻结
+- 共 5 条 assistant 消息, 76672 字符
 
 <!-- assistant msg @2026-11-18T13:25:46.526Z len=29178 -->
 
@@ -2111,101 +2111,1249 @@ M2-A Template Engine   M2-B TDE
 
 ====================[ASSISTANT MESSAGE]====================
 
-<!-- assistant msg @2026-11-18T13:37:33.044Z len=2740 -->
+<!-- assistant msg @2026-11-18T13:41:37.291Z len=24382 -->
 
-## 五、TDE 插入后的 M1/M2/M3 最终重排
+# 第四轮架构评审：Twins Data Engine V0.1 合成规范
 
-我建议不改变 M1，只重构 M2 和 M3。TDE 的数据协议、训练管线和模型评估都进入 M2，T1/T2 从原 M3 提前，T3 保留远期研究。
+<row align="center" gap={2} wrap="wrap">
+  <badge color="success">建议 APPROVE</badge>
+  <badge color="info">TDE V0.1</badge>
+  <badge color="warning">Sim2Real 独立门禁</badge>
+</row>
 
-| 阶段 | 核心任务 | 交付物 | 验收目标 |
-|---|---|---|---|
-| **M1** | 原定参数化垂直切片 | Gable-top、Geometry IR、SVG/PDF、纯 Python 折叠 QA | 原冻结范围全部通过 |
-| **M2-A** | 模板库扩展 | FEFCO 0201、Gable-top 完善、Template Contract | 多模板统一 IR |
-| **M2-B** | Twins Data Engine | 参数采样、3D 生成、Blender 渲染、数据集构建 | 孪生数据自动生成和可追溯 |
-| **M2-C** | 真实数据基准 | Real Golden Set、标注规范、数据版本管理 | 独立测试集冻结 |
-| **M2-D** | T1 分类模型 | 包装类型识别、UNKNOWN 拒识 | 真实域分类验证 |
-| **M2-E** | T2 参数回归 | 类型条件化参数预测、置信区间 | 真实域尺寸与几何验证 |
-| **M3-A** | 视觉重建增强 | TRELLIS.2、Mesh Analysis、非标结构辅助 | 视觉证据与参数化结构融合 |
-| **M3-B** | 智能交互 | 自动补全参数、冲突检测、最少问答 | 降低人工测量与确认成本 |
-| **M3-C** | T3 研究 | Photo→Candidate Geometry IR | 探索端到端结构生成，不绕过制造 QA |
+先给三个结论：
 
-### 建议的执行依赖关系
+1. **六维域随机化可以直接工程化，但必须采用分层、相关性约束的采样，不能简单地把所有参数独立随机。** 手机拍摄分布是基准，不是单反棚拍。
+2. **先建立结构多样性，再增加渲染数量。** 100 万张同一种盒型的图片，不如覆盖充分的 100 种独立结构变体。
+3. **T2 的成功标准不是合成测试集 MAE，而是未见过的真实包装上，模型预测的参数能否通过 Geometry IR 和制造 QA。**
+
+本轮不改变 M1、不改变 ADR-001，也不改变 TDE 在 M2 的位置。
+
+以下数值是建议冻结的首版工程采样范围，不是宣称已经从真实手机照片统计得到的概率分布。后续可以用真实照片 EXIF、相机元数据和标注分布校准。
+
+---
+
+# 交付一：TDE V0.1 六维随机化规范
+
+## 1.1 Camera：手机相机
+
+<badge color="success">最高优先级</badge>
+
+手机相机与单反棚拍有明显差异。建议默认采用等效焦距、相机与物体距离、俯仰角和透视关系进行采样。
+
+| 参数 | REALISTIC | MODERATE | STRESS | 分布 |
+|---|---:|---:|---:|---|
+| 等效焦距 | 24–70mm | 20–85mm | 16–100mm | 分段混合 |
+| 俯角 | -15°–35° | -30°–45° | -50°–60° | 三角分布 |
+| 水平偏航 | -35°–35° | -60°–60° | -85°–85° | 均匀 |
+| 滚转角 | -5°–5° | -12°–12° | -25°–25° | 截断正态 |
+| 拍摄距离 | 25–100cm | 15–150cm | 10–250cm | 对数均匀 |
+| 光轴偏移 | 0–10° | 0–20° | 0–35° | 截断正态 |
+| 主体画面占比 | 45–85% | 30–90% | 15–95% | 分段均匀 |
+| 镜头畸变 | 0–1% | 0–2% | 0–4% | 分段采样 |
+| 景深 | f/1.7–f/4 等效表现 | f/1.4–f/5.6 | f/1.2–f/8 | 按模糊半径采样 |
+
+注意：
+
+- 等效焦距不等于 Blender 的实际焦距。需要根据传感器尺寸换算。
+- 俯角定义为相机光轴相对包装水平面的角度，正负方向在代码中必须统一。
+- 24–70mm 是首期主分布，不代表手机所有镜头都服从这个分布。
+- 不应假设 24mm、35mm、50mm、70mm 在真实手机上的使用概率相等。
+
+建议真实手机分布先采用 24–28mm 主摄广角、35–50mm 裁切/主摄视角、65–70mm 长焦三个混合区间，后续通过真实数据修正。
+
+## 1.2 Lighting：光照
+
+| 参数 | REALISTIC | MODERATE | STRESS | 分布 |
+|---|---:|---:|---:|---|
+| 色温 | 3000–7500K | 2500–9000K | 2000–12000K | 对数混合 |
+| 曝光变化 | -1.5～+1.5 EV | -2.5～+2.5 EV | -4～+3 EV | 截断正态 |
+| 主光强度变化 | 0.5–2× | 0.25–3× | 0.1–5× | 对数均匀 |
+| 光源方向 | 0–360° | 0–360° | 0–360° | 均匀 |
+| 阴影软硬度 | 软至中等 | 软至硬 | 极硬至极软 | 混合 |
+| 环境光比例 | 0.2–0.8 | 0.1–0.9 | 0.02–1.0 | 均匀 |
+| 色偏 | ΔE 0–5 | ΔE 0–10 | ΔE 0–20 | 截断分布 |
+| 局部高光 | 0–5%面积 | 0–10%面积 | 0–20%面积 | 分段均匀 |
+
+这里的 0.5–2× 是相对基准光照强度，不是绝对照度。
+
+建议增加光照组合约束：
+
+- 室内暖光：3000–4500K。
+- 室内混合光：3500–6500K。
+- 窗边自然光：4500–7500K。
+- 户外阴天：5500–8000K。
+
+不能把 2000K 色温、极强曝光、硬阴影全部独立组合成大量没有现实意义的样本。
+
+## 1.3 Material：包装材料
+
+| 参数 | REALISTIC | MODERATE | STRESS | 分布 |
+|---|---:|---:|---:|---|
+| 表面粗糙度 | 0.25–0.75 | 0.15–0.9 | 0.05–1.0 | 截断 Beta |
+| 反射强度 | 低至中 | 低至高 | 极低至极高 | 混合 |
+| 微表面凹凸 | 0–0.15mm | 0–0.3mm | 0–0.8mm | 半正态 |
+| 局部压痕深度 | 0–0.3mm | 0–0.8mm | 0–2mm | 零膨胀分布 |
+| 折痕宽度 | 0.3–2mm | 0.2–3mm | 0.1–5mm | 对数均匀 |
+| 表面纤维强度 | 弱至中 | 弱至强 | 极强 | 离散混合 |
+| 材料厚度 | 模板指定 | 合理变化 | 极限测试 | 结构参数采样 |
+
+特别注意：纸板厚度属于包装结构真值的一部分，不应该为了视觉随机化而随意改变。
+
+如果改变厚度，必须重新计算折叠补偿、面板偏移和折痕位置。否则就会出现图片上看起来不同、但 Geometry IR 标签错误的样本。
+
+## 1.4 Print：印刷与包装图案
+
+| 参数 | REALISTIC | MODERATE | STRESS | 分布 |
+|---|---:|---:|---:|---|
+| 色彩偏差 | ΔE 0–5 | ΔE 0–10 | ΔE 0–20 | 混合 |
+| 印刷网点 | 60–175 LPI | 40–200 LPI | 20–250 LPI | 离散混合 |
+| 套印偏差 | 0–0.2mm | 0–0.5mm | 0–1mm | 截断正态 |
+| 标签纹理 | 真实印刷纹理 | 增强变化 | 极端磨损 | 分级 |
+| 图案覆盖率 | 30–90% | 10–100% | 0–100% | 分段均匀 |
+| 文字密度 | 低至高 | 极低至极高 | 遮挡/破损 | 分层 |
+| 印刷模糊 | 0–0.3px | 0–0.8px | 0–1.5px | 半正态 |
+| 图案旋转 | ±0.5° | ±2° | ±5° | 截断正态 |
+
+这里我建议将 Print 分成两个子系统：
+
+- 外观图案随机化：改变标签、文字、品牌色和图案。
+- 印刷缺陷随机化：改变偏色、套印、网点、磨损和模糊。
+
+两者不能混为一谈。
+
+另外，训练照片→几何参数模型时，应该使用合成但符合授权要求的虚构包装印刷图案，避免训练集无意中依赖特定品牌 Logo 来识别包装尺寸。
+
+## 1.5 Environment：环境与拍摄场景
+
+| 参数 | REALISTIC | MODERATE | STRESS | 分布 |
+|---|---:|---:|---:|---|
+| 背景类型 | 桌面/货架/厨房/办公室 | 扩展场景 | 极端背景 | 类别混合 |
+| 背景亮度 | 20–95% | 10–100% | 0–100% | Beta |
+| 背景复杂度 | 低至中 | 低至高 | 极高 | 离散分级 |
+| 遮挡面积 | 0–5% | 0–15% | 0–30% | 零膨胀分布 |
+| 遮挡位置 | 边缘为主 | 任意位置 | 关键结构区域 | 加权采样 |
+| 地面/桌面反射 | 0–10% | 0–25% | 0–50% | 截断分布 |
+| 背景景深模糊 | 0–5px | 0–10px | 0–20px | 半正态 |
+| 主体偏心 | 0–10% | 0–25% | 0–40% | 均匀 |
+
+建议把环境类别明确为：
+
+1. 白色背景。
+2. 家庭厨房。
+3. 办公桌面。
+4. 超市货架。
+5. 仓储/物流环境。
+6. 手持拍摄。
+7. 普通室内桌面。
+
+首期不要让白底棚拍超过总训练数据的 15%。
+
+## 1.6 Image Quality：手机 ISP 与图像退化
+
+| 参数 | REALISTIC | MODERATE | STRESS | 分布 |
+|---|---:|---:|---:|---|
+| 输出分辨率 | 720–4032px 长边 | 480–4032px | 256–4032px | 离散混合 |
+| JPEG Quality | 75–95 | 60–95 | 40–95 | 离散混合 |
+| 高斯模糊 σ | 0–0.6px | 0–1.2px | 0–2.5px | 半正态 |
+| 运动模糊长度 | 0–2px | 0–5px | 0–12px | 零膨胀 |
+| 运动模糊角度 | 0–360° | 0–360° | 0–360° | 均匀 |
+| 传感器噪声 | 低 | 低至中 | 中至高 | ISO 条件化 |
+| 锐化 Halo | 0–0.5px | 0–1px | 0–2px | 半正态 |
+| 暗部噪声 | 低 | 中 | 高 | 曝光条件化 |
+| 局部曝光裁切 | 0–1% | 0–5% | 0–15% | 零膨胀 |
+| 白平衡偏移 | ±300K | ±800K | ±1500K | 截断正态 |
+
+特别说明：不能把 JPEG Q50–95 直接当作真实手机图像的完整退化模型。真实手机还有 ISP 降噪、锐化、局部色调映射、HDR 合成、计算摄影等处理。
+
+**六维规范的冻结原则：**
+
+- REALISTIC 是训练主分布。
+- MODERATE 用于提升泛化。
+- STRESS 用于独立鲁棒性评估。
+- 三档必须在数据集中明确记录，不能混合后失去标签。
+- 首期建议 REALISTIC 70%、MODERATE 25%、STRESS 5%。
+
+以上六张参数表可以直接进入 `docs/tde-spec.md` 的 V0.1 初稿。
+
+# 交付二：采样策略与覆盖度保证
+
+## 2.1 不采用纯随机，也不采用全参数网格
+
+我的裁决是：
+
+<badge color="success">Stratified + Latin Hypercube + Active Sampling</badge>
+
+三种策略组合使用。
+
+| 方法 | 负责什么 | 使用比例建议 |
+|---|---|---:|
+| 分层采样 | 保证拍摄场景、视角、材料类别覆盖 | 40% |
+| Latin Hypercube | 连续参数空间均匀覆盖 | 40% |
+| Active Sampling | 补充模型不确定、错误集中的区域 | 20% |
+
+注意：这里的比例是每轮数据生成预算，不是三种方法的理论最优比例。
+
+### 为什么不采用参数全网格？
+
+假设有：
+
+- 5 个焦距档；
+- 7 个俯角档；
+- 5 个光照档；
+- 5 个材质档；
+- 7 个背景档；
+- 5 个图像质量档。
+
+全组合已经达到：
+
+\[
+5\times7\times5\times5\times7\times5=30,625
+\]
+
+这还没有考虑包装结构参数和印刷变化。
+
+如果每个组合再采样 10 种结构，数量就超过 30 万。
+
+更大的问题是：全网格容易产生大量没有真实意义的组合。
+
+因此：
+
+- 类别变量用分层采样。
+- 连续变量用 Latin Hypercube。
+- 高价值困难样本用主动采样。
+- 现实相关参数用联合分布采样。
+
+### 2.2 必须引入参数相关性
+
+这是 V0.1 需要特别冻结的一项。
+
+以下组合应该存在条件依赖：
+
+| 条件 | 联动参数 |
+|---|---|
+| 手机近距离拍摄 | 焦距、畸变、景深 |
+| 室内暖光 | 色温、曝光、白平衡 |
+| 暗光拍摄 | ISO 噪声、降噪、锐化 |
+| 高光纸盒 | 高光反射、曝光裁切 |
+| 手持拍摄 | 运动模糊、主体偏心 |
+| 超市货架 | 背景复杂度、遮挡、混合光源 |
+| 桌面俯拍 | 俯角、透视、桌面背景 |
+
+例如，不能独立随机选择：
+
+- 低光照；
+- 低 ISO 噪声；
+- 强烈运动模糊；
+- 完全无降噪。
+
+这可能生成不符合真实手机 ISP 行为的组合。
+
+建议在 TDE 中引入 `CaptureProfile`：
 
 ```text
-M1: Parametric Manufacturing Core
-                |
-                v
-       +--------+---------+
-       |                  |
-       v                  v
-M2-A Template Engine   M2-B TDE
-       |                  |
-       +--------+---------+
-                |
-                v
-       M2-C Real Golden Set
-                |
-                v
-          +-----+-----+
-          |           |
-          v           v
-       T1 Class    T2 Regression
-          |           |
-          +-----+-----+
-                |
-                v
-       Evidence Reconciliation
-                |
-                v
-       Parametric Geometry IR
-                |
-                v
-       Manufacturing QA
-                |
-                v
-            M3 Vision
-                |
-                v
-         T3 Exploratory
+CaptureProfile:
+  PHONE_INDOOR
+  PHONE_WINDOW_LIGHT
+  PHONE_SUPERMARKET
+  PHONE_HANDHELD
+  PHONE_DESKTOP
+  PHONE_LOW_LIGHT
 ```
 
-这里有一个执行顺序上的细节：M2-B 可以先用 M1 的 Gable-top 模板开始开发，不必等待 M2-A 的所有模板完成；M2-C 的真实 Golden Set 应尽早冻结，不能等模型训练完成才开始采集。
+先选择 CaptureProfile，再根据 Profile 采样六维参数。
 
-## 六、最终架构决议
+## 2.3 每种箱型至少需要多少独立结构变体？
 
-建议在现有 ADR-001 至 ADR-008 之外，增加以下三项：
+我建议冻结以下下限：
 
-| ADR | 新决策 | 裁决 |
-|---|---|---|
-| ADR-009 | Learning-to-Parameter, Not Learning-to-Manufacture | <badge color="success">APPROVE</badge> |
-| ADR-010 | Synthetic-to-Real Evaluation Protocol | <badge color="success">APPROVE</badge> |
-| ADR-011 | Dataset Provenance & Licensing | <badge color="success">APPROVE</badge> |
+| 级别 | 独立结构变体 | 定位 |
+|---|---:|---|
+| 最小研究验证 | 30 | 单箱型 MVE |
+| TDE 首期 | 60 | 单箱型正式训练 |
+| M2 稳定版 | 100 | 单箱型覆盖 |
+| 多箱型扩展 | 每箱型 50–100 | 结构学习 |
 
-我的最终判断：
+这里的独立结构变体，不是同一模型换不同颜色。
 
-**TDE 不是给项目增加一条 AI 功能，而是把项目从一个参数化刀版工具，升级为一个具有持续学习能力的包装几何重建系统。**
+对于 Gable-top，至少应覆盖：
 
-但要守住三个边界：
+- 长宽比变化。
+- 盒身高度变化。
+- 顶部坡面比例。
+- 封口鳍片高度。
+- 坡面起始位置。
+- 底部结构变化。
+- 纸板厚度及折叠补偿。
 
-1. **M1 不动。** 先完成确定性的制造几何闭环。
-2. **M2 建立数据飞轮。** 模板生成真值，真值训练模型，真实照片验证模型。
-3. **M3 扩展视觉智能。** 模型提高输入自动化程度，但不接管制造几何的最终决定权。
+**结构变化必须改变 Geometry IR，而不仅仅改变渲染图。**
 
-我尤其赞成将母仓的货架 SDG → YOLO 微调经验迁移过来，但不要简单复制训练流程。包装项目需要增加结构拓扑、参数约束、折叠闭合和制造可行性这些独有的标签与验证机制。
+### 相邻样本最小区分度
 
-<box border radius="lg" padding={3} gap={2}>
-  <title size="xl" color="success">第三轮评审：APPROVE</title>
-  **最终冻结意见**
+我建议定义一个 Structural Distance：
 
-  - M1：维持原冻结范围。
-  - TDE：纳入 M2 主轨，与模板扩展并行。
-  - T1/T2：提前到 M2。
-  - Sim2Real：独立 Golden Test 硬门。
-  - T3：保留 M3 研究，不作为交付承诺。
-  - ADR-001：强化，不修改。
-  - 新增 ADR-009/010/011。
+\[
+D_s = \sum_i w_i \cdot
+\frac{|p_i-p_i'|}{r_i}
+\]
+
+其中：
+
+- \(p_i\)：结构参数。
+- \(r_i\)：该参数的有效变化范围。
+- \(w_i\)：结构重要性权重。
+
+冻结建议：
+
+- 完全相同 Geometry IR：不计为独立结构变体。
+- 仅改变颜色或印刷：不计为独立结构变体。
+- \(D_s < 0.05\)：视为近重复。
+- \(0.05 \leq D_s < 0.15\)：视为相近结构。
+- \(D_s \geq 0.15\)：可作为独立变体候选。
+
+这些阈值是工程去重规则，不是已被论文证明的通用几何距离标准。
+
+此外，至少有一个关键结构参数发生有意义变化，才能计入结构覆盖。
+
+## 2.4 冷启动数据规模
+
+我的建议：
+
+<box border radius="lg" padding={3} gap={3}>
+  <box gap={1}>
+    <text color="secondary" weight="medium" size="xs">MVE · GABLE-TOP</text>
+    <title size="2xl" color="default" tabularNums>5,000</title>
+    **合成渲染样本**
+    <text color="secondary" size="xs">30 个结构变体 × 平均约 167 个不同拍摄实例</text>
+  </box>
+  <divider color="subtle"/>
+  <grid columns={2} gap={3}>
+    <grid-item>
+      <title size="xl" tabularNums>60</title>
+      <text color="secondary" size="xs">独立结构变体</text>
+    </grid-item>
+    <grid-item>
+      <title size="xl" tabularNums>100</title>
+      <text color="secondary" size="xs">真实照片目标数量</text>
+    </grid-item>
+    <grid-item>
+      <title size="xl" tabularNums>70/25/5</title>
+      <text color="secondary" size="xs">三档随机化比例 %</text>
+    </grid-item>
+    <grid-item>
+      <title size="xl" tabularNums>20%</title>
+      <text color="secondary" size="xs">主动采样预算</text>
+    </grid-item>
+  </grid>
 </box>
 
-**我认为现在已经形成了一个非常清晰的长期技术路线：先有可信的几何真值，再有规模化孪生数据，最后让模型学习如何从真实照片恢复这些几何真值。**
+这里区分两个数量：
 
-这条路线值得投入，而且比直接训练一个端到端照片生成刀版模型稳健得多。
+- MVE 先用 30 个变体、5,000 张合成图验证。
+- M2 正式数据集再扩大到至少 60 个变体、20,000 张合成图。
+
+每个结构变体必须跨多个相机、光照和环境组合。不能让某个结构只出现在某一种拍摄环境中，否则模型可能学到错误的结构—背景关联。
+
+---
+
+# 交付三：论文映射表
+
+这里我把文献分成三类：
+
+- **直接方法参考**：可以借鉴其数据生成和实验设计。
+- **任务范式参考**：任务相似，但不能直接照搬。
+- **工程参考**：适合借鉴工具链，而不是作为随机化理论依据。
+
+## 3.1 论文总表
+
+| 研究方向 | 论文、作者、年份 | 对应维度 | 我们直接借鉴什么 |
+|---|---|---|---|
+| Domain Randomization 开山 | Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World — Josh Tobin 等，2017 | Camera、Lighting、Material、Environment | 随机纹理、背景、光照、物体姿态；合成训练、真实测试 |
+| 随机化对象类别识别 | Applying Domain Randomization to Synthetic Data for Object Category Detection — João Borrego 等，2018 | Material、Environment、Lighting | 随机化消融、少量真实数据对比 |
+| 光真实合成 | BlenderProc: Reducing the Reality Gap with Photorealistic Rendering — Maximilian Denninger 等，2020 | Camera、Lighting、Material、Environment | BlenderProc 场景生成、相机标定、物理材质、分割与深度标签 |
+| 大规模场景孪生 | Hypersim: A Photorealistic Synthetic Dataset for Holistic Indoor Scene Understanding — Mike Roberts 等，2021 | Lighting、Material、Environment、Camera | 完整场景几何、材质、灯光和相机真值同时保存 |
+| 任务导向采样 | Task2Sim: Towards Effective Pre-Training and Transfer From Synthetic Data — Samarth Mishra 等，2022 | 六维联合优化 | 不把随机化当作越多越好；根据下游任务优化参数分布 |
+| 零售合成 | Product object detection using pseudo-generated product shelf images — Aoi Kamo、Kanya Ishizaka，2023 | Environment、Camera、Lighting、ImageQuality | 商品场景先验、促销物遮挡、拍摄质量变化 |
+| 工业域随机化 | Domain Randomization for Object Detection in Manufacturing Applications Using Synthetic Data: A Comprehensive Study — Xiaomeng Zhu 等，2025 | Camera、Lighting、Material、Environment、ImageQuality | 逐因素研究材质、渲染、后处理和干扰物的重要性 |
+| 6DoF 合成姿态 | One View, Many Worlds: Single-Image to 3D object Meets Generative Domain Randomization for One-Shot 6D Pose Estimation — Zheng Geng 等，2025 | Camera、Environment、Material、Lighting | 单图输入、3D 模型多样化、Blender 渲染和姿态/尺度估计 |
+| 6D 姿态模板库 | Learning 6D Object Pose Estimation With Event Cameras Using Synthetic Data and Domain Randomization — Oussama Abdul Hay 等，2025/2026 | Camera、Lighting、Material | 多视角模板覆盖、Fibonacci 视角采样、合成与真实查询匹配 |
+
+上述文献的核心事实分别可由原始论文和出版页面核对。<Cite refs={["turn150399search1","turn191521academia71","turn191521search6","turn150399search0","turn191521search0","turn191521search1","turn191521search2","turn191521search4","turn150399search2"]}/>
+
+## 3.2 六维逐项文献映射：具体抄什么
+
+| 随机化维度 | 首选文献 | 具体借鉴方法 | 文献支持程度 |
+|---|---|---|---|
+| Camera | Tobin 2017 | 随机相机观察条件、物体姿态 | 强 |
+| Camera | Geng 2025 | 多视角覆盖、视角与尺度估计 | 强，任务范式接近 |
+| Camera | Abdul Hay 2025/2026 | Fibonacci 近似均匀视点采样 | 强，适合生成视角库 |
+| Lighting | BlenderProc 2020 | 灯光、环境、相机条件联合渲染 | 强 |
+| Lighting | Hypersim 2021 | 保存照明与反射信息，支持光照因素分析 | 强 |
+| Lighting | Task2Sim 2022 | 根据任务表现选择光照分布 | 强 |
+| Material | Tobin 2017 | 随机纹理、材料变化 | 强 |
+| Material | BlenderProc 2020 | 物理材质与光真实渲染 | 强 |
+| Material | Zhu 等 2025 | 材质变化因素消融 | 强 |
+| Print | Tobin 2017 | 随机纹理的思想可迁移到表面图案 | 间接 |
+| Print | BlenderProc 2020 | 纹理与材质渲染管线 | 间接 |
+| Environment | Kamo & Ishizaka 2023 | 商品场景组成、货架先验、促销物干扰 | 强，零售特化 |
+| Environment | Hypersim 2021 | 真实室内场景资产及场景级随机化 | 强 |
+| Environment | Tobin 2017 | 随机背景与干扰物 | 强 |
+| ImageQuality | Borrego 等 2018 | 随机化与少量真实数据对比 | 中 |
+| ImageQuality | Zhu 等 2025 | 后处理、噪声和干扰因素消融 | 强 |
+| ImageQuality | Kamo & Ishizaka 2023 | 拍摄质量、视角、相机抖动 | 强，零售特化 |
+
+### 几个必须特别关注的研究发现
+
+**第一：Tobin 2017 不支持「越真实越好」的简单结论。**
+
+其重要贡献是通过足够丰富的随机化，使真实世界落入模拟分布的覆盖范围。
+
+因此，我们不能把商业产品摄影的美观程度当作合成数据质量指标。
+
+**第二：BlenderProc 2020 和 Hypersim 2021 代表两种互补路线。**
+
+- BlenderProc：更接近我们的程序化生成工程。
+- Hypersim：更强调完整场景、几何、光照和标签的成体系管理。
+
+建议工程直接借鉴 BlenderProc 的模块化思路，数据记录方式借鉴 Hypersim。
+
+**第三：Task2Sim 2022 对我们非常重要。**
+
+它研究了不同下游任务对模拟参数的偏好，并提出通过任务信息寻找更有效的合成参数配置。
+
+这意味着 TDE 未来不应该永远固定 70/25/5。
+
+我们可以根据 T2 在真实数据上的错误类型，动态调整下一批渲染任务。
+
+例如：
+
+- 如果顶部坡面预测不准，增加高俯角、顶部可见度较高的视角。
+- 如果宽度预测不准，增加左右侧面可见的视角。
+- 如果模型在暖光下退化，增加真实室内暖光组合。
+- 如果模型依赖印刷图案，增加不同图案、相同几何的对照组。
+
+这就是从普通 Domain Randomization 升级为 Task-aware Data Generation。
+
+**第四：零售领域已有直接可借鉴的合成数据案例。**
+
+Kamo 和 Ishizaka 2023 的商品货架合成研究，直接使用产品陈列先验、促销物障碍、光照、视角和相机抖动构造伪真实商品货架图像，并报告了真实货架检测任务的结果。
+
+这和我们的环境随机化很接近，但它解决的是货架商品检测，不是包装尺寸回归。不能直接把其 AP 成绩当成我们 T2 的可达指标。<Cite refs={["turn191521search1","turn191521search0","turn191521search6","turn191521search2"]}/>
+
+### 关于 Print 维度的文献诚实性
+
+目前我没有找到足够强、直接研究「纸包装印刷网点、套印误差、涂层与纸板折痕」联合随机化，并验证其对包装几何参数回归的论文。
+
+因此，Print 维度的具体数值应当视为工程先验。
+
+可以借鉴通用材质随机化和合成纹理方法，但不能宣称这些范围是文献验证过的包装印刷统计分布。
+
+这是 V0.1 必须保留的证据边界。
+
+---
+
+# 交付四：真实手机照片域差距 Top 8
+
+我认为这八项比单纯增加背景和灯光随机化更重要。
+
+| 排名 | 真实现象 | 合成覆盖策略 | 优先级 |
+|---|---|---|---|
+| 1 | 真实纸盒折痕、压痕及局部变形 | 需真实数据微调 | P0 |
+| 2 | 纸板纤维、涂层、局部粗糙度 | 随机化可覆盖 | P1 |
+| 3 | 印刷网点、套印、油墨渗透 | 随机化可覆盖 | P1 |
+| 4 | 手机 ISP 降噪、锐化、HDR、局部色调映射 | 需图像退化算子 | P0 |
+| 5 | 手机镜头畸变、透视与计算摄影 | 需图像退化算子 | P0 |
+| 6 | 手指遮挡、反光、标签褶皱 | 需真实数据微调 | P0 |
+| 7 | 制造公差、折边不对称、封口偏移 | 需真实数据微调 | P0 |
+| 8 | 自动白平衡、曝光漂移、压缩伪影 | 需图像退化算子 | P1 |
+
+### 我对这八项的进一步判断
+
+**1. 折痕与压痕：**
+
+这是包装重建与普通商品检测最大的区别之一。
+
+真实纸盒不是完美的 CAD 实体。它可能存在：
+
+- 折痕两侧不完全共面。
+- 封口鳍片轻微倾斜。
+- 局部鼓包。
+- 边缘压缩。
+- 长期储存形成的变形。
+
+建议 M2 采集少量真实包装的局部特写，并对几何参数标注「名义尺寸」和「实物观测尺寸」。
+
+不能让合成模型把制造误差误认为标准结构参数。
+
+**2. 纸板纤维和涂层：**
+
+可以用程序化纹理和材质节点模拟，但必须避免所有纤维纹理都呈现相同方向、相同尺度。
+
+**3. 印刷网点：**
+
+建议在 Blender 纹理阶段模拟主要外观，再通过图像后处理增加局部印刷缺陷。两者应分别记录。
+
+**4. 手机 ISP：**
+
+这是我认为首期最值得补充的退化模块。
+
+单纯 Gaussian Noise 和 JPEG 压缩无法模拟手机 ISP。
+
+建议构造可配置的近似处理链：
+
+<box border radius="lg" padding={3} gap={2}>
+  **Synthetic Linear RGB**
+  <box align="center"><icon name="arrow-down" color="secondary"/></box>
+  **White Balance / Color Correction**
+  <box align="center"><icon name="arrow-down" color="secondary"/></box>
+  **Denoising / Sharpening**
+  <box align="center"><icon name="arrow-down" color="secondary"/></box>
+  **Local Tone Mapping / HDR Approximation**
+  <box align="center"><icon name="arrow-down" color="secondary"/></box>
+  **Resize / Compression / JPEG**
+  <box align="center"><icon name="arrow-down" color="secondary"/></box>
+  <badge color="success">Synthetic Phone Image</badge>
+</box>
+
+这是可控的 ISP 近似链，不是声称复刻了某款手机的真实 ISP。
+
+**5. 镜头畸变：**
+
+应区分：
+
+- 光学径向畸变。
+- 切向畸变。
+- 透视变换。
+- 计算摄影的局部几何修正。
+
+特别是手机的超广角照片，不能只使用普通针孔相机模型。
+
+**6. 遮挡和反光：**
+
+合成数据可以制造遮挡，但真实手指、塑料膜、胶带及透明封装的反射行为很复杂。建议保留真实小样本微调。
+
+**7. 制造公差：**
+
+这是一个重要的标签设计问题。
+
+例如真实纸盒实测宽度 68.1mm，而名义 CAD 宽度是 68.3mm。
+
+模型究竟应该学习哪一个？
+
+建议 TDE 明确区分：
+
+- `nominal_geometry`：制造设计真值。
+- `observed_geometry`：实物测量值。
+- `manufacturing_deviation`：制造偏差。
+
+不要把三者混成同一个回归标签。
+
+**8. 自动曝光与白平衡：**
+
+建议采用真实照片的统计分布校准，而不是凭视觉主观决定退化强度。
+
+---
+
+# 交付五：T2 参数回归模型选型
+
+## 5.1 首期单箱型：ResNet18 + 多任务分位数回归
+
+<badge color="success">MVE 推荐方案</badge>
+
+不建议首期直接使用 Vision Transformer、大型多模态模型或者复杂 MoE。
+
+首期的目标不是追求最大模型容量，而是回答：
+
+**照片中是否包含足够的信息，能够恢复 Gable-top 的关键参数？**
+
+建议：
+
+| 组件 | 首期选择 | 原因 |
+|---|---|---|
+| Backbone | ResNet18 | 轻量、成熟、易复现 |
+| 输入分辨率 | 384×384 | 保留包装结构细节 |
+| 主任务 | 参数回归 | 输出模板参数 |
+| 回归方法 | Quantile Regression | 输出估计值及区间 |
+| 辅助任务 1 | Panel Segmentation | 识别主要面板 |
+| 辅助任务 2 | Crease/Edge Detection | 识别折线和轮廓 |
+| 辅助任务 3 | Package Orientation | 估计包装姿态 |
+| 损失函数 | Pinball + Smooth L1 + BCE | 多任务训练 |
+
+不建议第一轮训练就引入过多辅助头。优先保留参数回归、面板分割和折线检测三个任务。
+
+### 输出参数
+
+首期 Gable-top 建议：
+
+| 参数 | 单位 | 是否必需 |
+|---|---|---|
+| Body Length | mm | 是 |
+| Body Width | mm | 是 |
+| Body Height | mm | 是 |
+| Roof Height | mm | 是 |
+| Roof Slope Geometry | 参数化表示 | 是 |
+| Sealing Fin Height | mm | 是 |
+| Board Thickness | mm | 可选/实测优先 |
+
+这里有一个需要特别注意的地方：
+
+顶部坡面不是简单的一个高度数值。应根据模板定义其几何参数，避免不同屋顶结构使用相同参数名称却表达不同几何意义。
+
+### 分位数回归
+
+建议预测三个分位点：
+
+- Q10：保守下界。
+- Q50：中位估计。
+- Q90：保守上界。
+
+这样能够得到预测区间，而不是仅输出一个模型自己声称的置信度。
+
+需要注意：分位数区间必须经过真实验证集校准，不能直接把 Q10–Q90 宣称为可靠的 80% 置信区间。
+
+## 5.2 多箱型阶段：Per-type Head 优先于 MoE
+
+我的建议是分三步演进：
+
+| 阶段 | 模型架构 | 裁决 |
+|---|---|---|
+| 单箱型 | Shared Backbone + Regression Head | 首选 |
+| 2–5 箱型 | Shared Backbone + Per-type Heads | 首选 |
+| 多箱型复杂体系 | Conditional MoE | 有必要再引入 |
+
+为什么不直接用 MoE？
+
+因为不同包装类型的参数定义并不相同。
+
+例如：
+
+- FEFCO 0201 有摇盖、侧板、箱体尺寸。
+- Gable-top 有坡面、鳍片、底部封合结构。
+- Rigid Box 有天地盖、壁厚、内外尺寸。
+
+一个共享回归头很容易产生参数语义混乱。
+
+我更倾向：
+
+```text
+             Photo
+               |
+               v
+        Shared Backbone
+               |
+               v
+       Type Classification
+               |
+       +-------+-------+
+       |       |       |
+       v       v       v
+     Gable   FEFCO   Rigid
+      Head    Head    Head
+       |       |       |
+       +-------+-------+
+               |
+               v
+       Parametric Validation
+               |
+               v
+         Geometry IR
+```
+
+当类别数量增加、不同类别之间存在共享视觉特征，同时专家头确实表现出互补性时，再考虑 MoE。
+
+## 5.3 输入应该单照片还是多照片？
+
+我的裁决：
+
+**MVE 单照片训练，多照片作为 M2 后续能力。**
+
+原因是我们需要先证明单照片的基本可观测性，不能用多照片掩盖单照片信息不足的问题。
+
+但必须保留一个事实：
+
+仅从正面照片，通常无法可靠推断包装的深度尺寸。
+
+因此建议模型提供：
+
+| 输入方式 | 定位 |
+|---|---|
+| 单张三分之四视角 | MVE 主实验 |
+| 正面 + 侧面 | 后续推荐输入 |
+| 正面 + 侧面 + 顶面 | 高精度模式 |
+| 任意多角度 | 长期能力 |
+
+多照片模型建议使用共享 Backbone + Feature Fusion，并通过跨视角一致性损失约束相同物体的尺寸预测。
+
+不要在第一轮就引入复杂的多视图 Transformer。
+
+## 5.4 辅助任务值得做什么？
+
+我认为最有价值的是两个：
+
+**A. 面板分割监督**
+
+让模型不仅知道盒子是什么，还知道它的正面、侧面、顶部和坡面在哪里。
+
+**B. 折线与边界检测**
+
+这是几何参数回归的关键辅助信号。
+
+建议输出：
+
+- 主体轮廓。
+- 顶部坡面边界。
+- 屋脊封口鳍片边界。
+- 面板连接折线。
+- 可见粘接边。
+
+不建议首期加入品牌识别、OCR 语义理解、包装内容物识别等任务。这些任务容易引入无关特征，干扰几何学习。
+
+---
+
+# 交付六：MVE 最小可行实验——两周完成
+
+我建议 MVE 只回答一个问题：
+
+**合成训练的 Gable-top 参数回归模型，能否在真实手机照片上恢复可用于参数化重建的几何参数？**
+
+不做 T1 多类别分类、不做 T3、不做完整数据引擎产品化。
+
+## 6.1 实验设计
+
+<box border radius="lg" padding={3} gap={3}>
+  <title size="lg">Gable-top MVE</title>
+  <badge color="success">2 周研究实验</badge>
+  <grid columns={2} gap={3}>
+    <grid-item>
+      <title size="2xl" tabularNums>5,000</title>
+      <text color="secondary" size="xs">合成照片</text>
+    </grid-item>
+    <grid-item>
+      <title size="2xl" tabularNums>30</title>
+      <text color="secondary" size="xs">独立结构变体</text>
+    </grid-item>
+    <grid-item>
+      <title size="2xl" tabularNums>30</title>
+      <text color="secondary" size="xs">真实包装样本</text>
+    </grid-item>
+    <grid-item>
+      <title size="2xl" tabularNums>90</title>
+      <text color="secondary" size="xs">真实手机照片</text>
+    </grid-item>
+  </grid>
+  <divider color="subtle"/>
+  **真实样本拆分**
+  <row gap={2}>
+    <box flex={2} background="#16A34A" radius="sm" height="12px"/>
+    <box flex={1} background="#D6A34A" radius="sm" height="12px"/>
+  </row>
+  <row justify="between">
+    <text color="success" size="xs">20 个包装：训练/开发</text>
+    <text color="secondary" size="xs">10 个包装：冻结测试</text>
+  </row>
+  <text color="secondary" size="xs">每个实物拍摄三张不同视角照片；同一实物的所有照片必须留在同一个数据分区。</text>
+</box>
+
+### 实验数据
+
+**合成数据：5,000 张**
+
+- 30 个独立结构变体。
+- 每个变体约 167 张。
+- REALISTIC 70%。
+- MODERATE 25%。
+- STRESS 5%。
+- 每张图片均保留精确的 Geometry IR 和参数真值。
+- 同一个结构跨不同拍摄 Profile。
+
+**真实数据：30 个不同的 Gable-top 实物。**
+
+每个实物拍摄：
+
+1. 正面三分之四视角。
+2. 侧面三分之四视角。
+3. 顶部可见的俯视视角。
+
+每个实物必须测量：
+
+- 长度。
+- 宽度。
+- 主体高度。
+- 顶部坡面高度。
+- 封口鳍片高度。
+
+测量工具建议使用卡尺、钢尺和必要的局部测量夹具。
+
+这里必须强调：30 个实物应尽量覆盖不同结构变体，而不是同一 SKU 的 30 个重复包装。
+
+### 数据划分
+
+| 数据 | 数量 | 用途 |
+|---|---:|---|
+| Synthetic Train | 4,000 | 训练 |
+| Synthetic Validation | 1,000 | 模型选择 |
+| Real Train/Development | 20 个实物、60 张照片 | 少量微调及调试 |
+| Real Golden Test | 10 个实物、30 张照片 | 最终独立评估 |
+
+真实测试集在第一次训练之前冻结。
+
+不要在看到 Golden Test 结果后再调模型阈值，然后继续把同一测试集当作独立测试。
+
+## 6.2 三组必须进行的实验
+
+| 实验 | 训练数据 | 目的 |
+|---|---|---|
+| E0 | 仅 Synthetic REALISTIC | 基础迁移能力 |
+| E1 | Synthetic 三档域随机化 | 验证随机化收益 |
+| E2 | E1 + 少量 Real Train | 验证真实数据微调收益 |
+
+模型统一使用 ResNet18，训练轮数、数据规模和评估指标保持一致。
+
+增加一个非学习基线：
+
+**E-BASE：模板参数中位数预测。**
+
+如果模型连这个基线都无法显著超越，就没有必要继续增加合成数据量。
+
+### 6.3 成功判据
+
+我建议冻结以下首期门槛：
+
+| 指标 | MVE 通过标准 |
+|---|---:|
+| Synthetic Validation MAE | ≤0.5mm |
+| Real Golden Test 参数 MAE | ≤1.0mm |
+| Real Golden Test 参数 P90 绝对误差 | ≤2.0mm |
+| 关键参数合法率 | ≥99% |
+| Geometry IR 生成成功率 | 100%（有效输入样本） |
+| 与中位数基线相比的真实 MAE 改善 | ≥20% |
+| E1 相对 E0 的真实域改善 | 至少两个主要参数方向改善 |
+| 折叠及制造 QA | 不允许出现结构性失败 |
+
+这里有两项需要特别解释：
+
+- E1 的域随机化收益不能只看总体 MAE，还要看不同拍摄 Profile 的分组表现。
+- E2 如果比 E1 更好，说明真实小样本微调有效；如果没有明显改善，也不能据此否定 TDE，必须先检查真实样本标注质量和数据划分。
+
+对于 10 个独立测试实物，这些结果只能作为 MVE 的初步证据，不能宣称已经证明跨品牌、跨材料、跨手机泛化。
+
+## 七、写入 `docs/tde-spec.md` 的冻结结构
+
+建议将本轮内容组织成以下章节，不再分散在多个设计文档中。
+
+```text
+docs/tde-spec.md
+
+1. Scope & Architecture Boundary
+   1.1 TDE Position in M2
+   1.2 Learning-to-Parameter Principle
+   1.3 Geometry IR Contract
+
+2. Synthetic Data Schema
+   2.1 Sample Identity
+   2.2 Geometry Ground Truth
+   2.3 Camera Metadata
+   2.4 Lighting Metadata
+   2.5 Material Metadata
+   2.6 Print Metadata
+   2.7 Environment Metadata
+   2.8 Image Quality Metadata
+   2.9 License Provenance
+
+3. Domain Randomization V0.1
+   3.1 REALISTIC
+   3.2 MODERATE
+   3.3 STRESS
+   3.4 Capture Profiles
+   3.5 Joint Distribution Constraints
+
+4. Sampling Strategy
+   4.1 Stratified Sampling
+   4.2 Latin Hypercube
+   4.3 Active Sampling
+   4.4 Structural Diversity
+   4.5 Duplicate Detection
+
+5. Rendering Pipeline
+   5.1 Parametric Geometry
+   5.2 Blender Headless
+   5.3 Ground Truth Export
+   5.4 Image Degradation
+
+6. Dataset Governance
+   6.1 Dataset Versioning
+   6.2 Train/Validation/Test Split
+   6.3 Real Golden Set
+   6.4 Licensing and Provenance
+
+7. Learning Baselines
+   7.1 T1 Classification
+   7.2 T2 Quantile Regression
+   7.3 Auxiliary Tasks
+   7.4 Evaluation Metrics
+
+8. Sim2Real Evaluation
+   8.1 Synthetic-only
+   8.2 Domain Randomization Ablation
+   8.3 Real Fine-tuning
+   8.4 Acceptance Criteria
+
+9. MVE Experiment
+   9.1 Dataset
+   9.2 Training
+   9.3 Evaluation
+   9.4 Failure Analysis
+
+10. References
+```
+
+### 必须增加的四项数据治理约束
+
+1. 每张合成图片必须能够反查原始结构参数、Geometry IR、渲染配置和生成器版本。
+2. 同一实物、同一结构变体的近重复图片不能跨训练和测试集造成泄漏。
+3. 公开数据资产必须记录许可证及再分发权利，不能仅记录来源网址。
+4. 每次数据集版本发布，必须保存参数分布摘要、样本数量、去重结果和 Golden Test 版本。
+
+建议增加一个 `dataset_manifest.json`，记录：
+
+- `dataset_version`
+- `generator_version`
+- `template_version`
+- `ir_schema_version`
+- `randomization_profile`
+- `sample_count`
+- `structure_count`
+- `split`
+- `license_manifest`
+- `content_hash`
+
+这样未来即使更换 Blender 版本、修改材料节点或升级模板，也能追溯训练结果为什么发生变化。
+
+---
+
+## 八、最终文献阅读优先级
+
+我不建议团队一次阅读全部论文。首期真正值得精读的是以下五篇：
+
+<box border radius="lg" padding={3} gap={3}>
+  <row align="start" gap={3}>
+    <AsyncImage query="Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World Tobin 2017 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **1. Tobin et al. — 2017**
+
+      Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World
+
+      <badge color="success">必读：理论基础</badge>
+      <text color="secondary" size="xs">理解随机化如何跨越现实域差距。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="BlenderProc Reducing the Reality Gap with Photorealistic Rendering 2020 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **2. Denninger et al. — 2020**
+
+      BlenderProc: Reducing the Reality Gap with Photorealistic Rendering
+
+      <badge color="success">必读：工程实现</badge>
+      <text color="secondary" size="xs">直接借鉴程序化场景、渲染和标签生成。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="Task2Sim Towards Effective Pre-Training and Transfer From Synthetic Data CVPR 2022 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **3. Mishra et al. — 2022**
+
+      Task2Sim: Towards Effective Pre-Training and Transfer From Synthetic Data
+
+      <badge color="success">必读：主动采样</badge>
+      <text color="secondary" size="xs">理解如何依据下游任务选择合成参数，而不是盲目随机化。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="Product object detection using pseudo-generated product shelf images Kamo Ishizaka 2023" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **4. Kamo & Ishizaka — 2023**
+
+      Product object detection using pseudo-generated product shelf images
+
+      <badge color="info">业务场景参考</badge>
+      <text color="secondary" size="xs">借鉴零售场景合成、遮挡和拍摄变化。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="One View Many Worlds Single Image to 3D object Meets Generative Domain Randomization 2025 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **5. Geng et al. — 2025**
+
+      One View, Many Worlds: Single-Image to 3D Object Meets Generative Domain Randomization for One-Shot 6D Pose Estimation
+
+      <badge color="info">任务范式参考</badge>
+      <text color="secondary" size="xs">最接近单照片、尺度恢复、3D 模型多样化与合成训练的研究。</text>
+    </box>
+  </row>
+</box>
+
+其他参考：
+
+- <Link ref="turn150399search0" title="Hypersim，ICCV 2021"/>
+- <Link ref="turn191521search2" title="工业应用域随机化研究，ICRA 2025"/>
+- <Link ref="turn150399search2" title="合成数据与 6D 姿态估计，2025/2026"/>
+
+---
+
+## 九、第四轮最终裁决
+
+| 事项 | 裁决 |
+|---|---|
+| 六维随机化 | APPROVE V0.1 |
+| REALISTIC / MODERATE / STRESS | APPROVE |
+| 分层 + LHS + Active Sampling | APPROVE |
+| 结构变体数量 | MVE 30，正式首期 60 |
+| 首期合成规模 | 5,000，MVE |
+| 正式首期数据规模 | 20,000+ |
+| T2 模型 | ResNet18 + Quantile Regression |
+| 辅助监督 | 面板分割 + 折线检测 |
+| 真实照片 Golden Set | 训练前冻结 |
+| Sim2Real 三组消融 | 必须 |
+| Print 随机化 | APPROVE WITH EVIDENCE LIMIT |
+| Blender Headless | 保留在 TDE 数据生成，不进入 M1 CI |
+
+**还有一个我希望项目所有方特别注意的判断：**
+
+不要将 TDE 的成功定义为「生成了多少张合成照片」。
+
+我建议长期采用三个核心指标：
+
+1. **Structural Coverage**：生成数据覆盖了多少独立、合法的包装结构和参数区域。
+2. **Sim2Real Transfer**：合成训练模型在未见真实包装上的性能。
+3. **Manufacturing Yield**：模型预测进入参数化内核后，有多少比例能够通过制造几何 QA。
+
+第三个指标才是 TDE 对北极星的最终贡献。
+
+<box border radius="lg" padding={3} gap={2}>
+  <title size="xl" color="success">第四轮：APPROVE WITH EXPERIMENTAL VALIDATION</title>
+  **冻结文件：** `docs/tde-spec.md`
+
+  **下一步：** 先实现 Gable-top 的 5,000 张合成数据 MVE，跑完 E0/E1/E2 三组实验，再决定是否扩大到 20,000+ 和增加箱型。
+
+  不改变 M1，不改变参数化制造主干，不提前承诺真实域性能。
+</box>
+
+我的建议是：这轮设计到此冻结，下一轮直接进入 TDE 数据生成器的实现与实验，不再继续扩展随机化维度。
+
+
+====================[ASSISTANT MESSAGE]====================
+
+<!-- assistant msg @2026-11-18T13:45:16.818Z len=5650 -->
+
+## 七、写入 `docs/tde-spec.md` 的冻结结构
+
+建议将本轮内容组织成以下章节，不再分散在多个设计文档中。
+
+```text
+docs/tde-spec.md
+
+1. Scope & Architecture Boundary
+   1.1 TDE Position in M2
+   1.2 Learning-to-Parameter Principle
+   1.3 Geometry IR Contract
+
+2. Synthetic Data Schema
+   2.1 Sample Identity
+   2.2 Geometry Ground Truth
+   2.3 Camera Metadata
+   2.4 Lighting Metadata
+   2.5 Material Metadata
+   2.6 Print Metadata
+   2.7 Environment Metadata
+   2.8 Image Quality Metadata
+   2.9 License Provenance
+
+3. Domain Randomization V0.1
+   3.1 REALISTIC
+   3.2 MODERATE
+   3.3 STRESS
+   3.4 Capture Profiles
+   3.5 Joint Distribution Constraints
+
+4. Sampling Strategy
+   4.1 Stratified Sampling
+   4.2 Latin Hypercube
+   4.3 Active Sampling
+   4.4 Structural Diversity
+   4.5 Duplicate Detection
+
+5. Rendering Pipeline
+   5.1 Parametric Geometry
+   5.2 Blender Headless
+   5.3 Ground Truth Export
+   5.4 Image Degradation
+
+6. Dataset Governance
+   6.1 Dataset Versioning
+   6.2 Train/Validation/Test Split
+   6.3 Real Golden Set
+   6.4 Licensing and Provenance
+
+7. Learning Baselines
+   7.1 T1 Classification
+   7.2 T2 Quantile Regression
+   7.3 Auxiliary Tasks
+   7.4 Evaluation Metrics
+
+8. Sim2Real Evaluation
+   8.1 Synthetic-only
+   8.2 Domain Randomization Ablation
+   8.3 Real Fine-tuning
+   8.4 Acceptance Criteria
+
+9. MVE Experiment
+   9.1 Dataset
+   9.2 Training
+   9.3 Evaluation
+   9.4 Failure Analysis
+
+10. References
+```
+
+### 必须增加的四项数据治理约束
+
+1. 每张合成图片必须能够反查原始结构参数、Geometry IR、渲染配置和生成器版本。
+2. 同一实物、同一结构变体的近重复图片不能跨训练和测试集造成泄漏。
+3. 公开数据资产必须记录许可证及再分发权利，不能仅记录来源网址。
+4. 每次数据集版本发布，必须保存参数分布摘要、样本数量、去重结果和 Golden Test 版本。
+
+建议增加一个 `dataset_manifest.json`，记录：
+
+- `dataset_version`
+- `generator_version`
+- `template_version`
+- `ir_schema_version`
+- `randomization_profile`
+- `sample_count`
+- `structure_count`
+- `split`
+- `license_manifest`
+- `content_hash`
+
+这样未来即使更换 Blender 版本、修改材料节点或升级模板，也能追溯训练结果为什么发生变化。
+
+---
+
+## 八、最终文献阅读优先级
+
+我不建议团队一次阅读全部论文。首期真正值得精读的是以下五篇：
+
+<box border radius="lg" padding={3} gap={3}>
+  <row align="start" gap={3}>
+    <AsyncImage query="Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World Tobin 2017 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **1. Tobin et al. — 2017**
+
+      Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World
+
+      <badge color="success">必读：理论基础</badge>
+      <text color="secondary" size="xs">理解随机化如何跨越现实域差距。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="BlenderProc Reducing the Reality Gap with Photorealistic Rendering 2020 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **2. Denninger et al. — 2020**
+
+      BlenderProc: Reducing the Reality Gap with Photorealistic Rendering
+
+      <badge color="success">必读：工程实现</badge>
+      <text color="secondary" size="xs">直接借鉴程序化场景、渲染和标签生成。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="Task2Sim Towards Effective Pre-Training and Transfer From Synthetic Data CVPR 2022 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **3. Mishra et al. — 2022**
+
+      Task2Sim: Towards Effective Pre-Training and Transfer From Synthetic Data
+
+      <badge color="success">必读：主动采样</badge>
+      <text color="secondary" size="xs">理解如何依据下游任务选择合成参数，而不是盲目随机化。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="Product object detection using pseudo-generated product shelf images Kamo Ishizaka 2023" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **4. Kamo & Ishizaka — 2023**
+
+      Product object detection using pseudo-generated product shelf images
+
+      <badge color="info">业务场景参考</badge>
+      <text color="secondary" size="xs">借鉴零售场景合成、遮挡和拍摄变化。</text>
+    </box>
+  </row>
+  <divider color="subtle"/>
+  <row align="start" gap={3}>
+    <AsyncImage query="One View Many Worlds Single Image to 3D object Meets Generative Domain Randomization 2025 paper" aspectRatio="3:4" maxWidth="64px"/>
+    <box flex="1" gap={1}>
+      **5. Geng et al. — 2025**
+
+      One View, Many Worlds: Single-Image to 3D Object Meets Generative Domain Randomization for One-Shot 6D Pose Estimation
+
+      <badge color="info">任务范式参考</badge>
+      <text color="secondary" size="xs">最接近单照片、尺度恢复、3D 模型多样化与合成训练的研究。</text>
+    </box>
+  </row>
+</box>
+
+其他参考：
+
+- <Link ref="turn150399search0" title="Hypersim，ICCV 2021"/>
+- <Link ref="turn191521search2" title="工业应用域随机化研究，ICRA 2025"/>
+- <Link ref="turn150399search2" title="合成数据与 6D 姿态估计，2025/2026"/>
+
+---
+
+## 九、第四轮最终裁决
+
+| 事项 | 裁决 |
+|---|---|
+| 六维随机化 | APPROVE V0.1 |
+| REALISTIC / MODERATE / STRESS | APPROVE |
+| 分层 + LHS + Active Sampling | APPROVE |
+| 结构变体数量 | MVE 30，正式首期 60 |
+| 首期合成规模 | 5,000，MVE |
+| 正式首期数据规模 | 20,000+ |
+| T2 模型 | ResNet18 + Quantile Regression |
+| 辅助监督 | 面板分割 + 折线检测 |
+| 真实照片 Golden Set | 训练前冻结 |
+| Sim2Real 三组消融 | 必须 |
+| Print 随机化 | APPROVE WITH EVIDENCE LIMIT |
+| Blender Headless | 保留在 TDE 数据生成，不进入 M1 CI |
+
+**还有一个我希望项目所有方特别注意的判断：**
+
+不要将 TDE 的成功定义为「生成了多少张合成照片」。
+
+我建议长期采用三个核心指标：
+
+1. **Structural Coverage**：生成数据覆盖了多少独立、合法的包装结构和参数区域。
+2. **Sim2Real Transfer**：合成训练模型在未见真实包装上的性能。
+3. **Manufacturing Yield**：模型预测进入参数化内核后，有多少比例能够通过制造几何 QA。
+
+第三个指标才是 TDE 对北极星的最终贡献。
+
+<box border radius="lg" padding={3} gap={2}>
+  <title size="xl" color="success">第四轮：APPROVE WITH EXPERIMENTAL VALIDATION</title>
+  **冻结文件：** `docs/tde-spec.md`
+
+  **下一步：** 先实现 Gable-top 的 5,000 张合成数据 MVE，跑完 E0/E1/E2 三组实验，再决定是否扩大到 20,000+ 和增加箱型。
+
+  不改变 M1，不改变参数化制造主干，不提前承诺真实域性能。
+</box>
+
+我的建议是：这轮设计到此冻结，下一轮直接进入 TDE 数据生成器的实现与实验，不再继续扩展随机化维度。
