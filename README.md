@@ -33,7 +33,9 @@
 pip install -e ".[dev]"
 
 # 一条命令: 照片 + 实测尺寸 → IR / 1:1 分层 SVG / 分层 PDF / QA 报告
-photo-dieline build --spec examples/gable_top/spec.json --photo your_photo.jpg --out artifacts/
+# 仓内自带公版参照照 (USDA PD): 也可换成你自己的实拍
+photo-dieline build --spec examples/gable_top/spec.json \
+  --photo examples/gable_top/reference_photo.jpg --out examples/gable_top/artifacts
 
 pytest tests/   # 13 项机器验收 (16 项合同的可自动判定部分)
 ```

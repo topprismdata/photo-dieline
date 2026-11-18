@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "ir_version": "0.1",
+    "units": "mm",
+    "generator": "photo_dieline.parametric.gable_top 0.1",
+    "notes": "M1 golden sample; 板厚补偿 P1; 鳍双层顶缘距=fin_gap_mm"
+  },
+  "package": {
+    "type": "gable_top",
+    "params": {
+      "W": 45.0,
+      "D": 45.0,
+      "Hb": 100.0,
+      "Hr": 12.0,
+      "Ef": 14.0,
+      "fin_gap_mm": 3.0,
+      "glue_w": 12.0,
+      "board_t": 0.45
+    },
+    "template": {
+      "id": "gable_top",
+      "version": "0.1"
+    },
+    "photo": {
+      "path": "examples/gable_top/reference_photo.jpg",
+      "sha256": "6dc5c7f5c7d99030fe397274ee3d4a8c4cc2f65a621f6f9b62313ceed64bbcf6",
+      "width_px": 2100,
+      "height_px": 1500
+    },
+    "params_evidence": {
+      "W": "MEASURED",
+      "D": "MEASURED",
+      "Hb": "MEASURED",
+      "Hr": "DERIVED",
+      "Ef": "MEASURED",
+      "fin_gap_mm": "DERIVED",
+      "glue_w": "DEFAULTED",
+      "board_t": "MEASURED"
+    }
+  },
+  "panels": [
+    {
+      "id": "glue",
+      "role": "glue",
+      "polygon_2d": [
+        [
+          0.0,
+          0
+        ],
+        [
+          12.0,
+          0
+        ],
+        [
+          12.0,
+          100.0
+        ],
+        [
+          0.0,
+          100.0
+        ]
+      ]
+    },
+    {
+      "id": "wallL",
+      "role": "wall",
+      "polygon_2d": [
+        [
+          12.0,
+          0
+        ],
+        [
+          57.0,
+          0
+        ],
+        [
+          57.0,
+          100.0
+        ],
+        [
+          34.5,
+          112.0
+        ],
+        [
+          12.0,
+          100.0
+        ]
+      ],
+      "wall_of": "wallL"
+    },
+    {
+      "id": "back",
+      "role": "wall",
+      "polygon_2d": [
+        [
+          57.0,
+          0
+        ],
+        [
+          102.0,
+          0
+        ],
+        [
+          102.0,
+          100.0
+        ],
+        [
+          57.0,
+          100.0
+        ]
+      ]
+    },
+    {
+      "id": "wallR",
+      "role": "wall",
+      "polygon_2d": [
+        [
+          102.0,
+          0
+        ],
+        [
+          147.0,
+          0
+        ],
+        [
+          147.0,
+          100.0
+        ],
+        [
+          124.5,
+          112.0
+        ],
+        [
+          102.0,
+          100.0
+        ]
+      ]
+    },
+    {
+      "id": "front",
+      "role": "wall",
+      "polygon_2d": [
+        [
+          147.0,
+          0
+        ],
+        [
+          192.0,
+          0
+        ],
+        [
+          192.0,
+          100.0
+        ],
+        [
+          147.0,
+          100.0
+        ]
+      ]
+    },
+    {
+      "id": "slopeB",
+      "role": "slope",
+      "polygon_2d": [
+        [
+          57.0,
+          100.0
+        ],
+        [
+          102.0,
+          100.0
+        ],
+        [
+          102.0,
+          125.5
+        ],
+        [
+          57.0,
+          125.5
+        ]
+      ]
+    },
+    {
+      "id": "finB",
+      "role": "fin",
+      "polygon_2d": [
+        [
+          57.0,
+          125.5
+        ],
+        [
+          102.0,
+          125.5
+        ],
+        [
+          102.0,
+          139.5
+        ],
+        [
+          57.0,
+          139.5
+        ]
+      ]
+    },
+    {
+      "id": "slopeF",
+      "role": "slope",
+      "polygon_2d": [
+        [
+          147.0,
+          100.0
+        ],
+        [
+          192.0,
+          100.0
+        ],
+        [
+          192.0,
+          125.5
+        ],
+        [
+          147.0,
+          125.5
+        ]
+      ]
+    },
+    {
+      "id": "finF",
+      "role": "fin",
+      "polygon_2d": [
+        [
+          147.0,
+          125.5
+        ],
+        [
+          192.0,
+          125.5
+        ],
+        [
+          192.0,
+          139.5
+        ],
+        [
+          147.0,
+          139.5
+        ]
+      ]
+    },
+    {
+      "id": "flapF",
+      "role": "flap",
+      "polygon_2d": [
+        [
+          147.0,
+          -45.0
+        ],
+        [
+          192.0,
+          -45.0
+        ],
+        [
+          192.0,
+          0
+        ],
+        [
+          147.0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "flapB",
+      "role": "flap",
+      "polygon_2d": [
+        [
+          57.0,
+          -45.0
+        ],
+        [
+          102.0,
+          -45.0
+        ],
+        [
+          102.0,
+          0
+        ],
+        [
+          57.0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "flapL",
+      "role": "flap",
+      "polygon_2d": [
+        [
+          12.0,
+          -22.5
+        ],
+        [
+          57.0,
+          -22.5
+        ],
+        [
+          57.0,
+          0
+        ],
+        [
+          12.0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "flapR",
+      "role": "flap",
+      "polygon_2d": [
+        [
+          102.0,
+          -22.5
+        ],
+        [
+          147.0,
+          -22.5
+        ],
+        [
+          147.0,
+          0
+        ],
+        [
+          102.0,
+          0
+        ]
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_glue",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          12.0,
+          0
+        ],
+        [
+          12.0,
+          100.0
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "wallL",
+        "child": "glue",
+        "target_dir_3d": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_wl_bk",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          57.0,
+          0
+        ],
+        [
+          57.0,
+          100.0
+        ]
+      ],
+      "fold": {
+        "mt_va": "VALLEY",
+        "parent": "wallL",
+        "child": "back",
+        "target_dir_3d": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_bk_wr",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          102.0,
+          0
+        ],
+        [
+          102.0,
+          100.0
+        ]
+      ],
+      "fold": {
+        "mt_va": "VALLEY",
+        "parent": "back",
+        "child": "wallR",
+        "target_dir_3d": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_wr_ft",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          147.0,
+          0
+        ],
+        [
+          147.0,
+          100.0
+        ]
+      ],
+      "fold": {
+        "mt_va": "VALLEY",
+        "parent": "wallR",
+        "child": "front",
+        "target_dir_3d": [
+          -1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_bk_sl",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          57.0,
+          100.0
+        ],
+        [
+          102.0,
+          100.0
+        ]
+      ],
+      "fold": {
+        "mt_va": "VALLEY",
+        "parent": "back",
+        "child": "slopeB",
+        "target_dir_3d": [
+          0.0,
+          -0.8823529411764706,
+          0.47058823529411764
+        ]
+      }
+    },
+    {
+      "id": "e_ft_sl",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          147.0,
+          100.0
+        ],
+        [
+          192.0,
+          100.0
+        ]
+      ],
+      "fold": {
+        "mt_va": "VALLEY",
+        "parent": "front",
+        "child": "slopeF",
+        "target_dir_3d": [
+          0.0,
+          0.8823529411764706,
+          0.47058823529411764
+        ]
+      }
+    },
+    {
+      "id": "e_sl_fb",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          57.0,
+          125.5
+        ],
+        [
+          102.0,
+          125.5
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "slopeB",
+        "child": "finB",
+        "target_dir_3d": [
+          0.0,
+          -0.10714285714285714,
+          0.9942436362196467
+        ]
+      }
+    },
+    {
+      "id": "e_sl_ff",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          147.0,
+          125.5
+        ],
+        [
+          192.0,
+          125.5
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "slopeF",
+        "child": "finF",
+        "target_dir_3d": [
+          0.0,
+          0.10714285714285714,
+          0.9942436362196467
+        ]
+      }
+    },
+    {
+      "id": "e_ft_fl",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          147.0,
+          0
+        ],
+        [
+          192.0,
+          0
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "front",
+        "child": "flapF",
+        "target_dir_3d": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_bk_fl",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          57.0,
+          0
+        ],
+        [
+          102.0,
+          0
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "back",
+        "child": "flapB",
+        "target_dir_3d": [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_wl_fl",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          12.0,
+          0
+        ],
+        [
+          57.0,
+          0
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "wallL",
+        "child": "flapL",
+        "target_dir_3d": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "id": "e_wr_fl",
+      "kind": "FOLD",
+      "seg_2d": [
+        [
+          102.0,
+          0
+        ],
+        [
+          147.0,
+          0
+        ]
+      ],
+      "fold": {
+        "mt_va": "MOUNTAIN",
+        "parent": "wallR",
+        "child": "flapR",
+        "target_dir_3d": [
+          -1.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "features": [
+    {
+      "id": "f_glue",
+      "kind": "GLUE_TAB",
+      "panel_id": "glue"
+    },
+    {
+      "id": "f_bleed",
+      "kind": "BLEED",
+      "offset_mm": 3.0
+    },
+    {
+      "id": "f_check",
+      "kind": "CHECK_BAR",
+      "length_mm": 50.0
+    },
+    {
+      "id": "f_reg",
+      "kind": "REGISTRATION"
+    }
+  ]
+}

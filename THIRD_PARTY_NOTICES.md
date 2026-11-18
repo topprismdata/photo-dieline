@@ -17,6 +17,11 @@
 - DielineForge（GPL-3.0）与 TRELLIS.2：**未引入**本仓（ADR-005/004；M3 再评估）。
 - FEFCO 结构图纸：未复制、未再分发（M2 若实现兼容结构，将按公开几何规则独立实现并单独核验许可）。
 
+## 数据资产
+
+- `examples/gable_top/reference_photo.jpg` — USDA 公有领域实拍（屋顶包参照证据），
+  溯源/商标声明见 `examples/gable_top/PHOTO_PROVENANCE.md`（ADR-011 首条落地）。
+
 ## 数据治理承诺（ADR-011）
 
 任何进入本仓的照片/数据集样本将携带来源、许可与再分发元数据；客户品牌素材零容忍。

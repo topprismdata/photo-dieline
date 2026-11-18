@@ -1,0 +1,164 @@
+{
+  "qa_version": "0.1",
+  "status": "VALIDATED",
+  "package": {
+    "type": "gable_top",
+    "template": {
+      "id": "gable_top",
+      "version": "0.1"
+    },
+    "params": {
+      "W": 45.0,
+      "D": 45.0,
+      "Hb": 100.0,
+      "Hr": 12.0,
+      "Ef": 14.0,
+      "fin_gap_mm": 3.0,
+      "glue_w": 12.0,
+      "board_t": 0.45
+    },
+    "params_evidence": {
+      "W": "MEASURED",
+      "D": "MEASURED",
+      "Hb": "MEASURED",
+      "Hr": "DERIVED",
+      "Ef": "MEASURED",
+      "fin_gap_mm": "DERIVED",
+      "glue_w": "DEFAULTED",
+      "board_t": "MEASURED"
+    }
+  },
+  "photo": {
+    "path": "examples/gable_top/reference_photo.jpg",
+    "sha256": "6dc5c7f5c7d99030fe397274ee3d4a8c4cc2f65a621f6f9b62313ceed64bbcf6",
+    "width_px": 2100,
+    "height_px": 1500
+  },
+  "gates": [
+    {
+      "id": "G02",
+      "name": "ir_schema",
+      "status": "PASS",
+      "metrics": {
+        "top_level": [
+          "meta",
+          "package",
+          "panels",
+          "edges",
+          "features"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "id": "G03",
+      "name": "topology",
+      "status": "PASS",
+      "metrics": {
+        "max_shared_len_diff_mm": 0.0,
+        "panels": 13,
+        "folds": 12
+      },
+      "detail": ""
+    },
+    {
+      "id": "G04",
+      "name": "fold_closure",
+      "status": "PASS",
+      "metrics": {
+        "worst_residual_mm": 0.0,
+        "slopeB.ridge.L == wallL.apex": 0.0,
+        "slopeF.ridge.L == wallR.apex": 0.0,
+        "slopeB.ridge.R == wallR.apex": 0.0,
+        "slopeF.ridge.R == wallL.apex": 0.0,
+        "wallL.top.B == slopeB.bottom.L": 0.0,
+        "wallR.top.B == slopeF.bottom.L": 0.0,
+        "flapF.far.mid == flapB.attach.mid": 0.0,
+        "flapL.far.mid == flapR.far.mid": 0.0,
+        "flapL.far.x0": 0.0,
+        "flapR.far.x0": 0.0
+      },
+      "detail": ""
+    },
+    {
+      "id": "G05",
+      "name": "golden_dimensions",
+      "status": "PASS",
+      "metrics": {
+        "dims_mm": {
+          "W": 45.000000000000014,
+          "D": 45.00000000000003,
+          "H": 112.0
+        },
+        "expected_mm": {
+          "W": 45.0,
+          "D": 45.0,
+          "H": 112.0
+        },
+        "worst_diff_mm": 2.842170943040401e-14
+      },
+      "detail": ""
+    },
+    {
+      "id": "G06",
+      "name": "no_interpenetration",
+      "status": "PASS",
+      "metrics": {
+        "checked_pairs": 78
+      },
+      "detail": ""
+    },
+    {
+      "id": "G07",
+      "name": "svg_physical",
+      "status": "PASS",
+      "metrics": {
+        "svg_w_mm": 216.0,
+        "svg_h_mm": 208.5,
+        "net_w_mm": 192.0,
+        "net_h_mm": 184.5,
+        "layers": [
+          "CUT",
+          "CREASE-MOUNTAIN",
+          "CREASE-VALLEY",
+          "GLUE",
+          "BLEED",
+          "REGISTRATION",
+          "INFO"
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "id": "G08",
+      "name": "pdf_physical",
+      "status": "PASS",
+      "metrics": {
+        "mediabox_pt": [
+          612.2835,
+          591.0236
+        ],
+        "expected_pt": [
+          612.2834645669292,
+          591.0236220472442
+        ],
+        "bar_50mm": true,
+        "ocg_layers": 7
+      },
+      "detail": ""
+    },
+    {
+      "id": "G10",
+      "name": "core_isolation",
+      "status": "PASS",
+      "metrics": {
+        "imports": "numpy/shapely/jsonschema/PIL/typer only"
+      },
+      "detail": ""
+    }
+  ],
+  "tolerances": {
+    "fold_closure_mm": 0.2,
+    "golden_mm": 0.5
+  }
+}
