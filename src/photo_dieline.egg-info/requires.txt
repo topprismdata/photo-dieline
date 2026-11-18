@@ -1,0 +1,8 @@
+numpy>=1.24
+shapely>=2.0
+jsonschema>=4.17
+pillow>=10.0
+typer>=0.9
+
+[dev]
+pytest>=7.0

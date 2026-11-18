@@ -1,0 +1,14 @@
+{
+  "package": "gable_top",
+  "params": {"W": 45.0, "D": 45.0, "Hb": 100.0, "Hr": 12.0, "Ef": 14.0, "fin_gap_mm": 3.0, "glue_w": 12.0, "board_t": 0.45},
+  "measurements": [
+    {"name": "W", "value_mm": 45.0, "status": "MEASURED", "source": "卡尺, 三次取中"},
+    {"name": "D", "value_mm": 45.0, "status": "MEASURED", "source": "卡尺"},
+    {"name": "Hb", "value_mm": 100.0, "status": "MEASURED", "source": "钢尺"},
+    {"name": "Hr", "value_mm": 12.0, "status": "DERIVED", "source": "顶坡可见高度, 实测低坡"},
+    {"name": "Ef", "value_mm": 14.0, "status": "MEASURED", "source": "立鳍高"},
+    {"name": "fin_gap_mm", "value_mm": 3.0, "status": "DERIVED", "source": "双层板厚叠层"},
+    {"name": "glue_w", "value_mm": 12.0, "status": "DEFAULTED"},
+    {"name": "board_t", "value_mm": 0.45, "status": "MEASURED", "source": "千分尺"}
+  ]
+}

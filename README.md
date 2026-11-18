@@ -21,11 +21,25 @@
 
 ## 里程碑
 
-| 阶段 | 内容 |
-|---|---|
-| **M1（进行中）** | gable-top 屋顶包垂直切片：照片+三尺寸 → Geometry IR → 自研 2D 布局 → 1:1 SVG/PDF → 纯 Python 折叠 QA |
-| M2 | 模板库扩展（FEFCO 0201）＋ **Twins Data Engine**（合成孪生数据飞轮）＋ T1 箱型分类 / T2 参数回归 |
-| M3 | TRELLIS.2 视觉辅证 · 智能补参交互 · 端到端候选 IR 研究 |
+| 阶段 | 内容 | 状态 |
+|---|---|---|
+| **M1** | gable-top 屋顶包垂直切片：照片+三尺寸 → Geometry IR → 自研 2D 布局 → 1:1 分层 SVG/PDF → 纯 Python 折叠 QA（十门） | ✅ **VALIDATED**（CI 可复跑：`pytest tests/`） |
+| M2 | 模板库扩展（FEFCO 0201）＋ **Twins Data Engine**（合成孪生数据飞轮）＋ T1 箱型分类 / T2 参数回归 | 设计冻结（`docs/tde-spec.md`） |
+| M3 | TRELLIS.2 视觉辅证 · 智能补参交互 · 端到端候选 IR 研究 | 规划 |
+
+## 快速开始（M1 垂直切片）
+
+```bash
+pip install -e ".[dev]"
+
+# 一条命令: 照片 + 实测尺寸 → IR / 1:1 分层 SVG / 分层 PDF / QA 报告
+photo-dieline build --spec examples/gable_top/spec.json --photo your_photo.jpg --out artifacts/
+
+pytest tests/   # 13 项机器验收 (16 项合同的可自动判定部分)
+```
+
+输出 `artifacts/`：`geometry-ir.json`（五对象协议）· `dieline.svg` · `dieline.pdf`（7 图层 OCGroups）·
+`qa-report.json`（G01-G10 门禁）。照片门 ≥1000px；折叠闭合残差 ≤0.2mm；golden 尺寸 ≤0.5mm。
 
 ## 设计文档
 

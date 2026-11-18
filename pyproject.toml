@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "photo-dieline"
+version = "0.1.0"
+description = "From physical packaging photos to manufacturing-ready 1:1 dielines"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Topprism Data" }]
+dependencies = [
+  "numpy>=1.24",
+  "shapely>=2.0",
+  "jsonschema>=4.17",
+  "pillow>=10.0",
+  "typer>=0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+photo-dieline = "photo_dieline.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
