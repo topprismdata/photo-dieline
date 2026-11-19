@@ -125,7 +125,9 @@ def to_dict(ir: GeometryIR) -> dict:
 
 
 def from_raw(raw: dict) -> GeometryIR:
-    """已保存的 geometry-ir.json → GeometryIR (重校验)."""
+    """任意来源 raw IR → GeometryIR (统一协议清理: 剥模板内部派生量, 重校验)."""
+    raw = json.loads(json.dumps(raw))  # 深拷贝, 不污染调用方
+    raw.pop("_derived", None)
     validate_dict(raw)
     edges = [FoldEdge(
         id=e["id"],
