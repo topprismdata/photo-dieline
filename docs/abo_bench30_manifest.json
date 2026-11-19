@@ -1,0 +1,890 @@
+[
+ {
+  "file": "b00_gable_or_carton_B07H2G4J2L.jpg",
+  "structure": "gable_or_carton",
+  "item_id": "B07H2G4J2L",
+  "name": "AmazonBasics - Cartellina portadocumenti in cartoncino, 1 di",
+  "dims_in": {
+   "height": 15,
+   "length": 11.75,
+   "width": 10
+  },
+  "main_image_id": "81IXX2atcHL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/bb/bb8daed5.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   212
+  ],
+  "views": [
+   {
+    "file": "b00_gable_or_carton_B07H2G4J2L_v1.jpg",
+    "image_id": "71UKmCOecNL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/91/9117671d.jpg"
+   },
+   {
+    "file": "b00_gable_or_carton_B07H2G4J2L_v2.jpg",
+    "image_id": "81cCg2GvMPL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/d7/d7d58abf.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b01_gable_or_carton_B07ZHTTSB1.jpg",
+  "structure": "gable_or_carton",
+  "item_id": "B07ZHTTSB1",
+  "name": "365 by Whole Foods Market, Organic Unsweetened Almond Milk, ",
+  "dims_in": {
+   "height": 5.35,
+   "length": 2.1,
+   "width": 2.05
+  },
+  "main_image_id": "71haXxox86L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/52/52967463.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   106,
+   256
+  ],
+  "views": [
+   {
+    "file": "b01_gable_or_carton_B07ZHTTSB1_v1.jpg",
+    "image_id": "814s12s5bYL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/48/4864b067.jpg"
+   },
+   {
+    "file": "b01_gable_or_carton_B07ZHTTSB1_v2.jpg",
+    "image_id": "71pBJzitCIL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/c4/c4317288.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b02_gable_or_carton_B07ZHMLNCH.jpg",
+  "structure": "gable_or_carton",
+  "item_id": "B07ZHMLNCH",
+  "name": "AmazonBasics Wide-Mouth, 2-Speed Centrifugal Juicer with Jui",
+  "dims_in": {
+   "height": 11.18,
+   "length": 10.35,
+   "width": 6.65
+  },
+  "main_image_id": "718AhMKto8L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/d7/d7567026.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b02_gable_or_carton_B07ZHMLNCH_v1.jpg",
+    "image_id": "71dD-4xQ6BL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/30/30bfb7dc.jpg"
+   },
+   {
+    "file": "b02_gable_or_carton_B07ZHMLNCH_v2.jpg",
+    "image_id": "810giNsetAL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/56/56612212.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b03_gable_or_carton_B07ZHVDT1V.jpg",
+  "structure": "gable_or_carton",
+  "item_id": "B07ZHVDT1V",
+  "name": "365 by Whole Foods Market, Organic Unsweetened Almond Milk, ",
+  "dims_in": {
+   "height": 5.35,
+   "length": 2.05,
+   "width": 2.1
+  },
+  "main_image_id": "71jKjX7jqAL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/a1/a176e864.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   105,
+   256
+  ],
+  "views": [
+   {
+    "file": "b03_gable_or_carton_B07ZHVDT1V_v1.jpg",
+    "image_id": "71RUlpbGWgL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/05/05a28541.jpg"
+   },
+   {
+    "file": "b03_gable_or_carton_B07ZHVDT1V_v2.jpg",
+    "image_id": "81bhV0bfJfL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/aa/aaa88e8b.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b04_gable_or_carton_B0854RNKDK.jpg",
+  "structure": "gable_or_carton",
+  "item_id": "B0854RNKDK",
+  "name": "Amazon Brand - Presto! 2 Ply Facial Tissue Carton Box - 200 ",
+  "dims_in": {
+   "height": 10.43305,
+   "length": 9.4488,
+   "width": 9.0551
+  },
+  "main_image_id": "81LIDbU5n-L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/d9/d91d4753.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   219
+  ],
+  "views": [
+   {
+    "file": "b04_gable_or_carton_B0854RNKDK_v1.jpg",
+    "image_id": "31m5O95gcBL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/dd/dd2655e5.jpg"
+   },
+   {
+    "file": "b04_gable_or_carton_B0854RNKDK_v2.jpg",
+    "image_id": "81NAbfleHRL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/d4/d427b525.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b05_other_package_B07H286FR8.jpg",
+  "structure": "other_package",
+  "item_id": "B07H286FR8",
+  "name": "Umi. Essentials Plegable Carro Carretilla de jardín Carro Pl",
+  "dims_in": {
+   "height": 7.8,
+   "length": 28.7,
+   "width": 22.8
+  },
+  "main_image_id": "71H05GVLPBL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/c5/c5407d36.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   224
+  ],
+  "views": [
+   {
+    "file": "b05_other_package_B07H286FR8_v1.jpg",
+    "image_id": "91bEfoXl1UL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/66/66f6675f.jpg"
+   },
+   {
+    "file": "b05_other_package_B07H286FR8_v2.jpg",
+    "image_id": "81oM2STW9UL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/a1/a1b03fcf.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b06_corrugated_box_B081FGV61K.jpg",
+  "structure": "corrugated_box",
+  "item_id": "B081FGV61K",
+  "name": "Amazon Brand - Solimo Fabric Storage Box with Lid, Large, Be",
+  "dims_in": {
+   "height": 15.748,
+   "length": 15.748,
+   "width": 15.748
+  },
+  "main_image_id": "71+bPKLuvwL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/c1/c168a814.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b06_corrugated_box_B081FGV61K_v1.jpg",
+    "image_id": "810KkXfo97L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/c8/c831e6a2.jpg"
+   },
+   {
+    "file": "b06_corrugated_box_B081FGV61K_v2.jpg",
+    "image_id": "71gEFKfeK+L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/45/45764f91.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b07_corrugated_box_B081FGSKJ2.jpg",
+  "structure": "corrugated_box",
+  "item_id": "B081FGSKJ2",
+  "name": "Amazon Brand - Solimo Printed Fabric Rectangular Storage Box",
+  "dims_in": {
+   "height": 9.8425,
+   "length": 15.748,
+   "width": 11.811
+  },
+  "main_image_id": "91NOP9-ptqL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/8c/8c0fee5a.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   191
+  ]
+ },
+ {
+  "file": "b08_corrugated_box_B081FGY2MX.jpg",
+  "structure": "corrugated_box",
+  "item_id": "B081FGY2MX",
+  "name": "Amazon Brand - Solimo Printed Fabric Storage Box, Medium, Se",
+  "dims_in": {
+   "height": 12.2047,
+   "length": 12.2047,
+   "width": 12.2047
+  },
+  "main_image_id": "71bFEG7XPQL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/b0/b0e344f6.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b08_corrugated_box_B081FGY2MX_v1.jpg",
+    "image_id": "71mpJzGK8BL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/13/13025bd9.jpg"
+   },
+   {
+    "file": "b08_corrugated_box_B081FGY2MX_v2.jpg",
+    "image_id": "71UkPNWcRRL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/b6/b68154fa.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b09_corrugated_box_B081FHVGMC.jpg",
+  "structure": "corrugated_box",
+  "item_id": "B081FHVGMC",
+  "name": "Amazon Brand - Solimo Printed Fabric Storage Box, Small, Set",
+  "dims_in": {
+   "height": 10.6299,
+   "length": 10.6299,
+   "width": 10.6299
+  },
+  "main_image_id": "61uifFywSYL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/60/60af8c49.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b09_corrugated_box_B081FHVGMC_v1.jpg",
+    "image_id": "71mpJzGK8BL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/13/13025bd9.jpg"
+   },
+   {
+    "file": "b09_corrugated_box_B081FHVGMC_v2.jpg",
+    "image_id": "714R7aiDmZL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/7d/7d4c2a5e.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b10_corrugated_box_B081FHFLWC.jpg",
+  "structure": "corrugated_box",
+  "item_id": "B081FHFLWC",
+  "name": "Amazon Brand - Solimo Printed Fabric Storage Box, Small, Set",
+  "dims_in": {
+   "height": 10.6299,
+   "length": 10.6299,
+   "width": 10.6299
+  },
+  "main_image_id": "71PRdKP865L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/ca/ca0769de.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b10_corrugated_box_B081FHFLWC_v1.jpg",
+    "image_id": "81+AgVT+GqL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/3a/3ae191ee.jpg"
+   },
+   {
+    "file": "b10_corrugated_box_B081FHFLWC_v2.jpg",
+    "image_id": "61kMSVQVReL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/6a/6ad91981.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b11_corrugated_box_B081FHHB2S.jpg",
+  "structure": "corrugated_box",
+  "item_id": "B081FHHB2S",
+  "name": "Amazon Brand - Solimo Printed Fabric Storage Box, Medium, Se",
+  "dims_in": {
+   "height": 12.2047,
+   "length": 12.2047,
+   "width": 12.2047
+  },
+  "main_image_id": "61uifFywSYL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/60/60af8c49.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b11_corrugated_box_B081FHHB2S_v1.jpg",
+    "image_id": "71mpJzGK8BL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/13/13025bd9.jpg"
+   },
+   {
+    "file": "b11_corrugated_box_B081FHHB2S_v2.jpg",
+    "image_id": "71UkPNWcRRL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/b6/b68154fa.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b12_folding_box_B07ZD4357R.jpg",
+  "structure": "folding_box",
+  "item_id": "B07ZD4357R",
+  "name": "AmazonBasics 70 GSM A4 Multi-purpose Copier Paper Box (5 Rea",
+  "dims_in": {
+   "height": 8.89762,
+   "length": 12.16533,
+   "width": 10.78738
+  },
+  "main_image_id": "71gnoA4o5dL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/89/8980d511.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   170
+  ],
+  "views": [
+   {
+    "file": "b12_folding_box_B07ZD4357R_v1.jpg",
+    "image_id": "713UsBdZMkL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/9f/9f27a069.jpg"
+   },
+   {
+    "file": "b12_folding_box_B07ZD4357R_v2.jpg",
+    "image_id": "81AOIFvGVlL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/e9/e9d200cd.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b13_folding_box_B07W81PFD3.jpg",
+  "structure": "folding_box",
+  "item_id": "B07W81PFD3",
+  "name": "AmazonBasics Wooden Jewelry/Watch Box with Glass Top - 2-Dra",
+  "dims_in": {
+   "height": 5.25,
+   "length": 14.87,
+   "width": 8.87
+  },
+  "main_image_id": "81LGJdYohSL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/58/58e8fa30.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b13_folding_box_B07W81PFD3_v1.jpg",
+    "image_id": "819ivTGimPL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/df/dfe329cc.jpg"
+   },
+   {
+    "file": "b13_folding_box_B07W81PFD3_v2.jpg",
+    "image_id": "813efYcETmL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/00/00acee75.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b14_folding_box_B0879YBV6G.jpg",
+  "structure": "folding_box",
+  "item_id": "B0879YBV6G",
+  "name": "AmazonBasics ABS Ballot Box with Lock",
+  "dims_in": {
+   "height": 10,
+   "length": 7,
+   "width": 4.25
+  },
+  "main_image_id": "61ULZuTkdPL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/08/08729d1f.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b14_folding_box_B0879YBV6G_v1.jpg",
+    "image_id": "61HCT13vkuL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/43/4304f138.jpg"
+   },
+   {
+    "file": "b14_folding_box_B0879YBV6G_v2.jpg",
+    "image_id": "51B24c8gYhL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/0f/0f416a3d.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b15_folding_box_B07QW1JCPL.jpg",
+  "structure": "folding_box",
+  "item_id": "B07QW1JCPL",
+  "name": "Marque Amazon - Movian Box Coffee Table",
+  "dims_in": {
+   "height": 13.779527545,
+   "length": 27.55905509,
+   "width": 15.74803148
+  },
+  "main_image_id": "810yelKT9XL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/ea/ea048f9a.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   192
+  ],
+  "views": [
+   {
+    "file": "b15_folding_box_B07QW1JCPL_v1.jpg",
+    "image_id": "61VV9t3yM+L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/94/943ef1ad.jpg"
+   },
+   {
+    "file": "b15_folding_box_B07QW1JCPL_v2.jpg",
+    "image_id": "61kObR12VmL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/c6/c6233f14.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b16_folding_box_B087MKMPX1.jpg",
+  "structure": "folding_box",
+  "item_id": "B087MKMPX1",
+  "name": "AmazonBasics Wooden Birch Cajon Percussion Box with Internal",
+  "dims_in": {
+   "height": 18.9,
+   "length": 12.2,
+   "width": 11.8
+  },
+  "main_image_id": "51X7+ppZhpL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/87/872964e9.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b16_folding_box_B087MKMPX1_v1.jpg",
+    "image_id": "51fCHglcidL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/6e/6e1103a0.jpg"
+   },
+   {
+    "file": "b16_folding_box_B087MKMPX1_v2.jpg",
+    "image_id": "41wQ6E8dU7L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/fe/fedc6d17.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b17_folding_box_B07QTBBNC4.jpg",
+  "structure": "folding_box",
+  "item_id": "B07QTBBNC4",
+  "name": "Amazon Brand - Solimo Fabric Jewellery Box with 10 Transpare",
+  "dims_in": {
+   "height": 5.9055,
+   "length": 10.2362,
+   "width": 4.7244
+  },
+  "main_image_id": "91xLQovRY2L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/68/687c3fe6.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   132
+  ],
+  "views": [
+   {
+    "file": "b17_folding_box_B07QTBBNC4_v1.jpg",
+    "image_id": "917Jxph+VUL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/e8/e8d2c983.jpg"
+   },
+   {
+    "file": "b17_folding_box_B07QTBBNC4_v2.jpg",
+    "image_id": "91FpiAA1WwL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/32/3205e40b.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b18_bottle_jug_B07XL36C6P.jpg",
+  "structure": "bottle_jug",
+  "item_id": "B07XL36C6P",
+  "name": "Zoo-Max - Juguete para pájaro en espiral, 32-Ounces, 2-Pack",
+  "dims_in": {
+   "height": 9.8,
+   "length": 3.4,
+   "width": 3.4
+  },
+  "main_image_id": "51hPCkxKIWL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/0e/0ebca6f3.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b18_bottle_jug_B07XL36C6P_v1.jpg",
+    "image_id": "61vAzk2ERjL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/67/6760b6f2.jpg"
+   },
+   {
+    "file": "b18_bottle_jug_B07XL36C6P_v2.jpg",
+    "image_id": "61ldSImC+iL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/2b/2bc0472c.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b19_bottle_jug_B075YNL7R3.jpg",
+  "structure": "bottle_jug",
+  "item_id": "B075YNL7R3",
+  "name": "铆钉乡村风格装饰6-bottle 木质酒架25.4 CM 高自然色",
+  "dims_in": {
+   "height": 5,
+   "length": 37,
+   "width": 8
+  },
+  "main_image_id": "810JFjtga3L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/0b/0b589f12.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b19_bottle_jug_B075YNL7R3_v1.jpg",
+    "image_id": "81ttXyyg3gL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/73/73eb5e1d.jpg"
+   },
+   {
+    "file": "b19_bottle_jug_B075YNL7R3_v2.jpg",
+    "image_id": "81ELdEZyT2L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/de/de34ace8.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b20_bottle_jug_B07GFWLLGK.jpg",
+  "structure": "bottle_jug",
+  "item_id": "B07GFWLLGK",
+  "name": "AmazonBasics Wine Rack with Table Top for 23 Bottles",
+  "dims_in": {
+   "height": 27,
+   "length": 15.74,
+   "width": 9.33
+  },
+  "main_image_id": "81mSTLny+dL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/07/074fd668.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b20_bottle_jug_B07GFWLLGK_v1.jpg",
+    "image_id": "51g1vhkCjYL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/16/1636c0e3.jpg"
+   },
+   {
+    "file": "b20_bottle_jug_B07GFWLLGK_v2.jpg",
+    "image_id": "81lHeLmK9VL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/65/65e372e1.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b21_bottle_jug_B089GB5Q8S.jpg",
+  "structure": "bottle_jug",
+  "item_id": "B089GB5Q8S",
+  "name": "AmazonBasics Hydraulic Bottle Jack, 10-Ton Capacity (Renewed",
+  "dims_in": {
+   "height": 9.27,
+   "length": 5.14,
+   "width": 4.7
+  },
+  "main_image_id": "71R94H-q0DL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/b2/b203982b.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b21_bottle_jug_B089GB5Q8S_v1.jpg",
+    "image_id": "71mvViWmmOL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/30/30b0f69f.jpg"
+   },
+   {
+    "file": "b21_bottle_jug_B089GB5Q8S_v2.jpg",
+    "image_id": "71g20mJMDDL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/7c/7c96fa34.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b22_bottle_jug_B07ZVK94XL.jpg",
+  "structure": "bottle_jug",
+  "item_id": "B07ZVK94XL",
+  "name": "AmazonBasics Tritan Water Bottle with Infuser – 25-Ounce, 2-",
+  "dims_in": {
+   "height": 9.76,
+   "length": 3.21,
+   "width": 2.91
+  },
+  "main_image_id": "81yNcqkI4IL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/d5/d5307a1d.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b22_bottle_jug_B07ZVK94XL_v1.jpg",
+    "image_id": "71bWpl5tNJL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/8c/8c529083.jpg"
+   },
+   {
+    "file": "b22_bottle_jug_B07ZVK94XL_v2.jpg",
+    "image_id": "812NmnQCHqL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/88/88b8cb08.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b23_bottle_jug_B07TJV6Q7B.jpg",
+  "structure": "bottle_jug",
+  "item_id": "B07TJV6Q7B",
+  "name": "Amazon-märke - KENSINGTON vridlås Modern Bottlegreen Velvet",
+  "dims_in": {
+   "height": 31.6929133535,
+   "length": 22.6377952525,
+   "width": 23.4251968265
+  },
+  "main_image_id": "81HBhwJFzLL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/d1/d1dcdb73.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   204,
+   256
+  ],
+  "views": [
+   {
+    "file": "b23_bottle_jug_B07TJV6Q7B_v1.jpg",
+    "image_id": "81ifR0mA1fL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/a7/a75760ad.jpg"
+   },
+   {
+    "file": "b23_bottle_jug_B07TJV6Q7B_v2.jpg",
+    "image_id": "81gIqeFgdJL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/5d/5d35a3fc.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b24_other_package_B087QFZJD6.jpg",
+  "structure": "other_package",
+  "item_id": "B087QFZJD6",
+  "name": "AmazonCommercial Stainless Steel Heav-Duty Cheese Grater, 6-",
+  "dims_in": {
+   "height": 4,
+   "length": 9.25,
+   "width": 5
+  },
+  "main_image_id": "81Zwmg4NljL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/19/198dcf7b.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b24_other_package_B087QFZJD6_v1.jpg",
+    "image_id": "81YoT+cxdeL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/1e/1eb7576a.jpg"
+   },
+   {
+    "file": "b24_other_package_B087QFZJD6_v2.jpg",
+    "image_id": "61XHCE-bJeL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/fc/fc1382d9.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b25_other_package_B01MPWYHI6.jpg",
+  "structure": "other_package",
+  "item_id": "B01MPWYHI6",
+  "name": "AmazonBasics Gaming Headset for Xbox One, PS4",
+  "dims_in": {
+   "height": 8.5,
+   "length": 6,
+   "width": 3
+  },
+  "main_image_id": "81sOaAo4RQL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/1b/1be1872a.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   154,
+   256
+  ],
+  "views": [
+   {
+    "file": "b25_other_package_B01MPWYHI6_v1.jpg",
+    "image_id": "619SkXxq52L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/8b/8bbefc02.jpg"
+   },
+   {
+    "file": "b25_other_package_B01MPWYHI6_v2.jpg",
+    "image_id": "81a58n0PuDL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/da/da18bffe.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b26_other_package_B08155RK8V.jpg",
+  "structure": "other_package",
+  "item_id": "B08155RK8V",
+  "name": "AmazonCommercial Dissolvable Glass Cleaner Kit with 2 Spraye",
+  "dims_in": {
+   "height": 11.75,
+   "length": 7.125,
+   "width": 3.44
+  },
+  "main_image_id": "810EKzAhuVL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/71/71afbdf8.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b26_other_package_B08155RK8V_v1.jpg",
+    "image_id": "31oXKj7sXML",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/f0/f0296d65.jpg"
+   },
+   {
+    "file": "b26_other_package_B08155RK8V_v2.jpg",
+    "image_id": "61oWwSge2LL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/5c/5cfccc95.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b27_other_package_B07YN48J13.jpg",
+  "structure": "other_package",
+  "item_id": "B07YN48J13",
+  "name": "Amazon merk - Movian MULTIBOX 6, bookcase, 73,7 x 33,1 x 108",
+  "dims_in": {
+   "height": 42.5984251534,
+   "length": 29.0157480019,
+   "width": 13.0314960497
+  },
+  "main_image_id": "71bjYqznmSL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/73/7350e7ca.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b27_other_package_B07YN48J13_v1.jpg",
+    "image_id": "61kH+w49G8L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/93/93db7f63.jpg"
+   },
+   {
+    "file": "b27_other_package_B07YN48J13_v2.jpg",
+    "image_id": "51aGy2Al1XL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/ab/abdf2865.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b28_other_package_B078JFFX4S.jpg",
+  "structure": "other_package",
+  "item_id": "B078JFFX4S",
+  "name": "Stone & Beam Rustic Farmhouse Metal Jar and Rope Candle Hold",
+  "dims_in": {
+   "height": 19,
+   "length": 8.25,
+   "width": 12
+  },
+  "main_image_id": "91Ru1D-Pz2L",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/ad/ad55d7dd.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   256
+  ],
+  "views": [
+   {
+    "file": "b28_other_package_B078JFFX4S_v1.jpg",
+    "image_id": "91GYitcMm6L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/8c/8c415fee.jpg"
+   },
+   {
+    "file": "b28_other_package_B078JFFX4S_v2.jpg",
+    "image_id": "91iocAShK2L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/0a/0ab60024.jpg"
+   }
+  ]
+ },
+ {
+  "file": "b29_other_package_B07WK4BV5X.jpg",
+  "structure": "other_package",
+  "item_id": "B07WK4BV5X",
+  "name": "Amazon Brand - Solimo Plastic Food Storage Containers with L",
+  "dims_in": {
+   "height": 11.88,
+   "length": 14.81,
+   "width": 7.31
+  },
+  "main_image_id": "81749NZcCgL",
+  "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/09/09f144c7.jpg",
+  "license": "CC-BY 4.0 (ABO)",
+  "px": [
+   256,
+   240
+  ],
+  "views": [
+   {
+    "file": "b29_other_package_B07WK4BV5X_v1.jpg",
+    "image_id": "51M39MBAwDL",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/20/20533b83.jpg"
+   },
+   {
+    "file": "b29_other_package_B07WK4BV5X_v2.jpg",
+    "image_id": "71LZuMaY99L",
+    "source_url": "https://amazon-berkeley-objects.s3.amazonaws.com/images/small/c4/c49a59d1.jpg"
+   }
+  ]
+ }
+]
