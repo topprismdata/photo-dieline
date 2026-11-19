@@ -40,9 +40,9 @@ def build_material(roughness: float, base_color, tint_seed: float, role: str = "
     base = ROLE_PRINT.get(role, tuple(base_color))
     k = 0.88 + (tint_seed % 1.0) * 0.24
     lum = sum(base_color) / 3.0
-    col = [min(1.0, b * k * (0.55 + 0.45 * lum)) for b in base]
+    col = [min(1.0, b * k * (0.42 + 0.40 * lum) * 0.82) for b in base]
     bsdf.inputs["Base Color"].default_value = (*col, 1.0)
-    bsdf.inputs["Roughness"].default_value = roughness
+    bsdf.inputs["Roughness"].default_value = min(roughness, 0.42)
     return mat
 
 
@@ -92,7 +92,7 @@ def add_scene(payload):
     d = cam["distance_m"]
     fwd = mathutils.Vector((math.cos(el) * math.sin(az), -math.cos(el) * math.cos(az),
                             math.sin(el)))
-    eye = ctr + fwd * d * 1.15
+    eye = ctr + fwd * d * 1.35
     cam_obj = bpy.data.objects.new("cam", cam_data)
     cam_obj.location = eye
     # 朝向: -Z 对准目标, 再加 roll
@@ -124,7 +124,7 @@ def add_scene(payload):
 
     # 灯光: Key SUN 方向光 (色温, 无距离衰减, 曝光稳定) + 环境世界 + 小面积补光
     kd = bpy.data.lights.new("key", "SUN")
-    kd.energy = 3.0 * light["key_intensity_x"]
+    kd.energy = 5.0 * light["key_intensity_x"]
     kd.angle = math.radians(9.0)
     kd.color = kelvin_rgb(light["kelvin"])
     key = bpy.data.objects.new("key", kd)
@@ -134,7 +134,7 @@ def add_scene(payload):
     key.rotation_euler = kd_dir.to_track_quat("-Z", "Y").to_euler()
     bpy.context.collection.objects.link(key)
     kd2 = bpy.data.lights.new("fill", "AREA")
-    kd2.energy = 4.0 * light["key_intensity_x"] * light["ambient_ratio"] * 2
+    kd2.energy = 2.0 * light["key_intensity_x"] * light["ambient_ratio"] * 2
     kd2.size = max(0.5, d * 0.8)
     kd2.color = kelvin_rgb(light["kelvin"] + 400)
     fill = bpy.data.objects.new("fill", kd2)
@@ -150,7 +150,7 @@ def add_scene(payload):
 
     # 环境: 地面 + 背景板 (场景类简化程序化; 白底棚拍提亮)
     scene = payload["scene"]
-    ground_col = {"STUDIO": (0.92, 0.92, 0.92), "PHONE_DESKTOP": (0.42, 0.32, 0.24),
+    ground_col = {"STUDIO": (0.55, 0.55, 0.56), "PHONE_DESKTOP": (0.42, 0.32, 0.24),
                   "PHONE_INDOOR": (0.45, 0.42, 0.38), "PHONE_WINDOW_LIGHT": (0.50, 0.48, 0.45),
                   "PHONE_SUPERMARKET": (0.55, 0.55, 0.57), "PHONE_HANDHELD": (0.40, 0.38, 0.36)}.get(scene, (0.5, 0.5, 0.5))
     gmesh = bpy.data.meshes.new("ground")
@@ -176,7 +176,8 @@ def main():
     label = json.load(open(argv[0]))
     payload = label["render_payload"] if "render_payload" in label else label
     clean_scene()
-    bpy.ops.wm.obj_import(filepath=payload["obj_path"], global_scale=0.001)
+    bpy.ops.wm.obj_import(filepath=payload["obj_path"], global_scale=0.001,
+                          forward_axis="NEGATIVE_Y", up_axis="Z")
     add_scene(payload)
 
 

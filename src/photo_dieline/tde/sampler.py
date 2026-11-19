@@ -78,8 +78,8 @@ class CaptureSampler:
         # 距离↔景深联动: 近距开大光圈概率升高
         if dist_cm < 35 and r.random() < 0.5:
             fstop = min(fstop, r.uniform(1.7, 2.8))
-        # 主体占比 (spec 语义=画面面积占比) → 线性占比 = sqrt(面积占比); 距离解算后夹回档位区间
-        ratio = math.sqrt(r.uniform(ratio_lo, ratio_hi))
+        # 主体占比语义 = 线性占比 (v0.8: sqrt 版导致 0.67-0.92 线性必然出画, 实测裁决改线性直读)
+        ratio = r.uniform(ratio_lo, ratio_hi)
         fov_half = math.atan(18.0 / fe)
         d_mm = radius_mm / (ratio * math.tan(fov_half))
         d_mm = float(np.clip(d_mm, dist_cm * 10, dist_cm * 10 * 1.6))
