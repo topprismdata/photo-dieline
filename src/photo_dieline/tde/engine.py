@@ -94,9 +94,14 @@ def run_tde(out_dir: str, template_id: str = "gable_top",
                                  str(pl)], capture_output=True, timeout=240)
             if not png.exists():  # blender 脚本异常也可能 exit 0 → 以产物为准
                 raise RuntimeError(f"render {sid} 无产物: {pr.stderr.decode()[-600:]}")
+            iq = _image_learnability_gate(png)
+            # 渲染后回写图像级门 (label 在渲染前先供 driver 读取)
+            lab = json.loads(pl.read_text())
+            lab["learnability_gate"] = iq
+            pl.write_text(json.dumps(lab, ensure_ascii=False, indent=1))
             manifest["samples"].append({"sample_id": f"s_{sid:05d}", "variant": vi,
                                         "tier": cap["tier"], "scene": cap["scene"],
-                                        "g0": bool(gate["pass"]), "label": str(pl)})
+                                        "g0": bool(gate["pass"] and iq["pass"]), "label": str(pl)})
             sid += 1
 
     manifest["sample_count"] = sid
@@ -105,6 +110,32 @@ def run_tde(out_dir: str, template_id: str = "gable_top",
     (out / "dataset_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1))
     return {"samples": sid, "variants": variants, "elapsed_s": round(time.time() - t0, 1),
             "out": str(out)}
+
+
+def _image_learnability_gate(png_path, res: int = 384) -> dict:
+    """图像级可学性门 (v0.6): 主体面积占比 + 锐度 (Laplacian 方差) + 非退化.
+
+    spec 主体占比 45-85% (REALISTIC); 锐度门=结构可辨的下限仪器 (GPT v0.3 处方:
+    图像级判据, 与 3D 投影门互补, 不可互相替代)。
+    """
+    import numpy as np
+    from PIL import Image
+    im = np.asarray(Image.open(png_path).convert("RGB"), float)
+    gray = im.mean(axis=2)
+    # Laplacian 锐度
+    lap = (np.roll(gray, 1, 0) + np.roll(gray, -1, 0) + np.roll(gray, 1, 1)
+           + np.roll(gray, -1, 1) - 4 * gray)
+    sharp = float(lap.var())
+    # 主体面积: 与四角背景色的色距
+    corners = np.concatenate([im[:40, :40].reshape(-1, 3), im[:40, -40:].reshape(-1, 3),
+                              im[-40:, :40].reshape(-1, 3), im[-40:, -40:].reshape(-1, 3)])
+    bg = corners.mean(0)
+    mask = np.abs(im - bg).sum(2) > 60
+    frac = float(mask.mean())
+    nondegenerate = float(gray.std()) > 5.0
+    ok = bool(nondegenerate and 0.06 <= frac <= 0.93 and sharp >= 35.0)
+    return {"sharpness_lapvar": round(sharp, 1), "subject_area_frac": round(frac, 3),
+            "nondegenerate": nondegenerate, "pass": ok}
 
 
 def _topology_gate(ir, cap, vinfo, res: int) -> dict:
