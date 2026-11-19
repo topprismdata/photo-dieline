@@ -21,7 +21,7 @@ from ..core.ir import ARError, GeometryIR
 from ..export import pdf as pdfx
 from ..export import svg as svgx
 from ..folding.engine import fold_all
-from ..parametric import gable_top
+from ..parametric import base as templates
 
 TOL_MM = 0.2          # 折叠闭合残差门
 GOLDEN_TOL_MM = 0.5   # golden 尺寸门
@@ -73,7 +73,17 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     try:
         from ..core.ir import validate_dict
         validate_dict(ir.raw)
-        g02.ok({"top_level": ["meta", "package", "panels", "edges", "features"]})
+        missing = []
+        try:
+            mod = templates.get(ir.package["template"]["id"])
+            missing = [k for k in mod.PARAM_ORDER if k not in ir.package["params"]]
+        except KeyError:
+            missing = ["<未注册模板>"]
+        if missing:
+            g02.fail(f"模板参数缺失: {missing}")
+        else:
+            g02.ok({"top_level": ["meta", "package", "panels", "edges", "features"],
+                    "template": ir.package["template"]["id"]})
     except Exception as exc:  # noqa: BLE001
         g02.fail(str(exc))
     g.append(g02)
@@ -106,36 +116,8 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     g04 = Gate("G04", "fold_closure")
     try:
         world = fold_all(ir)
-        p = {k: float(v) for k, v in ir.package["params"].items()}
-        W, D, Hb, Hr = p["W"], p["D"], p["Hb"], p["Hr"]
-        residual = {}
-
-        def pair(name, pa, ia, pb, ib):
-            return name, _vdist(_vertex(world, pa, ia), _vertex(world, pb, ib))
-
-        checks = [
-            # 脊线四重合: slopeB/slopeF 坡顶缘 ↔ wallL/wallR 山墙顶点
-            pair("slopeB.ridge.L == wallL.apex", "slopeB", 3, "wallL", 3),
-            pair("slopeF.ridge.L == wallR.apex", "slopeF", 3, "wallR", 3),
-            pair("slopeB.ridge.R == wallR.apex", "slopeB", 2, "wallR", 3),
-            pair("slopeF.ridge.R == wallL.apex", "slopeF", 2, "wallL", 3),
-            # 山墙-坡侧缝: 墙顶角 == 坡底角
-            pair("wallL.top.B == slopeB.bottom.L", "wallL", 2, "slopeB", 0),
-            pair("wallR.top.B == slopeF.bottom.L", "wallR", 2, "slopeF", 0),
-            # 前后全宽底板: flapF 远缘 ↔ flapB 连接缘 (完全叠合封底)
-            ("flapF.far.mid == flapB.attach.mid",
-             _vdist(np.mean(world["flapF"][0:2], axis=0), np.mean(world["flapB"][2:4], axis=0))),
-            # 侧插板远缘互抵中线
-            ("flapL.far.mid == flapR.far.mid",
-             _vdist(np.mean(world["flapL"][0:2], axis=0), np.mean(world["flapR"][0:2], axis=0))),
-        ]
-        for name, d in checks:
-            residual[name] = round(d, 6)
-        # 侧插板远缘平面 x=0 (取远缘中点)
-        flapL_mid = tuple(np.mean(world["flapL"][0:2], axis=0))
-        flapR_mid = tuple(np.mean(world["flapR"][0:2], axis=0))
-        residual["flapL.far.x0"] = round(abs(flapL_mid[0]), 6)
-        residual["flapR.far.x0"] = round(abs(flapR_mid[0]), 6)
+        mod = templates.get(ir.package["template"]["id"])
+        residual = {k: round(float(v), 6) for k, v in mod.closure_checks(ir, world).items()}
         worst = max(residual.values())
         if worst <= TOL_MM:
             g04.ok({"worst_residual_mm": worst, **residual})
@@ -149,15 +131,16 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     g05 = Gate("G05", "golden_dimensions")
     try:
         world = fold_all(ir)
+        mod = templates.get(ir.package["template"]["id"])
         roles = {pp["id"]: pp["role"] for pp in ir.panels}
-        solid = [v for pid, v in world.items() if roles[pid] in ("wall", "slope")]
+        solid = [v for pid, v in world.items() if roles[pid] in mod.solid_roles()]
         allpts = np.vstack(solid)
         dims = {
             "W": float(allpts[:, 0].max() - allpts[:, 0].min()),
             "D": float(allpts[:, 1].max() - allpts[:, 1].min()),
             "H": float(allpts[:, 2].max() - allpts[:, 2].min()),
         }
-        ana = gable_top.analytic_box(ir.package["params"])["bbox"]
+        ana = mod.analytic_bbox(ir.package["params"])
         diffs = {k: abs(dims[k] - ana[k]) for k in ("W", "D", "H")}
         worst = max(diffs.values())
         if worst <= GOLDEN_TOL_MM:
@@ -173,6 +156,8 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     g06 = Gate("G06", "no_interpenetration")
     try:
         world = fold_all(ir)
+        mod = templates.get(ir.package["template"]["id"])
+        allowed = mod.allowed_overlap()
         roles = {pp["id"]: pp["role"] for pp in ir.panels}
         bad = []
         ids = list(world)
@@ -180,7 +165,7 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
             for j in range(i + 1, len(ids)):
                 a, b = ids[i], ids[j]
                 key = frozenset({a, b})
-                if key in ALLOWED_OVERLAP:
+                if key in allowed or key in ALLOWED_OVERLAP:
                     continue
                 if _panels_share_fold(ir, a, b):
                     continue

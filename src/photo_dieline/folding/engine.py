@@ -54,18 +54,25 @@ def _net3(poly: np.ndarray) -> np.ndarray:
 def fold_all(ir: GeometryIR) -> dict[str, np.ndarray]:
     """返回 panel_id → (N,3) 世界顶点 (与 polygon_2d 顶点一一对应)."""
     polys = {p["id"]: np.array(p["polygon_2d"], float) for p in ir.panels}
-    if ROOT_PANEL not in polys:
-        raise ARError(f"根面板 {ROOT_PANEL} 不在模板中")
+    meta = getattr(ir, "raw", {}).get("meta", {}) if hasattr(ir, "raw") else {}
+    root_id = meta.get("root_panel", ROOT_PANEL)
+    if root_id not in polys:
+        raise ARError(f"根面板 {root_id} 不在模板中")
 
-    # 根面板位姿: net(x,y,0) → world(-W/2, x - x1, y)
-    root_poly = polys[ROOT_PANEL]
-    x1 = root_poly[:, 0].min()
-    R0 = np.array([[0.0, 0.0, 0.0],
-                   [1.0, 0.0, 0.0],
-                   [0.0, 1.0, 0.0]])
-    off0 = np.array([-ir.param("W") / 2.0, -x1, 0.0])
-    frames: dict[str, tuple[np.ndarray, np.ndarray]] = {ROOT_PANEL: (R0, off0)}
-    world: dict[str, np.ndarray] = {ROOT_PANEL: _net3(root_poly) @ R0.T + off0}
+    # 根面板位姿: 模板声明 root_frame 优先; 缺省回退 gable 旧映射 (M1 合同)
+    root_poly = polys[root_id]
+    rf = meta.get("root_frame")
+    if rf:
+        R0 = np.array(rf["R"], float)
+        off0 = np.array(rf["off"], float)
+    else:
+        x1 = root_poly[:, 0].min()
+        R0 = np.array([[0.0, 0.0, 0.0],
+                       [1.0, 0.0, 0.0],
+                       [0.0, 1.0, 0.0]])
+        off0 = np.array([-ir.param("W") / 2.0, -x1, 0.0])
+    frames: dict[str, tuple[np.ndarray, np.ndarray]] = {root_id: (R0, off0)}
+    world: dict[str, np.ndarray] = {root_id: _net3(root_poly) @ R0.T + off0}
 
     edges = list(ir.edges)
     while edges:
@@ -95,7 +102,11 @@ def fold_all(ir: GeometryIR) -> dict[str, np.ndarray]:
                 want_positive = e.mt_va == "VALLEY"
                 cand.sort(key=lambda t: t[0], reverse=want_positive)
                 tgt = cand[0][1]
-            R_axis = _rotation_from_to(away_world, tgt, axis)
+            try:
+                R_axis = _rotation_from_to(away_world, tgt, axis)
+            except ARError as exc:
+                raise ARError(f"{e.id}: away={away_world.round(3).tolist()} "
+                              f"tgt={tgt.round(3).tolist()} axis={axis.round(3).tolist()}: {exc}") from None
             Rc = R_axis @ Rp
             offc = origin - Rc @ a_net
             frames[e.child] = (Rc, offc)

@@ -118,6 +118,16 @@ def render_cmd(
     typer.echo(f"compare: {out}")
 
 
+@app.command("batch")
+def batch_cmd(
+    out: str = typer.Option("output/zoo100", "--out", help="批量输出目录"),
+    prefix: str = typer.Option(None, "--prefix", help="只跑类ID前缀"),
+) -> None:
+    """注册表全类批量验证 (build→QA→fold→渲染→contact sheet)."""
+    from .batch import main_cli
+    main_cli(out, prefix)
+
+
 def main():
     app()
 

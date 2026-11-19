@@ -20,6 +20,68 @@ from __future__ import annotations
 import math
 
 PARAM_ORDER = ["W", "D", "Hb", "Hr", "Ef", "fin_gap_mm", "glue_w", "board_t"]
+
+from . import base as _base
+_base.register("gable_top", "gable_top")
+
+
+def class_params(cls_id: str) -> dict:
+    return {}
+
+
+def validate_params(params: dict) -> None:
+    """参数语义: 正尺寸; n/枚举由模板自检."""
+    for k in ("W", "D", "Hb", "Hr", "Ef", "fin_gap_mm", "glue_w", "board_t"):
+        v = params.get(k)
+        if v is None or not isinstance(v, (int, float)) or isinstance(v, bool) or v <= 0:
+            raise ValueError(f"非法参数 {k}={v!r} (须正数)")
+
+
+if __name__ != "__main__":
+    pass
+
+
+def analytic_bbox(params: dict) -> dict:
+    """G05 期望 bbox {W,D,H} (统一契约; 复用 analytic_box)."""
+    b = analytic_box(params)["bbox"]
+    return {"W": float(b["W"]), "D": float(b["D"]), "H": float(b["H"])}
+
+
+def allowed_overlap():
+    """G06 允许叠层 (真实工艺): 前后/左右底板互叠, 粘口贴前墙, 过脊鳍对叠."""
+    return {
+        frozenset({"flapF", "flapB"}), frozenset({"flapL", "flapR"}),
+        frozenset({"glue", "front"}), frozenset({"finB", "finF"}),
+    }
+
+
+def solid_roles():
+    return ("wall", "slope")
+
+
+def closure_checks(ir, world):
+    """G04 折叠闭合残差 (从 qa/pipeline.py 原硬编码迁移, 数值语义不变)."""
+    import numpy as np
+    def pair(name, pa, ia, pb, ib):
+        return name, float(np.linalg.norm(world[pa][ia] - world[pb][ib]))
+    checks = [
+        pair("slopeB.ridge.L == wallL.apex", "slopeB", 3, "wallL", 3),
+        pair("slopeF.ridge.L == wallR.apex", "slopeF", 3, "wallR", 3),
+        pair("slopeB.ridge.R == wallR.apex", "slopeB", 2, "wallR", 3),
+        pair("slopeF.ridge.R == wallL.apex", "slopeF", 2, "wallL", 3),
+        pair("wallL.top.B == slopeB.bottom.L", "wallL", 2, "slopeB", 0),
+        pair("wallR.top.B == slopeF.bottom.L", "wallR", 2, "slopeF", 0),
+        ("flapF.far.mid == flapB.attach.mid",
+         float(np.linalg.norm(np.mean(world["flapF"][0:2], axis=0) - np.mean(world["flapB"][2:4], axis=0)))),
+        ("flapL.far.mid == flapR.far.mid",
+         float(np.linalg.norm(np.mean(world["flapL"][0:2], axis=0) - np.mean(world["flapR"][0:2], axis=0)))),
+    ]
+    res = dict(checks)
+    flapL_mid = tuple(np.mean(world["flapL"][0:2], axis=0))
+    flapR_mid = tuple(np.mean(world["flapR"][0:2], axis=0))
+    res["flapL.far.x0"] = abs(flapL_mid[0])
+    res["flapR.far.x0"] = abs(flapR_mid[0])
+    return res
 DEFAULTS = {"W": 45.0, "D": 45.0, "Hb": 100.0, "Hr": 12.0,
             "Ef": 14.0, "fin_gap_mm": 3.0, "glue_w": 12.0, "board_t": 0.45}
 
@@ -135,7 +197,7 @@ def build_ir(params: dict | None = None) -> dict:
             "type": "gable_top",
             "params": {k: float(p[k]) for k in PARAM_ORDER},
             "template": dict(TEMPLATE),
-            "photo": {},  # build() 注入
+            "photo": None,  # build() 注入 (批量=null)
         },
         "panels": panels,
         "edges": edges,

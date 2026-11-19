@@ -75,6 +75,16 @@ class GeometryIR:
 def validate_dict(ir: dict, schema_path: Path = SCHEMA_PATH) -> None:
     schema = json.loads(schema_path.read_text())
     jsonschema.validate(ir, schema)
+    try:  # 模板参数语义 (负值/非法组合): 注册表分发, 未注册类跳过由 G02 拦
+        from ..parametric import base as _templates
+        mod = _templates.get(ir["package"]["template"]["id"])
+        hook = getattr(mod, "validate_params", None)
+        if hook:
+            hook(ir["package"]["params"])
+    except jsonschema.ValidationError:
+        raise
+    except KeyError:
+        pass
 
 
 def build(spec: dict, photo_path: str | Path, template_ir: dict) -> GeometryIR:
