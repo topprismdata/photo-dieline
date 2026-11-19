@@ -19,6 +19,19 @@
 2. **证据分级**：实测 > 可信来源 > 约束推导 > 模型推断 > 默认值；模型值永不覆盖实测（ADR-003）。
 3. **三态交付**：DRAFT → VALIDATED（数值 QA 全过）→ PRINT-READY（印厂人工签核）；系统不得自动升级（ADR-008）。
 
+## 模板动物园（100 类达成 ✅）
+
+| 家族（29） | 类数 | 代表拓扑 |
+|---|---|---|
+| 棱柱系（prism/prism_dust/tube/cone/hexagonal/two/slide…） | 40 | n 棱柱开盖/插盖/防尘翼、圆管、锥管、两件套、抽屉套筒 |
+| 盖型与商务盒（clv/box_essentials/tuck/window/hanger/dispenser/handle…） | 17 | 插舌入槽/T 形卡扣/活页/半盖/双层/胶封撕手/开窗框/挂舌/抽取/提手 |
+| 屋顶包系（gable/brick/window_front） | 6 | 经典/无鳍胶条/开窗前墙/旋盖座/宽鳍 V 张 |
+| 瓦楞与锁底（rsc/crashlock/lockbottom） | 6 | RSC/HSC/CSS/锁合/顺央底±插盖/1-2-3 |
+| 托盘食品系（tray/food/egg/divided/cup/sushi…） | 17 | 四角/六角/楔形/汉堡铰链/粉盒/薯条套/便当/卷饼袋/寿司托/蛋托/三分格/杯套 |
+| 异形展示（pyramid/pillow/pyramid_ext/mailer/envelope/display…） | 14 | 棱台×8/锥管×3/枕形/书封/信封×2/陈列台/扣夹盒/硬衬 |
+
+验收：`photo-dieline batch` 十门全绿 ×100（G04 折叠闭合最差残差 **5.8e-05mm**，门 0.2mm；G05 尺寸对账 ≤0.5mm）；每家族 closure 判据过**负探针**（扰动 tdir 残差须爆炸，恒等判据视为无效）；全量 contact sheet 见 `docs/images/zoo100_contact_sheet.png`。
+
 ## 里程碑
 
 | 阶段 | 内容 | 状态 |
