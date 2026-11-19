@@ -82,7 +82,7 @@ def _layer_geo(ir):
     geo["CUT"].append((list(ring.coords), (0.8, 0.13, 0.13), 0.3, None))
     for a, b in svgx.cut_segments(ir):
         geo["CUT"].append(([a, b], (0.8, 0.13, 0.13), 0.3, None))
-    bleed = outline.buffer(3.0)
+    bleed = outline.buffer(3.0, quad_segs=2)
     bring = bleed.exterior if bleed.geom_type == "Polygon" else max(
         (g.exterior for g in bleed.geoms), key=lambda g: g.area)
     geo["BLEED"].append((list(bring.coords), (0.8, 0.13, 0.67), 0.25, (3, 3)))
