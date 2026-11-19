@@ -13,8 +13,22 @@
 | 许可 | 图像 CC-BY 2.0（Flickr 原作者署名，ImageID 溯源）；标注 CC-BY 4.0 |
 | 体量 | test 625,282 真值框（52MB CSV）；train 1.46 万亿? 级（1.7GB，流式过滤） |
 | 品类对账（test 集包装相关） | Bottle 979 · Juice 512 · Box 256 · Milk 39 · **Carton 0（只在 train 标注）** |
-| 收割 | `output/datasets/oid_pack/`（本地，不入库）+ `MANIFEST.json`（入库：源 URL/许可/框坐标/裁切尺寸，每类 ≤25 例，面积占比 8-70%，非组框） |
-| 证据分级 | **REAL_PHOTO**（真实商品实拍，多品牌像素——仅作几何/品类参照，不参与输出刀版复刻） |
+| 收割 v1 | 94 裁切件（Juice25/Box25/Bottle25/Milk19）→ **独立评审否决作几何正样本（2/10）**：OID 语义类 ≠ 包装实体（Milk 类含倒奶/杯装），多实例/陈列场景/截断混入 |
+| 证据分级 | 降级为 **G2/G3 候选**（检测/分割用途）；几何正样本需按下方 G0-G4 协议重筛 |
+
+## REAL_PHOTO 分级协议（GPT 评审冻结，2026-11-19）
+
+| 级 | 定义 | 用途 |
+|---|---|---|
+| **G0** | 完整单包装 + ≥2 外表面可辨 + 结构清楚 | 几何逆向主验证集 |
+| G1 | 单包装完整，仅正面/轻微侧面 | 外观、局部几何 |
+| G2 | 单包装存在，遮挡/截断 | 检测、分割、局部特征 |
+| G3 | 多实例/陈列场景 | 场景理解 |
+| G4 | 内容物/非包装（液体、杯装） | 负样本 |
+
+附加属性 `package_structure_type`（与 OID 语义类解耦）：gable_top / folding_carton / corrugated_box / rigid_box / plastic_bottle / glass_bottle / other。
+
+**方向性结论（评审原文）**：需要"包装实例数据集"，不是"含包装语义的数据集"。候选：Amazon Berkeley Objects（ABO，CC-BY 4.0，单产品多视角棚拍+官方尺寸=可定量验证）> OID train Carton 类 > RPC/RP2K（注册墙）。
 
 ### SKU-110K — 记录未接入
 
