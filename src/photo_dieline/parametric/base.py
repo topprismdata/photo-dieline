@@ -33,6 +33,15 @@ def all_classes() -> list[str]:
     return sorted(REGISTRY)
 
 
-# --- 注册: 家族展开在家族模块顶部执行 register() ---
-from . import gable_top as _g  # noqa: E402,F401  (导入即注册)
-from . import generic_prism as _p  # noqa: E402,F401
+# --- 自动发现: 包内每个模块导入即自行 register() (零编辑冲突扩展) ---
+import pkgutil  # noqa: E402
+from pathlib import Path as _P
+
+for _m in pkgutil.iter_modules([str(_P(__file__).parent)]):
+    if _m.name in ("base",):
+        continue
+    try:
+        import_module(f".{_m.name}", __package__)
+    except Exception as _exc:  # noqa: BLE001
+        import sys
+        print(f"[parametric] 跳过 {_m.name}: {_exc}", file=sys.stderr)
