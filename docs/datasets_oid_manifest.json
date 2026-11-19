@@ -1,0 +1,1694 @@
+[
+ {
+  "file": "Juice_50674baacb3b426f.jpg",
+  "class": "Juice",
+  "image_id": "50674baacb3b426f",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/50674baacb3b426f.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.000000",
+   "0.191152",
+   "0.840705",
+   "0.979010"
+  ],
+  "crop_px": [
+   930,
+   670
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_159b0499772cbabf.jpg",
+  "class": "Box",
+  "image_id": "159b0499772cbabf",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/159b0499772cbabf.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.147631",
+   "0.164406",
+   "0.937958",
+   "0.997983"
+  ],
+  "crop_px": [
+   938,
+   616
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_29612ad46b19a314.jpg",
+  "class": "Box",
+  "image_id": "29612ad46b19a314",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/29612ad46b19a314.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.097289",
+   "0.041910",
+   "0.899175",
+   "0.861374"
+  ],
+  "crop_px": [
+   952,
+   712
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_c03a6449bc51d260.jpg",
+  "class": "Juice",
+  "image_id": "c03a6449bc51d260",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/c03a6449bc51d260.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.192821",
+   "0.183676",
+   "1.000000",
+   "0.986647"
+  ],
+  "crop_px": [
+   676,
+   902
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_0f1a711381875066.jpg",
+  "class": "Box",
+  "image_id": "0f1a711381875066",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/0f1a711381875066.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.118398",
+   "0.166085",
+   "0.893731",
+   "0.999123"
+  ],
+  "crop_px": [
+   921,
+   614
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_6cffd73cf05fce05.jpg",
+  "class": "Bottle",
+  "image_id": "6cffd73cf05fce05",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/6cffd73cf05fce05.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.083695",
+   "0.182558",
+   "0.926268",
+   "0.936446"
+  ],
+  "crop_px": [
+   1001,
+   598
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_85c711975d465154.jpg",
+  "class": "Juice",
+  "image_id": "85c711975d465154",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/85c711975d465154.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.161015",
+   "0.019738",
+   "0.982822",
+   "0.792606"
+  ],
+  "crop_px": [
+   926,
+   875
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_01cfd6231b55de3c.jpg",
+  "class": "Box",
+  "image_id": "01cfd6231b55de3c",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/01cfd6231b55de3c.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.103167",
+   "0.082950",
+   "0.887172",
+   "0.887316"
+  ],
+  "crop_px": [
+   716,
+   956
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_0591c19dfec6a487.jpg",
+  "class": "Box",
+  "image_id": "0591c19dfec6a487",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/0591c19dfec6a487.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.105286",
+   "0.046944",
+   "0.839637",
+   "0.896522"
+  ],
+  "crop_px": [
+   872,
+   770
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_d1bb2ab817e490fb.jpg",
+  "class": "Box",
+  "image_id": "d1bb2ab817e490fb",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/d1bb2ab817e490fb.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.125740",
+   "0.076819",
+   "0.863304",
+   "0.917171"
+  ],
+  "crop_px": [
+   876,
+   662
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_4ac60969dd23fc8c.jpg",
+  "class": "Juice",
+  "image_id": "4ac60969dd23fc8c",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/4ac60969dd23fc8c.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.098743",
+   "0.113066",
+   "0.858389",
+   "0.915682"
+  ],
+  "crop_px": [
+   902,
+   953
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_93ba9b30bbb5ef46.jpg",
+  "class": "Bottle",
+  "image_id": "93ba9b30bbb5ef46",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/93ba9b30bbb5ef46.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.044827",
+   "0.122010",
+   "0.853496",
+   "0.868570"
+  ],
+  "crop_px": [
+   940,
+   591
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_0d28a5a2d84b64d5.jpg",
+  "class": "Juice",
+  "image_id": "0d28a5a2d84b64d5",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/0d28a5a2d84b64d5.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.143146",
+   "0.202087",
+   "0.892516",
+   "1.000000"
+  ],
+  "crop_px": [
+   667,
+   882
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_dbf179d8fa3a36ef.jpg",
+  "class": "Bottle",
+  "image_id": "dbf179d8fa3a36ef",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/dbf179d8fa3a36ef.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.192066",
+   "0.032968",
+   "0.920155",
+   "0.850297"
+  ],
+  "crop_px": [
+   865,
+   703
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_6d042156c3629835.jpg",
+  "class": "Juice",
+  "image_id": "6d042156c3629835",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/6d042156c3629835.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.121233",
+   "0.183613",
+   "0.890431",
+   "0.956782"
+  ],
+  "crop_px": [
+   480,
+   899
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_094b2cf153b0b5d2.jpg",
+  "class": "Juice",
+  "image_id": "094b2cf153b0b5d2",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/094b2cf153b0b5d2.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.081395",
+   "0.145071",
+   "0.917328",
+   "0.850119"
+  ],
+  "crop_px": [
+   839,
+   837
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_6076acb6b42a2ce9.jpg",
+  "class": "Box",
+  "image_id": "6076acb6b42a2ce9",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/6076acb6b42a2ce9.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.142346",
+   "0.183179",
+   "0.930660",
+   "0.930521"
+  ],
+  "crop_px": [
+   937,
+   779
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_eb71b3080adf1e57.jpg",
+  "class": "Box",
+  "image_id": "eb71b3080adf1e57",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/eb71b3080adf1e57.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.093147",
+   "0.201455",
+   "0.919887",
+   "0.913991"
+  ],
+  "crop_px": [
+   982,
+   635
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_057677f8b281e963.jpg",
+  "class": "Box",
+  "image_id": "057677f8b281e963",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/057677f8b281e963.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.274563",
+   "0.187334",
+   "0.999692",
+   "0.999013"
+  ],
+  "crop_px": [
+   802,
+   536
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_60ec73656116d279.jpg",
+  "class": "Juice",
+  "image_id": "60ec73656116d279",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/60ec73656116d279.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.141946",
+   "0.111331",
+   "0.846570",
+   "0.939872"
+  ],
+  "crop_px": [
+   837,
+   978
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_35c7abdedfdd5a4b.jpg",
+  "class": "Juice",
+  "image_id": "35c7abdedfdd5a4b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/35c7abdedfdd5a4b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.177009",
+   "0.292619",
+   "1.000000",
+   "0.998553"
+  ],
+  "crop_px": [
+   910,
+   782
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_b73e08f53d1d3697.jpg",
+  "class": "Juice",
+  "image_id": "b73e08f53d1d3697",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/b73e08f53d1d3697.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.156644",
+   "0.161435",
+   "0.886475",
+   "0.953549"
+  ],
+  "crop_px": [
+   867,
+   924
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_5a266358010fd830.jpg",
+  "class": "Juice",
+  "image_id": "5a266358010fd830",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/5a266358010fd830.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.121725",
+   "0.107715",
+   "0.885000",
+   "0.862397"
+  ],
+  "crop_px": [
+   907,
+   673
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_6558d4bc24b018c3.jpg",
+  "class": "Bottle",
+  "image_id": "6558d4bc24b018c3",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/6558d4bc24b018c3.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.086387",
+   "0.034141",
+   "0.882862",
+   "0.750217"
+  ],
+  "crop_px": [
+   795,
+   827
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_5cddf9126c3bf57c.jpg",
+  "class": "Juice",
+  "image_id": "5cddf9126c3bf57c",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/5cddf9126c3bf57c.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.121798",
+   "0.240173",
+   "0.905461",
+   "0.964190"
+  ],
+  "crop_px": [
+   930,
+   837
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_a685066e9765e52b.jpg",
+  "class": "Box",
+  "image_id": "a685066e9765e52b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/a685066e9765e52b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.000001",
+   "0.000000",
+   "0.768680",
+   "0.735148"
+  ],
+  "crop_px": [
+   638,
+   813
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_97260cca90e0f0b8.jpg",
+  "class": "Juice",
+  "image_id": "97260cca90e0f0b8",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/97260cca90e0f0b8.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.011348",
+   "0.125831",
+   "0.840462",
+   "0.801117"
+  ],
+  "crop_px": [
+   929,
+   602
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_7f1fe1759e629add.jpg",
+  "class": "Juice",
+  "image_id": "7f1fe1759e629add",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/7f1fe1759e629add.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.104881",
+   "0.294154",
+   "0.896755",
+   "1.000000"
+  ],
+  "crop_px": [
+   940,
+   781
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_2c0040afab1adb4d.jpg",
+  "class": "Juice",
+  "image_id": "2c0040afab1adb4d",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/2c0040afab1adb4d.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.091896",
+   "0.204946",
+   "0.914477",
+   "0.883292"
+  ],
+  "crop_px": [
+   977,
+   626
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_c503a3f4e0819981.jpg",
+  "class": "Box",
+  "image_id": "c503a3f4e0819981",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/c503a3f4e0819981.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.154070",
+   "0.155826",
+   "0.859192",
+   "0.940799"
+  ],
+  "crop_px": [
+   838,
+   623
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_17c78b4cf69200a4.jpg",
+  "class": "Juice",
+  "image_id": "17c78b4cf69200a4",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/17c78b4cf69200a4.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.117960",
+   "0.203215",
+   "0.808043",
+   "1.000000"
+  ],
+  "crop_px": [
+   820,
+   589
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_df7e8f367fb9738a.jpg",
+  "class": "Juice",
+  "image_id": "df7e8f367fb9738a",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/df7e8f367fb9738a.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.152065",
+   "0.206156",
+   "0.938642",
+   "0.899192"
+  ],
+  "crop_px": [
+   700,
+   824
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_ea0dd0b0acbe15c6.jpg",
+  "class": "Milk",
+  "image_id": "ea0dd0b0acbe15c6",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/ea0dd0b0acbe15c6.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.000895",
+   "0.000600",
+   "0.667104",
+   "0.816836"
+  ],
+  "crop_px": [
+   738,
+   565
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_6ff1419a53559c22.jpg",
+  "class": "Juice",
+  "image_id": "6ff1419a53559c22",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/6ff1419a53559c22.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.137155",
+   "0.284845",
+   "0.896177",
+   "0.991674"
+  ],
+  "crop_px": [
+   674,
+   790
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_1f56089e26350169.jpg",
+  "class": "Box",
+  "image_id": "1f56089e26350169",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/1f56089e26350169.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.198344",
+   "0.218657",
+   "0.886632",
+   "0.988560"
+  ],
+  "crop_px": [
+   613,
+   863
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_9dfac710b96806b5.jpg",
+  "class": "Juice",
+  "image_id": "9dfac710b96806b5",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/9dfac710b96806b5.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.097457",
+   "0.213245",
+   "0.770612",
+   "0.998561"
+  ],
+  "crop_px": [
+   799,
+   579
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_7869fb39d11ac515.jpg",
+  "class": "Bottle",
+  "image_id": "7869fb39d11ac515",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/7869fb39d11ac515.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.000000",
+   "0.000000",
+   "0.706179",
+   "0.740789"
+  ],
+  "crop_px": [
+   781,
+   544
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_eede41df6d7bba55.jpg",
+  "class": "Box",
+  "image_id": "eede41df6d7bba55",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/eede41df6d7bba55.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.255598",
+   "0.185248",
+   "0.900598",
+   "0.994788"
+  ],
+  "crop_px": [
+   766,
+   667
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_dd2bddd81dc17c54.jpg",
+  "class": "Juice",
+  "image_id": "dd2bddd81dc17c54",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/dd2bddd81dc17c54.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.137859",
+   "0.182823",
+   "0.827280",
+   "0.938761"
+  ],
+  "crop_px": [
+   819,
+   673
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_7f83fa49acdb5ba4.jpg",
+  "class": "Bottle",
+  "image_id": "7f83fa49acdb5ba4",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/7f83fa49acdb5ba4.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.086730",
+   "0.198209",
+   "0.916854",
+   "0.822494"
+  ],
+  "crop_px": [
+   986,
+   556
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_87d5252b867024aa.jpg",
+  "class": "Bottle",
+  "image_id": "87d5252b867024aa",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/87d5252b867024aa.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.369538",
+   "0.000502",
+   "1.000000",
+   "0.817470"
+  ],
+  "crop_px": [
+   697,
+   678
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_9461fc0304883fe8.jpg",
+  "class": "Juice",
+  "image_id": "9461fc0304883fe8",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/9461fc0304883fe8.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.057007",
+   "0.053864",
+   "0.757700",
+   "0.788669"
+  ],
+  "crop_px": [
+   687,
+   868
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_2f81dbf8c2ac6568.jpg",
+  "class": "Juice",
+  "image_id": "2f81dbf8c2ac6568",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/2f81dbf8c2ac6568.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.116434",
+   "0.170860",
+   "0.765174",
+   "0.960525"
+  ],
+  "crop_px": [
+   771,
+   914
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_83fe384a1f430d2e.jpg",
+  "class": "Juice",
+  "image_id": "83fe384a1f430d2e",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/83fe384a1f430d2e.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.164811",
+   "0.186246",
+   "0.794159",
+   "1.000000"
+  ],
+  "crop_px": [
+   561,
+   675
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_dfe143673226931e.jpg",
+  "class": "Box",
+  "image_id": "dfe143673226931e",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/dfe143673226931e.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.116859",
+   "0.162763",
+   "0.880761",
+   "0.831149"
+  ],
+  "crop_px": [
+   602,
+   794
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_7275612648cab9b4.jpg",
+  "class": "Juice",
+  "image_id": "7275612648cab9b4",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/7275612648cab9b4.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.165719",
+   "0.183150",
+   "0.857723",
+   "0.920474"
+  ],
+  "crop_px": [
+   822,
+   876
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Juice_d91c15e588fc28cc.jpg",
+  "class": "Juice",
+  "image_id": "d91c15e588fc28cc",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/d91c15e588fc28cc.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.069336",
+   "0.134398",
+   "0.703923",
+   "0.935078"
+  ],
+  "crop_px": [
+   754,
+   951
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_165a07a95aa90490.jpg",
+  "class": "Box",
+  "image_id": "165a07a95aa90490",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/165a07a95aa90490.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.366787",
+   "0.024649",
+   "0.980991",
+   "0.851222"
+  ],
+  "crop_px": [
+   699,
+   702
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_b8bf9b84eeca0201.jpg",
+  "class": "Box",
+  "image_id": "b8bf9b84eeca0201",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/b8bf9b84eeca0201.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.212334",
+   "0.134943",
+   "0.855109",
+   "0.917180"
+  ],
+  "crop_px": [
+   763,
+   696
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_c0dfd1c1a44e2fa3.jpg",
+  "class": "Bottle",
+  "image_id": "c0dfd1c1a44e2fa3",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/c0dfd1c1a44e2fa3.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.170646",
+   "0.135657",
+   "0.783188",
+   "0.954210"
+  ],
+  "crop_px": [
+   727,
+   634
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_46bd7510946f7886.jpg",
+  "class": "Box",
+  "image_id": "46bd7510946f7886",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/46bd7510946f7886.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.202794",
+   "0.130615",
+   "0.838398",
+   "0.908581"
+  ],
+  "crop_px": [
+   534,
+   924
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_8a58b5067e6d794c.jpg",
+  "class": "Box",
+  "image_id": "8a58b5067e6d794c",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/8a58b5067e6d794c.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.151659",
+   "0.229888",
+   "0.855298",
+   "0.930802"
+  ],
+  "crop_px": [
+   783,
+   833
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_c4cfa4d475bb50d1.jpg",
+  "class": "Bottle",
+  "image_id": "c4cfa4d475bb50d1",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/c4cfa4d475bb50d1.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.273268",
+   "0.000000",
+   "0.999207",
+   "0.669196"
+  ],
+  "crop_px": [
+   804,
+   443
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_519a7d595adecfe4.jpg",
+  "class": "Box",
+  "image_id": "519a7d595adecfe4",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/519a7d595adecfe4.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.065909",
+   "0.237121",
+   "0.889773",
+   "0.820455"
+  ],
+  "crop_px": [
+   979,
+   520
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_b0f45fbef27728bb.jpg",
+  "class": "Box",
+  "image_id": "b0f45fbef27728bb",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/b0f45fbef27728bb.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.175727",
+   "0.222547",
+   "0.891329",
+   "0.892725"
+  ],
+  "crop_px": [
+   850,
+   595
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_4ff79076428f2f9d.jpg",
+  "class": "Bottle",
+  "image_id": "4ff79076428f2f9d",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/4ff79076428f2f9d.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.215382",
+   "0.085950",
+   "0.785945",
+   "0.916517"
+  ],
+  "crop_px": [
+   282,
+   987
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_19022bc62eb43546.jpg",
+  "class": "Box",
+  "image_id": "19022bc62eb43546",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/19022bc62eb43546.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.184001",
+   "0.131174",
+   "0.804217",
+   "0.893580"
+  ],
+  "crop_px": [
+   736,
+   511
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_a393a65915aabe01.jpg",
+  "class": "Bottle",
+  "image_id": "a393a65915aabe01",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/a393a65915aabe01.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.216427",
+   "0.086624",
+   "0.786195",
+   "0.915738"
+  ],
+  "crop_px": [
+   281,
+   985
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_f7a7bdbc4c2b3cdd.jpg",
+  "class": "Box",
+  "image_id": "f7a7bdbc4c2b3cdd",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/f7a7bdbc4c2b3cdd.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.000089",
+   "0.206708",
+   "0.593740",
+   "0.999944"
+  ],
+  "crop_px": [
+   657,
+   738
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_702e4c422cb95e77.jpg",
+  "class": "Bottle",
+  "image_id": "702e4c422cb95e77",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/702e4c422cb95e77.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.214769",
+   "0.105549",
+   "0.825657",
+   "0.876281"
+  ],
+  "crop_px": [
+   587,
+   915
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_56e76471db9128b7.jpg",
+  "class": "Bottle",
+  "image_id": "56e76471db9128b7",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/56e76471db9128b7.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.227508",
+   "0.067593",
+   "0.896770",
+   "0.770952"
+  ],
+  "crop_px": [
+   530,
+   835
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_e1f4f889b7c26667.jpg",
+  "class": "Bottle",
+  "image_id": "e1f4f889b7c26667",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/e1f4f889b7c26667.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.203635",
+   "0.092090",
+   "0.779246",
+   "0.903084"
+  ],
+  "crop_px": [
+   472,
+   963
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_b432764311041842.jpg",
+  "class": "Bottle",
+  "image_id": "b432764311041842",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/b432764311041842.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.224208",
+   "0.019244",
+   "0.812437",
+   "0.807400"
+  ],
+  "crop_px": [
+   699,
+   669
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_9ec0a155dc1dc834.jpg",
+  "class": "Bottle",
+  "image_id": "9ec0a155dc1dc834",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/9ec0a155dc1dc834.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.179970",
+   "0.118198",
+   "0.875382",
+   "0.779306"
+  ],
+  "crop_px": [
+   826,
+   785
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_fd2eeb683f461525.jpg",
+  "class": "Box",
+  "image_id": "fd2eeb683f461525",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/fd2eeb683f461525.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.087190",
+   "0.345766",
+   "0.925889",
+   "0.888277"
+  ],
+  "crop_px": [
+   996,
+   429
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_e501936a5ba491a9.jpg",
+  "class": "Bottle",
+  "image_id": "e501936a5ba491a9",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/e501936a5ba491a9.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.148601",
+   "0.217073",
+   "0.859740",
+   "0.849320"
+  ],
+  "crop_px": [
+   353,
+   751
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_ed69b58089af0da3.jpg",
+  "class": "Box",
+  "image_id": "ed69b58089af0da3",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/ed69b58089af0da3.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.384758",
+   "0.000000",
+   "1.000000",
+   "0.722602"
+  ],
+  "crop_px": [
+   680,
+   799
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_1c1cd205b908bf5c.jpg",
+  "class": "Bottle",
+  "image_id": "1c1cd205b908bf5c",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/1c1cd205b908bf5c.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.282861",
+   "0.091458",
+   "0.850281",
+   "0.861335"
+  ],
+  "crop_px": [
+   448,
+   914
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_26433f6803196e1b.jpg",
+  "class": "Bottle",
+  "image_id": "26433f6803196e1b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/26433f6803196e1b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.199197",
+   "0.175286",
+   "0.745059",
+   "0.974187"
+  ],
+  "crop_px": [
+   493,
+   682
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_d524c64c22a066e4.jpg",
+  "class": "Milk",
+  "image_id": "d524c64c22a066e4",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/d524c64c22a066e4.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.034738",
+   "0.202815",
+   "0.596062",
+   "0.979638"
+  ],
+  "crop_px": [
+   483,
+   880
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Box_9c679ccad9140e33.jpg",
+  "class": "Box",
+  "image_id": "9c679ccad9140e33",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/9c679ccad9140e33.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.106012",
+   "0.357641",
+   "0.926021",
+   "0.884702"
+  ],
+  "crop_px": [
+   974,
+   626
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_fe771761597be821.jpg",
+  "class": "Bottle",
+  "image_id": "fe771761597be821",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/fe771761597be821.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.227368",
+   "0.079222",
+   "0.756405",
+   "0.891626"
+  ],
+  "crop_px": [
+   420,
+   965
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_4251790fd7f95ea4.jpg",
+  "class": "Milk",
+  "image_id": "4251790fd7f95ea4",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/4251790fd7f95ea4.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.177734",
+   "0.258020",
+   "0.746842",
+   "1.000000"
+  ],
+  "crop_px": [
+   676,
+   821
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_d49c6e373e852c2b.jpg",
+  "class": "Bottle",
+  "image_id": "d49c6e373e852c2b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/d49c6e373e852c2b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.285947",
+   "0.058093",
+   "0.772636",
+   "0.892900"
+  ],
+  "crop_px": [
+   433,
+   983
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_3ee655a1e365b5fa.jpg",
+  "class": "Bottle",
+  "image_id": "3ee655a1e365b5fa",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/3ee655a1e365b5fa.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.187414",
+   "0.262446",
+   "0.783349",
+   "0.928368"
+  ],
+  "crop_px": [
+   529,
+   791
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_8e8fe8ba500d4af3.jpg",
+  "class": "Bottle",
+  "image_id": "8e8fe8ba500d4af3",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/8e8fe8ba500d4af3.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.358019",
+   "0.397603",
+   "1.000000",
+   "1.000000"
+  ],
+  "crop_px": [
+   710,
+   477
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_244d041e96164f93.jpg",
+  "class": "Bottle",
+  "image_id": "244d041e96164f93",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/244d041e96164f93.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.219994",
+   "0.000009",
+   "0.875017",
+   "0.581917"
+  ],
+  "crop_px": [
+   778,
+   644
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Bottle_c48b5ee10a208841.jpg",
+  "class": "Bottle",
+  "image_id": "c48b5ee10a208841",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/c48b5ee10a208841.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.267236",
+   "0.210892",
+   "0.742148",
+   "0.999919"
+  ],
+  "crop_px": [
+   564,
+   873
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_83f0a63eedfdd68f.jpg",
+  "class": "Milk",
+  "image_id": "83f0a63eedfdd68f",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/83f0a63eedfdd68f.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.094811",
+   "0.433144",
+   "0.708246",
+   "1.000000"
+  ],
+  "crop_px": [
+   547,
+   627
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_61bbb62f0aa9c07b.jpg",
+  "class": "Milk",
+  "image_id": "61bbb62f0aa9c07b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/61bbb62f0aa9c07b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.280868",
+   "0.204894",
+   "0.770093",
+   "0.881519"
+  ],
+  "crop_px": [
+   581,
+   603
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_1636d912cb396b1b.jpg",
+  "class": "Milk",
+  "image_id": "1636d912cb396b1b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/1636d912cb396b1b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.617844",
+   "0.163050",
+   "0.993838",
+   "1.000000"
+  ],
+  "crop_px": [
+   422,
+   735
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_bf7edfe3c2e6d0bd.jpg",
+  "class": "Milk",
+  "image_id": "bf7edfe3c2e6d0bd",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/bf7edfe3c2e6d0bd.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.064157",
+   "0.234743",
+   "0.870292",
+   "0.571693"
+  ],
+  "crop_px": [
+   716,
+   400
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_025a7039ee80a2e1.jpg",
+  "class": "Milk",
+  "image_id": "025a7039ee80a2e1",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/025a7039ee80a2e1.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.322942",
+   "0.129311",
+   "0.659403",
+   "0.902521"
+  ],
+  "crop_px": [
+   400,
+   689
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_585dccae418acf5b.jpg",
+  "class": "Milk",
+  "image_id": "585dccae418acf5b",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/585dccae418acf5b.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.305979",
+   "0.328482",
+   "0.743814",
+   "0.915929"
+  ],
+  "crop_px": [
+   391,
+   698
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_30addf94c6e85dfb.jpg",
+  "class": "Milk",
+  "image_id": "30addf94c6e85dfb",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/30addf94c6e85dfb.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.240711",
+   "0.292785",
+   "0.711636",
+   "0.824171"
+  ],
+  "crop_px": [
+   559,
+   465
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_c6f809b9cc6f5dbc.jpg",
+  "class": "Milk",
+  "image_id": "c6f809b9cc6f5dbc",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/c6f809b9cc6f5dbc.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.188614",
+   "0.093274",
+   "0.526477",
+   "0.828323"
+  ],
+  "crop_px": [
+   301,
+   873
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_e0fd90f5b5ec2746.jpg",
+  "class": "Milk",
+  "image_id": "e0fd90f5b5ec2746",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/e0fd90f5b5ec2746.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.210243",
+   "0.543983",
+   "0.837624",
+   "0.916401"
+  ],
+  "crop_px": [
+   497,
+   442
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_805a7f6cbe61b178.jpg",
+  "class": "Milk",
+  "image_id": "805a7f6cbe61b178",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/805a7f6cbe61b178.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.222092",
+   "0.170321",
+   "0.489169",
+   "0.836170"
+  ],
+  "crop_px": [
+   317,
+   593
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_4c55cc8739da20c8.jpg",
+  "class": "Milk",
+  "image_id": "4c55cc8739da20c8",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/4c55cc8739da20c8.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.206915",
+   "0.382159",
+   "0.682859",
+   "0.736842"
+  ],
+  "crop_px": [
+   377,
+   422
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_43f8ba8af1f69008.jpg",
+  "class": "Milk",
+  "image_id": "43f8ba8af1f69008",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/43f8ba8af1f69008.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.616660",
+   "0.404999",
+   "0.911370",
+   "0.967490"
+  ],
+  "crop_px": [
+   350,
+   490
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_dcb1025f7f6acda6.jpg",
+  "class": "Milk",
+  "image_id": "dcb1025f7f6acda6",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/dcb1025f7f6acda6.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.633498",
+   "0.110999",
+   "0.917292",
+   "0.673282"
+  ],
+  "crop_px": [
+   338,
+   501
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_8e468a6a53f431f1.jpg",
+  "class": "Milk",
+  "image_id": "8e468a6a53f431f1",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/8e468a6a53f431f1.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.155628",
+   "0.386786",
+   "0.468079",
+   "0.891287"
+  ],
+  "crop_px": [
+   371,
+   399
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_4bcdd5a142b125a1.jpg",
+  "class": "Milk",
+  "image_id": "4bcdd5a142b125a1",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/4bcdd5a142b125a1.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.574375",
+   "0.447553",
+   "0.948719",
+   "0.849898"
+  ],
+  "crop_px": [
+   317,
+   478
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ },
+ {
+  "file": "Milk_614c97c695a79926.jpg",
+  "class": "Milk",
+  "image_id": "614c97c695a79926",
+  "source_url": "https://open-images-dataset.s3.amazonaws.com/test/614c97c695a79926.jpg",
+  "license": "CC-BY 2.0 (Open Images, Flickr 原作者)",
+  "bbox_norm": [
+   "0.038586",
+   "0.140184",
+   "0.285235",
+   "0.496361"
+  ],
+  "crop_px": [
+   293,
+   281
+  ],
+  "evidence_tier": "REAL_PHOTO"
+ }
+]
