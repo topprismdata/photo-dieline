@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import subprocess
 import time
 from pathlib import Path
@@ -86,6 +87,25 @@ def run_tde(out_dir: str, template_id: str = "gable_top",
             payload["out_png"] = str(out / "images" / f"s_{sid:05d}.png")
             gate = _topology_gate(ir, cap, vinfo, res)
             png = out / "images" / f"s_{sid:05d}.png"
+            # 自动曝光: 低清探针帧 → EV 修正 (目标 mean≈135, 防削白)
+            probe_png = out / "images" / f"s_{sid:05d}_probe.png"
+            payload_probe = dict(payload)
+            payload_probe.update({"res": 160, "samples": 12, "out_png": str(probe_png),
+                                  "lighting": {**payload["lighting"], "exposure_ev": 0.0}})
+            plp = out / "labels" / f"s_{sid:05d}_probe.json"
+            plp.write_text(json.dumps({"render_payload": payload_probe}))
+            pr_probe = subprocess.run([blender, "--background", "--python", str(DRIVER), "--",
+                                       str(plp)], capture_output=True, timeout=240)
+            if probe_png.exists():
+                import numpy as np
+                from PIL import Image
+                pmean = float(np.asarray(Image.open(probe_png).convert("L"), float).mean())
+                ev_corr = float(np.clip(math.log2(135.0 / max(pmean, 1.0)), -2.2, 2.2))
+                payload["lighting"]["exposure_ev"] = round(
+                    max(-2.5, min(2.5, payload["lighting"]["exposure_ev"] + ev_corr)), 2)
+                probe_png.unlink()
+                plp.unlink()
+            cap["auto_exposure_ev"] = payload["lighting"]["exposure_ev"]
             pl.write_text(json.dumps({"sample_id": f"s_{sid:05d}", "variant": vi,
                                       "capture": cap, "params_gt": vinfo["params"],
                                       "topology_gate": gate,

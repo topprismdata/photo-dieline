@@ -122,22 +122,23 @@ def add_scene(payload):
     for dev in prefs.devices:
         dev.use = True
 
-    # 灯光: Key 区域灯 (色温) + 环境世界
-    kd = bpy.data.lights.new("key", "AREA")
-    kd.energy = 28.0 * light["key_intensity_x"]
-    kd.size = 0.8
+    # 灯光: Key SUN 方向光 (色温, 无距离衰减, 曝光稳定) + 环境世界 + 小面积补光
+    kd = bpy.data.lights.new("key", "SUN")
+    kd.energy = 3.0 * light["key_intensity_x"]
+    kd.angle = math.radians(9.0)
     kd.color = kelvin_rgb(light["kelvin"])
     key = bpy.data.objects.new("key", kd)
     key.location = (ctr.x + d * 0.5, ctr.y - d * 0.8, ctr.z + d * 0.9)
-    kd.size = max(0.3, d * 0.5)
+    kd_dir = mathutils.Vector((ctr.x - key.location.x, ctr.y - key.location.y,
+                               ctr.z - key.location.z)).normalized()
+    key.rotation_euler = kd_dir.to_track_quat("-Z", "Y").to_euler()
     bpy.context.collection.objects.link(key)
     kd2 = bpy.data.lights.new("fill", "AREA")
-    kd2.energy = 15.0 * light["key_intensity_x"] * light["ambient_ratio"] * 2
-    kd2.size = 1.2
+    kd2.energy = 4.0 * light["key_intensity_x"] * light["ambient_ratio"] * 2
+    kd2.size = max(0.5, d * 0.8)
     kd2.color = kelvin_rgb(light["kelvin"] + 400)
     fill = bpy.data.objects.new("fill", kd2)
     fill.location = (ctr.x - d * 0.7, ctr.y + d * 0.3, ctr.z + d * 0.4)
-    kd2.size = max(0.5, d * 0.8)
     bpy.context.collection.objects.link(fill)
     w = bpy.data.worlds.new("w")
     w.use_nodes = True

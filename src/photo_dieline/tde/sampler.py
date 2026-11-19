@@ -6,6 +6,7 @@ CaptureProfile 档内联动: 先选档再采样, 近距↔焦距/景深, 暗光�
 """
 from __future__ import annotations
 
+import colorsys
 import math
 
 import numpy as np
@@ -126,8 +127,14 @@ class CaptureSampler:
         occl = {"REALISTIC": lambda: r.uniform(0, 0.05),
                 "MODERATE": lambda: r.uniform(0, 0.15),
                 "STRESS": lambda: r.uniform(0, 0.30)}[tier]()
+        # 印刷盒基色: HSV 全色相 + 饱和 0.35-0.75 + 明度 0.5-0.85 (真实印刷盒是彩色的, 非白盒)
+        hh = r.uniform(0, 1)
+        ss = r.uniform(0.35, 0.75)
+        vv = r.uniform(0.50, 0.85)
+        rgb = colorsys.hsv_to_rgb(hh, ss, vv)
         return {"roughness": round(float(rough), 3),
-                "base_color": [round(float(x), 3) for x in r.uniform(0.55, 0.92, 3)],
+                "base_color_hsv": [round(hh, 3), round(ss, 3), round(vv, 3)],
+                "base_color": [round(float(x), 3) for x in rgb],
                 "occlusion_hint": round(float(occl), 3), **iq}
 
     def sample(self, radius_mm: float, tier: str | None = None) -> dict:
