@@ -26,14 +26,17 @@ REL = [("W", "Hb"), ("D", "Hb"), ("Hr", "Hb"), ("Ef", "Hb")]
 
 
 class RelDataset(Dataset):
-    def __init__(self, root: Path, variant_split: set[int], stats):
+    def __init__(self, root: Path, variant_split: set[int], stats, tier: str = "all"):
         self.stats = stats
+        self.tier = tier
         self.rows = []
         for lp in sorted(root.glob("labels/s_*.json")):
             if "_probe" in lp.name:
                 continue
             lab = json.loads(lp.read_text())
             if lab["variant"] not in variant_split:
+                continue
+            if self.tier != "all" and lab.get("capture", {}).get("tier") != self.tier:
                 continue
             self.rows.append((lab, root / "images" / f"{lab['sample_id']}.png"))
 
@@ -67,6 +70,8 @@ def main():
     ap.add_argument("--epochs", type=int, default=32)
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--out", default="runs/e0rel")
+    ap.add_argument("--tier", default="all",
+                    help="E1消融: all | REALISTIC | MODERATE | MAX (按capture.tier过滤)")
     args = ap.parse_args()
     root = Path(args.data)
     out = Path(args.out)
@@ -74,6 +79,10 @@ def main():
 
     labels = [json.loads(p.read_text()) for p in sorted(root.glob("labels/s_*.json"))
               if "_probe" not in p.name]
+    if args.tier != "all":
+        labels = [l for l in labels
+                  if l.get("capture", {}).get("tier") == args.tier]
+        print(f"tier filter {args.tier}: {len(labels)} samples")
     all_v = set(range(30))
     val_v = set(np.random.default_rng(7).choice(30, 6, replace=False).tolist())
     pre = np.array([[l["params_gt"][a] / l["params_gt"][b] for a, b in REL]
@@ -81,8 +90,10 @@ def main():
     rstd = {f"{a}/{b}": float(pre[:, i].std()) for i, (a, b) in enumerate(REL)}
     rstd_l = [rstd[f"{a}/{b}"] for a, b in REL]
 
-    ds_tr = RelDataset(root, set(range(30)) - val_v, {"mean": [0.485, 0.456, 0.406], "std": [0.229, 0.224, 0.225]})
-    ds_va = RelDataset(root, val_v, ds_tr.stats)
+    ds_tr = RelDataset(root, set(range(30)) - val_v,
+                       {"mean": [0.485, 0.456, 0.406], "std": [0.229, 0.224, 0.225]},
+                       tier=args.tier)
+    ds_va = RelDataset(root, val_v, ds_tr.stats, tier=args.tier)
     tl = DataLoader(ds_tr, batch_size=32, shuffle=True, num_workers=4)
     vl = DataLoader(ds_va, batch_size=32, num_workers=2)
 

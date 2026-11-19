@@ -65,6 +65,13 @@ def gen_class(cls_id: str, params: dict, sid0: int) -> int:
         info = export_obj(ir, obj)
         center, radius = _center_radius(info["bbox_min"], info["bbox_max"])
         caps = sample_batch(radius_mm=radius, n=CAPS, seed=1000 + sid)
+        # 填充率重定位: 驱动眼距= d×1.35 (margin硬编码) → 按水平投影宽反算
+        horiz = max(info["bbox_max"][0] - info["bbox_min"][0],
+                    info["bbox_max"][1] - info["bbox_min"][1])
+        for cap in caps:
+            tan_h = 18.0 / cap["equiv_focal_mm"]
+            d_fill = horiz / (0.38 * 2.0 * tan_h * 1.35)
+            cap["distance_mm"] = round(float(d_fill * rng.uniform(0.85, 1.2)), 1)
         ir_panels = {p["id"]: p["role"] for p in ir.panels}
         for cap in caps:
             png = cdir / "images" / f"s_{sid:05d}.png"
