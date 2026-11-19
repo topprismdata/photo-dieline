@@ -102,7 +102,7 @@ def add_scene(payload):
     cam_obj.rotation_euler = rot
     bpy.context.collection.objects.link(cam_obj)
     sc.camera = cam_obj
-    cam_data.dof.focus_distance = d  # 米制场景: 焦平面=主体距离
+    cam_data.dof.focus_distance = d * 1.35  # 眼距= d*1.35 (margin同上), 焦平面须在主体上
 
     # 渲染输出
     sc.render.engine = "CYCLES"
