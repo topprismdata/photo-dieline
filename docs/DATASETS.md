@@ -28,7 +28,35 @@
 
 附加属性 `package_structure_type`（与 OID 语义类解耦）：gable_top / folding_carton / corrugated_box / rigid_box / plastic_bottle / glass_bottle / other。
 
-**方向性结论（评审原文）**：需要"包装实例数据集"，不是"含包装语义的数据集"。候选：Amazon Berkeley Objects（ABO，CC-BY 4.0，单产品多视角棚拍+官方尺寸=可定量验证）> OID train Carton 类 > RPC/RP2K（注册墙）。
+**方向性结论（评审原文）**：需要"包装实例数据集"，不是"含包装语义的数据集"。
+
+### ABO (Amazon Berkeley Objects) — 已接入 v1
+
+| 项 | 值 |
+|---|---|
+| 来源 | `amazon-berkeley-objects.s3.amazonaws.com`（免注册直链） |
+| 许可 | CC-BY 4.0 |
+| 体量 | 147,702 产品；listings 10 分片已拉全（92,320 条筛入）；images-small.tar 3.25GB（本地） |
+| 候选池 | 378 条（名称关键词 + item_dimensions 完整 2-80in）；结构粗分：corrugated_box 148 · folding_box 43 · bottle_jug 32 · gable_or_carton 5 · other 150 |
+| 样本 | 37 棚拍件入库（`output/datasets/abo_pack/`，G0_CANDIDATE） |
+| 独立评审 | **ACCEPT-WITH-FILTERS 5.5/10**（OID 2/10 → ABO 5.5/10）；01/05/07/08 保留；商品本体冒充包装/误标/展开结构混用问题记录 |
+
+### 30 件 Benchmark 规格（评审冻结，数据轨验收合同）
+
+5 结构类型 × 6 件：传统屋顶包 6 · 砖形复合纸盒 6 · 普通折叠纸盒(天地盖/插舌/锁底) 6 · 瓦楞纸箱 6 · 塑料瓶 6。
+每件：≥3 方位实拍 + 官方尺寸及定义 + 单实例分割 + ≥1 组独立可核验几何 + 参数化孪生 + 配准误差报告。
+另建 `DIELINE_REFERENCE` 子集（展开纸板结构照，研究刀版拓扑↔折叠结果关系）。
+
+### 四项量化验收指标（评审冻结）
+
+| 指标 | 对象 | 输出 |
+|---|---|---|
+| 尺寸误差 | L/W/H vs 官方 | mm + 相对% |
+| 轮廓误差 | 实拍轮廓 vs 渲染轮廓 | IoU + Chamfer |
+| 表面几何误差 | 重建 vs 独立扫描/GT | 平均距离 + P95 |
+| 拓扑正确性 | 面板/折线/连接 | 结构检查 |
+
+已知缺口：①官方尺寸定义(本体vs零售包装/方向/精度) ②相机标定(内参+畸变+多视角) ③独立几何GT(防"轮廓对但折叠错"假通过) ④ABO 结构类型细分(gable_top_classic / gable_top_screw_cap / aseptic_brick_carton / folding_carton / corrugated_box)。
 
 ### SKU-110K — 记录未接入
 
