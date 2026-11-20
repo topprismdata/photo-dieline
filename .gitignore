@@ -5,3 +5,4 @@ __pycache__/
 output/
 data/frozen10-web/photos/
 data/shelf_twin_ref/
+runs/

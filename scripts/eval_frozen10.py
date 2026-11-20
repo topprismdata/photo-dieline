@@ -42,7 +42,7 @@ def load_model(ckpt: Path, device: str):
     return net
 
 
-def predict_ratios(net, image: Path, device: str) -> np.ndarray:
+def predict_ratios(net, image: Path, device: str, head_ratios: int = 4) -> np.ndarray:
     """单张照片 → 4 个比例预测 (中心裁剪+resize 384, 与训练口径一致)."""
     im = Image.open(image).convert("RGB")
     w, h = im.size
@@ -51,12 +51,14 @@ def predict_ratios(net, image: Path, device: str) -> np.ndarray:
     x = torch.from_numpy(np.asarray(im).transpose(2, 0, 1).copy()).float() / 255.0
     x = (x - torch.tensor(STATS["mean"])[:, None, None]) / torch.tensor(STATS["std"])[:, None, None]
     with torch.no_grad():
-        p = net(x[None].to(device)).view(-1, 3, len(REL))[:, 1, :].cpu().numpy()[0]
+        p = net(x[None].to(device)).view(-1, 3, head_ratios)[:, 1, :].cpu().numpy()[0]
     return p
 
 
 def true_ratios(meas: dict) -> dict:
     d = {m["name"]: float(m["value_mm"]) for m in meas["measurements"]}
+    if "H" in d and "Hb" not in d:
+        d["Hb"] = d["H"]  # 盒型键别名 (RSC=H, web specs=Hb)
     out = {}
     for r in REL:
         num, den = r.split("/")
@@ -127,7 +129,10 @@ def main():
         report["denom"] = {"expected": args.expect, "actual": len(items),
                            "pass": len(items) == args.expect}
         net = load_model(ROOT / args.ckpt, dev)
-        all_errs = [[] for _ in REL]
+        head_ratios = net.fc.out_features // 3  # 3 quantiles × R ratios (gable=4, box=2)
+        rels = REL[:head_ratios]
+        report["rel_used"] = rels
+        all_errs = [[] for _ in rels]
         for it in items:
             iid = it["id"]
             meas_p = data / "specs" / f"{iid}_measurements.json"
@@ -140,8 +145,8 @@ def main():
             if web_mode:
                 img = photos / f"{iid}.jpg"
                 if img.exists() and gt:
-                    pred = predict_ratios(net, img, dev)
-                    for i, r in enumerate(REL):
+                    pred = predict_ratios(net, img, dev, head_ratios)
+                    for i, r in enumerate(rels):
                         if r in gt:
                             per[r].append(abs(float(pred[i]) - gt[r]))
                     n_cam = 1
@@ -161,7 +166,7 @@ def main():
                             per[r].append(abs(float(pred[i]) - gt[r]))
                     n_cam += 1
             raws = {r: (float(np.mean(v)) if v else None) for r, v in per.items()}
-            avail = [r for r in REL if raws[r] is not None]
+            avail = [r for r in rels if raws[r] is not None]
             need = 1 if web_mode else 6
             ok = n_cam >= need and len(avail) >= 2   # web盒型无 Hr/Ef, 比例子集即可
             report["per_item"].append({"id": iid, "status": "OK" if ok else "INVALID",
@@ -172,11 +177,12 @@ def main():
                     if raws[r] is not None:
                         all_errs[i].append(raws[r])
         report["summary"] = {"overall_raw_MAE": {r: (round(float(np.mean(e)), 4) if e else None)
-                                                 for r, e in zip(REL, all_errs)},
+                                                 for r, e in zip(rels, all_errs)},
                              "n_valid_items": sum(1 for x in report["per_item"] if x["status"] == "OK"),
                              "baseline_synthetic": 0.0166,
                              "sim2real_gap_pp": None}
         ov = [v for v in report["summary"]["overall_raw_MAE"].values() if v is not None]
+        report["summary"]["note_head"] = f"模型头 {head_ratios} 比例 (按 ckpt 自适应)"
         if ov:
             report["summary"]["sim2real_gap_pp"] = round((float(np.mean(ov)) - 0.0166) * 100, 1)
 

@@ -90,6 +90,14 @@ def add_scene(payload):
     az = math.radians(cam["yaw_deg"])
     el = math.radians(cam["pitch_deg"])
     d = cam["distance_m"]
+    # 视野保底 (事故 2026-11-21): 采样距离是 gable 调校, 大尺寸族(focal 84/盒宽 296mm)
+    # 画幅 188mm < 主体 → 特写溢出. 按实测包围盒半径×焦距半视场角保底拉远 (margin 1.30).
+    r_meas = float(payload.get("_r_meas_m", 0.0))
+    if r_meas > 0:
+        tan_half = 18.0 / max(cam["equiv_focal_mm"], 1.0)
+        d_fit = r_meas / tan_half * 1.30
+        if d * 1.35 < d_fit:
+            d = d_fit / 1.35
     fwd = mathutils.Vector((math.cos(el) * math.sin(az), -math.cos(el) * math.cos(az),
                             math.sin(el)))
     eye = ctr + fwd * d * 1.35
@@ -178,6 +186,28 @@ def main():
     clean_scene()
     bpy.ops.wm.obj_import(filepath=payload["obj_path"], global_scale=0.001,
                           forward_axis="NEGATIVE_Y", up_axis="Z")
+    # 居中修正 (事故 2026-11-21): 轴向重映射使几何中心 ≠ payload center,
+    # RSC 大尺寸位移 148mm 把主体推出 FOV (26°>24°) → 全空帧, gable 小位移侥幸可见.
+    # 实测世界包围盒平移到 payload center — 对任意轴向惯例鲁棒.
+    from mathutils import Vector
+    dg = bpy.context.evaluated_depsgraph_get()
+    pts = []
+    for o in bpy.context.scene.objects:
+        if o.type != 'MESH':
+            continue
+        me = o.evaluated_get(dg).to_mesh()
+        pts += [o.matrix_world @ v.co for v in me.vertices]
+        o.evaluated_get(dg).to_mesh_clear()
+    if pts:
+        mn = Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts)))
+        mx = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)))
+        geo_c = (mn + mx) / 2
+        tgt = Vector(payload["center_mm"]) * 0.001
+        off = tgt - geo_c
+        for o in bpy.context.scene.objects:
+            if o.type == 'MESH':
+                o.location = o.location + off
+        payload["_r_meas_m"] = (mx - mn).length / 2  # 供视野保底 (m)
     add_scene(payload)
 
 

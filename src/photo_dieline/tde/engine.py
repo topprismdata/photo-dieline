@@ -36,7 +36,8 @@ def _center_radius(bbox_min, bbox_max):
 
 def run_tde(out_dir: str, template_id: str = "gable_top",
             variants: int = 30, captures_per: int = 10, seed: int = 7,
-            res: int = 384, samples: int = 48, blender: str = BLENDER) -> dict:
+            res: int = 384, samples: int = 48, blender: str = BLENDER,
+            jitter_range: tuple[float, float] = (0.8, 1.3)) -> dict:
     out = Path(out_dir)
     (out / "variants").mkdir(parents=True, exist_ok=True)
     (out / "images").mkdir(exist_ok=True)
@@ -54,8 +55,9 @@ def run_tde(out_dir: str, template_id: str = "gable_top",
     vid_list = []
     for vi in range(variants):
         vp = dict(base_params)
+        lo, hi = jitter_range
         for k in PARAM_JITTER.get(template_id, PARAM_JITTER["default"]):
-            vp[k] = round(float(base_params[k] * rng.uniform(0.8, 1.3)), 2)
+            vp[k] = round(float(base_params[k] * rng.uniform(lo, hi)), 2)
         ir_raw = mod.build_ir(vp)
         ir_raw.pop("_derived", None)
         ir = from_raw(ir_raw)
@@ -178,6 +180,27 @@ def _topology_gate(ir, cap, vinfo, res: int) -> dict:
         shoulders.append((pid, sh))
     ctr = np.array(vinfo["center_mm"]) * 0.001
     radius = vinfo["radius_mm"] / 1000.0
+    if not ridges:
+        # 非坡顶族 (RSC/盒型等): 无屋脊判据, 仅保留帧内检查 (G 追溯: 族感知显式留痕)
+        az, el = math.radians(cap["yaw_deg"]), math.radians(cap["pitch_deg"])
+        d = cap["distance_mm"] / 1000.0 * 1.15
+        eye = ctr + np.array([d * math.sin(az) * math.cos(el), -d * math.cos(az) * math.cos(el),
+                              d * math.sin(el)])
+        pts = np.array([[x, y, z] for verts in world.values() for x, y, z in verts]) * 0.001
+        fwd = ctr - eye
+        fwd /= np.linalg.norm(fwd)
+        right = np.cross(fwd, np.array([0.0, 0.0, 1.0]))
+        right /= np.linalg.norm(right)
+        up = np.cross(right, fwd)
+        f = 1.0 / math.tan(math.atan(18.0 / cap["equiv_focal_mm"]))
+        rel = pts - eye
+        z = rel @ fwd
+        x = (rel @ right) / z * f
+        y = (rel @ up) / z * f
+        px, py = 160 + x * 160, 160 - y * 160
+        fully_in = bool(np.all(px > 4) and np.all(px < res - 4)
+                        and np.all(py > 4) and np.all(py < res - 4))
+        return {"family": "no_ridge", "box_fully_in_frame": fully_in, "pass": fully_in}
     az, el = math.radians(cap["yaw_deg"]), math.radians(cap["pitch_deg"])
     d = cap["distance_mm"] / 1000.0 * 1.15
     eye = ctr + np.array([d * math.sin(az) * math.cos(el), -d * math.cos(az) * math.cos(el),
@@ -220,6 +243,7 @@ def _topology_gate(ir, cap, vinfo, res: int) -> dict:
 
 
 PARAM_JITTER = {
+    "rsc_rsc": ["W", "D", "H"],
     "gable_top": ["W", "D", "Hb", "Hr", "Ef"],
     "default": [],
 }
