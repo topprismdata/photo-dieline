@@ -58,9 +58,19 @@ def gen_class(cls_id: str, params: dict, sid0: int) -> int:
         for k in jk:
             if vp.get(k, 0) > 0:
                 vp[k] = round(float(vp[k] * rng.uniform(0.85, 1.15)), 2)
-        ir = from_raw({k: v for k, v in
-                       templates.get(cls_id).build_ir(dict(vp), cls_id=cls_id).items()
-                       if k != "_derived"})
+        mod = templates.get(cls_id)
+        try:
+            raw = mod.build_ir(dict(vp), cls_id=cls_id)
+        except TypeError:
+            raw = mod.build_ir(dict(vp))
+        except ValueError:
+            # 参数抖动破坏锁定约束(如 H=Hf+D) → 回退注册表原参数
+            vp = dict(params)
+            try:
+                raw = mod.build_ir(dict(vp), cls_id=cls_id)
+            except TypeError:
+                raw = mod.build_ir(dict(vp))
+        ir = from_raw({k: v for k, v in raw.items() if k != "_derived"})
         obj = cdir / "variants" / f"v_{vi}.obj"
         info = export_obj(ir, obj)
         center, radius = _center_radius(info["bbox_min"], info["bbox_max"])
@@ -130,14 +140,23 @@ def main() -> None:
         done = {json.loads(l)["class_id"] for l in index_path.read_text().splitlines()}
         ids = [c for c in ids if c not in done]
         print(f"resuming: {len(done)} classes done, {len(ids)} left", flush=True)
+    failed = []
     for i, cid in enumerate(ids):
         n0 = sid0
-        sid0 = gen_class(cid, classes[cid], sid0)
+        try:
+            sid0 = gen_class(cid, classes[cid], sid0)
+        except Exception as e:  # 单类失败不杀批 (记录后续跑)
+            failed.append((cid, repr(e)[:200]))
+            print(f"[{i + 1}/{len(ids)}] {cid}: FAILED {repr(e)[:120]}", flush=True)
+            continue
         with index_path.open("a") as f:
             f.write(json.dumps({"class_id": cid, "n": sid0 - n0,
                                 "sec": round(time.time() - t0, 1)}) + "\n")
         print(f"[{i + 1}/{len(ids)}] {cid}: {sid0 - n0} imgs "
               f"(total {sid0}, {round((time.time() - t0) / 60, 1)}min)", flush=True)
+    if failed:
+        (OUT / "failed.json").write_text(json.dumps(failed, indent=1))
+        print(f"FAILED classes: {[f[0] for f in failed]}", flush=True)
     print(f"DONE: {sid0} images, {round(time.time() - t0, 1)}s", flush=True)
 
 
