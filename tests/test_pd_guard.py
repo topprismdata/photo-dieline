@@ -73,3 +73,36 @@ def test_family_passes_valid():
     p.write_text(json.dumps(spec))
     r = run("family", "--spec", str(p), "--rule", "H=Hf+D")
     assert r.returncode == 0
+
+
+# ---- R3 (I/J/M + Release Gate) ----
+def _r3(*a):
+    return subprocess.run([sys.executable, "scripts/pd_guard_r3.py", *a],
+                          capture_output=True, text=True)
+
+
+def test_r3_pairs_catches_missing_frame(tmp_path):
+    rd = tmp_path / "r"; rd.mkdir()
+    (rd / "s_0.png").write_bytes(b"x")
+    assert _r3("pairs", "--render-dir", str(rd)).returncode == 1  # 无JSON
+
+
+def test_r3_dieline_catches_open_contour_and_no_strip(tmp_path):
+    p = tmp_path / "d.json"
+    p.write_text(json.dumps({"polygons": [{"material": "CUT", "points": [[0, 0], [1, 0]]}],
+                             "H_mm": 10, "Hf_mm": 6, "D_mm": 4}))
+    assert _r3("dieline", "--spec", str(p)).returncode == 1  # 未闭合+无校验条
+
+
+def test_r3_dieline_passes_valid(tmp_path):
+    p = tmp_path / "d.json"
+    p.write_text(json.dumps({"polygons": [{"material": "CREASE", "points": [[0, 0], [1, 0], [1, 1], [0, 0]]}],
+                             "params": {"H": 112, "Hb": 100, "Hr": 12},
+                             "calibration_strip_mm": 50}))
+    assert _r3("dieline", "--spec", str(p)).returncode == 0
+
+
+def test_r3_license_catches_missing_notice(tmp_path):
+    mp = tmp_path / "m.json"; zd = tmp_path / "z"; zd.mkdir()
+    mp.write_text(json.dumps([{"key": "tin_can", "license": "CC-BY", "source_url": "https://x"}]))
+    assert _r3("license", "--manifest", str(mp), "--zoo-dir", str(zd)).returncode == 1  # lic 文件缺
