@@ -16,9 +16,11 @@ argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 OUT = Path(argv[0]) if argv else Path("/tmp/pillow_bag.png")
 W_MM = float(argv[1]) if len(argv) > 1 else 140.0   # 袋宽
 H_MM = float(argv[2]) if len(argv) > 2 else 200.0   # 袋高
+COL = tuple(float(x) for x in argv[3].split(",")) if len(argv) > 3 else (0.85, 0.30, 0.12, 1.0)
+LABEL = argv[4] if len(argv) > 4 else "TOPPRISM"    # 品名字
+SUB = argv[5] if len(argv) > 5 else "零食 100g"      # 品名小注
 FIN_MM = 18.0                                       # 顶/底封翘 crimp 高
 DEPTH = 70.0                                        # 充气后厚度
-COL = (0.85, 0.30, 0.12, 1.0)                       # 主色块(默认零食红橙)
 
 
 def build_mesh():
@@ -102,8 +104,8 @@ def make_atlas(path: Path):
         f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 40, index=0)
     except Exception:
         f = f2 = ImageFont.load_default()
-    d.text((S // 2, S * 0.55), "TOPPRISM", font=f, fill=(30, 30, 34), anchor="mm")
-    d.text((S // 2, S * 0.68), "零食 100g", font=f2, fill=(90, 90, 96), anchor="mm")
+    d.text((S // 2, S * 0.55), LABEL, font=f, fill=(30, 30, 34), anchor="mm")
+    d.text((S // 2, S * 0.68), SUB, font=f2, fill=(90, 90, 96), anchor="mm")
     d.text((S // 2, S * 0.12), "NEW", font=f2, fill=(255, 255, 255), anchor="mm")
     im.save(path)
 
@@ -152,7 +154,7 @@ def render(obj, out: Path):
 
 
 obj = build_mesh()
-atlas = OUT.parent / "atlas.png"
+atlas = Path("/tmp") / "pb_atlas.png"  # 中间产物不入资产目录
 make_atlas(atlas)
 make_material(obj, atlas)
 render(obj, OUT)
