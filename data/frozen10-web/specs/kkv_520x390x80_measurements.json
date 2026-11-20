@@ -1,0 +1,24 @@
+{
+ "id": "kkv_520x390x80",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 520,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/520x390x80-mm-post-versandkarton"
+  },
+  {
+   "name": "D",
+   "value_mm": 390,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/520x390x80-mm-post-versandkarton"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 80,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/520x390x80-mm-post-versandkarton"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "id": "kkv_217x172x110",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 217,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/217x172x110-mm-zweiwellige-kartons-a5"
+  },
+  {
+   "name": "D",
+   "value_mm": 172,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/217x172x110-mm-zweiwellige-kartons-a5"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 110,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/217x172x110-mm-zweiwellige-kartons-a5"
+  }
+ ]
+}

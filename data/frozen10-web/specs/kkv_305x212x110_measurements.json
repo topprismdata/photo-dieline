@@ -1,0 +1,24 @@
+{
+ "id": "kkv_305x212x110",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 305,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/305x212x110-mm-post-versandkarton-a4"
+  },
+  {
+   "name": "D",
+   "value_mm": 212,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/305x212x110-mm-post-versandkarton-a4"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 110,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/305x212x110-mm-post-versandkarton-a4"
+  }
+ ]
+}

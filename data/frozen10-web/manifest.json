@@ -1,0 +1,165 @@
+{
+ "items": [
+  {
+   "id": "kkv_304x217x150",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 304,
+   "D": 217,
+   "Hb": 150,
+   "ratios": {
+    "W/Hb": 2.0267,
+    "D/Hb": 1.4467
+   },
+   "photo": "kkv_304x217x150.jpg",
+   "photo_model": "5624096.jpg",
+   "url": "https://www.kkverpackungen.de/304x217x150-mm-einwellige-kartons-a4",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_304x217x110",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 304,
+   "D": 217,
+   "Hb": 110,
+   "ratios": {
+    "W/Hb": 2.7636,
+    "D/Hb": 1.9727
+   },
+   "photo": "kkv_304x217x110.jpg",
+   "photo_model": "5624095.jpg",
+   "url": "https://www.kkverpackungen.de/304x217x110-mm-einwellige-kartons-a4",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_427x304x150",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 427,
+   "D": 304,
+   "Hb": 150,
+   "ratios": {
+    "W/Hb": 2.8467,
+    "D/Hb": 2.0267
+   },
+   "photo": "kkv_427x304x150.jpg",
+   "photo_model": "5624097.jpg",
+   "url": "https://www.kkverpackungen.de/427x304x150-mm-einwellige-kartons-a3",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_215x155x43",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 215,
+   "D": 155,
+   "Hb": 43,
+   "ratios": {
+    "W/Hb": 5.0,
+    "D/Hb": 3.6047
+   },
+   "photo": "kkv_215x155x43.jpg",
+   "photo_model": "5624151.jpg",
+   "url": "https://www.kkverpackungen.de/215x155x43-mm-post-versandkarton-a5-weiss",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_520x390x80",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 520,
+   "D": 390,
+   "Hb": 80,
+   "ratios": {
+    "W/Hb": 6.5,
+    "D/Hb": 4.875
+   },
+   "photo": "kkv_520x390x80.jpg",
+   "photo_model": "5624159.jpg",
+   "url": "https://www.kkverpackungen.de/520x390x80-mm-post-versandkarton",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_460x310x160",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 460,
+   "D": 310,
+   "Hb": 160,
+   "ratios": {
+    "W/Hb": 2.875,
+    "D/Hb": 1.9375
+   },
+   "photo": "kkv_460x310x160.jpg",
+   "photo_model": "5624157____5901519080335958937.jpg",
+   "url": "https://www.kkverpackungen.de/460x310x160-mm-post-versandkarton",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_305x212x110",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 305,
+   "D": 212,
+   "Hb": 110,
+   "ratios": {
+    "W/Hb": 2.7727,
+    "D/Hb": 1.9273
+   },
+   "photo": "kkv_305x212x110.jpg",
+   "photo_model": "5624156.jpg",
+   "url": "https://www.kkverpackungen.de/305x212x110-mm-post-versandkarton-a4",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_217x172x110",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 217,
+   "D": 172,
+   "Hb": 110,
+   "ratios": {
+    "W/Hb": 1.9727,
+    "D/Hb": 1.5636
+   },
+   "photo": "kkv_217x172x110.jpg",
+   "photo_model": "5624105____5980869519111622517.jpg",
+   "url": "https://www.kkverpackungen.de/217x172x110-mm-zweiwellige-kartons-a5",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_260x240x200",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 260,
+   "D": 240,
+   "Hb": 200,
+   "ratios": {
+    "W/Hb": 1.3,
+    "D/Hb": 1.2
+   },
+   "photo": "kkv_260x240x200.jpg",
+   "photo_model": "A00146_KK43_02.jpg",
+   "url": "https://www.kkverpackungen.de/260x240x200-mm-zweiwellige-kartons",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  },
+  {
+   "id": "kkv_330x290x120",
+   "family": "corrugated_box",
+   "supplier": "kkverpackungen",
+   "W": 330,
+   "D": 290,
+   "Hb": 120,
+   "ratios": {
+    "W/Hb": 2.75,
+    "D/Hb": 2.4167
+   },
+   "photo": "kkv_330x290x120.jpg",
+   "photo_model": "5624266.jpg",
+   "url": "https://www.kkverpackungen.de/330x290x120-mm-ordner-verpackung",
+   "photo_type": "single-box (A4/post/ordner/zweiwellige series)"
+  }
+ ],
+ "note": "web冻结集v3: 10件kkv在售品非system系列(单盒图), GT=slug规格承诺, photos gitignored"
+}

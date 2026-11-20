@@ -1,0 +1,24 @@
+{
+ "id": "kkv_427x304x150",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 427,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/427x304x150-mm-einwellige-kartons-a3"
+  },
+  {
+   "name": "D",
+   "value_mm": 304,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/427x304x150-mm-einwellige-kartons-a3"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 150,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/427x304x150-mm-einwellige-kartons-a3"
+  }
+ ]
+}

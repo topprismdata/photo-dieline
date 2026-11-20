@@ -1,0 +1,24 @@
+{
+ "id": "kkv_330x290x120",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 330,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/330x290x120-mm-ordner-verpackung"
+  },
+  {
+   "name": "D",
+   "value_mm": 290,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/330x290x120-mm-ordner-verpackung"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 120,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/330x290x120-mm-ordner-verpackung"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "id": "kkv_460x310x160",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 460,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/460x310x160-mm-post-versandkarton"
+  },
+  {
+   "name": "D",
+   "value_mm": 310,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/460x310x160-mm-post-versandkarton"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 160,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/460x310x160-mm-post-versandkarton"
+  }
+ ]
+}

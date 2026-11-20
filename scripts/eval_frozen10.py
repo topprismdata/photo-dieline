@@ -72,6 +72,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="用 E3 合成图验证 harness 本身")
     ap.add_argument("--render-dir", default="output/e3_camsweep/v0/images")
     ap.add_argument("--expect", type=int, default=10)
+    ap.add_argument("--web", action="store_true", help="web采购模式: 单图/品, 相机契约豁免留痕")
     args = ap.parse_args()
     dev = "mps" if torch.backends.mps.is_available() else "cpu"
     report = {"mode": "dry-run" if args.dry_run else "real", "per_item": [], "notes": []}
@@ -108,12 +109,19 @@ def main():
     else:
         data = Path(args.data)
         photos = data / "photos"
-        # 预检: pd-guard pairs
+        web_mode = not list(photos.glob("*_cam*.json")) and args.web
+        # 预检: pd-guard pairs — 真实采集要求相机契约; web模式 I1/I2 豁免留痕
         pairs_gate = subprocess.run([sys.executable, str(ROOT / "scripts/pd_guard_r3.py"),
                                      "pairs", "--render-dir", str(photos)], capture_output=True, text=True)
-        pairs = json.loads(pairs_gate.stdout)
+        try:
+            pairs = json.loads(pairs_gate.stdout)
+        except json.JSONDecodeError:
+            pairs = {"pass": False, "n_images": 0}
         report["pairs_gate"] = {k: pairs.get(k) for k in ("pass", "n_images",
                                  "missing_label", "missing_camera_fields", "missing_frame_decl")}
+        if web_mode:
+            report["pairs_gate"]["exemption"] = ("WEB-SOURCED: 相机参数不可追溯(I1/I2豁免留痕); "
+                                                 "照片=供应商按品渲染图(非实拍), 无ECXIF契约")
         man = json.loads((data / "manifest.json").read_text())
         items = man["items"] if isinstance(man, dict) else man
         report["denom"] = {"expected": args.expect, "actual": len(items),
@@ -127,31 +135,42 @@ def main():
                 report["per_item"].append({"id": iid, "status": "INVALID", "reason": "no measurements"})
                 continue
             gt = true_ratios(json.loads(meas_p.read_text()))
-            per = {}
-            for r in REL:
-                per[r] = []
+            per = {r: [] for r in REL}
             n_cam = 0
-            for cj in sorted(photos.glob(f"{iid}_cam*.json")):
-                lab = json.loads(cj.read_text())
-                if not REQUIRED_CAM <= set(lab.get("camera", {})):
-                    continue
-                img = cj.with_suffix(".jpg")
-                if not img.exists():
-                    img = cj.with_suffix(".png")
-                if not img.exists():
-                    continue
-                pred = predict_ratios(net, img, dev)
-                for i, r in enumerate(REL):
-                    if r in gt:
-                        per[r].append(abs(float(pred[i]) - gt[r]))
-                n_cam += 1
+            if web_mode:
+                img = photos / f"{iid}.jpg"
+                if img.exists() and gt:
+                    pred = predict_ratios(net, img, dev)
+                    for i, r in enumerate(REL):
+                        if r in gt:
+                            per[r].append(abs(float(pred[i]) - gt[r]))
+                    n_cam = 1
+            else:
+                for cj in sorted(photos.glob(f"{iid}_cam*.json")):
+                    lab = json.loads(cj.read_text())
+                    if not REQUIRED_CAM <= set(lab.get("camera", {})):
+                        continue
+                    img = cj.with_suffix(".jpg")
+                    if not img.exists():
+                        img = cj.with_suffix(".png")
+                    if not img.exists():
+                        continue
+                    pred = predict_ratios(net, img, dev)
+                    for i, r in enumerate(REL):
+                        if r in gt:
+                            per[r].append(abs(float(pred[i]) - gt[r]))
+                    n_cam += 1
             raws = {r: (float(np.mean(v)) if v else None) for r, v in per.items()}
-            ok = n_cam >= 6 and all(v is not None for v in raws.values())
+            avail = [r for r in REL if raws[r] is not None]
+            need = 1 if web_mode else 6
+            ok = n_cam >= need and len(avail) >= 2   # web盒型无 Hr/Ef, 比例子集即可
             report["per_item"].append({"id": iid, "status": "OK" if ok else "INVALID",
-                                       "n_cam": n_cam, "raw_MAE": raws})
+                                       "n_cam": n_cam, "raw_MAE": raws,
+                                       "ratios_available": avail})
             if ok:
                 for i, r in enumerate(REL):
-                    all_errs[i].append(raws[r])
+                    if raws[r] is not None:
+                        all_errs[i].append(raws[r])
         report["summary"] = {"overall_raw_MAE": {r: (round(float(np.mean(e)), 4) if e else None)
                                                  for r, e in zip(REL, all_errs)},
                              "n_valid_items": sum(1 for x in report["per_item"] if x["status"] == "OK"),

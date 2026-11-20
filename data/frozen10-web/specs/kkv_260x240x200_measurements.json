@@ -1,0 +1,24 @@
+{
+ "id": "kkv_260x240x200",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 260,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/260x240x200-mm-zweiwellige-kartons"
+  },
+  {
+   "name": "D",
+   "value_mm": 240,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/260x240x200-mm-zweiwellige-kartons"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 200,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/260x240x200-mm-zweiwellige-kartons"
+  }
+ ]
+}

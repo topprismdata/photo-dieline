@@ -1,0 +1,24 @@
+{
+ "id": "kkv_304x217x110",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 304,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/304x217x110-mm-einwellige-kartons-a4"
+  },
+  {
+   "name": "D",
+   "value_mm": 217,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/304x217x110-mm-einwellige-kartons-a4"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 110,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/304x217x110-mm-einwellige-kartons-a4"
+  }
+ ]
+}

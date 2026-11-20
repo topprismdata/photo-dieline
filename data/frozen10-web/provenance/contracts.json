@@ -1,0 +1,192 @@
+[
+ {
+  "reference_id": "kkv_304x217x150",
+  "source": {
+   "url": "https://www.kkverpackungen.de/304x217x150-mm-einwellige-kartons-a4",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/df/da/a8/5624096.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 459777,
+   "photo_bytes": 35720,
+   "photo_filename": "5624096.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_304x217x110",
+  "source": {
+   "url": "https://www.kkverpackungen.de/304x217x110-mm-einwellige-kartons-a4",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/29/d2/89/5624095.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 460019,
+   "photo_bytes": 45116,
+   "photo_filename": "5624095.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_427x304x150",
+  "source": {
+   "url": "https://www.kkverpackungen.de/427x304x150-mm-einwellige-kartons-a3",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/a9/03/10/5624097.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 473922,
+   "photo_bytes": 37016,
+   "photo_filename": "5624097.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_215x155x43",
+  "source": {
+   "url": "https://www.kkverpackungen.de/215x155x43-mm-post-versandkarton-a5-weiss",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/8d/f5/ea/5624151.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 427792,
+   "photo_bytes": 9300,
+   "photo_filename": "5624151.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_520x390x80",
+  "source": {
+   "url": "https://www.kkverpackungen.de/520x390x80-mm-post-versandkarton",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/43/e5/75/5624159.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 436631,
+   "photo_bytes": 63006,
+   "photo_filename": "5624159.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_460x310x160",
+  "source": {
+   "url": "https://www.kkverpackungen.de/460x310x160-mm-post-versandkarton",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/2c/f0/53/5624157____5901519080335958937.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 437290,
+   "photo_bytes": 39308,
+   "photo_filename": "5624157____5901519080335958937.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_305x212x110",
+  "source": {
+   "url": "https://www.kkverpackungen.de/305x212x110-mm-post-versandkarton-a4",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/93/cc/9e/5624156.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 433556,
+   "photo_bytes": 28402,
+   "photo_filename": "5624156.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_217x172x110",
+  "source": {
+   "url": "https://www.kkverpackungen.de/217x172x110-mm-zweiwellige-kartons-a5",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/1d/90/2e/5624105____5980869519111622517.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 540506,
+   "photo_bytes": 38218,
+   "photo_filename": "5624105____5980869519111622517.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_260x240x200",
+  "source": {
+   "url": "https://www.kkverpackungen.de/260x240x200-mm-zweiwellige-kartons",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/d4/59/42/A00146_KK43_02.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 574126,
+   "photo_bytes": 99934,
+   "photo_filename": "A00146_KK43_02.jpg",
+   "series": "non-system (single-box family)"
+  }
+ },
+ {
+  "reference_id": "kkv_330x290x120",
+  "source": {
+   "url": "https://www.kkverpackungen.de/330x290x120-mm-ordner-verpackung",
+   "supplier": "kkverpackungen",
+   "photo_url": "https://www.kkverpackungen.de/media/image/0e/87/ea/5624266.jpg",
+   "photo_license": "supplier product photo © — research use only, NOT redistributed (gitignored)"
+  },
+  "structure": {
+   "class": "corrugated_box",
+   "gt_grade": "SUPPLIER_SPEC"
+  },
+  "validation": {
+   "page_bytes": 434875,
+   "photo_bytes": 79400,
+   "photo_filename": "5624266.jpg",
+   "series": "non-system (single-box family)"
+  }
+ }
+]

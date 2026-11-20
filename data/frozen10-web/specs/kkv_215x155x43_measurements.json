@@ -1,0 +1,24 @@
+{
+ "id": "kkv_215x155x43",
+ "family": "corrugated_box",
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 215,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/215x155x43-mm-post-versandkarton-a5-weiss"
+  },
+  {
+   "name": "D",
+   "value_mm": 155,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/215x155x43-mm-post-versandkarton-a5-weiss"
+  },
+  {
+   "name": "Hb",
+   "value_mm": 43,
+   "status": "SUPPLIER_SPEC",
+   "source": "https://www.kkverpackungen.de/215x155x43-mm-post-versandkarton-a5-weiss"
+  }
+ ]
+}

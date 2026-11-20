@@ -1,0 +1,186 @@
+{
+ "mode": "real",
+ "per_item": [
+  {
+   "id": "kkv_304x217x150",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 1.4900649444262188,
+    "D/Hb": 0.9621132103602092,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_304x217x110",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 2.186440659653057,
+    "D/Hb": 1.4849342443726279,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_427x304x150",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 2.2870329348246257,
+    "D/Hb": 1.5337599174181622,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_215x155x43",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 4.529772698879242,
+    "D/Hb": 3.2508589126342953,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_520x390x80",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 6.053361803293228,
+    "D/Hb": 4.530215740203857,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_460x310x160",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 2.3555057644844055,
+    "D/Hb": 1.4599910378456116,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_305x212x110",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 2.289080552079461,
+    "D/Hb": 1.481372525475242,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_217x172x110",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 1.4559755661270835,
+    "D/Hb": 1.0986341844905507,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_260x240x200",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.7855695366859436,
+    "D/Hb": 0.727851402759552,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "kkv_330x290x120",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 2.2455455660820007,
+    "D/Hb": 1.9383871952692666,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  }
+ ],
+ "notes": [],
+ "pairs_gate": {
+  "pass": false,
+  "n_images": 0,
+  "missing_label": 0,
+  "missing_camera_fields": 0,
+  "missing_frame_decl": 0,
+  "exemption": "WEB-SOURCED: 相机参数不可追溯(I1/I2豁免留痕); 照片=供应商按品渲染图(非实拍), 无ECXIF契约"
+ },
+ "denom": {
+  "expected": 10,
+  "actual": 10,
+  "pass": true
+ },
+ "summary": {
+  "overall_raw_MAE": {
+   "W/Hb": 2.5678,
+   "D/Hb": 1.8468,
+   "Hr/Hb": null,
+   "Ef/Hb": null
+  },
+  "n_valid_items": 10,
+  "baseline_synthetic": 0.0166,
+  "sim2real_gap_pp": 219.1
+ },
+ "conclusion": {
+  "ratio_sim2real": "NOT MEASURABLE — 评估对象错误: E0rel 为 gable 专用比例模型, 对瓦楞盒照片属域错配(219pp 为域错配证据而非缺口测量); gable 族线上无 ≤1% 精度 GT(厂商页只给容量, 厂商博客互相矛盾±10%)",
+  "recognition_sim2real": "POSITIVE — T1 路由器对域外真实照片 0 假阳性: 5 AMBIGUOUS + 5 UNKNOWN 全诚实弃权, 拒绝机制按设计工作(语义最近猜测均为盒族)",
+  "path_to_ratio_validation": "实物冻结采集(协议就绪) 或 厂商规格数据表访问权限"
+ },
+ "t1_route": null
+}
