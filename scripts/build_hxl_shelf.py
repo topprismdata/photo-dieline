@@ -77,6 +77,27 @@ def pil_price_tag(text):
     p = Path(f"/tmp/hxl_tag_{text.replace('.', '_')}.png"); im.save(p); return p
 
 
+def crop_bag(png: Path) -> Path:
+    """裁掉资产渲染的烤入背景, 只留袋体 (排面平面用; 否则灰背景占 50% = 白卡)."""
+    import numpy as np
+    from PIL import Image
+    out = Path("/tmp") / f"crop_{png.stem}.png"
+    if out.exists():
+        return out
+    im = Image.open(png).convert("RGB")
+    a = np.asarray(im, float)
+    edge = np.concatenate([a[:, :24], a[:, -24:]], axis=1)
+    bg = np.median(np.concatenate([edge.reshape(-1, 3)[::7]]), axis=0)
+    dist = np.abs(a - bg[None, None, :]).sum(-1)
+    ys, xs = np.where(dist > 60)
+    if len(xs) > 100:
+        x0, x1 = max(xs.min()-8, 0), min(xs.max()+8, a.shape[1])
+        y0, y1 = max(ys.min()-8, 0), min(ys.max()+8, a.shape[0])
+        im = im.crop((x0, y0, x1, y1))
+    im.save(out)
+    return out
+
+
 def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
@@ -114,6 +135,12 @@ def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0):
 
 
 def main():
+    # 清启动场景 (事故 2026-11-21: 默认 Cube 2m 卡在相机与货架间 = 全程白雾元凶;
+    # tde_driver 有 clean_scene, 此脚本没有 → 八轮"洗白"误诊为灯光/曝光/atlas)
+    for coll in (bpy.data.objects, bpy.data.meshes, bpy.data.materials,
+                 bpy.data.cameras, bpy.data.lights, bpy.data.images, bpy.data.worlds):
+        for item in list(coll):
+            coll.remove(item, do_unlink=True)
     sc = bpy.context.scene
     sc.render.engine = "BLENDER_EEVEE"
     sc.view_settings.view_transform = "AgX"
@@ -160,10 +187,10 @@ def main():
         for r_i, (y_off, z_off, scale) in enumerate(((DEPTH / 2 - 0.06, 0.02, 0.92),
                                                      (DEPTH / 2 - 0.16, 0.10, 0.80))):
             for i in range(n):
-                a = picks[(i + lv * 3 + r_i) % len(picks)]
+                a = crop_bag(picks[(i + lv * 3 + r_i) % len(picks)])
                 img_plane(f"bag{lv}_{r_i}_{i}", a, bw * 0.82 * scale, LEVEL_H * 0.62 * scale,
                           (-SHELF_W / 2 + bw * (i + 0.5), y_off, z0 + 0.03 + z_off * (1 if r_i else 0)),
-                          emissive=0.5)
+                          emissive=0.25)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
@@ -212,4 +239,5 @@ def main():
     print("HXL_SHELF_OK", OUT)
 
 
-main()
+if __name__ == "__main__":
+    main()
