@@ -66,6 +66,7 @@ def main() -> None:
         for f in FOCALS:
             tan_h = 18.0 / f
             d_fill = horiz / (0.38 * 2.0 * tan_h * 1.35) * 1000.0  # mm
+            d_fill = max(d_fill, radius * 2.2)  # 防相机入盒: 眼距1.35d须>>半径
             for pitch in PITCHES:
                 for yaw in YAWS:
                     png = vdir / "images" / f"s_{sid:04d}.png"
