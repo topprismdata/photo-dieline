@@ -65,7 +65,7 @@ def main() -> None:
                     info["bbox_max"][1] - info["bbox_min"][1])
         for f in FOCALS:
             tan_h = 18.0 / f
-            d_fill = horiz / (0.38 * 2.0 * tan_h * 1.35) * 1000.0  # mm
+            d_fill = horiz / (0.38 * 2.0 * tan_h * 1.35)  # mm (horiz 已是 mm, 勿再 ×1000)
             d_fill = max(d_fill, radius * 2.2)  # 防相机入盒: 眼距1.35d须>>半径
             for pitch in PITCHES:
                 for yaw in YAWS:
