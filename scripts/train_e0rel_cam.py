@@ -26,8 +26,10 @@ CAM_DIMS = 4  # focal/50, pitch/35, yaw/30, dist_norm
 
 
 class CamDataset(Dataset):
-    def __init__(self, root: Path, variant_split: set[int], tier: str = "all"):
+    def __init__(self, root: Path, variant_split: set[int], tier: str = "all",
+                 use_cam: bool = True):
         self.rows = []
+        self.use_cam = use_cam
         self.rng_norm = 18.0
         for lp in sorted(root.glob("labels/s_*.json")):
             if "_probe" in lp.name:
@@ -52,12 +54,12 @@ class CamDataset(Dataset):
         cam = lab["render_payload"]["camera"]
         cap = lab["capture"]
         r_mm = max(lab["params_gt"].get("W", 60), lab["params_gt"].get("Hb", 105)) * 0.9
-        camv = torch.tensor([
+        camv = (torch.tensor([
             cam["equiv_focal_mm"] / 50.0,
             cam["pitch_deg"] / 35.0,
             cam["yaw_deg"] / 30.0,
             cam["distance_m"] * 1000.0 / max(r_mm, 1.0),
-        ], dtype=torch.float32)
+        ], dtype=torch.float32) if self.use_cam else torch.zeros(4))
         p = lab["params_gt"]
         y = torch.tensor([p[a] / p[b] for a, b in REL], dtype=torch.float32)
         return x, camv, y
@@ -87,6 +89,8 @@ def main():
     ap.add_argument("--epochs", type=int, default=32)
     ap.add_argument("--tier", default="all")
     ap.add_argument("--out", default="runs/e0rel_cam")
+    ap.add_argument("--no-cam", action="store_true",
+                    help="E3干净对照: 同架构去掉相机输入 (误差来源分解)")
     args = ap.parse_args()
     root = Path(args.data)
     out = Path(args.out)
@@ -99,8 +103,8 @@ def main():
     pre = np.array([[l["params_gt"][a] / l["params_gt"][b] for a, b in REL]
                     for l in labels if l["variant"] not in val_v], float)
     rstd_l = [float(pre[:, i].std()) for i in range(len(REL))]
-    ds_tr = CamDataset(root, set(range(30)) - val_v, args.tier)
-    ds_va = CamDataset(root, val_v, args.tier)
+    ds_tr = CamDataset(root, set(range(30)) - val_v, args.tier, use_cam=not args.no_cam)
+    ds_va = CamDataset(root, val_v, args.tier, use_cam=not args.no_cam)
     tl = DataLoader(ds_tr, batch_size=32, shuffle=True, num_workers=0)
     vl = DataLoader(ds_va, batch_size=32, num_workers=0)
     dev = "mps" if torch.backends.mps.is_available() else "cpu"
