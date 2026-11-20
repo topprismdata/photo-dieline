@@ -7,6 +7,8 @@ import math
 import sys
 from pathlib import Path
 
+import numpy as np
+import PIL.Image as Image
 import bpy
 from mathutils import Vector
 
@@ -16,7 +18,7 @@ ROOT = Path("/Users/guohongbin/photo-dieline")
 
 # ---- 场景参数 (对账 v2) ----
 SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
-BAGS_PER_LEVEL = 10
+BAGS_PER_LEVEL = 14
 ASSETS = sorted((ROOT / "assets/pillow_bags").glob("*.png"))
 # 每层色系主块 (对账: 逐层色系分块) — 索引进 ASSETS 排序
 LEVEL_PLAN = [
@@ -77,11 +79,11 @@ def pil_price_tag(text):
     p = Path(f"/tmp/hxl_tag_{text.replace('.', '_')}.png"); im.save(p); return p
 
 
-def crop_bag(png: Path) -> Path:
-    """裁掉资产渲染的烤入背景, 只留袋体 (排面平面用; 否则灰背景占 50% = 白卡)."""
+def crop_bag(png: Path, seed: int = 0) -> Path:
+    """裁掉资产渲染的烤入背景 + 变体抖动 (翻转/饱和/亮度 ±15%): 12 资产 → 48 设计, 杀克隆感."""
     import numpy as np
-    from PIL import Image
-    out = Path("/tmp") / f"crop_{png.stem}.png"
+    from PIL import Image, ImageEnhance
+    out = Path("/tmp") / f"crop_{png.stem}_{seed}.png"
     if out.exists():
         return out
     im = Image.open(png).convert("RGB")
@@ -94,6 +96,11 @@ def crop_bag(png: Path) -> Path:
         x0, x1 = max(xs.min()-8, 0), min(xs.max()+8, a.shape[1])
         y0, y1 = max(ys.min()-8, 0), min(ys.max()+8, a.shape[0])
         im = im.crop((x0, y0, x1, y1))
+    rng = np.random.default_rng(seed)
+    if rng.random() < 0.5:
+        im = im.transpose(Image.FLIP_LEFT_RIGHT)
+    im = ImageEnhance.Color(im).enhance(0.85 + rng.random() * 0.4)
+    im = ImageEnhance.Brightness(im).enhance(0.9 + rng.random() * 0.25)
     im.save(out)
     return out
 
@@ -122,12 +129,13 @@ def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0):
     sc.objects.link(o)
     import bmesh
     b = bmesh.new()
-    v = [b.verts.new((-w/2, 0, -h/2)), b.verts.new((-w/2, 0, h/2)),
-         b.verts.new((w/2, 0, h/2)), b.verts.new((w/2, 0, -h/2))]
+    # CCW(自 -y 视角)顶点序 + 恒等 UV — 法线朝相机, 文字正读
+    # (事故: normal_flip 反转环序 → UV 转置 90°, 文字竖排)
+    v = [b.verts.new((-w/2, 0, -h/2)), b.verts.new((w/2, 0, -h/2)),
+         b.verts.new((w/2, 0, h/2)), b.verts.new((-w/2, 0, h/2))]
     f = b.faces.new(v)
-    f.normal_flip()
     uv = b.loops.layers.uv.verify()
-    for loop, (uu, vv) in zip(f.loops, ((1, 0), (1, 1), (0, 1), (0, 0))):
+    for loop, (uu, vv) in zip(f.loops, ((0, 0), (1, 0), (1, 1), (0, 1))):
         loop[uv].uv = (uu, vv)
     b.to_mesh(mesh); b.free()
     o.data.materials.append(mat)
@@ -145,7 +153,7 @@ def main():
     sc.render.engine = "BLENDER_EEVEE"
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Punchy"   # 默认 look 强去饱和 (冷柜线已知坑)
-    sc.view_settings.exposure = -0.4
+    sc.view_settings.exposure = 0.0
     sc.render.resolution_x, sc.render.resolution_y = 720, 1044
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
     w.node_tree.nodes["Background"].inputs[0].default_value = (0.05, 0.05, 0.06, 1)
@@ -184,15 +192,47 @@ def main():
         # 排面: 两排软袋卡 (第一排贴唇, 第二排垫高出缝)
         fam = LEVEL_PLAN[lv % len(LEVEL_PLAN)]
         picks = [a for a in ASSETS if a.stem in fam] or ASSETS
-        n = BAGS_PER_LEVEL
+        rng = np.random.default_rng(lv * 31 + 7)
+        bag_h = LEVEL_H * 0.74
+        crop0 = crop_bag(ASSETS[0], seed=999)
+        tex_ar = Image.open(crop0).width / Image.open(crop0).height  # 纹理宽高比
+        n = max(8, int(SHELF_W / (bag_h * tex_ar * 1.06)))
         bw = SHELF_W / n
-        for r_i, (y_off, z_off, scale) in enumerate(((DEPTH / 2 - 0.06, 0.015, 0.93),
-                                                     (DEPTH / 2 - 0.15, 0.09, 0.86))):
+        for r_i, (y_off, z_off, s0) in enumerate(((DEPTH / 2 - 0.06, 0.015, 0.93),
+                                                  (DEPTH / 2 - 0.15, 0.09, 0.86))):
+            prev = -1
             for i in range(n):
-                a = crop_bag(picks[(i * 5 + lv + r_i * 2) % len(picks)])  # 层内多样设计, 杀克隆感
-                img_plane(f"bag{lv}_{r_i}_{i}", a, bw * 0.94 * scale, LEVEL_H * 0.72 * scale,
-                          (-SHELF_W / 2 + bw * (i + 0.5), y_off, z0 + 0.02 + z_off * (1 if r_i else 0)),
+                j = (i * 5 + lv * 3 + r_i * 7) % len(ASSETS)
+                if j == prev:
+                    j = (j + 4) % len(ASSETS)
+                prev = j
+                a = crop_bag(ASSETS[j], seed=lv * 100 + r_i * 50 + i)
+                ar = Image.open(a).width / Image.open(a).height
+                w_bag = bag_h * ar * (0.9 + rng.random() * 0.15)
+                x_bag = max(-SHELF_W / 2 + w_bag / 2,
+                            min(SHELF_W / 2 - w_bag / 2,
+                                -SHELF_W / 2 + bw * (i + 0.5) + (rng.random() - 0.5) * 0.01))
+                img_plane(f"bag{lv}_{r_i}_{i}", a, w_bag, bag_h,
+                          (x_bag, y_off, z0 + 0.02 + z_off * (1 if r_i else 0)),
                           emissive=0.25)
+                # 纯色背板 (+4mm 后, 平均色=袋背印刷近似, 消镜像字)
+                from PIL import Image as PILImage
+                _avg = PILImage.open(a).resize((1, 1)).getpixel((0, 0))
+                _m = bpy.data.materials.new(f"bagback{lv}_{r_i}_{i}")
+                _m.use_nodes = True
+                _m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (
+                    _avg[0] / 255 * 0.7, _avg[1] / 255 * 0.7, _avg[2] / 255 * 0.7, 1)
+                _mesh = bpy.data.meshes.new(f"bb{lv}_{r_i}_{i}")
+                _o = bpy.data.objects.new(f"bb{lv}_{r_i}_{i}", _mesh)
+                _o.location = (x_bag, y_off + 0.004, z0 + 0.02 + z_off * (1 if r_i else 0))
+                sc.collection.objects.link(_o)
+                import bmesh as _bm
+                _b = _bm.new()
+                _vv = [_b.verts.new((-w_bag/2, 0, -bag_h/2)), _b.verts.new((w_bag/2, 0, -bag_h/2)),
+                       _b.verts.new((w_bag/2, 0, bag_h/2)), _b.verts.new((-w_bag/2, 0, bag_h/2))]
+                _b.faces.new(_vv)
+                _b.to_mesh(_mesh); _b.free()
+                _o.data.materials.append(_m)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
@@ -202,7 +242,7 @@ def main():
         sc.collection.objects.link(blo)
         # 层板下沿灯带 (补层板唇高光)
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
-        lt.size = SHELF_W * 0.9; lt.size_y = 0.05; lt.energy = 12
+        lt.size = SHELF_W * 0.9; lt.size_y = 0.05; lt.energy = 32
         lo = bpy.data.objects.new(f"strip{lv}", lt)
         lo.location = (0, DEPTH - 0.10, z0 + 0.05)
         lo.rotation_euler = (math.radians(-70), 0, 0)
@@ -211,7 +251,7 @@ def main():
     # 顶部射灯 ×4 (黑轨道语义简化为灯本体)
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
-        lt.energy = 120; lt.spot_size = math.radians(55)
+        lt.energy = 200; lt.spot_size = math.radians(55)
         lo = bpy.data.objects.new(f"spot{i}", lt)
         lo.location = (x, -0.7, SHELVES * LEVEL_H + 0.55)
         aim = Vector((x * 0.6, DEPTH / 2, 1.0)) - lo.location

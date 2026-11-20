@@ -94,18 +94,23 @@ def build_mesh():
 def make_atlas(path: Path):
     from PIL import Image, ImageDraw, ImageFont
     S = 512
-    im = Image.new("RGB", (S, S), tuple(int(c * 255) for c in COL[:3]))
+    import colorsys
+    _h, _l, _sv = colorsys.rgb_to_hsv(*[c for c in COL[:3]])
+    _sv = min(1.0, _sv * 1.2)
+    _r, _g, _b = colorsys.hsv_to_rgb(_h, _sv, _l)
+    _col = (_r, _g, _b, 1.0)  # 局部饱和增强色 (不遮蔽全局 COL)
+    im = Image.new("RGB", (S, S), tuple(int(c * 255) for c in _col[:3]))
     d = ImageDraw.Draw(im)
-    # 上 1/4 亮带 + 中央白窗 + 品字占位 (排面远观三要素)
-    d.rectangle([0, 0, S, S // 4], fill=tuple(min(255, int(c * 255 + 40)) for c in COL[:3]))
-    d.rounded_rectangle([S // 5, S // 3, S * 4 // 5, S * 3 // 4], radius=24, fill=(250, 248, 242))
+    # 色块主导 (对账: 排面远观读色系): 白窗收窄至 30% 居中, 顶带亮色+品字
+    d.rectangle([0, 0, S, S // 5], fill=tuple(min(255, int(c * 255 + 45)) for c in _col[:3]))
+    d.rounded_rectangle([S * 4 // 10, S * 9 // 20, S * 6 // 10, S * 13 // 20], radius=14, fill=(250, 248, 242))
     try:
         f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 64, index=0)
         f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 40, index=0)
     except Exception:
         f = f2 = ImageFont.load_default()
     d.text((S // 2, S * 0.55), LABEL, font=f, fill=(30, 30, 34), anchor="mm")
-    d.text((S // 2, S * 0.68), SUB, font=f2, fill=(90, 90, 96), anchor="mm")
+    d.text((S // 2, S * 0.13), SUB, font=f2, fill=(255, 255, 255), anchor="mm")
     d.text((S // 2, S * 0.12), "NEW", font=f2, fill=(255, 255, 255), anchor="mm")
     im.save(path)
 
@@ -126,14 +131,17 @@ def make_material(obj, atlas: Path):
 def render(obj, out: Path):
     sc = bpy.context.scene
     sc.render.engine = "BLENDER_EEVEE"  # Blender5.2 枚举无 _NEXT (tde pitfalls)
+    sc.view_settings.view_transform = "AgX"
+    sc.view_settings.look = "AgX - Punchy"   # 默认 look 去饱和 = 洗白根因 (2026-11-21)
+    sc.view_settings.exposure = -0.3
     sc.render.resolution_x = sc.render.resolution_y = 640
     sc.world = bpy.data.worlds.new("w") or sc.world
     if sc.world:
         sc.world.use_nodes = True
         sc.world.node_tree.nodes["Background"].inputs[0].default_value = (0.92, 0.92, 0.94, 1)
-        sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.9
+        sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.55
     light = bpy.data.lights.new("key", "AREA")
-    light.size = 1.2; light.energy = 400
+    light.size = 1.2; light.energy = 220
     lo = bpy.data.objects.new("key", light)
     lo.location = (0.9, -0.8, 1.0)
     lo.rotation_euler = (math.radians(55), 0, math.radians(45))
