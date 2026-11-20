@@ -70,6 +70,7 @@ def main():
     ap.add_argument("--epochs", type=int, default=32)
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--out", default="runs/e0rel")
+    ap.add_argument("--seed", type=int, default=None, help="G追溯: 固定并记录; 不给则随机")
     ap.add_argument("--tier", default="all",
                     help="E1消融: all | REALISTIC | MODERATE | MAX (按capture.tier过滤)")
     args = ap.parse_args()
@@ -84,7 +85,9 @@ def main():
                   if l.get("capture", {}).get("tier") == args.tier]
         print(f"tier filter {args.tier}: {len(labels)} samples")
     all_v = set(range(30))
-    val_v = set(np.random.default_rng(7).choice(30, 6, replace=False).tolist())
+    seed = args.seed if args.seed is not None else int(torch.randint(0, 2**31 - 1, (1,)).item())
+    torch.manual_seed(seed)
+    val_v = set(np.random.default_rng(7).choice(30, 6, replace=False).tolist())  # split 固定与种子无关
     pre = np.array([[l["params_gt"][a] / l["params_gt"][b] for a, b in REL]
                     for l in labels if l["variant"] not in val_v], float)
     rstd = {f"{a}/{b}": float(pre[:, i].std()) for i, (a, b) in enumerate(REL)}
@@ -141,7 +144,7 @@ def main():
         log["epochs"].append(rec)
         if rec["mean_pct"] < best:
             best = rec["mean_pct"]
-            torch.save({"model": net.state_dict(), "rel": REL}, out / "best.pt")
+            torch.save({"model": net.state_dict(), "rel": REL, "seed": seed}, out / "best.pt")
         print(f"ep{ep}: loss={rec['train_loss']} ratioMAE%={rel_pct} mean%={rec['mean_pct']}", flush=True)
         (out / "train_log.json").write_text(json.dumps(log, indent=1))
     print(f"BEST mean ratio MAE: {best}% (比例误差 → 绝对尺度由配准仪器 P0-2 提供)")

@@ -99,7 +99,9 @@ def main():
               if "_probe" not in p.name]
     if args.tier != "all":
         labels = [l for l in labels if l.get("capture", {}).get("tier") == args.tier]
-    val_v = set(np.random.default_rng(7).choice(30, 6, replace=False).tolist())
+    seed = args.seed if args.seed is not None else int(torch.randint(0, 2**31 - 1, (1,)).item())
+    torch.manual_seed(seed)
+    val_v = set(np.random.default_rng(7).choice(30, 6, replace=False).tolist())  # split 固定与种子无关
     pre = np.array([[l["params_gt"][a] / l["params_gt"][b] for a, b in REL]
                     for l in labels if l["variant"] not in val_v], float)
     rstd_l = [float(pre[:, i].std()) for i in range(len(REL))]
@@ -142,7 +144,7 @@ def main():
         log["epochs"].append(rec)
         if mean_raw < best:
             best = mean_raw
-            torch.save({"model": net.state_dict(), "rel": REL}, out / "best.pt")
+            torch.save({"model": net.state_dict(), "rel": REL, "seed": seed}, out / "best.pt")
         print(f"ep{ep}: loss={rec['train_loss']} rawMAE={raw_mae} mean={mean_raw:.4f}",
               flush=True)
         (out / "train_log.json").write_text(json.dumps(log, indent=1))

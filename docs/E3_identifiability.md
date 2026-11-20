@@ -62,11 +62,11 @@
 
 | 种子 | raw mean MAE（独立评估） |
 |---|---|
-| 7（复训） | 1.71% |
+| run1（标"seed7"） | 1.71% |
 | 42 | 1.57% |
 | 123 | 1.69% |
-| 原始 run（同 seed7） | 2.11% |
+| 原始 run（同配置） | 2.11% |
 
-- 三新种子: mean 1.66%, std 0.06pp — **E1 判决: REPRODUCED**（raw 口径）
-- 同 seed 复训差 0.4pp = MPS 训练非确定性底噪 → 单次训练的 ±0.2pp 内差异**不可作为结论依据**（PD-Guardrails A2 实操判据）
+- 三新 run: mean 1.66%, std 0.06pp — **E1 判决: REPRODUCED**（raw 口径, 跨独立随机初始化 run）
+- ⚠️ 自查修正(2026-11-20 晚): 训练器当时**未设种子**("seed7/42/123"仅目录名, checkpoint 无种子记录=G 违规); "同 seed 复训差 0.4pp"实为**同配置独立 run 差 0.4pp**(val split 同源 default_rng(7) 已核实, 划分假象排除)。训练器已补 --seed 固定+checkpoint 记录。单次训练 ±0.4pp 内差异**不可作为结论依据**（PD-Guardrails A2 实操判据）
 - 训练日志的 rstd 缩水口径再次出现在 BEST 行——隔离纪律: 一切结论以独立 raw eval 为准
