@@ -1,0 +1,75 @@
+"""PD-Guardrails GA 门槛: 历史事故必须能被对应测试重新触发 (GPT 判决)."""
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+import numpy as np
+import pytest
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[1]
+GUARD = [sys.executable, str(ROOT / "scripts" / "pd_guard.py")]
+
+
+def run(*a):
+    return subprocess.run(GUARD + list(a), capture_output=True, text=True)
+
+
+def test_units_catches_camera_85m():
+    """历史事故 A1: d_fill×1000 → 相机 85m 外."""
+    payload = {"camera": {"distance_m": 85.19, "equiv_focal_mm": 28.0, "pitch_deg": 5.0,
+                           "yaw_deg": -30.0}, "params_gt": {"Hb": 119.0}}
+    p = Path("/tmp/guard_units_85m.json")
+    p.write_text(json.dumps(payload))
+    r = run("units", "--payload", str(p))
+    assert r.returncode == 1
+    assert "85.19" in r.stdout
+
+
+def test_units_passes_normal_payload():
+    payload = {"camera": {"distance_m": 0.25, "equiv_focal_mm": 50.0, "pitch_deg": 20.0,
+                           "yaw_deg": -30.0}, "params_gt": {"Hb": 119.0}}
+    p = Path("/tmp/guard_units_ok.json")
+    p.write_text(json.dumps(payload))
+    r = run("units", "--payload", str(p))
+    assert r.returncode == 0, r.stdout
+
+
+def test_artifact_catches_empty_scene():
+    """历史事故 B3: 有图无盒 (平滑渐变地面+背景)."""
+    im = np.zeros((384, 384, 3), np.uint8)
+    for y in range(384):
+        im[y, :] = [int(60 + y / 384 * 60)] * 3
+    Image.fromarray(im).save("/tmp/guard_empty.png")
+    r = run("artifact", "--image", "/tmp/guard_empty.png")
+    assert r.returncode == 1
+
+
+def test_artifact_passes_box_render():
+    """已知好图 (r_dist 校准件) 必须不误拦 (GA 门槛 3: 合法样本不误杀)."""
+    r = run("artifact", "--image", "/tmp/e3r_r_dist.png")
+    assert r.returncode == 0, r.stdout
+
+
+def test_numeric_catches_nan():
+    np.savez("/tmp/guard_pred.npz", ratios=np.array([0.5, np.nan, 0.2]))
+    r = run("numeric", "--input", "/tmp/guard_pred.npz")
+    assert r.returncode == 1
+
+
+def test_family_catches_lock_violation():
+    """历史事故 E3: 抖动破坏 H=Hf+D 锁定约束."""
+    spec = {"params": {"H": 120.0, "Hf": 70.0, "D": 40.0}}  # 120 != 110
+    p = Path("/tmp/guard_family.json")
+    p.write_text(json.dumps(spec))
+    r = run("family", "--spec", str(p), "--rule", "H=Hf+D")
+    assert r.returncode == 1
+
+
+def test_family_passes_valid():
+    spec = {"params": {"H": 110.0, "Hf": 70.0, "D": 40.0}}
+    p = Path("/tmp/guard_family_ok.json")
+    p.write_text(json.dumps(spec))
+    r = run("family", "--spec", str(p), "--rule", "H=Hf+D")
+    assert r.returncode == 0
