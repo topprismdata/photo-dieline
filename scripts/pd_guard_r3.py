@@ -43,10 +43,39 @@ def cmd_pairs(args):
     return 0 if ok else 1
 
 
+def _check_svg_dieline(svg_path: str) -> int:
+    """J2 硬检查: 制品级实测 — 1:1 mm 单位声明 + INFO 层 50mm 校验条几何."""
+    import re
+    txt = Path(svg_path).read_text()
+    errs = []
+    m = re.search(r'width="([\d.]+)(mm)?".*?height="([\d.]+)(mm)?"', txt)
+    if not m or not (m.group(2) and m.group(4)):
+        errs.append("SVG width/height 未带 mm 物理单位 (非 1:1)")
+    info = re.search(r'<g id="INFO">(.*?)</g>', txt, re.S)
+    if not info:
+        errs.append("缺少 INFO 层")
+    else:
+        bar = None
+        for ln in re.finditer(r'<line x1="([\d.-]+)" y1="[\d.-]+" x2="([\d.-]+)"', info.group(1)):
+            if "CHECK BAR" in info.group(1):
+                w = abs(float(ln.group(2)) - float(ln.group(1)))
+                if bar is None or w > bar:
+                    bar = w
+        if bar is None or abs(bar - 50.0) > 0.05:
+            errs.append(f"校验条实测 {bar} user-units ≠ 50mm±0.05")
+    print(json.dumps({"check": "dieline_svg", "svg": svg_path, "errors": errs,
+                      "pass": not errs, "note": "制品级实测: 1:1 单位+50mm 校验条几何 (J2)"}, indent=1))
+    return 0 if not errs else 1
+
+
 def cmd_dieline(args):
+    if not args.svg and not args.spec:
+        ap.error("dieline 需要 --spec 或 --svg")
+    exemptions = []
+    if args.svg:
+        return _check_svg_dieline(args.svg)
     spec = json.loads(Path(args.spec).read_text())
     errs = []
-    exemptions = []
     mats = {"CUT", "CREASE", "PERFORATE"}
     if "polygons" in spec:
         for i, poly in enumerate(spec["polygons"]):
@@ -119,7 +148,7 @@ def cmd_release(args):
 ap = argparse.ArgumentParser(prog="pd-guard-r3")
 sp = ap.add_subparsers(dest="cmd", required=True)
 p = sp.add_parser("pairs"); p.add_argument("--render-dir", required=True); p.set_defaults(fn=cmd_pairs)
-d = sp.add_parser("dieline"); d.add_argument("--spec", required=True); d.add_argument("--allow-missing-strip", action="store_true"); d.set_defaults(fn=cmd_dieline)
+d = sp.add_parser("dieline"); d.add_argument("--spec"); d.add_argument("--allow-missing-strip", action="store_true"); d.add_argument("--svg"); d.set_defaults(fn=cmd_dieline)
 m = sp.add_parser("license"); m.add_argument("--manifest", required=True); m.add_argument("--zoo-dir", required=True); m.set_defaults(fn=cmd_license)
 r = sp.add_parser("release")
 for flag in ("--render-dir", "--spec", "--manifest", "--zoo-dir", "--numeric-input"):

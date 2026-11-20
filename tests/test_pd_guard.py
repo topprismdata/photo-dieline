@@ -106,3 +106,21 @@ def test_r3_license_catches_missing_notice(tmp_path):
     mp = tmp_path / "m.json"; zd = tmp_path / "z"; zd.mkdir()
     mp.write_text(json.dumps([{"key": "tin_can", "license": "CC-BY", "source_url": "https://x"}]))
     assert _r3("license", "--manifest", str(mp), "--zoo-dir", str(zd)).returncode == 1  # lic 文件缺
+
+
+def test_r3_svg_strip_measured(tmp_path):
+    svg = ('<?xml version="1.0"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="120.000mm" '
+           'height="80.000mm" viewBox="0 0 120 80">\n<g id="INFO">'
+           '<line x1="10.000" y1="8.000" x2="60.000" y2="8.000" stroke="#111"/>'
+           '<text> CHECK BAR = 50 mm</text></g>\n</svg>')
+    p = tmp_path / "d.svg"; p.write_text(svg)
+    assert _r3("dieline", "--svg", str(p)).returncode == 0
+
+
+def test_r3_svg_catches_wrong_strip(tmp_path):
+    svg = ('<?xml version="1.0"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="120.000mm" '
+           'height="80.000mm" viewBox="0 0 120 80">\n<g id="INFO">'
+           '<line x1="10.000" y1="8.000" x2="50.000" y2="8.000" stroke="#111"/>'
+           '<text> CHECK BAR = 50 mm</text></g>\n</svg>')
+    p = tmp_path / "d.svg"; p.write_text(svg)
+    assert _r3("dieline", "--svg", str(p)).returncode == 1  # 条只有 40mm
