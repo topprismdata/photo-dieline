@@ -16,7 +16,7 @@ ROOT = Path("/Users/guohongbin/photo-dieline")
 
 # ---- 场景参数 (对账 v2) ----
 SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
-BAGS_PER_LEVEL = 22
+BAGS_PER_LEVEL = 10
 ASSETS = sorted((ROOT / "assets/pillow_bags").glob("*.png"))
 # 每层色系主块 (对账: 逐层色系分块) — 索引进 ASSETS 排序
 LEVEL_PLAN = [
@@ -127,7 +127,7 @@ def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0):
     f = b.faces.new(v)
     f.normal_flip()
     uv = b.loops.layers.uv.verify()
-    for loop, (uu, vv) in zip(f.loops, ((0, 0), (0, 1), (1, 1), (1, 0))):
+    for loop, (uu, vv) in zip(f.loops, ((1, 0), (1, 1), (0, 1), (0, 0))):
         loop[uv].uv = (uu, vv)
     b.to_mesh(mesh); b.free()
     o.data.materials.append(mat)
@@ -152,7 +152,9 @@ def main():
     w.node_tree.nodes["Background"].inputs[1].default_value = 0.3
 
     # 地面 (棋盘, y=0 平面)
-    img_plane("floor", pil_tex_floor(), 6.0, 6.0, (0, 3.0, 0), rot=(90, 0, 0))
+    img_plane("floor", pil_tex_floor(), 8.0, 8.0, (0, 4.0, 0), rot=(90, 0, 0))
+    img_plane("sideL", pil_tex_backwall(), 0.1, SHELVES * LEVEL_H + 0.5,
+              (-SHELF_W / 2 - 0.35, 1.6, SHELVES * LEVEL_H / 2), rot=(0, 0, 90), emissive=0.5)
 
     # 背光板 (发光背墙, 位于货架后)
     img_plane("backwall", pil_tex_backwall(), SHELF_W, SHELVES * LEVEL_H + 0.5,
@@ -184,12 +186,12 @@ def main():
         picks = [a for a in ASSETS if a.stem in fam] or ASSETS
         n = BAGS_PER_LEVEL
         bw = SHELF_W / n
-        for r_i, (y_off, z_off, scale) in enumerate(((DEPTH / 2 - 0.06, 0.02, 0.92),
-                                                     (DEPTH / 2 - 0.16, 0.10, 0.80))):
+        for r_i, (y_off, z_off, scale) in enumerate(((DEPTH / 2 - 0.06, 0.015, 0.93),
+                                                     (DEPTH / 2 - 0.15, 0.09, 0.86))):
             for i in range(n):
-                a = crop_bag(picks[(i + lv * 3 + r_i) % len(picks)])
-                img_plane(f"bag{lv}_{r_i}_{i}", a, bw * 0.82 * scale, LEVEL_H * 0.62 * scale,
-                          (-SHELF_W / 2 + bw * (i + 0.5), y_off, z0 + 0.03 + z_off * (1 if r_i else 0)),
+                a = crop_bag(picks[(i * 5 + lv + r_i * 2) % len(picks)])  # 层内多样设计, 杀克隆感
+                img_plane(f"bag{lv}_{r_i}_{i}", a, bw * 0.94 * scale, LEVEL_H * 0.72 * scale,
+                          (-SHELF_W / 2 + bw * (i + 0.5), y_off, z0 + 0.02 + z_off * (1 if r_i else 0)),
                           emissive=0.25)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
@@ -225,10 +227,10 @@ def main():
     sc.collection.objects.link(flo)
 
     # 人位相机 (对账 v2: 站位偏右, 平视微仰, 透视向左收敛, 微滚转)
-    cam = bpy.data.cameras.new("c"); cam.lens = 30
+    cam = bpy.data.cameras.new("c"); cam.lens = 32
     co = bpy.data.objects.new("c", cam)
-    co.location = (0.95, -2.1, 1.30)
-    aim = Vector((-0.35, DEPTH / 2, 1.30)) - co.location
+    co.location = (0.85, -1.55, 1.28)
+    aim = Vector((-0.30, DEPTH / 2, 1.22)) - co.location
     rot = aim.to_track_quat('-Z', 'Y').to_euler()
     rot.rotate_axis('Y', math.radians(-2.0))  # 微滚转
     co.rotation_euler = rot
