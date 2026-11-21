@@ -179,7 +179,7 @@ def img_bag_thin(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0):
     mesh = bpy.data.meshes.new(name)
     o = bpy.data.objects.new(name, mesh)
     o.location = loc
-    o.rotation_euler = (0, 0, math.radians(lean))
+    o.rotation_euler = (math.radians(pitch), 0, math.radians(lean))
     bpy.context.scene.collection.objects.link(o)
     b = bmesh.new()
     V = [b.verts.new(v) for v in ((-w/2,-t/2,-h/2),(w/2,-t/2,-h/2),(w/2,-t/2,h/2),(-w/2,-t/2,h/2),
@@ -252,12 +252,16 @@ def build_pyramid_rack_v2(loc, h=1.0, w=0.46, dep=0.34):
     return hooks
 
 
-def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26):
-    """桶装罐占位 (planogram form=barrel): 真实薯片罐比例 圆柱+白带+金属顶缘."""
+def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None):
+    """桶装罐 (H2 几何真实性: 内壁凹腔+缘/盖逐罐抖动, D8 评审罐顶过于整齐)."""
+    r = rng if rng is not None else np.random.default_rng(abs(hash(name)) % (2**32))
     soft = tuple(rgb[c] * 0.78 + 0.14 for c in range(3))
     bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2, depth=hgt, location=(x, y, z_bot + hgt / 2))
     o = bpy.context.active_object
     o.name = name
+    o.scale = (0.985 + r.random() * 0.03, 0.985 + r.random() * 0.03, 1.0)  # 逐罐锥度差
+    o.rotation_euler = (r.uniform(-0.015, 0.015), r.uniform(-0.015, 0.015),
+                        r.uniform(0, math.pi))  # 微倾+随机自转 (印刷面对向差异)
     m = bpy.data.materials.new(name)
     m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
@@ -272,16 +276,36 @@ def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26):
     mm.use_nodes = True
     mm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.95, 0.95, 0.94, 1)
     band.data.materials.append(mm)
-    bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2 - 0.001, depth=0.012,
-                                        location=(x, y, z_bot + hgt - 0.006))
+    # 内壁凹腔 (开口层次): 半径/深度逐罐不同
+    wall_r = dia / 2 - (0.0022 + r.random() * 0.0016)
+    wall_d = 0.014 + r.random() * 0.013
+    bpy.ops.mesh.primitive_cylinder_add(radius=wall_r, depth=wall_d,
+                                        location=(x, y, z_bot + hgt - wall_d / 2 + 0.0035))
+    wall = bpy.context.active_object
+    wall.name = name + "_wall"
+    mw = bpy.data.materials.new(name + "_wall")
+    mw.use_nodes = True
+    wb = mw.node_tree.nodes["Principled BSDF"]
+    wb.inputs["Base Color"].default_value = (0.14 + r.random() * 0.05,
+                                             0.13 + r.random() * 0.05,
+                                             0.12 + r.random() * 0.05, 1)
+    wb.inputs["Roughness"].default_value = 0.6
+    wall.data.materials.append(mw)
+    # 金属顶缘: 半径/z/倾角/粗糙度逐罐抖动 (不再整齐划一)
+    lid_r = dia / 2 - (0.0005 + r.random() * 0.001)
+    lid_z = z_bot + hgt - 0.006 + (r.random() - 0.5) * 0.0025
+    bpy.ops.mesh.primitive_cylinder_add(radius=lid_r, depth=0.011, location=(x, y, lid_z))
     lid = bpy.context.active_object
     lid.name = name + "_lid"
+    lid.rotation_euler = (r.uniform(-0.02, 0.02), r.uniform(-0.02, 0.02),
+                          r.uniform(0, math.pi))
     ml = bpy.data.materials.new(name + "_lid")
     ml.use_nodes = True
     lb = ml.node_tree.nodes["Principled BSDF"]
-    lb.inputs["Base Color"].default_value = (0.75, 0.76, 0.78, 1)
-    lb.inputs["Metallic"].default_value = 0.8
-    lb.inputs["Roughness"].default_value = 0.35
+    g = 0.72 + r.random() * 0.08
+    lb.inputs["Base Color"].default_value = (g, g + 0.01, g + 0.03, 1)
+    lb.inputs["Metallic"].default_value = 0.75 + r.random() * 0.15
+    lb.inputs["Roughness"].default_value = 0.28 + r.random() * 0.18
     lid.data.materials.append(ml)
 
 
@@ -309,7 +333,7 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
     front.data.materials.append(mm)
 
 
-def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0, amp=0.006):
+def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0, amp=0.006, pitch=0.0):
     """微鼓曲面前板 (6mm): crop 纹理不变, 剪影+镜面变化 — D4 教训的保守中间路径."""
     import bmesh
     mat = bpy.data.materials.new(name)
@@ -331,7 +355,7 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
     mesh = bpy.data.meshes.new(name)
     o = bpy.data.objects.new(name, mesh)
     o.location = loc
-    o.rotation_euler = (0, 0, math.radians(lean))
+    o.rotation_euler = (math.radians(pitch), 0, math.radians(lean))
     bpy.context.scene.collection.objects.link(o)
     b = bmesh.new()
     sx, sz = 8, 8
@@ -364,11 +388,11 @@ def main():
         for item in list(coll):
             coll.remove(item, do_unlink=True)
     sc = bpy.context.scene
-    sc.render.engine = "BLENDER_EEVEE"
+    sc.render.engine = "CYCLES"
     try:
-        sc.eevee.use_gtao = True          # 接触阴影: 袋坐层板唇的接地暗部
-        sc.eevee.gtao_distance = 0.08
-        sc.eevee.gtao_factor = 0.7
+        sc.cycles.device = "GPU"
+        sc.cycles.samples = 96
+        sc.cycles.use_denoising = True
     except AttributeError:
         pass
     sc.view_settings.view_transform = "AgX"
@@ -376,8 +400,13 @@ def main():
     sc.view_settings.exposure = 0.0
     sc.render.resolution_x, sc.render.resolution_y = 720, 1044
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
-    w.node_tree.nodes["Background"].inputs[0].default_value = (0.05, 0.05, 0.06, 1)
-    w.node_tree.nodes["Background"].inputs[1].default_value = 0.3
+    # H1 光照重构: HDRI 世界给光泽面反射内容 (黑虚空=塑料感根源, 杠杆#4)
+    env = w.node_tree.nodes.new("ShaderNodeTexEnvironment")
+    env.image = bpy.data.images.load(
+        str(ROOT / "assets/hdri/studio_small_09_2k.hdr"))
+    bg = w.node_tree.nodes["Background"]
+    w.node_tree.links.new(env.outputs["Color"], bg.inputs["Color"])
+    bg.inputs[1].default_value = 0.4
 
     # 地面 (棋盘, y=0 平面)
     img_plane("floor", pil_tex_floor(), 8.0, 8.0, (0, 4.0, 0), rot=(90, 0, 0))
@@ -437,7 +466,7 @@ def main():
                     y_bag = y_off + (0.012 if rng.random() < 0.10 else 0.0)
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
-                                           dia=min(0.075, bgw * 0.92))
+                                           dia=min(0.075, bgw * 0.92), rng=rng)
                         continue
                     if g["form"] == "box":
                         box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
@@ -452,7 +481,9 @@ def main():
                     img_bag_curved(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
                                    (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
                                     y_bag, z_bot + h_bag / 2),
-                                   emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean)
+                                   emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean,
+                                   amp=0.004 + rng.random() * 0.007,
+                                   pitch=(rng.random() - 0.5) * 2.4)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
@@ -470,19 +501,22 @@ def main():
         lo.rotation_euler = (math.radians(-70), 0, 0)
         sc.collection.objects.link(lo)
 
-    # 顶部射灯 ×4 (黑轨道语义简化为灯本体)
+    # 顶部射灯 ×4: 一主三辅 (H1: 定向主光替代平光, 杠杆#2)
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
-        lt.energy = 200; lt.spot_size = math.radians(55)
+        if i == 1:
+            lt.energy = 340; lt.spot_size = math.radians(42)   # 主光: 锐化光池
+        else:
+            lt.energy = 110; lt.spot_size = math.radians(55)
         lo = bpy.data.objects.new(f"spot{i}", lt)
         lo.location = (x, -0.7, SHELVES * LEVEL_H + 0.55)
         aim = Vector((x * 0.6, DEPTH / 2, 1.0)) - lo.location
         lo.rotation_euler = aim.to_track_quat('-Z', 'Y').to_euler()
         sc.collection.objects.link(lo)
 
-    # 前置柔光 (袋面受光底座)
+    # 前置柔光 (H1: 平光大 fill 杀到 1/4, 只作曝光底座)
     fl = bpy.data.lights.new("frontfill", "AREA")
-    fl.size = 3.0; fl.size_y = 1.6; fl.energy = 60
+    fl.size = 2.2; fl.size_y = 1.2; fl.energy = 14
     flo = bpy.data.objects.new("frontfill", fl)
     flo.location = (0, -1.1, 1.5)
     flo.rotation_euler = (math.radians(65), 0, 0)
