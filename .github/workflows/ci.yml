@@ -1,0 +1,22 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "${{ matrix.python }}" }
+      - run: pip install -e ".[dev]"
+      - run: pytest tests/ -q
+      - name: L1 集成 - 端到端构建 golden 样例
+        run: |
+          python3 -c "
+          from PIL import Image
+          Image.new('RGB',(1200,1600),(235,235,235)).save('/tmp/ref.png')"
+          photo-dieline build --spec examples/gable_top/spec.json --photo /tmp/ref.png --out /tmp/artifacts
+      - uses: actions/upload-artifact@v4
+        with: { name: dieline-artifacts, path: /tmp/artifacts }
