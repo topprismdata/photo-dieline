@@ -1,0 +1,172 @@
+{
+	"version": 1,
+	"checks": [
+		{
+			"id": "CHK-GUARD",
+			"type": "command",
+			"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q",
+			"aliases": [
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q",
+				"pytest tests/test_pd_guard.py -q",
+				"python3 -m pytest tests/test_pd_guard.py -q"
+			],
+			"mustPassBeforeEnd": true,
+			"maxAgeMinutes": 30
+		},
+		{
+			"id": "CHK-STRUCT",
+			"type": "command",
+			"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_m1.py -q",
+			"aliases": [
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_m1.py -q",
+				"pytest tests/test_m1.py -q",
+				"python3 -m pytest tests/test_m1.py -q"
+			],
+			"mustPassBeforeEnd": true,
+			"maxAgeMinutes": 60
+		},
+		{
+			"id": "CHK-ALL",
+			"type": "command",
+			"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/ -q",
+			"aliases": [
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/ -q",
+				"pytest tests/ -q",
+				"python3 -m pytest tests/ -q",
+				"pytest -q tests/"
+			],
+			"implies": [
+				"CHK-GUARD",
+				"CHK-STRUCT"
+			],
+			"mustPassBeforeEnd": true,
+			"maxAgeMinutes": 60
+		}
+	],
+	"rules": [
+		{
+			"id": "R-UNITS",
+			"failureClass": "单位量纲越界导致空渲染（d_fill×1000 → 相机 85m 外拍）",
+			"level": "L0",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q"
+			},
+			"requires": [
+				"CHK-GUARD"
+			],
+			"protects": [
+				"scripts/**",
+				"blender/**",
+				"src/photo_dieline/render/**"
+			]
+		},
+		{
+			"id": "R-ARTIFACT",
+			"failureClass": "渲染产物有效性未验（有图无盒：拿单一像素统计判主体存在）",
+			"level": "L0",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q"
+			},
+			"requires": [
+				"CHK-GUARD"
+			],
+			"protects": [
+				"scripts/**",
+				"blender/**",
+				"src/photo_dieline/qa/**"
+			]
+		},
+		{
+			"id": "R-NUMERIC",
+			"failureClass": "NaN/Inf/退化几何传入下游（生成边界未检查）",
+			"level": "L0",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q"
+			},
+			"requires": [
+				"CHK-GUARD"
+			],
+			"protects": [
+				"src/**",
+				"scripts/**"
+			]
+		},
+		{
+			"id": "R-FAMILY",
+			"failureClass": "家族锁定约束被参数抖动破坏（H=Hf+D）",
+			"level": "L1",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q"
+			},
+			"requires": [
+				"CHK-GUARD"
+			],
+			"protects": [
+				"src/**",
+				"scripts/**"
+			]
+		},
+		{
+			"id": "R-DIELINE",
+			"failureClass": "刀版轮廓开闭/strip 实测宽度/许可声明缺失",
+			"level": "L1",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_pd_guard.py -q"
+			},
+			"requires": [
+				"CHK-GUARD"
+			],
+			"protects": [
+				"src/photo_dieline/export/**",
+				"schemas/**"
+			]
+		},
+		{
+			"id": "R-STRUCT",
+			"failureClass": "结构不变量破坏（IR schema / 折叠闭合 / SVG 物理层 / PDF mediabox）",
+			"level": "L1",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/test_m1.py -q"
+			},
+			"requires": [
+				"CHK-STRUCT"
+			],
+			"protects": [
+				"src/**",
+				"schemas/**",
+				"examples/**"
+			]
+		},
+		{
+			"id": "R-REGRESS",
+			"failureClass": "改动未过全量回归即宣布完成",
+			"level": "L1",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/ -q"
+			},
+			"requires": [
+				"CHK-ALL"
+			],
+			"protects": [
+				"src/**",
+				"scripts/**",
+				"blender/**",
+				"tests/**"
+			]
+		}
+	]
+}

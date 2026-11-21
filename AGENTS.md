@@ -22,6 +22,15 @@
 13. **统计分母完整**: 报告必须含全分母（SUCCESS/FALLBACK/SKIPPED/FAILED/INVALID）, 禁只报成功样本均值。
 14. **可追溯**: 重要结论须能追溯到实验+原始数据+独立评审, 不存在于聊天记录即视为未确立。
 
+## 机器门禁（.omp/constraints/rule-enforcer.json）
+本仓的 L0/L1 事故类已有机器判据，已编译成 `.omp/constraints/rule-enforcer.json`，
+由 OMP 运行时约束门执行：改受保护路径前必须跑对应 check，check 未过则写入被拦，
+会话结束前未过 check 也不允许收尾。**不要绕过**：跑 check 就是跑测试本身。
+- `CHK-GUARD` = `tests/test_pd_guard.py`（单位/产物/数值/家族锁定/刀版轮廓-strip-许可）
+- `CHK-STRUCT` = `tests/test_m1.py`（IR schema/折叠闭合/SVG 物理层/PDF mediabox）
+- `CHK-ALL` = 全量套件（蕴含前两者）
+无机器判据的类（数据语义误标、跑批期间改文件、指标口径）仍以本文 L1 条款为准。
+
 ## 快速自检（提交/宣布前 30 秒）
 - [ ] 数字有单位吗？换算双向测过吗？
 - [ ] 指标是独立 eval 还是训练日志？
