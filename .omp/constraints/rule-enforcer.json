@@ -45,12 +45,12 @@
 		{
 			"id": "CHK-TESTINTEGRITY",
 			"type": "command",
-			"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-test-integrity.py",
+			"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-tree-integrity.py",
 			"aliases": [
-				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-test-integrity.py",
-				"python3 ~/.omp/agent/constraints/check-test-integrity.py",
-				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 /Users/guohongbin/.omp/agent/constraints/check-test-integrity.py",
-				"python3 /Users/guohongbin/.omp/agent/constraints/check-test-integrity.py"
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-tree-integrity.py",
+				"python3 ~/.omp/agent/constraints/check-tree-integrity.py",
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 /Users/guohongbin/.omp/agent/constraints/check-tree-integrity.py",
+				"python3 /Users/guohongbin/.omp/agent/constraints/check-tree-integrity.py"
 			],
 			"mustPassBeforeEnd": true,
 			"maxAgeMinutes": 30
@@ -188,10 +188,11 @@
 			"status": "ACTIVE",
 			"enforcer": {
 				"type": "command",
-				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-test-integrity.py"
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-tree-integrity.py"
 			},
 			"requires": [
-				"CHK-TESTINTEGRITY"
+				"CHK-TESTINTEGRITY",
+				"CHK-ALL"
 			],
 			"protects": [
 				"tests/**"
