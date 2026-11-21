@@ -23,9 +23,23 @@ import PIL.Image as Image
 import bpy
 from mathutils import Vector
 
+sys.path.insert(0, str(Path(__file__).parent))
+from bag_print import render_print
+from PIL import ImageFont
+
+def _load_font_cn(sz):
+    try:
+        return ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", sz, index=0)
+    except Exception:
+        return ImageFont.load_default()
+FLAVORS = ["经典原味", "黄瓜味", "青柠味", "麻辣小龙虾味", "番茄味", "海苔味",
+           "芝士味", "焦糖黄油味", "劲爆辣味", "烧烤鸡味", "黑松露味", "藤椒味"]
+
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 OUT = Path(argv[0]) if argv else Path("/tmp/hxl_v1.png")
 ROOT = Path("/Users/guohongbin/photo-dieline")
+DESIGN_DIR = ROOT / "assets/pillow_designs"
+LV_GIDX = {}
 
 # ---- 场景参数 (对账 v2) ----
 SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
@@ -517,7 +531,36 @@ def main():
                         box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                         bw_=min(0.12, bgw * 0.92))
                         continue
-                    a = crop_bag(ASSETS[j], seed=lv * 31 + r_i * 17 + i)
+                    # H12: 组独立印刷设计 (bag_print, 组=SKU 设计一对一)
+                    gidx = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
+                    style = gidx % 3  # H13: 三工艺体系 (busy/极简/牛皮纸)
+                    dpath = DESIGN_DIR / f"design_{gidx:02d}_{style}.png"
+                    if not dpath.exists():
+                        dpath.parent.mkdir(parents=True, exist_ok=True)
+                        col = FAMILY_RGB[g["color"]]  # 数据层色彩守 planogram
+                        base = render_print(768, col, FLAVORS[gidx % len(FLAVORS)],
+                                            seed=gidx * 7 + 3)
+                        if style == 1:
+                            # 极简: 40% 去饱和 + 大色块徽标带 (brand-minimal 体系)
+                            from PIL import ImageEnhance
+                            base = ImageEnhance.Color(base).enhance(0.55)
+                            from PIL import ImageDraw as _D
+                            _d = _D.Draw(base)
+                            _d.rectangle([0, int(768 * 0.30), 768, int(768 * 0.52)],
+                                         fill=(28, 30, 34))
+                            _f = _load_font_cn(int(768 * 0.085))
+                            _d.text((768 / 2, int(768 * 0.41)), "TOPPRISM",
+                                    fill=(245, 245, 242), font=_f, anchor="mm")
+                        elif style == 2:
+                            # 牛皮纸哑光: 棕调乘色 + 强纸纹 (matte-kraft 体系)
+                            from PIL import ImageEnhance
+                            base = ImageEnhance.Color(base).enhance(0.4)
+                            px = np.asarray(base, dtype=float)
+                            kraft = px * np.array([1.06, 0.90, 0.72])
+                            grain = np.random.default_rng(gidx).normal(0, 7.0, kraft.shape[:2])[..., None]
+                            base = Image.fromarray(np.clip(kraft + grain, 0, 255).astype("uint8"))
+                        base.save(dpath)
+                    a = dpath
                     ar = Image.open(a).width / Image.open(a).height
                     # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
                     w_bag = bgw * (0.98 + rng.random() * 0.04)
