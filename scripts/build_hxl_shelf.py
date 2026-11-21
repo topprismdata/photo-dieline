@@ -420,12 +420,12 @@ def main():
         str(ROOT / "assets/hdri/studio_small_09_2k.hdr"))
     bg = w.node_tree.nodes["Background"]
     w.node_tree.links.new(env.outputs["Color"], bg.inputs["Color"])
-    bg.inputs[1].default_value = 0.4
+    bg.inputs[1].default_value = 0.3
 
     # 地面 (棋盘, y=0 平面)
     img_plane("floor", pil_tex_floor(), 8.0, 8.0, (0, 4.0, 0), rot=(90, 0, 0))
     img_plane("sideL", pil_tex_backwall(), DEPTH, SHELVES * LEVEL_H + 0.5,
-              (-SHELF_W / 2 - 0.02, DEPTH / 2, SHELVES * LEVEL_H / 2), rot=(0, 0, 90), emissive=0.35)
+              (-SHELF_W / 2 - 0.02, DEPTH / 2, SHELVES * LEVEL_H / 2), rot=(0, 0, 90), emissive=0.22)
 
     # 背光板 (发光背墙, 位于货架后)
     img_plane("backwall", pil_tex_backwall(), SHELF_W, SHELVES * LEVEL_H + 0.5,
@@ -495,7 +495,7 @@ def main():
                     img_bag_curved(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
                                    (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
                                     y_bag, z_bot + h_bag / 2),
-                                   emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean,
+                                   emissive=0.02, rough=0.18 + rng.random() * 0.32, lean=lean,
                                    amp=0.004 + rng.random() * 0.007,
                                    pitch=(rng.random() - 0.5) * 2.4,
                                    phi1=rng.random() * 6.28, phi2=rng.random() * 6.28,
@@ -521,7 +521,7 @@ def main():
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
         if i == 1:
-            lt.energy = 340; lt.spot_size = math.radians(42)   # 主光: 锐化光池
+            lt.energy = 520; lt.spot_size = math.radians(42)   # H6 主光加硬: 高光份额对靶
         else:
             lt.energy = 110; lt.spot_size = math.radians(55)
         lo = bpy.data.objects.new(f"spot{i}", lt)
@@ -530,9 +530,9 @@ def main():
         lo.rotation_euler = aim.to_track_quat('-Z', 'Y').to_euler()
         sc.collection.objects.link(lo)
 
-    # 前置柔光 (H1: 平光大 fill 杀到 1/4, 只作曝光底座)
+    # 前置柔光 (H6: 再杀到 7W, 暗部份额对靶)
     fl = bpy.data.lights.new("frontfill", "AREA")
-    fl.size = 2.2; fl.size_y = 1.2; fl.energy = 14
+    fl.size = 2.2; fl.size_y = 1.2; fl.energy = 7
     flo = bpy.data.objects.new("frontfill", fl)
     flo.location = (0, -1.1, 1.5)
     flo.rotation_euler = (math.radians(65), 0, 0)
