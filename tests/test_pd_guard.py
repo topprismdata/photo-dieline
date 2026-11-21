@@ -47,8 +47,19 @@ def test_artifact_catches_empty_scene():
 
 
 def test_artifact_passes_box_render():
-    """已知好图 (r_dist 校准件) 必须不误拦 (GA 门槛 3: 合法样本不误杀)."""
-    r = run("artifact", "--image", "/tmp/e3r_r_dist.png")
+    """已知好图 (内联合成屋顶包校准件) 必须不误拦 (GA 门槛 3: 合法样本不误杀).
+
+    历史教训: 旧版引用本地 /tmp/e3r_r_dist.png, CI 无此文件炸门禁 — 夹具必须内联自足.
+    合成物对齐真实校准件结构: 均匀灰背景 + 居中蓝灰盒体(+顶肩) + 淡接触阴影.
+    """
+    im = np.full((384, 384, 3), 150, np.uint8)
+    # 淡阴影 (与背景差 <45: 不计入主体, 只提供真实感)
+    im[300:316, 130:280] = 138
+    # 盒体: 居中矩形+顶肩, 与背景逐像素通道和差 ≈65 >50 (可分离度)
+    im[90:300, 150:262] = (115, 135, 165)
+    im[64:90, 170:242] = (118, 138, 168)
+    Image.fromarray(im).save("/tmp/guard_box_ok.png")
+    r = run("artifact", "--image", "/tmp/guard_box_ok.png")
     assert r.returncode == 0, r.stdout
 
 
