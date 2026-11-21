@@ -435,20 +435,23 @@ def bag_material(name, tex_path, rough=0.4, emissive=0.06):
     ramp.inputs["To Max"].default_value = 1.0
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
+    hs = nt.nodes.new("ShaderNodeHueSaturation")
+    hs.inputs["Saturation"].default_value = 1.18  # D40: 印刷更鲜艳
+    nt.links.new(tex.outputs["Color"], hs.inputs["Color"])
     mul = nt.nodes.new("ShaderNodeMix")
     mul.data_type = "RGBA"
     mul.blend_type = "MULTIPLY"
     mul.inputs["Factor"].default_value = 1.0
-    nt.links.new(tex.outputs["Color"], mul.inputs[6])
+    nt.links.new(hs.outputs["Color"], mul.inputs[6])
     nt.links.new(ramp.outputs["Result"], mul.inputs[7])
     nt.links.new(mul.outputs[2], bsdf.inputs["Base Color"])
     rr = nt.nodes.new("ShaderNodeMapRange")
-    rr.inputs["To Min"].default_value = max(0.02, rough - 0.07)
+    rr.inputs["To Min"].default_value = max(0.04, rough - 0.05)  # D40: 反光再收敛
     rr.inputs["To Max"].default_value = rough + 0.09
     nt.links.new(nz.outputs["Fac"], rr.inputs["Value"])
     nt.links.new(rr.outputs["Result"], bsdf.inputs["Roughness"])
     try:
-        bsdf.inputs["Coat Weight"].default_value = 0.22
+        bsdf.inputs["Coat Weight"].default_value = 0.10  # D40: 银灰反射压制
         bsdf.inputs["Coat Roughness"].default_value = 0.28
     except KeyError:
         pass
@@ -596,22 +599,25 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
     ramp.inputs["To Max"].default_value = 1.0
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
+    hs = nt.nodes.new("ShaderNodeHueSaturation")
+    hs.inputs["Saturation"].default_value = 1.18  # D40: 印刷更鲜艳
+    nt.links.new(tex.outputs["Color"], hs.inputs["Color"])
     mul = nt.nodes.new("ShaderNodeMix")
     mul.data_type = "RGBA"
     mul.blend_type = "MULTIPLY"
     mul.inputs["Factor"].default_value = 1.0
-    nt.links.new(tex.outputs["Color"], mul.inputs[6])
+    nt.links.new(hs.outputs["Color"], mul.inputs[6])
     nt.links.new(ramp.outputs["Result"], mul.inputs[7])
     nt.links.new(mul.outputs[2], bsdf.inputs["Base Color"])
     rr = nt.nodes.new("ShaderNodeMapRange")
     rr.inputs["From Min"].default_value = 0.0
     rr.inputs["From Max"].default_value = 1.0
-    rr.inputs["To Min"].default_value = max(0.02, rough - 0.07)
+    rr.inputs["To Min"].default_value = max(0.04, rough - 0.05)  # D40: 反光再收敛
     rr.inputs["To Max"].default_value = rough + 0.09
     nt.links.new(nz.outputs["Fac"], rr.inputs["Value"])
     nt.links.new(rr.outputs["Result"], bsdf.inputs["Roughness"])
     try:
-        bsdf.inputs["Coat Weight"].default_value = 0.22   # 塑料薄膜双层反射
+        bsdf.inputs["Coat Weight"].default_value = 0.10  # D40: 银灰反射压制   # 塑料薄膜双层反射
         bsdf.inputs["Coat Roughness"].default_value = 0.28
     except KeyError:
         pass
@@ -681,7 +687,7 @@ def main():
         pass
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Punchy"   # 默认 look 强去饱和 (冷柜线已知坑)
-    sc.view_settings.exposure = 0.0
+    sc.view_settings.exposure = -0.10  # D37: 微暗 (实拍不如渲染亮)
     sc.render.resolution_x, sc.render.resolution_y = 720, 1044
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
     # H1 光照重构: HDRI 世界给光泽面反射内容 (黑虚空=塑料感根源, 杠杆#4)
@@ -855,8 +861,11 @@ def main():
         sc.collection.objects.link(blo)
         # 层板下沿灯带 (补层板唇高光)
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
+        lt.color = (1.0, 0.92, 0.82)  # D37: 商店LED暖化 4300K
         lt.size = SHELF_W * 0.9; lt.size_y = 0.05
-        lt.energy = 24 * (0.62 + 0.76 * ((lv * 0.37 + 0.11) % 1.0))  # H7: 层间光差 ±38% (局部空间差异)
+        lt.energy = 24 * (0.48 + 1.20 * ((lv * 0.37 + 0.11) % 1.0))  # D38: 层间光差 ±60% (明暗层次加深)
+        if lv % 3 == 1:
+            lt.color = (1.0, 0.96, 0.90)  # D38: 冷暖混光 (隔层偏中性)
         strip_x = ((lv * 0.53 + 0.29) % 1.0 - 0.5) * 0.34  # H7: 灯位横移加大 (不均匀光带)
         lo = bpy.data.objects.new(f"strip{lv}", lt)
         lo.location = (strip_x, DEPTH - 0.10, z0 + 0.05)
@@ -867,11 +876,13 @@ def main():
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
         if i == 1:
-            lt.energy = 520; lt.spot_size = math.radians(42)   # H6 主光加硬: 高光份额对靶
+            lt.energy = 640; lt.spot_size = math.radians(38); lt.shadow_soft_size = 0.14  # D39: 软影保高光
+            lt.color = (1.0, 0.96, 0.90)  # D37: 主光微暖
+            # 5.2 EEVEE Next: contact_shadow 已移除 (阴影由 RT 阴影覆盖)
         elif i == 2:
             lt.energy = 58; lt.spot_size = math.radians(38)   # H7: 右辅光压暗 (光比不均=局部阴影)
         else:
-            lt.energy = 110; lt.spot_size = math.radians(55)
+            lt.energy = 88; lt.spot_size = math.radians(55)  # D38: 辅光再压 (光比加深)
         lo = bpy.data.objects.new(f"spot{i}", lt)
         lo.location = (x, -0.7, SHELVES * LEVEL_H + 0.55)
         aim = Vector((x * 0.6, DEPTH / 2, 1.0)) - lo.location
