@@ -15,6 +15,7 @@
 """
 import json
 import math
+import shutil
 import sys
 from pathlib import Path
 
@@ -39,6 +40,7 @@ argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 OUT = Path(argv[0]) if argv else Path("/tmp/hxl_v1.png")
 ROOT = Path("/Users/guohongbin/photo-dieline")
 DESIGN_DIR = ROOT / "assets/pillow_designs"
+AI_FLAVOR_KEY = {"经典原味": "yuwei", "黄瓜味": "huanggua", "番茄味": "fanqie", "麻辣小龙虾味": "xiaolongxia"}
 LV_GIDX = {}
 FOOD_PATCHES = [Image.open(pp) for pp in sorted((ROOT / "assets/food_patches").glob("*.png"))]
 FLAVOR_TINT = {"黄瓜味": (0.82, 1.10, 0.85), "青柠味": (0.85, 1.08, 0.82),
@@ -539,6 +541,12 @@ def main():
                     gidx = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
                     style = gidx % 3  # H13: 三工艺体系 (busy/极简/牛皮纸)
                     dpath = DESIGN_DIR / f"design_{gidx:02d}_{style}.png"
+                    # H15: H3-Image AI 直出印刷优先 (assets/ai_prints/<味key>.png, 768×1707)
+                    if not dpath.exists():
+                        dpath.parent.mkdir(parents=True, exist_ok=True)
+                        ai_src = ROOT / f"assets/ai_prints/{AI_FLAVOR_KEY.get(FLAVORS[gidx % len(FLAVORS)], '')}.png"
+                        if ai_src.exists():
+                            shutil.copyfile(ai_src, dpath)
                     if not dpath.exists():
                         dpath.parent.mkdir(parents=True, exist_ok=True)
                         col = FAMILY_RGB[g["color"]]  # 数据层色彩守 planogram

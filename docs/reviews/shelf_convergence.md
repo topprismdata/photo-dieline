@@ -222,3 +222,21 @@ v29c 4.5 → v30a 6.2 (光照) → v30b ~6.2 (几何, 对内 +0.6)。绝对分�
 - 数据层面: **达成** (0.214 ALIGNED + 三门全绿 + 一致性 140/140)
 - 视觉层面: 排序 16/16 全胜; 判别未翻 — 剩余 = 逐袋布料级形变 (cloth sim)
   + 真实印刷像素集, 均为资产级工作包 (参数轮已证饱和: 16 胜但判别不动)
+
+## H3-Image 本地直出印刷通道 (D23, 2026-11-21): 用户指定装 MiniMax H3-Image
+
+**通道建设** (用户点名 h3 image → MiniMax H3-Image, 11-11 开源 33B):
+- ComfyUI v0.46 + ComfyUI-GGUF + Abiray pdd_sigmas 补丁 (/Volumes/ghb/ComfyUI, :8188)
+- DiT Q4_K_M 11.57GB (MPS) + TE Qwen3-VL-32B Q4 14.58GB (CPU) + VAE 1.17GB, 峰值 ~21GB
+- 同机级实证配方 (M1 Max 64GB 文章): 4MP 单张 ~350s 实测吻合
+- 下载三源冗余: 魔搭(DiT首拉/hf镜像断点续传/TE root 404→text_encoders/ 子路径)
+- **踩坑链**: SaveImage/VAEDecode 连线必须 [node_id, slot] 二元组; 服务启动早于权重
+  → 模型列表空需重启; 权重必须放仓内 ComfyUI/models/ 而非工作区根
+
+**印刷产出** (1344×2976 → 768×1707, ar≈0.45 袋型):
+- 首批 4 味 (原味/黄瓜/番茄/麻辣小龙虾): **TOPPRISM/口味汉字/Net Wt. 逐字全部正确**
+  (Qwen3-VL CJK 文字渲染实测可靠), 全幅食品摄影+封边+箔光棚拍级
+- H15 接线: build_hxl_shelf AI_FLAVOR_KEY 映射, ai_prints/<味>.png 优先于程序化设计
+
+**D23 判决**: v39 = **5.5** > v38 = 4.2 (**+1.3, 单杠杆最大跳变**); 像素门 0.206 (新纪录)
+**十七连胜** (D8-D23 全胜零回退)。评审下轮单点: 剩余 8 味程序化组 → AI 直出 (重复图案/伪文字消除)
