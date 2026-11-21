@@ -1,0 +1,7 @@
+{
+ "protocol": "alignment_D6b",
+ "compare": "v26b vs v28d (ref-grounded)",
+ "verdict": "v28d 4.8 > v26b 4.2",
+ "pass": true,
+ "session": "2026-11-21"
+}

@@ -1,0 +1,21 @@
+{
+ "schema": "esr-acceptance/1.0",
+ "gates": {
+  "physics": {
+   "ok": 14,
+   "total": 14,
+   "fails": []
+  },
+  "semantic_coverage": {
+   "ok": 14,
+   "total": 14,
+   "fails": []
+  },
+  "render_alignment": {
+   "ok": 1,
+   "total": 1,
+   "protocol": "参照对齐 D6b (v28d 4.8 > v26b 4.2)"
+  }
+ },
+ "compliant": true
+}

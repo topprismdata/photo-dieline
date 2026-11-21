@@ -1,0 +1,121 @@
+{
+ "schema": "semantic-coverage-gate/1.0",
+ "res": 256,
+ "padding": 1.0,
+ "results": [
+  {
+   "sku": "bag_tp_00",
+   "pass": true,
+   "on_coverage": 0.3673,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_01",
+   "pass": true,
+   "on_coverage": 0.3752,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_02",
+   "pass": true,
+   "on_coverage": 0.3704,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_03",
+   "pass": true,
+   "on_coverage": 0.3708,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_04",
+   "pass": true,
+   "on_coverage": 0.3776,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_05",
+   "pass": true,
+   "on_coverage": 0.3644,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_06",
+   "pass": true,
+   "on_coverage": 0.3799,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_07",
+   "pass": true,
+   "on_coverage": 0.3657,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_08",
+   "pass": true,
+   "on_coverage": 0.3546,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_09",
+   "pass": true,
+   "on_coverage": 0.3817,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_10",
+   "pass": true,
+   "on_coverage": 0.3704,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "bag_tp_11",
+   "pass": true,
+   "on_coverage": 0.3805,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "barrel_tp_00",
+   "pass": true,
+   "on_coverage": 0.2537,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  },
+  {
+   "sku": "box_tp_00",
+   "pass": true,
+   "on_coverage": 0.5773,
+   "labelled_frac": 1.0,
+   "dominant_id": 0,
+   "padding": 1.0
+  }
+ ],
+ "ok": 14,
+ "fail": 0
+}
