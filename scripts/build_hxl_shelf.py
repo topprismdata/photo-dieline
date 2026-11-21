@@ -465,7 +465,7 @@ def bag_material(name, tex_path, rough=0.4, emissive=0.06):
 CLOTH_LIB = []  # D30: 布料压力袋变体网格库 (base 0.095×0.19, origin 底面中心)
 
 
-def build_cloth_library(n_per=4):
+def build_cloth_library(n_per=6):  # D35: 48→72变体
     """D30: 每味4变体布料压力袋 — 封闭枕头网格+cloth pressure+顶底销点 → 静态形变网格.
 
     实证: 5.2 API (self_collision 在 collision_settings; pressure_factor 单参数),
@@ -474,7 +474,7 @@ def build_cloth_library(n_per=4):
     from mathutils import Vector as _V
     lib_col = bpy.data.collections.new("clothlib")
     bpy.context.scene.collection.children.link(lib_col)
-    for var in range(12 * n_per):
+    for var in range(12 * n_per):  # 72 = 12味×6
         rng = np.random.default_rng(var * 101 + 17)
         BW, BH, W, H = 0.095, 0.19, 24, 34
         bm = bmesh.new()
@@ -533,6 +533,32 @@ def build_cloth_library(n_per=4):
         cs = mod.collision_settings
         cs.use_self_collision = True
         cs.self_distance_min = 0.0025
+        # D36: 接触碰撞体 — 侧壁 (随机窄距=侧缘压扁) + 40%变体加前顶压板 (袋顶弯折)
+        gap = 0.010 + rng.random() * 0.006
+        for side in (-1, 1):
+            cw = bpy.data.meshes.new(f"cw{var}")
+            cmb = bmesh.new()
+            v1 = cmb.verts.new((side * (BW/2 + gap), -0.03, -0.02))
+            v2 = cmb.verts.new((side * (BW/2 + gap), 0.03, -0.02))
+            v3 = cmb.verts.new((side * (BW/2 + gap + side * rng.random() * 0.004), 0.03, BH + 0.02))
+            v4 = cmb.verts.new((side * (BW/2 + gap + side * rng.random() * 0.004), -0.03, BH + 0.02))
+            cmb.faces.new((v1, v2, v3, v4))
+            cmb.to_mesh(cw)
+            cmb.free()
+            cwo = bpy.data.objects.new(f"cwall{var}_{side}", cw)
+            lib_col.objects.link(cwo)
+        if rng.random() < 0.4:
+            cf = bpy.data.meshes.new(f"cf{var}")
+            cmb = bmesh.new()
+            f1 = cmb.verts.new((-BW, -0.028, BH * 0.86))
+            f2 = cmb.verts.new((BW, -0.028, BH * 0.86))
+            f3 = cmb.verts.new((BW, -0.004, BH * 1.05))
+            f4 = cmb.verts.new((-BW, -0.004, BH * 1.05))
+            cmb.faces.new((f4, f3, f2, f1))
+            cmb.to_mesh(cf)
+            cmb.free()
+            cfo = bpy.data.objects.new(f"cfront{var}", cf)
+            lib_col.objects.link(cfo)
         mod.point_cache.frame_end = 20
         sc2 = bpy.context.scene
         sc2.frame_set(1)
@@ -685,7 +711,7 @@ def main():
     # ESR Step C: 加载陈列表 (数据驱动布局; 场景只留夹具/灯光/相机)
     PLAN = json.loads((ROOT / "data/shelf_twin/planogram.json").read_text())
     # D30: 布料压力袋变体库 (48 网格 × 逐实例 OBJECT 印刷 = 无重复组合)
-    build_cloth_library(n_per=4)
+    build_cloth_library(n_per=6)  # D35: 48→72变体
 
     for lv in range(SHELVES):
         z0 = lv * LEVEL_H
@@ -726,12 +752,14 @@ def main():
                 for i in range(n_g):
                     if rng.random() < 0.03:
                         continue  # H9: 3% 缺位 (真实货架有人拿货后的空隙)
+                    dist = abs((i + 0.5) / max(n_g, 1) - 0.5) * 2.0  # D33: 0=组心 1=组缘
+                    irreg = 0.45 + 1.1 * dist ** 1.5  # 渐进不规则系数
                     # 真实 planogram 软件语义: 数据管结构(组/段/色), SKU 实宽管装箱
                     # 袋宽由高宽比定 (高=层高 0.62-0.72), 邻袋相触允许微溢 (参照: 满排相触)
                     x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.02
-                    y_bag = y_off + (rng.random() - 0.5) * 0.035 + (0.014 if rng.random() < 0.12 else 0.0)
-                    if rng.random() < 0.30:
-                        y_bag -= 0.038  # D31: 前拉加深 (30% 袋缘明显压前)
+                    y_bag = y_off + (rng.random() - 0.5) * 0.035 * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
+                    if rng.random() < 0.30 * irreg:
+                        y_bag -= 0.038  # D31/D33: 前拉加深 (概率随组缘增强)
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.075, bgw * 0.92), rng=rng)
@@ -786,19 +814,38 @@ def main():
                     w_bag = min(h_bag * ar, bgw * 0.99)
                     h_bag = w_bag / ar
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
-                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else (rng.random() - 0.5) * 3.2 + clump))  # D31: 倾角域加宽  # H11: 4% 强侧转
+                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else (rng.random() - 0.5) * 3.2 * irreg + clump * irreg))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
                     # D30: 布料库实例 (变体网格共享 + OBJECT 材质逐袋独立印刷)
-                    vmesh = CLOTH_LIB[(gidx * 7 + i + r_i * 13) % len(CLOTH_LIB)]
+                    vmesh = CLOTH_LIB[(gidx * 131 + i * 17 + r_i * 53 + lv * 29) % len(CLOTH_LIB)]  # D35: 素数扰动破阵列感
                     co = bpy.data.objects.new(f"bag{lv}_{r_i}_{g['design_id']}_{i}", vmesh)
                     co.location = (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
                                    y_bag, z_bot + h_bag / 2)
-                    co.rotation_euler = (math.radians((rng.random() - 0.5) * 2.4), 0, math.radians(lean))
-                    co.scale = (w_bag / 0.095, 1.0, h_bag / 0.19)
+                    pitch_x = (rng.random() - 0.5) * 2.4 + (7.0 + rng.random() * 6.0 if r_i == 1 else 0.0)  # D34: 二排前倾压前排
+                    co.rotation_euler = (math.radians(pitch_x), 0, math.radians(lean))
+                    if r_i == 1:
+                        co.location.y += 0.022  # D34: 整排前移 2.2cm (顶靠前排背)
+                    co.scale = (w_bag / 0.095 * (0.98 + rng.random() * 0.04),
+                               1.0, h_bag / 0.19 * (0.97 + rng.random() * 0.06))  # D35: 逐袋轮廓微差
                     bpy.context.scene.collection.objects.link(co)
                     sl = co.material_slots[0]
                     sl.link = 'OBJECT'
                     sl.material = bag_material(f"bagm_{lv}_{r_i}_{i}", Path(a),
                                                (0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, 0.02)
+                    # D32: 排尾簇 (12% 组触发): 斜靠+前压袋 — 评审"局部成簇不规则堆叠"
+                    if i == n_g - 1 and rng.random() < 0.12 and g.get("form", "bag") == "bag":
+                        for k, (yaw_k, dy_k, pitch_k) in enumerate(
+                                ((16.0 + rng.random() * 14.0, -0.020, 5.0 + rng.random() * 4.0),
+                                 (-13.0 - rng.random() * 11.0, -0.038, 9.0 + rng.random() * 5.0))):
+                            ce = bpy.data.objects.new(f"bagc{lv}_{r_i}_{g['design_id']}_{i}_{k}", vmesh)
+                            ce.location = (min(x0 + gw - w_bag * 0.35, x_bag + (rng.random() - 0.25) * 0.02),
+                                           y_bag + dy_k, z_bot + h_bag / 2 - k * 0.004)
+                            ce.rotation_euler = (math.radians(pitch_k), 0, math.radians(lean + yaw_k))
+                            ce.scale = (w_bag / 0.095, 1.0, h_bag / 0.19)
+                            bpy.context.scene.collection.objects.link(ce)
+                            sl2 = ce.material_slots[0]
+                            sl2.link = 'OBJECT'
+                            sl2.material = bag_material(f"bagcm_{lv}_{r_i}_{i}_{k}", Path(a),
+                                                        0.30 + rng.random() * 0.25, 0.02)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8

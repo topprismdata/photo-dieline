@@ -16,33 +16,33 @@
  ],
  "rows": [
   {
-   "label": "v46",
-   "render": "docs/images/shelf_twin_v46.png",
+   "label": "v51",
+   "render": "docs/images/shelf_twin_v51.png",
    "dev": {
-    "lum_hist": 0.0945,
-    "sat_hist": 0.2289,
-    "edge": 0.1503,
+    "lum_hist": 0.0794,
+    "sat_hist": 0.2275,
+    "edge": 0.1551,
     "highlight": 0.9214,
-    "dark": 0.2672,
-    "contrast": 0.0897,
-    "spectral": 0.0388
+    "dark": 0.1331,
+    "contrast": 0.0771,
+    "spectral": 0.0397
    },
-   "score": 0.1924,
+   "score": 0.1769,
    "verdict": "ALIGNED"
   },
   {
-   "label": "v47",
-   "render": "docs/images/shelf_twin_v47.png",
+   "label": "v52",
+   "render": "docs/images/shelf_twin_v52.png",
    "dev": {
-    "lum_hist": 0.094,
-    "sat_hist": 0.228,
-    "edge": 0.153,
+    "lum_hist": 0.0795,
+    "sat_hist": 0.2275,
+    "edge": 0.1551,
     "highlight": 0.9214,
-    "dark": 0.273,
-    "contrast": 0.0893,
-    "spectral": 0.0399
+    "dark": 0.1336,
+    "contrast": 0.0771,
+    "spectral": 0.0397
    },
-   "score": 0.1932,
+   "score": 0.177,
    "verdict": "ALIGNED"
   }
  ]
