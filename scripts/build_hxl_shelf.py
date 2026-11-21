@@ -165,7 +165,7 @@ def main():
     try:
         sc.eevee.use_gtao = True          # 接触阴影: 袋坐层板唇的接地暗部
         sc.eevee.gtao_distance = 0.08
-        sc.eevee.gtao_factor = 0.5
+        sc.eevee.gtao_factor = 0.7
     except AttributeError:
         pass
     sc.view_settings.view_transform = "AgX"
@@ -178,8 +178,8 @@ def main():
 
     # 地面 (棋盘, y=0 平面)
     img_plane("floor", pil_tex_floor(), 8.0, 8.0, (0, 4.0, 0), rot=(90, 0, 0))
-    img_plane("sideL", pil_tex_backwall(), 0.1, SHELVES * LEVEL_H + 0.5,
-              (-SHELF_W / 2 - 0.35, 1.6, SHELVES * LEVEL_H / 2), rot=(0, 0, 90), emissive=0.5)
+    img_plane("sideL", pil_tex_backwall(), DEPTH, SHELVES * LEVEL_H + 0.5,
+              (-SHELF_W / 2 - 0.02, DEPTH / 2, SHELVES * LEVEL_H / 2), rot=(0, 0, 90), emissive=0.35)
 
     # 背光板 (发光背墙, 位于货架后)
     img_plane("backwall", pil_tex_backwall(), SHELF_W, SHELVES * LEVEL_H + 0.5,
@@ -229,10 +229,10 @@ def main():
                 x_bag = -SHELF_W / 2 + bw * (i + 0.5 + sh)  # 第二排半格错位 → 缝里露头
                 x_bag = -SHELF_W / 2 + bw / 2 if x_bag > SHELF_W / 2 - bw / 2 else x_bag
                 z_bot = z0 + 0.015  # 坐落层板唇
-                rough = 0.4 + rng.random() * 0.3
+                rough = 0.25 + rng.random() * 0.3
                 img_plane(f"bag{lv}_{r_i}_{i}", a, w_bag, h_bag,
                           (x_bag, y_off, z_bot + h_bag / 2),
-                          emissive=0.22, rough=rough)
+                          emissive=0.06, rough=rough)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
@@ -242,7 +242,7 @@ def main():
         sc.collection.objects.link(blo)
         # 层板下沿灯带 (补层板唇高光)
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
-        lt.size = SHELF_W * 0.9; lt.size_y = 0.05; lt.energy = 32
+        lt.size = SHELF_W * 0.9; lt.size_y = 0.05; lt.energy = 24
         lo = bpy.data.objects.new(f"strip{lv}", lt)
         lo.location = (0, DEPTH - 0.10, z0 + 0.05)
         lo.rotation_euler = (math.radians(-70), 0, 0)
@@ -260,7 +260,7 @@ def main():
 
     # 前置柔光 (袋面受光底座)
     fl = bpy.data.lights.new("frontfill", "AREA")
-    fl.size = 3.0; fl.size_y = 1.6; fl.energy = 40
+    fl.size = 3.0; fl.size_y = 1.6; fl.energy = 60
     flo = bpy.data.objects.new("frontfill", fl)
     flo.location = (0, -1.1, 1.5)
     flo.rotation_euler = (math.radians(65), 0, 0)

@@ -93,7 +93,7 @@ def build_mesh():
 
 def make_atlas(path: Path):
     from PIL import Image, ImageDraw, ImageFont
-    S = 512
+    S = 1024
     import colorsys
     _h, _l, _sv = colorsys.rgb_to_hsv(*[c for c in COL[:3]])
     _sv = min(1.0, _sv * 1.2)
@@ -105,8 +105,15 @@ def make_atlas(path: Path):
     d.rectangle([0, 0, S, S // 5], fill=tuple(min(255, int(c * 255 + 45)) for c in _col[:3]))
     d.rounded_rectangle([S * 4 // 10, S * 9 // 20, S * 6 // 10, S * 13 // 20], radius=14, fill=(250, 248, 242))
     try:
-        f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 64, index=0)
-        f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 40, index=0)
+        f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 96, index=0)
+        f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 340, index=0)
+        _size = 340  # 宽度自适应: 全词入画 (340 会把 TOPPRISM 裁成 PPRIS) 碎片)
+        while _size > 40:
+            _bb = d.textbbox((0, 0), LABEL, font=f)
+            if _bb[2] - _bb[0] <= 0.82 * S:
+                break
+            _size -= 16
+            f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", _size, index=0)
     except Exception:
         f = f2 = ImageFont.load_default()
     d.text((S // 2, S * 0.55), LABEL, font=f, fill=(30, 30, 34), anchor="mm")
@@ -134,7 +141,7 @@ def render(obj, out: Path):
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Punchy"   # 默认 look 去饱和 = 洗白根因 (2026-11-21)
     sc.view_settings.exposure = -0.3
-    sc.render.resolution_x = sc.render.resolution_y = 640
+    sc.render.resolution_x = sc.render.resolution_y = 1024
     sc.world = bpy.data.worlds.new("w") or sc.world
     if sc.world:
         sc.world.use_nodes = True
