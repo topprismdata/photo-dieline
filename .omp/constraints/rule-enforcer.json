@@ -41,6 +41,19 @@
 			],
 			"mustPassBeforeEnd": true,
 			"maxAgeMinutes": 60
+		},
+		{
+			"id": "CHK-TESTINTEGRITY",
+			"type": "command",
+			"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-test-integrity.py",
+			"aliases": [
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-test-integrity.py",
+				"python3 ~/.omp/agent/constraints/check-test-integrity.py",
+				"/opt/homebrew/Caskroom/miniconda/base/bin/python3 /Users/guohongbin/.omp/agent/constraints/check-test-integrity.py",
+				"python3 /Users/guohongbin/.omp/agent/constraints/check-test-integrity.py"
+			],
+			"mustPassBeforeEnd": true,
+			"maxAgeMinutes": 30
 		}
 	],
 	"rules": [
@@ -159,12 +172,29 @@
 				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 -m pytest tests/ -q"
 			},
 			"requires": [
-				"CHK-ALL"
+				"CHK-ALL",
+				"CHK-TESTINTEGRITY"
 			],
 			"protects": [
 				"src/**",
 				"scripts/**",
 				"blender/**"
+			]
+		},
+		{
+			"id": "R-TESTS",
+			"failureClass": "门禁自指：削弱/删除测试让门通过（测试树被改写）",
+			"level": "L0",
+			"status": "ACTIVE",
+			"enforcer": {
+				"type": "command",
+				"command": "/opt/homebrew/Caskroom/miniconda/base/bin/python3 ~/.omp/agent/constraints/check-test-integrity.py"
+			},
+			"requires": [
+				"CHK-TESTINTEGRITY"
+			],
+			"protects": [
+				"tests/**"
 			]
 		}
 	]
