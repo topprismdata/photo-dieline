@@ -107,6 +107,70 @@ def pil_price_tag(text):
     p = Path(f"/tmp/hxl_tag_{text.replace('.', '_')}.png"); im.save(p); return p
 
 
+def pil_tag_rail(fracs, prices, seed_lv=0):
+    """H16: 逐组价签轨 — 沿唇贯通白条, 每组一段: 条码块+红价+灰码, 组间细分隔 (真实货架语义)."""
+    import random
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = 3072, 210
+    im = Image.new("RGB", (W, H), (253, 253, 251))
+    d = ImageDraw.Draw(im)
+    try:
+        f_p = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 150, index=0)
+    except Exception:
+        f_p = ImageFont.load_default()
+    rng = random.Random(seed_lv * 17 + 3)
+    x = 0.0
+    for gi, (fr, pr) in enumerate(zip(fracs, prices)):
+        w = int(fr * W)
+        if rng.random() < 0.10:
+            x += w  # 空洞段 (轨上无签, 补货语义)
+            continue
+        w = int(w * (0.82 + rng.random() * 0.18))
+        # 条码块 (随机宽度黑白竖线)
+        bx = x + w * 0.05
+        bw = w * 0.15
+        cx = bx
+        while cx < bx + bw:
+            lw = rng.choice((3, 5, 8))
+            d.rectangle([cx, H * 0.22, cx + lw, H * 0.72], fill=(22, 22, 24))
+            cx += lw + rng.choice((4, 6, 9))
+        # 红价 + 灰码
+        d.text((x + w * 0.58, H * 0.46 + rng.randint(-8, 8)), pr, font=f_p, fill=(172, 8, 14), anchor="mm")
+        d.text((x + w * 0.58, H * 0.87), f"69{rng.randint(10000000, 99999999)}",
+               fill=(24, 26, 30), anchor="mm")
+        # 组间分隔
+        if gi < len(fracs) - 1:
+            d.line([x + w, 0, x + w, H], fill=(150, 152, 156), width=4)
+        x += w
+    # 顶部装卡阴影线
+    d.rectangle([0, 0, W, 6], fill=(214, 215, 218))
+    p = Path(f"/tmp/hxl_tagrail_{seed_lv}.png"); im.save(p); return p
+
+
+def pil_tag_single(seed, price):
+    """D27: 独立价签卡 — 白底黑条码+大红价+灰码, 每签独立随机."""
+    import random
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = 512, 256
+    im = Image.new("RGB", (W, H), (253, 253, 251))
+    d = ImageDraw.Draw(im)
+    try:
+        f_p = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 128, index=0)
+    except Exception:
+        f_p = ImageFont.load_default()
+    rng = random.Random(seed * 29 + 5)
+    bx, bw = W * 0.07, W * 0.34
+    cx = bx
+    while cx < bx + bw:
+        lw = rng.choice((4, 7, 11))
+        d.rectangle([cx, H * 0.24, cx + lw, H * 0.70], fill=(20, 20, 22))
+        cx += lw + rng.choice((5, 8, 12))
+    d.text((W * 0.62, H * 0.40), price, font=f_p, fill=(186, 16, 22), anchor="mm")
+    d.text((W * 0.62, H * 0.82), f"69{rng.randint(10000000, 99999999)}", fill=(40, 42, 46), anchor="mm")
+    d.rectangle([0, 0, W, 8], fill=(210, 211, 214))
+    p = Path(f"/tmp/hxl_tag1_{seed}.png"); im.save(p); return p
+
+
 def crop_bag(png: Path, seed: int = 0) -> Path:
     """裁掉资产渲染的烤入背景 + 变体抖动 (翻转/饱和/亮度 ±15%): 12 资产 → 48 设计, 杀克隆感."""
     import numpy as np
@@ -355,6 +419,137 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
     front.data.materials.append(mm)
 
 
+def bag_material(name, tex_path, rough=0.4, emissive=0.06):
+    """D30: 印刷材质 (从 img_bag_curved 抽出, 供布料库实例 OBJECT-link 复用)."""
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    mat.use_backface_culling = True
+    nt = mat.node_tree
+    bsdf = nt.nodes["Principled BSDF"]
+    bsdf.inputs["Roughness"].default_value = rough
+    nz = nt.nodes.new("ShaderNodeTexNoise")
+    nz.inputs["Scale"].default_value = 620.0
+    nz.inputs["Detail"].default_value = 4.0
+    ramp = nt.nodes.new("ShaderNodeMapRange")
+    ramp.inputs["To Min"].default_value = 0.93
+    ramp.inputs["To Max"].default_value = 1.0
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.image = bpy.data.images.load(str(tex_path))
+    mul = nt.nodes.new("ShaderNodeMix")
+    mul.data_type = "RGBA"
+    mul.blend_type = "MULTIPLY"
+    mul.inputs["Factor"].default_value = 1.0
+    nt.links.new(tex.outputs["Color"], mul.inputs[6])
+    nt.links.new(ramp.outputs["Result"], mul.inputs[7])
+    nt.links.new(mul.outputs[2], bsdf.inputs["Base Color"])
+    rr = nt.nodes.new("ShaderNodeMapRange")
+    rr.inputs["To Min"].default_value = max(0.02, rough - 0.07)
+    rr.inputs["To Max"].default_value = rough + 0.09
+    nt.links.new(nz.outputs["Fac"], rr.inputs["Value"])
+    nt.links.new(rr.outputs["Result"], bsdf.inputs["Roughness"])
+    try:
+        bsdf.inputs["Coat Weight"].default_value = 0.22
+        bsdf.inputs["Coat Roughness"].default_value = 0.28
+    except KeyError:
+        pass
+    em = nt.nodes.new("ShaderNodeEmission")
+    em.inputs["Strength"].default_value = emissive
+    nt.links.new(tex.outputs["Color"], em.inputs["Color"])
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(bsdf.outputs["BSDF"], mix.inputs[1])
+    nt.links.new(em.outputs["Emission"], mix.inputs[2])
+    nt.links.new(mix.outputs["Shader"], nt.nodes["Material Output"].inputs["Surface"])
+    return mat
+
+
+CLOTH_LIB = []  # D30: 布料压力袋变体网格库 (base 0.095×0.19, origin 底面中心)
+
+
+def build_cloth_library(n_per=4):
+    """D30: 每味4变体布料压力袋 — 封闭枕头网格+cloth pressure+顶底销点 → 静态形变网格.
+
+    实证: 5.2 API (self_collision 在 collision_settings; pressure_factor 单参数),
+    2.9s/袋, 中段鼓胀 ~45mm; 调参=绷紧大面+少量大折痕 (tension 45/pressure 1.3)."""
+    import bmesh
+    from mathutils import Vector as _V
+    lib_col = bpy.data.collections.new("clothlib")
+    bpy.context.scene.collection.children.link(lib_col)
+    for var in range(12 * n_per):
+        rng = np.random.default_rng(var * 101 + 17)
+        BW, BH, W, H = 0.095, 0.19, 24, 34
+        bm = bmesh.new()
+        vf, vb = {}, {}
+        for r in range(H + 1):
+            for c in range(W + 1):
+                u, v = c / W, r / H
+                bow = math.sin(u * math.pi) * 0.006
+                y_in = math.sin(v * math.pi) * 0.004
+                vf[(r, c)] = bm.verts.new((-BW/2 + u*BW, -0.012 - bow + y_in, v * BH))
+                vb[(r, c)] = bm.verts.new((-BW/2 + u*BW, 0.012 + bow - y_in, v * BH))
+        for r in range(H):
+            for c in range(W):
+                bm.faces.new((vf[(r,c)], vf[(r+1,c)], vf[(r+1,c+1)], vf[(r,c+1)]))
+                bm.faces.new((vb[(r,c)], vb[(r,c+1)], vb[(r+1,c+1)], vb[(r+1,c)]))
+        for c in range(W):
+            bm.faces.new((vf[(0,c)], vb[(0,c)], vb[(0,c+1)], vf[(0,c+1)]))
+            bm.faces.new((vf[(H,c)], vf[(H,c+1)], vb[(H,c+1)], vb[(H,c)]))
+        for r in range(H):
+            bm.faces.new((vf[(r,0)], vf[(r+1,0)], vb[(r+1,0)], vb[(r,0)]))
+            bm.faces.new((vb[(r,W)], vb[(r+1,W)], vf[(r+1,W)], vf[(r,W)]))
+        uv = bm.loops.layers.uv.verify()
+        for f in bm.faces:
+            f.smooth = True
+            cen_y = sum(l.vert.co.y for l in f.loops) / len(f.loops)
+            front = cen_y < 0
+            for l in f.loops:
+                u, v = (l.vert.co.x + BW/2) / BW, l.vert.co.z / BH
+                l[uv].uv = (u, v) if front else (1.0 - u, v)
+        mesh = bpy.data.meshes.new(f"cloth_{var:02d}")
+        mesh.materials.append(None)
+        bm.to_mesh(mesh)
+        bm.free()
+        # 预噪声: 逐变体折叠独特性
+        for vtx in mesh.vertices:
+            if vtx.co.z > 0.004 and vtx.co.z < BH - 0.004:
+                vtx.co.y += float(rng.normal(0, 0.00045))
+        obj = bpy.data.objects.new(f"clothsrc_{var:02d}", mesh)
+        lib_col.objects.link(obj)
+        vg = obj.vertex_groups.new(name="pin")
+        for vtx in mesh.vertices:
+            if vtx.co.z < 0.004 or vtx.co.z > BH - 0.004:
+                vg.add([vtx.index], 1.0, 'ADD')
+        mod = obj.modifiers.new("cloth", 'CLOTH')
+        cl = mod.settings
+        cl.vertex_group_mass = "pin"
+        cl.quality = 5
+        cl.mass = 0.08
+        cl.tension_stiffness = 45 * (0.85 + rng.random() * 0.3)
+        cl.compression_stiffness = 45 * (0.85 + rng.random() * 0.3)
+        cl.shear_stiffness = 22
+        cl.bending_stiffness = 3.5 * (0.7 + rng.random() * 0.6)
+        cl.air_damping = 2.0
+        cl.time_scale = 1.2
+        cl.pressure_factor = 1.1 + rng.random() * 0.5
+        cs = mod.collision_settings
+        cs.use_self_collision = True
+        cs.self_distance_min = 0.0025
+        mod.point_cache.frame_end = 20
+        sc2 = bpy.context.scene
+        sc2.frame_set(1)
+        for fr in range(1, 21):
+            sc2.frame_set(fr)
+        bpy.context.view_layer.objects.active = obj
+        with bpy.context.temp_override(selected_objects=[obj], active_object=obj):
+            bpy.ops.object.modifier_apply(modifier="cloth")
+        # 原点移到底面中心 (调用方传层板底 z + h/2)
+        off = _V((0, 0, -BH / 2))
+        for vtx in mesh.vertices:
+            vtx.co += off
+        CLOTH_LIB.append(mesh)
+        lib_col.objects.unlink(obj)  # 网格由实例持有; 源对象退场
+    print(f"CLOTHLIB_OK n={len(CLOTH_LIB)}")
+
+
 def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0, amp=0.006, pitch=0.0, phi1=0.0, phi2=0.0, phi3=0.0, phi4=0.0):
     """微鼓曲面前板 (6mm): crop 纹理不变, 剪影+镜面变化 — D4 教训的保守中间路径."""
     import bmesh
@@ -489,6 +684,8 @@ def main():
     bag_names = [a.stem for a in ASSETS]
     # ESR Step C: 加载陈列表 (数据驱动布局; 场景只留夹具/灯光/相机)
     PLAN = json.loads((ROOT / "data/shelf_twin/planogram.json").read_text())
+    # D30: 布料压力袋变体库 (48 网格 × 逐实例 OBJECT 印刷 = 无重复组合)
+    build_cloth_library(n_per=4)
 
     for lv in range(SHELVES):
         z0 = lv * LEVEL_H
@@ -501,9 +698,7 @@ def main():
         m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.92, 0.92, 0.94, 1)
         m.node_tree.nodes["Principled BSDF"].inputs["Roughness"].default_value = 0.3
         sh.data.materials.append(m)
-        # 前唇亮边
-        img_plane(f"lip{lv}", pil_price_tag(tag_texts[lv % len(tag_texts)]),
-                  0.16, 0.10, (-SHELF_W / 2 + 0.25, DEPTH / 2 + 0.21, z0 + 0.005), emissive=0.35)
+        # 前唇亮边 (H16 价签轨另置, 见排面归一化后)
         # ESR Step C: 排面 = planogram.json 消费者 (facings×单位宽 → 宽度分配)
         rng = np.random.default_rng(lv * 31 + 7)
         plan_lv = PLAN["levels"][lv]
@@ -512,6 +707,12 @@ def main():
         norm = min(1.0, 24.0 / fac_sum)
         plan_lv = {**plan_lv, "groups": [{**g, "facings": max(1, round(g["facings"] * norm))}
                                          for g in plan_lv["groups"]]}
+        # D28: 连续轨内嵌逐组大数字 (轨底连续+段内大红价+空洞段)
+        fracs = [g["width_frac"] for g in plan_lv["groups"]]
+        fs = sum(fracs) or 1.0
+        prices = [tag_texts[(lv + gi) % len(tag_texts)] for gi in range(len(fracs))]
+        img_plane(f"tagrail{lv}", pil_tag_rail([f / fs for f in fracs], prices, seed_lv=lv),
+                  SHELF_W - 0.04, 0.15, (0, DEPTH / 2 + DEPTH / 4 + 0.003, z0 + 0.012), emissive=0.30)
         for r_i, (y_off, s0, sh) in enumerate(((DEPTH / 2 - 0.06, 1.0, 0.0),
                                                (DEPTH / 2 - 0.17, 0.92, 0.5))):
             for g in plan_lv["groups"]:
@@ -528,9 +729,9 @@ def main():
                     # 真实 planogram 软件语义: 数据管结构(组/段/色), SKU 实宽管装箱
                     # 袋宽由高宽比定 (高=层高 0.62-0.72), 邻袋相触允许微溢 (参照: 满排相触)
                     x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.02
-                    y_bag = y_off + (rng.random() - 0.5) * 0.02 + (0.012 if rng.random() < 0.10 else 0.0)
-                    if rng.random() < 0.15:
-                        y_bag -= 0.025  # H11: 前拉遮挡 (袋缘压住邻袋)
+                    y_bag = y_off + (rng.random() - 0.5) * 0.035 + (0.014 if rng.random() < 0.12 else 0.0)
+                    if rng.random() < 0.30:
+                        y_bag -= 0.038  # D31: 前拉加深 (30% 袋缘明显压前)
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.075, bgw * 0.92), rng=rng)
@@ -584,16 +785,20 @@ def main():
                     h_bag = LEVEL_H * (0.64 + rng.random() * 0.10)
                     w_bag = min(h_bag * ar, bgw * 0.99)
                     h_bag = w_bag / ar
-                    clump = (i // 3) % 2 * 2.2 - 1.1  # H10 受压簇: 相邻3袋同向偏置
-                    lean = 5.0 if rng.random() < 0.04 else (10.0 if rng.random() < 0.04 else (1.8 if i in (2, 9) else (rng.random() - 0.5) * 1.8 + clump))  # H11: 4% 强侧转
-                    img_bag_curved(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
-                                   (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
-                                    y_bag, z_bot + h_bag / 2),
-                                   emissive=0.02, rough=(0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, lean=lean,
-                                   amp=0.010 + rng.random() * 0.010,
-                                   pitch=(rng.random() - 0.5) * 2.4,
-                                   phi1=rng.random() * 6.28, phi2=rng.random() * 6.28,
-                                   phi3=rng.random() * 6.28, phi4=rng.random() * 6.28)
+                    clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
+                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else (rng.random() - 0.5) * 3.2 + clump))  # D31: 倾角域加宽  # H11: 4% 强侧转
+                    # D30: 布料库实例 (变体网格共享 + OBJECT 材质逐袋独立印刷)
+                    vmesh = CLOTH_LIB[(gidx * 7 + i + r_i * 13) % len(CLOTH_LIB)]
+                    co = bpy.data.objects.new(f"bag{lv}_{r_i}_{g['design_id']}_{i}", vmesh)
+                    co.location = (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
+                                   y_bag, z_bot + h_bag / 2)
+                    co.rotation_euler = (math.radians((rng.random() - 0.5) * 2.4), 0, math.radians(lean))
+                    co.scale = (w_bag / 0.095, 1.0, h_bag / 0.19)
+                    bpy.context.scene.collection.objects.link(co)
+                    sl = co.material_slots[0]
+                    sl.link = 'OBJECT'
+                    sl.material = bag_material(f"bagm_{lv}_{r_i}_{i}", Path(a),
+                                               (0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, 0.02)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
