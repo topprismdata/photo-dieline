@@ -13,6 +13,7 @@
   射灯×4      z=顶+0.55 悬挂                   y=-0.7
   相机        (0.85,-1.55,1.28) → (-0.3,D/2,1.22) roll-2°
 """
+import json
 import math
 import sys
 from pathlib import Path
@@ -28,18 +29,13 @@ ROOT = Path("/Users/guohongbin/photo-dieline")
 
 # ---- 场景参数 (对账 v2) ----
 SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
-BAGS_PER_LEVEL = 14
 ASSETS = sorted((ROOT / "assets/pillow_bags").glob("*.png"))
-# 每层色系主块 (对账: 逐层色系分块) — 索引进 ASSETS 排序
-LEVEL_PLAN = [
-    ["yellow", "gold"],                 # L1 黄系
-    ["brown", "gold", "white"],         # L2 棕金
-    ["blue", "teal", "white"],          # L3 蓝青
-    ["green", "teal"],                  # L4 绿系
-    ["red", "orange", "pink"],          # L5 红橙
-    ["purple", "pink", "dark"],         # L6 紫粉
-    ["yellow", "orange", "red"],        # L7 顶混暖
-]
+FAMILY_RGB = {  # 12 设计族基色 (与 make_planogram.FAMILY_IDX 同序)
+    "red": (0.82, 0.22, 0.10), "orange": (0.92, 0.45, 0.10), "yellow": (0.95, 0.72, 0.12),
+    "green": (0.30, 0.62, 0.28), "blue": (0.18, 0.42, 0.72), "purple": (0.48, 0.25, 0.60),
+    "brown": (0.42, 0.26, 0.16), "pink": (0.90, 0.50, 0.58), "teal": (0.15, 0.58, 0.58),
+    "gold": (0.85, 0.62, 0.20), "white": (0.88, 0.86, 0.82), "dark": (0.22, 0.24, 0.30),
+}
 
 
 def pil_tex_backwall():
@@ -204,6 +200,115 @@ def img_bag_thin(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0):
     return o
 
 
+def build_pyramid_rack_v2(loc, h=1.0, w=0.46, dep=0.34):
+    """前景挂架 v2 (对齐②最小要素): 细圆管 A 形侧架 + 3 挂杆 + 挂钩 + 垂坠袋位."""
+    import bmesh
+    x0, y0 = loc
+    mmetal = bpy.data.materials.new("rackmetal")
+    mmetal.use_nodes = True
+    mb = mmetal.node_tree.nodes["Principled BSDF"]
+    mb.inputs["Base Color"].default_value = (0.91, 0.91, 0.93, 1)
+    mb.inputs["Roughness"].default_value = 0.3
+    mb.inputs["Metallic"].default_value = 0.65
+
+    def tube(name, p0, p1, r):
+        d = (Vector(p1) - Vector(p0))
+        mid = (Vector(p0) + Vector(p1)) / 2
+        _bm = bmesh.new()
+        bmesh.ops.create_cone(_bm, cap_ends=True, segments=12,
+                              radius1=r, radius2=r, depth=d.length)
+        mesh = bpy.data.meshes.new(name)
+        _bm.to_mesh(mesh)
+        _bm.free()
+        o = bpy.data.objects.new(name, mesh)
+        o.location = mid
+        o.rotation_euler = d.to_track_quat("Z", "Y").to_euler()
+        bpy.context.scene.collection.objects.link(o)
+        o.data.materials.append(mmetal)
+        return o
+
+    tops = []
+    for sx in (-1, 1):
+        px = x0 + sx * w / 2
+        # A 腿 (前后撑开) + 竖杆
+        tube(f"lg_f{sx}", (px - sx * 0.04, y0 - dep / 2, 0), (px, y0, h), 0.006)
+        tube(f"lg_b{sx}", (px + sx * 0.04, y0 + dep / 2, 0), (px, y0, h), 0.006)
+        tube(f"post{sx}", (px, y0, 0), (px, y0, h), 0.005)
+        tops.append((px, y0, h))
+    tube("topbar", tops[0], tops[1], 0.005)
+    # 底横撑 + 接地脚
+    tube("base_f", (x0 - w / 2 + 0.02, y0 - dep / 2, 0.012), (x0 + w / 2 - 0.02, y0 - dep / 2, 0.012), 0.005)
+    tube("base_b", (x0 - w / 2 + 0.02, y0 + dep / 2, 0.012), (x0 + w / 2 - 0.02, y0 + dep / 2, 0.012), 0.005)
+    # 3 层挂杆 (前面, 层间) + 挂钩
+    tier_z = [h * t for t in (0.24, 0.5, 0.76)]
+    hooks = []
+    for k, zt in enumerate(tier_z):
+        tube(f"rail{k}", (x0 - w / 2 + 0.03, y0 - dep * 0.36, zt),
+             (x0 + w / 2 - 0.03, y0 - dep * 0.36, zt), 0.0045)
+        for hi in range(4):
+            hx = x0 - w / 2 + 0.08 + (w - 0.16) * hi / 3
+            tube(f"hook{k}_{hi}", (hx, y0 - dep * 0.36, zt), (hx, y0 - dep * 0.36, zt - 0.018), 0.002)
+            hooks.append((hx, y0 - dep * 0.36, zt - 0.018, k))
+    return hooks
+
+
+def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26):
+    """桶装罐占位 (planogram form=barrel): 真实薯片罐比例 圆柱+白带+金属顶缘."""
+    soft = tuple(rgb[c] * 0.78 + 0.14 for c in range(3))
+    bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2, depth=hgt, location=(x, y, z_bot + hgt / 2))
+    o = bpy.context.active_object
+    o.name = name
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    b = m.node_tree.nodes["Principled BSDF"]
+    b.inputs["Base Color"].default_value = (soft[0], soft[1], soft[2], 1)
+    b.inputs["Roughness"].default_value = 0.38
+    o.data.materials.append(m)
+    bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2 + 0.0008, depth=0.028,
+                                        location=(x, y, z_bot + hgt * 0.62))
+    band = bpy.context.active_object
+    band.name = name + "_band"
+    mm = bpy.data.materials.new(name + "_band")
+    mm.use_nodes = True
+    mm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.95, 0.95, 0.94, 1)
+    band.data.materials.append(mm)
+    bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2 - 0.001, depth=0.012,
+                                        location=(x, y, z_bot + hgt - 0.006))
+    lid = bpy.context.active_object
+    lid.name = name + "_lid"
+    ml = bpy.data.materials.new(name + "_lid")
+    ml.use_nodes = True
+    lb = ml.node_tree.nodes["Principled BSDF"]
+    lb.inputs["Base Color"].default_value = (0.75, 0.76, 0.78, 1)
+    lb.inputs["Metallic"].default_value = 0.8
+    lb.inputs["Roughness"].default_value = 0.35
+    lid.data.materials.append(ml)
+
+
+def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
+    """盒装占位 (planogram form=box): 立盒+白窗前板, 填满槽宽."""
+    soft = tuple(rgb[c] * 0.75 + 0.16 for c in range(3))
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(x, y, z_bot + hgt / 2))
+    o = bpy.context.active_object
+    o.name = name
+    o.scale = (bw_, 0.045, hgt)
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    b = m.node_tree.nodes["Principled BSDF"]
+    b.inputs["Base Color"].default_value = (soft[0], soft[1], soft[2], 1)
+    b.inputs["Roughness"].default_value = 0.42
+    o.data.materials.append(m)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(x, y - 0.0235, z_bot + hgt / 2))
+    front = bpy.context.active_object
+    front.name = name + "_front"
+    front.rotation_euler = (math.radians(90), 0, 0)
+    front.scale = (bw_ * 0.62, hgt * 0.5, 1)
+    mm = bpy.data.materials.new(name + "_front")
+    mm.use_nodes = True
+    mm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.94, 0.93, 0.90, 1)
+    front.data.materials.append(mm)
+
+
 def main():
     # 清启动场景 (事故 2026-11-21: 默认 Cube 2m 卡在相机与货架间 = 全程白雾元凶;
     # tde_driver 有 clean_scene, 此脚本没有 → 八轮"洗白"误诊为灯光/曝光/atlas)
@@ -243,6 +348,9 @@ def main():
     # 层板 + 前唇 + 排面 + 价签
     tag_texts = ["2.9", "4.9", "5.8", "5.9", "7.2", "1.7", "3.5"]
     bag_names = [a.stem for a in ASSETS]
+    # ESR Step C: 加载陈列表 (数据驱动布局; 场景只留夹具/灯光/相机)
+    PLAN = json.loads((ROOT / "data/shelf_twin/planogram.json").read_text())
+
     for lv in range(SHELVES):
         z0 = lv * LEVEL_H
         # 层板 (白板)
@@ -257,38 +365,46 @@ def main():
         # 前唇亮边
         img_plane(f"lip{lv}", pil_price_tag(tag_texts[lv % len(tag_texts)]),
                   0.16, 0.10, (-SHELF_W / 2 + 0.25, DEPTH / 2 + 0.21, z0 + 0.005), emissive=0.35)
-        # 排面: 两排软袋卡 (第一排贴唇, 第二排垫高出缝)
-        fam = LEVEL_PLAN[lv % len(LEVEL_PLAN)]
-        picks = [a for a in ASSETS if a.stem in fam] or ASSETS
+        # ESR Step C: 排面 = planogram.json 消费者 (facings×单位宽 → 宽度分配)
         rng = np.random.default_rng(lv * 31 + 7)
-        # 参照语言 v2: 一层=左右 4-6 色段 (段内同设计同变体, 色块边界清晰如色带)
-        n_seg = 4 + lv % 3
-        seg_design = [(lv * 3 + k * 5) % len(ASSETS) for k in range(n_seg)]
-        # 段内同设计但逐袋变体 (D5a: 同变体连贴=平铺信号, 反输 0.3)
-        crop0 = crop_bag(ASSETS[seg_design[0]], seed=lv * 7)
-        tex_ar = Image.open(crop0).width / Image.open(crop0).height
-        bag_h0 = LEVEL_H * 0.74
-        n = max(16, int(SHELF_W / (bag_h0 * tex_ar * 1.04)))  # 满排相触 16-24/层 (参照 20-30)
-        bw = SHELF_W / n
-        seg_edges = sorted(rng.choice(range(3, n - 2), size=n_seg - 1, replace=False).tolist())
+        plan_lv = PLAN["levels"][lv]
+        # 排面归一化: VLM 计数含二排露头会超墙容量, 按比例归一到 ≤24 槽
+        fac_sum = sum(g["facings"] for g in plan_lv["groups"])
+        norm = min(1.0, 24.0 / fac_sum)
+        plan_lv = {**plan_lv, "groups": [{**g, "facings": max(1, round(g["facings"] * norm))}
+                                         for g in plan_lv["groups"]]}
         for r_i, (y_off, s0, sh) in enumerate(((DEPTH / 2 - 0.06, 1.0, 0.0),
                                                (DEPTH / 2 - 0.17, 0.92, 0.5))):
-            for i in range(n):
-                si = sum(1 for e in seg_edges if i >= e)
-                j = seg_design[(si + r_i) % n_seg]
-                a = crop_bag(ASSETS[j], seed=lv * 31 + r_i * 17 + i)
-                ar = Image.open(a).width / Image.open(a).height
-                h_bag = bag_h0 * s0 * (0.96 + rng.random() * 0.08)
-                w_bag = h_bag * ar
-                x_bag = -SHELF_W / 2 + bw * (i + 0.5 + sh) + (rng.random() - 0.5) * bw * 0.3  # 理货不齐
-                x_bag = -SHELF_W / 2 + bw / 2 if x_bag > SHELF_W / 2 - bw / 2 else x_bag
-                y_bag = y_off + (0.012 if rng.random() < 0.10 else 0.0)  # 10% 未推齐
+            for g in plan_lv["groups"]:
+                j = int(g["design_id"].split("_")[1])
+                rgb = FAMILY_RGB[g["color"]]
+                gw = g["width_frac"] * SHELF_W
+                x0 = g["x0_frac"] * SHELF_W - SHELF_W / 2
+                n_g = max(1, g["facings"] + (1 if sh and g["facings"] > 2 else 0))
+                bgw = gw / n_g
                 z_bot = z0 + 0.013  # 坐落层板唇 (2mm 过盈=承重接触)
-                rough = 0.25 + rng.random() * 0.3
-                lean = 3.0 if i in (4, 11) else (rng.random() - 0.5) * 3.0  # 每层2袋明显歪
-                img_bag_thin(f"bag{lv}_{r_i}_{i}", a, w_bag, h_bag,
-                             (x_bag, y_bag, z_bot + h_bag / 2),
-                             emissive=0.06, rough=rough, lean=lean)
+                for i in range(n_g):
+                    # 真实 planogram 软件语义: 数据管结构(组/段/色), SKU 实宽管装箱
+                    # 袋宽由高宽比定 (高=层高 0.62-0.72), 邻袋相触允许微溢 (参照: 满排相触)
+                    x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.015
+                    y_bag = y_off + (0.012 if rng.random() < 0.10 else 0.0)
+                    if g["form"] == "barrel":
+                        barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
+                                           dia=min(0.075, bgw * 0.92))
+                        continue
+                    if g["form"] == "box":
+                        box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
+                                        bw_=min(0.12, bgw * 0.92))
+                        continue
+                    a = crop_bag(ASSETS[j], seed=lv * 31 + r_i * 17 + i)
+                    ar = Image.open(a).width / Image.open(a).height
+                    h_bag = LEVEL_H * (0.62 + rng.random() * 0.10) * s0
+                    w_bag = h_bag * ar
+                    lean = 3.0 if i in (2, 9) else (rng.random() - 0.5) * 3.0  # 每层2袋明显歪
+                    img_bag_thin(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
+                                 (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
+                                  y_bag, z_bot + h_bag / 2),
+                                 emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
@@ -333,6 +449,14 @@ def main():
     rot.rotate_axis('Y', math.radians(-2.0))  # 微滚转
     co.rotation_euler = rot
     sc.collection.objects.link(co); sc.camera = co
+
+    # 前景挂架 v2 (对齐②清单: 细圆管/挂杆/挂钩/垂坠袋)
+    hooks = build_pyramid_rack_v2((-0.05, -1.08))
+    rack_bags = [ASSETS[2], ASSETS[5], ASSETS[9]]
+    for hi, (hx, hy, hz, k) in enumerate(hooks):
+        img_plane(f"rbag{k}_{hi}", crop_bag(rack_bags[(hi + k) % 3], seed=70 + hi),
+                  0.062, 0.092, (hx, hy - 0.002, hz - 0.05),
+                  rot=(0, 0, (hash((hi, k)) % 7 - 3) * 0.6), emissive=0.12, rough=0.45)
 
     sc.render.filepath = str(OUT)
     bpy.ops.render.render(write_still=True)

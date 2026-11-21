@@ -51,9 +51,23 @@ def sign_band_frac():
     return {"method": "not_detected"}
 
 
+def reconcile_forms(groups):
+    """形式对账: VLM 细节粒度不可靠(用户实证) → 保守先验.
+    对账表证据: 桶装罐列在层左端; 袋型主体=枕袋/桶罐/自立袋. 盒读数降级为自立袋."""
+    out = []
+    for k, (fam, f, form) in enumerate(groups):
+        if form == "barrel" and k != 0:
+            form = "bag"
+        if form == "box":
+            form = "bag"
+        out.append((fam, f, form))
+    return out
+
+
 def main():
     levels = []
     for lv, groups in enumerate(ROWS):
+        groups = reconcile_forms(groups)
         # 宽度 ∝ facings × 单位宽 (真实 planogram 分配)
         weights = [f * UNIT_W[form] for (_, f, form) in groups]
         total = sum(weights)
@@ -79,6 +93,7 @@ def main():
             "reference": "data/shelf_twin_ref/primary.jpg",
             "structure": "vlm_read_full_photo (2026-11-21, 参照对齐语境)",
             "facings": "vlm_est",
+            "form_reconciliation": "桶仅保留层首组(对账表: 桶罐列在左端); 盒读数降级自立袋(VLM细节粒度不可靠)",
             "brand_replacement": "Topprism 12 设计族 (公开轨)",
         },
         "fixture": {

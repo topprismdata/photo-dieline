@@ -4,6 +4,7 @@
   "reference": "data/shelf_twin_ref/primary.jpg",
   "structure": "vlm_read_full_photo (2026-11-21, 参照对齐语境)",
   "facings": "vlm_est",
+  "form_reconciliation": "桶仅保留层首组(对账表: 桶罐列在左端); 盒读数降级自立袋(VLM细节粒度不可靠)",
   "brand_replacement": "Topprism 12 设计族 (公开轨)"
  },
  "fixture": {
@@ -29,18 +30,18 @@
      "design_id": "tp_03",
      "facings": 4,
      "facings_evidence": "vlm_est",
-     "form": "box",
+     "form": "bag",
      "x0_frac": 0.0,
-     "width_frac": 0.1325
+     "width_frac": 0.1481
     },
     {
      "color": "brown",
      "design_id": "tp_06",
      "facings": 7,
      "facings_evidence": "vlm_est",
-     "form": "box",
-     "x0_frac": 0.1325,
-     "width_frac": 0.2318
+     "form": "bag",
+     "x0_frac": 0.1481,
+     "width_frac": 0.2593
     },
     {
      "color": "brown",
@@ -48,8 +49,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.3642,
-     "width_frac": 0.1192
+     "x0_frac": 0.4074,
+     "width_frac": 0.1111
     },
     {
      "color": "purple",
@@ -57,8 +58,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.4834,
-     "width_frac": 0.1589
+     "x0_frac": 0.5185,
+     "width_frac": 0.1481
     },
     {
      "color": "yellow",
@@ -66,8 +67,8 @@
      "facings": 5,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.6424,
-     "width_frac": 0.1987
+     "x0_frac": 0.6667,
+     "width_frac": 0.1852
     },
     {
      "color": "red",
@@ -75,8 +76,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.8411,
-     "width_frac": 0.1589
+     "x0_frac": 0.8519,
+     "width_frac": 0.1481
     }
    ]
   },
@@ -89,27 +90,27 @@
      "design_id": "tp_02",
      "facings": 6,
      "facings_evidence": "vlm_est",
-     "form": "box",
+     "form": "bag",
      "x0_frac": 0.0,
-     "width_frac": 0.163
+     "width_frac": 0.1818
     },
     {
      "color": "gold",
      "design_id": "tp_09",
      "facings": 4,
      "facings_evidence": "vlm_est",
-     "form": "box",
-     "x0_frac": 0.163,
-     "width_frac": 0.1087
+     "form": "bag",
+     "x0_frac": 0.1818,
+     "width_frac": 0.1212
     },
     {
      "color": "yellow",
      "design_id": "tp_02",
      "facings": 4,
      "facings_evidence": "vlm_est",
-     "form": "box",
-     "x0_frac": 0.2717,
-     "width_frac": 0.1087
+     "form": "bag",
+     "x0_frac": 0.303,
+     "width_frac": 0.1212
     },
     {
      "color": "red",
@@ -117,8 +118,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.3804,
-     "width_frac": 0.0978
+     "x0_frac": 0.4242,
+     "width_frac": 0.0909
     },
     {
      "color": "yellow",
@@ -126,8 +127,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.4783,
-     "width_frac": 0.0978
+     "x0_frac": 0.5152,
+     "width_frac": 0.0909
     },
     {
      "color": "blue",
@@ -135,8 +136,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.5761,
-     "width_frac": 0.1304
+     "x0_frac": 0.6061,
+     "width_frac": 0.1212
     },
     {
      "color": "green",
@@ -144,8 +145,8 @@
      "facings": 5,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.7065,
-     "width_frac": 0.163
+     "x0_frac": 0.7273,
+     "width_frac": 0.1515
     },
     {
      "color": "red",
@@ -153,8 +154,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.8696,
-     "width_frac": 0.1304
+     "x0_frac": 0.8788,
+     "width_frac": 0.1212
     }
    ]
   },
@@ -169,25 +170,7 @@
      "facings_evidence": "vlm_est",
      "form": "barrel",
      "x0_frac": 0.0,
-     "width_frac": 0.0703
-    },
-    {
-     "color": "red",
-     "design_id": "tp_00",
-     "facings": 5,
-     "facings_evidence": "vlm_est",
-     "form": "barrel",
-     "x0_frac": 0.0703,
-     "width_frac": 0.1757
-    },
-    {
-     "color": "green",
-     "design_id": "tp_03",
-     "facings": 4,
-     "facings_evidence": "vlm_est",
-     "form": "barrel",
-     "x0_frac": 0.246,
-     "width_frac": 0.1406
+     "width_frac": 0.0683
     },
     {
      "color": "red",
@@ -195,8 +178,26 @@
      "facings": 5,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.3866,
-     "width_frac": 0.1917
+     "x0_frac": 0.0683,
+     "width_frac": 0.1863
+    },
+    {
+     "color": "green",
+     "design_id": "tp_03",
+     "facings": 4,
+     "facings_evidence": "vlm_est",
+     "form": "bag",
+     "x0_frac": 0.2547,
+     "width_frac": 0.1491
+    },
+    {
+     "color": "red",
+     "design_id": "tp_00",
+     "facings": 5,
+     "facings_evidence": "vlm_est",
+     "form": "bag",
+     "x0_frac": 0.4037,
+     "width_frac": 0.1863
     },
     {
      "color": "blue",
@@ -204,8 +205,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.5783,
-     "width_frac": 0.1534
+     "x0_frac": 0.5901,
+     "width_frac": 0.1491
     },
     {
      "color": "purple",
@@ -213,8 +214,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.7316,
-     "width_frac": 0.1534
+     "x0_frac": 0.7391,
+     "width_frac": 0.1491
     },
     {
      "color": "yellow",
@@ -222,8 +223,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.885,
-     "width_frac": 0.115
+     "x0_frac": 0.8882,
+     "width_frac": 0.1118
     }
    ]
   },
@@ -238,16 +239,16 @@
      "facings_evidence": "vlm_est",
      "form": "barrel",
      "x0_frac": 0.0,
-     "width_frac": 0.1512
+     "width_frac": 0.1486
     },
     {
      "color": "blue",
      "design_id": "tp_04",
      "facings": 5,
      "facings_evidence": "vlm_est",
-     "form": "barrel",
-     "x0_frac": 0.1512,
-     "width_frac": 0.189
+     "form": "bag",
+     "x0_frac": 0.1486,
+     "width_frac": 0.2027
     },
     {
      "color": "red",
@@ -255,8 +256,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.3402,
-     "width_frac": 0.1649
+     "x0_frac": 0.3514,
+     "width_frac": 0.1622
     },
     {
      "color": "blue",
@@ -264,8 +265,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.5052,
-     "width_frac": 0.1649
+     "x0_frac": 0.5135,
+     "width_frac": 0.1622
     },
     {
      "color": "yellow",
@@ -273,8 +274,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.6701,
-     "width_frac": 0.1649
+     "x0_frac": 0.6757,
+     "width_frac": 0.1622
     },
     {
      "color": "green",
@@ -282,8 +283,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.8351,
-     "width_frac": 0.1649
+     "x0_frac": 0.8378,
+     "width_frac": 0.1622
     }
    ]
   },
@@ -298,25 +299,25 @@
      "facings_evidence": "vlm_est",
      "form": "barrel",
      "x0_frac": 0.0,
-     "width_frac": 0.1354
+     "width_frac": 0.1325
     },
     {
      "color": "red",
      "design_id": "tp_00",
      "facings": 4,
      "facings_evidence": "vlm_est",
-     "form": "barrel",
-     "x0_frac": 0.1354,
-     "width_frac": 0.1354
+     "form": "bag",
+     "x0_frac": 0.1325,
+     "width_frac": 0.1446
     },
     {
      "color": "yellow",
      "design_id": "tp_02",
      "facings": 3,
      "facings_evidence": "vlm_est",
-     "form": "barrel",
-     "x0_frac": 0.2708,
-     "width_frac": 0.1015
+     "form": "bag",
+     "x0_frac": 0.2771,
+     "width_frac": 0.1084
     },
     {
      "color": "purple",
@@ -324,8 +325,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.3723,
-     "width_frac": 0.1108
+     "x0_frac": 0.3855,
+     "width_frac": 0.1084
     },
     {
      "color": "orange",
@@ -333,8 +334,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.4831,
-     "width_frac": 0.1477
+     "x0_frac": 0.494,
+     "width_frac": 0.1446
     },
     {
      "color": "dark",
@@ -342,8 +343,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.6308,
-     "width_frac": 0.1108
+     "x0_frac": 0.6386,
+     "width_frac": 0.1084
     },
     {
      "color": "yellow",
@@ -351,8 +352,8 @@
      "facings": 7,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.7415,
-     "width_frac": 0.2585
+     "x0_frac": 0.747,
+     "width_frac": 0.253
     }
    ]
   },
@@ -365,27 +366,27 @@
      "design_id": "tp_11",
      "facings": 3,
      "facings_evidence": "vlm_est",
-     "form": "box",
+     "form": "bag",
      "x0_frac": 0.0,
-     "width_frac": 0.1304
+     "width_frac": 0.1429
     },
     {
      "color": "pink",
      "design_id": "tp_07",
      "facings": 3,
      "facings_evidence": "vlm_est",
-     "form": "box",
-     "x0_frac": 0.1304,
-     "width_frac": 0.1304
+     "form": "bag",
+     "x0_frac": 0.1429,
+     "width_frac": 0.1429
     },
     {
      "color": "red",
      "design_id": "tp_00",
      "facings": 5,
      "facings_evidence": "vlm_est",
-     "form": "box",
-     "x0_frac": 0.2609,
-     "width_frac": 0.2174
+     "form": "bag",
+     "x0_frac": 0.2857,
+     "width_frac": 0.2381
     },
     {
      "color": "orange",
@@ -393,8 +394,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.4783,
-     "width_frac": 0.1565
+     "x0_frac": 0.5238,
+     "width_frac": 0.1429
     },
     {
      "color": "dark",
@@ -402,8 +403,8 @@
      "facings": 3,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.6348,
-     "width_frac": 0.1565
+     "x0_frac": 0.6667,
+     "width_frac": 0.1429
     },
     {
      "color": "yellow",
@@ -411,8 +412,8 @@
      "facings": 4,
      "facings_evidence": "vlm_est",
      "form": "bag",
-     "x0_frac": 0.7913,
-     "width_frac": 0.2087
+     "x0_frac": 0.8095,
+     "width_frac": 0.1905
     }
    ]
   },
