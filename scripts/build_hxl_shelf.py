@@ -153,6 +153,57 @@ def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0, rough=0.5)
     return o
 
 
+def img_bag_thin(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0):
+    """10mm 薄盒软袋: 正面贴图, 侧面/背面压暗纯色 — 实体厚度消'平面卡片'感 (GPT D3c P1)."""
+    import bmesh
+    t = 0.01
+    avg = Image.open(tex_path).resize((1, 1)).getpixel((0, 0))
+    mfront = bpy.data.materials.new(name + "_f")
+    mfront.use_nodes = True
+    mfront.use_backface_culling = True
+    nt = mfront.node_tree
+    bsdf = nt.nodes["Principled BSDF"]
+    bsdf.inputs["Roughness"].default_value = rough
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.image = bpy.data.images.load(str(tex_path))
+    nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    if emissive > 0:
+        em = nt.nodes.new("ShaderNodeEmission")
+        em.inputs["Strength"].default_value = emissive
+        nt.links.new(tex.outputs["Color"], em.inputs["Color"])
+        mix = nt.nodes.new("ShaderNodeMixShader")
+        nt.links.new(bsdf.outputs["BSDF"], mix.inputs[1])
+        nt.links.new(em.outputs["Emission"], mix.inputs[2])
+        nt.links.new(mix.outputs["Shader"], nt.nodes["Material Output"].inputs["Surface"])
+    msolid = bpy.data.materials.new(name + "_s")
+    msolid.use_nodes = True
+    sb = msolid.node_tree.nodes["Principled BSDF"]
+    sb.inputs["Base Color"].default_value = (avg[0]/255*0.55, avg[1]/255*0.55, avg[2]/255*0.55, 1)
+    sb.inputs["Roughness"].default_value = 0.5
+    mesh = bpy.data.meshes.new(name)
+    o = bpy.data.objects.new(name, mesh)
+    o.location = loc
+    o.rotation_euler = (0, 0, math.radians(lean))
+    bpy.context.scene.collection.objects.link(o)
+    b = bmesh.new()
+    V = [b.verts.new(v) for v in ((-w/2,-t/2,-h/2),(w/2,-t/2,-h/2),(w/2,-t/2,h/2),(-w/2,-t/2,h/2),
+                                  (-w/2,t/2,-h/2),(w/2,t/2,-h/2),(w/2,t/2,h/2),(-w/2,t/2,h/2))]
+    f0 = b.faces.new((V[0], V[1], V[2], V[3]))
+    uv = b.loops.layers.uv.verify()
+    for loop, (uu, vv) in zip(f0.loops, ((0, 0), (1, 0), (1, 1), (0, 1))):
+        loop[uv].uv = (uu, vv)
+    for fv in ((V[5],V[4],V[7],V[6]), (V[4],V[0],V[3],V[7]), (V[1],V[5],V[6],V[2]),
+               (V[3],V[2],V[6],V[7]), (V[4],V[5],V[1],V[0])):
+        b.faces.new(fv)
+    b.to_mesh(mesh); b.free()
+    mesh.materials.append(mfront)
+    mesh.materials.append(msolid)
+    mesh.polygons[0].material_index = 0
+    for poly in mesh.polygons[1:]:
+        poly.material_index = 1
+    return o
+
+
 def main():
     # 清启动场景 (事故 2026-11-21: 默认 Cube 2m 卡在相机与货架间 = 全程白雾元凶;
     # tde_driver 有 clean_scene, 此脚本没有 → 八轮"洗白"误诊为灯光/曝光/atlas)
@@ -226,13 +277,15 @@ def main():
                 ar = Image.open(a).width / Image.open(a).height
                 h_bag = bag_h0 * s0 * (0.96 + rng.random() * 0.08)
                 w_bag = h_bag * ar
-                x_bag = -SHELF_W / 2 + bw * (i + 0.5 + sh)  # 第二排半格错位 → 缝里露头
+                x_bag = -SHELF_W / 2 + bw * (i + 0.5 + sh) + (rng.random() - 0.5) * bw * 0.3  # 理货不齐
                 x_bag = -SHELF_W / 2 + bw / 2 if x_bag > SHELF_W / 2 - bw / 2 else x_bag
-                z_bot = z0 + 0.015  # 坐落层板唇
+                y_bag = y_off + (0.012 if rng.random() < 0.10 else 0.0)  # 10% 未推齐
+                z_bot = z0 + 0.013  # 坐落层板唇 (2mm 过盈=承重接触)
                 rough = 0.25 + rng.random() * 0.3
-                img_plane(f"bag{lv}_{r_i}_{i}", a, w_bag, h_bag,
-                          (x_bag, y_off, z_bot + h_bag / 2),
-                          emissive=0.06, rough=rough)
+                lean = 3.0 if i in (4, 11) else (rng.random() - 0.5) * 3.0  # 每层2袋明显歪
+                img_bag_thin(f"bag{lv}_{r_i}_{i}", a, w_bag, h_bag,
+                             (x_bag, y_bag, z_bot + h_bag / 2),
+                             emissive=0.06, rough=rough, lean=lean)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
@@ -242,7 +295,8 @@ def main():
         sc.collection.objects.link(blo)
         # 层板下沿灯带 (补层板唇高光)
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
-        lt.size = SHELF_W * 0.9; lt.size_y = 0.05; lt.energy = 24
+        lt.size = SHELF_W * 0.9; lt.size_y = 0.05
+        lt.energy = 24 * (0.8 + 0.4 * ((lv * 0.37) % 1.0))  # 层间光差 ±20%
         lo = bpy.data.objects.new(f"strip{lv}", lt)
         lo.location = (0, DEPTH - 0.10, z0 + 0.05)
         lo.rotation_euler = (math.radians(-70), 0, 0)
