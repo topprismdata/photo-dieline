@@ -40,6 +40,10 @@ OUT = Path(argv[0]) if argv else Path("/tmp/hxl_v1.png")
 ROOT = Path("/Users/guohongbin/photo-dieline")
 DESIGN_DIR = ROOT / "assets/pillow_designs"
 LV_GIDX = {}
+FOOD_PATCHES = [Image.open(pp) for pp in sorted((ROOT / "assets/food_patches").glob("*.png"))]
+FLAVOR_TINT = {"黄瓜味": (0.82, 1.10, 0.85), "青柠味": (0.85, 1.08, 0.82),
+               "番茄味": (1.10, 0.92, 0.85), "麻辣小龙虾味": (1.10, 0.90, 0.82),
+               "劲爆辣味": (1.12, 0.88, 0.80), "芝士味": (1.08, 1.04, 0.80)}
 
 # ---- 场景参数 (对账 v2) ----
 SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
@@ -416,7 +420,7 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
             bulge = math.sin(math.pi * u) * math.sin(math.pi * v)
             # H4: 鼓包非均匀 (低频不规则项, 逐袋相位差) + 封边褶皱 (高频浅纹)
             irr = 1 + 0.32 * math.sin(3 * math.pi * u + phi1) * math.sin(2 * math.pi * v + phi2)
-            wr = 0.0006 * math.sin(9 * math.pi * v) * (1 - math.sin(math.pi * u)) ** 2
+            wr = 0.0016 * math.sin(9 * math.pi * v + phi2 * 0.5) * (1 - math.sin(math.pi * u)) ** 2
             row.append(b.verts.new(((u - 0.5) * w * bow,
                                     -amp * bulge * irr + wr * (u * (1 - u) * 4)
                                     - (0.0 if fin else 0.0035),
@@ -538,18 +542,21 @@ def main():
                     if not dpath.exists():
                         dpath.parent.mkdir(parents=True, exist_ok=True)
                         col = FAMILY_RGB[g["color"]]  # 数据层色彩守 planogram
+                        patch = FOOD_PATCHES[gidx % len(FOOD_PATCHES)]
+                        tint = FLAVOR_TINT.get(FLAVORS[gidx % len(FLAVORS)])
                         base = render_print(768, col, FLAVORS[gidx % len(FLAVORS)],
-                                            seed=gidx * 7 + 3)
+                                            seed=gidx * 7 + 3, food_img=patch, tint=tint,
+                                            H=1707)  # v35 教训: 原生竖版 (ar≈0.45 真实薯片袋)
                         if style == 1:
                             # 极简: 40% 去饱和 + 大色块徽标带 (brand-minimal 体系)
                             from PIL import ImageEnhance
-                            base = ImageEnhance.Color(base).enhance(0.55)
+                            base = ImageEnhance.Color(base).enhance(0.72)
                             from PIL import ImageDraw as _D
                             _d = _D.Draw(base)
-                            _d.rectangle([0, int(768 * 0.30), 768, int(768 * 0.52)],
-                                         fill=(28, 30, 34))
+                            _d.rectangle([0, int(1707 * 0.34), 768, int(1707 * 0.46)],
+                                         fill=(38, 41, 46))
                             _f = _load_font_cn(int(768 * 0.085))
-                            _d.text((768 / 2, int(768 * 0.41)), "TOPPRISM",
+                            _d.text((768 / 2, int(1707 * 0.41)), "TOPPRISM",
                                     fill=(245, 245, 242), font=_f, anchor="mm")
                         elif style == 2:
                             # 牛皮纸哑光: 棕调乘色 + 强纸纹 (matte-kraft 体系)
@@ -563,15 +570,17 @@ def main():
                     a = dpath
                     ar = Image.open(a).width / Image.open(a).height
                     # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
-                    w_bag = bgw * (0.98 + rng.random() * 0.04)
-                    h_bag = min(w_bag / ar, LEVEL_H * 0.8)
+                    # 高度主导 (v35 教训: 宽度主导+窄 ar → 半高袋; 参照袋占层高 ~2/3)
+                    h_bag = LEVEL_H * (0.64 + rng.random() * 0.10)
+                    w_bag = min(h_bag * ar, bgw * 0.99)
+                    h_bag = w_bag / ar
                     clump = (i // 3) % 2 * 2.2 - 1.1  # H10 受压簇: 相邻3袋同向偏置
                     lean = 5.0 if rng.random() < 0.04 else (10.0 if rng.random() < 0.04 else (1.8 if i in (2, 9) else (rng.random() - 0.5) * 1.8 + clump))  # H11: 4% 强侧转
                     img_bag_curved(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
                                    (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
                                     y_bag, z_bot + h_bag / 2),
                                    emissive=0.02, rough=(0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, lean=lean,
-                                   amp=0.004 + rng.random() * 0.007,
+                                   amp=0.010 + rng.random() * 0.010,
                                    pitch=(rng.random() - 0.5) * 2.4,
                                    phi1=rng.random() * 6.28, phi2=rng.random() * 6.28,
                                    phi3=rng.random() * 6.28, phi4=rng.random() * 6.28)

@@ -17,7 +17,8 @@ from PIL import Image, ImageDraw, ImageFont
 FONT = "/System/Library/Fonts/STHeiti Medium.ttc"
 
 
-def render_print(S: int, col, sub: str, seed: int = 0, label: str = "TOPPRISM") -> Image.Image:
+def render_print(S: int, col, sub: str, seed: int = 0, label: str = "TOPPRISM",
+                 food_img: "Image.Image | None" = None, tint=None, H: int | None = None) -> Image.Image:
     """col: RGB 0-1 floats; 返回 S×S 印刷面."""
     h, l, sv = colorsys.rgb_to_hsv(*[c for c in col[:3]])
     sv = min(1.0, sv * 0.95)
@@ -25,14 +26,15 @@ def render_print(S: int, col, sub: str, seed: int = 0, label: str = "TOPPRISM") 
     base = tuple(int(c * 255) for c in (r, g, b))
     lite = tuple(min(255, int(c * 255 + 38)) for c in (r, g, b))
     dark = tuple(max(0, int(c * 255 - 52)) for c in (r, g, b))
-    im = Image.new("RGB", (S, S), base)
+    H = H or S
+    im = Image.new("RGB", (S, H), base)
     d = ImageDraw.Draw(im)
     rng = np.random.default_rng(seed)
 
     # 1) 顶品牌带 (更亮)
-    d.rectangle([0, 0, S, S // 6], fill=lite)
+    d.rectangle([0, 0, S, H // 6], fill=lite)
     # 2) 图案带 (上中, 斜纹或圆点 — 奇偶种子二选一)
-    band_y0, band_y1 = S // 6, int(S * 0.42)
+    band_y0, band_y1 = H // 7, int(H * 0.46)
     if seed % 2 == 0:
         step = S // 16
         for x0 in range(-S, S * 2, step * 2):
@@ -45,36 +47,56 @@ def render_print(S: int, col, sub: str, seed: int = 0, label: str = "TOPPRISM") 
                 rad = S // 34
                 d.ellipse([xx - rad, yy - rad, xx + rad, yy + rad], fill=dark)
     # 食品窗背景 (中下, 更亮收口; 版式: 品牌字 0.37-0.57, 窗 0.60-0.82 不相撞)
-    win = [S * 0.14, int(S * 0.60), S * 0.86, int(S * 0.82)]
+    win = [S * 0.10, int(H * 0.52), S * 0.90, int(H * 0.82)]  # 竖版大窗
     d.rounded_rectangle(win, radius=S // 22, fill=(250, 248, 242), outline=dark, width=max(2, S // 240))
-    # 3) 食品窗内容: 暖色椭圆簇 (薯片堆意象, 充满窗) + 高光点
-    cx, cy = (win[0] + win[2]) / 2, (win[1] + win[3]) / 2 + S * 0.01
-    warm = [(243, 196, 80), (238, 160, 66), (214, 120, 52), (245, 214, 120)]
-    for k in range(18):
-        ang = rng.random() * math.pi * 2
-        rad = rng.random() * S * 0.14
-        ex, ey = cx + math.cos(ang) * rad, cy + math.sin(ang) * rad * 0.62
-        ew = S * (0.055 + rng.random() * 0.05)
-        c = warm[k % len(warm)]
-        # 不规则波浪边薯片 (8 顶点多边形+深色描边) — 纯椭圆=生成感
-        pts = []
-        for m in range(8):
-            a2 = m / 8 * math.pi * 2
-            wob = 1.0 + (rng.random() - 0.5) * 0.34
-            pts.append((ex + math.cos(a2) * ew * wob, ey + math.sin(a2) * ew * 0.62 * wob))
-        d.polygon(pts, fill=c, outline=tuple(max(0, cc - 40) for cc in c), width=max(2, S // 320))
-        # 内弧纹理 (薯片弧度)
-        d.arc([ex - ew * 0.6, ey - ew * 0.5, ex + ew * 0.6, ey + ew * 0.5],
-              rng.integers(0, 180), rng.integers(180, 330), fill=(255, 245, 220), width=max(2, S // 400))
-    for k in range(8):
-        hx = cx + (rng.random() - 0.5) * S * 0.3
-        hy = cy + (rng.random() - 0.5) * S * 0.16
-        hr = S * 0.014
-        d.ellipse([hx - hr, hy - hr, hx + hr, hy + hr], fill=(255, 250, 235))
+    # 3) 食品窗内容: 摄影食物补丁 (H14, 净区裁剪) 优先; 无补丁回退椭圆簇
+    if food_img is not None:
+        fi = food_img.convert("RGB")
+        wr, hr = int(win[2] - win[0]), int(win[3] - win[1])
+        sc = max(wr / fi.width, hr / fi.height)
+        fi = fi.resize((int(fi.width * sc) + 1, int(fi.height * sc) + 1), Image.LANCZOS)
+        fx = (fi.width - wr) // 2
+        fy = (fi.height - hr) // 2
+        fi = fi.crop((fx, fy, fx + wr, fy + hr))
+        if tint is not None:
+            arr = np.asarray(fi, dtype=float)
+            arr[..., 0] = np.clip(arr[..., 0] * (1 + tint[0]), 0, 255)
+            arr[..., 1] = np.clip(arr[..., 1] * (1 + tint[1]), 0, 255)
+            arr[..., 2] = np.clip(arr[..., 2] * (1 + tint[2]), 0, 255)
+            fi = Image.fromarray(arr.astype("uint8"))
+        mask = Image.new("L", (wr, hr), 0)
+        _md = ImageDraw.Draw(mask)
+        _md.rounded_rectangle([0, 0, wr - 1, hr - 1], radius=S // 22, fill=255)
+        im.paste(fi, (int(win[0]), int(win[1])), mask)
+    # 3b) 无补丁回退: 暖色椭圆簇 (薯片堆意象, 充满窗) + 高光点
+    if food_img is None:
+        cx, cy = (win[0] + win[2]) / 2, (win[1] + win[3]) / 2 + H * 0.01
+        warm = [(243, 196, 80), (238, 160, 66), (214, 120, 52), (245, 214, 120)]
+        for k in range(18):
+            ang = rng.random() * math.pi * 2
+            rad = rng.random() * S * 0.14
+            ex, ey = cx + math.cos(ang) * rad, cy + math.sin(ang) * rad * 0.62
+            ew = S * (0.055 + rng.random() * 0.05)
+            c = warm[k % len(warm)]
+            # 不规则波浪边薯片 (8 顶点多边形+深色描边) — 纯椭圆=生成感
+            pts = []
+            for m in range(8):
+                a2 = m / 8 * math.pi * 2
+                wob = 1.0 + (rng.random() - 0.5) * 0.34
+                pts.append((ex + math.cos(a2) * ew * wob, ey + math.sin(a2) * ew * 0.62 * wob))
+            d.polygon(pts, fill=c, outline=tuple(max(0, cc - 40) for cc in c), width=max(2, S // 320))
+            # 内弧纹理 (薯片弧度)
+            d.arc([ex - ew * 0.6, ey - ew * 0.5, ex + ew * 0.6, ey + ew * 0.5],
+                  rng.integers(0, 180), rng.integers(180, 330), fill=(255, 245, 220), width=max(2, S // 400))
+        for k in range(8):
+            hx = cx + (rng.random() - 0.5) * S * 0.3
+            hy = cy + (rng.random() - 0.5) * S * 0.16
+            hr = S * 0.014
+            d.ellipse([hx - hr, hy - hr, hx + hr, hy + hr], fill=(255, 250, 235))
     # 4) 风味横幅 (底部深色带 + 品名小注 + 条码/净含量微字)
-    d.rectangle([0, int(S * 0.84), S, S], fill=dark)
+    d.rectangle([0, int(H * 0.84), S, H], fill=dark)
     f2 = ImageFont.truetype(FONT, int(S * 0.075), index=0)
-    d.text((int(S * 0.42), int(S * 0.92)), sub, font=f2, fill=(255, 255, 255), anchor="mm")
+    d.text((int(S * 0.42), int(H * 0.92)), sub, font=f2, fill=(255, 255, 255), anchor="mm")
     bx, bw_, bh_ = S * 0.62, S * 0.24, S * 0.07
     d.rectangle([bx, S * 0.885, bx + bw_, S * 0.885 + bh_], fill=(248, 248, 246))
     xx = bx + S * 0.012
@@ -105,6 +127,6 @@ def render_print(S: int, col, sub: str, seed: int = 0, label: str = "TOPPRISM") 
     d.text((S // 2, ty), label, font=f, fill=(30, 30, 34), anchor="mm")
     # 7) 纸纹: 垂直渐变 + 亮度颗粒 (D4a: 纯平色场=塑料感根因)
     arr = np.asarray(im).astype(np.float32)
-    arr *= np.linspace(1.0, 0.9, S)[:, None, None]
+    arr *= np.linspace(1.0, 0.9, H)[:, None, None]
     arr += np.random.default_rng(seed + 100).normal(0, 4.5, arr.shape)
     return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
