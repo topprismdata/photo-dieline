@@ -49,8 +49,17 @@ FLAVOR_TINT = {"黄瓜味": (0.82, 1.10, 0.85), "青柠味": (0.85, 1.08, 0.82),
                "番茄味": (1.10, 0.92, 0.85), "麻辣小龙虾味": (1.10, 0.90, 0.82),
                "劲爆辣味": (1.12, 0.88, 0.80), "芝士味": (1.08, 1.04, 0.80)}
 
-# ---- 场景参数 (对账 v2) ----
-SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
+# ---- 场景参数 (ESR Step A: planogram.json 驱动; 缺省回退对账 v2) ----
+_PLANO = ROOT / "docs/shelf_twin/planogram.json"
+if _PLANO.exists():
+    _pj = json.loads(_PLANO.read_text())
+    SHELVES = _pj["shelf"]["layers"]
+    LEVEL_H = _pj["shelf"]["layer_pitch_mm"] / 1000.0
+    SHELF_W = _pj["shelf"]["shelf_width_mm"] / 1000.0
+    DEPTH = _pj["shelf"]["board_depth_mm"] / 1000.0
+    print(f"[planogram] LEVEL_H={LEVEL_H:.3f} SHELVES={SHELVES} (标定驱动)")
+else:
+    SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
 ASSETS = sorted((ROOT / "assets/pillow_bags").glob("*.png"))
 FAMILY_RGB = {  # 12 设计族基色 (与 make_planogram.FAMILY_IDX 同序)
     "red": (0.82, 0.22, 0.10), "orange": (0.92, 0.45, 0.10), "yellow": (0.95, 0.72, 0.12),
@@ -514,7 +523,7 @@ def build_cloth_library(n_per=6):  # D35: 48→72变体
         # 预噪声: 逐变体折叠独特性
         for vtx in mesh.vertices:
             if vtx.co.z > 0.004 and vtx.co.z < BH - 0.004:
-                vtx.co.y += float(rng.normal(0, 0.00045))
+                vtx.co.y += float(rng.normal(0, 0.00015))  # G1修: 预噪声收敛
         obj = bpy.data.objects.new(f"clothsrc_{var:02d}", mesh)
         lib_col.objects.link(obj)
         vg = obj.vertex_groups.new(name="pin")
@@ -526,13 +535,13 @@ def build_cloth_library(n_per=6):  # D35: 48→72变体
         cl.vertex_group_mass = "pin"
         cl.quality = 5
         cl.mass = 0.08
-        cl.tension_stiffness = 45 * (0.85 + rng.random() * 0.3)
+        cl.tension_stiffness = 60 * (0.9 + rng.random() * 0.2)  # G1修: 绷紧充气枕
         cl.compression_stiffness = 45 * (0.85 + rng.random() * 0.3)
         cl.shear_stiffness = 22
         cl.bending_stiffness = 3.5 * (0.7 + rng.random() * 0.6)
         cl.air_damping = 2.0
         cl.time_scale = 1.2
-        cl.pressure_factor = 1.1 + rng.random() * 0.5
+        cl.pressure_factor = 2.0 + rng.random() * 0.6  # G1修: 饱满鼓胀 (皱纸片→充气枕)
         cs = mod.collision_settings
         cs.use_self_collision = True
         cs.self_distance_min = 0.0025
@@ -550,7 +559,7 @@ def build_cloth_library(n_per=6):  # D35: 48→72变体
             cmb.free()
             cwo = bpy.data.objects.new(f"cwall{var}_{side}", cw)
             lib_col.objects.link(cwo)
-        if rng.random() < 0.4:
+        if rng.random() < 0.2:  # G1修: 顶弯折减半
             cf = bpy.data.meshes.new(f"cf{var}")
             cmb = bmesh.new()
             f1 = cmb.verts.new((-BW, -0.028, BH * 0.86))
@@ -670,6 +679,19 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
     return o
 
 
+def apply_clay_override():
+    """白模模式: 所有网格覆写单一中性灰材质 (形态验收专用, 逐层验证前禁止看印刷)."""
+    clay = bpy.data.materials.new("clay_grey")
+    clay.use_nodes = True
+    b = clay.node_tree.nodes["Principled BSDF"]
+    b.inputs["Base Color"].default_value = (0.62, 0.62, 0.63, 1)
+    b.inputs["Roughness"].default_value = 0.55
+    for o in bpy.data.objects:
+        if o.type == 'MESH':
+            o.data.materials.clear()
+            o.data.materials.append(clay)
+
+
 def main():
     # 清启动场景 (事故 2026-11-21: 默认 Cube 2m 卡在相机与货架间 = 全程白雾元凶;
     # tde_driver 有 clean_scene, 此脚本没有 → 八轮"洗白"误诊为灯光/曝光/atlas)
@@ -724,7 +746,7 @@ def main():
         # 层板 (白板)
         bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH / 2, z0))
         sh = bpy.context.active_object
-        sh.scale = (SHELF_W / 2, DEPTH / 2, 0.018)
+        sh.scale = (SHELF_W / 2, DEPTH / 2, 0.011)  # G1修: 2cm薄板
         sh.name = f"shelf{lv}"
         m = bpy.data.materials.new(f"shm{lv}"); m.use_nodes = True
         m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.92, 0.92, 0.94, 1)
@@ -816,7 +838,7 @@ def main():
                     ar = Image.open(a).width / Image.open(a).height
                     # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
                     # 高度主导 (v35 教训: 宽度主导+窄 ar → 半高袋; 参照袋占层高 ~2/3)
-                    h_bag = LEVEL_H * (0.64 + rng.random() * 0.10)
+                    h_bag = LEVEL_H * (0.72 + rng.random() * 0.08)  # G1修: 密排充满
                     w_bag = min(h_bag * ar, bgw * 0.99)
                     h_bag = w_bag / ar
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
@@ -915,6 +937,8 @@ def main():
                   0.062, 0.092, (hx, hy - 0.002, hz - 0.05),
                   rot=(0, 0, (hash((hi, k)) % 7 - 3) * 0.6), emissive=0.12, rough=0.45)
 
+    if "--clay" in argv:
+        apply_clay_override()
     sc.render.filepath = str(OUT)
     bpy.ops.render.render(write_still=True)
     print("HXL_SHELF_OK", OUT)

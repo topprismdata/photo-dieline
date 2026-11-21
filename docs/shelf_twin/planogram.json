@@ -1,0 +1,27 @@
+{
+  "store": "好想来 (研究性参照, 公开发布前 Topprism 化)",
+  "version": "1.0 (M3.1 标定后)",
+  "calibration": {
+    "method": "Criminisi single-view metrology (m31, gate-spatial)",
+    "status": "PARTIAL: 结构正确, 毫米级受限 (rms27px)",
+    "layer_pitch_mm": 310,
+    "layer_pitch_uncertainty_pct": 15,
+    "bottom_lip_mm": 450,
+    "tile_mm": 300,
+    "pixel_direct_check": "层界y 393/520/632/742/852/942/1012 -> 层距像素127/112/110/110/90/70 (透视压缩单调自洽)"
+  },
+  "shelf": {
+    "layers": 7,
+    "layer_pitch_mm": 310,
+    "shelf_width_mm": 2400,
+    "board_depth_mm": 400,
+    "total_height_mm": 2420
+  },
+  "price_tags": {"L1": "2.9", "L2": "5.8", "L3": "5.9", "L4": "5.5", "L5": "7.2", "L6": "7.2/1.7", "L7": "1.0"},
+  "visual_language": {
+    "color_blocks": "每层单色系分块 (黄桶/棕金/蓝绿红黄袋列)",
+    "backlight": "层板后墙发光+顶部射灯",
+    "floor": "300mm 棋盘砖 (logo 线画污染)"
+  },
+  "uncertainty_note": "毫米值未经毫米级标定锁定; 标定升级后精化 (路径: 清晰棋盘素材/EXIF/店测基准)"
+}
