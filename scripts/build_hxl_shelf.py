@@ -709,7 +709,8 @@ def main():
         pass
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Punchy"   # 默认 look 强去饱和 (冷柜线已知坑)
-    sc.view_settings.exposure = -0.10  # D37: 微暗 (实拍不如渲染亮)
+    sc.view_settings.exposure = -0.55
+    sc.view_settings.gamma = 1.02
     sc.render.resolution_x, sc.render.resolution_y = 720, 1044
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
     # H1 光照重构: HDRI 世界给光泽面反射内容 (黑虚空=塑料感根源, 杠杆#4)
@@ -835,6 +836,13 @@ def main():
                             base = Image.fromarray(np.clip(kraft + grain, 0, 255).astype("uint8"))
                         base.save(dpath)
                     a = dpath
+                    from PIL import ImageEnhance as _IE
+                    _sat = Image.open(a)
+                    _sat = _IE.Color(_sat).enhance(1.28)
+                    _sat = _IE.Contrast(_sat).enhance(1.08)
+                    _satp = dpath.with_suffix(".sat.png")
+                    _sat.save(_satp)
+                    a = _satp
                     ar = Image.open(a).width / Image.open(a).height
                     # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
                     # 高度主导 (v35 教训: 宽度主导+窄 ar → 半高袋; 参照袋占层高 ~2/3)
@@ -898,13 +906,13 @@ def main():
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
         if i == 1:
-            lt.energy = 640; lt.spot_size = math.radians(38); lt.shadow_soft_size = 0.14  # D39: 软影保高光
+            lt.energy = 920; lt.spot_size = math.radians(38); lt.shadow_soft_size = 0.14  # D39: 软影保高光
             lt.color = (1.0, 0.96, 0.90)  # D37: 主光微暖
             # 5.2 EEVEE Next: contact_shadow 已移除 (阴影由 RT 阴影覆盖)
         elif i == 2:
-            lt.energy = 58; lt.spot_size = math.radians(38)   # H7: 右辅光压暗 (光比不均=局部阴影)
+            lt.energy = 38; lt.spot_size = math.radians(38)   # H7: 右辅光压暗 (光比不均=局部阴影)
         else:
-            lt.energy = 88; lt.spot_size = math.radians(55)  # D38: 辅光再压 (光比加深)
+            lt.energy = 60; lt.spot_size = math.radians(55)  # D38: 辅光再压 (光比加深)
         lo = bpy.data.objects.new(f"spot{i}", lt)
         lo.location = (x, -0.7, SHELVES * LEVEL_H + 0.55)
         aim = Vector((x * 0.6, DEPTH / 2, 1.0)) - lo.location
@@ -919,11 +927,11 @@ def main():
     flo.rotation_euler = (math.radians(65), 0, 0)
     sc.collection.objects.link(flo)
 
-    # 人位相机 (对账 v2: 站位偏右, 平视微仰, 透视向左收敛, 微滚转)
-    cam = bpy.data.cameras.new("c"); cam.lens = 32
+    # 人位相机 (primary.jpg 对齐: 站右端向左纵深看, 左远右近, 广角手机视场, 微滚转)
+    cam = bpy.data.cameras.new("c"); cam.lens = 28
     co = bpy.data.objects.new("c", cam)
-    co.location = (0.85, -1.55, 1.28)
-    aim = Vector((-0.30, DEPTH / 2, 1.22)) - co.location
+    co.location = (0.50, -1.42, 1.30)
+    aim = Vector((-0.15, DEPTH / 2, 1.21)) - co.location
     rot = aim.to_track_quat('-Z', 'Y').to_euler()
     rot.rotate_axis('Y', math.radians(-2.0))  # 微滚转
     co.rotation_euler = rot
