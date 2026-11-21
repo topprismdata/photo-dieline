@@ -92,34 +92,11 @@ def build_mesh():
 
 
 def make_atlas(path: Path):
-    from PIL import Image, ImageDraw, ImageFont
-    S = 1024
-    import colorsys
-    _h, _l, _sv = colorsys.rgb_to_hsv(*[c for c in COL[:3]])
-    _sv = min(1.0, _sv * 1.2)
-    _r, _g, _b = colorsys.hsv_to_rgb(_h, _sv, _l)
-    _col = (_r, _g, _b, 1.0)  # 局部饱和增强色 (不遮蔽全局 COL)
-    im = Image.new("RGB", (S, S), tuple(int(c * 255) for c in _col[:3]))
-    d = ImageDraw.Draw(im)
-    # 色块主导 (对账: 排面远观读色系): 白窗收窄至 30% 居中, 顶带亮色+品字
-    d.rectangle([0, 0, S, S // 5], fill=tuple(min(255, int(c * 255 + 45)) for c in _col[:3]))
-    d.rounded_rectangle([S * 4 // 10, S * 9 // 20, S * 6 // 10, S * 13 // 20], radius=14, fill=(250, 248, 242))
-    try:
-        f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 96, index=0)
-        f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 340, index=0)
-        _size = 340  # 宽度自适应: 全词入画 (340 会把 TOPPRISM 裁成 PPRIS) 碎片)
-        while _size > 40:
-            _bb = d.textbbox((0, 0), LABEL, font=f)
-            if _bb[2] - _bb[0] <= 0.82 * S:
-                break
-            _size -= 16
-            f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", _size, index=0)
-    except Exception:
-        f = f2 = ImageFont.load_default()
-    d.text((S // 2, S * 0.55), LABEL, font=f, fill=(30, 30, 34), anchor="mm")
-    d.text((S // 2, S * 0.13), SUB, font=f2, fill=(255, 255, 255), anchor="mm")
-    d.text((S // 2, S * 0.12), "NEW", font=f2, fill=(255, 255, 255), anchor="mm")
-    im.save(path)
+    """印刷面: bag_print.render_print v2 (多区排版/图案带/食品窗/吉祥物/纸纹)."""
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).parent))
+    from bag_print import render_print
+    render_print(1024, COL[:3], SUB, seed=hash(COL) % 97, label=LABEL).save(path)
 
 
 def make_material(obj, atlas: Path):
