@@ -91,16 +91,19 @@ def pil_tex_floor():
 
 def pil_tex_sign():
     from PIL import Image, ImageDraw, ImageFont
-    im = Image.new("RGB", (2048, 320), (196, 30, 38))
+    im = Image.new("RGB", (2048, 512), (196, 30, 38))
     d = ImageDraw.Draw(im)
     try:
-        f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 150, index=0)
-        f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 70, index=0)
+        f = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 190, index=0)
+        f2 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 120, index=0)
+        f3 = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 88, index=0)
     except Exception:
-        f = f2 = ImageFont.load_default()
-    d.text((80, 160), "好想来", font=f, fill=(255, 255, 255), anchor="lm")
-    d.text((760, 160), "品牌零食", font=f, fill=(255, 220, 80), anchor="lm")
-    d.text((1340, 160), "一件也是批发价", font=f2, fill=(255, 255, 255), anchor="lm")
+        f = f2 = f3 = ImageFont.load_default()
+    d.text((70, 150), "来来来 好想来", font=f, fill=(255, 255, 255), anchor="lm")
+    d.text((70, 360), "又便宜 又好吃", font=f2, fill=(255, 230, 90), anchor="lm")
+    d.rounded_rectangle([1470, 90, 1990, 430], radius=36, fill=(252, 250, 244))
+    d.text((1730, 200), "好想来", font=f3, fill=(196, 30, 38), anchor="mm")
+    d.text((1730, 330), "品牌零食", font=f3, fill=(196, 30, 38), anchor="mm")
     p = Path("/tmp/hxl_sign.png"); im.save(p); return p
 
 
@@ -212,6 +215,8 @@ def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0, rough=0.5)
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
+    bsdf.inputs["Coat Weight"].default_value = 0.10      # 镀铝亮面袋 (0.28 洗白印刷, 再平衡实证)
+    bsdf.inputs["Coat Roughness"].default_value = 0.16
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
     nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
@@ -255,6 +260,8 @@ def img_bag_thin(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0):
     nt = mfront.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
+    bsdf.inputs["Coat Weight"].default_value = 0.10      # 镀铝亮面袋 (0.28 洗白印刷, 再平衡实证)
+    bsdf.inputs["Coat Roughness"].default_value = 0.16
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
     nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
@@ -436,6 +443,8 @@ def bag_material(name, tex_path, rough=0.4, emissive=0.06):
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
+    bsdf.inputs["Coat Weight"].default_value = 0.10      # 镀铝亮面袋 (0.28 洗白印刷, 再平衡实证)
+    bsdf.inputs["Coat Roughness"].default_value = 0.16
     nz = nt.nodes.new("ShaderNodeTexNoise")
     nz.inputs["Scale"].default_value = 620.0
     nz.inputs["Detail"].default_value = 4.0
@@ -597,6 +606,8 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
+    bsdf.inputs["Coat Weight"].default_value = 0.10      # 镀铝亮面袋 (0.28 洗白印刷, 再平衡实证)
+    bsdf.inputs["Coat Roughness"].default_value = 0.16
     # H8 表面微真实: 印刷颗粒 (噪声乘色) + 粗糙度微_map + 塑料清漆双层
     nz = nt.nodes.new("ShaderNodeTexNoise")
     nz.inputs["Scale"].default_value = 620.0
@@ -731,7 +742,7 @@ def main():
               (0, DEPTH - 0.05, SHELVES * LEVEL_H / 2), emissive=1.1)
 
     # 招牌横带 (货架顶沿连体)
-    img_plane("sign", pil_tex_sign(), SHELF_W, 0.42,
+    img_plane("sign", pil_tex_sign(), SHELF_W, 0.62,
               (0, DEPTH - 0.04, SHELVES * LEVEL_H + 0.30), emissive=1.2)
 
     # 层板 + 前唇 + 排面 + 价签
@@ -838,7 +849,7 @@ def main():
                     a = dpath
                     from PIL import ImageEnhance as _IE
                     _sat = Image.open(a)
-                    _sat = _IE.Color(_sat).enhance(1.28)
+                    _sat = _IE.Color(_sat).enhance(1.40)
                     _sat = _IE.Contrast(_sat).enhance(1.08)
                     _satp = dpath.with_suffix(".sat.png")
                     _sat.save(_satp)
@@ -928,9 +939,9 @@ def main():
     sc.collection.objects.link(flo)
 
     # 人位相机 (primary.jpg 对齐: 站右端向左纵深看, 左远右近, 广角手机视场, 微滚转)
-    cam = bpy.data.cameras.new("c"); cam.lens = 28
+    cam = bpy.data.cameras.new("c"); cam.lens = 26
     co = bpy.data.objects.new("c", cam)
-    co.location = (0.50, -1.42, 1.30)
+    co.location = (0.55, -1.85, 1.44)
     aim = Vector((-0.15, DEPTH / 2, 1.21)) - co.location
     rot = aim.to_track_quat('-Z', 'Y').to_euler()
     rot.rotate_axis('Y', math.radians(-2.0))  # 微滚转
