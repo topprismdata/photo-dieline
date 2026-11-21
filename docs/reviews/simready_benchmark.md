@@ -93,3 +93,46 @@ python3 scripts/gate_semantic_coverage.py                                  # 我
 python3 scripts/gate_semantic_coverage.py --usd-dir assets/simready_official/beer --out /tmp/g.json
 python3 scripts/bench_simready_physics.py                                  # 官方 3 件静置
 ```
+
+## 量化对标 (同日追加): 官方能力清单双侧检查器
+
+`scripts/check_simready_conformance.py` 把官方资产内嵌验证矩阵的 CAP/FET 建模为
+10 项可执行检查, 同表量测双侧:
+
+| 能力(官方ID建模) | ESR(14) | 官方(3) |
+|---|---|---|
+| CORE_OPENUSD (CAP000) | 14/14 | 3/3 |
+| SELF_CONTAINED (CAP031) | 14/14 | 3/3 |
+| PLACEABLE_VISUAL (FET001) | 14/14 | 3/3 |
+| WIKIDATA_LABELS (CAP046) | 14/14 | 3/3 |
+| WIKIDATA_QCODE | **0/14 → 14/14** | 3/3 |
+| SEMANTIC_MATERIAL (FET011) | 14/14 | 3/3 |
+| MATERIALS_BOUND (FET006) | **0/14 → 14/14** | 3/3 |
+| EXTENTS_METADATA | 14/14 | 3/3 |
+| MASS_METADATA | 14/14 | 3/3 |
+| RIGID_BODY_MUJOCO (CAP003) | 14/14 | 3/3 |
+
+**总分: ESR 112/140 (80%) → 富化后 140/140 (100%)**, 官方 30/30。
+
+富化 (`scripts/enrich_sku_usd.py`): ①`wikidata_qcode=Q749316` (snack,
+wikidata.org 实证) ②UsdPreviewSurface 材质入 USD + crop 贴图 assetpath +
+material:binding (bag 12 件真贴图; barrel/box 场景侧程序化标签无 crop 源 →
+家族色常量, 贴图欠账如实)。富化后全链回归: ESR COMPLIANT 保持 (物理 14/14 +
+语义 14/14 + 渲染对齐 1/1)。
+
+### 诚实边界
+
+- 100% 是**我方建模的 10 项子集**上的分数;官方资产仍携带超出检查单的能力
+  (FET005 抓取点/CAP004 多体/MDL 材质/USDZ 封装/per-backend runnables) ——
+  即"官方清单对齐", 非"官方能力全覆盖"。
+- 我方独有且官方矩阵没有的量化项: **语义覆盖 CPU 光栅化数值**(逐资产
+  on_coverage/labelled_frac)、**参照对齐门**(真实照片坐标系)、**物理 KE 数值
+  落盘**。这是"超越"叙事的当前证据形态: 对齐清单 + 官方没有的量化维度,
+  而非官方能力全包。
+
+### 中途负结果 (即修)
+
+- 首轮 MATERIALS_BOUND 0/14 取证为**真实缺口**: 我方 USD 导出曾是纯几何
+  (材质留在 Blender 场景), 已由富化闭合。
+- SEMANTIC_MATERIAL 官方 0/3 为查询方式错(材质标签在材质 prim 非祖先链),
+  修正后 3/3 —— 检查器自身的 bug 不入账为对方缺陷。

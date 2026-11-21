@@ -1,0 +1,341 @@
+{
+ "schema": "simready-conformance/1.0",
+ "checks": [
+  "CORE_OPENUSD",
+  "SELF_CONTAINED",
+  "PLACEABLE_VISUAL",
+  "WIKIDATA_LABELS",
+  "WIKIDATA_QCODE",
+  "SEMANTIC_MATERIAL",
+  "MATERIALS_BOUND",
+  "EXTENTS_METADATA",
+  "MASS_METADATA",
+  "RIGID_BODY_MUJOCO"
+ ],
+ "rows": [
+  {
+   "side": "esr",
+   "asset": "bag_tp_00",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_01",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_02",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_03",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_04",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_05",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_06",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_07",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_08",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_09",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_10",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "bag_tp_11",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "barrel_tp_00",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "esr",
+   "asset": "box_tp_00",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "official",
+   "asset": "banana",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "official",
+   "asset": "beer",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  },
+  {
+   "side": "official",
+   "asset": "bottle",
+   "checks": {
+    "CORE_OPENUSD": true,
+    "SELF_CONTAINED": true,
+    "PLACEABLE_VISUAL": true,
+    "WIKIDATA_LABELS": true,
+    "WIKIDATA_QCODE": true,
+    "SEMANTIC_MATERIAL": true,
+    "MATERIALS_BOUND": true,
+    "EXTENTS_METADATA": true,
+    "MASS_METADATA": true,
+    "RIGID_BODY_MUJOCO": true
+   }
+  }
+ ],
+ "summary": {
+  "CORE_OPENUSD": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "SELF_CONTAINED": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "PLACEABLE_VISUAL": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "WIKIDATA_LABELS": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "WIKIDATA_QCODE": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "SEMANTIC_MATERIAL": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "MATERIALS_BOUND": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "EXTENTS_METADATA": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "MASS_METADATA": {
+   "esr": "14/14",
+   "official": "3/3"
+  },
+  "RIGID_BODY_MUJOCO": {
+   "esr": "14/14",
+   "official": "3/3"
+  }
+ },
+ "totals": {
+  "esr": [
+   140,
+   140
+  ],
+  "official": [
+   30,
+   30
+  ]
+ }
+}
