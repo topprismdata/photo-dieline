@@ -58,9 +58,10 @@ if _PLANO.exists():
     LEVEL_H = _pj["shelf"]["layer_pitch_mm"] / 1000.0
     SHELF_W = _pj["shelf"]["shelf_width_mm"] / 1000.0
     DEPTH = _pj["shelf"]["board_depth_mm"] / 1000.0
-    print(f"[planogram] LEVEL_H={LEVEL_H:.3f} SHELVES={SHELVES} (标定驱动)")
+    LIP = _pj["calibration"].get("bottom_lip_mm", 450) / 1000.0  # M31 标定底唇 450mm (FTC 拟合同基准)
+    print(f"[planogram] LEVEL_H={LEVEL_H:.3f} SHELVES={SHELVES} LIP={LIP:.3f} (标定驱动)")
 else:
-    SHELVES, LEVEL_H, SHELF_W, DEPTH = 7, 0.38, 2.4, 0.40
+    SHELVES, LEVEL_H, SHELF_W, DEPTH, LIP = 7, 0.38, 2.4, 0.40, 0.45
 ASSETS = sorted((ROOT / "assets/pillow_bags").glob("*.png"))
 FAMILY_RGB = {  # 12 设计族基色 (与 make_planogram.FAMILY_IDX 同序)
     "red": (0.82, 0.22, 0.10), "orange": (0.92, 0.45, 0.10), "yellow": (0.95, 0.72, 0.12),
@@ -746,11 +747,11 @@ def main():
 
     # 背光板 (发光背墙, 位于货架后)
     img_plane("backwall", pil_tex_backwall(), SHELF_W, SHELVES * LEVEL_H + 0.5,
-              (0, DEPTH - 0.05, SHELVES * LEVEL_H / 2), emissive=1.1)
+              (0, DEPTH - 0.05, LIP + SHELVES * LEVEL_H / 2), emissive=1.1)
 
     # 招牌横带 (货架顶沿连体)
     img_plane("sign", pil_tex_sign(), SHELF_W, 0.62,
-              (0, DEPTH - 0.04, SHELVES * LEVEL_H + 0.30), emissive=1.2)
+              (0, DEPTH - 0.04, LIP + SHELVES * LEVEL_H + 0.30), emissive=1.2)
 
     # 层板 + 前唇 + 排面 + 价签
     tag_texts = ["2.9", "4.9", "5.8", "5.9", "7.2", "1.7", "3.5"]
@@ -761,7 +762,7 @@ def main():
     build_cloth_library(n_per=6)  # D35: 48→72变体
 
     for lv in range(SHELVES):
-        z0 = lv * LEVEL_H
+        z0 = LIP + lv * LEVEL_H  # P0#2 修: 底唇 450mm (v19 前层板从地面起排致相机瞄过架顶)
         # 层板 (白板)
         bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH / 2, z0))
         sh = bpy.context.active_object
@@ -777,9 +778,15 @@ def main():
         plan_lv = PLAN["levels"][lv]
         # 排面归一化: VLM 计数含二排露头会超墙容量, 按比例归一到 ≤24 槽
         fac_sum = sum(g["facings"] for g in plan_lv["groups"])
-        norm = min(1.0, 24.0 / fac_sum)
+        norm = min(1.0, 34.0 / fac_sum)  # P0#2 密度: A 实拍满排 ~34 排面/层, 24 槽上限偏疏 (v20 实证)
         plan_lv = {**plan_lv, "groups": [{**g, "facings": max(1, round(g["facings"] * norm))}
                                          for g in plan_lv["groups"]]}
+        # P0#2 漏检补偿: SKU-110K 臂对底层 (照片裁切区) facings 偏少, A 实拍底排满排 → 归一后 <14 槽按比例补足
+        fac2 = sum(g["facings"] for g in plan_lv["groups"])
+        if fac2 < 14:
+            k2 = 14.0 / fac2
+            plan_lv = {**plan_lv, "groups": [{**g, "facings": max(1, round(g["facings"] * k2))}
+                                             for g in plan_lv["groups"]]}
         # D28: 连续轨内嵌逐组大数字 (轨底连续+段内大红价+空洞段)
         fracs = [g["width_frac"] for g in plan_lv["groups"]]
         fs = sum(fracs) or 1.0
@@ -924,7 +931,7 @@ def main():
         sc.collection.objects.link(lo)
 
     # 环境组 (Lowe's 实证: 立体感=环境完整度 天花板+可见灯具+洞洞板端墙+金属立柱)
-    top_z = SHELVES * LEVEL_H
+    top_z = LIP + SHELVES * LEVEL_H  # 结构顶 (层板顶 2.31 + 板厚近似)
     # 天花板
     bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH / 2 + 1.2, top_z + 0.62))
     cl = bpy.context.active_object; cl.name = "ceiling"
@@ -955,7 +962,7 @@ def main():
     pmb.inputs["Roughness"].default_value = 0.6
     pb.data.materials.append(pm)
     # 金属立柱 ×3 (货架段界, 真实龙门架语义)
-    for ux in (-SHELF_W / 2 + 0.02, -SHELF_W / 6, SHELF_W / 6):
+    for ux in (-SHELF_W / 2 - 0.015, SHELF_W / 2 + 0.015):  # P0#2 结构修: 立柱移段界两端 (v19 前景三柱横穿画面=GPT结构FAIL项)
         bpy.ops.mesh.primitive_cube_add(size=1, location=(ux, -0.02, top_z / 2))
         up = bpy.context.active_object; up.name = f"upright{ux}"
         up.scale = (0.022, 0.03, top_z / 2 + 0.08)
