@@ -13,13 +13,9 @@ def Xform "root" (
             bool generated = 1
         }
     }
-    kind = "component"
 )
 {
     uniform token colorSpace:name = "lin_rec709_scene"
-    custom float3 phys:dimensionsMM = (125, 70, 180)
-    custom token semantics:labels:material = "plastic_film"
-    custom token semantics:labels:wikidata_class = "snack bag"
     custom token semantics:labels:wikidata_qcode = "Q749316"
 
     def Xform "bag_tp_07"

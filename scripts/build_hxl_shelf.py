@@ -354,8 +354,8 @@ def build_pyramid_rack_v2(loc, h=1.0, w=0.46, dep=0.34):
     return hooks
 
 
-def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None):
-    """桶装罐 (H2 几何真实性: 内壁凹腔+缘/盖逐罐抖动, D8 评审罐顶过于整齐)."""
+def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None, tex_path=None):
+    """桶装罐 (H2 几何真实性 + 标签环绕: 设计图 UV 环绕侧壁, D8 评审罐顶过于整齐)."""
     r = rng if rng is not None else np.random.default_rng(abs(hash(name)) % (2**32))
     soft = tuple(rgb[c] * 0.78 + 0.14 for c in range(3))
     bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2, depth=hgt, location=(x, y, z_bot + hgt / 2))
@@ -369,6 +369,12 @@ def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None):
     b = m.node_tree.nodes["Principled BSDF"]
     b.inputs["Base Color"].default_value = (soft[0], soft[1], soft[2], 1)
     b.inputs["Roughness"].default_value = 0.38
+    nt = m.node_tree
+    if tex_path and Path(tex_path).exists():
+        tex = nt.nodes.new("ShaderNodeTexImage")
+        tex.image = bpy.data.images.load(str(tex_path))
+        nt.links.new(tex.outputs["Color"], b.inputs["Base Color"])
+        b.inputs["Roughness"].default_value = 0.34
     o.data.materials.append(m)
     bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2 + 0.0008, depth=0.028,
                                         location=(x, y, z_bot + hgt * 0.62))
@@ -801,17 +807,20 @@ def main():
                     if rng.random() < 0.30 * irreg:
                         y_bag -= 0.038  # D31/D33: 前拉加深 (概率随组缘增强)
                     if g["form"] == "barrel":
+                        # 设计路径前置 (桶罐标签也需要)
+                        gidx0 = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
+                        style0 = gidx0 % 3
+                        dpath0 = DESIGN_DIR / f"design_{gidx0:02d}_{style0}.png"
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
-                                           dia=min(0.075, bgw * 0.92), rng=rng)
+                                           dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
+                                           rng=rng, tex_path=dpath0 if dpath0.exists() else None)
                         continue
                     if g["form"] == "box":
                         box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                         bw_=min(0.12, bgw * 0.92))
                         continue
                     # H12: 组独立印刷设计 (bag_print, 组=SKU 设计一对一)
-                    gidx = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
-                    style = gidx % 3  # H13: 三工艺体系 (busy/极简/牛皮纸)
-                    dpath = DESIGN_DIR / f"design_{gidx:02d}_{style}.png"
+                    gidx, style, dpath = gidx0, style0, dpath0
                     # H15: H3-Image AI 直出印刷优先 (assets/ai_prints/<味key>.png, 768×1707)
                     if not dpath.exists():
                         dpath.parent.mkdir(parents=True, exist_ok=True)
@@ -912,6 +921,49 @@ def main():
         lo.location = (strip_x, DEPTH - 0.10, z0 + 0.05)
         lo.rotation_euler = (math.radians(-70), 0, 0)
         sc.collection.objects.link(lo)
+
+    # 环境组 (Lowe's 实证: 立体感=环境完整度 天花板+可见灯具+洞洞板端墙+金属立柱)
+    top_z = SHELVES * LEVEL_H
+    # 天花板
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH / 2 + 1.2, top_z + 0.62))
+    cl = bpy.context.active_object; cl.name = "ceiling"
+    cl.scale = (SHELF_W / 2 + 1.2, 2.6, 0.02)
+    cm = bpy.data.materials.new("ceil"); cm.use_nodes = True
+    cm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.93, 0.93, 0.95, 1)
+    cm.node_tree.nodes["Principled BSDF"].inputs["Roughness"].default_value = 0.5
+    cl.data.materials.append(cm)
+    # 荧光灯灯具 ×3 (可见外壳+发光底面) — Lowe's 实证: 灯具模型是第一立体线索
+    for fx in (-0.7, 0.0, 0.7):
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(fx, 0.5, top_z + 0.48))
+        fxo = bpy.context.active_object; fxo.name = f"fixture{fx}"
+        fxo.scale = (0.55, 0.09, 0.035)
+        fm = bpy.data.materials.new(f"fxf{fx}"); fm.use_nodes = True
+        fxb = fm.node_tree.nodes["Principled BSDF"]
+        fxb.inputs["Base Color"].default_value = (0.95, 0.95, 0.97, 1)
+        fxb.inputs["Emission Color"].default_value = (1.0, 0.98, 0.94, 1)
+        fxb.inputs["Emission Strength"].default_value = 6.0
+        fxo.data.materials.append(fm)
+    # 左端洞洞板墙 (封虚空; Lowe's pegboard 实证)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(-SHELF_W / 2 - 0.45, DEPTH / 2 + 0.8, top_z / 2))
+    pb = bpy.context.active_object; pb.name = "pegboard"
+    pb.rotation_euler = (0, math.radians(90), 0)
+    pb.scale = (top_z / 2 + 0.6, 2.6, 1)
+    pm = bpy.data.materials.new("pegm"); pm.use_nodes = True
+    pmb = pm.node_tree.nodes["Principled BSDF"]
+    pmb.inputs["Base Color"].default_value = (0.72, 0.73, 0.75, 1)
+    pmb.inputs["Roughness"].default_value = 0.6
+    pb.data.materials.append(pm)
+    # 金属立柱 ×3 (货架段界, 真实龙门架语义)
+    for ux in (-SHELF_W / 2 + 0.02, -SHELF_W / 6, SHELF_W / 6):
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(ux, -0.02, top_z / 2))
+        up = bpy.context.active_object; up.name = f"upright{ux}"
+        up.scale = (0.022, 0.03, top_z / 2 + 0.08)
+        um = bpy.data.materials.new(f"upm{ux}"); um.use_nodes = True
+        ub = um.node_tree.nodes["Principled BSDF"]
+        ub.inputs["Base Color"].default_value = (0.62, 0.64, 0.66, 1)
+        ub.inputs["Metallic"].default_value = 0.85
+        ub.inputs["Roughness"].default_value = 0.35
+        up.data.materials.append(um)
 
     # 顶部射灯 ×4: 一主三辅 (H1: 定向主光替代平光, 杠杆#2)
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):

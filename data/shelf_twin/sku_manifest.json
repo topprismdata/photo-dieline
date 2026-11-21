@@ -1,22 +1,252 @@
 {
-  "schema": "sku-manifest/1.0",
-  "units": {"length": "mm", "mass": "g"},
-  "dimension_source": "make_pillow_bag 参数 + 占位资产规格 (实测单源, openusd 仓 phys:dimensionsMM 同纪律)",
-  "skus": [
-    {"id": "bag_tp_00", "type": "bag", "family": "red", "dims_mm": [130, 70, 190], "mass_g": 90, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_01", "type": "bag", "family": "orange", "dims_mm": [140, 70, 200], "mass_g": 95, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_02", "type": "bag", "family": "yellow", "dims_mm": [135, 70, 195], "mass_g": 92, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_03", "type": "bag", "family": "green", "dims_mm": [130, 70, 185], "mass_g": 90, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_04", "type": "bag", "family": "blue", "dims_mm": [145, 70, 205], "mass_g": 98, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_05", "type": "bag", "family": "purple", "dims_mm": [120, 70, 170], "mass_g": 85, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_06", "type": "bag", "family": "brown", "dims_mm": [140, 70, 190], "mass_g": 95, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_07", "type": "bag", "family": "pink", "dims_mm": [125, 70, 180], "mass_g": 88, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_08", "type": "bag", "family": "teal", "dims_mm": [110, 70, 160], "mass_g": 80, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_09", "type": "bag", "family": "gold", "dims_mm": [150, 70, 210], "mass_g": 100, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_10", "type": "bag", "family": "white", "dims_mm": [135, 70, 195], "mass_g": 92, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "bag_tp_11", "type": "bag", "family": "dark", "dims_mm": [145, 70, 200], "mass_g": 96, "material": "plastic_film", "class_label": "snack bag"},
-    {"id": "barrel_tp_00", "type": "barrel", "family": "neutral", "dims_mm": [75, 75, 260], "mass_g": 110, "material": "paperboard", "class_label": "snack canister"},
-    {"id": "box_tp_00", "type": "box", "family": "neutral", "dims_mm": [120, 45, 190], "mass_g": 150, "material": "paperboard", "class_label": "snack box"}
-  ],
-  "friction": {"plastic_film": 0.4, "paperboard": 0.6}
+ "schema": "sku-manifest/1.0",
+ "units": {
+  "length": "mm",
+  "mass": "g"
+ },
+ "dimension_source": "make_pillow_bag 参数 + 占位资产规格 (实测单源, openusd 仓 phys:dimensionsMM 同纪律)",
+ "skus": [
+  {
+   "id": "bag_tp_00",
+   "type": "bag",
+   "family": "red",
+   "dims_mm": [
+    130,
+    70,
+    190
+   ],
+   "mass_g": 90,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_01",
+   "type": "bag",
+   "family": "orange",
+   "dims_mm": [
+    140,
+    70,
+    200
+   ],
+   "mass_g": 95,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_02",
+   "type": "bag",
+   "family": "yellow",
+   "dims_mm": [
+    135,
+    70,
+    195
+   ],
+   "mass_g": 92,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_03",
+   "type": "bag",
+   "family": "green",
+   "dims_mm": [
+    130,
+    70,
+    185
+   ],
+   "mass_g": 90,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_04",
+   "type": "bag",
+   "family": "blue",
+   "dims_mm": [
+    145,
+    70,
+    205
+   ],
+   "mass_g": 98,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_05",
+   "type": "bag",
+   "family": "purple",
+   "dims_mm": [
+    120,
+    70,
+    170
+   ],
+   "mass_g": 85,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_06",
+   "type": "bag",
+   "family": "brown",
+   "dims_mm": [
+    140,
+    70,
+    190
+   ],
+   "mass_g": 95,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_07",
+   "type": "bag",
+   "family": "pink",
+   "dims_mm": [
+    125,
+    70,
+    180
+   ],
+   "mass_g": 88,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_08",
+   "type": "bag",
+   "family": "teal",
+   "dims_mm": [
+    110,
+    70,
+    160
+   ],
+   "mass_g": 80,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_09",
+   "type": "bag",
+   "family": "gold",
+   "dims_mm": [
+    150,
+    70,
+    210
+   ],
+   "mass_g": 100,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_10",
+   "type": "bag",
+   "family": "white",
+   "dims_mm": [
+    135,
+    70,
+    195
+   ],
+   "mass_g": 92,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "bag_tp_11",
+   "type": "bag",
+   "family": "dark",
+   "dims_mm": [
+    145,
+    70,
+    200
+   ],
+   "mass_g": 96,
+   "material": "plastic_film",
+   "class_label": "snack bag"
+  },
+  {
+   "id": "barrel_tp_00",
+   "type": "barrel",
+   "family": "neutral",
+   "dims_mm": [
+    75,
+    75,
+    260
+   ],
+   "mass_g": 110,
+   "material": "paperboard",
+   "class_label": "snack canister"
+  },
+  {
+   "id": "box_tp_00",
+   "type": "box",
+   "family": "neutral",
+   "dims_mm": [
+    120,
+    45,
+    190
+   ],
+   "mass_g": 150,
+   "material": "paperboard",
+   "class_label": "snack box"
+  },
+  {
+   "id": "barrel_tp_02",
+   "type": "barrel",
+   "family": "blue",
+   "dims_mm": [
+    110,
+    110,
+    260
+   ],
+   "mass_g": 210,
+   "material": "paperboard",
+   "class_label": "snack canister",
+   "note": "检测实证分组新增 SKU (make_planogram_det)"
+  },
+  {
+   "id": "barrel_tp_03",
+   "type": "barrel",
+   "family": "red",
+   "dims_mm": [
+    110,
+    110,
+    260
+   ],
+   "mass_g": 210,
+   "material": "paperboard",
+   "class_label": "snack canister",
+   "note": "检测实证分组新增 SKU (make_planogram_det)"
+  },
+  {
+   "id": "barrel_tp_05",
+   "type": "barrel",
+   "family": "yellow",
+   "dims_mm": [
+    110,
+    110,
+    260
+   ],
+   "mass_g": 210,
+   "material": "paperboard",
+   "class_label": "snack canister",
+   "note": "检测实证分组新增 SKU (make_planogram_det)"
+  },
+  {
+   "id": "barrel_tp_07",
+   "type": "barrel",
+   "family": "green",
+   "dims_mm": [
+    110,
+    110,
+    260
+   ],
+   "mass_g": 210,
+   "material": "paperboard",
+   "class_label": "snack canister",
+   "note": "检测实证分组新增 SKU (make_planogram_det)"
+  }
+ ],
+ "friction": {
+  "plastic_film": 0.4,
+  "paperboard": 0.6
+ }
 }
