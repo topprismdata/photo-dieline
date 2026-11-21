@@ -164,8 +164,7 @@
 			"protects": [
 				"src/**",
 				"scripts/**",
-				"blender/**",
-				"tests/**"
+				"blender/**"
 			]
 		}
 	]
