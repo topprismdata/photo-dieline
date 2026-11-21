@@ -261,18 +261,21 @@ def main():
         fam = LEVEL_PLAN[lv % len(LEVEL_PLAN)]
         picks = [a for a in ASSETS if a.stem in fam] or ASSETS
         rng = np.random.default_rng(lv * 31 + 7)
-        # 参照语言: 每层=1 色系主设计 (族内同形重复=真实理货态) + 次设计占 1/4 位
-        j_main = lv % len(ASSETS)
-        j_second = (lv * 5 + 3) % len(ASSETS)
-        crop0 = crop_bag(ASSETS[j_main], seed=lv * 7)
+        # 参照语言 v2: 一层=左右 4-6 色段 (段内同设计同变体, 色块边界清晰如色带)
+        n_seg = 4 + lv % 3
+        seg_design = [(lv * 3 + k * 5) % len(ASSETS) for k in range(n_seg)]
+        # 段内同设计但逐袋变体 (D5a: 同变体连贴=平铺信号, 反输 0.3)
+        crop0 = crop_bag(ASSETS[seg_design[0]], seed=lv * 7)
         tex_ar = Image.open(crop0).width / Image.open(crop0).height
         bag_h0 = LEVEL_H * 0.74
         n = max(16, int(SHELF_W / (bag_h0 * tex_ar * 1.04)))  # 满排相触 16-24/层 (参照 20-30)
         bw = SHELF_W / n
+        seg_edges = sorted(rng.choice(range(3, n - 2), size=n_seg - 1, replace=False).tolist())
         for r_i, (y_off, s0, sh) in enumerate(((DEPTH / 2 - 0.06, 1.0, 0.0),
                                                (DEPTH / 2 - 0.17, 0.92, 0.5))):
             for i in range(n):
-                j = j_second if (i + lv) % 4 == 0 else j_main  # 次设计 1/4 (段内混排近似)
+                si = sum(1 for e in seg_edges if i >= e)
+                j = seg_design[(si + r_i) % n_seg]
                 a = crop_bag(ASSETS[j], seed=lv * 31 + r_i * 17 + i)
                 ar = Image.open(a).width / Image.open(a).height
                 h_bag = bag_h0 * s0 * (0.96 + rng.random() * 0.08)
@@ -297,8 +300,9 @@ def main():
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
         lt.size = SHELF_W * 0.9; lt.size_y = 0.05
         lt.energy = 24 * (0.8 + 0.4 * ((lv * 0.37) % 1.0))  # 层间光差 ±20%
+        strip_x = ((lv * 0.53) % 1.0 - 0.5) * 0.12  # 灯位微差 (非严格居中)
         lo = bpy.data.objects.new(f"strip{lv}", lt)
-        lo.location = (0, DEPTH - 0.10, z0 + 0.05)
+        lo.location = (strip_x, DEPTH - 0.10, z0 + 0.05)
         lo.rotation_euler = (math.radians(-70), 0, 0)
         sc.collection.objects.link(lo)
 

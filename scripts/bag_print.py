@@ -50,22 +50,40 @@ def render_print(S: int, col, sub: str, seed: int = 0, label: str = "TOPPRISM") 
     # 3) 食品窗内容: 暖色椭圆簇 (薯片堆意象, 充满窗) + 高光点
     cx, cy = (win[0] + win[2]) / 2, (win[1] + win[3]) / 2 + S * 0.01
     warm = [(243, 196, 80), (238, 160, 66), (214, 120, 52), (245, 214, 120)]
-    for k in range(22):
+    for k in range(18):
         ang = rng.random() * math.pi * 2
-        rad = rng.random() * S * 0.145
+        rad = rng.random() * S * 0.14
         ex, ey = cx + math.cos(ang) * rad, cy + math.sin(ang) * rad * 0.62
-        ew = S * (0.06 + rng.random() * 0.05)
+        ew = S * (0.055 + rng.random() * 0.05)
         c = warm[k % len(warm)]
-        d.ellipse([ex - ew, ey - ew * 0.62, ex + ew, ey + ew * 0.62], fill=c)
+        # 不规则波浪边薯片 (8 顶点多边形+深色描边) — 纯椭圆=生成感
+        pts = []
+        for m in range(8):
+            a2 = m / 8 * math.pi * 2
+            wob = 1.0 + (rng.random() - 0.5) * 0.34
+            pts.append((ex + math.cos(a2) * ew * wob, ey + math.sin(a2) * ew * 0.62 * wob))
+        d.polygon(pts, fill=c, outline=tuple(max(0, cc - 40) for cc in c), width=max(2, S // 320))
+        # 内弧纹理 (薯片弧度)
+        d.arc([ex - ew * 0.6, ey - ew * 0.5, ex + ew * 0.6, ey + ew * 0.5],
+              rng.integers(0, 180), rng.integers(180, 330), fill=(255, 245, 220), width=max(2, S // 400))
     for k in range(8):
         hx = cx + (rng.random() - 0.5) * S * 0.3
         hy = cy + (rng.random() - 0.5) * S * 0.16
         hr = S * 0.014
         d.ellipse([hx - hr, hy - hr, hx + hr, hy + hr], fill=(255, 250, 235))
-    # 4) 风味横幅 (底部深色带 + 品名小注)
+    # 4) 风味横幅 (底部深色带 + 品名小注 + 条码/净含量微字)
     d.rectangle([0, int(S * 0.84), S, S], fill=dark)
     f2 = ImageFont.truetype(FONT, int(S * 0.075), index=0)
-    d.text((S // 2, int(S * 0.92)), sub, font=f2, fill=(255, 255, 255), anchor="mm")
+    d.text((int(S * 0.42), int(S * 0.92)), sub, font=f2, fill=(255, 255, 255), anchor="mm")
+    bx, bw_, bh_ = S * 0.62, S * 0.24, S * 0.07
+    d.rectangle([bx, S * 0.885, bx + bw_, S * 0.885 + bh_], fill=(248, 248, 246))
+    xx = bx + S * 0.012
+    while xx < bx + bw_ - S * 0.015:
+        lw = S * (0.004 + rng.random() * 0.008)
+        d.rectangle([xx, S * 0.895, xx + lw, S * 0.885 + bh_ * 0.78], fill=(20, 20, 24))
+        xx += lw + S * 0.006
+    f3 = ImageFont.truetype(FONT, int(S * 0.028), index=0)
+    d.text((bx + bw_ / 2, S * 0.955), "净含量 100g", font=f3, fill=(230, 230, 232), anchor="mm")
     # 5) 吉祥物圆徽 (右上)
     mx, my, mr = S * 0.84, S * 0.10, S * 0.07
     d.ellipse([mx - mr, my - mr, mx + mr, my + mr], fill=(250, 248, 242), outline=dark, width=S // 90)
