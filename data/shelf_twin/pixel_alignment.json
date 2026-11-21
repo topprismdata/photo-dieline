@@ -16,63 +16,33 @@
  ],
  "rows": [
   {
-   "label": "v29c",
-   "render": "docs/images/shelf_twin_v29c.png",
+   "label": "v31e",
+   "render": "docs/images/shelf_twin_v31e.png",
    "dev": {
-    "lum_hist": 0.1508,
-    "sat_hist": 0.2946,
-    "edge": 0.2784,
+    "lum_hist": 0.1253,
+    "sat_hist": 0.2765,
+    "edge": 0.2694,
     "highlight": 0.9214,
-    "dark": 0.6704,
-    "contrast": 0.1336,
-    "spectral": 0.0308
+    "dark": 0.5838,
+    "contrast": 0.1008,
+    "spectral": 0.0526
    },
-   "score": 0.274,
+   "score": 0.2555,
    "verdict": "NEAR"
   },
   {
-   "label": "v30a",
-   "render": "docs/images/shelf_twin_v30a.png",
+   "label": "v31f",
+   "render": "docs/images/shelf_twin_v31f.png",
    "dev": {
-    "lum_hist": 0.1389,
-    "sat_hist": 0.2809,
-    "edge": 0.2701,
+    "lum_hist": 0.1292,
+    "sat_hist": 0.2788,
+    "edge": 0.2709,
     "highlight": 0.9214,
-    "dark": 0.6119,
-    "contrast": 0.1084,
-    "spectral": 0.0476
+    "dark": 0.6026,
+    "contrast": 0.1036,
+    "spectral": 0.0528
    },
-   "score": 0.2621,
-   "verdict": "NEAR"
-  },
-  {
-   "label": "v30e",
-   "render": "docs/images/shelf_twin_v30e.png",
-   "dev": {
-    "lum_hist": 0.1382,
-    "sat_hist": 0.2802,
-    "edge": 0.2737,
-    "highlight": 0.9214,
-    "dark": 0.6402,
-    "contrast": 0.1108,
-    "spectral": 0.0507
-   },
-   "score": 0.2656,
-   "verdict": "NEAR"
-  },
-  {
-   "label": "v31a",
-   "render": "docs/images/shelf_twin_v31a.png",
-   "dev": {
-    "lum_hist": 0.1275,
-    "sat_hist": 0.2737,
-    "edge": 0.2692,
-    "highlight": 0.9214,
-    "dark": 0.5729,
-    "contrast": 0.1014,
-    "spectral": 0.0507
-   },
-   "score": 0.2546,
+   "score": 0.2589,
    "verdict": "NEAR"
   }
  ]

@@ -342,9 +342,36 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
+    # H8 表面微真实: 印刷颗粒 (噪声乘色) + 粗糙度微_map + 塑料清漆双层
+    nz = nt.nodes.new("ShaderNodeTexNoise")
+    nz.inputs["Scale"].default_value = 620.0
+    nz.inputs["Detail"].default_value = 4.0
+    ramp = nt.nodes.new("ShaderNodeMapRange")
+    ramp.inputs["From Min"].default_value = 0.0
+    ramp.inputs["From Max"].default_value = 1.0
+    ramp.inputs["To Min"].default_value = 0.93   # 颗粒调暗 7%
+    ramp.inputs["To Max"].default_value = 1.0
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
-    nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    mul = nt.nodes.new("ShaderNodeMix")
+    mul.data_type = "RGBA"
+    mul.blend_type = "MULTIPLY"
+    mul.inputs["Factor"].default_value = 1.0
+    nt.links.new(tex.outputs["Color"], mul.inputs[6])
+    nt.links.new(ramp.outputs["Result"], mul.inputs[7])
+    nt.links.new(mul.outputs[2], bsdf.inputs["Base Color"])
+    rr = nt.nodes.new("ShaderNodeMapRange")
+    rr.inputs["From Min"].default_value = 0.0
+    rr.inputs["From Max"].default_value = 1.0
+    rr.inputs["To Min"].default_value = max(0.02, rough - 0.07)
+    rr.inputs["To Max"].default_value = rough + 0.09
+    nt.links.new(nz.outputs["Fac"], rr.inputs["Value"])
+    nt.links.new(rr.outputs["Result"], bsdf.inputs["Roughness"])
+    try:
+        bsdf.inputs["Coat Weight"].default_value = 0.22   # 塑料薄膜双层反射
+        bsdf.inputs["Coat Roughness"].default_value = 0.28
+    except KeyError:
+        pass
     em = nt.nodes.new("ShaderNodeEmission")
     em.inputs["Strength"].default_value = emissive
     nt.links.new(tex.outputs["Color"], em.inputs["Color"])
@@ -469,15 +496,19 @@ def main():
                 j = int(g["design_id"].split("_")[1])
                 rgb = FAMILY_RGB[g["color"]]
                 gw = g["width_frac"] * SHELF_W
-                x0 = g["x0_frac"] * SHELF_W - SHELF_W / 2
+                x0 = g["x0_frac"] * SHELF_W - SHELF_W / 2 + (rng.random() - 0.5) * 0.02  # H10 组界横移
                 n_g = max(1, g["facings"] + (1 if sh and g["facings"] > 2 else 0))
                 bgw = gw / n_g
                 z_bot = z0 + 0.013  # 坐落层板唇 (2mm 过盈=承重接触)
                 for i in range(n_g):
+                    if rng.random() < 0.03:
+                        continue  # H9: 3% 缺位 (真实货架有人拿货后的空隙)
                     # 真实 planogram 软件语义: 数据管结构(组/段/色), SKU 实宽管装箱
                     # 袋宽由高宽比定 (高=层高 0.62-0.72), 邻袋相触允许微溢 (参照: 满排相触)
-                    x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.015
-                    y_bag = y_off + (0.012 if rng.random() < 0.10 else 0.0)
+                    x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.02
+                    y_bag = y_off + (rng.random() - 0.5) * 0.02 + (0.012 if rng.random() < 0.10 else 0.0)
+                    if rng.random() < 0.15:
+                        y_bag -= 0.025  # H11: 前拉遮挡 (袋缘压住邻袋)
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.075, bgw * 0.92), rng=rng)
@@ -491,11 +522,12 @@ def main():
                     # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
                     w_bag = bgw * (0.98 + rng.random() * 0.04)
                     h_bag = min(w_bag / ar, LEVEL_H * 0.8)
-                    lean = 1.8 if i in (2, 9) else (rng.random() - 0.5) * 1.8  # v29 教训: 3° 倾角袋角压邻袋文字区(叠印乱码)
+                    clump = (i // 3) % 2 * 2.2 - 1.1  # H10 受压簇: 相邻3袋同向偏置
+                    lean = 5.0 if rng.random() < 0.04 else (10.0 if rng.random() < 0.04 else (1.8 if i in (2, 9) else (rng.random() - 0.5) * 1.8 + clump))  # H11: 4% 强侧转
                     img_bag_curved(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
                                    (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
                                     y_bag, z_bot + h_bag / 2),
-                                   emissive=0.02, rough=0.18 + rng.random() * 0.32, lean=lean,
+                                   emissive=0.02, rough=(0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, lean=lean,
                                    amp=0.004 + rng.random() * 0.007,
                                    pitch=(rng.random() - 0.5) * 2.4,
                                    phi1=rng.random() * 6.28, phi2=rng.random() * 6.28,
@@ -510,8 +542,8 @@ def main():
         # 层板下沿灯带 (补层板唇高光)
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
         lt.size = SHELF_W * 0.9; lt.size_y = 0.05
-        lt.energy = 24 * (0.8 + 0.4 * ((lv * 0.37) % 1.0))  # 层间光差 ±20%
-        strip_x = ((lv * 0.53) % 1.0 - 0.5) * 0.12  # 灯位微差 (非严格居中)
+        lt.energy = 24 * (0.62 + 0.76 * ((lv * 0.37 + 0.11) % 1.0))  # H7: 层间光差 ±38% (局部空间差异)
+        strip_x = ((lv * 0.53 + 0.29) % 1.0 - 0.5) * 0.34  # H7: 灯位横移加大 (不均匀光带)
         lo = bpy.data.objects.new(f"strip{lv}", lt)
         lo.location = (strip_x, DEPTH - 0.10, z0 + 0.05)
         lo.rotation_euler = (math.radians(-70), 0, 0)
@@ -522,6 +554,8 @@ def main():
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
         if i == 1:
             lt.energy = 520; lt.spot_size = math.radians(42)   # H6 主光加硬: 高光份额对靶
+        elif i == 2:
+            lt.energy = 58; lt.spot_size = math.radians(38)   # H7: 右辅光压暗 (光比不均=局部阴影)
         else:
             lt.energy = 110; lt.spot_size = math.radians(55)
         lo = bpy.data.objects.new(f"spot{i}", lt)
