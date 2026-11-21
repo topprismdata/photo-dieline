@@ -1,0 +1,49 @@
+{
+ "schema": "simready-bench-physics/1.0",
+ "results": [
+  {
+   "asset": "banana",
+   "pass": true,
+   "dims_mm": [
+    38.6,
+    197.2,
+    74.1
+   ],
+   "mass_kg": 0.2729,
+   "material": "[rubber]",
+   "friction": 0.5,
+   "ke": 3.34e-25,
+   "z": 0.0369
+  },
+  {
+   "asset": "beer",
+   "pass": true,
+   "dims_mm": [
+    60.0,
+    60.0,
+    221.5
+   ],
+   "mass_kg": 1.2954,
+   "material": "[clear_glass]",
+   "friction": 0.5,
+   "ke": 1.08e-23,
+   "z": 0.1106
+  },
+  {
+   "asset": "bottle",
+   "pass": true,
+   "dims_mm": [
+    52.8,
+    52.8,
+    174.9
+   ],
+   "mass_kg": 0.6759,
+   "material": "[plastic]",
+   "friction": 0.5,
+   "ke": 8.27e-25,
+   "z": 0.0873
+  }
+ ],
+ "ok": 3,
+ "fail": 0
+}

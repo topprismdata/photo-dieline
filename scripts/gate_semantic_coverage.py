@@ -22,9 +22,14 @@ RES = 256
 
 def gather(stage):
     """(verts_world, tri_indices, tri_prim_path) 聚合."""
+    # 官方 SimReady 资产 obj 层 instanceable=true; 嵌套实例代理在 pip usd-core
+    # TraverseAll 下不可见 (嵌套代理遍历缺口) — 内存解除 instancing, 不落盘
+    for prim in stage.TraverseAll():
+        if prim.IsInstance():
+            prim.SetInstanceable(False)
     verts, tris, paths = [], [], []
     off = 0
-    for prim in stage.Traverse():
+    for prim in stage.TraverseAll():
         if not prim.IsA(UsdGeom.Mesh):
             continue
         mesh = UsdGeom.Mesh(prim)
@@ -58,14 +63,39 @@ def look_at(eye, target, up=np.array([0.0, 0.0, 1.0])):
     return view
 
 
+def resolve_label(prim):
+    """逐 prim 标签解析: 自身→祖先链找 semantics:labels:* 裸属性 (官方样例写法)."""
+    p = prim
+    while p.IsValid():
+        for attr in p.GetAttributes():
+            name = attr.GetName()
+            if name.startswith("semantics:labels:") and attr.Get() is not None:
+                return name.removeprefix("semantics:labels:"), str(attr.Get())
+        p = p.GetParent()
+    return None
+
+
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--usd-dir", default=str(USD_DIR))
+    ap.add_argument("--out", default=str(ROOT / "data/shelf_twin/gate_semantic_coverage.json"))
+    args = ap.parse_args()
     results = []
-    for f in sorted(USD_DIR.glob("*.usda")):
+    for f in sorted(Path(args.usd_dir).glob("*.usd*")):
         stage = Usd.Stage.Open(str(f))
         verts, tris, paths = gather(stage)
         uniq = sorted(set(paths))
         pid = {p: i for i, p in enumerate(uniq)}
         tri_pid = np.array([pid[p] for p in paths])
+        # SL.001 真解析: 每 prim 走祖先链找标签; 无标签 prim 的像素计 unlabelled
+        labels = {}
+        for p in uniq:
+            prim = stage.GetPrimAtPath(p)
+            got = resolve_label(prim) if prim.IsValid() else None
+            labels[p] = got
+        resolved_ids = {pid[p] for p in uniq if labels[p] is not None}
+        tax_seen = sorted({t for t, _ in labels.values() if t})
 
         # auto-frame: padding 1.0 (取景标定纪律)
         mn, mx = verts.min(0), verts.max(0)
@@ -120,23 +150,28 @@ def main():
         if proj_area == 0:
             results.append({"sku": f.stem, "pass": False, "err": "no projection"})
             continue
-        # SL.001: 每个覆盖像素可解析到 label (我们只打 root 一层 → 全部可解析)
-        labelled = proj_area  # root 标签继承覆盖全部像素
+        # SL.001: 每个覆盖像素经 prim→祖先链解析到标签; 未解析 prim 的像素计 unlabelled
+        labelled_px = int(np.isin(label[covered], list(resolved_ids)).sum())
         on_coverage = float(covered.mean())
-        dominant = int(np.bincount(label[covered].ravel()).argmax())
-        passed = (labelled / proj_area >= 0.98) and (0.05 <= on_coverage <= 0.60)
+        res_pix = label[covered][np.isin(label[covered], list(resolved_ids))]
+        dominant = int(np.bincount(res_pix).argmax()) if len(res_pix) else -1
+        unlabelled_prims = sorted(p for p in uniq if labels[p] is None)
+        labelled_frac = labelled_px / proj_area
+        passed = (labelled_frac >= 0.98) and (0.05 <= on_coverage <= 0.60)
         results.append({"sku": f.stem, "pass": bool(passed),
                         "on_coverage": round(on_coverage, 4),
-                        "labelled_frac": round(labelled / proj_area, 4),
+                        "labelled_frac": round(labelled_frac, 4),
+                        "taxonomies": tax_seen,
+                        "unlabelled_prims": unlabelled_prims[:5],
                         "dominant_id": dominant,
                         "padding": 1.0})
         print(f"{'PASS' if passed else 'FAIL'} {f.stem}: on_cov={on_coverage:.3f} "
-              f"labelled={labelled / proj_area:.3f} dominant={dominant}")
+              f"labelled={labelled_frac:.3f} tax={tax_seen} "
+              f"unlabelled={len(unlabelled_prims)}")
     n_ok = sum(r["pass"] for r in results)
-    report = {"schema": "semantic-coverage-gate/1.0", "res": RES, "padding": 1.0,
+    report = {"schema": "semantic-coverage-gate/1.1", "res": RES, "padding": 1.0,
               "results": results, "ok": n_ok, "fail": len(results) - n_ok}
-    (ROOT / "data/shelf_twin/gate_semantic_coverage.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=1))
+    Path(args.out).write_text(json.dumps(report, ensure_ascii=False, indent=1))
     print(f"COVERAGE_DONE ok={n_ok} fail={len(results) - n_ok}")
 
 

@@ -1,5 +1,5 @@
 {
- "schema": "semantic-coverage-gate/1.0",
+ "schema": "semantic-coverage-gate/1.1",
  "res": 256,
  "padding": 1.0,
  "results": [
@@ -8,6 +8,10 @@
    "pass": true,
    "on_coverage": 0.3673,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -16,6 +20,10 @@
    "pass": true,
    "on_coverage": 0.3752,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -24,6 +32,10 @@
    "pass": true,
    "on_coverage": 0.3704,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -32,6 +44,10 @@
    "pass": true,
    "on_coverage": 0.3708,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -40,6 +56,10 @@
    "pass": true,
    "on_coverage": 0.3776,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -48,6 +68,10 @@
    "pass": true,
    "on_coverage": 0.3644,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -56,6 +80,10 @@
    "pass": true,
    "on_coverage": 0.3799,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -64,6 +92,10 @@
    "pass": true,
    "on_coverage": 0.3657,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -72,6 +104,10 @@
    "pass": true,
    "on_coverage": 0.3546,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -80,6 +116,10 @@
    "pass": true,
    "on_coverage": 0.3817,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -88,6 +128,10 @@
    "pass": true,
    "on_coverage": 0.3704,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -96,6 +140,10 @@
    "pass": true,
    "on_coverage": 0.3805,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -104,6 +152,10 @@
    "pass": true,
    "on_coverage": 0.2537,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   },
@@ -112,6 +164,10 @@
    "pass": true,
    "on_coverage": 0.5773,
    "labelled_frac": 1.0,
+   "taxonomies": [
+    "material"
+   ],
+   "unlabelled_prims": [],
    "dominant_id": 0,
    "padding": 1.0
   }
