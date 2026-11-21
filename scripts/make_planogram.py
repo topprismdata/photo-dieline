@@ -56,9 +56,9 @@ def reconcile_forms(groups):
     对账表证据: 桶装罐列在层左端; 袋型主体=枕袋/桶罐/自立袋. 盒读数降级为自立袋."""
     out = []
     for k, (fam, f, form) in enumerate(groups):
-        if form == "barrel" and k != 0:
-            form = "bag"
-        if form == "box":
+        if k == 0:
+            form = "barrel"   # 对账表: 桶罐列在层左端 (参照证据, 每层成立)
+        elif form in ("box", "barrel"):
             form = "bag"
         out.append((fam, f, form))
     return out
@@ -93,7 +93,7 @@ def main():
             "reference": "data/shelf_twin_ref/primary.jpg",
             "structure": "vlm_read_full_photo (2026-11-21, 参照对齐语境)",
             "facings": "vlm_est",
-            "form_reconciliation": "桶仅保留层首组(对账表: 桶罐列在左端); 盒读数降级自立袋(VLM细节粒度不可靠)",
+            "form_reconciliation": "桶罐列在每层左端(对账表证据强化); 其余组读数降级为袋(VLM细节粒度不可靠)",
             "brand_replacement": "Topprism 12 设计族 (公开轨)",
         },
         "fixture": {

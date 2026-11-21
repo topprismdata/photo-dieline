@@ -309,6 +309,53 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
     front.data.materials.append(mm)
 
 
+def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0, amp=0.006):
+    """微鼓曲面前板 (6mm): crop 纹理不变, 剪影+镜面变化 — D4 教训的保守中间路径."""
+    import bmesh
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    mat.use_backface_culling = True
+    nt = mat.node_tree
+    bsdf = nt.nodes["Principled BSDF"]
+    bsdf.inputs["Roughness"].default_value = rough
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.image = bpy.data.images.load(str(tex_path))
+    nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    em = nt.nodes.new("ShaderNodeEmission")
+    em.inputs["Strength"].default_value = emissive
+    nt.links.new(tex.outputs["Color"], em.inputs["Color"])
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(bsdf.outputs["BSDF"], mix.inputs[1])
+    nt.links.new(em.outputs["Emission"], mix.inputs[2])
+    nt.links.new(mix.outputs["Shader"], nt.nodes["Material Output"].inputs["Surface"])
+    mesh = bpy.data.meshes.new(name)
+    o = bpy.data.objects.new(name, mesh)
+    o.location = loc
+    o.rotation_euler = (0, 0, math.radians(lean))
+    bpy.context.scene.collection.objects.link(o)
+    b = bmesh.new()
+    sx, sz = 8, 8
+    grid = []
+    for iz in range(sz + 1):
+        row = []
+        for ix in range(sx + 1):
+            u, v = ix / sx, iz / sz
+            bulge = math.sin(math.pi * u) * math.sin(math.pi * v)
+            row.append(b.verts.new(((u - 0.5) * w, -amp * bulge, (v - 0.5) * h)))
+        grid.append(row)
+    uv = b.loops.layers.uv.verify()
+    for iz in range(sz):
+        for ix in range(sx):
+            f = b.faces.new((grid[iz][ix], grid[iz][ix + 1], grid[iz + 1][ix + 1], grid[iz + 1][ix]))
+            for loop, du, dv in zip(f.loops, (0, 1, 1, 0), (0, 0, 1, 1)):
+                loop[uv].uv = (ix / sx + du / sx, 1 - (iz / sz + dv / sz))
+    b.normal_update()
+    b.to_mesh(mesh)
+    b.free()
+    o.data.materials.append(mat)
+    return o
+
+
 def main():
     # 清启动场景 (事故 2026-11-21: 默认 Cube 2m 卡在相机与货架间 = 全程白雾元凶;
     # tde_driver 有 clean_scene, 此脚本没有 → 八轮"洗白"误诊为灯光/曝光/atlas)
@@ -398,13 +445,14 @@ def main():
                         continue
                     a = crop_bag(ASSETS[j], seed=lv * 31 + r_i * 17 + i)
                     ar = Image.open(a).width / Image.open(a).height
-                    h_bag = LEVEL_H * (0.62 + rng.random() * 0.10) * s0
-                    w_bag = h_bag * ar
-                    lean = 3.0 if i in (2, 9) else (rng.random() - 0.5) * 3.0  # 每层2袋明显歪
-                    img_bag_thin(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
-                                 (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
-                                  y_bag, z_bot + h_bag / 2),
-                                 emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean)
+                    # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
+                    w_bag = bgw * (0.98 + rng.random() * 0.04)
+                    h_bag = min(w_bag / ar, LEVEL_H * 0.8)
+                    lean = 1.8 if i in (2, 9) else (rng.random() - 0.5) * 1.8  # v29 教训: 3° 倾角袋角压邻袋文字区(叠印乱码)
+                    img_bag_curved(f"bag{lv}_{r_i}_{g['design_id']}_{i}", a, w_bag, h_bag,
+                                   (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
+                                    y_bag, z_bot + h_bag / 2),
+                                   emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
