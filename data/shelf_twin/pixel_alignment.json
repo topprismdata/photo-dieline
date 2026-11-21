@@ -1,19 +1,50 @@
 {
- "schema": "pixel-alignment-gate/1.0",
+ "schema": "pixel-alignment-gate/1.1",
  "ref": "/tmp/blind/ref.jpg",
  "weights": {
-  "lum_hist": 0.3,
-  "sat_hist": 0.15,
-  "edge": 0.2,
-  "highlight": 0.1,
-  "dark": 0.1,
-  "contrast": 0.15
+  "lum_hist": 0.25,
+  "sat_hist": 0.13,
+  "edge": 0.17,
+  "highlight": 0.08,
+  "dark": 0.08,
+  "contrast": 0.14,
+  "spectral": 0.15
  },
  "thresholds": [
   0.25,
   0.4
  ],
  "rows": [
+  {
+   "label": "v29c",
+   "render": "docs/images/shelf_twin_v29c.png",
+   "dev": {
+    "lum_hist": 0.1508,
+    "sat_hist": 0.2946,
+    "edge": 0.2784,
+    "highlight": 0.9214,
+    "dark": 0.6704,
+    "contrast": 0.1336,
+    "spectral": 0.0308
+   },
+   "score": 0.274,
+   "verdict": "NEAR"
+  },
+  {
+   "label": "v30a",
+   "render": "docs/images/shelf_twin_v30a.png",
+   "dev": {
+    "lum_hist": 0.1389,
+    "sat_hist": 0.2809,
+    "edge": 0.2701,
+    "highlight": 0.9214,
+    "dark": 0.6119,
+    "contrast": 0.1084,
+    "spectral": 0.0476
+   },
+   "score": 0.2621,
+   "verdict": "NEAR"
+  },
   {
    "label": "v30e",
    "render": "docs/images/shelf_twin_v30e.png",
@@ -23,9 +54,10 @@
     "edge": 0.2737,
     "highlight": 0.9214,
     "dark": 0.6402,
-    "contrast": 0.1108
+    "contrast": 0.1108,
+    "spectral": 0.0507
    },
-   "score": 0.311,
+   "score": 0.2656,
    "verdict": "NEAR"
   },
   {
@@ -37,9 +69,10 @@
     "edge": 0.2692,
     "highlight": 0.9214,
     "dark": 0.5729,
-    "contrast": 0.1014
+    "contrast": 0.1014,
+    "spectral": 0.0507
    },
-   "score": 0.2978,
+   "score": 0.2546,
    "verdict": "NEAR"
   }
  ]

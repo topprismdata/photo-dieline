@@ -13,8 +13,10 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-W = {"lum_hist": 0.30, "sat_hist": 0.15, "edge": 0.20,
-     "highlight": 0.10, "dark": 0.10, "contrast": 0.15}
+# v1.1: 加频谱径向臂 (Dzanic 2020: 生成图高频谱缺口是最稳的客观真伪信号之一)
+W = {"lum_hist": 0.25, "sat_hist": 0.13, "edge": 0.17,
+     "highlight": 0.08, "dark": 0.08, "contrast": 0.14, "spectral": 0.15}
+N_RADIAL = 24
 THR_ALIGNED = 0.25   # 合成偏差 < 0.25 → ALIGNED
 THR_NEAR = 0.40      # < 0.40 → NEAR, 否则 DEVIANT
 
@@ -29,7 +31,16 @@ def stats(img):
     # 边缘密度 (梯度幅度, Sobel 近似)
     gy, gx = np.gradient(lum)
     mag = np.hypot(gx, gy)
+    # 频谱径向平均 (log 幅度谱, 归一化频率 0-1) — Dzanic 2020 信号
+    spec = np.log(np.abs(np.fft.fftshift(np.fft.fft2(lum))) + 1e-8)
+    h, w2 = spec.shape
+    cy, cx = h / 2, w2 / 2
+    yy, xx = np.mgrid[0:h, 0:w2]
+    r = np.hypot(yy - cy, xx - cx) / np.hypot(cy, cx)
+    spec_prof = np.array([spec[(r >= i / N_RADIAL) & (r < (i + 1) / N_RADIAL)].mean()
+                          for i in range(N_RADIAL)])
     return {
+        "spectral": spec_prof,
         "lum_hist": np.histogram(lum, bins=64, range=(0, 1), density=True)[0],
         "sat_hist": np.histogram(sat, bins=32, range=(0, 1), density=True)[0],
         "edge": float((mag > 0.06).mean()),
@@ -53,6 +64,7 @@ def dev(a, b):
         "highlight": abs(a["highlight"] - b["highlight"]) * 10,
         "dark": abs(a["dark"] - b["dark"]) * 10,
         "contrast": abs(a["contrast"] - b["contrast"]),
+        "spectral": wdist(a["spectral"], b["spectral"]),
     }
 
 
@@ -74,10 +86,10 @@ def main():
         rows.append({"label": lab, "render": p, "dev": {k: round(v, 4) for k, v in d.items()},
                      "score": round(score, 4), "verdict": verdict})
         print(f"{lab:>6}: dev={score:.3f} [{verdict}]  " +
-              " ".join(f"{k}={d[k]:.2f}" for k in ("lum_hist", "edge", "highlight", "contrast")))
+              " ".join(f"{k}={d[k]:.2f}" for k in ("lum_hist", "spectral", "edge", "highlight", "contrast")))
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"schema": "pixel-alignment-gate/1.0", "ref": args.ref,
+    out.write_text(json.dumps({"schema": "pixel-alignment-gate/1.1", "ref": args.ref,
                                "weights": W, "thresholds": [THR_ALIGNED, THR_NEAR],
                                "rows": rows}, ensure_ascii=False, indent=1))
     print(f"PIXEL_ALIGNMENT_DONE -> {out}")
