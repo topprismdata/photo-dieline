@@ -333,7 +333,7 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
     front.data.materials.append(mm)
 
 
-def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0, amp=0.006, pitch=0.0):
+def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0, amp=0.006, pitch=0.0, phi1=0.0, phi2=0.0, phi3=0.0, phi4=0.0):
     """微鼓曲面前板 (6mm): crop 纹理不变, 剪影+镜面变化 — D4 教训的保守中间路径."""
     import bmesh
     mat = bpy.data.materials.new(name)
@@ -364,8 +364,22 @@ def img_bag_curved(name, tex_path, w, h, loc, emissive=0.06, rough=0.4, lean=0.0
         row = []
         for ix in range(sx + 1):
             u, v = ix / sx, iz / sz
+            # H3 侧缘外弓 + H5 左右不对称弓 (逐侧相位差) + 封口鳍边外展
+            bow = 1 + 0.045 * math.sin(math.pi * v)
+            if u < 0.5:
+                bow += 0.014 * math.sin(2 * math.pi * v + phi3)
+            else:
+                bow += 0.014 * math.sin(2 * math.pi * v + phi4)
+            fin = 0 if (v < 0.045 or v > 0.955) else 1
+            bow *= 1.024 if not fin else 1.0
             bulge = math.sin(math.pi * u) * math.sin(math.pi * v)
-            row.append(b.verts.new(((u - 0.5) * w, -amp * bulge, (v - 0.5) * h)))
+            # H4: 鼓包非均匀 (低频不规则项, 逐袋相位差) + 封边褶皱 (高频浅纹)
+            irr = 1 + 0.32 * math.sin(3 * math.pi * u + phi1) * math.sin(2 * math.pi * v + phi2)
+            wr = 0.0006 * math.sin(9 * math.pi * v) * (1 - math.sin(math.pi * u)) ** 2
+            row.append(b.verts.new(((u - 0.5) * w * bow,
+                                    -amp * bulge * irr + wr * (u * (1 - u) * 4)
+                                    - (0.0 if fin else 0.0035),
+                                    (v - 0.5) * h)))
         grid.append(row)
     uv = b.loops.layers.uv.verify()
     for iz in range(sz):
@@ -483,7 +497,9 @@ def main():
                                     y_bag, z_bot + h_bag / 2),
                                    emissive=0.06, rough=0.25 + rng.random() * 0.3, lean=lean,
                                    amp=0.004 + rng.random() * 0.007,
-                                   pitch=(rng.random() - 0.5) * 2.4)
+                                   pitch=(rng.random() - 0.5) * 2.4,
+                                   phi1=rng.random() * 6.28, phi2=rng.random() * 6.28,
+                                   phi3=rng.random() * 6.28, phi4=rng.random() * 6.28)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
