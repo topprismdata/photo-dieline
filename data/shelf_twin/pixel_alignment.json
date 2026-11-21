@@ -16,21 +16,6 @@
  ],
  "rows": [
   {
-   "label": "v38",
-   "render": "docs/images/shelf_twin_v38.png",
-   "dev": {
-    "lum_hist": 0.0602,
-    "sat_hist": 0.0997,
-    "edge": 0.2381,
-    "highlight": 0.9212,
-    "dark": 0.7571,
-    "contrast": 0.0352,
-    "spectral": 0.0438
-   },
-   "score": 0.2143,
-   "verdict": "ALIGNED"
-  },
-  {
    "label": "v39",
    "render": "docs/images/shelf_twin_v39.png",
    "dev": {
@@ -43,6 +28,21 @@
     "spectral": 0.0424
    },
    "score": 0.2059,
+   "verdict": "ALIGNED"
+  },
+  {
+   "label": "v40",
+   "render": "docs/images/shelf_twin_v40.png",
+   "dev": {
+    "lum_hist": 0.0941,
+    "sat_hist": 0.2228,
+    "edge": 0.1978,
+    "highlight": 0.9212,
+    "dark": 0.2957,
+    "contrast": 0.0841,
+    "spectral": 0.0408
+   },
+   "score": 0.2014,
    "verdict": "ALIGNED"
   }
  ]

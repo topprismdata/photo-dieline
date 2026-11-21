@@ -40,7 +40,9 @@ argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 OUT = Path(argv[0]) if argv else Path("/tmp/hxl_v1.png")
 ROOT = Path("/Users/guohongbin/photo-dieline")
 DESIGN_DIR = ROOT / "assets/pillow_designs"
-AI_FLAVOR_KEY = {"经典原味": "yuwei", "黄瓜味": "huanggua", "番茄味": "fanqie", "麻辣小龙虾味": "xiaolongxia"}
+AI_FLAVOR_KEY = {"经典原味": "yuwei", "黄瓜味": "huanggua", "青柠味": "qingning", "麻辣小龙虾味": "xiaolongxia",
+                 "番茄味": "fanqie", "海苔味": "haitai", "芝士味": "zhishi", "焦糖黄油味": "jiaotang",
+                 "劲爆辣味": "jinbaoLa", "烧烤鸡味": "shaokaoJi", "黑松露味": "heisonglu", "藤椒味": "tengjiao"}
 LV_GIDX = {}
 FOOD_PATCHES = [Image.open(pp) for pp in sorted((ROOT / "assets/food_patches").glob("*.png"))]
 FLAVOR_TINT = {"黄瓜味": (0.82, 1.10, 0.85), "青柠味": (0.85, 1.08, 0.82),
