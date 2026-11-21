@@ -749,9 +749,9 @@ def main():
     img_plane("backwall", pil_tex_backwall(), SHELF_W, SHELVES * LEVEL_H + 0.5,
               (0, DEPTH - 0.05, LIP + SHELVES * LEVEL_H / 2), emissive=1.1)
 
-    # 招牌横带 (货架顶沿连体)
-    img_plane("sign", pil_tex_sign(), SHELF_W, 0.62,
-              (0, DEPTH - 0.04, LIP + SHELVES * LEVEL_H + 0.30), emissive=1.2)
+    # 招牌横带 (货架顶沿连体; 0.50m 薄条 — v19 实证 0.62 过高致顶裁切, A 实拍 ~0.5m)
+    img_plane("sign", pil_tex_sign(), SHELF_W, 0.50,
+              (0, DEPTH - 0.04, LIP + SHELVES * LEVEL_H + 0.25), emissive=1.2)
 
     # 层板 + 前唇 + 排面 + 价签
     tag_texts = ["2.9", "4.9", "5.8", "5.9", "7.2", "1.7", "3.5"]
@@ -874,7 +874,7 @@ def main():
                     ar = Image.open(a).width / Image.open(a).height
                     # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
                     # 高度主导 (v35 教训: 宽度主导+窄 ar → 半高袋; 参照袋占层高 ~2/3)
-                    h_bag = LEVEL_H * (0.72 + rng.random() * 0.08)  # G1修: 密排充满
+                    h_bag = LEVEL_H * (0.62 + rng.random() * 0.26)  # P0-2 体量差异: A 组内高差 ±25% (v35 教训: 保持高主导防半高袋)
                     w_bag = min(h_bag * ar, bgw * 0.99)
                     h_bag = w_bag / ar
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
