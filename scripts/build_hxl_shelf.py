@@ -1,7 +1,17 @@
-"""build_hxl_shelf: 好想来式背光墙货架段 v1 — 场景/排面/灯光/人位相机一体化.
+"""build_hxl_shelf: 好想来式背光墙货架段 — 场景/排面/灯光/人位相机一体化.
 
 对账依据: docs/shelf_twin/RECONCILIATION.md v2 (primary.jpg 7 维真值).
 用法: blender --background --python scripts/build_hxl_shelf.py -- out.png
+
+构件 z/y 台账 (技能: blender-coldcase-shelf-scene — 落位前查冲突):
+  地板 slab   z=-0.02 (顶面低于最低构件)      y 0..8
+  层板 lv     z0=lv*0.38 .. z0+0.025 (板厚)   y 0..DEPTH
+  层板唇+价签 z0-0.05..z0+0.025 前立面          y=DEPTH/2
+  袋(坐落)    底=z0+0.015, 高 0.75*LEVEL_H    y 前=0.14 后=0.03
+  背光带      z0+LEVEL_H*0.35 层板后 0.10     y=DEPTH-0.10
+  层下灯带    z0+0.05                          y=DEPTH-0.10
+  射灯×4      z=顶+0.55 悬挂                   y=-0.7
+  相机        (0.85,-1.55,1.28) → (-0.3,D/2,1.22) roll-2°
 """
 import math
 import sys
@@ -97,19 +107,20 @@ def crop_bag(png: Path, seed: int = 0) -> Path:
         y0, y1 = max(ys.min()-8, 0), min(ys.max()+8, a.shape[0])
         im = im.crop((x0, y0, x1, y1))
     rng = np.random.default_rng(seed)
-    if rng.random() < 0.5:
-        im = im.transpose(Image.FLIP_LEFT_RIGHT)
+    # 严禁水平翻转: 翻转会镜像印刷文字 (v13-v19 镜像字真根因)
     im = ImageEnhance.Color(im).enhance(0.85 + rng.random() * 0.4)
     im = ImageEnhance.Brightness(im).enhance(0.9 + rng.random() * 0.25)
     im.save(out)
     return out
 
 
-def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0):
+def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0, rough=0.5):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
+    mat.use_backface_culling = True  # 背脸剔除: 第二排不再漏镜像字
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
+    bsdf.inputs["Roughness"].default_value = rough
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
     nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
@@ -151,6 +162,12 @@ def main():
             coll.remove(item, do_unlink=True)
     sc = bpy.context.scene
     sc.render.engine = "BLENDER_EEVEE"
+    try:
+        sc.eevee.use_gtao = True          # 接触阴影: 袋坐层板唇的接地暗部
+        sc.eevee.gtao_distance = 0.08
+        sc.eevee.gtao_factor = 0.5
+    except AttributeError:
+        pass
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Punchy"   # 默认 look 强去饱和 (冷柜线已知坑)
     sc.view_settings.exposure = 0.0
@@ -193,46 +210,29 @@ def main():
         fam = LEVEL_PLAN[lv % len(LEVEL_PLAN)]
         picks = [a for a in ASSETS if a.stem in fam] or ASSETS
         rng = np.random.default_rng(lv * 31 + 7)
-        bag_h = LEVEL_H * 0.74
-        crop0 = crop_bag(ASSETS[0], seed=999)
-        tex_ar = Image.open(crop0).width / Image.open(crop0).height  # 纹理宽高比
-        n = max(8, int(SHELF_W / (bag_h * tex_ar * 1.06)))
+        # 参照语言: 每层=1 色系主设计 (族内同形重复=真实理货态) + 次设计占 1/4 位
+        j_main = lv % len(ASSETS)
+        j_second = (lv * 5 + 3) % len(ASSETS)
+        crop0 = crop_bag(ASSETS[j_main], seed=lv * 7)
+        tex_ar = Image.open(crop0).width / Image.open(crop0).height
+        bag_h0 = LEVEL_H * 0.74
+        n = max(16, int(SHELF_W / (bag_h0 * tex_ar * 1.04)))  # 满排相触 16-24/层 (参照 20-30)
         bw = SHELF_W / n
-        for r_i, (y_off, z_off, s0) in enumerate(((DEPTH / 2 - 0.06, 0.015, 0.93),
-                                                  (DEPTH / 2 - 0.15, 0.09, 0.86))):
-            prev = -1
+        for r_i, (y_off, s0, sh) in enumerate(((DEPTH / 2 - 0.06, 1.0, 0.0),
+                                               (DEPTH / 2 - 0.17, 0.92, 0.5))):
             for i in range(n):
-                j = (i * 5 + lv * 3 + r_i * 7) % len(ASSETS)
-                if j == prev:
-                    j = (j + 4) % len(ASSETS)
-                prev = j
-                a = crop_bag(ASSETS[j], seed=lv * 100 + r_i * 50 + i)
+                j = j_second if (i + lv) % 4 == 0 else j_main  # 次设计 1/4 (段内混排近似)
+                a = crop_bag(ASSETS[j], seed=lv * 31 + r_i * 17 + i)
                 ar = Image.open(a).width / Image.open(a).height
-                w_bag = bag_h * ar * (0.9 + rng.random() * 0.15)
-                x_bag = max(-SHELF_W / 2 + w_bag / 2,
-                            min(SHELF_W / 2 - w_bag / 2,
-                                -SHELF_W / 2 + bw * (i + 0.5) + (rng.random() - 0.5) * 0.01))
-                img_plane(f"bag{lv}_{r_i}_{i}", a, w_bag, bag_h,
-                          (x_bag, y_off, z0 + 0.02 + z_off * (1 if r_i else 0)),
-                          emissive=0.25)
-                # 纯色背板 (+4mm 后, 平均色=袋背印刷近似, 消镜像字)
-                from PIL import Image as PILImage
-                _avg = PILImage.open(a).resize((1, 1)).getpixel((0, 0))
-                _m = bpy.data.materials.new(f"bagback{lv}_{r_i}_{i}")
-                _m.use_nodes = True
-                _m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (
-                    _avg[0] / 255 * 0.7, _avg[1] / 255 * 0.7, _avg[2] / 255 * 0.7, 1)
-                _mesh = bpy.data.meshes.new(f"bb{lv}_{r_i}_{i}")
-                _o = bpy.data.objects.new(f"bb{lv}_{r_i}_{i}", _mesh)
-                _o.location = (x_bag, y_off + 0.004, z0 + 0.02 + z_off * (1 if r_i else 0))
-                sc.collection.objects.link(_o)
-                import bmesh as _bm
-                _b = _bm.new()
-                _vv = [_b.verts.new((-w_bag/2, 0, -bag_h/2)), _b.verts.new((w_bag/2, 0, -bag_h/2)),
-                       _b.verts.new((w_bag/2, 0, bag_h/2)), _b.verts.new((-w_bag/2, 0, bag_h/2))]
-                _b.faces.new(_vv)
-                _b.to_mesh(_mesh); _b.free()
-                _o.data.materials.append(_m)
+                h_bag = bag_h0 * s0 * (0.96 + rng.random() * 0.08)
+                w_bag = h_bag * ar
+                x_bag = -SHELF_W / 2 + bw * (i + 0.5 + sh)  # 第二排半格错位 → 缝里露头
+                x_bag = -SHELF_W / 2 + bw / 2 if x_bag > SHELF_W / 2 - bw / 2 else x_bag
+                z_bot = z0 + 0.015  # 坐落层板唇
+                rough = 0.4 + rng.random() * 0.3
+                img_plane(f"bag{lv}_{r_i}_{i}", a, w_bag, h_bag,
+                          (x_bag, y_off, z_bot + h_bag / 2),
+                          emissive=0.22, rough=rough)
         # 层间背光带 (EEVEE 自发光不照明 → 需真光源; 朝袋背面)
         bl = bpy.data.lights.new(f"back{lv}", "AREA")
         bl.size = SHELF_W * 0.95; bl.size_y = LEVEL_H * 0.7; bl.energy = 8
