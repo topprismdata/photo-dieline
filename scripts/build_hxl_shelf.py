@@ -15,6 +15,7 @@
 """
 import json
 import math
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -991,13 +992,23 @@ def main():
     sc.collection.objects.link(flo)
 
     # 人位相机 (primary.jpg 对齐: 站右端向左纵深看, 左远右近, 广角手机视场, 微滚转)
-    cam = bpy.data.cameras.new("c"); cam.lens = 26
-    co = bpy.data.objects.new("c", cam)
-    co.location = (0.55, -1.85, 1.44)
-    aim = Vector((-0.15, DEPTH / 2, 1.21)) - co.location
-    rot = aim.to_track_quat('-Z', 'Y').to_euler()
-    rot.rotate_axis('Y', math.radians(-2.0))  # 微滚转
-    co.rotation_euler = rot
+    if os.environ.get("HXL_CAM") == "M31":
+        # M31 满幅约束拟合 (FTC 层线+横向满幅, 2026-11-22): 层线rms16.1px, 层位avg0.0126H/max0.0306H, 左缘u≈0右缘出画
+        # 相机 (0.181,-1.200,2.300) 瞄 (-0.014, DEPTH/2, 2.037), f25.7mm — 实拍摄高≈2.3m (垂直张角自洽)
+        cam = bpy.data.cameras.new("c"); cam.lens = 25.7
+        co = bpy.data.objects.new("c", cam)
+        co.location = (0.181, -1.200, 2.300)
+        aim = Vector((-0.014, DEPTH / 2, 2.037)) - co.location
+        rot = aim.to_track_quat('-Z', 'Y').to_euler()
+        co.rotation_euler = rot
+    else:
+        cam = bpy.data.cameras.new("c"); cam.lens = 26
+        co = bpy.data.objects.new("c", cam)
+        co.location = (0.55, -1.85, 1.44)
+        aim = Vector((-0.15, DEPTH / 2, 1.21)) - co.location
+        rot = aim.to_track_quat('-Z', 'Y').to_euler()
+        rot.rotate_axis('Y', math.radians(-2.0))  # 微滚转
+        co.rotation_euler = rot
     sc.collection.objects.link(co); sc.camera = co
 
     # 前景挂架 v2 (对齐②清单: 细圆管/挂杆/挂钩/垂坠袋)
