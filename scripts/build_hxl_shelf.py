@@ -358,7 +358,7 @@ def build_pyramid_rack_v2(loc, h=1.0, w=0.46, dep=0.34):
 
 def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None, tex_path=None):
     """桶装罐 (H2 几何真实性 + 标签环绕: 设计图 UV 环绕侧壁, D8 评审罐顶过于整齐)."""
-    r = rng if rng is not None else np.random.default_rng(abs(hash(name)) % (2**32))
+    r = rng if rng is not None else np.random.default_rng(__import__('zlib').crc32(name.encode()) % (2**32))  # V28修: hash()跨进程随机→crc32定种
     soft = tuple(rgb[c] * 0.78 + 0.14 for c in range(3))
     bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2, depth=hgt, location=(x, y, z_bot + hgt / 2))
     o = bpy.context.active_object
@@ -711,6 +711,13 @@ def apply_clay_override():
             o.data.materials.append(clay)
 
 
+def drop_to_surface(co, z_target):
+    """V28 陈列物理: 旋转/缩放后世界包围盒最低点沉降到 z_target (倾角袋底角悬浮修)."""
+    bpy.context.view_layer.update()
+    zmin = min((co.matrix_world @ Vector(c)).z for c in co.bound_box)
+    co.location.z += z_target - zmin
+
+
 def main():
     # 清启动场景 (事故 2026-11-21: 默认 Cube 2m 卡在相机与货架间 = 全程白雾元凶;
     # tde_driver 有 clean_scene, 此脚本没有 → 八轮"洗白"误诊为灯光/曝光/atlas)
@@ -752,6 +759,40 @@ def main():
     # 招牌横带 (货架顶沿连体; 0.50m 薄条 — v19 实证 0.62 过高致顶裁切, A 实拍 ~0.5m)
     img_plane("sign", pil_tex_sign(), SHELF_W, 0.50,
               (0, DEPTH - 0.04, LIP + SHELVES * LEVEL_H + 0.25), emissive=1.2)
+    # V28: 灯箱体 (横幅非卡片 — 12cm 深盒, 侧/背面深红哑光; context 实拍结构)
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH + 0.04, LIP + SHELVES * LEVEL_H + 0.25))  # V28修: y+侧=架后(相机y=-1.2, 小y=前), 盒在印刷面/背墙后
+    sbx = bpy.context.active_object
+    sbx.name = "signbox"
+    sbx.scale = (SHELF_W / 2 + 0.01, 0.05, 0.25)  # 前面 DEPTH-0.07, 距印刷面 3cm 防 z-fight
+    msx = bpy.data.materials.new("signbox_m"); msx.use_nodes = True
+    _sb = msx.node_tree.nodes["Principled BSDF"]
+    _sb.inputs["Base Color"].default_value = (0.45, 0.07, 0.06, 1)
+    _sb.inputs["Roughness"].default_value = 0.35
+    sbx.data.materials.append(msx)
+    # 吊装杆 ×3 (饰带→灯箱顶; context 实拍横幅吊装结构)
+    for hx in (-SHELF_W / 3, 0.0, SHELF_W / 3):
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.006, depth=0.16,
+                                            location=(hx, DEPTH + 0.04, LIP + SHELVES * LEVEL_H + 0.58))
+        rod = bpy.context.active_object
+        rod.name = f"signrod_{hx:.2f}"
+        mr = bpy.data.materials.new("rod_m"); mr.use_nodes = True
+        _rb = mr.node_tree.nodes["Principled BSDF"]
+        _rb.inputs["Base Color"].default_value = (0.10, 0.10, 0.11, 1)
+        _rb.inputs["Metallic"].default_value = 0.6
+        _rb.inputs["Roughness"].default_value = 0.4
+        rod.data.materials.append(mr)
+    # 饰带 (红色灯箱长带, 横幅吊其下; 帧上缘仅露下沿 — 同 A 原图顶部裁切)
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH + 0.04, LIP + SHELVES * LEVEL_H + 0.80))
+    fasc = bpy.context.active_object
+    fasc.name = "fascia"
+    fasc.scale = (SHELF_W / 2 + 0.01, 0.055, 0.16)
+    mf = bpy.data.materials.new("fascia_m"); mf.use_nodes = True
+    _fb = mf.node_tree.nodes["Principled BSDF"]
+    _fb.inputs["Base Color"].default_value = (0.55, 0.09, 0.07, 1)
+    _fb.inputs["Roughness"].default_value = 0.3
+    _fb.inputs["Emission Color"].default_value = (0.55, 0.09, 0.07, 1)
+    _fb.inputs["Emission Strength"].default_value = 0.55
+    fasc.data.materials.append(mf)
 
     # 层板 + 前唇 + 排面 + 价签
     tag_texts = ["2.9", "4.9", "5.8", "5.9", "7.2", "1.7", "3.5"]
@@ -816,7 +857,7 @@ def main():
                     irreg = 0.45 + 1.1 * dist ** 1.5  # 渐进不规则系数
                     # 真实 planogram 软件语义: 数据管结构(组/段/色), SKU 实宽管装箱
                     # 袋宽由高宽比定 (高=层高 0.62-0.72), 邻袋相触允许微溢 (参照: 满排相触)
-                    x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.02
+                    x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.008  # V28: 邻袋接触 (±1cm→±4mm)
                     y_bag = y_off + (rng.random() - 0.5) * 0.035 * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
                     if rng.random() < 0.30 * irreg:
                         y_bag -= 0.038  # D31/D33: 前拉加深 (概率随组缘增强)
@@ -830,8 +871,12 @@ def main():
                                            rng=rng, tex_path=dpath0 if dpath0.exists() else None)
                         continue
                     if g["form"] == "box":
-                        box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
-                                        bw_=min(0.12, bgw * 0.92))
+                        # V29: 盒组陈列姿态 (六审 P0) — 前排退让 3cm 消前突 + 前排 88% 高
+                        #     → 二排露头形成可信前后排遮挡 (几何探针已证盒底坐板 7.5mm)
+                        y_box = y_bag + (0.03 if r_i == 1 else 0.0)
+                        h_box = 0.19 * (0.88 if r_i == 1 else 1.0)
+                        box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_box, z_bot, rgb,
+                                        bw_=min(0.12, bgw * 0.92), hgt=h_box)
                         continue
                     if g["form"] == "bottle":
                         # P0-3: 瓶装 (A L7 深色瓶罐块): 细径高瓶, 复用圆柱占位 (盖=瓶盖)
@@ -893,7 +938,7 @@ def main():
                     ar = Image.open(a).width / Image.open(a).height
                     # P0-4: 密度-形状协同 (v26 教训: 槽宽钳制反压高度→半高排大空洞;
                     # A 实测 ~34件/层 × 6-8cm 宽 × 0.5-0.65LH 高, 槽宽即袋宽, 高度钳制防塌)
-                    w_bag = bgw * 0.97
+                    w_bag = bgw * 0.985  # V28: 邻袋相触 (0.97→0.985, 缝隙≤2mm)
                     h_bag = min(max(w_bag / ar * (0.90 + rng.random() * 0.25), LEVEL_H * 0.50), LEVEL_H * 0.75)
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
                     lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else (rng.random() - 0.5) * 3.2 * irreg + clump * irreg))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
@@ -908,7 +953,8 @@ def main():
                         co.location.y += 0.022  # D34: 整排前移 2.2cm (顶靠前排背)
                     co.scale = (w_bag / 0.095 * (0.98 + rng.random() * 0.04),
                                1.0, h_bag / 0.19 * (0.97 + rng.random() * 0.06))  # D35: 逐袋轮廓微差
-                    bpy.context.scene.collection.objects.link(co)
+                    bpy.context.scene.collection.objects.link(co)  # V28修: 先入场景(depsgraph), 后算世界bbox
+                    drop_to_surface(co, z_bot)  # V28: 倾角袋底角沉降到板面 (禁悬浮)
                     sl = co.material_slots[0]
                     sl.link = 'OBJECT'
                     sl.material = bag_material(f"bagm_{lv}_{r_i}_{i}", Path(a),
@@ -923,7 +969,8 @@ def main():
                                            y_bag + dy_k, z_bot + h_bag / 2 - k * 0.004)
                             ce.rotation_euler = (math.radians(pitch_k), 0, math.radians(lean + yaw_k))
                             ce.scale = (w_bag / 0.095, 1.0, h_bag / 0.19)
-                            bpy.context.scene.collection.objects.link(ce)
+                            bpy.context.scene.collection.objects.link(ce)  # V28修: 先入场景后沉降
+                            drop_to_surface(ce, z_bot - 0.001)  # V28: 簇袋微过盈沉降
                             sl2 = ce.material_slots[0]
                             sl2.link = 'OBJECT'
                             sl2.material = bag_material(f"bagcm_{lv}_{r_i}_{i}_{k}", Path(a),
@@ -1046,6 +1093,27 @@ def main():
 
     if "--clay" in argv:
         apply_clay_override()
+    # V29 几何探针: 盒/袋底 vs 板顶 (mm 级对账)
+    bpy.context.view_layer.update()
+    boards = {int(o.name[5:]): (o.location.z + o.scale[2]*0.5 if False else o.matrix_world.translation.z + o.dimensions.z/2)
+              for o in bpy.data.objects if o.name.startswith("shelf")}
+    for o in sorted(bpy.data.objects, key=lambda x: x.name):
+        if o.type != 'MESH':
+            continue
+        zmin = min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+        if o.name.startswith(("box", "bag", "shelf")):
+            lv = o.name[3] if o.name.startswith(("box", "bag")) else o.name[5:]
+            print(f"PROBE {o.name[:28]:28s} zmin={zmin:.4f} board_top={boards.get(int(lv.rstrip('.0')) if str(lv).rstrip('.0').isdigit() else -1, -1):.4f}")
+    if "--side" in argv:
+        # V29: 侧视正交白模 (粉盒接触关系证明 — 六审 P0 要求)
+        cam = bpy.data.cameras.new("side"); cam.type = 'ORTHO'
+        cam.ortho_scale = 0.75
+        co = bpy.data.objects.new("side", cam)
+        co.location = (-0.55, -1.5, 1.40)  # 侧前 25° 对准 L4 盒组 (x -0.29..0.05, 板面 z=1.38)
+        aim = Vector((-0.12, 0.2, 1.47)) - co.location
+        co.rotation_euler = aim.to_track_quat('-Z', 'Y').to_euler()
+        sc.camera = co
+        sc.render.resolution_x, sc.render.resolution_y = 900, 700
     sc.render.filepath = str(OUT)
     bpy.ops.render.render(write_still=True)
     print("HXL_SHELF_OK", OUT)
