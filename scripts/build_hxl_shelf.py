@@ -443,6 +443,79 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
     front.data.materials.append(mm)
 
 
+def tray_basket(name, cx, y, z_bot, bw_, dep=0.26, hgt=0.15):
+    """藤编陈列篮 (V30): 实体篮体+三道编织棱+深色沿口 (参照实拍下层托盘陈列)."""
+    tan = bpy.data.materials.new(name + "_w")
+    tan.use_nodes = True
+    tb = tan.node_tree.nodes["Principled BSDF"]
+    tb.inputs["Base Color"].default_value = (0.66, 0.51, 0.32, 1)
+    tb.inputs["Roughness"].default_value = 0.75
+    dk = bpy.data.materials.new(name + "_d")
+    dk.use_nodes = True
+    db = dk.node_tree.nodes["Principled BSDF"]
+    db.inputs["Base Color"].default_value = (0.46, 0.34, 0.21, 1)
+    db.inputs["Roughness"].default_value = 0.8
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(cx, y, z_bot + hgt / 2))
+    body = bpy.context.active_object
+    body.name = name
+    body.scale = (bw_ / 2, dep / 2, hgt / 2)
+    body.data.materials.append(tan)
+    for k in range(3):
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(cx, y, z_bot + hgt * (0.28 + 0.24 * k)))
+        ridge = bpy.context.active_object
+        ridge.name = f"{name}_r{k}"
+        ridge.scale = (bw_ / 2 + 0.004, dep / 2 + 0.004, 0.006)
+        ridge.data.materials.append(dk)
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(cx, y, z_bot + hgt))
+    rim = bpy.context.active_object
+    rim.name = name + "_rim"
+    rim.scale = (bw_ / 2 + 0.008, dep / 2 + 0.008, 0.010)
+    rim.data.materials.append(dk)
+
+
+def tray_lean_fill(name, cx, y_in, z_bot, bw_, dpath, rng):
+    """篮内二排斜倚袋 (V30): 后排4+前排3, 前排倚后排露头 (局部遮挡), 袋顶越沿."""
+    bw2 = min(0.10, bw_ / 4.4)
+    bh2 = bw2 * 1.55
+    for k in range(7):
+        back = k < 4
+        yy = y_in + (0.055 if back else -0.022)
+        xx = cx + (k - (1.5 if back else 1.0)) * (bw2 + 0.014)
+        zz = z_bot + 0.055 + (0.0 if back else 0.012)
+        img_plane(f"{name}_l{k}", dpath, bw2, bh2,
+                  (xx, yy, zz + bh2 * 0.44),
+                  rot=(-(22 + rng.random() * 8), 0, (rng.random() - 0.5) * 14),
+                  emissive=0.10, rough=0.5)
+
+
+def tray_flat_fill(name, cx, y_in, z_bot, bw_, rgb, dpath, rng):
+    """篮内平叠煎饼堆 (V30): 2堆×4-5层薄盒+顶面印刷, 层间微转角叠边可见."""
+    pw = min(0.14, bw_ / 2.3)
+    pd = pw * 0.66
+    th = 0.014
+    soft = tuple(rgb[c] * 0.75 + 0.16 for c in range(3))
+    side = bpy.data.materials.new(name + "_s")
+    side.use_nodes = True
+    sb = side.node_tree.nodes["Principled BSDF"]
+    sb.inputs["Base Color"].default_value = (soft[0], soft[1], soft[2], 1)
+    sb.inputs["Roughness"].default_value = 0.45
+    for st in range(2):
+        sx = cx + (st - 0.5) * (pw + 0.035)
+        n = 4 + (st % 2)
+        for k in range(n):
+            zz = z_bot + 0.075 + k * th
+            rz = (rng.random() - 0.5) * 16
+            bpy.ops.mesh.primitive_cube_add(size=1, location=(sx, y_in, zz + th / 2))
+            pk = bpy.context.active_object
+            pk.name = f"{name}_f{st}_{k}"
+            pk.rotation_euler = (0, 0, math.radians(rz))
+            pk.scale = (pw / 2, pd / 2, th / 2)
+            pk.data.materials.append(side)
+            img_plane(f"{name}_t{st}_{k}", dpath, pw * 0.92, pd * 0.92,
+                      (sx, y_in, zz + th + 0.002),
+                      rot=(-90, 0, rz), emissive=0.08, rough=0.55)
+
+
 def bag_material(name, tex_path, rough=0.4, emissive=0.06):
     """D30: 印刷材质 (从 img_bag_curved 抽出, 供布料库实例 OBJECT-link 复用)."""
     mat = bpy.data.materials.new(name)
@@ -850,6 +923,26 @@ def main():
                         n_g = max(n_g, int(g["width_frac"] * SHELF_W / 0.072))  # 窄袋: 密度饥饿校正 (A L6/L7 满排 ~28)
                 bgw = gw / n_g
                 z_bot = z0 + 0.013  # 坐落层板唇 (2mm 过盈=承重接触)
+                # V26: 设计索引前置 (托盘分支也需印刷贴图; 组级一次)
+                gidx0 = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
+                style0 = gidx0 % 3
+                dpath0 = DESIGN_DIR / f"design_{gidx0:02d}_{style0}.png"
+                if g["form"].startswith("tray"):
+                    # V30: 托盘陈列 (八审 P0) — 藤编篮×N 坐板 + 篮内二排斜倚/平叠煎饼
+                    #     (参照实拍下层托盘陈列; 篮体全落板面 y 0.01..0.27)
+                    nb = max(1, int(gw / 0.37))
+                    bw_ = gw / nb - 0.025
+                    y_c = 0.14
+                    for b in range(nb):
+                        bx = x0 + gw * (b + 0.5) / nb
+                        tray_basket(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_)
+                        if g["form"] == "tray_lean":
+                            tray_lean_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_,
+                                           dpath0 if dpath0.exists() else None, rng)
+                        else:
+                            tray_flat_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_, rgb,
+                                           dpath0 if dpath0.exists() else None, rng)
+                    continue
                 for i in range(n_g):
                     if rng.random() < 0.03:
                         continue  # H9: 3% 缺位 (真实货架有人拿货后的空隙)
@@ -861,10 +954,6 @@ def main():
                     y_bag = y_off + (rng.random() - 0.5) * 0.035 * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
                     if rng.random() < 0.30 * irreg:
                         y_bag -= 0.038  # D31/D33: 前拉加深 (概率随组缘增强)
-                    # V26: 设计索引前置 (占据图重建后 L1 无桶组, 赋值不再依赖 barrel 分支)
-                    gidx0 = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
-                    style0 = gidx0 % 3
-                    dpath0 = DESIGN_DIR / f"design_{gidx0:02d}_{style0}.png"
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
