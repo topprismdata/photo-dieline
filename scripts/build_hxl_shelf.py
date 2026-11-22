@@ -1244,6 +1244,99 @@ def main():
         if o.name.startswith(("box", "bag", "shelf")):
             lv = o.name[3] if o.name.startswith(("box", "bag")) else o.name[5:]
             print(f"PROBE {o.name[:28]:28s} zmin={zmin:.4f} board_top={boards.get(int(lv.rstrip('.0')) if str(lv).rstrip('.0').isdigit() else -1, -1):.4f}")
+    if "--heal" in argv:
+        # V35: 局部非穿透修正 (十三审 P0) — 深叠对接触区顶点回缩压平, 保留接触外观
+        #     只动相交袋对局部几何; 摆放/姿态/种子全冻结; 回缩仅水平向 (板接触保持)
+        from mathutils.bvhtree import BVHTree
+
+        def _wbvh(o):
+            vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            ps = [list(p.vertices) for p in o.data.polygons]
+            return BVHTree.FromPolygons(vs, ps)
+
+        bags = [o for o in bpy.data.objects
+                if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
+                and int(o.name.split("_")[0][3:]) >= 3]
+        lv_of = lambda n: int(n.split("_")[0][3:])
+        cw = lambda o: o.matrix_world.translation
+        R, PULL, PASSES = 0.035, 0.004, 5
+        healed_ids = {}
+        for p_i in range(PASSES):
+            trees = {o.name: _wbvh(o) for o in bags}
+            deep = []
+            for a in bags:
+                for b in bags:
+                    if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
+                        continue
+                    dv = cw(b) - cw(a)
+                    if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
+                        continue
+                    ov = trees[a.name].overlap(trees[b.name])
+                    if len(ov) > 60:
+                        deep.append((a, b, ov))
+            if not deep:
+                print(f"HEAL_PASS {p_i} clear")
+                break
+            for a, b, ov in deep:
+                key = f"{a.name} x {b.name}"
+                for o in (a, b):
+                    if o.data.users > 1:
+                        o.data = o.data.copy()  # 单用户化 (护共享布料库)
+                if key not in healed_ids:
+                    # 首遍: 实测最大穿透深度 (重叠区顶点到对方表面距离)
+                    maxpen = 0.0
+                    for ia, ib in ov[:120]:
+                        for o, t_o, idx in ((a, trees[b.name], ia), (b, trees[a.name], ib)):
+                            if idx < len(o.data.polygons):
+                                vw = o.matrix_world @ o.data.polygons[idx].center
+                                d = t_o.find_nearest(vw)[3]
+                                if d is not None:
+                                    maxpen = max(maxpen, d)
+                    healed_ids[key] = {"lv": lv_of(a.name), "tris0": len(ov),
+                                       "pen_mm": round(maxpen * 1000, 1)}
+                # 接触区质心 (世界) → 邻域顶点水平回缩
+                cent = [(a.matrix_world @ a.data.polygons[ia].center) for ia, ib in ov[:150] if ia < len(a.data.polygons)]
+                cent += [(b.matrix_world @ b.data.polygons[ib].center) for ia, ib in ov[:150] if ib < len(b.data.polygons)]
+                sep = cw(a) - cw(b)
+                sep.z = 0.0
+                if sep.length < 1e-6:
+                    sep = Vector((1.0, 0.0, 0.0))
+                sep.normalize()
+                inv_a, inv_b = a.matrix_world.inverted().to_3x3(), b.matrix_world.inverted().to_3x3()
+                for o, inv, d in ((a, inv_a, sep), (b, inv_b, -sep)):
+                    for v in o.data.vertices:
+                        vw = o.matrix_world @ v.co
+                        f = 0.0
+                        for c in cent:
+                            dd = (vw - c).length
+                            if dd < R:
+                                f = max(f, 1.0 - dd / R)
+                        if f > 0.0:
+                            v.co += inv @ (d * (PULL * f))
+                    o.data.update()
+        # 终账: 逐对 tris 终值
+        trees = {o.name: _wbvh(o) for o in bags}
+        res = []
+        for a in bags:
+            for b in bags:
+                if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
+                    continue
+                dv = cw(b) - cw(a)
+                if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
+                    continue
+                ov = trees[a.name].overlap(trees[b.name])
+                if len(ov) > 4:
+                    res.append((f"{a.name} x {b.name}", len(ov)))
+        for k, t in res:
+            h = healed_ids.get(k)
+            if h and t <= 60 and h["tris0"] > 60:
+                print(f"HEAL_OK {k} lv={h['lv']} tris {h['tris0']}->{t} pen={h['pen_mm']}mm")
+        for k, t in res:
+            h = healed_ids.get(k)
+            if t > 60:
+                st0 = h["tris0"] if h else "?"
+                print(f"HEAL_RESIDUAL {k} tris {st0}->{t}")
+        print(f"HEAL_SUMMARY deep0={len([1 for _, t in res if t <= 60])} residual={len([1 for _, t in res if t > 60])}")
     if "--side" in argv:
         # V29: 侧视正交白模 (粉盒接触关系证明 — 六审 P0 要求)
         # V34: env 参数化 (HXL_ORTHO/HXL_AIMZ/HXL_AIMX) — 转袋/前探碰撞证据可调视野

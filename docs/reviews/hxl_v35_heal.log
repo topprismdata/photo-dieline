@@ -1,0 +1,12 @@
+HEAL_OK bag3_1_d_0_2 x bag3_1_d_0_3 lv=3 tris 178->34 pen=5.5mm
+HEAL_OK bag3_1_d_7_2 x bag3_1_d_7_3 lv=3 tris 172->48 pen=5.7mm
+HEAL_OK bag4_0_d_9_2 x bag4_1_d_9_2 lv=4 tris 281->44 pen=9.6mm
+HEAL_OK bag4_1_d_0_1 x bag4_1_d_0_2 lv=4 tris 68->9 pen=7.4mm
+HEAL_OK bag4_1_d_0_11 x bag4_1_d_0_12 lv=4 tris 100->18 pen=4.6mm
+HEAL_OK bag4_1_d_11_0 x bag4_1_d_11_1 lv=4 tris 243->46 pen=10.1mm
+HEAL_OK bag4_1_d_9_1 x bag4_1_d_9_2 lv=4 tris 134->56 pen=12.2mm
+HEAL_OK bag5_1_d_2_8 x bag5_1_d_2_9 lv=5 tris 148->27 pen=11.2mm
+HEAL_OK bag6_1_d_6_5 x bag6_1_d_6_6 lv=6 tris 96->14 pen=4.3mm
+HEAL_SUMMARY deep0=32 residual=0
+COLLIDE_SUMMARY pairs=307 touch=32 deep=0 float_flags=0 bags=139
+HXL_SHELF_OK /tmp/hxl_v35_side.png
