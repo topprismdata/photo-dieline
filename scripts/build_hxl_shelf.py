@@ -1027,7 +1027,7 @@ def main():
                         #     → 二排露头形成可信前后排遮挡 (几何探针已证盒底坐板 7.5mm)
                         y_box = y_bag + (0.03 if r_i == 1 else 0.0)
                         h_box = 0.19 * (0.88 if r_i == 1 else 1.0)
-                        # V46: 盒装语义次级信息 (二十四审 P0) — 主设计窗+顶部系列带+条码/净含量
+                        # 盒面设计 (用户裁决简化版): 软粉底+TOPPRISM红顶带+主设计窗, 无次级信息 (拍摄友好)
                         bfp = None
                         if dpath0.exists():
                             _ck = str(dpath0)
@@ -1046,14 +1046,12 @@ def main():
                                 fbot = _load_font_cn(int(H2 * 0.032))
                                 d3.rectangle([0, 0, W2, int(H2 * 0.07)], fill=(200, 30, 30))
                                 d3.text((W2 // 2, int(H2 * 0.035)), "TOPPRISM", font=ftop, fill=(255, 255, 255), anchor="mm")
-                                d3.text((W2 // 2, int(H2 * 0.755)), "家族系列 · 家庭分享装", font=fbot, fill=(70, 40, 40), anchor="mm")
                                 d3.rectangle([int(W2 * 0.10), int(H2 * 0.83), int(W2 * 0.42), int(H2 * 0.91)], fill=(255, 255, 255), outline=(40, 40, 40), width=3)
                                 _bx = int(W2 * 0.115)
                                 while _bx < int(W2 * 0.405):
                                     d3.line([(_bx, int(H2 * 0.842)), (_bx, int(H2 * 0.898))], fill=(30, 30, 30), width=2)
                                     _bx += 7
-                                d3.text((int(W2 * 0.70), int(H2 * 0.87)), "净含量 120g", font=fbot, fill=(70, 40, 40), anchor="mm")
-                                d3.text((W2 // 2, int(H2 * 0.965)), "TOPPRISM SNACK SERIES", font=fbot, fill=(120, 60, 60), anchor="mm")
+
                                 bfp = DESIGN_DIR / f"boxfront_{Path(dpath0).stem}.png"
                                 comp.save(bfp)
                                 BOX_FRONT_CACHE[_ck] = bfp
