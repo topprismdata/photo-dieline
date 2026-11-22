@@ -1059,6 +1059,20 @@ def main():
                     co.scale = (w_bag / 0.095 * (0.98 + rng.random() * 0.04),
                                1.0, h_bag / 0.19 * (0.97 + rng.random() * 0.06))  # D35: 逐袋轮廓微差
                     bpy.context.scene.collection.objects.link(co)  # V28修: 先入场景(depsgraph), 后算世界bbox
+                    # V32: 簇相关形变 (十审 P0) — 单用户化+顶点扰动:
+                    #     相邻 3 件簇共享挤压方向, 逐袋肩部塌陷幅度/褶皱相位独立 (破复制模板)
+                    #     禁穿插: 幅度 ≤1cm; 沉降在后 (drop 需最终 bbox)
+                    if lv >= 3 and g.get("form", "bag") == "bag":
+                        co.data = co.data.copy()
+                        _me = co.data
+                        _cl_dir = ((i // 3) % 2) - 0.5  # 簇级挤压方向 (簇内同向, 簇间反向)
+                        _sh_amp = 0.005 + rng.random() * 0.009  # 逐袋肩塌幅度 5-14mm
+                        _ph = i * 13.7 + lv * 2.3  # 逐袋褶皱相位 (破模板)
+                        for _v in _me.vertices:
+                            _t = max(0.0, (_v.co.z + 0.095) / 0.19)  # 高度归一 0底→1顶
+                            _v.co.x += _cl_dir * _sh_amp * _t * _t  # 肩部内收 (顶满底零)
+                            _v.co.y += math.sin(_v.co.x * 210.0 + _ph) * 0.0022 * _t  # 前后向微褶
+                        _me.update()
                     drop_to_surface(co, z_bot)  # V28: 倾角袋底角沉降到板面 (禁悬浮)
                     sl = co.material_slots[0]
                     sl.link = 'OBJECT'
