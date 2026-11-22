@@ -968,6 +968,11 @@ def main():
                     y_bag = y_off + (rng.random() - 0.5) * _vj * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
                     if rng.random() < ((0.45 if lv >= 3 else 0.30) * irreg):
                         y_bag -= (0.020 + rng.random() * 0.030)  # D31/D33: 前拉加深 (V31 深度随机化)
+                    # V33: 簇内中位件前探 (十一审 P0 可见面朝向) — 35% 概率前探 20-32mm,
+                    #     局部遮挡后排同款正面, 破 5+ 连排同面积图案 (密度不减, 交叠不算穿插:
+                    #     前探件在前, 转角扫掠从邻袋前方通过)
+                    if lv >= 3 and g.get("form", "bag") == "bag" and i % 3 == 1 and rng.random() < 0.35:
+                        y_bag -= 0.020 + rng.random() * 0.012
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
@@ -1046,7 +1051,11 @@ def main():
                     h_bag = min(max(w_bag / ar * _hm, LEVEL_H * 0.50), LEVEL_H * 0.75)
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
                     _lb = (rng.random() - 0.5) * ((6.5 if lv >= 3 else 3.2) * irreg)  # V31: 角度差 (中下层翻倍)
-                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else _lb + clump * irreg))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
+                    # V33: 簇级侧转 (十一审 P0) — 3件簇共享偏角 -7.5/0/+7.5° + 逐袋 ±1.5°,
+                    #     同款正面可见面积逐簇差异化 (几何冻结: 只改朝向)
+                    _cl_yaw = ((((i // 3) % 3) - 1) * 7.5 + (rng.random() - 0.5) * 3.0) \
+                        if (lv >= 3 and g.get("form", "bag") == "bag") else 0.0
+                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else _lb + clump * irreg + _cl_yaw))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
                     # D30: 布料库实例 (变体网格共享 + OBJECT 材质逐袋独立印刷)
                     vmesh = CLOTH_LIB[(gidx * 131 + i * 17 + r_i * 53 + lv * 29) % len(CLOTH_LIB)]  # D35: 素数扰动破阵列感
                     co = bpy.data.objects.new(f"bag{lv}_{r_i}_{g['design_id']}_{i}", vmesh)
@@ -1056,7 +1065,12 @@ def main():
                     co.rotation_euler = (math.radians(pitch_x), 0, math.radians(lean))
                     if r_i == 1:
                         co.location.y += 0.022  # D34: 整排前移 2.2cm (顶靠前排背)
-                    co.scale = (w_bag / 0.095 * (0.98 + rng.random() * 0.04),
+                    _xc = w_bag / 0.095 * (0.98 + rng.random() * 0.04)
+                    if lv >= 3 and g.get("form", "bag") == "bag":
+                        # V34: 转角足迹收缩 (十一审 P0) — 侧转袋 x 按 cos(yaw) 收缩,
+                        #     转角扫掠钳回槽缝内 (解析防穿, 碰撞探针实测验证)
+                        _xc *= math.cos(math.radians(min(abs(lean), 20.0)))
+                    co.scale = (_xc,
                                1.0, h_bag / 0.19 * (0.97 + rng.random() * 0.06))  # D35: 逐袋轮廓微差
                     bpy.context.scene.collection.objects.link(co)  # V28修: 先入场景(depsgraph), 后算世界bbox
                     # V32: 簇相关形变 (十审 P0) — 单用户化+顶点扰动:
@@ -1225,14 +1239,52 @@ def main():
             print(f"PROBE {o.name[:28]:28s} zmin={zmin:.4f} board_top={boards.get(int(lv.rstrip('.0')) if str(lv).rstrip('.0').isdigit() else -1, -1):.4f}")
     if "--side" in argv:
         # V29: 侧视正交白模 (粉盒接触关系证明 — 六审 P0 要求)
+        # V34: env 参数化 (HXL_ORTHO/HXL_AIMZ/HXL_AIMX) — 转袋/前探碰撞证据可调视野
         cam = bpy.data.cameras.new("side"); cam.type = 'ORTHO'
-        cam.ortho_scale = 0.75
+        cam.ortho_scale = float(os.environ.get("HXL_ORTHO", "0.75"))
         co = bpy.data.objects.new("side", cam)
-        co.location = (-0.55, -1.5, 1.40)  # 侧前 25° 对准 L4 盒组 (x -0.29..0.05, 板面 z=1.38)
-        aim = Vector((-0.12, 0.2, 1.47)) - co.location
+        _ax = float(os.environ.get("HXL_AIMX", "-0.12"))
+        _az = float(os.environ.get("HXL_AIMZ", "1.47"))
+        co.location = (_ax - 0.43, -1.5, _az - 0.07)  # 侧前 25° (原 L4 盒组偏移保持)
+        aim = Vector((_ax, 0.2, _az)) - co.location
         co.rotation_euler = aim.to_track_quat('-Z', 'Y').to_euler()
         sc.camera = co
         sc.render.resolution_x, sc.render.resolution_y = 900, 700
+    if "--collide" in argv:
+        # V34: 三维碰撞验证 (十一审 P0) — BVH 网格相交 + 板接触 + 前后排序
+        dg = bpy.context.evaluated_depsgraph_get()
+        bags = [o for o in bpy.data.objects
+                if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
+                and int(o.name.split("_")[0][3:]) >= 3]
+        trees = {}
+        for o in bags:
+            trees[o.name] = bpy.types.BVHTree.FromObject(o, dg)
+        lv_of = lambda n: int(n.split("_")[0][3:])
+        x_of = lambda o: o.matrix_world.translation.x
+        y_of = lambda o: o.matrix_world.translation.y
+        zmin_of = lambda o: min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+        flags, pairs_checked = 0, 0
+        for o in bags:
+            for p in bags:
+                if p.name <= o.name or lv_of(p.name) != lv_of(o.name):
+                    continue
+                if abs(x_of(p) - x_of(o)) > 0.16 or abs(y_of(p) - y_of(o)) > 0.09:
+                    continue
+                pairs_checked += 1
+                ov = trees[o.name].overlap(trees[p.name])
+                if len(ov) > 4:
+                    flags += 1
+                    print(f"COLLIDE_FLAG {o.name} x {p.name} tris={len(ov)} "
+                          f"dx={abs(x_of(p)-x_of(o)):.3f} dy={abs(y_of(p)-y_of(o)):.3f}")
+        # 板接触: 袋世界 zmin 距板顶 >3mm = 悬浮
+        floats = 0
+        for o in bags:
+            lv = lv_of(o.name)
+            z0 = LIP + lv * LEVEL_H + 0.011
+            if zmin_of(o) > z0 + 0.003:
+                floats += 1
+                print(f"FLOAT_FLAG {o.name} zmin={zmin_of(o):.4f} board_top={z0:.4f}")
+        print(f"COLLIDE_SUMMARY pairs={pairs_checked} inter_flags={flags} float_flags={floats} bags={len(bags)}")
     sc.render.filepath = str(OUT)
     bpy.ops.render.render(write_still=True)
     print("HXL_SHELF_OK", OUT)
