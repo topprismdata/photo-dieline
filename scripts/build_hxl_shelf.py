@@ -801,6 +801,12 @@ def main():
                 gw = g["width_frac"] * SHELF_W
                 x0 = g["x0_frac"] * SHELF_W - SHELF_W / 2 + (rng.random() - 0.5) * 0.02  # H10 组界横移
                 n_g = max(1, g["facings"] + (1 if sh and g["facings"] > 2 else 0))
+                ar_g = (0.40, 0.58)[(j * 7 + lv * 3) % 2]  # P0-3: 组级袋形 (细长/中宽; 0.95 档已证塌陷弃用)
+                if g.get("form", "bag") == "bag":
+                    if ar_g >= 0.58:
+                        n_g = max(2, int(gw / (LEVEL_H * 0.62 * ar_g)))  # 宽袋: 槽数由袋形推导 (少而大; 检出 facings 不可靠)
+                    else:
+                        n_g = max(n_g, int(g["width_frac"] * SHELF_W / 0.072))  # 窄袋: 密度饥饿校正 (A L6/L7 满排 ~28)
                 bgw = gw / n_g
                 z_bot = z0 + 0.013  # 坐落层板唇 (2mm 过盈=承重接触)
                 for i in range(n_g):
@@ -814,11 +820,11 @@ def main():
                     y_bag = y_off + (rng.random() - 0.5) * 0.035 * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
                     if rng.random() < 0.30 * irreg:
                         y_bag -= 0.038  # D31/D33: 前拉加深 (概率随组缘增强)
+                    # V26: 设计索引前置 (占据图重建后 L1 无桶组, 赋值不再依赖 barrel 分支)
+                    gidx0 = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
+                    style0 = gidx0 % 3
+                    dpath0 = DESIGN_DIR / f"design_{gidx0:02d}_{style0}.png"
                     if g["form"] == "barrel":
-                        # 设计路径前置 (桶罐标签也需要)
-                        gidx0 = LV_GIDX.setdefault((lv, g["design_id"]), len(LV_GIDX))
-                        style0 = gidx0 % 3
-                        dpath0 = DESIGN_DIR / f"design_{gidx0:02d}_{style0}.png"
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
                                            rng=rng, tex_path=dpath0 if dpath0.exists() else None)
@@ -826,6 +832,12 @@ def main():
                     if g["form"] == "box":
                         box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                         bw_=min(0.12, bgw * 0.92))
+                        continue
+                    if g["form"] == "bottle":
+                        # P0-3: 瓶装 (A L7 深色瓶罐块): 细径高瓶, 复用圆柱占位 (盖=瓶盖)
+                        barrel_placeholder(f"bottle{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
+                                           dia=min(0.05, bgw * 0.9), hgt=LEVEL_H * 0.88,
+                                           rng=rng, tex_path=dpath0 if dpath0.exists() else None)
                         continue
                     # H12: 组独立印刷设计 (bag_print, 组=SKU 设计一对一)
                     gidx, style, dpath = gidx0, style0, dpath0
@@ -871,12 +883,18 @@ def main():
                     _satp = dpath.with_suffix(".sat.png")
                     _sat.save(_satp)
                     a = _satp
+                    ar_g2 = (0.40, 0.58)[(j * 7 + lv * 3) % 2]  # 与槽宽推导同源
+                    _im = Image.open(a)
+                    if _im.width / _im.height < ar_g2 - 0.04:
+                        _hc = min(int(_im.width / ar_g2), _im.height)
+                        _ar_p = dpath.with_suffix(".ar.png")
+                        _im.crop((0, 0, _im.width, _hc)).save(_ar_p)
+                        a = _ar_p
                     ar = Image.open(a).width / Image.open(a).height
-                    # 组内同 SKU=同尺寸定宽平铺 (v29b 教训: 随机尺寸破坏平铺 → 邻字叠印)
-                    # 高度主导 (v35 教训: 宽度主导+窄 ar → 半高袋; 参照袋占层高 ~2/3)
-                    h_bag = LEVEL_H * (0.62 + rng.random() * 0.26)  # P0-2 体量差异: A 组内高差 ±25% (v35 教训: 保持高主导防半高袋)
-                    w_bag = min(h_bag * ar, bgw * 0.99)
-                    h_bag = w_bag / ar
+                    # P0-4: 密度-形状协同 (v26 教训: 槽宽钳制反压高度→半高排大空洞;
+                    # A 实测 ~34件/层 × 6-8cm 宽 × 0.5-0.65LH 高, 槽宽即袋宽, 高度钳制防塌)
+                    w_bag = bgw * 0.97
+                    h_bag = min(max(w_bag / ar * (0.90 + rng.random() * 0.25), LEVEL_H * 0.50), LEVEL_H * 0.75)
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
                     lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else (rng.random() - 0.5) * 3.2 * irreg + clump * irreg))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
                     # D30: 布料库实例 (变体网格共享 + OBJECT 材质逐袋独立印刷)
