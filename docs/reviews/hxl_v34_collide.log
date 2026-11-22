@@ -1,0 +1,16 @@
+HXL_SHELF_OK /tmp/hxl_v34.png
+COLLIDE_DEEP bag3_1_d_0_2 x bag3_1_d_0_3 tris=178 dx=0.090 dy=0.010 y=(0.052,0.043) zc=(1.508,1.505)
+COLLIDE_DEEP bag3_1_d_11_0 x bag3_1_d_11_1 tris=75 dx=0.042 dy=0.009 y=(-0.005,-0.014) zc=(1.471,1.473)
+COLLIDE_DEEP bag3_1_d_7_2 x bag3_1_d_7_3 tris=172 dx=0.037 dy=0.011 y=(0.013,0.024) zc=(1.475,1.470)
+COLLIDE_DEEP bag4_0_d_0_0 x bag4_1_d_0_0 tris=80 dx=0.027 dy=0.043 y=(0.115,0.072) zc=(1.795,1.781)
+COLLIDE_DEEP bag4_0_d_9_2 x bag4_1_d_9_2 tris=281 dx=0.009 dy=0.030 y=(0.115,0.085) zc=(1.815,1.818)
+COLLIDE_DEEP bag4_1_d_0_1 x bag4_1_d_0_2 tris=68 dx=0.061 dy=0.013 y=(0.013,0.026) zc=(1.795,1.786)
+COLLIDE_DEEP bag4_1_d_0_11 x bag4_1_d_0_12 tris=100 dx=0.061 dy=0.002 y=(0.061,0.062) zc=(1.782,1.781)
+COLLIDE_DEEP bag4_1_d_10_3 x bag4_1_d_10_4 tris=67 dx=0.052 dy=0.003 y=(0.041,0.038) zc=(1.780,1.784)
+COLLIDE_DEEP bag4_1_d_10_4 x bag4_1_d_10_5 tris=176 dx=0.043 dy=0.011 y=(0.038,0.050) zc=(1.784,1.780)
+COLLIDE_DEEP bag4_1_d_11_0 x bag4_1_d_11_1 tris=243 dx=0.120 dy=0.020 y=(0.026,0.006) zc=(1.821,1.823)
+COLLIDE_DEEP bag4_1_d_9_1 x bag4_1_d_9_2 tris=134 dx=0.112 dy=0.024 y=(0.061,0.085) zc=(1.820,1.818)
+COLLIDE_DEEP bag5_1_d_2_8 x bag5_1_d_2_9 tris=148 dx=0.084 dy=0.029 y=(0.002,0.031) zc=(2.128,2.112)
+COLLIDE_DEEP bag6_1_d_6_5 x bag6_1_d_6_6 tris=96 dx=0.058 dy=0.008 y=(0.041,0.033) zc=(2.411,2.400)
+COLLIDE_SUMMARY pairs=307 touch=23 deep=13 float_flags=0 bags=139
+HXL_SHELF_OK /tmp/hxl_v34_side.png

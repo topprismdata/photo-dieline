@@ -967,12 +967,19 @@ def main():
                     _vj = 0.055 if lv >= 3 else 0.035  # V31: 前缘不齐 (中下层加强)
                     y_bag = y_off + (rng.random() - 0.5) * _vj * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
                     if rng.random() < ((0.45 if lv >= 3 else 0.30) * irreg):
-                        y_bag -= (0.020 + rng.random() * 0.030)  # D31/D33: 前拉加深 (V31 深度随机化)
-                    # V33: 簇内中位件前探 (十一审 P0 可见面朝向) — 35% 概率前探 20-32mm,
+                        # V34: 前拉封顶 0.038 (原 0.050 — BVH 实测前后排行间 11mm 深叠根因)
+                        y_bag -= (0.020 + rng.random() * 0.018)  # D31/D33: 前拉加深 (V31 深度随机化)
+                    # V33: 簇内中位件前探 (十一审 P0 可见面朝向) — 35% 概率前探 15-24mm,
                     #     局部遮挡后排同款正面, 破 5+ 连排同面积图案 (密度不减, 交叠不算穿插:
                     #     前探件在前, 转角扫掠从邻袋前方通过)
                     if lv >= 3 and g.get("form", "bag") == "bag" and i % 3 == 1 and rng.random() < 0.35:
-                        y_bag -= 0.020 + rng.random() * 0.012
+                        y_bag -= 0.015 + rng.random() * 0.009
+                    # V34: 行间净距钳制 (双向) — 后排 ≥0.115, 前排 ≤0.075
+                    #     (袋鼓深 ~35mm; BVH 实测单边钳制 0.095 与前排尾部相撞 460tri)
+                    if r_i == 0 and lv >= 3:
+                        y_bag = max(y_bag, 0.115)
+                    if r_i == 1 and lv >= 3:
+                        y_bag = min(y_bag, 0.075)
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
@@ -1053,7 +1060,7 @@ def main():
                     _lb = (rng.random() - 0.5) * ((6.5 if lv >= 3 else 3.2) * irreg)  # V31: 角度差 (中下层翻倍)
                     # V33: 簇级侧转 (十一审 P0) — 3件簇共享偏角 -7.5/0/+7.5° + 逐袋 ±1.5°,
                     #     同款正面可见面积逐簇差异化 (几何冻结: 只改朝向)
-                    _cl_yaw = ((((i // 3) % 3) - 1) * 7.5 + (rng.random() - 0.5) * 3.0) \
+                    _cl_yaw = ((((i // 3) % 3) - 1) * 5.0 + (rng.random() - 0.5) * 3.0) \
                         if (lv >= 3 and g.get("form", "bag") == "bag") else 0.0
                     lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else _lb + clump * irreg + _cl_yaw))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
                     # D30: 布料库实例 (变体网格共享 + OBJECT 材质逐袋独立印刷)
@@ -1061,10 +1068,10 @@ def main():
                     co = bpy.data.objects.new(f"bag{lv}_{r_i}_{g['design_id']}_{i}", vmesh)
                     co.location = (max(x0 + w_bag / 2, min(x0 + gw - w_bag / 2, x_bag)),
                                    y_bag, z_bot + h_bag / 2)
-                    pitch_x = (rng.random() - 0.5) * 2.4 + (7.0 + rng.random() * 6.0 if r_i == 1 else 0.0)  # D34: 二排前倾压前排
+                    pitch_x = (rng.random() - 0.5) * 2.4 + (4.0 + rng.random() * 3.0 if r_i == 1 else 0.0)  # D34: 二排前倾 (V34: 7-13→4-7°, 顶后摆≤12mm 防顶进后排)
                     co.rotation_euler = (math.radians(pitch_x), 0, math.radians(lean))
                     if r_i == 1:
-                        co.location.y += 0.022  # D34: 整排前移 2.2cm (顶靠前排背)
+                        co.location.y += 0.012  # D34: 整排前移 (V34: 22→12mm)
                     _xc = w_bag / 0.095 * (0.98 + rng.random() * 0.04)
                     if lv >= 3 and g.get("form", "bag") == "bag":
                         # V34: 转角足迹收缩 (十一审 P0) — 侧转袋 x 按 cos(yaw) 收缩,
@@ -1080,12 +1087,12 @@ def main():
                         co.data = co.data.copy()
                         _me = co.data
                         _cl_dir = ((i // 3) % 2) - 0.5  # 簇级挤压方向 (簇内同向, 簇间反向)
-                        _sh_amp = 0.005 + rng.random() * 0.009  # 逐袋肩塌幅度 5-14mm
+                        _sh_amp = 0.003 + rng.random() * 0.005  # V34: 肩塌 3-8mm (原 5-14, BVH 实测同簇对压深叠缩减)
                         _ph = i * 13.7 + lv * 2.3  # 逐袋褶皱相位 (破模板)
                         for _v in _me.vertices:
                             _t = max(0.0, (_v.co.z + 0.095) / 0.19)  # 高度归一 0底→1顶
                             _v.co.x += _cl_dir * _sh_amp * _t * _t  # 肩部内收 (顶满底零)
-                            _v.co.y += math.sin(_v.co.x * 210.0 + _ph) * 0.0022 * _t  # 前后向微褶
+                            _v.co.y += math.sin(_v.co.x * 210.0 + _ph) * 0.0018 * _t  # 前后向微褶 (V34: 2.2→1.8mm)
                         _me.update()
                     drop_to_surface(co, z_bot)  # V28: 倾角袋底角沉降到板面 (禁悬浮)
                     sl = co.material_slots[0]
@@ -1252,18 +1259,22 @@ def main():
         sc.render.resolution_x, sc.render.resolution_y = 900, 700
     if "--collide" in argv:
         # V34: 三维碰撞验证 (十一审 P0) — BVH 网格相交 + 板接触 + 前后排序
+        from mathutils.bvhtree import BVHTree
         dg = bpy.context.evaluated_depsgraph_get()
         bags = [o for o in bpy.data.objects
                 if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
                 and int(o.name.split("_")[0][3:]) >= 3]
         trees = {}
         for o in bags:
-            trees[o.name] = bpy.types.BVHTree.FromObject(o, dg)
+            # V34修: FromObject 是局部空间 (同源网格全重合=全误报) — 世界空间多边形重建
+            _vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            _ps = [list(p.vertices) for p in o.data.polygons]
+            trees[o.name] = BVHTree.FromPolygons(_vs, _ps)
         lv_of = lambda n: int(n.split("_")[0][3:])
         x_of = lambda o: o.matrix_world.translation.x
         y_of = lambda o: o.matrix_world.translation.y
         zmin_of = lambda o: min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
-        flags, pairs_checked = 0, 0
+        flags, touch, deep, pairs_checked = 0, 0, 0, 0
         for o in bags:
             for p in bags:
                 if p.name <= o.name or lv_of(p.name) != lv_of(o.name):
@@ -1274,8 +1285,15 @@ def main():
                 ov = trees[o.name].overlap(trees[p.name])
                 if len(ov) > 4:
                     flags += 1
-                    print(f"COLLIDE_FLAG {o.name} x {p.name} tris={len(ov)} "
-                          f"dx={abs(x_of(p)-x_of(o)):.3f} dy={abs(y_of(p)-y_of(o)):.3f}")
+                    if len(ov) > 60:
+                        deep += 1
+                        print(f"COLLIDE_DEEP {o.name} x {p.name} tris={len(ov)} "
+                              f"dx={abs(x_of(p)-x_of(o)):.3f} dy={abs(y_of(p)-y_of(o)):.3f} "
+                              f"y=({y_of(o):.3f},{y_of(p):.3f}) "
+                              f"zc=({o.matrix_world.translation.z:.3f},{p.matrix_world.translation.z:.3f})")
+                    else:
+                        touch += 1
+                        print(f"COLLIDE_TOUCH {o.name} x {p.name} tris={len(ov)}")
         # 板接触: 袋世界 zmin 距板顶 >3mm = 悬浮
         floats = 0
         for o in bags:
@@ -1284,9 +1302,10 @@ def main():
             if zmin_of(o) > z0 + 0.003:
                 floats += 1
                 print(f"FLOAT_FLAG {o.name} zmin={zmin_of(o):.4f} board_top={z0:.4f}")
-        print(f"COLLIDE_SUMMARY pairs={pairs_checked} inter_flags={flags} float_flags={floats} bags={len(bags)}")
+        print(f"COLLIDE_SUMMARY pairs={pairs_checked} touch={touch} deep={deep} float_flags={floats} bags={len(bags)}")
     sc.render.filepath = str(OUT)
-    bpy.ops.render.render(write_still=True)
+    if os.environ.get("HXL_NORENDER") != "1":
+        bpy.ops.render.render(write_still=True)
     print("HXL_SHELF_OK", OUT)
 
 

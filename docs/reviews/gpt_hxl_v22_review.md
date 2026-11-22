@@ -152,3 +152,11 @@
 - 轨迹: 4.5→4.8→5.2→5.6→5.8→6.0→6.3→6.6→6.8→**7.0**
 ### 十二审 P0 (十一审授权): V34 三维碰撞验证轮 — 对 L3-L6 侧转/前探袋 BVH 网格相交检测+板接触+前后排序, 有穿插优先缩减幅度不改密度; 必须交侧视白模+碰撞检测结果
 ### V34 已执行 (待送审): 转角足迹收缩 cos(yaw) 解析防穿 + --collide BVH 探针 (COLLIDE_FLAG/FLOAT_FLAG/SUMMARY) + --side env 参数化 (HXL_ORTHO/AIMX/AIMZ)
+
+## V34 三维碰撞验证轮 (2026-11-22 深夜, 十一审授权) — 投递被限流待重试
+### 执行 (零新增随机, 全幅度收敛)
+- BVH 探针: mathutils.bvhtree 世界空间 FromPolygons (**FromObject 是局部空间, 同源网格全重合=全误报 1500-1800tri**); 139 袋 L3-L6 两两邻近对
+- 收敛: 簇偏角 ±7.5→±5.0 / D34 前倾 7-13→4-7°+前移 22→12mm / 肩塌 5-14→3-8mm / 褶皱 2.2→1.8mm / 前探 20-32→15-24mm / 前拉封顶 0.038 / 行净距双向钳制 (后排≥0.115 前排≤0.075) / 侧转足迹 cos(yaw) 收缩
+- 账目: deep 19→**13** (最重 467→281), float **0**, touch 23, pairs 307; 余 deep 全为同排宽袋满排相触设计接触带 (槽距 0.985+挤压), 非行间穿越
+- 证据: docs/reviews/hxl_v34_collide.log + /tmp/hxl_v34_side.png (白模) + /tmp/hxl_v34.png
+### 事故: backend-api burst 复查 → 429 限流升级到 "A temporary limit is preventing this chat from loading" (会话级临时锁) — 教训: 复查必须 ≥90s 间隔, 单次拿全量, 禁连续 fetch; DOM 检查同源也锁
