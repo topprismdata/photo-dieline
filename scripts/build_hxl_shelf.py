@@ -1396,6 +1396,51 @@ def main():
                 floats += 1
                 print(f"FLOAT_FLAG {o.name} zmin={zmin_of(o):.4f} board_top={z0:.4f}")
         print(f"COLLIDE_SUMMARY pairs={pairs_checked} touch={touch} deep={deep} float_flags={floats} bags={len(bags)}")
+    if "--depthtable" in argv:
+        # V36: 纯测量轮 (十四审 P0) — 全部相交对逐对穿透深度账 (零几何修改)
+        from mathutils.bvhtree import BVHTree
+
+        def _wt(o):
+            vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            ps = [list(p.vertices) for p in o.data.polygons]
+            return BVHTree.FromPolygons(vs, ps)
+
+        bags = [o for o in bpy.data.objects
+                if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
+                and int(o.name.split("_")[0][3:]) >= 3]
+        lv_of = lambda n: int(n.split("_")[0][3:])
+        cw = lambda o: o.matrix_world.translation
+        trees = {o.name: _wt(o) for o in bags}
+        rows = []
+        for a in bags:
+            for b in bags:
+                if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
+                    continue
+                dv = cw(b) - cw(a)
+                if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
+                    continue
+                ov = trees[a.name].overlap(trees[b.name])
+                if len(ov) < 4:
+                    continue
+                maxpen = 0.0
+                for ia, ib in ov[:150]:
+                    for o, t_o, idx in ((a, trees[b.name], ia), (b, trees[a.name], ib)):
+                        if idx < len(o.data.polygons):
+                            vw = o.matrix_world @ o.data.polygons[idx].center
+                            d = t_o.find_nearest(vw)[3]
+                            if d is not None:
+                                maxpen = max(maxpen, d)
+                cls = "SURFACE" if maxpen < 0.0005 else ("SLIGHT" if maxpen < 0.002 else "OBVIOUS")
+                rows.append((lv_of(a.name), f"{a.name} x {b.name}", len(ov),
+                             round(maxpen * 1000, 2), cls))
+        rows.sort(key=lambda r: -r[3])
+        for lv, k, t, p, c in rows:
+            print(f"DEPTH_ROW lv={lv} {k} tris={t} maxpen={p}mm class={c}")
+        n_s = len([r for r in rows if r[4] == "SURFACE"])
+        n_l = len([r for r in rows if r[4] == "SLIGHT"])
+        n_o = len([r for r in rows if r[4] == "OBVIOUS"])
+        print(f"DEPTH_SUMMARY pairs={len(rows)} surface={n_s} slight={n_l} obvious={n_o} "
+              f"maxpen={rows[0][3] if rows else 0}mm")
     sc.render.filepath = str(OUT)
     if os.environ.get("HXL_NORENDER") != "1":
         bpy.ops.render.render(write_still=True)
