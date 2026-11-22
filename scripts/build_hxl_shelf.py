@@ -474,17 +474,24 @@ def tray_basket(name, cx, y, z_bot, bw_, dep=0.26, hgt=0.15):
 
 
 def tray_lean_fill(name, cx, y_in, z_bot, bw_, dpath, rng):
-    """篮内二排斜倚袋 (V30): 后排4+前排3, 前排倚后排露头 (局部遮挡), 袋顶越沿."""
+    """篮内二排斜倚袋 (V30/V31): 后排3-5+前排2-4 随机缺位, 前排倚后排露头, 逐袋高低差 (非均匀补货)."""
     bw2 = min(0.10, bw_ / 4.4)
     bh2 = bw2 * 1.55
-    for k in range(7):
-        back = k < 4
+    nb_back = int(rng.integers(3, 6))
+    nb_front = int(rng.integers(2, 5))
+    slots = [(1, k) for k in range(nb_back)] + [(0, k) for k in range(nb_front)]
+    if rng.random() < 0.4 and len(slots) > 4:
+        slots.pop(int(rng.integers(0, len(slots))))  # V31: 拿走一袋
+    for kk, (back, k) in enumerate(slots):
         yy = y_in + (0.055 if back else -0.022)
-        xx = cx + (k - (1.5 if back else 1.0)) * (bw2 + 0.014)
-        zz = z_bot + 0.055 + (0.0 if back else 0.012)
-        img_plane(f"{name}_l{k}", dpath, bw2, bh2,
-                  (xx, yy, zz + bh2 * 0.44),
-                  rot=(-(22 + rng.random() * 8), 0, (rng.random() - 0.5) * 14),
+        xx = cx + (k - ((nb_back - 1) / 2 if back else (nb_front - 1) / 2)) * (bw2 + 0.014)
+        zz = z_bot + 0.055 + (0.0 if back else 0.012 + rng.random() * 0.018)
+        bh3 = bh2 * (0.82 + rng.random() * 0.36)  # V31: 逐袋高低差
+        if not back and rng.random() < 0.25:
+            yy -= 0.045  # V31: 前缘不齐 (单袋前探)
+        img_plane(f"{name}_l{kk}", dpath, bw2, bh3,
+                  (xx, yy, zz + bh3 * 0.44),
+                  rot=(-(20 + rng.random() * 14), 0, (rng.random() - 0.5) * 20),
                   emissive=0.10, rough=0.5)
 
 
@@ -501,18 +508,19 @@ def tray_flat_fill(name, cx, y_in, z_bot, bw_, rgb, dpath, rng):
     sb.inputs["Roughness"].default_value = 0.45
     for st in range(2):
         sx = cx + (st - 0.5) * (pw + 0.035)
-        n = 4 + (st % 2)
+        n = int(rng.integers(3, 7))  # V31: 层数随机 (3-6, 补货后不等高)
         for k in range(n):
             zz = z_bot + 0.075 + k * th
-            rz = (rng.random() - 0.5) * 16
-            bpy.ops.mesh.primitive_cube_add(size=1, location=(sx, y_in, zz + th / 2))
+            rz = (rng.random() - 0.5) * (12 + k * 4)  # V31: 上层更乱
+            ox = (rng.random() - 0.5) * (0.012 if k == n - 1 else 0.004)  # V31: 顶层拿歪
+            bpy.ops.mesh.primitive_cube_add(size=1, location=(sx + ox, y_in, zz + th / 2))
             pk = bpy.context.active_object
             pk.name = f"{name}_f{st}_{k}"
             pk.rotation_euler = (0, 0, math.radians(rz))
             pk.scale = (pw / 2, pd / 2, th / 2)
             pk.data.materials.append(side)
             img_plane(f"{name}_t{st}_{k}", dpath, pw * 0.92, pd * 0.92,
-                      (sx, y_in, zz + th + 0.002),
+                      (sx + ox, y_in, zz + th + 0.002),
                       rot=(-90, 0, rz), emissive=0.08, rough=0.55)
 
 
@@ -943,17 +951,23 @@ def main():
                             tray_flat_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_, rgb,
                                            dpath0 if dpath0.exists() else None, rng)
                     continue
+                # V31: 拿货缺口段 (九审 P0 非均匀补货节奏; 中下层 30% 组触发)
+                gap_at = set()
+                if lv >= 3 and rng.random() < 0.30:
+                    g0 = int(rng.integers(0, n_g))
+                    gap_at = ({g0, (g0 + 1) % n_g} if rng.random() < 0.4 else {g0})
                 for i in range(n_g):
-                    if rng.random() < 0.03:
-                        continue  # H9: 3% 缺位 (真实货架有人拿货后的空隙)
+                    if i in gap_at or rng.random() < 0.03:
+                        continue  # H9: 3% 缺位 + V31 缺口段 (真实货架有人拿货后的空隙)
                     dist = abs((i + 0.5) / max(n_g, 1) - 0.5) * 2.0  # D33: 0=组心 1=组缘
                     irreg = 0.45 + 1.1 * dist ** 1.5  # 渐进不规则系数
                     # 真实 planogram 软件语义: 数据管结构(组/段/色), SKU 实宽管装箱
                     # 袋宽由高宽比定 (高=层高 0.62-0.72), 邻袋相触允许微溢 (参照: 满排相触)
                     x_bag = x0 + gw * (i + 0.5 + sh * 0.5) / max(n_g, 1) + (rng.random() - 0.5) * 0.008  # V28: 邻袋接触 (±1cm→±4mm)
-                    y_bag = y_off + (rng.random() - 0.5) * 0.035 * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
-                    if rng.random() < 0.30 * irreg:
-                        y_bag -= 0.038  # D31/D33: 前拉加深 (概率随组缘增强)
+                    _vj = 0.055 if lv >= 3 else 0.035  # V31: 前缘不齐 (中下层加强)
+                    y_bag = y_off + (rng.random() - 0.5) * _vj * irreg + (0.014 if rng.random() < 0.12 * irreg else 0.0)
+                    if rng.random() < ((0.45 if lv >= 3 else 0.30) * irreg):
+                        y_bag -= (0.020 + rng.random() * 0.030)  # D31/D33: 前拉加深 (V31 深度随机化)
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
@@ -1028,9 +1042,11 @@ def main():
                     # P0-4: 密度-形状协同 (v26 教训: 槽宽钳制反压高度→半高排大空洞;
                     # A 实测 ~34件/层 × 6-8cm 宽 × 0.5-0.65LH 高, 槽宽即袋宽, 高度钳制防塌)
                     w_bag = bgw * 0.985  # V28: 邻袋相触 (0.97→0.985, 缝隙≤2mm)
-                    h_bag = min(max(w_bag / ar * (0.90 + rng.random() * 0.25), LEVEL_H * 0.50), LEVEL_H * 0.75)
+                    _hm = (0.84 + rng.random() * 0.42) if lv >= 3 else (0.90 + rng.random() * 0.25)  # V31: 高低差 (中下层加强)
+                    h_bag = min(max(w_bag / ar * _hm, LEVEL_H * 0.50), LEVEL_H * 0.75)
                     clump = (i // 3) % 2 * 3.4 - 1.7  # D31: 受压簇加强 (1.1→1.7度)
-                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else (rng.random() - 0.5) * 3.2 * irreg + clump * irreg))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
+                    _lb = (rng.random() - 0.5) * ((6.5 if lv >= 3 else 3.2) * irreg)  # V31: 角度差 (中下层翻倍)
+                    lean = 6.5 if rng.random() < 0.05 else (11.0 if rng.random() < 0.05 else (2.6 if i in (2, 9) else _lb + clump * irreg))  # D33: 倾角随组缘增强  # H11: 4% 强侧转
                     # D30: 布料库实例 (变体网格共享 + OBJECT 材质逐袋独立印刷)
                     vmesh = CLOTH_LIB[(gidx * 131 + i * 17 + r_i * 53 + lv * 29) % len(CLOTH_LIB)]  # D35: 素数扰动破阵列感
                     co = bpy.data.objects.new(f"bag{lv}_{r_i}_{g['design_id']}_{i}", vmesh)
