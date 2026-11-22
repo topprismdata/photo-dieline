@@ -1,0 +1,3 @@
+V38_SUMMARY joint=131 restored=139 collisions=0 silhouette_mean_px=63.3 silhouette_max_px=284.9 residual_disp_max_mm=69.6
+COLLIDE_SUMMARY pairs=275 touch=0 deep=0 float_flags=0 bags=139
+HXL_SHELF_OK /tmp/hxl_v39_side.png

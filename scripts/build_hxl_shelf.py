@@ -45,6 +45,11 @@ AI_FLAVOR_KEY = {"经典原味": "yuwei", "黄瓜味": "huanggua", "青柠味": 
                  "番茄味": "fanqie", "海苔味": "haitai", "芝士味": "zhishi", "焦糖黄油味": "jiaotang",
                  "劲爆辣味": "jinbaoLa", "烧烤鸡味": "shaokaoJi", "黑松露味": "heisonglu", "藤椒味": "tengjiao"}
 LV_GIDX = {}
+ROW_CHAINS = {}  # V37-B2: (lv, r_i, design_id) -> [bag objs] 行内链式打包
+ROW_SPANS = {}   # V37-B2: (lv, r_i, design_id) -> (x0, gw) 组原span
+ORIG36 = {}      # V38: 打包前 V36 位置快照 (name -> (x, y))
+BOX_FRONT_CACHE = {}  # V46: 盒面合成缓存 (design path -> composed png)
+BOX_BODY_COLOR = {}  # V47: 盒体色 = 设计边色均值 (消贴纸感)
 FOOD_PATCHES = [Image.open(pp) for pp in sorted((ROOT / "assets/food_patches").glob("*.png"))]
 FLAVOR_TINT = {"黄瓜味": (0.82, 1.10, 0.85), "青柠味": (0.85, 1.08, 0.82),
                "番茄味": (1.10, 0.92, 0.85), "麻辣小龙虾味": (1.10, 0.90, 0.82),
@@ -217,7 +222,7 @@ def img_plane(name, tex_path, w, h, loc, rot=(0, 0, 0), emissive=0.0, rough=0.5)
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
-    bsdf.inputs["Coat Weight"].default_value = 0.10      # 镀铝亮面袋 (0.28 洗白印刷, 再平衡实证)
+    bsdf.inputs["Coat Weight"].default_value = 0.10
     bsdf.inputs["Coat Roughness"].default_value = 0.16
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
@@ -419,7 +424,7 @@ def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None, te
     lid.data.materials.append(ml)
 
 
-def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
+def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19, front_tex=None):
     """盒装占位 (planogram form=box): 立盒+白窗前板, 填满槽宽."""
     soft = tuple(rgb[c] * 0.75 + 0.16 for c in range(3))
     bpy.ops.mesh.primitive_cube_add(size=1, location=(x, y, z_bot + hgt / 2))
@@ -437,10 +442,25 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19):
     front.name = name + "_front"
     front.rotation_euler = (math.radians(90), 0, 0)
     front.scale = (bw_ * 0.62, hgt * 0.5, 1)
-    mm = bpy.data.materials.new(name + "_front")
-    mm.use_nodes = True
-    mm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.94, 0.93, 0.90, 1)
-    front.data.materials.append(mm)
+    if front_tex:
+        # V45: 盒装正面印刷 (TOPPRISM 设计族 — 同组设计, 品牌一致非虚构)
+        fm = bpy.data.materials.new(name + "_front")
+        fm.use_nodes = True
+        fnt = fm.node_tree
+        fb = fnt.nodes["Principled BSDF"]
+        fb.inputs["Roughness"].default_value = 0.35
+        ftex = fnt.nodes.new("ShaderNodeTexImage")
+        ftex.image = bpy.data.images.load(str(front_tex))
+        fhs = fnt.nodes.new("ShaderNodeHueSaturation")
+        fhs.inputs["Saturation"].default_value = 1.15
+        fnt.links.new(ftex.outputs["Color"], fhs.inputs["Color"])
+        fnt.links.new(fhs.outputs["Color"], fb.inputs["Base Color"])
+        front.data.materials.append(fm)
+    else:
+        mm = bpy.data.materials.new(name + "_front")
+        mm.use_nodes = True
+        mm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.94, 0.93, 0.90, 1)
+        front.data.materials.append(mm)
 
 
 def tray_basket(name, cx, y, z_bot, bw_, dep=0.26, hgt=0.15):
@@ -524,16 +544,18 @@ def tray_flat_fill(name, cx, y_in, z_bot, bw_, rgb, dpath, rng):
                       rot=(-90, 0, rz), emissive=0.08, rough=0.55)
 
 
-def bag_material(name, tex_path, rough=0.4, emissive=0.06):
-    """D30: 印刷材质 (从 img_bag_curved 抽出, 供布料库实例 OBJECT-link 复用)."""
+def bag_material(name, tex_path, rough=0.4, emissive=0.06, uv_rot=0.0, uv_scale=1.0, uv_tr=(0.0, 0.0), warp=0.0,
+                 coat_w=0.10, coat_r=0.28, bump_s=0.0):
+    """D30: 印刷材质 (从 img_bag_curved 抽出, 供布料库实例 OBJECT-link 复用).
+    V41: 印刷重复感去重 — 逐袋 UV 微旋转/缩放/平移 + 噪声非刚性微变形 (同 SKU 官方设计不变)."""
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     mat.use_backface_culling = True
     nt = mat.node_tree
     bsdf = nt.nodes["Principled BSDF"]
     bsdf.inputs["Roughness"].default_value = rough
-    bsdf.inputs["Coat Weight"].default_value = 0.10      # 镀铝亮面袋 (0.28 洗白印刷, 再平衡实证)
-    bsdf.inputs["Coat Roughness"].default_value = 0.16
+    bsdf.inputs["Coat Weight"].default_value = coat_w    # V42: 逐袋膜面反射微差异
+    bsdf.inputs["Coat Roughness"].default_value = coat_r
     nz = nt.nodes.new("ShaderNodeTexNoise")
     nz.inputs["Scale"].default_value = 620.0
     nz.inputs["Detail"].default_value = 4.0
@@ -542,6 +564,14 @@ def bag_material(name, tex_path, rough=0.4, emissive=0.06):
     ramp.inputs["To Max"].default_value = 1.0
     tex = nt.nodes.new("ShaderNodeTexImage")
     tex.image = bpy.data.images.load(str(tex_path))
+    if abs(uv_rot) > 1e-6 or abs(uv_scale - 1.0) > 1e-6 or abs(uv_tr[0]) > 1e-6 or abs(uv_tr[1]) > 1e-6 or warp > 1e-6:
+        tc = nt.nodes.new("ShaderNodeTexCoord")
+        mp = nt.nodes.new("ShaderNodeMapping")
+        mp.inputs["Rotation"].default_value = (0.0, 0.0, math.radians(uv_rot))
+        mp.inputs["Scale"].default_value = (uv_scale, uv_scale, 1.0)
+        mp.inputs["Location"].default_value = (uv_tr[0], uv_tr[1], 0.0)
+        nt.links.new(tc.outputs["UV"], mp.inputs["Vector"])
+        nt.links.new(mp.outputs["Vector"], tex.inputs["Vector"])
     hs = nt.nodes.new("ShaderNodeHueSaturation")
     hs.inputs["Saturation"].default_value = 1.18  # D40: 印刷更鲜艳
     nt.links.new(tex.outputs["Color"], hs.inputs["Color"])
@@ -557,6 +587,11 @@ def bag_material(name, tex_path, rough=0.4, emissive=0.06):
     rr.inputs["To Max"].default_value = rough + 0.09
     nt.links.new(nz.outputs["Fac"], rr.inputs["Value"])
     nt.links.new(rr.outputs["Result"], bsdf.inputs["Roughness"])
+    if bump_s > 1e-4:
+        bp = nt.nodes.new("ShaderNodeBump")
+        bp.inputs["Strength"].default_value = bump_s   # V42: 逐袋微起伏强度差异
+        nt.links.new(nz.outputs["Fac"], bp.inputs["Height"])
+        nt.links.new(bp.outputs["Normal"], bsdf.inputs["Normal"])
     try:
         bsdf.inputs["Coat Weight"].default_value = 0.10  # D40: 银灰反射压制
         bsdf.inputs["Coat Roughness"].default_value = 0.28
@@ -974,12 +1009,14 @@ def main():
                     #     前探件在前, 转角扫掠从邻袋前方通过)
                     if lv >= 3 and g.get("form", "bag") == "bag" and i % 3 == 1 and rng.random() < 0.35:
                         y_bag -= 0.015 + rng.random() * 0.009
-                    # V34: 行间净距钳制 (双向) — 后排 ≥0.115, 前排 ≤0.075
-                    #     (袋鼓深 ~35mm; BVH 实测单边钳制 0.095 与前排尾部相撞 460tri)
-                    if r_i == 0 and lv >= 3:
-                        y_bag = max(y_bag, 0.115)
-                    if r_i == 1 and lv >= 3:
-                        y_bag = min(y_bag, 0.075)
+                    # V37-B2: 行带硬分离 (路线B R37-B02) — 前排终位 ≤0.070, 后排 ≥0.135
+                    #     (袋鼓半深 ~27mm: 带间净距 ≥11mm → 跨排物理不可能相交; y 随机收带, 高度/倾角随机保留)
+                    if lv >= 3:
+                        if r_i == 1:
+                            y_bag = max(0.028, min(0.048, y_bag))
+                        else:
+                            y_bag = max(0.135, min(0.140, y_bag))
+                    ROW_SPANS.setdefault((lv, r_i, g["design_id"]), (x0, gw))
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
@@ -990,8 +1027,41 @@ def main():
                         #     → 二排露头形成可信前后排遮挡 (几何探针已证盒底坐板 7.5mm)
                         y_box = y_bag + (0.03 if r_i == 1 else 0.0)
                         h_box = 0.19 * (0.88 if r_i == 1 else 1.0)
-                        box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_box, z_bot, rgb,
-                                        bw_=min(0.12, bgw * 0.92), hgt=h_box)
+                        # V46: 盒装语义次级信息 (二十四审 P0) — 主设计窗+顶部系列带+条码/净含量
+                        bfp = None
+                        if dpath0.exists():
+                            _ck = str(dpath0)
+                            bfp = BOX_FRONT_CACHE.get(_ck)
+                            if bfp is None:
+                                from PIL import Image as _I2, ImageDraw as _D3
+                                base = _I2.open(dpath0).convert("RGB")
+                                W2, H2 = 600, 1180
+                                # V48: 粉色主体整体印刷 — 背景盒色软粉 (随 rgb), 元素直接印上, 无白贴纸
+                                _soft = tuple(int(c * 255 * 0.30 + 245 * 0.70) for c in rgb)
+                                comp = _I2.new("RGB", (W2, H2), _soft)
+                                ins = base.resize((int(W2 * 0.78), int(H2 * 0.58)))
+                                comp.paste(ins, ((W2 - ins.width) // 2, int(H2 * 0.115)))
+                                d3 = _D3.Draw(comp)
+                                ftop = _load_font_cn(int(H2 * 0.045))
+                                fbot = _load_font_cn(int(H2 * 0.032))
+                                d3.rectangle([0, 0, W2, int(H2 * 0.07)], fill=(200, 30, 30))
+                                d3.text((W2 // 2, int(H2 * 0.035)), "TOPPRISM", font=ftop, fill=(255, 255, 255), anchor="mm")
+                                d3.text((W2 // 2, int(H2 * 0.755)), "家族系列 · 家庭分享装", font=fbot, fill=(70, 40, 40), anchor="mm")
+                                d3.rectangle([int(W2 * 0.10), int(H2 * 0.83), int(W2 * 0.42), int(H2 * 0.91)], fill=(255, 255, 255), outline=(40, 40, 40), width=3)
+                                _bx = int(W2 * 0.115)
+                                while _bx < int(W2 * 0.405):
+                                    d3.line([(_bx, int(H2 * 0.842)), (_bx, int(H2 * 0.898))], fill=(30, 30, 30), width=2)
+                                    _bx += 7
+                                d3.text((int(W2 * 0.70), int(H2 * 0.87)), "净含量 120g", font=fbot, fill=(70, 40, 40), anchor="mm")
+                                d3.text((W2 // 2, int(H2 * 0.965)), "TOPPRISM SNACK SERIES", font=fbot, fill=(120, 60, 60), anchor="mm")
+                                bfp = DESIGN_DIR / f"boxfront_{Path(dpath0).stem}.png"
+                                comp.save(bfp)
+                                BOX_FRONT_CACHE[_ck] = bfp
+                            _softf = tuple(c / 255.0 for c in _soft)
+                            BOX_BODY_COLOR[_ck] = _softf
+                        box_placeholder(f"box{lv}_{r_i}_{i}", x_bag, y_box, z_bot,
+                                        rgb, bw_=min(0.12, bgw * 0.92), hgt=h_box,
+                                        front_tex=bfp)
                         continue
                     if g["form"] == "bottle":
                         # P0-3: 瓶装 (A L7 深色瓶罐块): 细径高瓶, 复用圆柱占位 (盖=瓶盖)
@@ -1080,6 +1150,7 @@ def main():
                     co.scale = (_xc,
                                1.0, h_bag / 0.19 * (0.97 + rng.random() * 0.06))  # D35: 逐袋轮廓微差
                     bpy.context.scene.collection.objects.link(co)  # V28修: 先入场景(depsgraph), 后算世界bbox
+                    ROW_CHAINS.setdefault((lv, r_i, g["design_id"]), []).append(co)  # V37-B2 行内链式打包登记
                     # V32: 簇相关形变 (十审 P0) — 单用户化+顶点扰动:
                     #     相邻 3 件簇共享挤压方向, 逐袋肩部塌陷幅度/褶皱相位独立 (破复制模板)
                     #     禁穿插: 幅度 ≤1cm; 沉降在后 (drop 需最终 bbox)
@@ -1097,8 +1168,20 @@ def main():
                     drop_to_surface(co, z_bot)  # V28: 倾角袋底角沉降到板面 (禁悬浮)
                     sl = co.material_slots[0]
                     sl.link = 'OBJECT'
+                    # V41: 印刷重复感去重 (十九审 P0) — 逐袋 UV 微旋转±2.5°/缩放 0.96-1.04/平移±0.015
+                    #     + 非刚性噪声微变形 0.02 (同 SKU 官方设计不变, 禁改 Logo/文字/配色)
+                    _uvr = (rng.random() - 0.5) * 5.0
+                    _uvs = 0.96 + rng.random() * 0.08
+                    _uvt = ((rng.random() - 0.5) * 0.03, (rng.random() - 0.5) * 0.03)
+                    import zlib as _z
+                    _sd = _z.crc32(f"bagm_{lv}_{r_i}_{i}".encode())
+                    _cw = 0.08 + (_sd % 997) / 997 * 0.06          # V42: clearcoat 0.08-0.14
+                    _cr = 0.10 + ((_sd >> 10) % 997) / 997 * 0.16  # clearcoat rough 0.10-0.26
+                    _bs = 0.02 + ((_sd >> 20) % 997) / 997 * 0.06  # bump 0.02-0.08
                     sl.material = bag_material(f"bagm_{lv}_{r_i}_{i}", Path(a),
-                                               (0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, 0.02)
+                                               (0.10 if rng.random() < 0.22 else 0.28) + rng.random() * 0.30, 0.02,
+                                               uv_rot=_uvr, uv_scale=_uvs, uv_tr=_uvt, warp=0.0,
+                                               coat_w=_cw, coat_r=_cr, bump_s=_bs)
                     # D32: 排尾簇 (12% 组触发): 斜靠+前压袋 — 评审"局部成簇不规则堆叠"
                     if i == n_g - 1 and rng.random() < 0.12 and g.get("form", "bag") == "bag":
                         for k, (yaw_k, dy_k, pitch_k) in enumerate(
@@ -1125,7 +1208,8 @@ def main():
         # 层板下沿灯带 (补层板唇高光)
         lt = bpy.data.lights.new(f"strip{lv}", "AREA")
         lt.color = (1.0, 0.92, 0.82)  # D37: 商店LED暖化 4300K
-        lt.size = SHELF_W * 0.9; lt.size_y = 0.05
+        _sy = 0.05 * float(os.environ.get("HXL_STRIP", "1.0"))  # V43: 单灯变量 — 灯带宽度倍率 (高光带结构实验)
+        lt.size = SHELF_W * 0.9; lt.size_y = _sy
         lt.energy = 24 * (0.48 + 1.20 * ((lv * 0.37 + 0.11) % 1.0))  # D38: 层间光差 ±60% (明暗层次加深)
         if lv % 3 == 1:
             lt.color = (1.0, 0.96, 0.90)  # D38: 冷暖混光 (隔层偏中性)
@@ -1182,7 +1266,8 @@ def main():
     for i, x in enumerate((-0.9, -0.3, 0.3, 0.9)):
         lt = bpy.data.lights.new(f"spot{i}", "SPOT")
         if i == 1:
-            lt.energy = 920; lt.spot_size = math.radians(38); lt.shadow_soft_size = 0.14  # D39: 软影保高光
+            lt.energy = 920; lt.spot_size = math.radians(38)
+            lt.shadow_soft_size = float(os.environ.get("HXL_SPOT_SOFT", "0.14"))  # V43: 单灯变量 — 主光软影半径 (膜面高光带结构)
             lt.color = (1.0, 0.96, 0.90)  # D37: 主光微暖
             # 5.2 EEVEE Next: contact_shadow 已移除 (阴影由 RT 阴影覆盖)
         elif i == 2:
@@ -1197,7 +1282,8 @@ def main():
 
     # 前置柔光 (H6: 再杀到 7W, 暗部份额对靶)
     fl = bpy.data.lights.new("frontfill", "AREA")
-    fl.size = 2.2; fl.size_y = 1.2; fl.energy = 7
+    fl.size = 2.2; fl.size_y = 1.2
+    fl.energy = 7 * float(os.environ.get("HXL_FILL", "1.0"))  # V44: 单灯变量 — 填充光强度 (接触阴影可读性)
     flo = bpy.data.objects.new("frontfill", fl)
     flo.location = (0, -1.1, 1.5)
     flo.rotation_euler = (math.radians(65), 0, 0)
@@ -1350,52 +1436,130 @@ def main():
         co.rotation_euler = aim.to_track_quat('-Z', 'Y').to_euler()
         sc.camera = co
         sc.render.resolution_x, sc.render.resolution_y = 900, 700
-    if "--collide" in argv:
-        # V34: 三维碰撞验证 (十一审 P0) — BVH 网格相交 + 板接触 + 前后排序
+    if "--v37b" in argv:
+        # V37-B: 摆放级避碰 (十五审批准路线B, R37-B01~03) — 刚体位置微调, 袋网格完全不变
+        # 主轴分离: 跨排对推 y, 同排对推 x; 4 遍全量重检 (新碰撞对显形), 共用袋位移累加=联合求解
         from mathutils.bvhtree import BVHTree
-        dg = bpy.context.evaluated_depsgraph_get()
+
+        def _wt(o):
+            vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            ps = [list(p.vertices) for p in o.data.polygons]
+            return BVHTree.FromPolygons(vs, ps)
+
         bags = [o for o in bpy.data.objects
                 if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
                 and int(o.name.split("_")[0][3:]) >= 3]
-        trees = {}
-        for o in bags:
-            # V34修: FromObject 是局部空间 (同源网格全重合=全误报) — 世界空间多边形重建
-            _vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
-            _ps = [list(p.vertices) for p in o.data.polygons]
-            trees[o.name] = BVHTree.FromPolygons(_vs, _ps)
         lv_of = lambda n: int(n.split("_")[0][3:])
-        x_of = lambda o: o.matrix_world.translation.x
-        y_of = lambda o: o.matrix_world.translation.y
-        zmin_of = lambda o: min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
-        flags, touch, deep, pairs_checked = 0, 0, 0, 0
+        ri_of = lambda n: int(n.split("_")[1])
+        cw = lambda o: o.matrix_world.translation
+        ORIG36.clear()
+        ORIG36.update({o.name: (cw(o).x, cw(o).y) for o in bags})
+        orig = ORIG36
+
+        # R37-B03: 法线一致性 (符号体积) — 负=法线内向
+        inconsistent = 0
         for o in bags:
-            for p in bags:
-                if p.name <= o.name or lv_of(p.name) != lv_of(o.name):
+            if o.data.users > 1:
+                continue
+            tot = 0.0
+            mw = o.matrix_world
+            for pg in o.data.polygons:
+                vs = [mw @ o.data.vertices[i].co for i in pg.vertices]
+                tot += vs[0].dot(vs[1].cross(vs[2]))
+            if tot / 6.0 < 0:
+                inconsistent += 1
+        print(f"V37B_TOPO bags={len(bags)} normal_inverted={inconsistent}")
+
+        for p_i in range(4):
+            trees = {o.name: _wt(o) for o in bags}
+            pairs = []
+            for a in bags:
+                for b in bags:
+                    if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
+                        continue
+                    dv = cw(b) - cw(a)
+                    if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
+                        continue
+                    ov = trees[a.name].overlap(trees[b.name])
+                    if len(ov) > 4:
+                        pairs.append((a, b, len(ov)))
+            deep = len([p for p in pairs if p[2] > 60])
+            print(f"V37B_PASS {p_i} colliding={len(pairs)} deep={deep}")
+            if not pairs:
+                break
+            # 位移级联已证失败 (V37-B 首轮: colliding 36→32 但 deep 13→26) — 纯测量, 零位移
+        # 终账
+        trees = {o.name: _wt(o) for o in bags}
+        rem = 0
+        moved = len([o for o in bags if abs(cw(o).x - orig[o.name][0]) > 1e-6 or abs(cw(o).y - orig[o.name][1]) > 1e-6])
+        for a in bags:
+            for b in bags:
+                if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
                     continue
-                if abs(x_of(p) - x_of(o)) > 0.16 or abs(y_of(p) - y_of(o)) > 0.09:
+                dv = cw(b) - cw(a)
+                if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
                     continue
-                pairs_checked += 1
-                ov = trees[o.name].overlap(trees[p.name])
+                ov = trees[a.name].overlap(trees[b.name])
                 if len(ov) > 4:
-                    flags += 1
-                    if len(ov) > 60:
-                        deep += 1
-                        print(f"COLLIDE_DEEP {o.name} x {p.name} tris={len(ov)} "
-                              f"dx={abs(x_of(p)-x_of(o)):.3f} dy={abs(y_of(p)-y_of(o)):.3f} "
-                              f"y=({y_of(o):.3f},{y_of(p):.3f}) "
-                              f"zc=({o.matrix_world.translation.z:.3f},{p.matrix_world.translation.z:.3f})")
-                    else:
-                        touch += 1
-                        print(f"COLLIDE_TOUCH {o.name} x {p.name} tris={len(ov)}")
-        # 板接触: 袋世界 zmin 距板顶 >3mm = 悬浮
-        floats = 0
-        for o in bags:
-            lv = lv_of(o.name)
-            z0 = LIP + lv * LEVEL_H + 0.011
-            if zmin_of(o) > z0 + 0.003:
-                floats += 1
-                print(f"FLOAT_FLAG {o.name} zmin={zmin_of(o):.4f} board_top={z0:.4f}")
-        print(f"COLLIDE_SUMMARY pairs={pairs_checked} touch={touch} deep={deep} float_flags={floats} bags={len(bags)}")
+                    rem += 1
+                    print(f"V37B_RESIDUAL {a.name} x {b.name} tris={len(ov)}")
+        print(f"V37B_SUMMARY residual_pairs={rem} moved_bags={moved} "
+              f"max_dx={max(abs(cw(o).x - orig[o.name][0]) for o in bags):.4f} "
+              f"max_dy={max(abs(cw(o).y - orig[o.name][1]) for o in bags):.4f}")
+    # V37-B2 v3: 整行链式打包 (跨组统一) — 组界对根因: 各组锚自身 x0, 组A末袋撞组B首袋
+    #   整行一条链左包 (0.2mm 间隙), 行 span = 各组 [min(x0), max(x0+gw)]; 溢出→行级 yaw 收足 (|lean|>2° 减半×3/轮, ≤6 轮)
+    def _xext(o):
+        xs = [(o.matrix_world @ Vector(c)).x for c in o.bound_box]
+        return min(xs), max(xs)
+    row_keys = sorted({(k[0], k[1]) for k in ROW_CHAINS.keys()})
+    yaw_shrunk_total = 0
+    for (lv_c, ri_c) in row_keys:
+        if lv_c < 3:
+            continue
+        chain = []
+        span_lo, span_hi = None, None
+        for k, ch in ROW_CHAINS.items():
+            if (k[0], k[1]) != (lv_c, ri_c):
+                continue
+            chain.extend(ch)
+            x0g, gw = ROW_SPANS.get(k, (None, None))
+            if x0g is not None:
+                span_lo = x0g if span_lo is None else min(span_lo, x0g)
+                span_hi = (x0g + gw) if span_hi is None else max(span_hi, x0g + gw)
+        if len(chain) < 2 or span_lo is None:
+            continue
+        span = span_hi - span_lo
+        for _round in range(6):
+            chain = sorted(chain, key=lambda o: o.matrix_world.translation.x)
+            widths = []
+            for o in chain:
+                mn_x, mx_x = _xext(o)
+                widths.append(mx_x - mn_x)
+            need = sum(widths) + 0.0002 * (len(chain) - 1)
+            if need <= span:
+                break
+            rot = sorted(chain, key=lambda o: -abs(math.degrees(o.rotation_euler.z)))
+            hit = 0
+            for o in rot:
+                if hit >= 3:
+                    break
+                lz = math.degrees(o.rotation_euler.z)
+                if abs(lz) > 2.0:
+                    o.rotation_euler.z = math.radians(2.0 if lz > 0 else -2.0)
+                    hit += 1
+            if hit == 0:
+                break
+            yaw_shrunk_total += hit
+            bpy.context.view_layer.update()
+        chain = sorted(chain, key=lambda o: o.matrix_world.translation.x)
+        mn0, _ = _xext(chain[0])
+        cur = span_lo + (mn0 - span_lo)
+        for o in chain:
+            mn_x, mx_x = _xext(o)
+            o.location.x += (cur - mn_x)
+            cur = cur + (mx_x - mn_x) + 0.0002
+        bpy.context.view_layer.update()
+    print(f"V37B2_ROWCHAIN rows={len(row_keys)} yaw_shrunk={yaw_shrunk_total}")
     if "--topo" in argv:
         # R37-01: 袋体拓扑审计 — 定碰撞壳表示 (闭合流形/开放壳/非流形)
         from collections import defaultdict
@@ -1540,6 +1704,207 @@ def main():
                   f"tris_before={len(ov)} tris_after={tris_after}")
         print(f"V37A_SUMMARY pairs={len(report)} "
               f"cleared={len([r for r in report if r[4] <= 60])}")
+    if "--v38" in argv:
+        # V38: 恢复 V35 陈列构图 (十七审 P0) — 零相交约束下向 V36 位置二分回推
+        #   只动刚体位置; x 全量回推 (构图/节奏), y 保持行带 (跨排零相交依赖); yaw 减足保留
+        from bpy_extras.object_utils import world_to_camera_view as _w2c
+        bags = [o for o in bpy.data.objects
+                if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
+                and int(o.name.split("_")[0][3:]) >= 3]
+        lv_of = lambda n: int(n.split("_")[0][3:])
+        ri_of = lambda n: int(n.split("_")[1])
+        cw = lambda o: o.matrix_world.translation
+
+        def _wt(o):
+            vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            ps = [list(p.vertices) for p in o.data.polygons]
+            return BVHTree.FromPolygons(vs, ps)
+
+        trees = {o.name: _wt(o) for o in bags}
+        v37pos = {o.name: (cw(o).x, cw(o).y) for o in bags}
+        joint = [o for o in bags
+                 if o.name in ORIG36 and (abs(cw(o).x - ORIG36[o.name][0]) > 5e-4
+                                          or abs(cw(o).y - ORIG36[o.name][1]) > 5e-4)]
+
+        def _xext(o):
+            xs = [(o.matrix_world @ Vector(c)).x for c in o.bound_box]
+            return min(xs), max(xs)
+
+        # V39 修正: 保序单调回拉 (按 V36 x 序, 左界=前袋右缘+0.2mm, 永不穿越; 替代二分 —
+        #   二分被中间袋挡住全败, 465mm 残余 = L3 行左压实后右侧袋回不去)
+        from collections import defaultdict as _dd
+        row_j = _dd(list)
+        for o in joint:
+            row_j[(lv_of(o.name), ri_of(o.name))].append(o)
+        restored = 0
+        for (lvr, rir), objs in row_j.items():
+            all_row = objs + [o for o in bags
+                              if (lv_of(o.name), ri_of(o.name)) == (lvr, rir) and o not in objs]
+            all_row = sorted(all_row, key=lambda o: ORIG36.get(o.name, (cw(o).x,))[0])
+            prev_right = None
+            for o in all_row:
+                if o.name in ORIG36:
+                    tx, ty = ORIG36[o.name]
+                else:
+                    tx, ty = cw(o).x, cw(o).y
+                if rir == 1:
+                    ty = max(0.050, min(0.070, ty))
+                else:
+                    ty = max(0.135, min(0.140, ty))
+                mn_x, mx_x = _xext(o)
+                half = (mx_x - mn_x) / 2.0
+                lo_lim = (prev_right + 0.0002 + half) if prev_right is not None else -1e9
+                gx = max(tx, lo_lim)
+                cc = (mn_x + mx_x) / 2.0
+                if abs(gx - cc) > 5e-4:
+                    o.location.x += (gx - cc)
+                    restored += 1
+                bpy.context.view_layer.update()
+                _mn2, mx2 = _xext(o)
+                prev_right = mx2
+        bpy.context.view_layer.update()
+        # 账: 剩余位移 + 屏幕空间偏差 + 碰撞
+        trees = {o.name: _wt(o) for o in bags}
+        coll = 0
+        for a in bags:
+            for b in bags:
+                if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
+                    continue
+                dv = cw(b) - cw(a)
+                if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
+                    continue
+                if len(trees[a.name].overlap(trees[b.name])) > 4:
+                    coll += 1
+        cam = sc.camera
+        res = (sc.render.resolution_x, sc.render.resolution_y)
+        devs = []
+        for o in joint:
+            if o.name not in v37pos:
+                continue
+            p37 = _w2c(sc, cam, Vector((v37pos[o.name][0], v37pos[o.name][1], cw(o).z)))
+            p38 = _w2c(sc, cam, cw(o))
+            dx = (p38.x - p37.x) * res[0]
+            dy = (p38.y - p37.y) * res[1]
+            devs.append((dx * dx + dy * dy) ** 0.5)
+        devs.sort()
+        mean_d = sum(devs) / len(devs) if devs else 0.0
+        max_d = devs[-1] if devs else 0.0
+        rem_disp = [abs(cw(o).x - ORIG36[o.name][0]) for o in joint if o.name in ORIG36]
+        print(f"V38_SUMMARY joint={len(joint)} restored={restored} collisions={coll} "
+              f"silhouette_mean_px={mean_d:.1f} silhouette_max_px={max_d:.1f} "
+              f"residual_disp_max_mm={max(rem_disp) * 1000 if rem_disp else 0:.1f}")
+        top_out = sorted(joint, key=lambda o: -abs(cw(o).x - ORIG36[o.name][0]))[:5]
+        for o in top_out:
+            ox, oy = ORIG36[o.name]
+            px, py = cw(o).x, cw(o).y
+            p37 = _w2c(sc, cam, Vector((v37pos[o.name][0], v37pos[o.name][1], cw(o).z)))
+            p38 = _w2c(sc, cam, cw(o))
+            p35 = _w2c(sc, cam, Vector((ox, oy, cw(o).z)))
+            print(f"V38_OUTLIER {o.name} lv={lv_of(o.name)} ri={ri_of(o.name)} "
+                  f"v36=({ox:.3f},{oy:.3f}) v38=({px:.3f},{py:.3f}) "
+                  f"px35=({p35.x * res[0]:.0f},{p35.y * res[1]:.0f}) "
+                  f"px38=({p38.x * res[0]:.0f},{p38.y * res[1]:.0f}) "
+                  f"disp_mm={(abs(px - ox) ** 2 + abs(py - oy) ** 2) ** 0.5 * 1000:.0f}")
+    if "--v40" in argv:
+        # V40: 法线一致性修复 (十九审 P0) — 59 内向网格面绕序统一, 不移动顶点
+        #   bmesh reverse_faces: loop-vert 关联保留 → UV 不镜像; 符号体积翻正; BVH 拓扑不变
+        import bmesh
+        fixed, uv_ok = 0, True
+        for o in sorted(bags, key=lambda x: x.name):
+            tot = 0.0
+            mw = o.matrix_world
+            for pg in o.data.polygons:
+                vs = [mw @ o.data.vertices[i].co for i in pg.vertices]
+                tot += vs[0].dot(vs[1].cross(vs[2]))
+            if tot / 6.0 >= 0:
+                continue
+            def _uv_assoc(m):
+                """逐面逐顶点 uv 关联 (face_idx, vert_idx) -> uv; 翻绕序不改变角点关联"""
+                out = {}
+                uvl = m.uv_layers.active
+                if uvl is None:
+                    return None
+                for pg in m.polygons:
+                    for li in pg.loop_indices:
+                        vi = m.loops[li].vertex_index
+                        out[(pg.index, vi)] = tuple(uvl.data[li].uv)
+                return out
+            uv_before = _uv_assoc(o.data)
+            bm = bmesh.new()
+            bm.from_mesh(o.data)
+            bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
+            bm.to_mesh(o.data)
+            bm.free()
+            uv_after = _uv_assoc(o.data)
+            if uv_before is None or uv_before != uv_after:
+                uv_ok = False
+                print(f"V40_UV_DRIFT {o.name}")
+            tot2 = 0.0
+            mw = o.matrix_world
+            for pg in o.data.polygons:
+                vs = [mw @ o.data.vertices[i].co for i in pg.vertices]
+                tot2 += vs[0].dot(vs[1].cross(vs[2]))
+            fixed += 1
+            print(f"V40_FLIP {o.name} svol {tot / 6.0:.6f} -> {tot2 / 6.0:.6f}")
+            if (tot2 / 6.0) < 0:
+                print(f"V40_STILL_NEG {o.name}")
+        # 全场符号体积终检
+        neg_after = 0
+        for o in bags:
+            tot = 0.0
+            mw = o.matrix_world
+            for pg in o.data.polygons:
+                vs = [mw @ o.data.vertices[i].co for i in pg.vertices]
+                tot += vs[0].dot(vs[1].cross(vs[2]))
+            if tot / 6.0 < 0:
+                neg_after += 1
+        print(f"V40_SUMMARY fixed={fixed} neg_after={neg_after} uv_preserved={uv_ok}")
+    if "--collide" in argv:
+        # V34: 三维碰撞验证 (十一审 P0) — BVH 网格相交 + 板接触 + 前后排序
+        from mathutils.bvhtree import BVHTree
+        dg = bpy.context.evaluated_depsgraph_get()
+        bags = [o for o in bpy.data.objects
+                if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
+                and int(o.name.split("_")[0][3:]) >= 3]
+        trees = {}
+        for o in bags:
+            # V34修: FromObject 是局部空间 (同源网格全重合=全误报) — 世界空间多边形重建
+            _vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            _ps = [list(p.vertices) for p in o.data.polygons]
+            trees[o.name] = BVHTree.FromPolygons(_vs, _ps)
+        lv_of = lambda n: int(n.split("_")[0][3:])
+        x_of = lambda o: o.matrix_world.translation.x
+        y_of = lambda o: o.matrix_world.translation.y
+        zmin_of = lambda o: min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+        flags, touch, deep, pairs_checked = 0, 0, 0, 0
+        for o in bags:
+            for p in bags:
+                if p.name <= o.name or lv_of(p.name) != lv_of(o.name):
+                    continue
+                if abs(x_of(p) - x_of(o)) > 0.16 or abs(y_of(p) - y_of(o)) > 0.09:
+                    continue
+                pairs_checked += 1
+                ov = trees[o.name].overlap(trees[p.name])
+                if len(ov) > 4:
+                    flags += 1
+                    if len(ov) > 60:
+                        deep += 1
+                        print(f"COLLIDE_DEEP {o.name} x {p.name} tris={len(ov)} "
+                              f"dx={abs(x_of(p)-x_of(o)):.3f} dy={abs(y_of(p)-y_of(o)):.3f} "
+                              f"y=({y_of(o):.3f},{y_of(p):.3f}) "
+                              f"zc=({o.matrix_world.translation.z:.3f},{p.matrix_world.translation.z:.3f})")
+                    else:
+                        touch += 1
+                        print(f"COLLIDE_TOUCH {o.name} x {p.name} tris={len(ov)}")
+        # 板接触: 袋世界 zmin 距板顶 >3mm = 悬浮
+        floats = 0
+        for o in bags:
+            lv = lv_of(o.name)
+            z0 = LIP + lv * LEVEL_H + 0.011
+            if zmin_of(o) > z0 + 0.003:
+                floats += 1
+                print(f"FLOAT_FLAG {o.name} zmin={zmin_of(o):.4f} board_top={z0:.4f}")
+        print(f"COLLIDE_SUMMARY pairs={pairs_checked} touch={touch} deep={deep} float_flags={floats} bags={len(bags)}")
     if "--depthtable" in argv:
         # V36: 纯测量轮 (十四审 P0) — 全部相交对逐对穿透深度账 (零几何修改)
         from mathutils.bvhtree import BVHTree
