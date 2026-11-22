@@ -1396,6 +1396,150 @@ def main():
                 floats += 1
                 print(f"FLOAT_FLAG {o.name} zmin={zmin_of(o):.4f} board_top={z0:.4f}")
         print(f"COLLIDE_SUMMARY pairs={pairs_checked} touch={touch} deep={deep} float_flags={floats} bags={len(bags)}")
+    if "--topo" in argv:
+        # R37-01: 袋体拓扑审计 — 定碰撞壳表示 (闭合流形/开放壳/非流形)
+        from collections import defaultdict
+        audited = set()
+        print("TOPO_BEGIN")
+        for o in sorted(bpy.data.objects, key=lambda x: x.name):
+            if o.type != 'MESH' or not o.name.startswith("bag"):
+                continue
+            me = o.data
+            if me.name in audited:
+                continue
+            audited.add(me.name)
+            edges = defaultdict(int)
+            for pgn in me.polygons:
+                vs = list(pgn.vertices)
+                for k in range(len(vs)):
+                    e = tuple(sorted((vs[k], vs[(k + 1) % len(vs)])))
+                    edges[e] += 1
+            n_b = len([e for e, c in edges.items() if c == 1])
+            n_nm = len([e for e, c in edges.items() if c > 2])
+            print(f"TOPO_MESH {me.name} V={len(me.vertices)} F={len(me.polygons)} "
+                  f"E={len(edges)} boundary={n_b} nonmanifold={n_nm} "
+                  f"closed={'YES' if n_b == 0 and n_nm == 0 else 'NO'}")
+        print("TOPO_END")
+    if "--v37a" in argv:
+        # V37-A: Top5 独立接触判定+局部形变验证 (R37-01~05)
+        # 壳表示 (R37-01 已审计): 全部闭合亏格0流形 (V-E+F=2, 零边界零非流形)
+        #   → 广义绕数内外判定严格成立, 实体壳表示冻结
+        # R37-03 (评审修正): 弃全局平面投影 (平面穿对方鼓包=越推越深, 实测 tris 全升)
+        #   → L3 collisionDeformer 正解: 侵入顶点推到对方实际表面外侧 2mm (沿对方表面法线)
+        #   + 移动区拉普拉斯平滑 (λ=0.4 防 12mm 单步尖峰); 双方迭代 2 遍
+        from mathutils.bvhtree import BVHTree
+
+        def _wt(o):
+            vs = [tuple(o.matrix_world @ v.co) for v in o.data.vertices]
+            ps = [list(p.vertices) for p in o.data.polygons]
+            return BVHTree.FromPolygons(vs, ps)
+
+        def _winding(o, q):
+            """广义绕数 (闭合网格严格): q 世界坐标 → +1 内 / 0 外"""
+            mwi = o.matrix_world.inverted()
+            ql = mwi @ q
+            tot = 0.0
+            co = o.data.vertices
+            for pg in o.data.polygons:
+                vs = [co[i].co for i in pg.vertices]
+                a, b, c = vs[0] - ql, vs[1] - ql, vs[2] - ql
+                la, lb, lc = a.length, b.length, c.length
+                if min(la, lb, lc) < 1e-9:
+                    continue
+                den = la * lb * lc + a.dot(b) * lb + b.dot(c) * lc + c.dot(a) * la
+                if abs(den) < 1e-12:
+                    continue
+                tot += 2.0 * math.atan2(a.cross(b).dot(c), den)
+            return tot / (4.0 * math.pi)
+
+        bags = [o for o in bpy.data.objects
+                if o.type == 'MESH' and o.name.startswith("bag") and o.name[3].isdigit()
+                and int(o.name.split("_")[0][3:]) >= 3]
+        lv_of = lambda n: int(n.split("_")[0][3:])
+        cw = lambda o: o.matrix_world.translation
+        trees = {o.name: _wt(o) for o in bags}
+        cands = []
+        for a in bags:
+            for b in bags:
+                if b.name <= a.name or lv_of(b.name) != lv_of(a.name):
+                    continue
+                dv = cw(b) - cw(a)
+                if abs(dv.x) > 0.16 or abs(dv.y) > 0.09:
+                    continue
+                ov = trees[a.name].overlap(trees[b.name])
+                if len(ov) > 4:
+                    cands.append((len(ov), a, b, ov))
+        cands.sort(key=lambda c: -c[0])
+        top5 = cands[:5]
+        print(f"V37A_TOPO bags={len(bags)} closed=ALL candidates={len(cands)} "
+              f"top5={[(c[1].name, c[2].name, c[0]) for c in top5]}")
+        report = []
+        for rank, (_, a, b, ov) in enumerate(top5):
+            if a.data.users > 1:
+                a.data = a.data.copy()
+            if b.data.users > 1:
+                b.data = b.data.copy()
+            cand_a = set()
+            cand_b = set()
+            for ia, ib in ov[:400]:
+                if ia < len(a.data.polygons):
+                    cand_a.update(a.data.polygons[ia].vertices)
+                if ib < len(b.data.polygons):
+                    cand_b.update(b.data.polygons[ib].vertices)
+
+            def _push(o, other, cand_v):
+                t_o = _wt(other)
+                inv_o = o.matrix_world.inverted().to_3x3()
+                mw_o = o.matrix_world
+                moved = []
+                for vi in cand_v:
+                    vw = mw_o @ o.data.vertices[vi].co
+                    if _winding(other, vw) < 0.5:
+                        continue
+                    loc, nrm, _idx, _d = t_o.find_nearest(vw)
+                    if loc is None:
+                        continue
+                    o.data.vertices[vi].co = inv_o @ (Vector(loc) + Vector(nrm) * 0.002)
+                    moved.append(vi)
+                o.data.update()
+                return moved
+
+            for _pi in range(2):
+                ma = _push(a, b, cand_a)
+                mb = _push(b, a, cand_b)
+                if not ma and not mb:
+                    break
+            # 移动区拉普拉斯平滑 (λ=0.4, 1 遍)
+            for o, cand_v in ((a, cand_a), (b, cand_b)):
+                if not cand_v:
+                    continue
+                nbrs = {vi: set() for vi in range(len(o.data.vertices))}  # bpy .keys() 返回字符串名, 禁用
+                for pg in o.data.polygons:
+                    vs = list(pg.vertices)
+                    for k in range(len(vs)):
+                        nbrs[vs[k]].add(vs[(k + 1) % len(vs)])
+                        nbrs[vs[(k + 1) % len(vs)]].add(vs[k])
+                inv_o = o.matrix_world.inverted().to_3x3()
+                mw_o = o.matrix_world
+                delta = {}
+                for vi in cand_v:
+                    vw = mw_o @ o.data.vertices[vi].co
+                    nb = [mw_o @ o.data.vertices[j].co for j in nbrs[vi]]
+                    if nb:
+                        avg = Vector((sum(p.x for p in nb) / len(nb),
+                                      sum(p.y for p in nb) / len(nb),
+                                      sum(p.z for p in nb) / len(nb)))
+                        delta[vi] = inv_o @ ((avg - vw) * 0.4)
+                for vi, d in delta.items():
+                    o.data.vertices[vi].co += d
+                o.data.update()
+            ta, tb = _wt(a), _wt(b)
+            tris_after = len(ta.overlap(tb))
+            report.append((rank, a.name, b.name, len(ov), tris_after))
+            print(f"V37A_PAIR {rank} {a.name} x {b.name} "
+                  f"tris_before={len(ov)} tris_after={tris_after}")
+        print(f"V37A_SUMMARY pairs={len(report)} "
+              f"cleared={len([r for r in report if r[4] <= 60])}")
     if "--depthtable" in argv:
         # V36: 纯测量轮 (十四审 P0) — 全部相交对逐对穿透深度账 (零几何修改)
         from mathutils.bvhtree import BVHTree
