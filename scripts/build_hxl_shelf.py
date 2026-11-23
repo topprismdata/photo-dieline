@@ -458,85 +458,80 @@ def box_placeholder(name, x, y, z_bot, rgb, bw_=0.12, hgt=0.19, front_tex=None):
         front.data.materials.append(mm)
 
 
-def tray_basket(name, cx, y, z_bot, bw_, dep=0.26, hgt=0.15):
-    """藤编陈列篮 (V30): 实体篮体+三道编织棱+深色沿口 (参照实拍下层托盘陈列)."""
-    tan = bpy.data.materials.new(name + "_w")
-    tan.use_nodes = True
-    tb = tan.node_tree.nodes["Principled BSDF"]
-    tb.inputs["Base Color"].default_value = (0.66, 0.51, 0.32, 1)
-    tb.inputs["Roughness"].default_value = 0.75
-    dk = bpy.data.materials.new(name + "_d")
-    dk.use_nodes = True
-    db = dk.node_tree.nodes["Principled BSDF"]
-    db.inputs["Base Color"].default_value = (0.46, 0.34, 0.21, 1)
-    db.inputs["Roughness"].default_value = 0.8
-    bpy.ops.mesh.primitive_cube_add(size=1, location=(cx, y, z_bot + hgt / 2))
+def _legacy_tray_rng(rng, lean):
+    """V60 冻结种子纪律: 只回放 V30 托盘填充对层级 rng 的抽取序列 (不建对象).
+    层级 rng 跨组顺序消费 — 抽取次数一变, 同层其余商品的随机态全部重排; 回放后与 V59 逐位一致."""
+    if lean:
+        nb_back = int(rng.integers(3, 6))
+        nb_front = int(rng.integers(2, 5))
+        slots = [(1, k) for k in range(nb_back)] + [(0, k) for k in range(nb_front)]
+        if rng.random() < 0.4 and len(slots) > 4:
+            slots.pop(int(rng.integers(0, len(slots))))
+        for back, k in slots:
+            if not back:
+                rng.random()  # zz
+            rng.random()      # bh3
+            if not back:
+                rng.random()  # 前探判定
+            rng.random(); rng.random()  # rot
+    else:
+        for st in range(2):
+            n = int(rng.integers(3, 7))
+            for k in range(n):
+                rng.random(); rng.random()  # rz, ox
+
+
+def tray_carton(name, cx, y, z_bot, bw_, dep=0.26, hgt=0.055, front_tex=None):
+    """开箱陈列纸托 (V60): 浅口牛皮箱体 + 浅色切口沿 + 印花前裙, 箱内立式袋 (参照实拍下层开箱直立陈列).
+    替 V30 藤编篮: primitive_cube_add(size=1)+半长 scale 致篮体半尺寸、沿口板悬空 37mm、平叠煎饼埋在篮体内;
+    size=2 恢复设计尺寸后 150mm 篮体会把填充全埋住 → 改 55mm 浅口."""
+    kraft = bpy.data.materials.new(name + "_k")
+    kraft.use_nodes = True
+    kb = kraft.node_tree.nodes["Principled BSDF"]
+    kb.inputs["Base Color"].default_value = (0.66, 0.51, 0.32, 1)
+    kb.inputs["Roughness"].default_value = 0.8
+    edge = bpy.data.materials.new(name + "_e")
+    edge.use_nodes = True
+    eb = edge.node_tree.nodes["Principled BSDF"]
+    eb.inputs["Base Color"].default_value = (0.84, 0.74, 0.58, 1)
+    eb.inputs["Roughness"].default_value = 0.85
+    bpy.ops.mesh.primitive_cube_add(size=2, location=(cx, y, z_bot + hgt / 2))
     body = bpy.context.active_object
     body.name = name
     body.scale = (bw_ / 2, dep / 2, hgt / 2)
-    body.data.materials.append(tan)
-    for k in range(3):
-        bpy.ops.mesh.primitive_cube_add(size=1, location=(cx, y, z_bot + hgt * (0.28 + 0.24 * k)))
-        ridge = bpy.context.active_object
-        ridge.name = f"{name}_r{k}"
-        ridge.scale = (bw_ / 2 + 0.004, dep / 2 + 0.004, 0.006)
-        ridge.data.materials.append(dk)
-    bpy.ops.mesh.primitive_cube_add(size=1, location=(cx, y, z_bot + hgt))
+    body.data.materials.append(kraft)
+    # 沿口条顶面须高出箱体顶面 1mm: 完全共面的两个面在 Cycles 里互相自遮挡 → 顶面整片发黑 (单箱探针实证)
+    bpy.ops.mesh.primitive_cube_add(size=2, location=(cx, y, z_bot + hgt - 0.0035))
     rim = bpy.context.active_object
     rim.name = name + "_rim"
-    rim.scale = (bw_ / 2 + 0.008, dep / 2 + 0.008, 0.010)
-    rim.data.materials.append(dk)
+    rim.scale = (bw_ / 2 + 0.003, dep / 2 + 0.003, 0.0045)
+    rim.data.materials.append(edge)
+    if front_tex:
+        fh = hgt - 0.010  # 印花前裙: 上留切口沿 8mm, 下留 2mm
+        img_plane(name + "_front", front_tex, bw_ - 0.006, fh, (cx, y - dep / 2 - 0.002, z_bot + fh / 2 + 0.001),
+                  emissive=0.10, rough=0.55)
 
 
-def tray_lean_fill(name, cx, y_in, z_bot, bw_, dpath, rng):
-    """篮内二排斜倚袋 (V30/V31): 后排3-5+前排2-4 随机缺位, 前排倚后排露头, 逐袋高低差 (非均匀补货)."""
+def tray_upright_fill(name, cx, y_in, z_bot, bw_, dpath, rng, back, full):
+    """箱内单排立式袋 (V60): 槽数由箱宽定; full=False 随机缺位 1-2 (lean 组, V31 拿货语义); 后排更后仰、前排微仰;
+    逐袋高低差 (V31 语义保留). 袋底落在箱体内, 自箱口露出."""
     bw2 = min(0.10, bw_ / 4.4)
     bh2 = bw2 * 1.55
-    nb_back = int(rng.integers(3, 6))
-    nb_front = int(rng.integers(2, 5))
-    slots = [(1, k) for k in range(nb_back)] + [(0, k) for k in range(nb_front)]
-    if rng.random() < 0.4 and len(slots) > 4:
-        slots.pop(int(rng.integers(0, len(slots))))  # V31: 拿走一袋
-    for kk, (back, k) in enumerate(slots):
-        yy = y_in + (0.055 if back else -0.022)
-        xx = cx + (k - ((nb_back - 1) / 2 if back else (nb_front - 1) / 2)) * (bw2 + 0.014)
-        zz = z_bot + 0.055 + (0.0 if back else 0.012 + rng.random() * 0.018)
-        bh3 = bh2 * (0.82 + rng.random() * 0.36)  # V31: 逐袋高低差
-        if not back and rng.random() < 0.25:
-            yy -= 0.045  # V31: 前缘不齐 (单袋前探)
-        img_plane(f"{name}_l{kk}", dpath, bw2, bh3,
-                  (xx, yy, zz + bh3 * 0.44),
-                  rot=(-(20 + rng.random() * 14), 0, (rng.random() - 0.5) * 20),
-                  emissive=0.10, rough=0.5)
-
-
-def tray_flat_fill(name, cx, y_in, z_bot, bw_, rgb, dpath, rng):
-    """篮内平叠煎饼堆 (V30): 2堆×4-5层薄盒+顶面印刷, 层间微转角叠边可见."""
-    pw = min(0.14, bw_ / 2.3)
-    pd = pw * 0.66
-    th = 0.014
-    soft = tuple(rgb[c] * 0.75 + 0.16 for c in range(3))
-    side = bpy.data.materials.new(name + "_s")
-    side.use_nodes = True
-    sb = side.node_tree.nodes["Principled BSDF"]
-    sb.inputs["Base Color"].default_value = (soft[0], soft[1], soft[2], 1)
-    sb.inputs["Roughness"].default_value = 0.45
-    for st in range(2):
-        sx = cx + (st - 0.5) * (pw + 0.035)
-        n = int(rng.integers(3, 7))  # V31: 层数随机 (3-6, 补货后不等高)
-        for k in range(n):
-            zz = z_bot + 0.075 + k * th
-            rz = (rng.random() - 0.5) * (12 + k * 4)  # V31: 上层更乱
-            ox = (rng.random() - 0.5) * (0.012 if k == n - 1 else 0.004)  # V31: 顶层拿歪
-            bpy.ops.mesh.primitive_cube_add(size=1, location=(sx + ox, y_in, zz + th / 2))
-            pk = bpy.context.active_object
-            pk.name = f"{name}_f{st}_{k}"
-            pk.rotation_euler = (0, 0, math.radians(rz))
-            pk.scale = (pw / 2, pd / 2, th / 2)
-            pk.data.materials.append(side)
-            img_plane(f"{name}_t{st}_{k}", tight_crop(Path(dpath)) if not isinstance(dpath, Path) or not str(dpath).endswith(".tight.png") else dpath, pw * 0.92, pd * 0.92,
-                      (sx + ox, y_in, zz + th + 0.002),
-                      rot=(-90, 0, rz), emissive=0.08, rough=0.55)
+    nb = max(1, int((bw_ - 0.03) / (bw2 + 0.012)))
+    miss = set()
+    if not full and nb > 2:
+        miss = set(int(i) for i in rng.choice(nb, size=int(rng.integers(1, min(3, nb))), replace=False))
+    for k in range(nb):
+        if k in miss:
+            continue
+        xx = cx + (k - (nb - 1) / 2) * (bw2 + 0.012)
+        bh3 = bh2 * (0.84 + rng.random() * 0.30)  # V31: 逐袋高低差
+        lean = (14 + rng.random() * 8) if back else (5 + rng.random() * 7)
+        yy = y_in + (0.065 if back else -0.028) + (rng.random() - 0.5) * 0.008
+        zb = z_bot + 0.012 + rng.random() * 0.008
+        img_plane(f"{name}_l{int(back)}{k}", dpath, bw2, bh3,
+                  (xx, yy, zb + bh3 * 0.5 * math.cos(math.radians(lean))),
+                  rot=(-lean, 0, (rng.random() - 0.5) * 16), emissive=0.10, rough=0.5)
 
 
 TIGHT_CACHE = {}  # V52: 设计紧裁缓存 (stem -> Path)
@@ -619,13 +614,15 @@ def tight_crop(png: Path) -> Path:
 CAN_CACHE = {}  # V58: 罐标合成缓存 ((紧裁 packshot, 周高比) -> Path)
 
 
-def can_label(src: Path, wrap_ar: float) -> Path:
-    """V58: 罐身标签 — packshot 裁掉两侧条纹边距后以原生像素宽高比双联平铺, 余宽用袋身色缝填满.
+def can_label(src: Path, wrap_ar: float, panels: int = 2, rims: bool = True, tile_h: int = 0, band: float = 0.0) -> Path:
+    """V58: 设计条带合成 — packshot 裁掉两侧条纹边距后以原生像素宽高比多联平铺, 余宽用袋身色缝填满.
     整张 packshot 绕圆柱一圈会把文字横向拉 2 倍+ (周长/高 0.93-1.10 vs 贴图 0.446; V57 左下罐 TOPPRISM 摊成巨幅环带).
-    边距: 紧裁框按最宽行 (封口鳍) 定, 袋身两侧留 V57 逐行延展的条纹带 → 面板各裁 7%.
-    缝色: 每行中央 50% 列的中位色 (袋身真印刷, 不含剪影阴影) 再纵向平滑 → [P][缝][P][缝], 首尾同为 P 左缘 → 全周无接缝、无镜像文字.
-    顶/底各留 2.5% 金属缘 (参照实拍 primary.jpg: 真罐满印 flavor 色, 无白环带, 设计绕罐重复)."""
-    key = (str(src), round(wrap_ar, 4))
+    边距: 紧裁框按最宽行 (封口鳍) 定, 袋身两侧留 V57 逐行延展的条纹带 → 按水平梯度裁到核心列.
+    缝色: 每行中央 50% 列的中位色 (袋身真印刷, 不含剪影阴影) 再纵向平滑 → [P][缝]×n, 首尾同为 P 左缘 → 全周无接缝、无镜像文字.
+    罐身 (默认): 双联 + 顶/底各 2.5% 金属缘 (参照实拍 primary.jpg: 真罐满印 flavor 色, 无白环带, 设计绕罐重复).
+    V60: panels=0 按宽高比自动定联数, rims=False 去金属缘, tile_h 降输出高, band>0 只取顶部品牌带作面板 — 供纸托前裙等宽幅载体
+    (整幅 packshot 密铺成 44 联微型图 = 噪点墙; 品牌带宽高比≈1.6, 69cm 裙约 10 联, 字可读)."""
+    key = (str(src), round(wrap_ar, 4), panels, rims, tile_h, band)
     if key in CAN_CACHE:
         return CAN_CACHE[key]
     a = np.asarray(Image.open(src).convert("RGB"), dtype=float)
@@ -639,24 +636,36 @@ def can_label(src: Path, wrap_ar: float) -> Path:
     if cx1 - cx0 < tw * 0.45:
         cx0, cx1 = 0, tw
     a = a[:, cx0:cx1]
-    rim = int(round(th * 0.025))
-    ih = th - 2 * rim
+    oh = tile_h if tile_h > 0 else th  # 输出高
+    rim = int(round(oh * 0.025)) if (rims and band <= 0) else 0
+    ih = oh - 2 * rim
     tile = np.asarray(Image.fromarray(a.astype("uint8")).resize(
         (max(2, int(round(a.shape[1] * ih / th))), ih), Image.LANCZOS), dtype=float)
-    W = max(2 * tile.shape[1] + 2, int(round(wrap_ar * th)))
-    gap = W - 2 * tile.shape[1]
+    if band > 0:  # V60 纸托前裙: 只取顶部品牌带 (TOPPRISM+口味名) 作面板, 输出高随之取面板高
+        tile = tile[:max(8, int(round(ih * band)))]
+        oh = tile.shape[0]
+    n = panels if panels > 0 else max(2, int(round(wrap_ar / (tile.shape[1] / tile.shape[0]))))
+    W = max(n * tile.shape[1] + n, int(round(wrap_ar * oh)))
+    gap = W - n * tile.shape[1]
     rowcol = np.median(tile[:, tile.shape[1] // 4:tile.shape[1] * 3 // 4], axis=1)[:, None, :]
-    k = max(1, ih // 6)
+    k = max(1, tile.shape[0] // 6)
     cs = np.cumsum(np.pad(rowcol, ((k + 1, k), (0, 0), (0, 0))), axis=0)
     seam = (cs[2 * k + 1:] - cs[:-2 * k - 1]) / (2 * k + 1)  # 缝色纵向平滑 (窗 2k+1)
-    mid = np.concatenate([tile, np.repeat(seam, gap // 2, axis=1), tile,
-                          np.repeat(seam, gap - gap // 2, axis=1)], axis=1)
-    out = np.empty((th, W, 3))
-    out[rim:rim + ih] = mid
-    metal = np.linspace(168.0, 205.0, rim)[:, None, None] * np.ones((1, W, 1))  # 顶/底金属缘竖向微渐变
-    out[:rim] = metal
-    out[rim + ih:] = metal[::-1]
-    dst = src.with_name(src.stem.replace(".tight", "") + f".can{wrap_ar:.3f}.png")
+    parts = []
+    for i in range(n):
+        parts += [tile, np.repeat(seam, gap // n + (1 if i >= n - gap % n else 0), axis=1)]  # 余数给末几缝
+    mid = np.concatenate(parts, axis=1)
+    if rim:
+        out = np.empty((oh, W, 3))
+        out[rim:rim + ih] = mid
+        metal = np.linspace(168.0, 205.0, rim)[:, None, None] * np.ones((1, W, 1))  # 顶/底金属缘竖向微渐变
+        out[:rim] = metal
+        out[rim + ih:] = metal[::-1]
+    else:
+        out = mid
+    dst = src.with_name(src.stem.replace(".tight", "") + f".can{wrap_ar:.3f}"
+                        + ("" if (panels == 2 and rims and not tile_h and band <= 0)
+                           else f".p{panels}r{int(rims)}h{tile_h}b{band:.2f}") + ".png")
     Image.fromarray(np.clip(out, 0, 255).astype("uint8")).save(dst)
     CAN_CACHE[key] = dst
     return dst
@@ -1100,20 +1109,23 @@ def main():
                 style0 = gidx0 % 3
                 dpath0 = DESIGN_DIR / f"design_{gidx0:02d}_{style0}.png"
                 if g["form"].startswith("tray"):
-                    # V30: 托盘陈列 (八审 P0) — 藤编篮×N 坐板 + 篮内二排斜倚/平叠煎饼
-                    #     (参照实拍下层托盘陈列; 篮体全落板面 y 0.01..0.27)
+                    # V60: 开箱陈列纸托 — 箱体只建一次 (r_i=0), 两次行循环各填一排 (后排/前排).
+                    #     (V30 藤编篮在两次行循环里同名同位各建一遍 = 每托叠两只篮 + 两套卡片)
+                    #     冻结种子纪律: 层级 rng 跨组顺序消费, 托盘只回放旧填充的抽取序列, 自身用独立种子
+                    #     → 同层其余商品随机态与 V59 逐位一致.
                     nb = max(1, int(gw / 0.37))
                     bw_ = gw / nb - 0.025
                     y_c = 0.14
+                    _lean = g["form"] == "tray_lean"
+                    _tp = tight_crop(dpath0) if dpath0.exists() else None
                     for b in range(nb):
+                        _legacy_tray_rng(rng, _lean)  # 逐箱回放 (与 V30 逐箱填充的抽取次序一致)
                         bx = x0 + gw * (b + 0.5) / nb
-                        tray_basket(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_)
-                        if g["form"] == "tray_lean":
-                            tray_lean_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_,
-                                           tight_crop(dpath0) if dpath0.exists() else None, rng)
-                        else:
-                            tray_flat_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_, rgb,
-                                           tight_crop(dpath0) if dpath0.exists() else None, rng)
+                        if r_i == 0:
+                            tray_carton(f"tray{lv}_0_{b}", bx, y_c, z_bot, bw_,
+                                        front_tex=can_label(_tp, (bw_ - 0.006) / 0.045, panels=0, tile_h=400, rims=False, band=0.22) if _tp else None)
+                        tray_upright_fill(f"tray{lv}_0_{b}", bx, y_c, z_bot, bw_, _tp,
+                                          np.random.default_rng(lv * 977 + b * 131 + 7), back=(r_i == 0), full=not _lean)
                     continue
                 # V31: 拿货缺口段 (九审 P0 非均匀补货节奏; 中下层 30% 组触发)
                 gap_at = set()
