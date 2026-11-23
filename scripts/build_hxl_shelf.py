@@ -127,16 +127,18 @@ def pil_price_tag(text):
 
 
 def pil_tag_rail(fracs, prices, seed_lv=0):
-    """H16: 逐组价签轨 — 沿唇贯通白条, 每组一段: 条码块+红价+灰码, 组间细分隔 (真实货架语义)."""
+    """V59: 价签轨贴图 — 对齐参照实拍电子价签: 条码块 + 大整数位红价 + 上标小数角标 (2⁹), 组间细分隔.
+    画布宽高比 = 轨平面 2.36m/52mm ≈ 45.4 (文字不拉伸); 原灰码行删除 (成片尺度不可读, 只添噪)."""
     import random
     from PIL import Image, ImageDraw, ImageFont
-    W, H = 3072, 210
+    W, H = 8192, 180
     im = Image.new("RGB", (W, H), (253, 253, 251))
     d = ImageDraw.Draw(im)
     try:
-        f_p = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", 150, index=0)
+        f_i = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", int(H * 0.62), index=0)
+        f_d = ImageFont.truetype("/System/Library/Fonts/STHeiti Medium.ttc", int(H * 0.36), index=0)
     except Exception:
-        f_p = ImageFont.load_default()
+        f_i = f_d = ImageFont.load_default()
     rng = random.Random(seed_lv * 17 + 3)
     x = 0.0
     for gi, (fr, pr) in enumerate(zip(fracs, prices)):
@@ -146,23 +148,24 @@ def pil_tag_rail(fracs, prices, seed_lv=0):
             continue
         w = int(w * (0.82 + rng.random() * 0.18))
         # 条码块 (随机宽度黑白竖线)
-        bx = x + w * 0.05
-        bw = w * 0.15
-        cx = bx
-        while cx < bx + bw:
-            lw = rng.choice((3, 5, 8))
-            d.rectangle([cx, H * 0.22, cx + lw, H * 0.72], fill=(22, 22, 24))
-            cx += lw + rng.choice((4, 6, 9))
-        # 红价 + 灰码
-        d.text((x + w * 0.58, H * 0.46 + rng.randint(-8, 8)), pr, font=f_p, fill=(172, 8, 14), anchor="mm")
-        d.text((x + w * 0.58, H * 0.87), f"69{rng.randint(10000000, 99999999)}",
-               fill=(24, 26, 30), anchor="mm")
+        cx = x + w * 0.06
+        while cx < x + w * 0.20:
+            lw = rng.choice((5, 8, 12))
+            d.rectangle([cx, H * 0.16, cx + lw, H * 0.84], fill=(22, 22, 24))
+            cx += lw + rng.choice((7, 10, 14))
+        # 红价: 整数位大字 + 上标小数角标
+        ip, _, dp = pr.partition(".")
+        tx = x + w * 0.30
+        d.text((tx, H * 0.80), ip, font=f_i, fill=(172, 8, 14), anchor="ls")
+        if dp:
+            d.text((tx + d.textlength(ip, font=f_i) + H * 0.03, H * 0.46), dp, font=f_d, fill=(172, 8, 14), anchor="ls")
         # 组间分隔
         if gi < len(fracs) - 1:
             d.line([x + w, 0, x + w, H], fill=(150, 152, 156), width=4)
         x += w
-    # 顶部装卡阴影线
-    d.rectangle([0, 0, W, 6], fill=(214, 215, 218))
+    # 顶部装卡阴影线 + 轨底沿
+    d.rectangle([0, 0, W, 5], fill=(214, 215, 218))
+    d.rectangle([0, H - 4, W, H], fill=(196, 197, 200))
     p = Path(f"/tmp/hxl_tagrail_{seed_lv}.png"); im.save(p); return p
 
 
@@ -1042,7 +1045,9 @@ def main():
     for lv in range(SHELVES):
         z0 = LIP + lv * LEVEL_H  # P0#2 修: 底唇 450mm (v19 前层板从地面起排致相机瞄过架顶)
         # 层板 (白板)
-        bpy.ops.mesh.primitive_cube_add(size=1, location=(0, DEPTH / 2, z0))
+        # V59: size=2 — size=1 立方体半边长 0.5, 而下一行 scale 是半长语义: 宽/深/厚曾全部只有一半
+        #     (探针实测 1.2×0.2×11mm, 前排商品全悬在板前缘 y=0.1 之外, 底悬空 7.5mm)
+        bpy.ops.mesh.primitive_cube_add(size=2, location=(0, DEPTH / 2, z0))
         sh = bpy.context.active_object
         sh.scale = (SHELF_W / 2, DEPTH / 2, 0.011)  # G1修: 2cm薄板
         sh.name = f"shelf{lv}"
@@ -1069,8 +1074,11 @@ def main():
         fracs = [g["width_frac"] for g in plan_lv["groups"]]
         fs = sum(fracs) or 1.0
         prices = [tag_texts[(lv + gi) % len(tag_texts)] for gi in range(len(fracs))]
+        # V59: 价签轨贴层板前缘立面 (板沿 22mm + 板下唇 30mm = 52mm, 全层全视角最前). 原平面 0.15m 高悬在
+        #     y=0.303 (板后沿), 被层板前立面从正中劈开 — 红价画在贴图 46% 高 = 层板高度 (ray_cast 竖线扫描实证)
+        #     相机在 y=-1.2: 越负越靠前. 板前立面 y=0 → 轨须 y=-0.003 (写 +0.003 即塞进板体, 上 42% 被板面盖成灰带)
         img_plane(f"tagrail{lv}", pil_tag_rail([f / fs for f in fracs], prices, seed_lv=lv),
-                  SHELF_W - 0.04, 0.15, (0, DEPTH / 2 + DEPTH / 4 + 0.003, z0 + 0.012), emissive=0.30)
+                  SHELF_W - 0.04, 0.052, (0, -0.003, z0 - 0.014), emissive=0.30)
         for r_i, (y_off, s0, sh) in enumerate(((DEPTH / 2 - 0.06, 1.0, 0.0),
                                                (DEPTH / 2 - 0.17, 0.92, 0.5))):
             for g in plan_lv["groups"]:
@@ -1137,6 +1145,7 @@ def main():
                             y_bag = max(0.028, min(0.048, y_bag))
                         else:
                             y_bag = max(0.135, min(0.140, y_bag))
+                    y_bag = max(y_bag, 0.012)  # V59: 层板恢复全深 (前缘 y=0) — 前拉件重心须留在板上 (袋半深 ~27mm)
                     ROW_SPANS.setdefault((lv, r_i, g["design_id"]), (x0, gw))
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
