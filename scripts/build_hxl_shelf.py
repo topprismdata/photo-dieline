@@ -539,9 +539,33 @@ def tray_flat_fill(name, cx, y_in, z_bot, bw_, rgb, dpath, rng):
             pk.rotation_euler = (0, 0, math.radians(rz))
             pk.scale = (pw / 2, pd / 2, th / 2)
             pk.data.materials.append(side)
-            img_plane(f"{name}_t{st}_{k}", dpath, pw * 0.92, pd * 0.92,
+            img_plane(f"{name}_t{st}_{k}", tight_crop(Path(dpath)) if not isinstance(dpath, Path) or not str(dpath).endswith(".tight.png") else dpath, pw * 0.92, pd * 0.92,
                       (sx + ox, y_in, zz + th + 0.002),
                       rot=(-90, 0, rz), emissive=0.08, rough=0.55)
+
+
+TIGHT_CACHE = {}  # V52: 设计紧裁缓存 (stem -> Path)
+
+
+def tight_crop(png: Path) -> Path:
+    """V52: 紧裁 packshot 到剪影 — 摄影米色边距直接卷上 barrel/托盘/瓶面成"白翼" (根因修).
+    bag 路径已有内联紧裁 (sat 后); 此 helper 服务 barrel/托盘/瓶等直用 dpath0 的分支."""
+    out = png.with_suffix(".tight.png")
+    if out.exists():
+        return out
+    import numpy as _np
+    im = Image.open(png).convert("RGB")
+    a = _np.asarray(im, float)
+    e = np.concatenate([a[:, :24], a[:, -24:]], axis=1)
+    bg = np.median(e.reshape(-1, 3)[::7], axis=0)
+    d = np.abs(a - bg[None, None, :]).sum(-1)
+    ys, xs = np.where(d > 60)
+    if len(xs) > 100:
+        x0, x1 = max(int(xs.min()) - 6, 0), min(int(xs.max()) + 6, a.shape[1])
+        y0, y1 = max(int(ys.min()) - 6, 0), min(int(ys.max()) + 6, a.shape[0])
+        im.crop((x0, y0, x1, y1)).save(out)
+        return out
+    return png
 
 
 def bag_material(name, tex_path, rough=0.4, emissive=0.06, uv_rot=0.0, uv_scale=1.0, uv_tr=(0.0, 0.0), warp=0.0,
@@ -853,7 +877,8 @@ def main():
     sc.view_settings.look = "AgX - Punchy"   # 默认 look 强去饱和 (冷柜线已知坑)
     sc.view_settings.exposure = -0.55
     sc.view_settings.gamma = 1.02
-    sc.render.resolution_x, sc.render.resolution_y = 720, 1044
+    _res = float(os.environ.get("HXL_RES", "1"))  # V51: 分辨率倍率 (逐SKU印刷优化底座)
+    sc.render.resolution_x, sc.render.resolution_y = int(720 * _res), int(1044 * _res)
     w = bpy.data.worlds.new("w"); sc.world = w; w.use_nodes = True
     # H1 光照重构: HDRI 世界给光泽面反射内容 (黑虚空=塑料感根源, 杠杆#4)
     env = w.node_tree.nodes.new("ShaderNodeTexEnvironment")
@@ -981,10 +1006,10 @@ def main():
                         tray_basket(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_)
                         if g["form"] == "tray_lean":
                             tray_lean_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_,
-                                           dpath0 if dpath0.exists() else None, rng)
+                                           tight_crop(dpath0) if dpath0.exists() else None, rng)
                         else:
                             tray_flat_fill(f"tray{lv}_{r_i}_{b}", bx, y_c, z_bot, bw_, rgb,
-                                           dpath0 if dpath0.exists() else None, rng)
+                                           tight_crop(dpath0) if dpath0.exists() else None, rng)
                     continue
                 # V31: 拿货缺口段 (九审 P0 非均匀补货节奏; 中下层 30% 组触发)
                 gap_at = set()
@@ -1020,7 +1045,7 @@ def main():
                     if g["form"] == "barrel":
                         barrel_placeholder(f"barrel{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.085, bgw * 0.92), hgt=LEVEL_H * 0.78,
-                                           rng=rng, tex_path=dpath0 if dpath0.exists() else None)
+                                           rng=rng, tex_path=tight_crop(dpath0) if dpath0.exists() else None)
                         continue
                     if g["form"] == "box":
                         # V29: 盒组陈列姿态 (六审 P0) — 前排退让 3cm 消前突 + 前排 88% 高
@@ -1065,7 +1090,7 @@ def main():
                         # P0-3: 瓶装 (A L7 深色瓶罐块): 细径高瓶, 复用圆柱占位 (盖=瓶盖)
                         barrel_placeholder(f"bottle{lv}_{r_i}_{i}", x_bag, y_bag, z_bot, rgb,
                                            dia=min(0.05, bgw * 0.9), hgt=LEVEL_H * 0.88,
-                                           rng=rng, tex_path=dpath0 if dpath0.exists() else None)
+                                           rng=rng, tex_path=tight_crop(dpath0) if dpath0.exists() else None)
                         continue
                     # H12: 组独立印刷设计 (bag_print, 组=SKU 设计一对一)
                     gidx, style, dpath = gidx0, style0, dpath0
@@ -1111,6 +1136,19 @@ def main():
                     _satp = dpath.with_suffix(".sat.png")
                     _sat.save(_satp)
                     a = _satp
+                    # V52: 紧裁到袋剪影 — packshot 米色摄影边距被 ar 裁切保留并映上袋面成"白翼" (全袋SKU根因修)
+                    _tg = Image.open(_satp).convert("RGB")
+                    _ta = np.asarray(_tg, float)
+                    _te = np.concatenate([_ta[:, :24], _ta[:, -24:]], axis=1)
+                    _tb = np.median(_te.reshape(-1, 3)[::7], axis=0)
+                    _td = np.abs(_ta - _tb[None, None, :]).sum(-1)
+                    _ty, _tx = np.where(_td > 60)
+                    if len(_tx) > 100:
+                        _x0t, _x1t = max(int(_tx.min()) - 6, 0), min(int(_tx.max()) + 6, _ta.shape[1])
+                        _y0t, _y1t = max(int(_ty.min()) - 6, 0), min(int(_ty.max()) + 6, _ta.shape[0])
+                        _tg.crop((_x0t, _y0t, _x1t, _y1t)).save(_satp)
+                    import os as _os2
+                    print("V52_TIGHT_CROP_APPLIED", _satp, _os2.path.getsize(_satp))
                     ar_g2 = (0.40, 0.58)[(j * 7 + lv * 3) % 2]  # 与槽宽推导同源
                     _im = Image.open(a)
                     if _im.width / _im.height < ar_g2 - 0.04:
