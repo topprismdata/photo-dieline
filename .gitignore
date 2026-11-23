@@ -10,3 +10,5 @@ assets/simready_official/
 # 设计图派生缓存 (build_hxl_shelf 确定性再生成): 紧裁 / 罐标合成
 assets/pillow_designs/*.tight.png
 assets/pillow_designs/*.can*.png
+assets/pillow_designs/*.sat.png
+assets/pillow_designs/*.ar.png
