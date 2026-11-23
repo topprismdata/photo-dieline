@@ -547,25 +547,79 @@ def tray_flat_fill(name, cx, y_in, z_bot, bw_, rgb, dpath, rng):
 TIGHT_CACHE = {}  # V52: 设计紧裁缓存 (stem -> Path)
 
 
-def tight_crop(png: Path) -> Path:
-    """V52: 紧裁 packshot 到剪影 — 摄影米色边距直接卷上 barrel/托盘/瓶面成"白翼" (根因修).
-    bag 路径已有内联紧裁 (sat 后); 此 helper 服务 barrel/托盘/瓶等直用 dpath0 的分支."""
-    out = png.with_suffix(".tight.png")
-    if out.exists():
-        return out
-    import numpy as _np
-    im = Image.open(png).convert("RGB")
-    a = _np.asarray(im, float)
+def _tight_box(a):
+    """V54: 自适应紧裁框 — packshot 边缘阴影梯度会骗过单一阈值致紧裁 no-op (白翼残留);
+    th 阶梯 60→90→120, 边界离开画布边即接受 (封顶 120: 保住近白袋身 vs 米色背景 dist≈129)."""
     e = np.concatenate([a[:, :24], a[:, -24:]], axis=1)
     bg = np.median(e.reshape(-1, 3)[::7], axis=0)
     d = np.abs(a - bg[None, None, :]).sum(-1)
-    ys, xs = np.where(d > 60)
-    if len(xs) > 100:
-        x0, x1 = max(int(xs.min()) - 6, 0), min(int(xs.max()) + 6, a.shape[1])
-        y0, y1 = max(int(ys.min()) - 6, 0), min(int(ys.max()) + 6, a.shape[0])
-        im.crop((x0, y0, x1, y1)).save(out)
+    H, W = d.shape
+    box = (0, 0, W, H)
+    for th in (60, 90, 120):
+        ys, xs = np.where(d > th)
+        if len(xs) <= 100:
+            continue
+        x0, x1, y0, y1 = int(xs.min()), int(xs.max()), int(ys.min()), int(ys.max())
+        box = (max(x0 - 6, 0), max(y0 - 6, 0), min(x1 + 7, W), min(y1 + 7, H))
+        if not (x0 <= 2 or y0 <= 2 or x1 >= W - 3 or y1 >= H - 3):
+            break
+    return box
+
+
+def _edge_extend(arr, th=90):
+    """V57: 背景连通泛洪 + 行/列最近邻延展 — packshot 袋型有腰身/收窄, bbox 内剪影凹陷处仍为米色,
+    袋侧/背面采样到即成白板. 只有与画布边缘连通的背景状像素才算背景 (袋内浅色薯片/白带不动 —
+    V52b/V57 两次逐行条纹事故的根因正是把袋内浅色当背景); 背景像素用同行 (无则同列) 最近袋身像素填充."""
+    a = arr.copy()
+    H, W, _ = a.shape
+    e = np.concatenate([arr[:, :24], arr[:, -24:]], axis=1)
+    bg = np.median(e.reshape(-1, 3)[::7], axis=0)
+    bglike = np.abs(arr - bg[None, None, :]).sum(-1) <= th
+    B = np.zeros((H, W), bool)
+    B[0, :] = bglike[0, :]; B[-1, :] = bglike[-1, :]
+    B[:, 0] |= bglike[:, 0]; B[:, -1] |= bglike[:, -1]
+    for _ in range(max(H, W)):
+        D = B.copy()
+        D[1:, :] |= B[:-1, :]; D[:-1, :] |= B[1:, :]
+        D[:, 1:] |= B[:, :-1]; D[:, :-1] |= B[:, 1:]
+        D &= bglike
+        if (D == B).all():
+            break
+        B = D
+    rr = np.broadcast_to(np.arange(H)[:, None], (H, W))
+    cc = np.broadcast_to(np.arange(W)[None, :], (H, W))
+    xs = np.arange(W)
+    lidx = np.maximum.accumulate(np.where(~B, xs[None, :], -1), axis=1)
+    ridx = np.minimum.accumulate(np.where(~B, xs[None, :], W)[:, ::-1], axis=1)[:, ::-1]
+    has_row = (lidx >= 0) | (ridx < W)
+    src = np.where((lidx >= 0) & ((ridx >= W) | (xs[None, :] - lidx <= ridx - xs[None, :])), lidx, ridx)
+    m1 = B & has_row
+    a[m1] = a[rr[m1], np.clip(src, 0, W - 1)[m1]]
+    m2 = B & ~has_row          # 整行无袋身 (顶/底边距行): 同列最近袋身像素
+    if m2.any():
+        ys = np.arange(H)
+        uidx = np.maximum.accumulate(np.where(~B, ys[:, None], -1), axis=0)
+        didx = np.minimum.accumulate(np.where(~B, ys[:, None], H)[::-1, :], axis=0)[::-1, :]
+        pick = np.where((uidx >= 0) & ((didx >= H) | (ys[:, None] - uidx <= didx - ys[:, None])), uidx, didx)
+        a[m2] = a[np.clip(pick, 0, H - 1)[m2], cc[m2]]
+    # 填充区纵向平滑 (窗 41): 逐行取边缘色受阴影影响成横带, 侧面采样会显条纹
+    k = 20
+    cs = np.cumsum(np.pad(a, ((k + 1, k), (0, 0), (0, 0))), axis=0)
+    sm = (cs[2 * k + 1:] - cs[:-2 * k - 1]) / (2 * k + 1)
+    a[B] = sm[B]
+    return a
+
+
+def tight_crop(png: Path) -> Path:
+    """V52: 紧裁 packshot 到剪影 — 摄影米色边距直接卷上 barrel/托盘/瓶面成"白翼" (根因修).
+    bag 路径经 sat 后用 _tight_box 内联紧裁; 此 helper 服务直用 dpath0 的分支."""
+    out = png.with_suffix(".tight.png")
+    if out.exists():
         return out
-    return png
+    im = Image.open(png).convert("RGB")
+    cropped = im.crop(_tight_box(np.asarray(im, float)))
+    Image.fromarray(np.clip(_edge_extend(np.asarray(cropped, float)), 0, 255).astype("uint8")).save(out)
+    return out
 
 
 def bag_material(name, tex_path, rough=0.4, emissive=0.06, uv_rot=0.0, uv_scale=1.0, uv_tr=(0.0, 0.0), warp=0.0,
@@ -670,8 +724,13 @@ def build_cloth_library(n_per=6):  # D35: 48→72变体
             f.smooth = True
             cen_y = sum(l.vert.co.y for l in f.loops) / len(f.loops)
             front = cen_y < 0
+            # V55: 侧条面 UV 内缩 — 袋身鼓胀时圆润侧面只采样纹理边缘列 (u=0/1),
+            #     packshot 剪影边列多为米色 → "白翼"第二来源 (barrel 连续环绕 UV 无此问题)
+            side = all(abs(abs(l.vert.co.x) - BW / 2) < 1e-9 for l in f.loops)
             for l in f.loops:
                 u, v = (l.vert.co.x + BW/2) / BW, l.vert.co.z / BH
+                if side:
+                    u = 0.04 if l.vert.co.x < 0 else 0.96
                 l[uv].uv = (u, v) if front else (1.0 - u, v)
         mesh = bpy.data.meshes.new(f"cloth_{var:02d}")
         mesh.materials.append(None)
@@ -1136,19 +1195,11 @@ def main():
                     _satp = dpath.with_suffix(".sat.png")
                     _sat.save(_satp)
                     a = _satp
-                    # V52: 紧裁到袋剪影 — packshot 米色摄影边距被 ar 裁切保留并映上袋面成"白翼" (全袋SKU根因修)
+                    # V52/V54: 紧裁到袋剪影 — packshot 米色边距映上袋面成"白翼"; 自适应 th 阶梯防 no-op
                     _tg = Image.open(_satp).convert("RGB")
-                    _ta = np.asarray(_tg, float)
-                    _te = np.concatenate([_ta[:, :24], _ta[:, -24:]], axis=1)
-                    _tb = np.median(_te.reshape(-1, 3)[::7], axis=0)
-                    _td = np.abs(_ta - _tb[None, None, :]).sum(-1)
-                    _ty, _tx = np.where(_td > 60)
-                    if len(_tx) > 100:
-                        _x0t, _x1t = max(int(_tx.min()) - 6, 0), min(int(_tx.max()) + 6, _ta.shape[1])
-                        _y0t, _y1t = max(int(_ty.min()) - 6, 0), min(int(_ty.max()) + 6, _ta.shape[0])
-                        _tg.crop((_x0t, _y0t, _x1t, _y1t)).save(_satp)
-                    import os as _os2
-                    print("V52_TIGHT_CROP_APPLIED", _satp, _os2.path.getsize(_satp))
+                    _tg = _tg.crop(_tight_box(np.asarray(_tg, float)))
+                    _tg = Image.fromarray(np.clip(_edge_extend(np.asarray(_tg, float)), 0, 255).astype("uint8"))
+                    _tg.save(_satp)
                     ar_g2 = (0.40, 0.58)[(j * 7 + lv * 3) % 2]  # 与槽宽推导同源
                     _im = Image.open(a)
                     if _im.width / _im.height < ar_g2 - 0.04:
