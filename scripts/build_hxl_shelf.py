@@ -379,18 +379,10 @@ def barrel_placeholder(name, x, y, z_bot, rgb, dia=0.075, hgt=0.26, rng=None, te
     nt = m.node_tree
     if tex_path and Path(tex_path).exists():
         tex = nt.nodes.new("ShaderNodeTexImage")
-        tex.image = bpy.data.images.load(str(tex_path))
+        tex.image = bpy.data.images.load(str(can_label(Path(tex_path), math.pi * dia / hgt)))
         nt.links.new(tex.outputs["Color"], b.inputs["Base Color"])
         b.inputs["Roughness"].default_value = 0.34
     o.data.materials.append(m)
-    bpy.ops.mesh.primitive_cylinder_add(radius=dia / 2 + 0.0008, depth=0.028,
-                                        location=(x, y, z_bot + hgt * 0.62))
-    band = bpy.context.active_object
-    band.name = name + "_band"
-    mm = bpy.data.materials.new(name + "_band")
-    mm.use_nodes = True
-    mm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (0.95, 0.95, 0.94, 1)
-    band.data.materials.append(mm)
     # 内壁凹腔 (开口层次): 半径/深度逐罐不同
     wall_r = dia / 2 - (0.0022 + r.random() * 0.0016)
     wall_d = 0.014 + r.random() * 0.013
@@ -620,6 +612,51 @@ def tight_crop(png: Path) -> Path:
     cropped = im.crop(_tight_box(np.asarray(im, float)))
     Image.fromarray(np.clip(_edge_extend(np.asarray(cropped, float)), 0, 255).astype("uint8")).save(out)
     return out
+
+CAN_CACHE = {}  # V58: 罐标合成缓存 ((紧裁 packshot, 周高比) -> Path)
+
+
+def can_label(src: Path, wrap_ar: float) -> Path:
+    """V58: 罐身标签 — packshot 裁掉两侧条纹边距后以原生像素宽高比双联平铺, 余宽用袋身色缝填满.
+    整张 packshot 绕圆柱一圈会把文字横向拉 2 倍+ (周长/高 0.93-1.10 vs 贴图 0.446; V57 左下罐 TOPPRISM 摊成巨幅环带).
+    边距: 紧裁框按最宽行 (封口鳍) 定, 袋身两侧留 V57 逐行延展的条纹带 → 面板各裁 7%.
+    缝色: 每行中央 50% 列的中位色 (袋身真印刷, 不含剪影阴影) 再纵向平滑 → [P][缝][P][缝], 首尾同为 P 左缘 → 全周无接缝、无镜像文字.
+    顶/底各留 2.5% 金属缘 (参照实拍 primary.jpg: 真罐满印 flavor 色, 无白环带, 设计绕罐重复)."""
+    key = (str(src), round(wrap_ar, 4))
+    if key in CAN_CACHE:
+        return CAN_CACHE[key]
+    a = np.asarray(Image.open(src).convert("RGB"), dtype=float)
+    th, tw = a.shape[:2]
+    # 条纹边距裁切: 紧裁框含剪影外软阴影带 (延展后逐行平色 = 横条纹, 右侧宽 19-27%), 按水平梯度找袋身核心列区间
+    body = a[int(th * 0.10):int(th * 0.90)].mean(axis=2)
+    g = np.convolve(np.abs(np.diff(body, axis=1)).mean(axis=0), np.ones(31) / 31, mode="same")
+    d = np.diff(np.concatenate([[0], (g > 1.2).astype(int), [0]]))
+    runs = [(s, e) for s, e in zip(np.where(d == 1)[0], np.where(d == -1)[0]) if e - s >= max(9, tw // 30)]
+    cx0, cx1 = (int(runs[0][0]), int(runs[-1][1]) + 1) if runs else (0, tw)
+    if cx1 - cx0 < tw * 0.45:
+        cx0, cx1 = 0, tw
+    a = a[:, cx0:cx1]
+    rim = int(round(th * 0.025))
+    ih = th - 2 * rim
+    tile = np.asarray(Image.fromarray(a.astype("uint8")).resize(
+        (max(2, int(round(a.shape[1] * ih / th))), ih), Image.LANCZOS), dtype=float)
+    W = max(2 * tile.shape[1] + 2, int(round(wrap_ar * th)))
+    gap = W - 2 * tile.shape[1]
+    rowcol = np.median(tile[:, tile.shape[1] // 4:tile.shape[1] * 3 // 4], axis=1)[:, None, :]
+    k = max(1, ih // 6)
+    cs = np.cumsum(np.pad(rowcol, ((k + 1, k), (0, 0), (0, 0))), axis=0)
+    seam = (cs[2 * k + 1:] - cs[:-2 * k - 1]) / (2 * k + 1)  # 缝色纵向平滑 (窗 2k+1)
+    mid = np.concatenate([tile, np.repeat(seam, gap // 2, axis=1), tile,
+                          np.repeat(seam, gap - gap // 2, axis=1)], axis=1)
+    out = np.empty((th, W, 3))
+    out[rim:rim + ih] = mid
+    metal = np.linspace(168.0, 205.0, rim)[:, None, None] * np.ones((1, W, 1))  # 顶/底金属缘竖向微渐变
+    out[:rim] = metal
+    out[rim + ih:] = metal[::-1]
+    dst = src.with_name(src.stem.replace(".tight", "") + f".can{wrap_ar:.3f}.png")
+    Image.fromarray(np.clip(out, 0, 255).astype("uint8")).save(dst)
+    CAN_CACHE[key] = dst
+    return dst
 
 
 def bag_material(name, tex_path, rough=0.4, emissive=0.06, uv_rot=0.0, uv_scale=1.0, uv_tr=(0.0, 0.0), warp=0.0,
