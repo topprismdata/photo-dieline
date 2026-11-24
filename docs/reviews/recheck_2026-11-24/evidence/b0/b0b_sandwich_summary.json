@@ -1,0 +1,38 @@
+{
+ "B03_iid": {
+  "n": 20,
+  "cov_iid": 0.85,
+  "cov_robust": 0.4,
+  "inflation_median": 0.7127867509499168,
+  "over_tol": 16,
+  "silent_wrong_auto": 1,
+  "manual_rate": 0.95
+ },
+ "B03_corr": {
+  "n": 20,
+  "cov_iid": 0.3,
+  "cov_robust": 0.1,
+  "inflation_median": 0.5374597080371395,
+  "over_tol": 19,
+  "silent_wrong_auto": 1,
+  "manual_rate": 0.95
+ },
+ "B06_one_edge": {
+  "n": 30,
+  "cov_iid": 0.26666666666666666,
+  "cov_robust": 0.36666666666666664,
+  "inflation_median": 1.328221215051323,
+  "over_tol": 29,
+  "silent_wrong_auto": 1,
+  "manual_rate": 0.9666666666666667
+ },
+ "B06_none": {
+  "n": 30,
+  "cov_iid": 0.9666666666666667,
+  "cov_robust": 0.6666666666666666,
+  "inflation_median": 0.2958330833758023,
+  "over_tol": 21,
+  "silent_wrong_auto": 0,
+  "manual_rate": 0.0
+ }
+}

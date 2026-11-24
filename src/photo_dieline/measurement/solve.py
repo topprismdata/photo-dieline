@@ -308,11 +308,50 @@ def ratio_mae(model, theta, truth):
     return float(np.mean([abs(theta[a] / theta[b] - truth[a] / truth[b]) for a, b in rel]))
 
 
-def delivery_policy(res, tol_mm=1.0, k=2.0):
+def capture_protocol_check(cams, min_az_spread_deg=25.0):
+    """采集协议层 B06 对策 (R4): 近重复视角下逐面吸收偏移不可检 (B05/B06 实证: 近重复超容差 0.37 vs 互补 0.07)。
+    方位角圆跨度 < min_az_spread_deg 的多视角集判 NEAR_DUP → 须降级人工; 单视角 SINGLE_VIEW。"""
+    azs = sorted(math.degrees(c["az"]) % 360.0 for c in cams)
+    if len(azs) <= 1:
+        return {"status": "SINGLE_VIEW", "az_spread_deg": 0.0}
+    gaps = [b - a for a, b in zip(azs, azs[1:])] + [360.0 - azs[-1] + azs[0]]
+    spread = 360.0 - max(gaps)
+    return {"status": "NEAR_DUP" if spread < min_az_spread_deg else "OK", "az_spread_deg": float(spread)}
+
+
+def cross_view_closure(model, obs_list, anchors, d0):
+    """测站闭合差 (摄影测量 multi-station QC): 逐视角独立解 (同锚), 维度估计跨站分歧 (mm)。
+    互补视角下相关偏移吸收方向不同 → 分歧暴露系统误差; 近重复视角分歧天然小 (先过 capture_protocol_check)。"""
+    per_view = []
+    for idx, uv, fx in obs_list:
+        r = solve(model, idx, uv, fx, anchors, d0)
+        if not r.get("ok"):
+            continue
+        th = {**r["anchors"], **r["theta"]}
+        per_view.append({"dims": {k: float(th[k]) for k in ("W", "D") if k in th},
+                         "sigma": {k: r["sigma_mm"][k] for k in ("W", "D") if k in r["sigma_mm"] and math.isfinite(r["sigma_mm"][k])}})
+    out = {"n_views_solved": len(per_view), "W_spread_mm": None, "D_spread_mm": None,
+           "W_closure_over_sigma": None, "D_closure_over_sigma": None}
+    for k in ("W", "D"):
+        vals = [d["dims"][k] for d in per_view if k in d["dims"]]
+        sig = [d["sigma"][k] for d in per_view if k in d["sigma"]]
+        if len(vals) >= 2:
+            out[f"{k}_spread_mm"] = float(max(vals) - min(vals))
+            out[f"{k}_per_view"] = [round(v, 2) for v in vals]
+        if len(vals) >= 2 and len(sig) == len(vals):
+            denom = math.sqrt(sum(s * s for s in sig))     # 跨站合成精度: 闭合差/√Σσ² (深度退化站归一)
+            out[f"{k}_closure_over_sigma"] = float(out[f"{k}_spread_mm"] / denom) if denom > 0 else None
+    return out
+
+
+def delivery_policy(res, tol_mm=1.0, k=2.0, protocol=None):
     """R4 WP1 第 III 层: σ 对比特征容差的自动交付门槛 (优先用稳健 σ, 缺则退 i.i.d. σ)。
     AUTO: 实测锚 + 可辨识 + max(σ_W,σ_D) ≤ tol/k (k=2 安全系数), 可自动交付;
     MANUAL: 实测锚可辨识但误差棒超容差 → 转人工复核; NO_GO: 拒绝/仅先验/不可辨识。
-    注意 B0-B 冻结结论: TOL=1mm 时单视角固有精度 1–4mm → 大量 MANUAL 是正确行为 (精度不足即不自动)。"""
+    注意 B0-B 冻结结论: TOL=1mm 时单视角固有精度 1–4mm → 大量 MANUAL 是正确行为 (精度不足即不自动)。
+    protocol: capture_protocol_check 的返回; NEAR_DUP → 封顶 MANUAL (B06 类沉默错误在近重复视角下不可检)。"""
+    if protocol is not None and protocol.get("status") == "NEAR_DUP":
+        return "MANUAL"
     if not res.get("ok"):
         return "NO_GO"
     if res.get("delivery") in ("REFUSED", "PRIOR_DEPENDENT_ESTIMATE"):

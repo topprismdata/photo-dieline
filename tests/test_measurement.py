@@ -4,7 +4,9 @@ import math
 import numpy as np
 import pytest
 
-from photo_dieline.measurement import MODELS, delivery_policy, observe, ratio_mae, solve
+from photo_dieline.measurement import (
+    MODELS, capture_protocol_check, cross_view_closure, delivery_policy, observe, ratio_mae, solve,
+)
 
 # 与 experiments 一致的相机口径: equiv_focal → fx, 眼距 = 距离 × 1.35 (ADJ_FOV)
 FX = 50.0 / 36.0 * 768.0
@@ -142,3 +144,30 @@ def test_sandwich_robust_sigma_and_policy_gate():
     r3 = solve(gab, idx, uv + rng.normal(0, 8.0, uv.shape), FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8, point_clusters=CL)
     if r3["delivery"] == "MANUFACTURING_DIMENSIONS":
         assert delivery_policy(r3, tol_mm=1.0, k=2.0) == "MANUAL"
+
+
+def _ccam(az, el, roll, d):
+    return {"az": math.radians(az), "el": math.radians(el), "roll": math.radians(roll), "d_eye": d}
+
+
+def test_capture_protocol_and_closure():
+    """B06 协议层对策: 近重复视角判 NEAR_DUP 且封顶 MANUAL; 测站闭合差可解算可比较。"""
+    comp = [_ccam(35, 18, -4, 0.81), _ccam(140, 10, 3, 0.75), _ccam(270, 30, 0, 0.90)]
+    dup = [_ccam(30, 16, -3, 0.80), _ccam(40, 20, -5, 0.82), _ccam(35, 14, -2, 0.79)]
+    assert capture_protocol_check(comp)["status"] == "OK"
+    assert capture_protocol_check(dup)["status"] == "NEAR_DUP"
+    assert capture_protocol_check(comp[:1])["status"] == "SINGLE_VIEW"
+    r = {"ok": True, "delivery": "MANUFACTURING_DIMENSIONS", "sigma_mm": {"W": 0.1, "D": 0.1}}
+    assert delivery_policy(r, protocol=capture_protocol_check(dup)) == "MANUAL"
+    assert delivery_policy(r, protocol=capture_protocol_check(comp)) == "AUTO"
+
+    gab = MODELS["gable_top"]
+    rng = np.random.default_rng(41)
+    obs = []
+    for c in comp:
+        i2, u2, _ = observe(gab, GABLE_PARAMS, c, FX)
+        obs.append((i2, u2 + rng.normal(0, 1.0, u2.shape), FX))
+    cl = cross_view_closure(gab, obs, {"Hb": GABLE_PARAMS["Hb"]}, 0.85)
+    # i.i.d. 下归一化闭合差 (闭合差/跨站合成精度) 应在噪声量级内; 单站深度退化由 σ 归一吸收
+    assert cl["n_views_solved"] == 3
+    assert cl["W_closure_over_sigma"] < 6.0 and cl["D_closure_over_sigma"] < 6.0, cl

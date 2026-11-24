@@ -1,0 +1,15 @@
+=== (a) 合法组合网格 (应全 VALIDATED) ===
+合法格: 216/216 VALIDATED
+
+=== (b) 域边界两侧翻转 (公式: slope=atan(2*Hr/D), lean=asin(gap/(2Ef))) ===
+  gap=2Ef-ε 合法(声明域)        → DRAFT      G02=PASS  预期合法 ✗ 误判
+  gap=2Ef+ε 非法             → DRAFT      G02=FAIL  预期非法 ✓
+  坡角5.2° 合法                → VALIDATED  G02=PASS  预期合法 ✓
+  坡角4.8° 非法                → DRAFT      G02=FAIL  预期非法 ✓
+  gap=0.5 按声明域合法           → VALIDATED  G02=PASS  预期合法 ✓
+
+=== (c) 非 gable 分发 (cuboid, 应按 cuboid 几何判定且 G02 不误触) ===
+  cuboid → VALIDATED  G02=PASS  门集=['G01', 'G02', 'G03', 'G04', 'G05', 'G06', 'G07', 'G08', 'G09', 'G10']
+
+判定: 1 项失败: [('boundary', 'gap=2Ef-ε 合法(声明域)', 'DRAFT')]
+PROBE13_DONE

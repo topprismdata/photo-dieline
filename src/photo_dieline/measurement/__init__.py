@@ -4,12 +4,13 @@
 实验证据与生成/求解两端投影对账 (最大差 0.004px) 见 docs/reviews/recheck_2026-11-24/evidence/b0/。
 """
 from .solve import (  # noqa: F401
-    MODELS, REL, RES, back_dir, basis, cuboid_faces, cuboid_keypoints, delivery_policy, eye_pos,
-    gable_faces, gable_keypoints, observe, project, ratio_mae, solve, to_world, visible,
+    MODELS, REL, RES, back_dir, basis, capture_protocol_check, cross_view_closure, cuboid_faces,
+    cuboid_keypoints, delivery_policy, eye_pos, gable_faces, gable_keypoints, observe, project,
+    ratio_mae, solve, to_world, visible,
 )
 
 __all__ = [
-    "MODELS", "REL", "RES", "back_dir", "basis", "cuboid_faces", "cuboid_keypoints",
-    "delivery_policy", "eye_pos", "gable_faces", "gable_keypoints", "observe", "project",
-    "ratio_mae", "solve", "to_world", "visible",
+    "MODELS", "REL", "RES", "back_dir", "basis", "capture_protocol_check", "cross_view_closure",
+    "cuboid_faces", "cuboid_keypoints", "delivery_policy", "eye_pos", "gable_faces",
+    "gable_keypoints", "observe", "project", "ratio_mae", "solve", "to_world", "visible",
 ]
