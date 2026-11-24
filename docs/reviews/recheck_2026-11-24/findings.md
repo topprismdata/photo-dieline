@@ -379,3 +379,23 @@ b_j 落在参数化子空间内的能量占比 **[1.0, 1.0, 1.0, 1.0]**, 最小�
   L0–L7 架构 + 双率制度 (C_auto/R_auto) + inverse-crime 禁令 + C01–C06 挑战应对;
   第二垂直实例定为**货架空间测量** (OpenUSD), 规范先于其实例冻结。
 - 咨询纠正两条: "27→1 不独立证明检测能力" → P4-D 双率补上; "一切残差基通道"未限定措辞 → 已改范围限定版。
+
+### 5.12 R4 收口复核 (第五批; [R4-P4-CLOSURE] 回执, `gpt/round4_closure_reply.md`)
+
+**最终联合复核: B06 CLOSED — ACCEPTED**; r4-baseline 确认。逐项: P4-A ACCEPTED (须冻结数值条件:
+归一化方式/秩阈值/投影残差绝对+相对值 — 措辞已入 ESR §6); P4-B **ACCEPTED WITH SCOPE**
+("锚点真值假设必须披露" — 我方循环性质疑方向获支持: 锚准确性属 L6 问题, 但须明确 P4-B 证明的是
+锚给定条件下的观测等价性); P4-C NOT PROVEN (互补视角未优于单视角, 负结果保留, 移 R5-F); P4-D ACCEPTED
+(双率制度正式入 ESR, 增第三指标 C_manual, MANUAL≠REJECT); DOM-01/02 ACCEPTED;
+R5 v0.1 FROZEN + 强制补充条款; ESR-V0.1 APPROVED FOR DEVELOPMENT + 新增强制规范。
+
+**已落地的三项复核要求**:
+1. `r5_real_pilot_protocol_v0.1-A.md`: Reference Anchor Independence — 锚点九字段审计
+   (ID/方法/仪器/校准/值/u_ref/独立性/相关性/冲突裁决) + 相关性警告 (共用尺/基准 → 联合协方差禁块对角)
+   + R5-F 拆分 F1 (仅视角)/F2 (视角+独立参考), 报告禁只报中位数须含尾部;
+2. ESR §3: 第三指标 C_manual + 目标函数改为"风险上限内最大化 C_auto";
+3. ESR §6/§6.1: 基础三原则 (第三条"独立参考测量不是天然真值"为 ESR 基础原则) + **证据来源独立性**
+   强制规范 (每条证据声明来源/测量模型/误差结构/独立性/适用范围)。
+
+**下一步 (GPT 指令)**: 不再修改求解器 — 按冻结 r4-baseline 进入 R5 真实包装试验,
+参考锚点独立性与不确定性为首个重点观察项; 完成后以 OpenUSD 货架空间测量检验 ESR 跨垂直复用。
