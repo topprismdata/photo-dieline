@@ -54,10 +54,45 @@ def validate_usdc(path):
         return {"ok": False, "reason": str(e)[:300], "checks": []}
 
 
-def build_one(fam, cls_id, idx, out_dir):
+GATE_IDS = ("G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10")
+# 几何调节率先验 (如实: 这不是可辨识性证明 — 自观测=inverse crime 被禁;
+# 真交付标签须测量层在真实观测上判, 数据集只发布几何先验供消费方求解器自证)
+DEGENERATE_MAX_RATIO = 6.0   # max/min 尺寸比 ≥6 → LOW (近退化扁平/细长)
+DEGENERATE_MIN_RATIO = 0.12
+
+
+def degeneracy_prior(dims_mm):
+    vals = [max(dims_mm[k], 1e-6) for k in ("W", "D", "H")]
+    ratio = max(vals) / min(vals)
+    prior = "LOW" if (ratio >= DEGENERATE_MAX_RATIO or min(vals) / max(vals) <= DEGENERATE_MIN_RATIO) else "NORMAL"
+    return {"dim_ratio": round(ratio, 2), "identifiability_prior": prior}
+
+
+# 拒收集退化算子: 按家族显式 z 向键集合 (同比缩 0.12 — 比例约束如 Hb>Hf, Hl<H 天然保持;
+# 只缩 H 不缩耦合键会被 validate_params 正确拒绝 — 首版实证 12 例)
+DEGENERATE_KEYS = {
+    "gable": ("Hb", "Hr"),
+    "clv": ("H", "tuck_d", "gs_d", "ts_d", "pk_d", "slot_d", "hs", "bd"),
+    "cone": ("h",),
+    "food": ("H", "Hf", "Hb", "Hl", "lip_d", "glue_w"),
+}
+
+
+def build_one(fam, cls_id, idx, out_dir, degenerate=False):
     params, deriv = sample_variant(cls_id, idx)
+    if degenerate:  # R03 类拒收样本: 近扁平化 (z 向键同比 ×0.12), 几何仍合法可折叠
+        keys = [k for k in DEGENERATE_KEYS.get(fam, ()) if params.get(k, 0) > 0]
+        if not keys:
+            return {"status": "QA_FAIL", "gates": {}, "fail": "无 z 向键可退化"}, params, deriv
+        for k in keys:
+            params[k] = round(params[k] * 0.12, 3)
+        deriv["degenerate"] = f"{','.join(keys)}×0.12"
+        deriv["identifiability_prior"] = "LOW"
     mod = class_module(cls_id)
-    ir_raw = mod.build_ir(params)
+    try:
+        ir_raw = mod.build_ir(params)
+    except ValueError as e:
+        return {"status": "CONTRACT_REJECTED", "gates": {}, "fail": f"合同拒绝: {e}"}, params, deriv
     ir_raw.pop("_derived", None)
     ir = from_raw(ir_raw)
 
@@ -106,13 +141,17 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
 
     rows = []
+    refusal_per_family = max(1, args.per_family // 12)  # ~8% 拒收先验样本
     for fam, classes in FAMILIES.items():
-        for i in range(args.per_family):
+        n_normal = args.per_family - refusal_per_family
+        plan = [(i, False) for i in range(n_normal)] + [(args.per_family + j, True) for j in range(refusal_per_family)]
+        for i, degenerate in plan:
             cls_id = classes[i % len(classes)]
-            asset_id = f"{fam}_{cls_id}_v{i:04d}"
-            row = {"asset_id": asset_id, "family": fam, "class_id": cls_id, "variant": i}
+            asset_id = f"{fam}_{cls_id}_v{i:04d}" + ("_dg" if degenerate else "")
+            row = {"asset_id": asset_id, "family": fam, "class_id": cls_id, "variant": i,
+                   "sample_set": "REFUSAL_PRIOR" if degenerate else "MAIN"}
             try:
-                res, params, deriv = build_one(fam, cls_id, i, out)
+                res, params, deriv = build_one(fam, cls_id, i, out, degenerate=degenerate)
                 row.update({"status": res["status"], "params": params, "derivation": deriv,
                             "fail": res.get("fail") or res.get("validator", {}).get("reason"),
                             "gates": res.get("gates", {}),
@@ -121,7 +160,9 @@ def main():
                             "validator_ok": (res.get("validator") or {}).get("ok"),
                             "validator_checks": len((res.get("validator") or {}).get("checks", []))})
                 if res.get("status") == "GREEN":
-                    row["dims_mm"] = {"analytic": res["analytic"], "folded": res["folded"]}
+                    dims = res["analytic"]
+                    row["degeneracy"] = degeneracy_prior(dims)
+                    row["dims_mm"] = {"analytic": dims, "folded": res["folded"]}
                     row["reconcile"] = res["reconcile"]["axes"]
             except Exception as e:
                 row.update({"status": "ERROR", "fail": f"{type(e).__name__}: {str(e)[:220]}",
@@ -132,13 +173,17 @@ def main():
 
     # manifest (CSV) + summary
     import csv
-    cols = ["asset_id", "family", "class_id", "variant", "status", "reconcile_ok",
-            "reconcile_worst_mm", "validator_ok", "validator_checks", "fail"]
+    cols = ["asset_id", "family", "class_id", "variant", "sample_set", "status", "reconcile_ok",
+            "reconcile_worst_mm", "validator_ok", "validator_checks", "identifiability_prior", "dim_ratio", "fail"]
+    for r in rows:
+            dg = r.get("degeneracy") or {}
+            r["identifiability_prior"] = dg.get("identifiability_prior", "")
+            r["dim_ratio"] = dg.get("dim_ratio", "")
     with open(out / "manifest.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
-    st = {}
+        st = {}
     for r in rows:
         st[r["status"]] = st.get(r["status"], 0) + 1
     summary = {"total": len(rows), "statuses": st,
