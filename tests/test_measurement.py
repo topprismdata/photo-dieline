@@ -195,3 +195,17 @@ def test_solve_misfit_gate_and_domain_invariant():
     r = solve(gab, idx2, uv2, FX, {"Hb": 100.0}, 0.85, noise_px=0.2)
     assert r["delivery"] == "INSUFFICIENT_PRECISION" and r["misfit_px"], r  # 不给 MANUFACTURING
     assert delivery_policy(r, tol_mm=1.0, k=2.0) == "MANUAL"
+
+
+def test_measurement_domain_d1_boundary():
+    """DOM-02 三层域契约: D1 测量有效域 lean≤75° (V1.0 保守边界, 等价 gap≤1.9319·Ef)。
+    D0 不动 (75° 不入数学声明域); D1 违规 → 转人工。"""
+    from photo_dieline.measurement.solve import _gable_measurement_domain
+    assert _gable_measurement_domain({"fin_gap_mm": 15.0, "Ef": 8.0}) == []      # lean 69.6° OK
+    v = _gable_measurement_domain({"fin_gap_mm": 15.5, "Ef": 8.0})               # lean 75.7° 违规
+    assert v and "75" in v[0]
+    # 合法运行点不受影响
+    gab = MODELS["gable_top"]
+    idx, uv, _ = observe(gab, GABLE_PARAMS, _gable_cam(), FX)
+    ok = solve(gab, idx, uv, FX, {"Hb": 100.0}, 0.85)
+    assert ok["delivery"] == "MANUFACTURING_DIMENSIONS" and not ok["measurement_violations"]

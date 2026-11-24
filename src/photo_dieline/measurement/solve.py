@@ -94,6 +94,24 @@ except ImportError:
     pass
 
 
+def _gable_measurement_domain(q):
+    """D1 测量有效域 (R4 咨询 DOM-02: 三层域契约 D2⊆D1⊆D0)。
+    D0 = param_domain_violations (数学声明域, 不动); D1 = 测量可辨识性边界; D2 = 自动交付门 (delivery_policy)。
+    V1.0 保守运行边界: lean = asin(gap/(2Ef)) ≤ 75° ⇔ gap ≤ 2·sin75°·Ef = 1.9319·Ef (DOM-01 核对的等价阈值)。
+    依据: lean→90° 鳍高→0 退化形体触发其他门 (probe13 近边界发现); 75° 是运行边界而非普适物理边界
+    (灵敏度曲线待 R5 真实数据补充后修订)。"""
+    out = []
+    gap, Ef = q.get("fin_gap_mm"), q.get("Ef")
+    if isinstance(gap, (int, float)) and isinstance(Ef, (int, float)) and gap > 0 and Ef > 0:
+        lean = math.degrees(math.asin(min(1.0, (gap / 2.0) / Ef)))
+        if lean > 75.0:
+            out.append(f"lean={lean:.1f}° > 75° (D1 测量有效域 V1.0 保守边界, gap ≤ 1.9319·Ef): 鳍近退化, 测量转人工")
+    return out
+
+
+MODELS["gable_top"]["meas_domain"] = _gable_measurement_domain
+
+
 def to_world(P, c):
     """折叠坐标 (mm) → 世界 (m): 绕 z 转 180° (导入器) + 平移到包围盒中心."""
     return (R_IMPORT @ (P - c).T).T / 1000.0 + c / 1000.0
@@ -298,12 +316,16 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
     dom_fn = model.get("domain")
     violations = list(dom_fn(params([best.x[i] for i in range(len(names))]))) if dom_fn else []
     misfit_px = rms_px > 2.0 * noise_px + 0.2
+    md_fn = model.get("meas_domain")
+    meas_violations = list(md_fn(params([best.x[i] for i in range(len(names))]))) if md_fn else []
     if level == "UNIDENTIFIABLE" or scale_source == "NO_METRIC_ANCHOR":
         delivery = "REFUSED"
     elif scale_source == "TEMPLATE_PRIOR_ANCHOR":
         delivery = "PRIOR_DEPENDENT_ESTIMATE"
     elif violations:
         delivery = "OUT_OF_DOMAIN"
+    elif meas_violations:
+        delivery = "INSUFFICIENT_PRECISION"          # D1 测量有效域外 (近退化): 转人工, 不自动交付
     elif misfit_px:
         delivery = "INSUFFICIENT_PRECISION"          # 实测锚在但几何失配, 误差棒无意义 → 人工复核
     elif level == "WEAK":
@@ -323,6 +345,7 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
             "cond_theta": cond_theta, "identifiable": level != "UNIDENTIFIABLE",
             "identifiability": level, "scale_source": scale_source, "delivery": delivery,
             "domain_violations": violations, "misfit_px": misfit_px,
+            "measurement_violations": meas_violations,
             "sigma_mm": sigma, "sigma_mm_robust": sigma_r,
             "sigma_inflation": (float(np.median([sigma_r[k] / max(sigma[k], 1e-9) for k in names
                                                  if sigma_r and math.isfinite(sigma_r[k]) and math.isfinite(sigma[k])]))
