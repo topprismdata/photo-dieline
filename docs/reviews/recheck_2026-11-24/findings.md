@@ -316,3 +316,23 @@ OUT_OF_DOMAIN 检查挂接为不变量 (MODELS["gable_top"]["domain"], 测量子
 域声明两侧现共用同一 `param_domain_violations` (测量侧适配子集), 消除双口径。
 
 **合同测试新增**: unknown_anchor 拒绝 / 失配门拦截+policy MANUAL / 合法参数不触发域检查。**测试 77 passed。**
+
+### 5.9 WP3「独立 PDF 实际渲染」(probe15, 第五批; 同日) — A2 有条件通过 → 补证完成
+
+`audits/probes/probe15_pdf_independent_render.py` (`evidence/probe15_pdf_render.log` + 独立引擎产物
+`probe15_independent.pdf`): 库字节 → PyMuPDF 第三方栅格化 → 像素域几何实测。
+
+| 项 | 实测 | 合同 |
+|---|---|---|
+| MediaBox | 216.000×208.500mm, Δ=0.0000 vs SVG | 第三方引擎可打开且页尺寸同源一致 |
+| 50mm 校验条 (工字标) | 端刻线中心距 **49.999mm** (clip×24, 偏差 0.001mm) | 印刷比例尺在像素域可复现 |
+| 墨迹完整性 | 栅格墨迹 ⊇ 矢量并集 (外向缺欠 0.11mm=AA), 上缘 2.99mm 为 INFO 标题文字 (合法) | 全部笔画渲染 |
+| 图层 | /OCProperties /D /ON 含全部 7 OCG | 印刷默认可见 |
+
+**取证过程中排除的两个伪缺陷 (记入台账, 防重查)**:
+- 页边暗像素带: MediaBox 边界行第三方抗锯齿伪影 (clip 1pt 后归零; 矢量域无页边元素) — 非内容;
+- 校验条"缺失": 全页行映射 ~10px 探针偏差 + 工字标端刻线墨迹混入 (横线 141.732pt + 端刻线半宽) —
+  按刻线中心距读数后与矢量逐位一致。**教训: 校验类探针必须先矢量定位→clip 直取→按制图读数约定测量。**
+
+**R4 清单状态 (13 项)**: WP1 4/4 ✅ · WP2 5/5 ✅ · WP3 4/4 ✅ (probe12/probe13/probe14-A4/probe15-PDF)。
+**13/13 全绿 → 求解器基线具备冻结条件 (tag 待 GPT 咨询闭环后执行)。**
