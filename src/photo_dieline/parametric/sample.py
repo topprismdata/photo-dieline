@@ -1,0 +1,55 @@
+"""P0-③ 变体采样器: 显式尺寸键缩放 + validate_params 守门 + 种子纪律。
+
+纪律: 尺寸键**显式声明** (禁启发式猜键 — 采错键=静默产废件); 工艺参数 (克重/胶宽/板厚) 不动;
+非法组合 validate_params 拒绝 → 换因子重采 (8 次全非法 = 大声失败, 不静默产废)。
+种子 = sha256(class_id + variant_index) 派生, 资产可 bit 级再生。
+"""
+
+import hashlib
+
+import numpy as np
+
+from ..core.ir import class_defaults, class_module
+
+# 试点家族的可缩放尺寸键 (显式声明; 值须 >0 才缩放, 缩放键 <2 = 大声失败)
+SCALABLE_KEYS = {
+    "gable": ("W", "D", "Hb", "Hr", "Ef"),
+    "clv": ("W", "D", "H"),
+    "cone": ("side_b", "side_t", "h"),
+    "food": ("W", "D", "H", "Hl"),
+}
+
+
+def seed_from(cls_id: str, variant_index: int) -> int:
+    tag = f"{cls_id}-v{variant_index:04d}".encode()
+    return int(hashlib.sha256(tag).hexdigest()[:16], 16)
+
+
+def sample_variant(cls_id: str, variant_index: int, scale_range=(0.8, 1.25)):
+    """类默认参数 × 尺寸缩放因子 s~U(range)。返回 (params, derivation)。"""
+    fam = cls_id.split("_")[0]
+    keys = SCALABLE_KEYS.get(fam)
+    if not keys:
+        raise ValueError(f"家族 {fam} 未声明 SCALABLE_KEYS — 禁止启发式采键")
+    mod = class_module(cls_id)
+    base = class_defaults(cls_id)
+    rng = np.random.default_rng(seed_from(cls_id, variant_index))
+    last_err = None
+    for _ in range(8):
+        s = float(rng.uniform(*scale_range))
+        p = dict(base)
+        scaled = []
+        for k in keys:
+            v = base.get(k, 0)
+            if isinstance(v, (int, float)) and not isinstance(v, bool) and v > 0:
+                p[k] = round(v * s, 3)
+                scaled.append(k)
+        if len(scaled) < 2:
+            raise ValueError(f"{cls_id}: 可缩放键不足 ({scaled}) — 检查 SCALABLE_KEYS")
+        try:
+            mod.validate_params(p)
+        except ValueError as e:
+            last_err = e
+            continue
+        return p, {"scale": round(s, 4), "scaled_keys": scaled, "seed": seed_from(cls_id, variant_index)}
+    raise ValueError(f"{cls_id}: 8 次采样均被 validate_params 拒绝 (last: {last_err})")
