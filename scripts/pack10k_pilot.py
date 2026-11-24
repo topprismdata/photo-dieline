@@ -86,6 +86,11 @@ def build_one(fam, cls_id, idx, out_dir):
     ev["stage_dims_m"] = sdims
     ev["date"] = datetime.date.today().isoformat()
     write_sidecars(a_dir, asset_id, cls_id, ev, rec, val["checks"])
+    (a_dir / "build.json").write_text(json.dumps({
+        "asset_id": asset_id, "family": fam, "class_id": cls_id,
+        "params": params, "derivation": deriv, "gates": gates,
+        "folded_mm": {k: round(v, 3) for k, v in folded.items()},
+        "board_kind": ev["kind"]}, ensure_ascii=False, indent=2))
     return {"status": "GREEN" if (rec["ok"] and val["ok"]) else "EVID_FAIL",
             "gates": gates, "reconcile": rec, "validator": val,
             "folded": {k: round(v, 3) for k, v in folded.items()},
