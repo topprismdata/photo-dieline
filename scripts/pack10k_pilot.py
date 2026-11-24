@@ -96,27 +96,36 @@ def build_one(fam, cls_id, idx, out_dir, degenerate=False):
     ir_raw.pop("_derived", None)
     ir = from_raw(ir_raw)
 
+    import time as _t
+    t0 = _t.perf_counter()
     x0, y0, x1, y1 = net_bbox(ir)
     svg = svg_render(ir, x1 - x0, y1 - y0)
     pdf = build_pdf(ir, x1 - x0, y1 - y0)
     report = run_qa(ir, svg, pdf)
+    t_qa = _t.perf_counter() - t0
     gates = {g["id"]: g["status"] for g in report["gates"] if g["id"] != "G01"}
     gate_fail = [k for k, v in gates.items() if v != "PASS"]
     if gate_fail:
         return {"status": "QA_FAIL", "gates": gates, "fail": f"gate {gate_fail} FAIL"}, params, deriv
 
+    t1 = _t.perf_counter()
     world = fold_all(ir)
     roles = {pp["id"]: pp["role"] for pp in ir.panels}
     solid = np.vstack([v for pid, v in world.items() if roles[pid] in mod.solid_roles()])
     folded = {k: float(solid[:, i].max() - solid[:, i].min()) for i, k in enumerate("WDH")}
     analytic = mod.analytic_bbox(params)
+    t_fold = _t.perf_counter() - t1
 
     asset_id = f"{fam}_{cls_id}_v{idx:04d}" + ("_dg" if degenerate else "")
     a_dir = Path(out_dir) / asset_id
+    t2 = _t.perf_counter()
     ev = export_usdc(ir, a_dir / "model.usdc", kind="carton_board", family=fam)
     sdims = stage_dims_m(a_dir / "model.usdc")
     rec = reconcile_dims(analytic, folded, sdims)
+    t_exp = _t.perf_counter() - t2
+    t3 = _t.perf_counter()
     val = validate_usdc(a_dir / "model.usdc")
+    t_val = _t.perf_counter() - t3
 
     ev["stage_dims_m"] = sdims
     ev["date"] = datetime.date.today().isoformat()
@@ -128,6 +137,8 @@ def build_one(fam, cls_id, idx, out_dir, degenerate=False):
         "board_kind": ev["kind"]}, ensure_ascii=False, indent=2))
     return {"status": "GREEN" if (rec["ok"] and val["ok"]) else "EVID_FAIL",
             "gates": gates, "reconcile": rec, "validator": val,
+            "stage_ms": {"qa": round(t_qa * 1000, 1), "fold": round(t_fold * 1000, 1),
+                         "export": round(t_exp * 1000, 1), "validate": round(t_val * 1000, 1)},
             "folded": {k: round(v, 3) for k, v in folded.items()},
             "analytic": {k: round(v, 3) for k, v in analytic.items()}}, params, deriv
 
@@ -153,6 +164,7 @@ def main():
             try:
                 res, params, deriv = build_one(fam, cls_id, i, out, degenerate=degenerate)
                 row.update({"status": res["status"], "params": params, "derivation": deriv,
+                            "stage_ms": res.get("stage_ms"),
                             "fail": res.get("fail") or res.get("validator", {}).get("reason"),
                             "gates": res.get("gates", {}),
                             "reconcile_ok": (res.get("reconcile") or {}).get("ok"),
@@ -185,6 +197,7 @@ def main():
     import csv
     cols = ["asset_id", "family", "class_id", "variant", "sample_set", "status", "reconcile_ok",
             "reconcile_worst_mm", "validator_ok", "validator_checks", "identifiability_prior", "dim_ratio",
+        "qa_ms", "fold_ms", "export_ms", "validate_ms",
         "p_gate_01", "p_gate_02", "p_gate_03", "p_gate_04", "p_gate_05", "p_gate_06", "p_gate_07", "p_gate_08", "fail"]
     for r in rows:
             dg = r.get("degeneracy") or {}
@@ -197,7 +210,11 @@ def main():
         st = {}
     for r in rows:
         st[r["status"]] = st.get(r["status"], 0) + 1
-    summary = {"total": len(rows), "statuses": st,
+    stage_ok = [r.get("stage_ms") for r in rows if r.get("stage_ms")]
+    stage_avg = {k: round(sum(x[k] for x in stage_ok) / max(len(stage_ok), 1), 1)
+                 for k in ("qa", "fold", "export", "validate")} if stage_ok else {}
+    summary = {"total": len(rows), "statuses": st, "stage_avg_ms": stage_avg,
+               "thumbs_render_s": None,
                "reconcile_ok": sum(1 for r in rows if r.get("reconcile_ok")),
                "validator_ok": sum(1 for r in rows if r.get("validator_ok")),
                "validator_available": HAVE_UDV}
