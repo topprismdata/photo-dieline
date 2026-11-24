@@ -54,7 +54,13 @@ def _solid_triangles_mm(ir):
         nets.extend(N.tolist())
         for i in range(1, len(P) - 1):  # 扇形三角化 (试点家族面板均为凸多边形)
             tris.append((base, base + i, base + i + 1))
-    return np.asarray(pts, float), np.asarray(tris, int), np.asarray(nets, float)
+    pts_arr = np.asarray(pts, float)
+    nets_arr = np.asarray(nets, float)
+    # 焊接: 相邻面板共享棱各持重复顶点 → 不焊接则 USD 网格非流形 (独立验收器 V2 实测抓获)
+    key = np.round(pts_arr, 6)
+    uniq, first_idx, inv = np.unique(key, axis=0, return_index=True, return_inverse=True)
+    tris_arr = inv[np.asarray(tris, int)]
+    return uniq, tris_arr, nets_arr[first_idx]
 
 
 def _area_mm2(pts, tris):
