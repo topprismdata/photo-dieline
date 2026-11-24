@@ -25,11 +25,19 @@ def seed_from(cls_id: str, variant_index: int) -> int:
     return int(hashlib.sha256(tag).hexdigest()[:16], 16)
 
 
-def sample_variant(cls_id: str, variant_index: int, scale_range=(0.8, 1.25)):
-    """类默认参数 × 尺寸缩放因子 s~U(range)。返回 (params, derivation)。"""
+def sample_variant(cls_id: str, variant_index: int, scale_range=(0.8, 1.25), allow_identity=False):
+    """类默认参数 × 尺寸缩放因子 s~U(range)。返回 (params, derivation)。
+    allow_identity: 家族未声明 SCALABLE_KEYS 时回退恒等参数 (derivation 标 no_scaling_coverage
+    — 规模干跑用, 多样性口径须扣除; 生产 10K 前须显式补键)。"""
     fam = cls_id.split("_")[0]
     keys = SCALABLE_KEYS.get(fam)
     if not keys:
+        if allow_identity:
+            base = class_defaults(cls_id)
+            mod = class_module(cls_id)
+            mod.validate_params(base)
+            return dict(base), {"scale": 1.0, "scaled_keys": [], "seed": seed_from(cls_id, variant_index),
+                                "no_scaling_coverage": True}
         raise ValueError(f"家族 {fam} 未声明 SCALABLE_KEYS — 禁止启发式采键")
     mod = class_module(cls_id)
     base = class_defaults(cls_id)

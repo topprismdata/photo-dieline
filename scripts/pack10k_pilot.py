@@ -25,6 +25,7 @@ from photo_dieline.export.usd import export_usdc, reconcile_dims, stage_dims_m, 
 from photo_dieline.folding.engine import fold_all  # noqa: E402
 from photo_dieline.parametric import base as templates  # noqa: E402
 from photo_dieline.parametric.sample import sample_variant  # noqa: E402
+from photo_dieline.batch import run_batch  # noqa: E402
 from photo_dieline.qa.pipeline import run_qa  # noqa: E402
 
 FAMILIES = {
@@ -78,8 +79,8 @@ DEGENERATE_KEYS = {
 }
 
 
-def build_one(fam, cls_id, idx, out_dir, degenerate=False):
-    params, deriv = sample_variant(cls_id, idx)
+def build_one(fam, cls_id, idx, out_dir, degenerate=False, allow_identity=False):
+    params, deriv = sample_variant(cls_id, idx, allow_identity=allow_identity)
     if degenerate:  # R03 类拒收样本: 近扁平化 (z 向键同比 ×0.12), 几何仍合法可折叠
         keys = [k for k in DEGENERATE_KEYS.get(fam, ()) if params.get(k, 0) > 0]
         if not keys:
@@ -147,13 +148,54 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(ROOT / "output" / "pack10k_pilot"))
     ap.add_argument("--per-family", type=int, default=25)
+    ap.add_argument("--all-green", type=int, default=0,
+                    help="规模干跑: N 件遍历全部 GREEN 类 (身份回退采样, 多样性口径扣除)")
     args = ap.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
 
     rows = []
-    refusal_per_family = max(1, args.per_family // 12)  # ~8% 拒收先验样本
-    for fam, classes in FAMILIES.items():
+    allow_identity = args.all_green > 0
+    if allow_identity:
+        r0 = run_batch(out_dir=str(Path(args.out) / "_greenprobe"))
+        green = [x["class_id"] for x in (r0.get("rows") or []) if x["status"] == "GREEN"]
+        fam_map = {}
+        for c in green:
+            fam_map.setdefault(c.split("_")[0], []).append(c)
+        plan_fams = [(f, cs) for f, cs in sorted(fam_map.items())]
+        total = args.all_green
+        plan = [(plan_fams[i % len(plan_fams)][0], plan_fams[i % len(plan_fams)][1][i % len(plan_fams[i % len(plan_fams)][1])], i)
+                for i in range(total)]
+        refusal_per_family = 0
+    else:
+        refusal_per_family = max(1, args.per_family // 12)  # ~8% 拒收先验样本
+    iter_plan = plan if allow_identity else None
+    if allow_identity:
+        for fam, cls_id, i in plan:
+            asset_id = f"{fam}_{cls_id}_v{i:06d}"
+            row = {"asset_id": asset_id, "family": fam, "class_id": cls_id, "variant": i,
+                   "sample_set": "SCALE_DRYRUN"}
+            try:
+                res, params, deriv = build_one(fam, cls_id, i, out, degenerate=False, allow_identity=True)
+                row.update({"status": res["status"], "params": params, "derivation": deriv,
+                            "stage_ms": res.get("stage_ms"),
+                            "fail": res.get("fail") or res.get("validator", {}).get("reason"),
+                            "gates": res.get("gates", {}),
+                            "reconcile_ok": (res.get("reconcile") or {}).get("ok"),
+                            "reconcile_worst_mm": (res.get("reconcile") or {}).get("worst_diff_mm"),
+                            "validator_ok": (res.get("validator") or {}).get("ok"),
+                            "validator_checks": len((res.get("validator") or {}).get("checks", []))})
+                if res.get("status") == "GREEN":
+                    dims = res["analytic"]
+                    row["degeneracy"] = degeneracy_prior(dims)
+            except Exception as e:
+                row.update({"status": "ERROR", "fail": f"{type(e).__name__}: {str(e)[:220]}",
+                            "trace": traceback.format_exc()[-600:]})
+            rows.append(row)
+            if len(rows) % 500 == 0:
+                print(f"[{len(rows)}/{total}]", flush=True)
+    else:
+      for fam, classes in FAMILIES.items():
         n_normal = args.per_family - refusal_per_family
         plan = [(i, False) for i in range(n_normal)] + [(args.per_family + j, True) for j in range(refusal_per_family)]
         for i, degenerate in plan:
@@ -162,7 +204,7 @@ def main():
             row = {"asset_id": asset_id, "family": fam, "class_id": cls_id, "variant": i,
                    "sample_set": "REFUSAL_PRIOR" if degenerate else "MAIN"}
             try:
-                res, params, deriv = build_one(fam, cls_id, i, out, degenerate=degenerate)
+                res, params, deriv = build_one(fam, cls_id, i, out, degenerate=degenerate, allow_identity=allow_identity)
                 row.update({"status": res["status"], "params": params, "derivation": deriv,
                             "stage_ms": res.get("stage_ms"),
                             "fail": res.get("fail") or res.get("validator", {}).get("reason"),
