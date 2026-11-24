@@ -1,0 +1,164 @@
+{
+  "attempts": 10000,
+  "assets": 9386,
+  "yield_overall": 0.939,
+  "families": {
+    "aseptic": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "brick": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "clamp": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "clv": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "cone": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "crashlock": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "cup": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "dispenser": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "display": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "envelope": {
+      "attempts": 371,
+      "green": 371,
+      "yield": 1.0
+    },
+    "food": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "gable": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "handle": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "hanger": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "hexagonal": {
+      "attempts": 370,
+      "green": 287,
+      "yield": 0.776
+    },
+    "lockbottom": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "mailer": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "pillow": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "prism": {
+      "attempts": 370,
+      "green": 152,
+      "yield": 0.411
+    },
+    "pyramid": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "rsc": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "slide": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "tray": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "tube": {
+      "attempts": 370,
+      "green": 57,
+      "yield": 0.154
+    },
+    "tuck": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "two": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    },
+    "window": {
+      "attempts": 370,
+      "green": 370,
+      "yield": 1.0
+    }
+  },
+  "low_yield_families": {
+    "hexagonal": {
+      "attempts": 370,
+      "green": 287,
+      "yield": 0.776
+    },
+    "prism": {
+      "attempts": 370,
+      "green": 152,
+      "yield": 0.411
+    },
+    "tube": {
+      "attempts": 370,
+      "green": 57,
+      "yield": 0.154
+    }
+  },
+  "fail_reasons": {
+    "gate ['G04'] FAIL": 224,
+    "gate ['G03'] FAIL": 221,
+    "gate ['G03', 'G04'] FAIL": 169
+  }
+}
