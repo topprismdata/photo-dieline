@@ -59,20 +59,27 @@ def page_size(ir) -> tuple[float, float]:
 
 
 def cut_segments(ir) -> list[tuple[tuple[float, float], tuple[float, float]]]:
-    """全部非折线的面板边 (模板坐标): 相邻底板分界/粘口自由边必须裁开.
+    """全部裁切缝 (模板坐标): 面板边减去被折线共线覆盖的部分.
 
+    面板边与折线的端点不必逐点对应 — 模板可以在面板里插入共线分点 (例如提手缺口把顶缘断开)。
+    只要面板边 (或其一段) 被某条折线共线覆盖, 这一段就是铰链材料而不是裁切;
+    只有落在全部折线之外的部分才成为裁切缝 (相邻底板分界/粘口自由边必须裁开)。
     含净图外轮廓边; 页面几何里落在并集边界上的段由外轮廓多边形承担, 不重复输出。
     """
-    fold_keys = {tuple(sorted((tuple(e.seg_2d[0]), tuple(e.seg_2d[1])))) for e in ir.edges}
+    folds = [LineString([tuple(e.seg_2d[0]), tuple(e.seg_2d[1])]) for e in ir.edges]
+    folds = [f for f in folds if f.length > 1e-12]
+    fold_union = unary_union(folds) if folds else None
     out = []
     for p in ir.panels:
         poly = p["polygon_2d"]
         n = len(poly)
         for i in range(n):
-            a, b = tuple(poly[i]), tuple(poly[(i + 1) % n])
-            if tuple(sorted((a, b))) in fold_keys:
-                continue
-            out.append((a, b))
+            seg = LineString([tuple(poly[i]), tuple(poly[(i + 1) % n])])
+            rest = seg.difference(fold_union) if fold_union is not None else seg
+            for piece in (rest.geoms if hasattr(rest, "geoms") else [rest]):
+                if piece.length > 1e-9:
+                    cs = list(piece.coords)
+                    out.append((tuple(cs[0]), tuple(cs[-1])))
     return out
 
 
