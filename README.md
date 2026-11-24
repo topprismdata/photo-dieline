@@ -41,6 +41,20 @@
 
 **过门不等于可制造。** 全园 1591 条折线中 1066 条（67%）的 MOUNTAIN/VALLEY 标注与"以父面板正面为观察面"的约定不一致——除金标外，现有导出的两个压线图层语义不可信；另有 37 类粘口折回自身墙板（筒体不闭合）、2 类无底板，现有门检不出（findings F4-24…F4-28）。100 类中 39 类是同一家族按多边形边数派生的变体，尚未对齐 ECMA/FEFCO 编码。contact sheet 见 `docs/images/zoo100_contact_sheet.png`（绿 L2 / 橙 L1 / 红 L0）。
 
+## Pack10K-Retail：零售包装 simulation-ready OpenUSD 数据集产线（预览版 500 件）
+
+模板动物园之上的一条**数据集产线**（对标 NVIDIA USDCraft-10K，垂直域差异化）：
+参数化模板 × 种子化采样 → USD 导出（`/Asset`、Z-up、米制、PhysX 刚体+克重推导质量、净图 UV 印刷层）
+→ 逐件跑 [NVlabs/USDCraft 官方验证器](https://github.com/NVlabs/USDCraft)（Apache-2.0，10 项命名检查）
+→ SimReady 侧车（model.json / packaging.json / conformance / build.json 再生凭证）→ 深浅双缩略图。
+
+- **500 件预览集独立验收 VSR = 1.0**（验收器异源于生产门禁：水密性/退化/尺寸核账/物理字段，
+  `scripts/packbench_validator.py` — 首跑曾抓获导出未焊接盲区）
+- **全链非 CUDA**：CPU/Metal 可复现，几何段 73ms/件，API 成本 $0（USDCraft 单件 $0.851 / 4.9min）
+- **拒收先验集**入账（近退化参数 + 拓扑拒绝记录）+ 4 类 v1 几何限制排除（见覆盖矩阵 B2）
+- HF 打包器：`scripts/pack10k_export_hf.py`；证据链：`docs/reviews/pack10k_r1_verdict.md`、
+  `docs/pack10k_coverage_matrix.md`、`docs/measurement/r5_real_pilot_protocol*.md`（GUM 口径外部真值协议）
+
 ## 里程碑
 
 | 阶段 | 内容 | 状态 |
