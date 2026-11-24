@@ -25,9 +25,10 @@ FAMILY_COLORS = {
 }
 
 
-def draw_print_texture(ir, family, px_per_mm=4.0, net_bbox_mm=None):
+def draw_print_texture(ir, family, px_per_mm=4.0, net_bbox_mm=None, max_px=2048):
     """净图 → RGBA 纹理。返回 (PIL.Image, (x0, y0, w_mm, h_mm))。
-    uv 映射 (导出器侧): u = (x_mm - x0)/w_mm, v = 1 - (y_mm - y0)/h_mm (PIL y 向下)。"""
+    uv 映射 (导出器侧): u = (x_mm - x0)/w_mm, v = 1 - (y_mm - y0)/h_mm (PIL y 向下)。
+    分辨率上限: 长边 ≤ max_px (大净图 mailer/管筒 600×880mm@4px/mm = 2400×3520px 拖垮批产 → 统一钳制)。"""
     polys = []
     for pp in ir.panels:
         polys.append((pp["id"], pp["role"], [tuple(p) for p in pp["polygon_2d"]]))
@@ -35,6 +36,7 @@ def draw_print_texture(ir, family, px_per_mm=4.0, net_bbox_mm=None):
     x0 = min(p[0] for p in allpts); y0 = min(p[1] for p in allpts)
     x1 = max(p[0] for p in allpts); y1 = max(p[1] for p in allpts)
     w_mm, h_mm = x1 - x0, y1 - y0
+    px_per_mm = min(px_per_mm, max_px / max(w_mm, h_mm, 1.0))
     W, H = max(256, int(w_mm * px_per_mm)), max(256, int(h_mm * px_per_mm))
     img = Image.new("RGB", (W, H), BASE_COLOR.get("carton_board", (247, 245, 240)))
     d = ImageDraw.Draw(img)
