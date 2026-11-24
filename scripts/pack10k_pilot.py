@@ -111,7 +111,7 @@ def build_one(fam, cls_id, idx, out_dir, degenerate=False):
     folded = {k: float(solid[:, i].max() - solid[:, i].min()) for i, k in enumerate("WDH")}
     analytic = mod.analytic_bbox(params)
 
-    asset_id = f"{fam}_{cls_id}_v{idx:04d}"
+    asset_id = f"{fam}_{cls_id}_v{idx:04d}" + ("_dg" if degenerate else "")
     a_dir = Path(out_dir) / asset_id
     ev = export_usdc(ir, a_dir / "model.usdc", kind="carton_board", family=fam)
     sdims = stage_dims_m(a_dir / "model.usdc")
