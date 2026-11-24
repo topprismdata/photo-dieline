@@ -53,6 +53,10 @@ def sample_variant(cls_id: str, variant_index: int, scale_range=(0.8, 1.25), all
                 p[k] = round(v * s, 3)
                 scaled.append(k)
         if len(scaled) < 2:
+            if allow_identity:
+                mod.validate_params(base)
+                return dict(base), {"scale": 1.0, "scaled_keys": [], "seed": seed_from(cls_id, variant_index),
+                                    "no_scaling_coverage": True}
             raise ValueError(f"{cls_id}: 可缩放键不足 ({scaled}) — 检查 SCALABLE_KEYS")
         try:
             mod.validate_params(p)
