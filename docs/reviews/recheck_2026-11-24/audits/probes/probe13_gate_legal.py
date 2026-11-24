@@ -61,7 +61,8 @@ if "G02" in gids and g02 == "FAIL":
     fails.append(("dispatch", "cuboid G02 误触", st))
 
 print("\n判定:", "ALL PASS" if not fails else f"{len(fails)} 项失败: {fails}")
-# 已知近边界发现 (非失败, 记录在案): gap=2Ef−ε 在声明域内合法, 但 lean→90° 时鳍高→0 (退化形体),
-# 会触发非 G02 的门 → DRAFT。域声明与门行为不一致: 建议域加 lean 上限 (如 ≤75°, 即 gap ≤ 1.63·Ef)。
-# 下一轮域契约变更时处理, 不在本轮静默改 (G02 条款已经 R3 签署)。
+# 已知近边界发现 (非失败, 记录在案): gap=2Ef-ε 在声明域内合法, 但 lean->90° 时?高->0 (退化形体),
+# 会触发非 G02 的门 -> DRAFT。域声明与门行为不一致: 建议域加 lean 上限 (勘误: 初稿写 gap≤1.63·Ef 系笔误,
+# DOM-01 核对 lean=asin(gap/2Ef) ⇒ 75° ⇔ gap ≤ 2·sin75°·Ef = 1.9319·Ef; 且 R4 咨询裁决 75° 不入 D0,
+# 落 D1 测量有效域, 见 §5.11/DOM-02)。
 print("PROBE13_DONE")

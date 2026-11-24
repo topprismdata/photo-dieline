@@ -361,3 +361,21 @@ b_j 落在参数化子空间内的能量占比 **[1.0, 1.0, 1.0, 1.0]**, 最小�
 **B06 状态 (按 GPT 判据)**: 三通道 NEGATIVE RESULT ACCEPTED + 机理解释 SUPPORTED (P4-A/B 补证) +
 风险门禁 MITIGATED (P4-D 双率) + 自动测量能力 NOT RESOLVED (corr 场景) → **研究任务允许 CLOSED**
 (结论范围限定措辞已采纳)。P4-C 负结果 + 双率表随 R4 咨询回执一并送达 GPT 复核。
+
+### 5.11 R4 咨询裁决与收口 (第五批; 会话 6b05b414, 全文另存 gpt/round4_consult_B06.md)
+
+自拟四问咨询 (P4 结果发出前)。**最终裁决书**: B06 三通道 ACCEPTED / 机理普遍性 CONDITIONAL /
+"风险完全解决" REJECTED / lean≤75° 入 D0 **REJECTED** / **分层域契约 APPROVED** / R4 基线冻结
+(补证完成后) / 真实 Pilot APPROVED WITH CONDITIONS / ESR V0.1 研究 APPROVED / 通用有效性 NOT VALIDATED。
+
+- **DOM-01 (公式核对)**: 引擎公式 lean=asin(gap/(2Ef)) 与咨询假设一致; **75° ⇔ gap≤1.9319·Ef**;
+  §5.7 初稿 "1.63·Ef" 系笔误 (对应 54.6°), 已在 probe13 注释勘误。
+- **DOM-02 (三层域契约, 已实现)**: D0 数学域不动; **D1 测量有效域** lean≤75° 进测量层
+  (`_gable_measurement_domain`, 违规→INSUFFICIENT_PRECISION 转人工); D2=交付门不变。测试 78 passed。
+- **R5-PROTOCOL (已冻结 v0.1)**: `docs/measurement/r5_real_pilot_protocol.md` —
+  P01–P08 八项补强全收 (实物 R01–R05 风险分层 / 关键面可见性 / 双人独立采点 / 真尺 u_ref /
+  调参禁令 / 受控对照 A–F 组 / 失败样本 / 产物核验), 结论口径限"工作流可行性" (5 件零失败上界 45%)。
+- **ESR-V01**: `docs/esr/ESR-measurement-v0.1.md` — 继承映射 (GUM/NASA-STD-7009/ASME VVUQ) +
+  L0–L7 架构 + 双率制度 (C_auto/R_auto) + inverse-crime 禁令 + C01–C06 挑战应对;
+  第二垂直实例定为**货架空间测量** (OpenUSD), 规范先于其实例冻结。
+- 咨询纠正两条: "27→1 不独立证明检测能力" → P4-D 双率补上; "一切残差基通道"未限定措辞 → 已改范围限定版。
