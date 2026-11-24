@@ -35,6 +35,15 @@
     "width_px": 2100,
     "height_px": 1500
   },
+  "input_usage": {
+    "photo_provided": true,
+    "photo_used_for_dimensions": false,
+    "dimension_source": "spec.params + spec.measurements (MEASURED / VERIFIED_SOURCE 优先)"
+  },
+  "manufacturing_constraints": {
+    "status": "NOT_ASSESSED",
+    "note": "VALIDATED 只表示数值几何门通过, 不等于可制造; 工艺约束须有来源、适用材料与阈值后方可评估"
+  },
   "gates": [
     {
       "id": "G01",
@@ -59,7 +68,8 @@
           "edges",
           "features"
         ],
-        "template": "gable_top"
+        "template": "gable_top",
+        "param_domain": "PASS"
       },
       "detail": ""
     },
@@ -90,6 +100,7 @@
           "n_mismatch": 0,
           "n_undetermined": 0
         },
+        "n_hinge_off": 0,
         "slopeB.ridge.L == wallL.apex": 0.0,
         "slopeF.ridge.L == wallR.apex": 0.0,
         "slopeB.ridge.R == wallR.apex": 0.0,
@@ -128,7 +139,14 @@
       "name": "no_interpenetration",
       "status": "PASS",
       "metrics": {
-        "checked_pairs": 78
+        "checked_pairs": 58,
+        "skipped_pairs": {
+          "allowed_overlap": 4,
+          "share_fold": 12,
+          "flap_flap": 4
+        },
+        "total_pairs": 78,
+        "contact_tol_mm": 0.2
       },
       "detail": ""
     },
@@ -220,6 +238,7 @@
   ],
   "tolerances": {
     "fold_closure_mm": 0.2,
-    "golden_mm": 0.5
+    "golden_mm": 0.5,
+    "contact_mm": 0.2
   }
 }

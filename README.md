@@ -19,7 +19,7 @@
 2. **证据分级**：实测 > 可信来源 > 约束推导 > 模型推断 > 默认值；模型值永不覆盖实测（ADR-003）。
 3. **三态交付**：DRAFT → VALIDATED（数值 QA 全过）→ PRINT-READY（印厂人工签核）；系统不得自动升级（ADR-008）。
 
-## 模板动物园（100 类注册：L2 折叠有效 1 · L1 展开几何有效 83 · L0 仅已注册 16）
+## 模板动物园（100 类注册：L2 折叠运动学有效 1 · L1 展开几何有效 83 · L0 仅已注册 16）
 
 | 家族（29） | 类数 | 代表拓扑 |
 |---|---|---|
@@ -45,7 +45,7 @@
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
-| **M1** | gable-top 屋顶包垂直切片：照片+三尺寸 → Geometry IR → 自研 2D 布局 → 1:1 分层 SVG/PDF → 纯 Python 折叠 QA（十门） | ✅ **VALIDATED**（2026-11-24 复查修复后重验：十门为独立解析核对 + 手算金标对账 + 49 项测试含变异矩阵回放；模板成熟度 L2） |
+| **M1** | gable-top 屋顶包垂直切片：照片+三尺寸 → Geometry IR → 自研 2D 布局 → 1:1 分层 SVG/PDF → 纯 Python 折叠 QA（十门） | ✅ **VALIDATED**（2026-11-24 复查修复后重验：十门为独立解析核对 + 手算金标对账 + 70 项测试含变异矩阵回放；模板成熟度 L2_KINEMATIC） |
 | M2 | 模板库扩展（FEFCO 0201）＋ **Twins Data Engine**（合成孪生数据飞轮）＋ T1 箱型分类 / T2 参数回归 | 模板动物园 100 类（成熟度 L2 1 / L1 83 / L0 16）；TDE v0.8；T1/T2 **仅合成域结果**（分类 top-1 71.1%；比例回归相对误差 5.4–5.8%），真实照片上未达可用（findings F2-01…F2-10） |
 | M2.5 | 货架孪生渲染 + ESR 资产样例（`scripts/build_hxl_shelf.py` 与三门脚本） | **实验性，建议迁出本仓**：资产层与验收报告在复查中发现失效（findings F4-04…F4-09） |
 | M3 | TRELLIS.2 视觉辅证 · 智能补参交互 · 端到端候选 IR 研究 | 规划 |
@@ -55,7 +55,8 @@
 ```bash
 pip install -e ".[dev]"
 
-# 一条命令: 照片 + 实测尺寸 → IR / 1:1 分层 SVG / 分层 PDF / QA 报告
+# 一条命令: 规格 (+可选照片证据) → IR / 1:1 分层 SVG / 分层 PDF / QA 报告
+# 尺寸全部来自 spec (实测/可信来源优先于参数, 矛盾即拒绝); 照片只作证据存证 (qa-report input_usage 如实声明)
 # 仓内自带公版参照照 (USDA PD): 也可换成你自己的实拍
 photo-dieline build --spec examples/gable_top/spec.json \
   --photo examples/gable_top/reference_photo.jpg --out examples/gable_top/artifacts
@@ -67,7 +68,10 @@ photo-dieline render --ir examples/gable_top/artifacts/geometry-ir.json \
   --photo examples/gable_top/reference_photo.jpg \
   --out examples/gable_top/artifacts/compare_usda.png
 
-pytest tests/   # 49 项机器验收 (含负探针与变异矩阵: 坏交付物/坏折叠必须被对应门拒绝)
+pytest tests/   # 70 项机器验收 (含负探针、变异矩阵回放、模板适用域边界、测量合同)
+
+# 可选: B0 参数化测量 (单视角标注关键点 + 内参 + 一条实测边 → 绝对尺寸, 比例 MAE ≈ CNN 的 1/7)
+pip install -e ".[measure]"; 详见 src/photo_dieline/measurement/solve.py 与 docs/reviews/recheck_2026-11-24/findings.md §5.4
 ```
 
 输出 `artifacts/`：`geometry-ir.json`（五对象协议）· `dieline.svg` · `dieline.pdf`（7 图层 OCGroups）·
