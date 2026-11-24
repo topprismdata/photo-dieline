@@ -349,7 +349,7 @@ def _build_mailer(p):
 def _build_divided3(p):
     W, D, H, xt = float(p["W"]), float(p["D"]), float(p["H"]), float(p["xt"])
     panels = [
-        _poly("floor", "wall", [(W, D), (0, D), (0, 0), (xt, 0), (W, 0), (xt, D)]),
+        _poly("floor", "wall", [(0, 0), (xt, 0), (W, 0), (W, D), (xt, D), (0, D)]),
         _rect("wF", "wall", 0.0, -H, W, 0.0),
         _rect("wB", "wall", 0.0, D, W, D + H),
         _rect("wL", "wall", -H, 0.0, 0.0, D),

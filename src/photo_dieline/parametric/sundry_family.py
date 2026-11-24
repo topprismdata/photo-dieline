@@ -166,7 +166,8 @@ def _build_cup(p):
                                            T[k + 1] + hd * um, T[k] + hd * um])})
         panels.append({"id": f"hemB{k}", "role": "flap",
                        "polygon_2d": _pts([B[k], B[k + 1],
-                                           B[k + 1] + hd * um, B[k] + hd * um])})
+                                           B[k + 1] - hd * u(k + 1),
+                                           B[k] - hd * u(k)])})
     # 搭接粘缝: 附末墙自由侧棱, 180° 反贴 w0 内侧
     q = np.array([-math.sin(phi(n)), math.cos(phi(n))])
     panels.append({"id": "glue", "role": "glue",
