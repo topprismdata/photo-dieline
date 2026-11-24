@@ -140,11 +140,13 @@ def observe(model, p, cam, fx, res=RES):
     return idx, uv[idx], eye
 
 
-def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, noise_px=1.0):
+def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, noise_px=1.0, extra_views=None, free_fx=False):
     """联合拟合: 未锚定的包装参数 + 相机 (注视点 3, 方位, 俯仰, 滚转, 眼距)。
     anchors: {参数名: 实测值 mm} (尺度锚定, 与待估参数严格分开)。多起点 (方位 × 俯仰), 取代价最低解。
     free_fin_gap: gable 的 fin_gap_mm 改为自由参数 (先验消融; 无锚点时应重新暴露绝对尺度自由度)。
     noise_px: 关键点噪声假设 (参数级误差棒的 σ 缩放)。
+ extra_views: [(obs_idx, obs_uv, fx), ...] 附加视角; 参数跨视角共享, 位姿逐视角独立。
+ free_fx: 附加一个共享焦距乘数 s (B0-B"部分未知内参"; s 与眼距耦合, 会进入 Schur 位姿块被边缘化)。
 
     R3 WP1 合同 (round3_verdict.md §2):
     - scale_source: MEASURED_ANCHOR (有实测边) / TEMPLATE_PRIOR_ANCHOR (gable 隐含 fin_gap=3mm 绝对先验,
@@ -164,6 +166,8 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
     names = [n for n in pnames if n not in anchors]
     if free_fin_gap and model is MODELS["gable_top"] and "fin_gap_mm" not in names:
         names = names + ["fin_gap_mm"]
+    views = [(obs_idx, obs_uv, fx)] + [tuple(v) for v in (extra_views or [])]
+    nv = len(views)
 
     def params(theta):
         q = {k: DEFAULTS[k] for k in ("W", "D", "Hb", "Hr", "Ef", "H")}
@@ -174,19 +178,31 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
         return q
 
     def resid(x):
+        s = x[-1] if free_fx else 1.0
         P, c = model["kp"](params(x[:len(names)]))
-        eye = eye_pos(x[len(names):len(names) + 3], x[-4], x[-3], x[-1])
-        uv = project(to_world(P, c)[obs_idx], eye, x[-4], x[-3], x[-2], fx)
-        return (uv - obs_uv).ravel()
+        Pw = to_world(P, c)
+        out = []
+        for v, (idx, uv, f) in enumerate(views):
+            o = len(names) + 7 * v
+            eye = eye_pos(x[o:o + 3], x[o + 3], x[o + 4], x[o + 6])
+            out.append((project(Pw[idx], eye, x[o + 3], x[o + 4], x[o + 5], f * s) - uv).ravel())
+        return np.concatenate(out)
 
-    lo = np.array([0.5 if n == "fin_gap_mm" else 8.0 for n in names] + [-0.6, -0.6, -0.6, 0.0, -0.35, -0.8, 0.03])
-    hi = np.array([10.0 if n == "fin_gap_mm" else 500.0 for n in names] + [0.6, 0.6, 0.6, 2 * math.pi, 1.35, 0.8, 6.0])
+    pose_lo = [-0.6, -0.6, -0.6, 0.0, -0.35, -0.8, 0.03]
+    pose_hi = [0.6, 0.6, 0.6, 2 * math.pi, 1.35, 0.8, 6.0]
+    lo = np.array([0.5 if n == "fin_gap_mm" else 8.0 for n in names] + pose_lo * nv + ([0.5] if free_fx else []))
+    hi = np.array([10.0 if n == "fin_gap_mm" else 500.0 for n in names] + pose_hi * nv + ([2.0] if free_fx else []))
     th0 = np.array([DEFAULTS[n] for n in names])
     c0 = model["kp"](params(th0))[1] / 1000.0
     sols = []
     for k in range(n_az):
         for el0 in (0.15, 0.55):
-            x0 = np.concatenate([th0, c0, [2 * math.pi * k / n_az, el0, 0.0, d0]])
+            x0 = list(th0)
+            for v in range(nv):
+                x0 += [c0[0], c0[1], c0[2], 2 * math.pi * k / n_az + 0.9 * v, el0, 0.0, d0]
+            if free_fx:
+                x0 += [1.0]
+            x0 = np.array(x0)
             try:
                 r = least_squares(resid, np.clip(x0, lo + 1e-6, hi - 1e-6), bounds=(lo, hi), loss="soft_l1", f_scale=2.0, max_nfev=300)
             except Exception:
@@ -200,7 +216,7 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
                    and any(abs(r.x[i] - best.x[i]) > 1.0 for i in range(len(names))))
     # 可辨识性: 见模块 docstring 合同 3
     n = len(names)
-    scale = np.abs(best.x) + np.array([10.0] * n + [0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1])
+    scale = np.abs(best.x) + np.array([10.0] * n + [0.1, 0.1, 0.1, 1.0, 1.0, 1.0, 0.1] * nv + ([1.0] if free_fx else []))
     Jn = best.jac / scale
     H = Jn.T @ Jn
     Htt, Htp, Hpp = H[:n, :n], H[:n, n:], H[n:, n:]
@@ -230,8 +246,12 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
         delivery = "MANUFACTURING_DIMENSIONS"
     sv = np.linalg.svd(Jn, compute_uv=False)
     return {"ok": True, "theta": theta, "anchors": dict(anchors),
-            "cam": {"T": best.x[n:n + 3].tolist(), "az": float(best.x[-4]), "el": float(best.x[-3]),
-                    "roll": float(best.x[-2]), "d_eye": float(best.x[-1])},
+            "cam": {"T": best.x[n:n + 3].tolist(), "az": float(best.x[n + 3]), "el": float(best.x[n + 4]),
+                    "roll": float(best.x[n + 5]), "d_eye": float(best.x[n + 6]),
+                    "fx_scale": float(best.x[-1]) if free_fx else 1.0},
+            "cams": [{"T": best.x[n + 7 * v:n + 7 * v + 3].tolist(), "az": float(best.x[n + 7 * v + 3]),
+                      "el": float(best.x[n + 7 * v + 4]), "roll": float(best.x[n + 7 * v + 5]),
+                      "d_eye": float(best.x[n + 7 * v + 6])} for v in range(nv)],
             "rms_px": float(math.sqrt(np.mean(best.fun ** 2) / 2)), "cost": float(best.cost),
             "cond": float(sv[0] / sv[-1]) if sv[-1] > 0 else float("inf"),
             "cond_theta": cond_theta, "identifiable": level != "UNIDENTIFIABLE",

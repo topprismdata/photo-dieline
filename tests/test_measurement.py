@@ -98,3 +98,26 @@ def test_sigma_bars_finite_positive_and_honest():
             covered += abs(th[k] - GABLE_PARAMS[k]) <= 2 * s
             total += 1
     assert covered >= 0.8 * total, covered  # 名义 95%, 小样本放宽到 80% 下限
+
+
+def test_multiview_and_free_fx_contract():
+    """B0-B 前置合同: 多视角联合拟合 (参数共享/位姿逐视角) + 共享焦距乘数恢复。"""
+    gab = MODELS["gable_top"]
+    idx, uv, _ = observe(gab, GABLE_PARAMS, _gable_cam(), FX)
+    extra = []
+    for az, el, roll, d in ((140, 10, 3, 0.75), (270, 30, 0, 0.90)):
+        c = {"az": math.radians(az), "el": math.radians(el), "roll": math.radians(roll), "d_eye": d}
+        i2, u2, _ = observe(gab, GABLE_PARAMS, c, FX)
+        extra.append((i2, u2, FX))
+    r = solve(gab, idx, uv, FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8, extra_views=extra)
+    assert r["ok"] and len(r["cams"]) == 3
+    th = {**r["anchors"], **r["theta"]}
+    for k in ("W", "D"):
+        assert abs(th[k] - GABLE_PARAMS[k]) < 3.0, (k, th[k])
+
+    # 部分未知内参: 渲染 fx×1.05, 求解名义 fx + 共享乘数 → s 须恢复 1.05 且尺寸不歪
+    i3, u3, _ = observe(gab, GABLE_PARAMS, _gable_cam(), FX * 1.05)
+    r = solve(gab, i3, u3, FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8, free_fx=True)
+    assert abs(r["cam"]["fx_scale"] - 1.05) < 0.05
+    th = {**r["anchors"], **r["theta"]}
+    assert abs(th["W"] - GABLE_PARAMS["W"]) < 3.0
