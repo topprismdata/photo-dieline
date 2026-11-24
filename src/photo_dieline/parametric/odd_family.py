@@ -132,9 +132,11 @@ def _frustum_build(params: dict, cls_id: str) -> dict:
 
     panels = [{"id": f"w{k}", "role": "wall",
                "polygon_2d": _pts([B[k], B[k + 1], T[k + 1], T[k]])} for k in range(n)]
-    # 顶盖三角片: 底边 = 顶弦(长 st), 尖点折入深 = a_t → 世界尖点 = 顶面中心
+    # 顶盖三角片: 底边 = 顶弦(长 st), 尖点折入深 = a_t → 世界尖点 = 顶面中心。
+    # 净图放置: 墙体占据顶弦外侧 (扇形 lt→lb), tf 必须内放 (朝顶心) 否则 G03 自压
+    # (同款修: fan_net_ext.py line 142, 2026-11-25)
     for k in range(n):
-        Fk = (T[k] + T[k + 1]) / 2.0 + a_t * u(k + 0.5)
+        Fk = (T[k] + T[k + 1]) / 2.0 - a_t * u(k + 0.5)
         panels.append({"id": f"tf{k}", "role": "flap",
                        "polygon_2d": _pts([T[k], T[k + 1], Fk])})
 
