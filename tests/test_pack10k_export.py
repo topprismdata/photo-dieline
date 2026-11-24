@@ -59,7 +59,8 @@ def test_export_roundtrip(tmp_path: Path):
     dims = stage_dims_m(tmp_path / "model.usdc")
     assert all(d > 0 for d in dims)
     m = UsdPhysics.MassAPI(stage.GetPrimAtPath("/Asset/Body"))
-    assert m.GetMassAttr().Get() == pytest.approx(ev["mass_kg"], rel=1e-9)
+    # USD mass 属性是 float32 — roundtrip 容差 1e-6 (全精度值在 model.json/manifest)
+    assert m.GetMassAttr().Get() == pytest.approx(ev["mass_kg"], rel=1e-6)
 
 
 def test_reconcile_exact_and_fail():
