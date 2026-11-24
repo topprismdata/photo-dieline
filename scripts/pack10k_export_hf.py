@@ -58,8 +58,7 @@ def main():
     shutil.copy2(src / "independent_vsr.json", dst / "independent_vsr.json")
 
     card = f"""---
-license: other
-license_name: topprism-noncommercial-preview
+license: cc-by-4.0
 task_categories:
 - robotics
 - computer-vision
@@ -107,7 +106,7 @@ rigid/<family>/<asset_id>/
     print(f"HF 树组装完成: {copied} 资产 → {dst}")
     n_refusal_assets = n_refusal - 2
     print(f"  主集 {n_main} + 拒收先验 {n_refusal} ({n_refusal_assets} 带资产 + 2 拓扑拒绝记录) · VSR {vsr.get('vsr')}")
-    print(f"  上传: hf upload 大文件协议, 仓库 <org>/pack10k-retail-preview (用户 token)")
+    print(f"  上传: hf upload → hyperion911/pack10k-retail-preview")
 
 
 if __name__ == "__main__":
