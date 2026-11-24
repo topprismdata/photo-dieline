@@ -339,9 +339,11 @@ def _build_pail(p):
         d_f = float(np.linalg.norm(w - float(np.dot(w, c3)) * c3))  # 到铰线距离
         c2 = _unit(T[k + 1] - T[k])                   # 网弦向
         uo = u_mid(k)                                 # 网径向 (锥顶->外)
-        Fk0 = T[k] + a_k * c2 + d_f * uo
+        # 净图放置: 墙体占据顶弦外侧 (扇形 lt→lb), tf 必须内放 (朝锥顶) 否则 G03 自压
+        # (同款修: fan_net_ext.py line 142 / odd_family.py line 139, 2026-11-25)
+        Fk0 = T[k] + a_k * c2 - d_f * uo
         Fk1 = T[k + 1] + (float(np.dot(vs[(k + 1) % n] - vt[(k + 1) % n],
-                                              c3)) * c2 + d_f * uo)
+                                              c3)) * c2 - d_f * uo)
         F_far[k] = (Fk0, Fk1)
         panels.append(_poly(f"tf{k}", "slope", [T[k], T[k + 1], Fk1, Fk0]))
         hm3 = (vt[k] + vt[(k + 1) % n]) / 2.0
@@ -364,7 +366,7 @@ def _build_pail(p):
             aj = float(np.dot(wj, c3))
             dj = float(np.linalg.norm(wj - aj * c3))
             base = F_far[k][0] if j == k else F_far[k][1]
-            Wn[j] = base + aj * c2 + dj * uo
+            Wn[j] = base + aj * c2 - dj * uo           # 随 tf 内放, 翼体续向锥顶侧
         panels.append(_poly(f"wg{k}", "flap",
                             [F_far[k][0], F_far[k][1], Wn[k + 1], Wn[k]]))
         vsm = (vs[k] + vs[k + 1]) / 2.0
@@ -377,7 +379,7 @@ def _build_pail(p):
                         [T[n], B[n], B[n] + gw * q, T[n] + gw * q]))
     axis0 = vb[0] - vt[0]
     in_w0 = (vb[0] + vb[1] + vt[1] + vt[0]) / 4.0 - (vb[0] + vt[0]) / 2.0
-    in_w0 = in_w0 - float(np.dot(in_w0, axis0)) * axis0
+    in_w0 = in_w0 - float(np.dot(in_w0, axis0) / float(np.dot(axis0, axis0))) * axis0
     edges.append(_fold("e_glue", T[n], B[n], f"w{n-1}", "glue", _unit(in_w0),
                        "MOUNTAIN"))
 
@@ -655,18 +657,21 @@ def _build_sushi(p):
                        "MOUNTAIN"))
     # --- web 工艺条: 铰链于 w4 (背墙) 顶缘, 平折向后 (分离拓扑, two_piece 同款)
     uvs = _offset_poly(vs, c)
-    uns = _octo_normals(uvs)
     x4e, x5e = W / 2.0 - (W - 2 * ch) / 2.0, W / 2.0 + (W - 2 * ch) / 2.0
     yw = D + H
     yf2 = yw + webw                       # 盖后墙 L0 底缘网 y
-    yfl = yf2 + Hl                        # 盖盘底网 y (背缘)
+    yfl = yf2 + Hl                        # 盖盘底背缘网 y (LB 远缘铰链线)
     panels.append(_rect("web", "flap", x4e, yw, x5e, yf2))
     edges.append(_fold("e_web", (vs[4][0], yw), (vs[5][0], yw), "w4", "web",
                        (0.0, 1.0, 0.0), "MOUNTAIN"))
-    # 盖盘底 = 托底外偏置 c, 平移至 web 后方 (背缘网 y = yfl)
+    # 盖盘底 = 托底外偏置 c, 背缘铰链于 LB 远缘 (网 y = yfl), 盘体向后镜像展开。
+    # 平移放置会把盘体压回托网 (G03 自压); LB 面片全等锁定背缘位置, 铰链边不动
+    # 唯一的自由放置 = 沿铰线镜像 (引擎对镜像不敏感, 3D 落位不变)
     shift = yfl - float(uvs[4][1])
-    uv = [np.array([q[0], q[1] + shift]) for q in uvs]
+    uv = [np.array([q[0], 2.0 * yfl - (q[1] + shift)]) for q in uvs]
     panels.append(_poly("lfloor", "wall", uv))
+    # uv 镜像后绕序反转 (CW), 外法线 = 内法线取反
+    uns = [np.array([-n[0], -n[1]]) for n in _octo_normals(uv)]
     # 盖后墙 LB (梯形: 底缘 = web 远缘, 顶缘 = 盘底背缘), 上升
     panels.append(_poly("LB", "wall", [(x4e, yf2), (x5e, yf2), uv[4], uv[5]]))
     edges += [
@@ -693,7 +698,11 @@ def _build_sushi(p):
     A2 = uv[0] + (Hl / 2.0) * uns[7]
     B2 = uv[0] + Hl * uns[7]
     t02 = _unit(uv[1] - uv[0])
-    panels.append(_poly("lglue", "glue", [A2, B2, B2 + gw * t02, A2 + gw * t02]))
+    # 伸入 L7/L0 端棱间空楔 (外法线角平分向; ±t02 均会压邻墙净图带,
+    # tray_6corner 粘口空楔同款思路)
+    wgt = _unit(uns[7] + uns[0])
+    panels.append(_poly("lglue", "glue",
+                        [A2, B2, B2 + gw * wgt, A2 + gw * wgt]))
     edges.append(_fold("e_lglue", A2, B2, "L7", "lglue",
                        (float(t02[0]), float(t02[1]), 0.0), "MOUNTAIN"))
     notes = (f"sushi_tray: 寿司托 (分离式两件拓扑, 网内 web 条 {webw:g}mm 相连供整版) "
@@ -777,11 +786,12 @@ def _build_liner(p):
         panels.append(_poly(f"c{i}", "flap", [A, Bp, Bp + gw * m, A + gw * m]))
         edges.append(_fold(f"e_c{i}", A, Bp, f"w{i}", f"c{i}",
                            (*tangent[j], 0.0), "MOUNTAIN"))
-    # 粘口: w5 端棱上半段, 折合 w0 内面
+    # 粘口: w5 端棱上半段, 折合 w0 内面; 净图伸 +t5 空楔 (避开 w0 净图带,
+    # tray_6corner 同款 — 伸 +t0 会切进 w0 带 ~0.3mm²)
     A = vs[0] + (H / 2.0) * outward[5]
     Bp = vs[0] + H * outward[5]
     panels.append(_poly("glue", "glue",
-                        [A, Bp, Bp + gw * tangent[0], A + gw * tangent[0]]))
+                        [A, Bp, Bp + gw * tangent[5], A + gw * tangent[5]]))
     edges.append(_fold("e_glue", A, Bp, "w5", "glue",
                        (*tangent[0], 0.0), "MOUNTAIN"))
     # 防尘翻缘 f0..f5: 铰链 = 墙顶缘, 对角平分斜缘 (刚体展开 congruence),
@@ -806,9 +816,13 @@ def _build_liner(p):
         fr = vs[j] + hem * bis[j]
         fmid = (fl + fr) / 2.0
         hmid = (hl + hr) / 2.0
+        # 折向声明合同: tdir 须为单位向量且 ⊥ 世界铰链轴 (轴 = 墙顶缘方向,
+        # R_STAR 星形网下 = 净图铰线方向); 引擎本就投影, 显式化后 G04 折向门可核
+        d3 = np.array([float((fmid - hmid)[0]), float((fmid - hmid)[1]), 0.0])
+        ax3 = _unit(np.array([float((hr - hl)[0]), float((hr - hl)[1]), 0.0]))
+        d3 = d3 - float(d3 @ ax3) * ax3
         edges.append(_fold(f"e_f{i}", hl, hr, f"w{i}" if i < 5 else "w5", f"f{i}",
-                           (float((fmid - hmid)[0]), float((fmid - hmid)[1]), 0.0),
-                           "MOUNTAIN"))
+                           _unit(d3), "MOUNTAIN"))
     notes = (f"tray_liner: 托盘内衬 (单件连体拓扑) — 六角浅盘 (边长 {side:g}, 浅深 "
              f"{H:g}) + 5 角片 + 粘口 (tray_6corner 同款) + 防尘翻缘 6 片沿棱折链 "
              f"(内折深 {hem:g}, 对角平分斜缘拼接成环, 相邻翻缘角点互抵)")
