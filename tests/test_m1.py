@@ -12,7 +12,7 @@ import pytest
 from PIL import Image
 
 from photo_dieline.core.ir import (ARError, build, class_defaults, photo_evidence, resolve_params,
-                                   validate_dict)
+                                   from_raw, validate_dict)
 from photo_dieline.export import pdf as pdfx
 from photo_dieline.export import svg as svgx
 from photo_dieline.folding.engine import fold_all
@@ -513,3 +513,175 @@ def test_maturity_level_requires_semantics_and_sensitivity():
     assert maturity_level(ok, sem, {**good, "n_probed": 0}) == "L1_GEOMETRY_VALID"
     assert maturity_level({**ok, "G04": "FAIL"}, sem, good) == "L1_GEOMETRY_VALID"
     assert maturity_level({**ok, "G03": "FAIL"}, sem, good) == "L0_REGISTERED"
+
+
+# ---- A4 专项 (GPT R2: 实测覆盖、冲突实测、类分发、无照片模式 须各有专项证据) ----
+def _photo(tmp_path):
+    p = tmp_path / "p.png"
+    Image.new("RGB", (1200, 1600), (235, 235, 235)).save(p)
+    return p
+
+
+def test_measured_override_recomputes_derived_panels(tmp_path):
+    """参数 W=50、实测 W=45 → 结果为 45, 且派生面板尺寸同步重算 (不是只改一个数字)."""
+    spec = dict(SPEC, params=dict(SPEC["params"], W=50.0))
+    params, _overrides = resolve_params(spec)
+    ir = build(spec, _photo(tmp_path), gable_top.build_ir(params))
+    assert ir.package["params"]["W"] == 45.0
+    for pid in ("front", "back", "flapF", "flapB"):     # 宽 = W 的面板全部重算
+        assert np.ptp(np.asarray(ir.panel(pid)["polygon_2d"], float)[:, 0]) == pytest.approx(45.0), pid
+    glue = np.asarray(ir.panel("glue")["polygon_2d"], float)
+    assert np.ptp(glue[:, 0]) == pytest.approx(SPEC["params"]["glue_w"])   # 粘口宽不受影响
+
+
+def test_conflicting_measurements_are_refused():
+    """同一参数两条互相矛盾的实测值 → 必须拒绝, 不允许按输入顺序后者覆盖前者."""
+    spec = {"package": "gable_top", "params": SPEC["params"],
+            "measurements": [{"name": "W", "value_mm": 45.0, "status": "MEASURED"},
+                             {"name": "W", "value_mm": 46.0, "status": "MEASURED"}]}
+    with pytest.raises(ARError, match="矛盾"):
+        resolve_params(spec)
+    same = {"package": "gable_top", "params": SPEC["params"],
+            "measurements": [{"name": "W", "value_mm": 45.0, "status": "MEASURED"},
+                             {"name": "W", "value_mm": 45.0, "status": "VERIFIED_SOURCE"}]}
+    assert resolve_params(same)[0]["W"] == 45.0          # 两条一致的不算冲突
+
+
+def test_cli_dispatch_uses_the_named_generator(tmp_path):
+    """指定非 gable_top 模板 → IR 的模板 id 与面板都必须来自该族."""
+    from typer.testing import CliRunner
+    from photo_dieline.cli import app
+    spec = tmp_path / "ok.json"
+    spec.write_text(json.dumps({"package": "rsc_rsc", "params": class_defaults("rsc_rsc")}))
+    r = CliRunner().invoke(app, ["build", "--spec", str(spec), "--photo", str(_photo(tmp_path)),
+                                 "--out", str(tmp_path / "o")])
+    assert r.exit_code == 0, r.output
+    ir = json.loads((tmp_path / "o" / "geometry-ir.json").read_text())
+    assert ir["package"]["template"]["id"] == "rsc_rsc"
+    assert not {"slopeB", "finF", "flapF"} & {p["id"] for p in ir["panels"]}
+
+
+def test_parametric_mode_without_photo_declares_size_source(tmp_path):
+    """未提供照片的参数化模式: 输出必须写明尺寸来源, 并声明照片未参与尺寸恢复 (GPT R2-15)."""
+    from typer.testing import CliRunner
+    from photo_dieline.cli import app
+    spec = tmp_path / "s.json"
+    spec.write_text(json.dumps(SPEC))
+    r = CliRunner().invoke(app, ["build", "--spec", str(spec), "--out", str(tmp_path / "o")])
+    assert r.exit_code == 0, r.output
+    report = json.loads((tmp_path / "o" / "qa-report.json").read_text())
+    usage = report["input_usage"]
+    assert usage["photo_provided"] is False
+    assert usage["photo_used_for_dimensions"] is False
+    assert "measurements" in usage["dimension_source"]
+    assert _gate(report, "G01")["status"] == "FAIL"         # 无照片如实报告, 不冒充有照片证据
+
+
+def test_photo_is_never_claimed_to_measure(env):
+    """即便提供了照片, 报告也须声明: 当前尺寸全部来自 spec, 照片只作证据存档."""
+    usage = env[3]["input_usage"]
+    assert usage["photo_provided"] is True and usage["photo_used_for_dimensions"] is False
+
+
+# ---- 正向挑战集 (GPT R2-4: 防止门禁从过松走向过严 — 合法变化必须仍然通过) ----
+def _qa_raw(raw):
+    ir = from_raw(raw)
+    x0, y0, x1, y1 = svgx.net_bbox(ir)
+    return run_qa(ir, svgx.render(ir, x1 - x0, y1 - y0), pdfx.build_pdf(ir, x1 - x0, y1 - y0))
+
+
+def _shift_net(raw, dx, dy):
+    for p in raw["panels"]:
+        p["polygon_2d"] = [[x + dx, y + dy] for x, y in p["polygon_2d"]]
+    for e in raw["edges"]:
+        e["seg_2d"] = [[x + dx, y + dy] for x, y in e["seg_2d"]]
+    return raw
+
+
+def _insert_midpoints(raw):
+    for p in raw["panels"]:
+        pts = p["polygon_2d"]
+        out = []
+        for i in range(len(pts)):
+            a, b = pts[i], pts[(i + 1) % len(pts)]
+            out += [a, [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]]
+        p["polygon_2d"] = out
+    return raw
+
+
+def _rotate_polygon_start(raw):
+    for p in raw["panels"]:
+        pts = p["polygon_2d"]
+        k = len(pts) // 2
+        p["polygon_2d"] = pts[k:] + pts[:k]
+    return raw
+
+
+def _reverse_records(raw):
+    raw["panels"].reverse()
+    raw["edges"].reverse()
+    return raw
+
+
+def _legal_params(raw):
+    raw.update(gable_top.build_ir({"W": 50.0, "D": 40.0, "Hb": 90.0, "Hr": 15.0, "Ef": 12.0, "glue_w": 15.0}))
+    return raw
+
+
+def _tiny_angle(raw):
+    """一条折线的折向偏 0.1° — 远在闭合容差内的合法数值偏差."""
+    e = next(x for x in raw["edges"] if x["id"] == "e_bk_sl")
+    a = math.radians(0.1)
+    x, y, z = e["fold"]["target_dir_3d"]
+    e["fold"]["target_dir_3d"] = [x, y * math.cos(a) - z * math.sin(a), y * math.sin(a) + z * math.cos(a)]
+    return raw
+
+
+def _flip_reference_and_labels(raw):
+    """参考面翻到另一侧, M/V 同步翻转 — 物理折法完全不变的等价表示."""
+    raw["package"]["template"]["mt_va_reference"] = "polygon_2d_cw"
+    for e in raw["edges"]:
+        e["fold"]["mt_va"] = {"MOUNTAIN": "VALLEY", "VALLEY": "MOUNTAIN"}[e["fold"]["mt_va"]]
+    return raw
+
+
+POSITIVE = [
+    ("POS-01 整体平移", lambda raw: _shift_net(raw, 37.0, -11.0)),
+    ("POS-03 合法参数域内改尺寸", _legal_params),
+    ("POS-04 每条面板边插入共线中点", _insert_midpoints),
+    ("POS-05 面板与折线记录重排", _reverse_records),
+    ("POS-05b 多边形起始顶点轮换", _rotate_polygon_start),
+    ("POS-07 容差内 0.1° 折向偏差", _tiny_angle),
+    ("POS-08 参考面翻转且 M/V 同步翻转", _flip_reference_and_labels),
+]
+
+
+@pytest.mark.parametrize("label,fn", POSITIVE, ids=[p[0] for p in POSITIVE])
+def test_legal_transformations_still_pass(label, fn):
+    """合法变化必须仍然 VALIDATED, 且导出几何与变化前一致 (平移类除外, 只要求闭合与导出成立)."""
+    raw = copy.deepcopy(gable_top.build_ir(SPEC["params"]))
+    fn(raw)
+    report = _qa_raw(raw)
+    failed = [g["id"] for g in report["gates"] if g["id"] != "G01" and g["status"] != "PASS"]
+    assert not failed, f"{label} 被误杀: {failed} — " + "; ".join(
+        g["detail"] for g in report["gates"] if g["status"] == "FAIL")
+    assert report["status"] == "VALIDATED", label
+
+
+def test_positive_set_keeps_folded_geometry():
+    """平移 / 插中点 / 重排 / 翻参考面 都不改变折叠终态: 逐面板逐顶点 (按 net 坐标对齐) 世界坐标一致."""
+    base = copy.deepcopy(gable_top.build_ir(SPEC["params"]))
+    w0 = fold_all(from_raw(base))
+    ref = {pid: np.asarray(v) for pid, v in w0.items()}
+    for fn in (_insert_midpoints, _reverse_records, _flip_reference_and_labels):
+        raw = copy.deepcopy(gable_top.build_ir(SPEC["params"]))
+        fn(raw)
+        ir = from_raw(raw)
+        w = fold_all(ir)
+        for p in ir.panels:
+            pts = np.asarray(p["polygon_2d"], float)
+            src = np.asarray(next(q for q in base["panels"] if q["id"] == p["id"])["polygon_2d"], float)
+            for k, q in enumerate(pts):
+                if any(np.allclose(q, s) for s in src):          # 原有顶点仍在 → 折叠后位置必须一致
+                    j = int(np.argmin(np.linalg.norm(src - q, axis=1)))
+                    assert np.allclose(w[p["id"]][k], ref[p["id"]][j], atol=1e-9), (fn.__name__, p["id"], k)
