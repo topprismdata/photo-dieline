@@ -113,7 +113,7 @@ def build_one(fam, cls_id, idx, out_dir, degenerate=False):
 
     asset_id = f"{fam}_{cls_id}_v{idx:04d}"
     a_dir = Path(out_dir) / asset_id
-    ev = export_usdc(ir, a_dir / "model.usdc", kind="carton_board")
+    ev = export_usdc(ir, a_dir / "model.usdc", kind="carton_board", family=fam)
     sdims = stage_dims_m(a_dir / "model.usdc")
     rec = reconcile_dims(analytic, folded, sdims)
     val = validate_usdc(a_dir / "model.usdc")

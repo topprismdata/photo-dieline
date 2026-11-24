@@ -32,8 +32,7 @@ def setup_scene(dark: bool):
     shading = sc.display.shading
     shading.background_type = "WORLD"  # Workbench 默认 THEME 灰 — 显式切 WORLD
     shading.light = "STUDIO"
-    shading.color_type = "SINGLE"
-    shading.single_color = (0.62, 0.64, 0.68) if not dark else (0.58, 0.60, 0.65)
+    shading.color_type = "TEXTURE"  # WP2: 显示印刷纹理
     shading.show_cavity = True
     shading.cavity_type = "WORLD"
     w = bpy.data.worlds.get("World") or bpy.data.worlds.new("World")
@@ -48,7 +47,7 @@ def render_asset(build_path: Path):
     meta = json.loads(build_path.read_text())
     mod = class_module(meta["class_id"])
     ir = from_raw({k: v for k, v in mod.build_ir(meta["params"]).items() if k != "_derived"})
-    pts_mm, tris = _solid_triangles_mm(ir)
+    pts_mm, tris, nets_mm = _solid_triangles_mm(ir)
     mn, mx = pts_mm.min(0), pts_mm.max(0)
     c = (mn + mx) / 2.0
     r = float(max(mx - mn).max()) * 0.5 * 1e-3  # 米! (mm bbox → m; 之前漏换算致相机 117m 外)
@@ -60,9 +59,27 @@ def render_asset(build_path: Path):
         bpy.data.objects.remove(ob, do_unlink=True)
     for me in list(bpy.data.meshes):
         bpy.data.meshes.remove(me)
+    for ma in list(bpy.data.materials):
+        bpy.data.materials.remove(ma)
     me = bpy.data.meshes.new("body")
     me.from_pydata([tuple(p) for p in Pm], [], [tuple(t) for t in tris])
     me.validate()
+    # WP2: 净图 UV + 印刷纹理材质 (Workbench TEXTURE 模式显示)
+    from photo_dieline.export.print_layer import draw_print_texture
+    _, (nx0, ny0, nw_mm, nh_mm) = draw_print_texture(ir, meta.get("family", "sundry"))
+    uv = me.uv_layers.new(name="st")
+    for loop in me.loops:
+        nx, ny = nets_mm[loop.vertex_index]
+        uv.data[loop.index].uv = (1.0 - (nx - nx0) / nw_mm, 1.0 - (ny - ny0) / nh_mm)
+    png = build_path.parent / "print.png"
+    if png.exists():
+        mat = bpy.data.materials.new("print")
+        mat.use_nodes = True
+        nt = mat.node_tree
+        tex = nt.nodes.new("ShaderNodeTexImage")
+        tex.image = bpy.data.images.load(str(png))
+        nt.links.new(tex.outputs["Color"], nt.nodes["Principled BSDF"].inputs["Base Color"])
+        me.materials.append(mat)
     ob = bpy.data.objects.new("body", me)
     sc.collection.objects.link(ob)
 

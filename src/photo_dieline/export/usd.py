@@ -33,24 +33,28 @@ BOARD_GSM = {
 
 
 def _solid_triangles_mm(ir):
-    """折叠世界 → solid 面板三角网 (mm)。口径与 QA G05 一致: 只取 solid_roles 封闭体。"""
+    """折叠世界 → solid 面板三角网 (mm)。口径与 QA G05 一致: 只取 solid_roles 封闭体。
+    返回 (世界顶点 Nx3, 三角 Mx3, 净图顶点 Nx2) — 净图坐标与顶点同序 (UV 刀版映射用)。"""
     world = fold_all(ir)
     mod = templates.get(ir.package["template"]["id"])
     roles = {pp["id"]: pp["role"] for pp in ir.panels}
-    pts, tris = [], []
+    net_polys = {pp["id"]: pp["polygon_2d"] for pp in ir.panels}
+    pts, tris, nets = [], [], []
     for pid, poly in world.items():
         if roles.get(pid) not in mod.solid_roles():
             continue
         P = np.asarray(poly, float)
+        N = np.asarray(net_polys[pid], float)
         if P.shape[0] >= 3 and np.allclose(P[0], P[-1]):
-            P = P[:-1]
+            P, N = P[:-1], N[:-1]
         if P.shape[0] < 3:
             continue
         base = len(pts)
         pts.extend(P.tolist())
+        nets.extend(N.tolist())
         for i in range(1, len(P) - 1):  # 扇形三角化 (试点家族面板均为凸多边形)
             tris.append((base, base + i, base + i + 1))
-    return np.asarray(pts, float), np.asarray(tris, int)
+    return np.asarray(pts, float), np.asarray(tris, int), np.asarray(nets, float)
 
 
 def _area_mm2(pts, tris):
@@ -58,12 +62,13 @@ def _area_mm2(pts, tris):
     return float(0.5 * np.linalg.norm(np.cross(v1 - v0, v2 - v0), axis=1).sum())
 
 
-def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45):
-    """IR → .usdc。返回证据 dict (含 mm 口径 authored 尺寸, 供三方对账)。"""
+def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45, texture=True, family=None):
+    """IR → .usdc (+ WP2 印刷层: 净图 UV + UsdPreviewSurface 材质 + print.png)。
+    返回证据 dict (含 mm 口径 authored 尺寸, 供三方对账)。"""
     import pxr  # noqa: F401  (存在性断言)
-    from pxr import Gf, Usd, UsdGeom, UsdPhysics, Vt
+    from pxr import Gf, Sdf, Usd, UsdGeom, UsdPhysics, UsdShade, Vt
 
-    pts_mm, tris = _solid_triangles_mm(ir)
+    pts_mm, tris, nets_mm = _solid_triangles_mm(ir)
     if len(pts_mm) == 0 or len(tris) == 0:
         raise ValueError("solid 三角网为空")
     area_m2 = _area_mm2(pts_mm, tris) * 1e-6
@@ -97,11 +102,43 @@ def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45):
     UsdPhysics.CollisionAPI.Apply(bp)
     mapi = UsdPhysics.MassAPI.Apply(bp)
     mapi.GetMassAttr().Set(float(mass_kg))
+
+    tex_note = None
+    if texture:
+        from .print_layer import draw_print_texture
+        img, (nx0, ny0, nw_mm, nh_mm) = draw_print_texture(ir, family or "sundry")
+        img.save(path.parent / "print.png")
+        us = [1.0 - (p[0] - nx0) / nw_mm for p in nets_mm]  # u 预镜像: 折叠后外侧视印刷正读
+        vs = [1.0 - (p[1] - ny0) / nh_mm for p in nets_mm]
+        st_vals = Vt.Vec2fArray([Gf.Vec2f(us[i], vs[i]) for t in tris for i in t])  # faceVarying 逐角
+        pv = UsdGeom.PrimvarsAPI(bp).CreatePrimvar(
+            "st", Sdf.ValueTypeNames.TexCoord2fArray, "faceVarying", len(st_vals))
+        pv.Set(st_vals)
+        mat = UsdShade.Material.Define(stage, "/Asset/Materials/PrintMat")
+        tex = UsdShade.Shader.Define(stage, "/Asset/Materials/PrintMat/PrintTex")
+        tex.CreateIdAttr("UsdUVTexture")
+        tex.CreateInput("file", Sdf.ValueTypeNames.Asset).Set(Sdf.AssetPath("./print.png"))
+        pv_reader = UsdShade.Shader.Define(stage, "/Asset/Materials/PrintMat/PrimvarSt")
+        pv_reader.CreateIdAttr("UsdPrimvarReader_float2")
+        pv_reader.CreateInput("primvarName", Sdf.ValueTypeNames.Token).Set("st")
+        pv_reader.CreateOutput("result", Sdf.ValueTypeNames.Float2)
+        tex.CreateInput("st", Sdf.ValueTypeNames.Float2).ConnectToSource(pv_reader.ConnectableAPI(), "result")
+        tex.CreateOutput("rgb", Sdf.ValueTypeNames.Color3f)
+        ps = UsdShade.Shader.Define(stage, "/Asset/Materials/PrintMat/PreviewSurface")
+        ps.CreateIdAttr("UsdPreviewSurface")
+        rough = 0.84 if kind != "liquid_brick" else 0.30  # 牛皮/白卡纸 vs 淋膜 (TWIN_ASSET_SPEC §4 口径)
+        ps.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(float(rough))
+        ps.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(0.0)
+        ps.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).ConnectToSource(tex.ConnectableAPI(), "rgb")
+        mat.CreateSurfaceOutput().ConnectToSource(ps.ConnectableAPI(), "surface")
+        UsdShade.MaterialBindingAPI(bp).Bind(mat)
+        tex_note = {"print_png": "print.png", "roughness": rough,
+                    "scope": "程序化占位印刷 (WP2 v0), 非真实品牌版面"}
     stage.Save()
 
     return {
         "path": str(path), "kind": kind, "gsm": gsm, "area_m2": area_m2,
-        "mass_kg": mass_kg, "board_t_mm": board_t_mm,
+        "mass_kg": mass_kg, "board_t_mm": board_t_mm, "texture": tex_note,
         "n_panels": int(len({tuple(p) for p in pts_mm}) and len(tris) and tris[:, 0].max() + 1),
         "n_tris": int(len(tris)), "authored_dims_mm": {k: round(v, 3) for k, v in dims_mm.items()},
     }
