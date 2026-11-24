@@ -2,9 +2,10 @@
 
 用法: photo-dieline batch --out output/zoo100 [--prefix prism]
 成熟度 (机器可判定的前三档; L3 样件验证 / L4 生产签核须实物, 不在此判定):
-  L0_REGISTERED      模板能构建
+  L0_REGISTERED    模板能构建
   L1_GEOMETRY_VALID  schema + 展开拓扑 + 两个导出件独立解析 全过
-  L2_FOLD_VALID      L1 + 折叠闭合/尺寸/穿插 全过 + 折线语义已声明且自洽 + 每条折线的扰动都被闭合判据检出
+  L2_KINEMATIC     L1 + 折叠终态闭合/尺寸/穿插 全过 + 折线语义已声明且与参考面自洽 + 每条折线的 ±35°/180° 扰动都被闭合判据检出
+                    (只证明终态运动学; 折叠路径可达性、印刷面/压线工艺面映射、制造特征约束均未评估 — GPT R2 §4.4)
 """
 from __future__ import annotations
 
@@ -33,7 +34,7 @@ def _build_class(cls_id: str):
 
 GEOMETRY_GATES = ("G02", "G03", "G07", "G08", "G09", "G10")
 FOLD_GATES = ("G04", "G05", "G06")
-LEVELS = ("L0_REGISTERED", "L1_GEOMETRY_VALID", "L2_FOLD_VALID")
+LEVELS = ("L0_REGISTERED", "L1_GEOMETRY_VALID", "L2_KINEMATIC")
 
 
 def maturity_level(gates: dict, semantics: dict, sensitivity: dict) -> str:
@@ -45,7 +46,7 @@ def maturity_level(gates: dict, semantics: dict, sensitivity: dict) -> str:
         return "L1_GEOMETRY_VALID"
     if not sensitivity.get("n_probed") or sensitivity.get("n_undetected", 1) or sensitivity.get("n_uncovered", 1):
         return "L1_GEOMETRY_VALID"
-    return "L2_FOLD_VALID"
+    return "L2_KINEMATIC"
 
 
 def run_batch(out_dir: str, prefix: str | None = None, thumb: int = 320) -> dict:

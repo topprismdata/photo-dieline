@@ -127,29 +127,25 @@ def resolve_params(spec: dict) -> tuple[dict, dict]:
         raise ARError(f"spec.params 含模板 {spec['package']} 未定义的参数: {unknown}")
     params.update({k: float(v) for k, v in given.items()})
     overrides: dict = {}
+    measured: dict = {}   # 同一参数的多条实测/可信来源值必须一致
     for m in spec.get("measurements", []):
         name, st = m.get("name"), str(m.get("status", "")).upper()
         if name not in params:
             raise ARError(f"measurements 含模板 {spec['package']} 未定义的参数: {name!r}")
         if st in MEASURED_STATUSES:
             v = float(m["value_mm"])
+            if name in measured and abs(measured[name] - v) > 1e-9:
+                raise ARError(f"参数 {name} 的实测值互相矛盾 ({measured[name]:g}mm 与 {v:g}mm): "
+                              f"须先解决冲突, 不按输入顺序覆盖")
+            measured[name] = v
             if abs(v - params[name]) > 1e-9:
                 overrides[name] = {"from": params[name], "to": v, "status": st}
                 params[name] = v
     return params, overrides
 
 
-def build(spec: dict, photo_path: str | Path, template_ir: dict) -> GeometryIR:
-    """spec(用户输入+证据) + 模板产出的几何 → 完整 IR dict → 校验 → GeometryIR."""
-    ir = json.loads(json.dumps(template_ir))  # deep copy
-    ir.pop("_derived", None)  # 模板内部派生量, 不进 IR 协议
-    ev = photo_evidence(photo_path)
-    ir["package"]["photo"] = {
-        "path": ev.path,
-        "sha256": ev.sha256,
-        "width_px": ev.width_px,
-        "height_px": ev.height_px,
-    }
+def _attach_evidence(ir: dict, spec: dict) -> None:
+    """把 spec 的证据等级写进 IR, 并执行"实测优先"的入口检查 (原地修改)."""
     # 尺寸证据状态记录: spec.measurements[{name,value_mm,status,source?}]
     status_map = {m["name"]: m["status"].upper() for m in spec.get("measurements", [])}
     ir["package"]["params_evidence"] = {
@@ -168,6 +164,9 @@ def build(spec: dict, photo_path: str | Path, template_ir: dict) -> GeometryIR:
                     f"实测={float(m['value_mm']):g}mm (|Δ|={diff:.3f}mm > {MEASURED_TOL_MM}mm); "
                     f"几何须由 resolve_params(spec) 生成")
     validate_dict(ir)
+
+
+def _to_ir(ir: dict) -> GeometryIR:
     edges = [FoldEdge(
         id=e["id"],
         seg_2d=((e["seg_2d"][0][0], e["seg_2d"][0][1]), (e["seg_2d"][1][0], e["seg_2d"][1][1])),
@@ -178,6 +177,32 @@ def build(spec: dict, photo_path: str | Path, template_ir: dict) -> GeometryIR:
         target_dir_3d=tuple(e["fold"]["target_dir_3d"]) if e["fold"].get("target_dir_3d") else None,
     ) for e in ir["edges"]]
     return GeometryIR(ir["meta"], ir["package"], ir["panels"], edges, ir["features"], ir)
+
+
+def build(spec: dict, photo_path: str | Path, template_ir: dict) -> GeometryIR:
+    """spec(用户输入+证据) + 照片证据 + 模板产出的几何 → 完整 IR。
+    照片在此只作证据存证 (哈希/尺寸), 不参与尺寸恢复。"""
+    ir = json.loads(json.dumps(template_ir))  # deep copy
+    ir.pop("_derived", None)  # 模板内部派生量, 不进 IR 协议
+    ev = photo_evidence(photo_path)
+    ir["package"]["photo"] = {
+        "path": ev.path,
+        "sha256": ev.sha256,
+        "width_px": ev.width_px,
+        "height_px": ev.height_px,
+    }
+    _attach_evidence(ir, spec)
+    return _to_ir(ir)
+
+
+def build_parametric(spec: dict, template_ir: dict) -> GeometryIR:
+    """无照片的参数化模式: 尺寸全部来自 spec (实测优先)。照片位留空 — QA 的 G01 如实报告无照片证据,
+    报告的 input_usage 写明尺寸来源, 不得被读成"照片测量"。"""
+    ir = json.loads(json.dumps(template_ir))
+    ir.pop("_derived", None)
+    ir["package"]["photo"] = None
+    _attach_evidence(ir, spec)
+    return _to_ir(ir)
 
 
 def to_dict(ir: GeometryIR) -> dict:

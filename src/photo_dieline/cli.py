@@ -1,4 +1,4 @@
-"""photo-dieline CLI: spec + 照片 → IR / SVG / PDF / QA 报告."""
+"""photo-dieline CLI: spec (+ 照片证据) → IR / SVG / PDF / QA 报告."""
 from __future__ import annotations
 
 import json
@@ -6,35 +6,39 @@ from pathlib import Path
 
 import typer
 
-from .core.ir import ARError, build, class_defaults, class_module, resolve_params, save
+from .core.ir import ARError, build, build_parametric, class_defaults, class_module, resolve_params, save
 from .export import pdf as pdfx
 from .export import svg as svgx
 from .qa.pipeline import run_qa
 
-app = typer.Typer(help="photo-dieline: 实物包装照片 → 1:1 刀版", add_completion=False)
+app = typer.Typer(help="photo-dieline: 包装规格 (+ 实物照片证据) → 参数化制造几何 → 1:1 刀版", add_completion=False)
 
 
 @app.command("build")
 def build_cmd(
     spec: Path = typer.Option(..., "--spec", help="包装 spec JSON"),
-    photo: Path = typer.Option(..., "--photo", help="实物参照照片"),
+    photo: Path = typer.Option(None, "--photo", help="实物参照照片 (可选; 当前只作证据存证, 不参与尺寸恢复)"),
     out: Path = typer.Option(..., "--out", help="artifacts 输出目录"),
 ) -> None:
-    """spec + photo → geometry-ir.json / dieline.svg / dieline.pdf / qa-report.json.
+    """spec (+ photo) → geometry-ir.json / dieline.svg / dieline.pdf / qa-report.json.
 
     按 spec.package 经模板注册表分发 (未注册的类显式报错, 不回退默认模板);
-    几何参数由 resolve_params 给出: 实测/可信来源值优先于 spec.params 与模板默认值 (ADR-003)。
+    几何参数由 resolve_params 给出: 实测/可信来源值优先于 spec.params 与模板默认值 (ADR-003),
+    互相矛盾的实测值直接拒绝。
+    **尺寸全部来自 spec**; 照片 (若提供) 只做哈希与分辨率存证 — 视觉测量尚未实现, 报告的 input_usage 如实声明。
     """
     spec_d = json.loads(spec.read_text())
     try:
         params, overrides = resolve_params(spec_d)
         ir_tpl = class_module(spec_d["package"]).build_ir(params)
-        ir = build(spec_d, photo, ir_tpl)
+        ir = build(spec_d, photo, ir_tpl) if photo is not None else build_parametric(spec_d, ir_tpl)
     except ARError as exc:
         typer.echo(f"输入错误: {exc}", err=True)
         raise typer.Exit(2) from exc
     for name, ov in overrides.items():
         typer.echo(f"实测优先: {name} 参数 {ov['from']:g} → 实测 {ov['to']:g} mm ({ov['status']})")
+    typer.echo("尺寸来源: spec (params + measurements, 实测优先); 照片未参与尺寸恢复"
+               + (" (未提供照片)" if photo is None else " (已提供, 仅作证据存证)"))
 
     out.mkdir(parents=True, exist_ok=True)
     ir_path = out / "geometry-ir.json"
@@ -48,7 +52,7 @@ def build_cmd(
 
     report = run_qa(ir, svg_text, pdf_bytes)
     (out / "qa-report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
-    typer.echo(f"QA status: {report['status']}")
+    typer.echo(f"QA status: {report['status']}  | 工艺约束: {report['manufacturing_constraints']['status']} (VALIDATED ≠ 可制造)")
     for gate in report["gates"]:
         typer.echo(f"  {gate['id']} {gate['status']:4s} {gate['name']}"
                    + (f"  {gate['detail']}" if gate["status"] == "FAIL" else ""))
