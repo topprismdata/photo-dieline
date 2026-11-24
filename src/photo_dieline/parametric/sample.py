@@ -18,9 +18,10 @@ SCALABLE_KEYS = {
     "cone": ("side_b", "side_t", "h"),
     "food": ("W", "D", "H", "Hl"),
     # 2026-11-25 全家族覆盖 (逐族 class_defaults 实测枚举; 保守取主尺寸, 耦合工艺键不动)
+# 缩放排除族 (10K 独立验收 VSR 实证: clamp/mailer/two/window 缩放产生退化三角/重复面/非流形
+# — 共 1482 件失败, 集中于此 4 族; 身份回退并标 no_scaling_coverage, 10K v1 不缩放)
     "aseptic": ("W", "D", "Hb"),
     "brick": ("W", "D", "Hb"),
-    "clamp": ("W", "D", "H"),
     "crashlock": ("W", "D", "H", "Hf", "Hb"),
     "cup": ("H", "side_b", "side_t"),
     "dispenser": ("W", "D", "H"),
@@ -30,7 +31,6 @@ SCALABLE_KEYS = {
     "hanger": ("W", "D", "H"),
     "hexagonal": ("H", "side"),
     "lockbottom": ("W", "D", "H", "Hf", "Hb", "side"),
-    "mailer": ("h", "spine_w", "cover_w", "tuck_t"),
     "pillow": ("W", "H", "D"),
     "prism": ("side", "h"),
     "pyramid": ("side_b", "side_t", "h"),
@@ -39,8 +39,6 @@ SCALABLE_KEYS = {
     "tray": ("W", "D", "H", "Hf", "Hb", "side"),
     "tube": ("side", "h"),
     "tuck": ("W", "D", "H"),
-    "two": ("W", "D", "H"),
-    "window": ("W", "D", "H"),
 }
 
 
