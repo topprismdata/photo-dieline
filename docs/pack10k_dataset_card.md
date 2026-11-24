@@ -63,9 +63,9 @@ manifest 的 `identifiability_prior` 是**几何调节率先验** (尺寸比阈�
 
 | 子集 | 规模 | 用途 | 状态 |
 |---|---:|---|---|
-| Pack10K-Geometry | 10,000 (HOLD) | 几何/尺寸/碰撞/堆叠 | 试点 500 件 |
-| Pack10K-Visual | 渐进覆盖 | 感知/检测/印刷材质 (复用刀版 UV/SDG 既有管线, WP2) | 未建 |
-| Pack-Real100 | ≥100 实物参照 | 外部精度与迁移验证 (卡尺+称重+实拍, WP1) | 未建 |
+| Pack10K-Geometry | 500 件预览 (10K HOLD) | 几何/尺寸/碰撞/堆叠 | ✅ 独立验收 VSR=1.0 (498/498) |
+| Pack10K-Visual | 渐进覆盖 | 印刷层 v0 已落地 (程序化占位印刷: 品类色场+品牌字标, 净图 UV + PBR roughness); 真实版面复刻待许可审计 | 🔶 v0 |
+| Pack-Real100 | ≥100 实物参照 | 外部精度与迁移验证 (卡尺+称重+实拍, WP1) | 📋 采集契约已冻结, 待实物 |
 
 ## 合规口径 (R1 P0-04 整改: 禁止 GREEN=SimReady verified 混称)
 
