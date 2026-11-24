@@ -77,7 +77,11 @@ def check_asset(asset_dir: Path):
                 e = tuple(sorted((t[i], t[(i + 1) % 3])))
                 edges[e] += 1
     dup = sum(v - 1 for v in dup_faces.values() if v > 1)
-    non_manifold = sum(1 for v in edges.values() if v > 2)      # 流形: 每棱 ≤2 面
+    # 片材复杂体判据 (R1 诚实边界: 折纸模型非闭合流形 — 3-4 面接触结为物理合法
+    # [盒角三面板相遇/锁扣舌压墙], ≥5 面才是真缺陷; 闭口/开口分列 INFO)
+    non_manifold = sum(1 for v in edges.values() if v > 4)      # 缺陷: ≥5 面边
+    junction3 = sum(1 for v in edges.values() if v == 3)        # 合法三面板接触结
+    junction4 = sum(1 for v in edges.values() if v == 4)        # 合法双片压合边
     open_edges = sum(1 for v in edges.values() if v == 1)        # 开口腔 (托盘) 合法边界
     closed = non_manifold == 0 and open_edges == 0
     checks["v2_manifold"] = mesh_count > 0 and non_manifold == 0
@@ -87,6 +91,8 @@ def check_asset(asset_dir: Path):
     checks["v4_finite"] = finite
     details["tris"] = tris_total
     details["non_manifold_edges"] = non_manifold
+    details["junction3_edges"] = junction3
+    details["junction4_edges"] = junction4
     details["open_edges"] = open_edges
     details["degenerate_tris"] = degen
 

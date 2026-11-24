@@ -60,6 +60,18 @@ def _solid_triangles_mm(ir):
     key = np.round(pts_arr, 6)
     uniq, first_idx, inv = np.unique(key, axis=0, return_index=True, return_inverse=True)
     tris_arr = inv[np.asarray(tris, int)]
+    # 三角过滤: 零面积退化 + 重复面 (fan 三角化共线点产物; 独立验收 V3 实测 1125+371 例)
+    v0, v1, v2 = uniq[tris_arr[:, 0]], uniq[tris_arr[:, 1]], uniq[tris_arr[:, 2]]
+    areas = 0.5 * np.linalg.norm(np.cross(v1 - v0, v2 - v0), axis=1)
+    keep = areas > 1e-9
+    tris_arr = tris_arr[keep]
+    seen, dedup = set(), []
+    for t in map(tuple, tris_arr):
+        k = tuple(sorted(t))
+        if k not in seen:
+            seen.add(k)
+            dedup.append(t)
+    tris_arr = np.asarray(dedup, int)
     return uniq, tris_arr, nets_arr[first_idx]
 
 
