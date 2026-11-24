@@ -1,0 +1,46 @@
+B0B v16 views=1 none unidentifiable
+B0B v16 views=1 one_edge accepted
+B0B v16 views=3 none accepted
+B0B v16 views=3 one_edge accepted
+B0B v16 views=6 none accepted
+B0B v16 views=6 one_edge accepted
+B0B v18 views=1 none accepted
+B0B v18 views=1 one_edge accepted
+B0B v18 views=3 none accepted
+B0B v18 views=3 one_edge accepted
+B0B v18 views=6 none accepted
+B0B v18 views=6 one_edge accepted
+B0B v23 views=1 none accepted
+B0B v23 views=1 one_edge accepted
+B0B v23 views=3 none accepted
+B0B v23 views=3 one_edge accepted
+B0B v23 views=6 none accepted
+B0B v23 views=6 one_edge accepted
+B0B v25 views=1 none accepted
+B0B v25 views=1 one_edge accepted
+B0B v25 views=3 none accepted
+B0B v25 views=3 one_edge accepted
+B0B v25 views=6 none accepted
+B0B v25 views=6 one_edge accepted
+B0B v28 views=1 none unidentifiable
+B0B v28 views=1 one_edge accepted
+B0B v28 views=3 none accepted
+B0B v28 views=3 one_edge accepted
+B0B v28 views=6 none accepted
+B0B v28 views=6 one_edge accepted
+B0B v29 views=1 none accepted
+B0B v29 views=1 one_edge accepted
+B0B v29 views=3 none accepted
+B0B v29 views=3 one_edge accepted
+B0B v29 views=6 none accepted
+B0B v29 views=6 one_edge accepted
+
+=== B0-B 汇总 (σ=1px, 内参 ±10% 扰动; 6 留出变体) ===
+视角        锚点       可辨识   比例MAE     W误差mm     D误差mm | 条件数中位
+1       none       4/6  0.0028      4.75      4.37 | 4.0e+05
+1      one_edge       6/6  0.0035      0.33      0.47 | 1.4e+02
+3       none       6/6  0.0040      5.45      6.18 | 2.1e+05
+3      one_edge       6/6  0.0041      0.54      0.57 | 1.0e+02
+6       none       6/6  0.0039      3.28      3.63 | 2.5e+05
+6      one_edge       6/6  0.0038      0.72      0.53 | 8.5e+01
+B0B_DONE

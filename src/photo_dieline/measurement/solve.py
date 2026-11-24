@@ -20,7 +20,7 @@ import numpy as np
 RES = 768                       # 求解内部归一分辨率 (与 TDE 渲染一致; project 的 res 参数可覆盖)
 REL = [("W", "Hb"), ("D", "Hb"), ("Hr", "Hb"), ("Ef", "Hb")]   # gable 目标比例, 与 CNN 同口径
 R_IMPORT = np.diag([-1.0, -1.0, 1.0])   # 驱动 obj_import(forward_axis=NEGATIVE_Y, up_axis=Z) 的实际旋转
-DEFAULTS = {"W": 45.0, "D": 45.0, "Hb": 100.0, "Hr": 12.0, "Ef": 14.0, "H": 100.0}
+DEFAULTS = {"W": 45.0, "D": 45.0, "Hb": 100.0, "Hr": 12.0, "Ef": 14.0, "H": 100.0, "fin_gap_mm": 3.0}
 
 
 def gable_keypoints(p):
@@ -140,21 +140,36 @@ def observe(model, p, cam, fx, res=RES):
     return idx, uv[idx], eye
 
 
-def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6):
+def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, noise_px=1.0):
     """联合拟合: 未锚定的包装参数 + 相机 (注视点 3, 方位, 俯仰, 滚转, 眼距)。
     anchors: {参数名: 实测值 mm} (尺度锚定, 与待估参数严格分开)。多起点 (方位 × 俯仰), 取代价最低解。
-    返回 identifiable=False 表示存在数据约束不到的参数方向 (典型: 无锚点时的整体尺度), 不得采信尺寸。"""
+    free_fin_gap: gable 的 fin_gap_mm 改为自由参数 (先验消融; 无锚点时应重新暴露绝对尺度自由度)。
+    noise_px: 关键点噪声假设 (参数级误差棒的 σ 缩放)。
+
+    R3 WP1 合同 (round3_verdict.md §2):
+    - scale_source: MEASURED_ANCHOR (有实测边) / TEMPLATE_PRIOR_ANCHOR (gable 隐含 fin_gap=3mm 绝对先验,
+      "无锚点"其实不是无尺度约束) / NO_METRIC_ANCHOR (真·无绝对长度)。
+    - identifiability: IDENTIFIABLE / WEAK / UNIDENTIFIABLE (参数子空间 Schur 补, 无量纲归一化;
+      阈值 1e4/1e6 是数值诊断, 不是精度标准)。
+    - sigma_mm: 参数级 1σ 误差棒 (C ≈ S⁻¹ 局部线性近似; 秩亏方向显式 inf, 不给虚假精度)。
+      交付决策应对比 sigma_mm 与特征容差, 而不是只看条件数。
+    - delivery: MANUFACTURING_DIMENSIONS (实测锚 + 满秩良态) / INSUFFICIENT_PRECISION (实测锚但 WEAK,
+      误差棒可能超容差) / PRIOR_DEPENDENT_ESTIMATE (仅模板先验, 只可作研究估计) / REFUSED
+      (NO_METRIC_ANCHOR 或 UNIDENTIFIABLE, 禁止交付确定尺寸)。"""
     try:
         from scipy.optimize import least_squares
     except ImportError as exc:  # 可选依赖: pip install photo-dieline[measure]
         raise ImportError("measurement.solve 需要 scipy: pip install photo-dieline[measure]") from exc
     pnames = model["params"]
     names = [n for n in pnames if n not in anchors]
+    if free_fin_gap and model is MODELS["gable_top"] and "fin_gap_mm" not in names:
+        names = names + ["fin_gap_mm"]
 
     def params(theta):
         q = {k: DEFAULTS[k] for k in ("W", "D", "Hb", "Hr", "Ef", "H")}
         q.update(anchors)
-        q["fin_gap_mm"] = 3.0
+        if "fin_gap_mm" not in names:
+            q["fin_gap_mm"] = 3.0
         q.update(zip(names, theta))
         return q
 
@@ -164,8 +179,8 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6):
         uv = project(to_world(P, c)[obs_idx], eye, x[-4], x[-3], x[-2], fx)
         return (uv - obs_uv).ravel()
 
-    lo = np.array([8.0] * len(names) + [-0.6, -0.6, -0.6, 0.0, -0.35, -0.8, 0.03])
-    hi = np.array([500.0] * len(names) + [0.6, 0.6, 0.6, 2 * math.pi, 1.35, 0.8, 6.0])
+    lo = np.array([0.5 if n == "fin_gap_mm" else 8.0 for n in names] + [-0.6, -0.6, -0.6, 0.0, -0.35, -0.8, 0.03])
+    hi = np.array([10.0 if n == "fin_gap_mm" else 500.0 for n in names] + [0.6, 0.6, 0.6, 2 * math.pi, 1.35, 0.8, 6.0])
     th0 = np.array([DEFAULTS[n] for n in names])
     c0 = model["kp"](params(th0))[1] / 1000.0
     sols = []
@@ -192,14 +207,36 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6):
     S = Htt - Htp @ np.linalg.pinv(Hpp, rcond=1e-10) @ Htp.T
     ev = np.linalg.eigvalsh((S + S.T) / 2)
     kept = ev[ev > 1e-12 * max(float(ev.max()), 1e-300)]
-    cond_theta = float(kept.max() / kept.min()) if len(kept) == n else float("inf")
+    full_rank = len(kept) == n
+    cond_theta = float(kept.max() / kept.min()) if full_rank else float("inf")
+    level = "UNIDENTIFIABLE" if (not full_rank or cond_theta >= 1e6) else ("WEAK" if cond_theta > 1e4 else "IDENTIFIABLE")
+    # 参数级 1σ (mm): 无量纲 S⁻¹ 对角 → 物理单位 = sqrt(inv(S)_ii)/scale_i × noise_px; 秩亏方向显式 inf
+    Sinv = np.linalg.inv(S) if full_rank else None
+    sigma = {nm: (float(math.sqrt(max(Sinv[i, i], 0.0)) / scale[i] * noise_px) if full_rank else float("inf"))
+             for i, nm in enumerate(names)}
+    if anchors:
+        scale_source = "MEASURED_ANCHOR"
+    elif model is MODELS["gable_top"] and not free_fin_gap:
+        scale_source = "TEMPLATE_PRIOR_ANCHOR"      # fin_gap=3mm 是绝对长度先验, "无锚点"并非无尺度约束
+    else:
+        scale_source = "NO_METRIC_ANCHOR"
+    if level == "UNIDENTIFIABLE" or scale_source == "NO_METRIC_ANCHOR":
+        delivery = "REFUSED"
+    elif scale_source == "TEMPLATE_PRIOR_ANCHOR":
+        delivery = "PRIOR_DEPENDENT_ESTIMATE"
+    elif level == "WEAK":
+        delivery = "INSUFFICIENT_PRECISION"          # 实测锚在, 但误差棒可能超特征容差 → 交付决策看 sigma_mm
+    else:
+        delivery = "MANUFACTURING_DIMENSIONS"
     sv = np.linalg.svd(Jn, compute_uv=False)
     return {"ok": True, "theta": theta, "anchors": dict(anchors),
             "cam": {"T": best.x[n:n + 3].tolist(), "az": float(best.x[-4]), "el": float(best.x[-3]),
                     "roll": float(best.x[-2]), "d_eye": float(best.x[-1])},
             "rms_px": float(math.sqrt(np.mean(best.fun ** 2) / 2)), "cost": float(best.cost),
             "cond": float(sv[0] / sv[-1]) if sv[-1] > 0 else float("inf"),
-            "cond_theta": cond_theta, "identifiable": bool(cond_theta < 1e6), "n_distinct_minima": int(distinct)}
+            "cond_theta": cond_theta, "identifiable": level != "UNIDENTIFIABLE",
+            "identifiability": level, "scale_source": scale_source, "delivery": delivery,
+            "sigma_mm": sigma, "n_distinct_minima": int(distinct)}
 
 
 def ratio_mae(model, theta, truth):

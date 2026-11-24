@@ -14,8 +14,8 @@ glue 宽 12 -> 2         [粘口宽错]                              DRAFT     G
 -- (b) 参数域/证据 --
 fin_gap_mm=40 (Ef=14, 2*Ef=28 < 40) [超域被钳位]                DRAFT     G01:FAIL G02:FAIL G03:PASS G04:FAIL G05:PASS G06:PASS G07:PASS G08:PASS G09:PASS G10:PASS
 Hr=0.001 / D=45         [近退化]                              DRAFT     G01:FAIL G02:FAIL G03:PASS G04:PASS G05:PASS G06:PASS G07:PASS G08:PASS G09:PASS G10:PASS
-W=nan                                                      BUILD-EXC GEOSException: IllegalArgumentException: Points of LinearRing do not form a closed li
-W=inf                                                      BUILD-EXC ARError: 面板多边形自交或退化, 无法导出: ['back', 'wallR', 'front', 'slopeB', 'finB', 'slopeF
+W=nan                                                      BUILD-EXC ValueError: 非法参数 W=nan (须正的有限数)
+W=inf                                                      BUILD-EXC ValueError: 非法参数 W=inf (须正的有限数)
 params W=50 但 measurements W=45 MEASURED [值不一致]            ARError (输入被拒): 实测值与几何参数不一致: W 几何=50mm 实测=45mm (|Δ|=5.000mm > 0.5mm); 几何须由 resolve_params(spec) 生成
 
 -- (c) 折线语义 --

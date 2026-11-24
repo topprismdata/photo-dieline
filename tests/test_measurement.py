@@ -59,3 +59,42 @@ def test_measured_edge_beats_cnn_tolerance_at_realistic_noise():
     assert mae < 0.0314 / 2, mae
     for k in ("W", "D", "Hr", "Ef"):
         assert abs(th[k] - GABLE_PARAMS[k]) < 3.0, (k, th[k])
+
+
+def test_scale_source_and_delivery_contract():
+    """R3 WP1 合同: 尺度来源分级 + 交付处置 (无绝对长度 → REFUSED; 仅模板先验 → 只作研究估计)。"""
+    cub, gab = MODELS["cuboid"], MODELS["gable_top"]
+    pc = {"W": 80.0, "D": 50.0, "H": 120.0}
+    idx, uv, _ = observe(cub, pc, CUBOID_CAM, FX)
+    r = solve(cub, idx, uv, FX, {}, 0.6)
+    assert r["scale_source"] == "NO_METRIC_ANCHOR" and r["delivery"] == "REFUSED"
+    assert r["identifiability"] == "UNIDENTIFIABLE" and all(math.isinf(v) for v in r["sigma_mm"].values())
+
+    idx, uv, _ = observe(gab, GABLE_PARAMS, _gable_cam(), FX)
+    r = solve(gab, idx, uv, FX, {}, 0.8)
+    assert r["scale_source"] == "TEMPLATE_PRIOR_ANCHOR" and r["delivery"] == "PRIOR_DEPENDENT_ESTIMATE"
+
+    r = solve(gab, idx, uv, FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8)
+    assert r["scale_source"] == "MEASURED_ANCHOR" and r["delivery"] == "MANUFACTURING_DIMENSIONS"
+
+    # fin_gap 转自由参数: 模板先验消失, 无锚点须重新暴露不可辨识 (R3 §2.2 第三组条件)
+    r = solve(gab, idx, uv, FX, {}, 0.8, free_fin_gap=True)
+    assert r["scale_source"] == "NO_METRIC_ANCHOR" and r["delivery"] == "REFUSED"
+    assert r["identifiability"] == "UNIDENTIFIABLE"
+
+
+def test_sigma_bars_finite_positive_and_honest():
+    """σ=1px + 一条实测边: 误差棒为有限正值且 2σ 区间须覆盖实际误差 (局部线性近似的下限检查)。"""
+    rng = np.random.default_rng(2027)
+    gab = MODELS["gable_top"]
+    covered = total = 0
+    for _ in range(3):
+        idx, uv, _ = observe(gab, GABLE_PARAMS, _gable_cam(), FX)
+        r = solve(gab, idx, uv + rng.normal(0, 1.0, uv.shape), FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8, noise_px=1.0)
+        th = {**r["anchors"], **r["theta"]}
+        for k in ("W", "D", "Hr", "Ef"):
+            s = r["sigma_mm"][k]
+            assert math.isfinite(s) and s > 0, (k, s)
+            covered += abs(th[k] - GABLE_PARAMS[k]) <= 2 * s
+            total += 1
+    assert covered >= 0.8 * total, covered  # 名义 95%, 小样本放宽到 80% 下限

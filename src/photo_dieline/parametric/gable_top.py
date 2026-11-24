@@ -33,8 +33,9 @@ def validate_params(params: dict) -> None:
     """参数语义: 正尺寸; n/枚举由模板自检."""
     for k in ("W", "D", "Hb", "Hr", "Ef", "fin_gap_mm", "glue_w", "board_t"):
         v = params.get(k)
-        if v is None or not isinstance(v, (int, float)) or isinstance(v, bool) or v <= 0:
-            raise ValueError(f"非法参数 {k}={v!r} (须正数)")
+        # isfinite: nan/inf 能同时躲过 v<=0 与 isinstance 检查, 会在几何内核深处才崩 (R3 §4.4)
+        if v is None or not isinstance(v, (int, float)) or isinstance(v, bool) or not math.isfinite(v) or v <= 0:
+            raise ValueError(f"非法参数 {k}={v!r} (须正的有限数)")
 
 
 if __name__ != "__main__":

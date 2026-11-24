@@ -202,3 +202,19 @@ zoo_audit: P0×1 / P1×6 / P2×11 / P3×6。全部探针在 HEAD 54b81ca 的 `gi
 ## 6. GPT 复查评审
 - 第 1 轮: 会话 `6b04e20e-6b54-83ea-9404-cce4e946424f`, 判决原文 `gpt/round1_verdict.md`。要点: 技术主干保留; 撤回 100/100 声明改分级验证; **"几何覆盖稀疏是误差主因" 不予确认** (接受现象、拒绝归因); CNN 回归暂停扩张; 解析几何升 P0 并升级为参数化逆向拟合; 多视角前馈模型降级; 真实数据集 P0; 货架线迁出。
 - 第 2 轮: (见 `gpt/round2_verdict.md`)
+- 第 3 轮: 判决原文 `gpt/round3_verdict.md` (同线程续评, 提示词 `gpt/round3_prompt.txt`)。**B0-A CONDITIONAL PASS; 准入 B0-B; 参数化逆向拟合批准为研究主干; "B0 比 CNN 精确七倍"的普遍性声明 NOT APPROVED (收窄为: 额外几何观测+尺度约束可用的条件下, 求解器能力上限优于 CNN 实测表现); 无锚点 gable 制造尺寸交付 REJECTED (允许 PRIOR_DEPENDENT_ESTIMATE); G04 折向合同 CONDITIONAL PASS (1e-3 是数值容差非制造容差, 须区分); G02 5° 域批准为 MODEL_DOMAIN_LIMIT (不作制造/视觉标准声明); 四分法 PARTIAL PASS (建议改八维正交状态合同); 变异矩阵账目质疑 (27 vs 30) → 已补逐 ID 对账。R4 三工作包: WP1 可辨识性与尺度来源合同 / WP2 B0-B 最小压力实验 (B01 先验 · B02 退化视角 · B03 噪声结构 · B04 内参 ±2%/±5% · B05 1 vs 3 vs 3 近重复视角) / WP3 门禁证据收口。**
+
+### 5.5 R4 首批落实 (第三批同日)
+
+| WP | 动作 | 结果 |
+|---|---|---|
+| WP3 | 变异矩阵逐 ID 对账 (回应 R3 §4.4 账目质疑) | `evidence/gate_v2_replay_account.md`: 探针 30 项 (27 是 R1 时代条数, probe12 扩到 30, 已更正); **30/30 全部被预期机制拒绝**; 3 项 BUILD-EXC 全部为入口显式拒绝 (2×ValueError 非法参数 + 1×ARError 语义非法), 无意外崩溃 |
+| WP3 | W=nan/inf 穿透修复: `v<=0` 拦不住非有限值, nan 曾穿透到 shapely 深处崩 GEOSException | `gable_top.validate_params` 加 `isfinite`; 回放中 W=nan/inf 变为入口 `ValueError (须正的有限数)`; 拼写审计: 代码 `NOT_ASSESSED` 正确, R3 提示词中误拼 NOT_ASSESED 1 处 (证据文件不改写, 在此更正) |
+| WP1 | 尺度来源分级 + 交付处置 + 三级可辨识 + 参数级误差棒: `measurement/solve.py` 返回 `scale_source` (MEASURED_ANCHOR / TEMPLATE_PRIOR_ANCHOR / NO_METRIC_ANCHOR) · `identifiability` (IDENTIFIABLE/WEAK/UNIDENTIFIABLE, 阈值 1e4/1e6 仅数值诊断) · `sigma_mm` (C≈S⁻¹ 对角 × noise_px, 秩亏方向显式 inf) · `delivery` (MANUFACTURING_DIMENSIONS / INSUFFICIENT_PRECISION / PRIOR_DEPENDENT_ESTIMATE / REFUSED) · `free_fin_gap` 先验消融开关 | 无锚长方体 → REFUSED; 无锚 gable → PRIOR_DEPENDENT_ESTIMATE (fin_gap=3mm 是绝对先验, "无锚点"并非无尺度约束 — 采纳 R3 §2.1); 合同测试 `test_scale_source_and_delivery_contract` |
+| WP1 | fin_gap 先验敏感性 (R3 §2.2): 真值 gap ∈ {2.5,3.0,3.5}, 求解器假定 3.0 | 有实测边: 尺度偏差仅 ±1% (绝对尺度已被 Hb 锚定, 失配只扰动鳍几何); **仅先验锚定: +5.8% / −0.8% / −17.9% — 不服从理论比例且符号不定 (弱可辨识谷底内任意落点), σ_W=15–26mm 如实报告平坦性; 这正是必须拒绝先验-only 制造交付的实证** |
+| WP1 | fin_gap 自由参数消融 (R3 §2.2 第三组) | 无锚点+gap 自由 → NO_METRIC_ANCHOR / UNIDENTIFIABLE / REFUSED (简并如预期重新暴露); Hb 锚+gap 自由 → gap 恢复 3.000 (σ=1.45mm) |
+| WP1 | 误差棒可信度 (R3 §3.4 区间覆盖率) | σ=1px + Hb 锚, 5 种子: **2σ 区间覆盖 19/20 ≈ 95%** (名义水平); 合同测试 `test_sigma_bars_finite_positive_and_honest` |
+| WP2 | B0-B 初步跑 (多视角 × 锚点 × 内参 ±10% 扰动; 6 留出变体, σ=1px; **非 R3 冻结方案的最终版**, 冻结版 B01–B05 待做) | 多视角解除尺度简并: 无锚 3/6 视角从拒判变"可辨识"但条件数仍 2×10⁵、W/D 误差 ±3–6mm (±10% 内参误差被尺度吸收 — 印证 R3 B04 内参-几何混淆); 一条实测边时多视角无增益 (0.0035→0.0041) 且内参已知时单视角已 0.33/0.47mm。数据 `evidence/b0/b0b_rows.json` |
+| — | 测试 | **72 passed** (新增尺度来源/交付合同 + 误差棒覆盖) |
+
+R4 剩余 (按 R3 §6): WP2 冻结方案 B01–B05 全矩阵 (配对观测+固定种子, 含 3 近重复视角对照、系统性/相关噪声、语义对应错误与关键点缺失的拒识行为、风险-覆盖率曲线); WP1 参数级精度 III 层 (σ 对比特征容差的自动交付门槛); WP3 合法 W/D/H 几何变化挑战、A4 专项 (冲突实测/派生重算/非 gable 分发)、PDF 独立渲染证据、roll 有符号残差扫描、六帧排除分母登记。
