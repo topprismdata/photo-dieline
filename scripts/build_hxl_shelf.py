@@ -28,6 +28,7 @@ from mathutils import Vector
 sys.path.insert(0, str(Path(__file__).parent))
 from bag_print import render_print
 from PIL import ImageFont
+from PIL import ImageDraw
 
 def _load_font_cn(sz):
     try:
@@ -50,7 +51,24 @@ ROW_SPANS = {}   # V37-B2: (lv, r_i, design_id) -> (x0, gw) 组原span
 ORIG36 = {}      # V38: 打包前 V36 位置快照 (name -> (x, y))
 BOX_FRONT_CACHE = {}  # V46: 盒面合成缓存 (design path -> composed png)
 BOX_BODY_COLOR = {}  # V47: 盒体色 = 设计边色均值 (消贴纸感)
-FOOD_PATCHES = [Image.open(pp) for pp in sorted((ROOT / "assets/food_patches").glob("*.png"))]
+def _procedural_food_patch(seed: int, size: int = 240):
+    """仓内自绘的占位"食品窗": 暖色底 + 一片起伏边缘的椭圆片, 不含任何第三方素材。
+    仅当既无设计图、也无 AI 印刷时作为程序化印刷的回退 (2026-11-24 第三方电商产品照出库后启用)。"""
+    rng = np.random.default_rng(seed)
+    im = Image.new("RGB", (size, size), (236, 196, 60))
+    d = ImageDraw.Draw(im)
+    cx = cy = size / 2
+    pts = []
+    for k in range(48):
+        a = 2 * math.pi * k / 48
+        rr = size * 0.36 * (1 + 0.08 * math.sin(5 * a + seed) + rng.normal(0, 0.015))
+        pts.append((cx + rr * math.cos(a), cy + rr * math.sin(a)))
+    d.polygon(pts, fill=(242, 214, 140), outline=(214, 170, 96))
+    return im
+
+
+FOOD_PATCHES = ([Image.open(pp) for pp in sorted((ROOT / "assets/food_patches").glob("*.png"))]
+                or [_procedural_food_patch(s) for s in (1, 2, 3, 4)])
 FLAVOR_TINT = {"黄瓜味": (0.82, 1.10, 0.85), "青柠味": (0.85, 1.08, 0.82),
                "番茄味": (1.10, 0.92, 0.85), "麻辣小龙虾味": (1.10, 0.90, 0.82),
                "劲爆辣味": (1.12, 0.88, 0.80), "芝士味": (1.08, 1.04, 0.80)}

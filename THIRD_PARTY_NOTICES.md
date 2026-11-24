@@ -9,6 +9,7 @@
 | jsonschema | MIT | Geometry IR Schema 校验 |
 | Pillow | HPND / MIT-CMU | 照片证据读取 |
 | Typer | MIT | CLI |
+| pypdf | BSD-3-Clause | QA 门 G08 独立解析 PDF 交付物 |
 
 ## 方法与知识来源（非代码依赖）
 
@@ -21,6 +22,9 @@
 
 - `examples/gable_top/reference_photo.jpg` — USDA 公有领域实拍（屋顶包参照证据），
   溯源/商标声明见 `examples/gable_top/PHOTO_PROVENANCE.md`（ADR-011 首条落地）。
+- `assets/hdri/studio_small_09_2k.hdr` — Poly Haven HDRI（CC0），货架孪生渲染的环境光。
+- `assets/ai_prints/*.png` 及其派生的 `assets/pillow_designs/design_*.png` — MiniMax H3-Image 本地推理生成的虚构品牌（TOPPRISM）包装印刷图；图案内容非真实品牌。模型权重的使用许可以其官方发布为准，入库时未做许可审查（待补）。
+- **已出库**（2026-11-24）：`assets/food_patches/` 下 4 张第三方电商产品摄影裁片（无来源与许可记录，违反 ADR-011）。回退路径改为仓内自绘占位图。注意：这些文件在 2026-11-21 至 11-24 之间的 git 历史提交中仍然存在，清除历史需改写公开仓历史（待仓库所有者裁决）。
 
 ## 数据治理承诺（ADR-011）
 
