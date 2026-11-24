@@ -149,6 +149,8 @@ def write_sidecars(asset_dir, asset_id, category, evidence, dims_reconcile, vali
         "asset_license": license_str, "category": category,
         "source_file": "./model.usdc", "qcode": None,  # 已知缺口: 品类 Wikidata 富化未接 (如实)
         "rigid_body_count": 1, "mass_kg": round(evidence["mass_kg"], 6),
+        "mass_scope": "packaging_empty",  # 仅包装材料质量 (面积×克重); 内容物/商品总重不含 — R1 P0-05
+        "content_volume_ml": None,  # 未声明: 品类容量属商品层, 实测后回填
         "asset_extents_m": [round(d, 6) for d in evidence["stage_dims_m"]],
         "board": {"kind": evidence["kind"], "gsm": evidence["gsm"],
                   "source": "BOARD_GSM 表 (通用材料口径, 量产须替换采购规格)"},

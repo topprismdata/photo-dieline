@@ -164,6 +164,16 @@ def main():
                     row["degeneracy"] = degeneracy_prior(dims)
                     row["dims_mm"] = {"analytic": dims, "folded": res["folded"]}
                     row["reconcile"] = res["reconcile"]["axes"]
+                    # P-GATE 拆分 (R1 P0-04: 禁止 GREEN=SimReady verified 混称; 只报实测)
+                    for gk, gv in {"01_naming": "PASS",
+                                   "02_structure": "PASS" if row.get("validator_ok") else "FAIL",
+                                   "03_package_profile": "UNTESTED",
+                                   "04_asset_profile": "UNTESTED",
+                                   "05_physics": "PARTIAL",
+                                   "06_runtime_load": "UNTESTED",
+                                   "07_stability": "UNTESTED",
+                                   "08_cross_runtime": "UNTESTED"}.items():
+                        row["p_gate_" + gk.split("_")[0]] = gv
             except Exception as e:
                 row.update({"status": "ERROR", "fail": f"{type(e).__name__}: {str(e)[:220]}",
                             "trace": traceback.format_exc()[-600:]})
@@ -174,7 +184,8 @@ def main():
     # manifest (CSV) + summary
     import csv
     cols = ["asset_id", "family", "class_id", "variant", "sample_set", "status", "reconcile_ok",
-            "reconcile_worst_mm", "validator_ok", "validator_checks", "identifiability_prior", "dim_ratio", "fail"]
+            "reconcile_worst_mm", "validator_ok", "validator_checks", "identifiability_prior", "dim_ratio",
+        "p_gate_01", "p_gate_02", "p_gate_03", "p_gate_04", "p_gate_05", "p_gate_06", "p_gate_07", "p_gate_08", "fail"]
     for r in rows:
             dg = r.get("degeneracy") or {}
             r["identifiability_prior"] = dg.get("identifiability_prior", "")
