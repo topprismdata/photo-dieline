@@ -1,0 +1,100 @@
+aseptic_brick: base_flags=[] trials={'GREEN': 23, 'QA_FAIL': 1} GREEN_with_new_flags=0/23
+brick_250ml: base_flags=[] trials={'GREEN': 23, 'QA_FAIL': 1} GREEN_with_new_flags=0/23
+clamp_shell: base_flags=[] trials={'GREEN': 18, 'REJECT': 2} GREEN_with_new_flags=0/18
+clv_double_cover: base_flags=[] trials={'GREEN': 24, 'REJECT': 4} GREEN_with_new_flags=0/24
+clv_double_tuck: base_flags=[] trials={'GREEN': 28} GREEN_with_new_flags=0/28
+clv_glue_seal: base_flags=[] trials={'REJECT': 4, 'GREEN': 28} GREEN_with_new_flags=0/28
+clv_hinged_flap: base_flags=[] trials={'GREEN': 32} GREEN_with_new_flags=0/32
+clv_partial_lid: base_flags=[] trials={'GREEN': 20} GREEN_with_new_flags=0/20
+clv_snap_lock: base_flags=[] trials={'REJECT': 12, 'GREEN': 28} GREEN_with_new_flags=0/28
+clv_tuck_insert: base_flags=[] trials={'REJECT': 6, 'GREEN': 26} GREEN_with_new_flags=0/26
+cone_wrap: base_flags=[] trials={'REJECT': 8, 'GREEN': 12} GREEN_with_new_flags=0/12
+cone_wrap_n12: base_flags=[] trials={'REJECT': 8, 'GREEN': 12} GREEN_with_new_flags=0/12
+cone_wrap_n20: base_flags=[] trials={'REJECT': 8, 'GREEN': 12} GREEN_with_new_flags=0/12
+crashlock_divider: base_flags=['glue_on_own_panel'] trials={'REJECT': 11, 'GREEN': 15, 'QA_FAIL': 2} GREEN_with_new_flags=0/15
+crashlock_rect: base_flags=['glue_on_own_panel'] trials={'GREEN': 25, 'REJECT': 7} GREEN_with_new_flags=0/25
+crashlock_rect_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 25, 'REJECT': 7} GREEN_with_new_flags=0/25
+cup_sleeve: base_flags=[] trials={'GREEN': 17, 'REJECT': 7} GREEN_with_new_flags=0/17
+dispenser_top: base_flags=[] trials={'REJECT': 6, 'GREEN': 32, 'QA_FAIL': 2} GREEN_with_new_flags=0/32
+display_counter: base_flags=[] trials={'GREEN': 8, 'REJECT': 12} GREEN_with_new_flags=0/8
+divided_tray_3comp: base_flags=[] trials={'REJECT': 6, 'GREEN': 10} GREEN_with_new_flags=0/10
+egg_tray_2x4: base_flags=[] trials={'GREEN': 14, 'REJECT': 2} GREEN_with_new_flags=0/14
+envelope_square: base_flags=[] trials={'REJECT': 4, 'GREEN': 8} GREEN_with_new_flags=0/8
+envelope_wedge: base_flags=[] trials={'GREEN': 22, 'REJECT': 2} GREEN_with_new_flags=0/22
+food_bento_lid_box: base_flags=[] trials={'GREEN': 22, 'REJECT': 2} GREEN_with_new_flags=0/22
+food_clamshell_burger: base_flags=[] trials={'GREEN': 18, 'REJECT': 2} GREEN_with_new_flags=0/18
+food_fries_sleeve: base_flags=[] trials={'GREEN': 22, 'REJECT': 6} GREEN_with_new_flags=0/22
+food_noodle_pail: base_flags=[] trials={'REJECT': 10, 'GREEN': 25, 'QA_FAIL': 1} GREEN_with_new_flags=2/25
+food_sushi_tray: base_flags=[] trials={'GREEN': 28, 'REJECT': 4, 'QA_FAIL': 4} GREEN_with_new_flags=4/28
+food_tray_liner: base_flags=[] trials={'REJECT': 7, 'GREEN': 13} GREEN_with_new_flags=0/13
+food_wrap_pocket: base_flags=[] trials={'GREEN': 27, 'REJECT': 1} GREEN_with_new_flags=0/27
+gable_fin_gap_wide: base_flags=[] trials={'GREEN': 28, 'QA_FAIL': 2, 'REJECT': 2} GREEN_with_new_flags=2/28
+gable_finless: base_flags=[] trials={'GREEN': 22, 'QA_FAIL': 6} GREEN_with_new_flags=2/22
+gable_rect_base: base_flags=[] trials={'GREEN': 26, 'REJECT': 3, 'QA_FAIL': 3} GREEN_with_new_flags=0/26
+gable_screw_cap: base_flags=[] trials={'REJECT': 10, 'GREEN': 22, 'QA_FAIL': 4} GREEN_with_new_flags=1/22
+gable_top: base_flags=[] trials={'GREEN': 29, 'QA_FAIL': 3} GREEN_with_new_flags=2/29
+gable_window_front: base_flags=['glue_overhang'] trials={'REJECT': 5, 'GREEN': 38, 'QA_FAIL': 1} GREEN_with_new_flags=0/38
+handle_box: base_flags=[] trials={'REJECT': 6, 'GREEN': 36, 'QA_FAIL': 2} GREEN_with_new_flags=0/36
+hanger_box: base_flags=[] trials={'REJECT': 6, 'GREEN': 36, 'QA_FAIL': 2} GREEN_with_new_flags=0/36
+hexagonal_flip: base_flags=['glue_on_own_panel'] trials={'GREEN': 10, 'REJECT': 2} GREEN_with_new_flags=0/10
+lockbottom_123: base_flags=['glue_on_own_panel'] trials={'REJECT': 5, 'GREEN': 27} GREEN_with_new_flags=0/27
+mailer_bookwrap: base_flags=[] trials={'GREEN': 20} GREEN_with_new_flags=0/20
+mailer_diecut: base_flags=[] trials={'REJECT': 6, 'GREEN': 22} GREEN_with_new_flags=0/22
+mailer_rigid_pad: base_flags=[] trials={'GREEN': 22, 'REJECT': 2} GREEN_with_new_flags=0/22
+pillow_box: base_flags=[] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_dust_n10: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n11: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n12: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n4: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n5: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n6: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n7: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n8: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_dust_n9: base_flags=['glue_overhang'] trials={'QA_FAIL': 9, 'GREEN': 11} GREEN_with_new_flags=0/11
+prism_n10_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n10_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n11_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n11_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n12_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n12_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n4_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n4_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n5_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n5_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n6_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n6_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n7_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n7_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n8_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n8_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n9_open: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_n9_tuck: base_flags=['glue_on_own_panel'] trials={'GREEN': 16} GREEN_with_new_flags=0/16
+prism_tuck_window: base_flags=[] trials={'GREEN': 23, 'REJECT': 5} GREEN_with_new_flags=0/23
+pyramid_frustum_n10: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n12: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n4: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n5: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n6: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n7: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n8: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+pyramid_frustum_n9: base_flags=[] trials={'REJECT': 4, 'GREEN': 12} GREEN_with_new_flags=0/12
+rsc_css: base_flags=[] trials={'GREEN': 20, 'QA_FAIL': 3, 'REJECT': 1} GREEN_with_new_flags=0/20
+rsc_display_panel: base_flags=[] trials={'GREEN': 8, 'REJECT': 16} GREEN_with_new_flags=0/8
+rsc_handhole: base_flags=[] trials={'GREEN': 27, 'REJECT': 5} GREEN_with_new_flags=0/27
+rsc_hsc: base_flags=[] trials={'GREEN': 23, 'REJECT': 1} GREEN_with_new_flags=0/23
+rsc_lock: base_flags=[] trials={'GREEN': 22, 'QA_FAIL': 1, 'REJECT': 1} GREEN_with_new_flags=0/22
+rsc_rsc: base_flags=[] trials={'GREEN': 23, 'REJECT': 1} GREEN_with_new_flags=0/23
+slide_box: base_flags=[] trials={'REJECT': 2, 'GREEN': 34} GREEN_with_new_flags=0/34
+tray_4corner: base_flags=[] trials={'GREEN': 28, 'REJECT': 4} GREEN_with_new_flags=0/28
+tray_6corner: base_flags=[] trials={'GREEN': 27, 'REJECT': 5} GREEN_with_new_flags=0/27
+tray_domelid: base_flags=[] trials={'GREEN': 21, 'REJECT': 3} GREEN_with_new_flags=0/21
+tray_lid_overfit: base_flags=[] trials={'REJECT': 3, 'GREEN': 13} GREEN_with_new_flags=0/13
+tray_wedge: base_flags=[] trials={'GREEN': 30, 'REJECT': 2} GREEN_with_new_flags=0/30
+tube_cap_end: base_flags=['glue_on_own_panel'] trials={'QA_FAIL': 4, 'REJECT': 5, 'GREEN': 11} GREEN_with_new_flags=0/11
+tube_double_seam: base_flags=['glue_on_own_panel'] trials={'REJECT': 2, 'GREEN': 10} GREEN_with_new_flags=0/10
+tube_glue: base_flags=['glue_on_own_panel'] trials={'GREEN': 8, 'QA_FAIL': 4, 'REJECT': 4} GREEN_with_new_flags=0/8
+tube_glue_n24: base_flags=['glue_on_own_panel'] trials={'GREEN': 8, 'QA_FAIL': 4, 'REJECT': 4} GREEN_with_new_flags=0/8
+tube_glue_n8: base_flags=['glue_on_own_panel'] trials={'GREEN': 8, 'QA_FAIL': 4, 'REJECT': 4} GREEN_with_new_flags=0/8
+tuck_top_box: base_flags=[] trials={'GREEN': 28, 'QA_FAIL': 2, 'REJECT': 2} GREEN_with_new_flags=0/28
+two_piece: base_flags=[] trials={'GREEN': 36} GREEN_with_new_flags=0/36
+window_box: base_flags=[] trials={'REJECT': 12, 'GREEN': 30, 'QA_FAIL': 2} GREEN_with_new_flags=0/30

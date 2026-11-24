@@ -1,0 +1,62 @@
+== A. glue hosts ==
+  [SELF] crashlock_divider: glue=glue parent=wF area=960.0 hosts=[('wF', 'wall', 960.0, True, True)]
+  [SELF] crashlock_rect: glue=glue parent=wF area=960.0 hosts=[('wF', 'wall', 960.0, True, True)]
+  [SELF] crashlock_rect_tuck: glue=glue parent=wF area=960.0 hosts=[('wF', 'wall', 960.0, True, True)]
+  [OK] gable_window_front: glue=glue parent=wallL area=1200.0 hosts=[('fb', 'wall', 240.0, False, False), ('wt', 'wall', 168.0, False, False), ('wr', 'wall', 792.0, False, False)]
+  [SELF] hexagonal_flip: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] lockbottom_123: glue=glue parent=wF area=840.0 hosts=[('wF', 'wall', 840.0, True, True)]
+  [OK] prism_dust_n10: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n11: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n12: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n4: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n5: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n6: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n7: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n8: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [OK] prism_dust_n9: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True), ('d0', 'flap', 180.0, False, False)]
+  [SELF] prism_n10_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n10_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n11_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n11_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n12_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n12_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n4_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n4_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n5_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n5_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n6_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n6_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n7_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n7_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n8_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n8_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n9_open: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [SELF] prism_n9_tuck: glue=glue parent=w0 area=1200.0 hosts=[('w0', 'wall', 1200.0, True, True)]
+  [OK] slide_box: glue=glue_d parent=dwL area=408.0 hosts=[('dwF', 'wall', 408.0, False, False), ('baffle', 'flap', 300.0, False, False)]
+  [SELF] tube_cap_end: glue=glue parent=w0 area=2800.0 hosts=[('w0', 'wall', 2800.0, True, True)]
+  [SELF] tube_double_seam: glue=glue parent=w0 area=3000.0 hosts=[('w0', 'wall', 3000.0, True, True)]
+  [SELF] tube_glue: glue=glue parent=w0 area=2800.0 hosts=[('w0', 'wall', 2800.0, True, True)]
+  [SELF] tube_glue_n24: glue=glue parent=w0 area=2800.0 hosts=[('w0', 'wall', 2800.0, True, True)]
+  [SELF] tube_glue_n8: glue=glue parent=w0 area=2800.0 hosts=[('w0', 'wall', 2800.0, True, True)]
+== B. net overlap (dup area > 0.01) ==
+  crashlock_divider: dup=5160.0 pairs=[('bF', 'dvl', 3000.0), ('bF', 'dvt', 2160.0), ('dvl', 'dvt', 1080.0)]
+  cup_sleeve: dup=960.0 pairs=[('w0', 'hemB0', 80.0), ('w1', 'hemB1', 80.0), ('w2', 'hemB2', 80.0), ('w3', 'hemB3', 80.0), ('w4', 'hemB4', 80.0), ('w5', 'hemB5', 80.0)]...
+  divided_tray_3comp: dup=6250.0 pairs=[('floor', 'dvl', 3383.33), ('floor', 'dvt', 2690.62), ('dvl', 'dvt', 1225.0)]
+  egg_tray_2x4: dup=15680.0 pairs=[('floor', 'wAf', 4480.0), ('floor', 'dvm', 4480.0), ('floor', 'cs1', 1120.0), ('floor', 'cs2', 1120.0), ('floor', 'cs3', 1120.0), ('wAf', 'cs1', 1120.0)]...
+  food_noodle_pail: dup=4430.86 pairs=[('w0', 'tf0', 359.65), ('w0', 'wg0', 482.84), ('w1', 'tf1', 457.65), ('w2', 'tf2', 457.65), ('w3', 'tf3', 457.65), ('w4', 'tf4', 359.65)]...
+  food_sushi_tray: dup=26559.05 pairs=[('floor', 'lfloor', 12885.19), ('floor', 'L0', 1877.82), ('floor', 'L1', 212.38), ('floor', 'L7', 212.38), ('floor', 'lglue', 42.43), ('w2', 'lfloor', 104.23)]...
+  food_tray_liner: dup=0.33 pairs=[('w0', 'glue', 0.33)]
+  gable_screw_cap: dup=257.79 pairs=[('slopeB', 'sb0', 8.06), ('slopeB', 'sb1', 0.0), ('slopeB', 'sb6', 0.0), ('slopeB', 'sb7', 8.06), ('slopeF', 'sf0', 8.06), ('slopeF', 'sf1', 0.0)]...
+  pyramid_frustum_n10: dup=9971.69 pairs=[('w0', 'tf0', 997.17), ('w1', 'tf1', 997.17), ('w2', 'tf2', 997.17), ('w3', 'tf3', 997.17), ('w4', 'tf4', 997.17), ('w5', 'tf5', 997.17)]...
+  pyramid_frustum_n12: dup=14510.21 pairs=[('w0', 'tf0', 1209.18), ('w1', 'tf1', 1209.18), ('w2', 'tf2', 1209.18), ('w3', 'tf3', 1209.18), ('w4', 'tf4', 1209.18), ('w5', 'tf5', 1209.18)]...
+  pyramid_frustum_n4: dup=1296.0 pairs=[('w0', 'tf0', 324.0), ('w1', 'tf1', 324.0), ('w2', 'tf2', 324.0), ('w3', 'tf3', 324.0)]
+  pyramid_frustum_n5: dup=2229.74 pairs=[('w0', 'tf0', 445.95), ('w1', 'tf1', 445.95), ('w2', 'tf2', 445.95), ('w3', 'tf3', 445.95), ('w4', 'tf4', 445.95)]
+  pyramid_frustum_n6: dup=3367.11 pairs=[('w0', 'tf0', 561.18), ('w1', 'tf1', 561.18), ('w2', 'tf2', 561.18), ('w3', 'tf3', 561.18), ('w4', 'tf4', 561.18), ('w5', 'tf5', 561.18)]
+  pyramid_frustum_n7: dup=4709.55 pairs=[('w0', 'tf0', 672.79), ('w1', 'tf1', 672.79), ('w2', 'tf2', 672.79), ('w3', 'tf3', 672.79), ('w4', 'tf4', 672.79), ('w5', 'tf5', 672.79)]...
+  pyramid_frustum_n8: dup=6257.64 pairs=[('w0', 'tf0', 782.21), ('w1', 'tf1', 782.21), ('w2', 'tf2', 782.21), ('w3', 'tf3', 782.21), ('w4', 'tf4', 782.21), ('w5', 'tf5', 782.21)]...
+  pyramid_frustum_n9: dup=8011.64 pairs=[('w0', 'tf0', 890.18), ('w1', 'tf1', 890.18), ('w2', 'tf2', 890.18), ('w3', 'tf3', 890.18), ('w4', 'tf4', 890.18), ('w5', 'tf5', 890.18)]...
+== degen first tri / bad poly ==
+  divided_tray_3comp: degen=[] bad=['floor']
+== F. crossings ==
+  crashlock_divider: ('dvl', 'wall', 'dvt', 'wall', 36.0, 'allowed')
+  divided_tray_3comp: ('dvl', 'wall', 'dvt', 'wall', 35.0, 'G06_MISS')

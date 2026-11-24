@@ -1,0 +1,48 @@
+--- envelopes (front coverage on body plane) ---
+envelope_square body 19600.0 covered 19600.0 UNCOVERED 0.0 (0.0%) holes 0 sum/union 1.75
+envelope_wedge body 21600.0 covered 18230.7 UNCOVERED 3369.3 (15.6%) holes 2 sum/union 0.949
+--- pillow ends (x faces) ---
+(3034.5, {'endL': {'union': 2520.0, 'uncovered': 514.5, 'cover_ratio': 0.83}, 'endR': {'union': 2520.0, 'uncovered': 514.5, 'cover_ratio': 0.83}})
+--- clamshell ends ---
+(4137.6, {'wL': {'union': 2800.0, 'uncovered': 1337.6, 'cover_ratio': 0.677}, 'wR': {'union': 2800.0, 'uncovered': 1337.6, 'cover_ratio': 0.677}})
+--- tray_domelid ends ---
+(5468.4, {'wL': {'union': 3200.0, 'uncovered': 2268.4, 'cover_ratio': 0.585}, 'wR': {'union': 3200.0, 'uncovered': 2268.4, 'cover_ratio': 0.585}})
+--- tube_cap_end bottom (z=0) / top ---
+(9974.0, {'cap*': {'union': 4021.9, 'uncovered': 5952.1, 'cover_ratio': 0.403}, 'flange': {'union': 1920.0, 'uncovered': 8054.0, 'cover_ratio': 0.193}})
+--- noodle pail top/bottom ---
+(7732.3, {'tf*': {'union': 3012.9, 'uncovered': 4719.3, 'cover_ratio': 0.39}, 'wg*': {'union': 965.7, 'uncovered': 6766.6, 'cover_ratio': 0.125}})
+--- wrap pocket bottom ---
+(6757.8, {'all': {'union': 5766.6, 'uncovered': 991.2, 'cover_ratio': 0.853}})
+--- frustum bottom ---
+(3604.8, {'all': {'union': 3600.0, 'uncovered': 4.8, 'cover_ratio': 0.999}})
+--- hexagonal_flip bottom ---
+(2341.9, {'all': {'union': 2338.3, 'uncovered': 3.6, 'cover_ratio': 0.998}})
+--- liner rim (z=H plane projected) ---
+(5266.5, {'rim': {'union': 2078.5, 'uncovered': 3188.0, 'cover_ratio': 0.395}})
+prism_n4_open g0: n=4 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=3600 ids=['b0', 'b1', 'b2', 'b3']
+prism_n5_tuck g0: n=5 sum/union=2.000 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=6194 ids=['b0', 'b1', 'b2', 'b3', 'b4']
+prism_n5_tuck g1: n=5 sum/union=2.000 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=6194 ids=['t0', 't1', 't2', 't3', 't4']
+prism_n6_tuck g0: n=6 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=9353 ids=['b0', 'b1', 'b2', 'b3', 'b4', 'b5']
+prism_n6_tuck g1: n=6 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=9353 ids=['t0', 't1', 't2', 't3', 't4', 't5']
+prism_n8_tuck g0: n=8 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=17382 ids=['b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7']
+prism_n8_tuck g1: n=8 sum/union=2.000 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=17382 ids=['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7']
+prism_n12_tuck g0: n=12 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=40306 ids=['b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7']
+prism_n12_tuck g1: n=12 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=40306 ids=['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7']
+prism_dust_n6 g5: n=6 sum/union=1.847 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=9075 ids=['t0', 't1', 't2', 't3', 't4', 't5']
+prism_dust_n6 g6: n=6 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=9353 ids=['b0', 'b1', 'b2', 'b3', 'b4', 'b5']
+prism_dust_n12 g11: n=12 sum/union=1.851 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=38566 ids=['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7']
+prism_dust_n12 g12: n=12 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=40306 ids=['b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7']
+hexagonal_flip g0: n=6 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=2338 ids=['f0', 'f1', 'f2', 'f3', 'f4', 'f5']
+tube_double_seam g0: n=8 sum/union=1.950 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=3018 ids=['b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7']
+tube_double_seam g1: n=8 sum/union=1.950 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=3018 ids=['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7']
+rsc_rsc g0: n=4 sum/union=2.000 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=16000 ids=['b0', 'b1', 'b2', 'b3']
+rsc_rsc g1: n=4 sum/union=2.000 1x/2x/3x+=[1.0, 0.0, 0.0] union_area=16000 ids=['t0', 't1', 't2', 't3']
+tuck_top_box g0: n=4 sum/union=2.000 1x/2x/3x+=[0.0, 0.0, 0.0] union_area=7700 ids=['b0', 'b1', 'b2', 'b3']
+tuck_top_box g1: n=3 sum/union=2.000 1x/2x/3x+=[1.0, 0.0, 0.0] union_area=7700 ids=['t1', 't3', 't2']
+clv_double_tuck g0: n=2 sum/union=1.876 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=5820 ids=['lt2', 'lt0']
+clv_double_tuck g3: n=4 sum/union=2.000 1x/2x/3x+=[1.0, 0.0, 0.0] union_area=6000 ids=['b0', 'b1', 'b2', 'b3']
+gable_top g0: n=4 sum/union=3.000 1x/2x/3x+=[0.0, 0.0, 1.0] union_area=2025 ids=['flapF', 'flapB', 'flapL', 'flapR']
+envelope_square g0: n=4 sum/union=1.750 1x/2x/3x+=[1.0, 0.0, 0.0] union_area=19600 ids=['flapL', 'flapR', 'flapB', 'flapT']
+envelope_wedge g0: n=4 sum/union=1.125 1x/2x/3x+=[1.0, 0.0, 0.0] union_area=18231 ids=['sideL', 'sideR', 'bot', 'top']
+lockbottom_123 g0: n=3 sum/union=1.500 1x/2x/3x+=[1.0, 0.0, 0.0] union_area=4500 ids=['bL', 'bR', 'bF']
+crashlock_rect g0: n=6 sum/union=3.000 1x/2x/3x+=[0.0, 1.0, 0.0] union_area=6000 ids=['bF', 'bB', 'gL0', 'gR0', 'gL1', 'gR1']

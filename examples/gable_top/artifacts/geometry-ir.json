@@ -3,7 +3,7 @@
     "ir_version": "0.1",
     "units": "mm",
     "generator": "photo_dieline.parametric.gable_top 0.1",
-    "notes": "M1 golden sample; 板厚补偿 P1; 鳍双层顶缘距=fin_gap_mm"
+    "notes": "M1 golden sample; 板厚补偿 P1; 鳍双层顶缘距=fin_gap_mm; mt_va 观察面 = polygon_2d 正面 (本模板墙体该侧为盒内面)"
   },
   "package": {
     "type": "gable_top",
@@ -19,7 +19,8 @@
     },
     "template": {
       "id": "gable_top",
-      "version": "0.1"
+      "version": "0.1",
+      "mt_va_reference": "polygon_2d_ccw"
     },
     "photo": {
       "path": "examples/gable_top/reference_photo.jpg",
@@ -350,7 +351,7 @@
         ]
       ],
       "fold": {
-        "mt_va": "MOUNTAIN",
+        "mt_va": "VALLEY",
         "parent": "wallL",
         "child": "glue",
         "target_dir_3d": [
@@ -542,7 +543,7 @@
         ]
       ],
       "fold": {
-        "mt_va": "MOUNTAIN",
+        "mt_va": "VALLEY",
         "parent": "front",
         "child": "flapF",
         "target_dir_3d": [
@@ -566,7 +567,7 @@
         ]
       ],
       "fold": {
-        "mt_va": "MOUNTAIN",
+        "mt_va": "VALLEY",
         "parent": "back",
         "child": "flapB",
         "target_dir_3d": [
@@ -590,7 +591,7 @@
         ]
       ],
       "fold": {
-        "mt_va": "MOUNTAIN",
+        "mt_va": "VALLEY",
         "parent": "wallL",
         "child": "flapL",
         "target_dir_3d": [
@@ -614,7 +615,7 @@
         ]
       ],
       "fold": {
-        "mt_va": "MOUNTAIN",
+        "mt_va": "VALLEY",
         "parent": "wallR",
         "child": "flapR",
         "target_dir_3d": [

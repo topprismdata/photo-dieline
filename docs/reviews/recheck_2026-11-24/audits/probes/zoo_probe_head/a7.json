@@ -1,0 +1,666 @@
+{
+ "photo_dieline_file": "/tmp/pd_recheck/head_54b81ca/src/photo_dieline/__init__.py",
+ "g06": {
+  "pairs": {
+   "all": 17836,
+   "share": 1597,
+   "allowed": 4617,
+   "flapflap": 2622,
+   "tested": 9000
+  },
+  "tested_pct": 50.46,
+  "allowed_entries": 15546,
+  "allowed_vacuous": 13960,
+  "allowed_vacuous_pct": 89.8,
+  "least_tested": [
+   [
+    0.0,
+    "envelope_square",
+    10,
+    4,
+    6,
+    0,
+    0,
+    327,
+    319
+   ],
+   [
+    0.0,
+    "envelope_wedge",
+    10,
+    4,
+    6,
+    0,
+    0,
+    68,
+    60
+   ],
+   [
+    0.0946,
+    "cup_sleeve",
+    666,
+    36,
+    291,
+    276,
+    63,
+    327,
+    326
+   ],
+   [
+    0.3187,
+    "tray_domelid",
+    91,
+    13,
+    43,
+    6,
+    29,
+    218,
+    212
+   ],
+   [
+    0.3456,
+    "prism_dust_n4",
+    136,
+    16,
+    41,
+    32,
+    47,
+    378,
+    367
+   ],
+   [
+    0.3571,
+    "prism_dust_n5",
+    210,
+    20,
+    65,
+    50,
+    75,
+    378,
+    355
+   ],
+   [
+    0.3667,
+    "prism_dust_n6",
+    300,
+    24,
+    94,
+    72,
+    110,
+    378,
+    351
+   ],
+   [
+    0.3744,
+    "prism_dust_n7",
+    406,
+    28,
+    128,
+    98,
+    152,
+    378,
+    333
+   ],
+   [
+    0.3807,
+    "prism_dust_n8",
+    528,
+    32,
+    167,
+    128,
+    201,
+    378,
+    327
+   ],
+   [
+    0.3859,
+    "prism_dust_n9",
+    666,
+    36,
+    211,
+    162,
+    257,
+    378,
+    303
+   ],
+   [
+    0.3902,
+    "prism_dust_n10",
+    820,
+    40,
+    260,
+    200,
+    320,
+    378,
+    295
+   ],
+   [
+    0.3939,
+    "prism_dust_n11",
+    990,
+    44,
+    314,
+    242,
+    390,
+    378,
+    265
+   ],
+   [
+    0.3971,
+    "prism_dust_n12",
+    1176,
+    48,
+    373,
+    288,
+    467,
+    378,
+    255
+   ],
+   [
+    0.4103,
+    "crashlock_divider",
+    78,
+    12,
+    34,
+    0,
+    32,
+    218,
+    202
+   ],
+   [
+    0.4396,
+    "dispenser_top",
+    91,
+    13,
+    3,
+    35,
+    40,
+    19,
+    18
+   ],
+   [
+    0.4396,
+    "hanger_box",
+    91,
+    13,
+    3,
+    35,
+    40,
+    19,
+    17
+   ]
+  ],
+  "robust_crossings": [
+   [
+    "crashlock_divider",
+    "dvl",
+    "dvt",
+    36.0,
+    true
+   ],
+   [
+    "divided_tray_3comp",
+    "dvl",
+    "dvt",
+    35.0,
+    false
+   ]
+  ]
+ },
+ "crease_orientation": {
+  "VALLEY->net-up": {
+   "n": 14,
+   "classes": [
+    "aseptic_brick",
+    "brick_250ml",
+    "cup_sleeve",
+    "divided_tray_3comp",
+    "gable_fin_gap_wide",
+    "gable_finless",
+    "gable_screw_cap",
+    "gable_top",
+    "gable_window_front",
+    "tray_4corner",
+    "tray_6corner",
+    "tray_domelid",
+    "tray_lid_overfit",
+    "tray_wedge"
+   ]
+  },
+  "no-valley": {
+   "n": 10,
+   "classes": [
+    "clamp_shell",
+    "display_counter",
+    "egg_tray_2x4",
+    "envelope_square",
+    "envelope_wedge",
+    "food_bento_lid_box",
+    "food_clamshell_burger",
+    "food_fries_sleeve",
+    "food_sushi_tray",
+    "food_tray_liner"
+   ]
+  },
+  "VALLEY->net-down": {
+   "n": 76,
+   "classes": [
+    "clv_double_cover",
+    "clv_double_tuck",
+    "clv_glue_seal",
+    "clv_hinged_flap",
+    "clv_partial_lid",
+    "clv_snap_lock",
+    "clv_tuck_insert",
+    "cone_wrap",
+    "cone_wrap_n12",
+    "cone_wrap_n20",
+    "crashlock_divider",
+    "crashlock_rect",
+    "crashlock_rect_tuck",
+    "dispenser_top",
+    "food_noodle_pail",
+    "food_wrap_pocket",
+    "gable_rect_base",
+    "handle_box",
+    "hanger_box",
+    "hexagonal_flip",
+    "lockbottom_123",
+    "mailer_bookwrap",
+    "mailer_diecut",
+    "mailer_rigid_pad",
+    "pillow_box",
+    "prism_dust_n10",
+    "prism_dust_n11",
+    "prism_dust_n12",
+    "prism_dust_n4",
+    "prism_dust_n5",
+    "prism_dust_n6",
+    "prism_dust_n7",
+    "prism_dust_n8",
+    "prism_dust_n9",
+    "prism_n10_open",
+    "prism_n10_tuck",
+    "prism_n11_open",
+    "prism_n11_tuck",
+    "prism_n12_open",
+    "prism_n12_tuck",
+    "prism_n4_open",
+    "prism_n4_tuck",
+    "prism_n5_open",
+    "prism_n5_tuck",
+    "prism_n6_open",
+    "prism_n6_tuck",
+    "prism_n7_open",
+    "prism_n7_tuck",
+    "prism_n8_open",
+    "prism_n8_tuck",
+    "prism_n9_open",
+    "prism_n9_tuck",
+    "prism_tuck_window",
+    "pyramid_frustum_n10",
+    "pyramid_frustum_n12",
+    "pyramid_frustum_n4",
+    "pyramid_frustum_n5",
+    "pyramid_frustum_n6",
+    "pyramid_frustum_n7",
+    "pyramid_frustum_n8",
+    "pyramid_frustum_n9",
+    "rsc_css",
+    "rsc_display_panel",
+    "rsc_handhole",
+    "rsc_hsc",
+    "rsc_lock",
+    "rsc_rsc",
+    "slide_box",
+    "tube_cap_end",
+    "tube_double_seam",
+    "tube_glue",
+    "tube_glue_n24",
+    "tube_glue_n8",
+    "tuck_top_box",
+    "two_piece",
+    "window_box"
+   ]
+  }
+ },
+ "svg_cut_check": {
+  "rsc_handhole": {
+   "svg_cut_lines": 33,
+   "cut_inside_panel": {},
+   "cut_on_fold": {
+    "e_t0": 130.0
+   }
+  },
+  "gable_screw_cap": {
+   "svg_cut_lines": 82,
+   "cut_inside_panel": {
+    "sb1": 43.01,
+    "sb2": 46.36,
+    "sb3": 28.8,
+    "slopeB": 21.72,
+    "sb0": 14.58,
+    "sb4": 28.8,
+    "sb5": 46.36,
+    "sb6": 43.01,
+    "sb7": 14.58,
+    "sf1": 43.01,
+    "sf2": 46.36,
+    "sf3": 28.8,
+    "slopeF": 21.72,
+    "sf0": 14.58,
+    "sf4": 28.8,
+    "sf5": 46.36,
+    "sf6": 43.01,
+    "sf7": 14.58
+   },
+   "cut_on_fold": {
+    "e_sl_fb": 19.0,
+    "e_sl_ff": 19.0
+   }
+  },
+  "pyramid_frustum_n4": {
+   "svg_cut_lines": 14,
+   "cut_inside_panel": {
+    "w0": 110.92,
+    "w1": 108.77,
+    "w2": 64.3,
+    "w3": 85.64,
+    "tf0": 50.92,
+    "tf1": 36.41,
+    "tf2": 9.46,
+    "tf3": 11.68
+   },
+   "cut_on_fold": {}
+  },
+  "egg_tray_2x4": {
+   "svg_cut_lines": 47,
+   "cut_inside_panel": {
+    "floor": 440.0
+   },
+   "cut_on_fold": {
+    "e_wr": 164.0,
+    "e_wl": 136.0,
+    "e_wf": 280.0,
+    "e_wb": 280.0
+   }
+  },
+  "cup_sleeve": {
+   "svg_cut_lines": 76,
+   "cut_inside_panel": {
+    "w0": 38.33,
+    "hemT0": 18.5,
+    "hemT1": 5.68,
+    "w1": 26.01,
+    "hemB1": 13.65,
+    "hemT2": 7.18,
+    "w2": 25.99,
+    "hemB2": 9.79,
+    "hemT3": 6.06,
+    "hemT4": 13.97,
+    "w3": 26.0,
+    "w4": 25.98,
+    "hemB3": 11.46,
+    "hemB4": 5.0,
+    "w5": 26.01,
+    "hemB5": 5.01,
+    "hemT5": 10.27,
+    "hemT6": 28.51,
+    "w6": 25.99,
+    "hemB6": 3.69,
+    "w7": 26.02,
+    "hemB7": 16.83,
+    "w8": 25.99,
+    "hemT7": 0.98,
+    "hemT8": 7.46,
+    "hemB8": 2.77,
+    "hemT9": 15.64,
+    "w9": 26.0,
+    "hemB9": 8.95,
+    "w10": 26.03,
+    "hemB10": 23.33,
+    "hemT10": 5.15,
+    "hemT11": 13.03,
+    "w11": 25.98,
+    "hemB11": 19.32,
+    "glue": 33.11
+   },
+   "cut_on_fold": {}
+  }
+ },
+ "divided_floor": {
+  "is_valid": false,
+  "reason": "Self-intersection[60 90]",
+  "area": 10800.0,
+  "WxD": 16200.0,
+  "buffer0_area": 10800.0
+ },
+ "validate_cases": [
+  {
+   "class": "rsc_rsc",
+   "override": {
+    "flap_ratio": 0.1
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_rsc",
+   "override": {
+    "flap_ratio": 0.3
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_rsc",
+   "override": {
+    "flap_ratio": 0.95
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_rsc",
+   "override": {
+    "flap_ratio": 1.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_hsc",
+   "override": {
+    "flap_ratio": 0.2
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_lock",
+   "override": {
+    "flap_ratio": 0.3
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "clv_tuck_insert",
+   "override": {
+    "W": 0.0
+   },
+   "result": "FAIL:G03,G04,G05,G06"
+  },
+  {
+   "class": "clv_tuck_insert",
+   "override": {
+    "W": -50.0
+   },
+   "result": "ERROR"
+  },
+  {
+   "class": "clv_tuck_insert",
+   "override": {
+    "D": -10.0
+   },
+   "result": "FAIL:G05"
+  },
+  {
+   "class": "clv_tuck_insert",
+   "override": {
+    "H": -5.0
+   },
+   "result": "FAIL:G05"
+  },
+  {
+   "class": "clv_tuck_insert",
+   "override": {
+    "ins": 60.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "tuck_top_box",
+   "override": {
+    "W": -40.0
+   },
+   "result": "FAIL:G04,G05"
+  },
+  {
+   "class": "tuck_top_box",
+   "override": {
+    "ins": 60.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "two_piece",
+   "override": {
+    "W": 0.0
+   },
+   "result": "FAIL:G04,G05,G06"
+  },
+  {
+   "class": "two_piece",
+   "override": {
+    "clear": 0.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "two_piece",
+   "override": {
+    "clear": 50.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "slide_box",
+   "override": {
+    "W": -30.0
+   },
+   "result": "FAIL:G04,G05"
+  },
+  {
+   "class": "window_box",
+   "override": {
+    "W": 0.0
+   },
+   "result": "FAIL:G03,G04,G05,G06"
+  },
+  {
+   "class": "gable_top",
+   "override": {
+    "glue_w": 60.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "gable_top",
+   "override": {
+    "fin_gap_mm": 40.0
+   },
+   "result": "FAIL:G06"
+  },
+  {
+   "class": "prism_n4_open",
+   "override": {
+    "glue_w": 200.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_rsc",
+   "override": {
+    "glue_w": 99.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "rsc_rsc",
+   "override": {
+    "board_t": 50.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "envelope_square",
+   "override": {
+    "flap_d": 50.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "envelope_square",
+   "override": {
+    "flap_d": 69.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "tube_glue_n8",
+   "override": {
+    "glue_w": 0.1
+   },
+   "result": "FAIL:G04"
+  },
+  {
+   "class": "tray_6corner",
+   "override": {
+    "side": 30.0,
+    "glue_w": 14.0,
+    "H": 50.0
+   },
+   "result": "GREEN"
+  },
+  {
+   "class": "crashlock_rect",
+   "override": {
+    "W": 80.0,
+    "D": 70.0
+   },
+   "result": "GREEN"
+  }
+ ],
+ "module_probe": {
+  "n_classes_with_probe": 40,
+  "min_perturbed": 1.457,
+  "max_perturbed": 41.786
+ },
+ "fallback_tie": {
+  "VALLEY": [
+   10.0,
+   5.0,
+   5.0
+  ],
+  "MOUNTAIN": [
+   10.0,
+   5.0,
+   5.0
+  ],
+  "identical": true
+ },
+ "pdf_layers_with_content": {
+  "CUT": 31,
+  "CREASE-MOUNTAIN": 7,
+  "CREASE-VALLEY": 5,
+  "BLEED": 1,
+  "INFO": 1
+ },
+ "folds_from": "AttributeError(\"'FoldEdge' object has no attribute 'fold'\")",
+ "degen_first_tri": []
+}

@@ -1,0 +1,5324 @@
+{
+ "batch_version": "0.2",
+ "total_classes": 100,
+ "green": 84,
+ "gate_green_ratio": 0.84,
+ "maturity": {
+  "L0_REGISTERED": 16,
+  "L1_GEOMETRY_VALID": 83,
+  "L2_FOLD_VALID": 1
+ },
+ "fold_edges_mislabeled": 1066,
+ "fold_edges_total": 1591,
+ "elapsed_s": 63.6,
+ "rows": [
+  {
+   "class_id": "aseptic_brick",
+   "family": "aseptic",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 60.0,
+    "D": 40.0,
+    "Hb": 120.0,
+    "Hr": 0.0,
+    "hr": 12.0,
+    "Ef": 0.0,
+    "fin_gap": 0.0,
+    "cap_r": 0.0,
+    "cap_h": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 2,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062763,
+     "180.0": 24.0
+    }
+   }
+  },
+  {
+   "class_id": "brick_250ml",
+   "family": "brick",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 40.0,
+    "D": 28.0,
+    "Hb": 95.0,
+    "Hr": 0.0,
+    "hr": 8.0,
+    "Ef": 0.0,
+    "fin_gap": 0.0,
+    "cap_r": 0.0,
+    "cap_h": 0.0,
+    "glue_w": 10.0,
+    "board_t": 0.35
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 2,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.8678821817552302,
+     "-35.0": 2.8678821817552302,
+     "180.0": 20.0
+    }
+   }
+  },
+  {
+   "class_id": "clamp_shell",
+   "family": "clamp",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 90.0,
+    "D": 60.0,
+    "H": 25.0,
+    "Hf": 0.0,
+    "S": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "flap_d": 0.0,
+    "lip_d": 10.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 9,
+    "n_mismatch": 7,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 9,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.014115990085455,
+     "-35.0": 6.014115990085463,
+     "180.0": 19.999999999999996
+    }
+   }
+  },
+  {
+   "class_id": "clv_double_cover",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 100.0,
+    "D": 60.0,
+    "H": 50.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "ins": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "pk_w": 0.0,
+    "pk_d": 0.0,
+    "bd": 0.0,
+    "hs": 0.0,
+    "lw_d": 32.0,
+    "lin_in": 10.0,
+    "gs_d": 0.0,
+    "ts_w": 0.0,
+    "ts_d": 0.0,
+    "kind": 5
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 3,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062763,
+     "180.0": 1.4210854715202004e-14
+    }
+   }
+  },
+  {
+   "class_id": "clv_double_tuck",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 100.0,
+    "D": 60.0,
+    "H": 50.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 10.0,
+    "ins": 12.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "pk_w": 0.0,
+    "pk_d": 0.0,
+    "bd": 0.0,
+    "hs": 0.0,
+    "lw_d": 0.0,
+    "lin_in": 0.0,
+    "gs_d": 0.0,
+    "ts_w": 0.0,
+    "ts_d": 0.0,
+    "kind": 1
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.8678821817552205,
+     "-35.0": 2.8678821817552382,
+     "180.0": 1.0547118733938987e-14
+    }
+   }
+  },
+  {
+   "class_id": "clv_glue_seal",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 100.0,
+    "D": 60.0,
+    "H": 50.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "ins": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "pk_w": 0.0,
+    "pk_d": 0.0,
+    "bd": 0.0,
+    "hs": 0.0,
+    "lw_d": 0.0,
+    "lin_in": 0.0,
+    "gs_d": 12.0,
+    "ts_w": 30.0,
+    "ts_d": 8.0,
+    "kind": 6
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 11,
+    "n_mismatch": 3,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 11,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.2943057454041735,
+     "-35.0": 2.294305745404209,
+     "180.0": 1.0436096431476471e-14
+    }
+   }
+  },
+  {
+   "class_id": "clv_hinged_flap",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 100.0,
+    "D": 60.0,
+    "H": 50.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 10.0,
+    "ins": 12.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "pk_w": 0.0,
+    "pk_d": 0.0,
+    "bd": 0.0,
+    "hs": 8.0,
+    "lw_d": 0.0,
+    "lin_in": 0.0,
+    "gs_d": 0.0,
+    "ts_w": 0.0,
+    "ts_d": 0.0,
+    "kind": 3
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 11,
+    "n_mismatch": 3,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 11,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.8678821817552205,
+     "-35.0": 2.867882181755231,
+     "180.0": 1.0547118733938987e-14
+    }
+   }
+  },
+  {
+   "class_id": "clv_partial_lid",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 110.0,
+    "D": 70.0,
+    "H": 60.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "ins": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "pk_w": 0.0,
+    "pk_d": 0.0,
+    "bd": 0.0,
+    "hs": 0.0,
+    "lw_d": 0.0,
+    "lin_in": 0.0,
+    "gs_d": 0.0,
+    "ts_w": 0.0,
+    "ts_d": 0.0,
+    "kind": 4
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 9,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 9,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062763,
+     "180.0": 3.885780586188048e-15
+    }
+   }
+  },
+  {
+   "class_id": "clv_snap_lock",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 100.0,
+    "D": 60.0,
+    "H": 50.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "ins": 0.0,
+    "slot_w": 20.0,
+    "slot_d": 5.0,
+    "pk_w": 36.0,
+    "pk_d": 9.0,
+    "bd": 5.0,
+    "hs": 0.0,
+    "lw_d": 0.0,
+    "lin_in": 0.0,
+    "gs_d": 0.0,
+    "ts_w": 0.0,
+    "ts_d": 0.0,
+    "kind": 2
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.4376998544919513,
+     "-35.0": 2.437699854491937,
+     "180.0": 7.105427357601002e-15
+    }
+   }
+  },
+  {
+   "class_id": "clv_tuck_insert",
+   "family": "clv",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 110.0,
+    "D": 70.0,
+    "H": 60.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 12.0,
+    "ins": 0.0,
+    "slot_w": 24.0,
+    "slot_d": 6.0,
+    "pk_w": 0.0,
+    "pk_d": 0.0,
+    "bd": 0.0,
+    "hs": 0.0,
+    "lw_d": 0.0,
+    "lin_in": 0.0,
+    "gs_d": 0.0,
+    "ts_w": 0.0,
+    "ts_d": 0.0,
+    "kind": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062745,
+     "-35.0": 3.4414586181062745,
+     "180.0": 7.105427357601002e-15
+    }
+   }
+  },
+  {
+   "class_id": "cone_wrap",
+   "family": "cone",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 0,
+    "side_b": 18.0,
+    "side_t": 10.0,
+    "h": 120.0,
+    "board_t": 0.42,
+    "glue_w": 8.0,
+    "side": 0,
+    "W": 0,
+    "H": 0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 17,
+    "n_mismatch": 15,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 17,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.586133902529861,
+     "-35.0": 4.586133906227728,
+     "180.0": 3.152669209637652e-08
+    }
+   }
+  },
+  {
+   "class_id": "cone_wrap_n12",
+   "family": "cone",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 12,
+    "side_b": 18.0,
+    "side_t": 10.0,
+    "h": 120.0,
+    "board_t": 0.42,
+    "glue_w": 8.0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 13,
+    "n_mismatch": 11,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 13,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.586103172294125,
+     "-35.0": 4.586103169863016,
+     "180.0": 1.0438774757728512e-08
+    }
+   }
+  },
+  {
+   "class_id": "cone_wrap_n20",
+   "family": "cone",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 20,
+    "side_b": 18.0,
+    "side_t": 10.0,
+    "h": 120.0,
+    "board_t": 0.42,
+    "glue_w": 8.0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 21,
+    "n_mismatch": 19,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 21,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.586172331265235,
+     "-35.0": 4.5861723331879345,
+     "180.0": 1.517656720288685e-08
+    }
+   }
+  },
+  {
+   "class_id": "crashlock_divider",
+   "family": "crashlock",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 3,
+    "W": 100.0,
+    "D": 60.0,
+    "H": 80.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "side": 0.0,
+    "h": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "flap_ratio": 0.0,
+    "hw": 0.0,
+    "hh": 0.0,
+    "dv_x": 50.0,
+    "dv_h": 36.0,
+    "rf": 0.0,
+    "spine_w": 0.0,
+    "cover_w": 0.0,
+    "tuck_t": 0.0,
+    "pad_d": 0.0,
+    "dome_k": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 3
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 1.933429440366757,
+     "-35.0": 1.9334294403667507,
+     "180.0": 2.842170943040401e-14
+    }
+   }
+  },
+  {
+   "class_id": "crashlock_rect",
+   "family": "crashlock",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "fam": 4,
+    "W": 100.0,
+    "D": 60.0,
+    "H": 80.0,
+    "Hf": 25.0,
+    "Hb": 60.0,
+    "side": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 3,
+    "n_undetermined": 3
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 1.933429440366757,
+     "-35.0": 1.9334294403667507,
+     "180.0": 2.842170943040401e-14
+    }
+   }
+  },
+  {
+   "class_id": "crashlock_rect_tuck",
+   "family": "crashlock",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "fam": 4,
+    "W": 100.0,
+    "D": 60.0,
+    "H": 80.0,
+    "Hf": 25.0,
+    "Hb": 60.0,
+    "side": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 14,
+    "n_mismatch": 3,
+    "n_undetermined": 3
+   },
+   "closure_sensitivity": {
+    "n_probed": 14,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 1.933429440366757,
+     "-35.0": 1.9334294403667507,
+     "180.0": 2.842170943040401e-14
+    }
+   }
+  },
+  {
+   "class_id": "cup_sleeve",
+   "family": "cup",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 0.0,
+    "D": 0.0,
+    "H": 60.0,
+    "Hf": 0.0,
+    "S": 0.0,
+    "side_b": 16.0,
+    "side_t": 18.5,
+    "hem_d": 5.0,
+    "glue_w": 8.0,
+    "board_t": 0.42,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "flap_d": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 36,
+    "n_mismatch": 11,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 36,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.007057993412972,
+     "-35.0": 3.0070579923465326,
+     "180.0": 1.4861745088597073e-08
+    }
+   }
+  },
+  {
+   "class_id": "dispenser_top",
+   "family": "dispenser",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 110.0,
+    "D": 70.0,
+    "H": 60.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 12.0,
+    "dust_r": 0.5,
+    "ins": 12.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "clear": 0.0,
+    "friction": 0.0,
+    "rf": 0.0,
+    "web_w": 0.0,
+    "hw": 18.0,
+    "ad": 8.0,
+    "cs": 0.0,
+    "drop": 0.0,
+    "bs": 0.0,
+    "kind": 4
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 13,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 13,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062674,
+     "180.0": 2.2469334198890888e-14
+    }
+   }
+  },
+  {
+   "class_id": "display_counter",
+   "family": "display",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 120.0,
+    "D": 60.0,
+    "H": 100.0,
+    "Hf": 40.0,
+    "S": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "flap_d": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 5,
+    "n_mismatch": 5,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 5,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 24.056463960341855,
+     "-35.0": 24.056463960341848,
+     "180.0": 80.0
+    }
+   }
+  },
+  {
+   "class_id": "divided_tray_3comp",
+   "family": "divided",
+   "status": "ERROR",
+   "level": "L0_REGISTERED",
+   "gates": {},
+   "params": {
+    "kind": 6,
+    "W": 180.0,
+    "D": 90.0,
+    "H": 35.0,
+    "glue_w": 0.0,
+    "board_t": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "ridge_off": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "Hf": 0.0,
+    "flap_ratio": 0.0,
+    "side": 0.0,
+    "h": 0.0,
+    "g": 0.0,
+    "S": 0.0,
+    "C": 0.0,
+    "t": 0.0,
+    "bw": 0.0,
+    "tw": 0.0,
+    "wl": 0.0,
+    "xt": 60.0
+   },
+   "error": "面板多边形自交或退化, 无法导出: ['floor']"
+  },
+  {
+   "class_id": "egg_tray_2x4",
+   "family": "egg",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 160.0,
+    "D": 80.0,
+    "H": 28.0,
+    "Hf": 0.0,
+    "S": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "flap_d": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 11,
+    "n_mismatch": 8,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 11,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 5.063742759908237,
+     "-35.0": 5.06374275990823,
+     "180.0": 56.0
+    }
+   }
+  },
+  {
+   "class_id": "envelope_square",
+   "family": "envelope",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "Hf": 0.0,
+    "S": 140.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.42,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "flap_d": 70.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 4,
+    "n_mismatch": 0,
+    "n_undetermined": 4
+   },
+   "closure_sensitivity": {
+    "n_probed": 4,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 20.075175272286607,
+     "-35.0": 20.075175272286607,
+     "180.0": 140.0
+    }
+   }
+  },
+  {
+   "class_id": "envelope_wedge",
+   "family": "envelope",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 0,
+    "side_b": 0,
+    "side_t": 0,
+    "h": 0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0,
+    "W": 120.0,
+    "H": 180.0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 22.0,
+    "bot_d": 40.0,
+    "corner_e": 14.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 4,
+    "n_mismatch": 0,
+    "n_undetermined": 4
+   },
+   "closure_sensitivity": {
+    "n_probed": 4,
+    "n_undetected": 3,
+    "undetected": [
+     "e_sl",
+     "e_sr",
+     "e_bt"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.309340799861502,
+     "-35.0": 6.309340799861502,
+     "180.0": 1.7145055188062946e-14
+    }
+   }
+  },
+  {
+   "class_id": "food_bento_lid_box",
+   "family": "food",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 3,
+    "W": 120.0,
+    "D": 80.0,
+    "H": 40.0,
+    "ra": 0.0,
+    "k": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "h": 0.0,
+    "s_p": 0.0,
+    "gd": 0.0,
+    "nw": 0.0,
+    "nd": 0.0,
+    "Hf": 0.0,
+    "Hb": 0.0,
+    "lip_d": 0.0,
+    "Hl": 12.0,
+    "c": 2.5,
+    "hb": 0.0,
+    "gs": 0.0,
+    "sd": 0.0,
+    "ch": 0.0,
+    "web_w": 0.0,
+    "side": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 9,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 0.7169705454388051,
+     "-35.0": 0.7169705454388051,
+     "180.0": 4.999999999999993
+    }
+   }
+  },
+  {
+   "class_id": "food_clamshell_burger",
+   "family": "food",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 0,
+    "W": 100.0,
+    "D": 100.0,
+    "H": 28.0,
+    "ra": 20.0,
+    "k": 6.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "h": 0.0,
+    "s_p": 0.0,
+    "gd": 0.0,
+    "nw": 0.0,
+    "nd": 0.0,
+    "Hf": 0.0,
+    "Hb": 0.0,
+    "lip_d": 0.0,
+    "Hl": 0.0,
+    "c": 0.0,
+    "hb": 0.0,
+    "gs": 0.0,
+    "sd": 0.0,
+    "ch": 0.0,
+    "web_w": 0.0,
+    "side": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 10,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 11.031013825108502,
+     "-35.0": 11.031013827511996,
+     "180.0": 36.683741544178766
+    }
+   }
+  },
+  {
+   "class_id": "food_fries_sleeve",
+   "family": "food",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 2,
+    "W": 75.0,
+    "D": 32.0,
+    "H": 0.0,
+    "ra": 0.0,
+    "k": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "h": 0.0,
+    "s_p": 0.0,
+    "gd": 0.0,
+    "nw": 0.0,
+    "nd": 0.0,
+    "Hf": 70.0,
+    "Hb": 95.0,
+    "lip_d": 10.0,
+    "Hl": 0.0,
+    "c": 0.0,
+    "hb": 0.0,
+    "gs": 0.0,
+    "sd": 0.0,
+    "ch": 0.0,
+    "web_w": 0.0,
+    "side": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 6,
+    "n_mismatch": 6,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 6,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.014115990085455,
+     "-35.0": 6.014115990085455,
+     "180.0": 1.2717264309667843e-14
+    }
+   }
+  },
+  {
+   "class_id": "food_noodle_pail",
+   "family": "food",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 1,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "ra": 0.0,
+    "k": 0.0,
+    "side_b": 40.0,
+    "side_t": 32.0,
+    "h": 70.0,
+    "s_p": 20.0,
+    "gd": 10.0,
+    "nw": 14.0,
+    "nd": 7.0,
+    "Hf": 0.0,
+    "Hb": 0.0,
+    "lip_d": 0.0,
+    "Hl": 0.0,
+    "c": 0.0,
+    "hb": 0.0,
+    "gs": 0.0,
+    "sd": 0.0,
+    "ch": 0.0,
+    "web_w": 0.0,
+    "side": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 10.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 1e-06,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 18,
+    "n_mismatch": 9,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 18,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 5.73576362292062,
+     "-35.0": 5.735765104671069,
+     "180.0": 8.990253359542066e-07
+    }
+   }
+  },
+  {
+   "class_id": "food_sushi_tray",
+   "family": "food",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 5,
+    "W": 190.0,
+    "D": 120.0,
+    "H": 35.0,
+    "ra": 0.0,
+    "k": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "h": 0.0,
+    "s_p": 0.0,
+    "gd": 0.0,
+    "nw": 0.0,
+    "nd": 0.0,
+    "Hf": 0.0,
+    "Hb": 0.0,
+    "lip_d": 0.0,
+    "Hl": 12.0,
+    "c": 3.0,
+    "hb": 0.0,
+    "gs": 0.0,
+    "sd": 0.0,
+    "ch": 18.0,
+    "web_w": 8.0,
+    "side": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 10.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 20,
+    "n_mismatch": 12,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 20,
+    "n_undetected": 2,
+    "undetected": [
+     "e_glue",
+     "e_lglue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.055797876726389,
+     "-35.0": 4.055797876726388,
+     "180.0": 3.537415173409576e-14
+    }
+   }
+  },
+  {
+   "class_id": "food_tray_liner",
+   "family": "food",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 6,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 16.0,
+    "ra": 0.0,
+    "k": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "h": 0.0,
+    "s_p": 0.0,
+    "gd": 0.0,
+    "nw": 0.0,
+    "nd": 0.0,
+    "Hf": 0.0,
+    "Hb": 0.0,
+    "lip_d": 0.0,
+    "Hl": 0.0,
+    "c": 0.0,
+    "hb": 0.0,
+    "gs": 0.0,
+    "sd": 0.0,
+    "ch": 0.0,
+    "web_w": 0.0,
+    "side": 45.0,
+    "hem_d": 10.0,
+    "glue_w": 8.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 18,
+    "n_mismatch": 6,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 18,
+    "n_undetected": 6,
+    "undetected": [
+     "e_c0",
+     "e_c1",
+     "e_c2",
+     "e_c3",
+     "e_c4",
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.294305745051025,
+     "-35.0": 2.294305745051026,
+     "180.0": 4.3112158287783586e-10
+    }
+   }
+  },
+  {
+   "class_id": "food_wrap_pocket",
+   "family": "food",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 4,
+    "W": 150.0,
+    "D": 0.0,
+    "H": 95.0,
+    "ra": 0.0,
+    "k": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "h": 0.0,
+    "s_p": 0.0,
+    "gd": 0.0,
+    "nw": 0.0,
+    "nd": 0.0,
+    "Hf": 0.0,
+    "Hb": 0.0,
+    "lip_d": 0.0,
+    "Hl": 0.0,
+    "c": 0.0,
+    "hb": 25.0,
+    "gs": 45.0,
+    "sd": 15.0,
+    "ch": 0.0,
+    "web_w": 0.0,
+    "side": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 5,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 5,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212535,
+     "-35.0": 6.882917236212535,
+     "180.0": 12.0
+    }
+   }
+  },
+  {
+   "class_id": "gable_fin_gap_wide",
+   "family": "gable",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 45.0,
+    "D": 45.0,
+    "Hb": 100.0,
+    "Hr": 12.0,
+    "hr": 0.0,
+    "Ef": 26.0,
+    "fin_gap": 18.0,
+    "cap_r": 0.0,
+    "cap_h": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 5,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 2,
+    "undetected": [
+     "e_glue",
+     "e_bk_fl"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.559193911291004e-09,
+     "-35.0": 4.559193911291004e-09,
+     "180.0": 4.559193911291004e-09
+    }
+   }
+  },
+  {
+   "class_id": "gable_finless",
+   "family": "gable",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 45.0,
+    "D": 45.0,
+    "Hb": 80.0,
+    "Hr": 20.0,
+    "gfin_w": 18.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 11,
+    "n_mismatch": 6,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 11,
+    "n_undetected": 3,
+    "undetected": [
+     "e_glue",
+     "e_sl_gf",
+     "e_bk_fl"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.4999967888237496e-09,
+     "-35.0": 2.4999967888237496e-09,
+     "180.0": 2.4999967888237496e-09
+    }
+   }
+  },
+  {
+   "class_id": "gable_rect_base",
+   "family": "gable",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 0,
+    "W": 60.0,
+    "D": 45.0,
+    "H": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.0,
+    "Hb": 90.0,
+    "Hr": 15.0,
+    "ridge_off": 6.0,
+    "Ef": 12.0,
+    "fin_gap_mm": 3.0,
+    "Hf": 0.0,
+    "flap_ratio": 0.0,
+    "side": 0.0,
+    "h": 0.0,
+    "g": 0.0,
+    "S": 0.0,
+    "C": 0.0,
+    "t": 0.0,
+    "bw": 0.0,
+    "tw": 0.0,
+    "wl": 0.0,
+    "xt": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 7,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 1.2991840253932505,
+     "-35.0": 3.4414586181062763,
+     "180.0": 12.0
+    }
+   }
+  },
+  {
+   "class_id": "gable_screw_cap",
+   "family": "gable",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 45.0,
+    "D": 45.0,
+    "Hb": 100.0,
+    "Hr": 12.0,
+    "hr": 0.0,
+    "Ef": 16.0,
+    "fin_gap": 0.0,
+    "cap_r": 13.0,
+    "cap_h": 9.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 28,
+    "n_mismatch": 23,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 28,
+    "n_undetected": 2,
+    "undetected": [
+     "e_glue",
+     "e_bk_fl"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.499995043296212e-09,
+     "-35.0": 4.499995043296212e-09,
+     "180.0": 4.499995043296212e-09
+    }
+   }
+  },
+  {
+   "class_id": "gable_top",
+   "family": "gable",
+   "status": "GREEN",
+   "level": "L2_FOLD_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 45.0,
+    "D": 45.0,
+    "Hb": 100.0,
+    "Hr": 12.0,
+    "Ef": 14.0,
+    "fin_gap_mm": 3.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": true,
+    "n_edges": 12,
+    "n_mismatch": 0,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 8.232446023125668,
+     "-35.0": 2.510144318636339,
+     "180.0": 24.838821814150094
+    }
+   }
+  },
+  {
+   "class_id": "gable_window_front",
+   "family": "gable",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 1,
+    "W": 60.0,
+    "D": 45.0,
+    "H": 0.0,
+    "Hb": 100.0,
+    "Hr": 15.0,
+    "Ef": 14.0,
+    "fin_gap_mm": 3.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "side": 0.0,
+    "h": 0.0,
+    "bw": 20.0,
+    "tw_s": 14.0,
+    "lw": 12.0,
+    "flap_ratio": 0.0,
+    "hw": 0.0,
+    "hh": 0.0,
+    "dv_x": 0.0,
+    "dv_h": 0.0,
+    "rf": 0.0,
+    "spine_w": 0.0,
+    "cover_w": 0.0,
+    "tuck_t": 0.0,
+    "pad_d": 0.0,
+    "dome_k": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 15,
+    "n_mismatch": 5,
+    "n_undetermined": 3
+   },
+   "closure_sensitivity": {
+    "n_probed": 15,
+    "n_undetected": 4,
+    "undetected": [
+     "e_glue",
+     "e_sl_fb",
+     "e_sl_ff",
+     "e_bk_fl"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.0097183471152322e-14,
+     "-35.0": 2.0097183471152322e-14,
+     "180.0": 2.0097183471152322e-14
+    }
+   }
+  },
+  {
+   "class_id": "handle_box",
+   "family": "handle",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 90.0,
+    "D": 55.0,
+    "H": 130.0,
+    "Hf": 0.0,
+    "S": 0.0,
+    "side_b": 0.0,
+    "side_t": 0.0,
+    "hem_d": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 12.0,
+    "dust_r": 0.5,
+    "ins": 12.0,
+    "tab_h": 30.0,
+    "slot_w": 16.0,
+    "slot_d": 11.0,
+    "flap_d": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 13,
+    "n_mismatch": 3,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 13,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062674,
+     "180.0": 1.5888218580782548e-14
+    }
+   }
+  },
+  {
+   "class_id": "hanger_box",
+   "family": "hanger",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 90.0,
+    "D": 55.0,
+    "H": 140.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 12.0,
+    "dust_r": 0.5,
+    "ins": 12.0,
+    "tab_h": 32.0,
+    "slot_w": 10.0,
+    "slot_d": 12.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "clear": 0.0,
+    "friction": 0.0,
+    "rf": 0.0,
+    "web_w": 0.0,
+    "hw": 0.0,
+    "ad": 0.0,
+    "cs": 0.0,
+    "drop": 0.0,
+    "bs": 0.0,
+    "kind": 1
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 13,
+    "n_mismatch": 3,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 13,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062603,
+     "180.0": 1.5888218580782548e-14
+    }
+   }
+  },
+  {
+   "class_id": "hexagonal_flip",
+   "family": "hexagonal",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 3,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 80.0,
+    "glue_w": 15.0,
+    "board_t": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "ridge_off": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "Hf": 0.0,
+    "flap_ratio": 0.0,
+    "side": 30.0,
+    "h": 0.0,
+    "g": 0.0,
+    "S": 0.0,
+    "C": 0.0,
+    "t": 0.0,
+    "bw": 0.0,
+    "tw": 0.0,
+    "wl": 0.0,
+    "xt": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 5,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 4.301823272632845,
+     "-35.0": 4.301823272632845,
+     "180.0": 15.0
+    }
+   }
+  },
+  {
+   "class_id": "lockbottom_123",
+   "family": "lockbottom",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "fam": 5,
+    "W": 90.0,
+    "D": 50.0,
+    "H": 70.0,
+    "Hf": 25.0,
+    "Hb": 60.0,
+    "side": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 7,
+    "n_mismatch": 3,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 7,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212551,
+     "-35.0": 6.882917236212551,
+     "180.0": 2.7755575615628914e-15
+    }
+   }
+  },
+  {
+   "class_id": "mailer_bookwrap",
+   "family": "mailer",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 0,
+    "side_b": 0,
+    "side_t": 0,
+    "h": 220.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0,
+    "W": 0,
+    "H": 0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 40.0,
+    "cover_w": 150.0,
+    "tuck_t": 35.0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 3,
+    "n_mismatch": 2,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 3,
+    "n_undetected": 1,
+    "undetected": [
+     "e_cl"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 20.07517527228663,
+     "-35.0": 20.07517527228657,
+     "180.0": 1.6653345369377348e-14
+    }
+   }
+  },
+  {
+   "class_id": "mailer_diecut",
+   "family": "mailer",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 5,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "ridge_off": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "Hf": 0.0,
+    "flap_ratio": 0.0,
+    "side": 0.0,
+    "h": 160.0,
+    "g": 0.0,
+    "S": 40.0,
+    "C": 120.0,
+    "t": 30.0,
+    "bw": 30.0,
+    "tw": 30.0,
+    "wl": 30.0,
+    "xt": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 6,
+    "n_mismatch": 2,
+    "n_undetermined": 4
+   },
+   "closure_sensitivity": {
+    "n_probed": 6,
+    "n_undetected": 2,
+    "undetected": [
+     "e_wt",
+     "e_clr"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 5.735764363510467,
+     "-35.0": 5.7357643635104525,
+     "180.0": 1.4210854715202004e-14
+    }
+   }
+  },
+  {
+   "class_id": "mailer_rigid_pad",
+   "family": "mailer",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 5,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.42,
+    "side": 0.0,
+    "h": 220.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "flap_ratio": 0.0,
+    "hw": 0.0,
+    "hh": 0.0,
+    "dv_x": 0.0,
+    "dv_h": 0.0,
+    "rf": 0.0,
+    "spine_w": 40.0,
+    "cover_w": 150.0,
+    "tuck_t": 35.0,
+    "pad_d": 70.0,
+    "dome_k": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 4,
+    "n_mismatch": 2,
+    "n_undetermined": 2
+   },
+   "closure_sensitivity": {
+    "n_probed": 4,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 20.07517527228663,
+     "-35.0": 20.07517527228657,
+     "180.0": 70.0
+    }
+   }
+  },
+  {
+   "class_id": "pillow_box",
+   "family": "pillow",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 0,
+    "side_b": 0,
+    "side_t": 0,
+    "h": 0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0,
+    "W": 60.0,
+    "H": 90.0,
+    "D": 28.0,
+    "k": 3,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 11,
+    "n_mismatch": 6,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 11,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 8.419762385333735,
+     "-35.0": 8.41976238533374,
+     "180.0": 27.999999997386453
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n10",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 10,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 92.330506,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 40,
+    "n_mismatch": 39,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 40,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.2352334977094952e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n11",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 11,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 102.170617,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 44,
+    "n_mismatch": 43,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 44,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.9499757404860622e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n12",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 12,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 111.961524,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 48,
+    "n_mismatch": 47,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 48,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 2.3061576196319665e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n4",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 4,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 30.0,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 16,
+    "n_mismatch": 15,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 16,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 4.2780337774645346e-14
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n5",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 5,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 41.291458,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 20,
+    "n_mismatch": 19,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 20,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 3.939789103910263e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n6",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 6,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 51.961524,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 24,
+    "n_mismatch": 23,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 24,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 2.335331288350062e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n7",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 7,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 62.295642,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 28,
+    "n_mismatch": 27,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 28,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.250131447192644e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n8",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 8,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 72.426407,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 32,
+    "n_mismatch": 31,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 32,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.288071597124733e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_dust_n9",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 9,
+    "side": 60.0,
+    "h": 100.0,
+    "tuck_depth": 82.424323,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 36,
+    "n_mismatch": 35,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 36,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 4.3376316208407863e-07
+    }
+   }
+  },
+  {
+   "class_id": "prism_n10_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 10,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 20,
+    "n_mismatch": 19,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 20,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 3.325937287046684e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n10_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 10,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 30,
+    "n_mismatch": 29,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 30,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 3.325937287046684e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n11_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 11,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 22,
+    "n_mismatch": 21,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 22,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 7.361430985404137e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n11_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 11,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 33,
+    "n_mismatch": 32,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 33,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 7.361431964225954e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n12_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 12,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 24,
+    "n_mismatch": 23,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 24,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.5482794145714298e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n12_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 12,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 36,
+    "n_mismatch": 35,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 36,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.5482794145714298e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n4_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 4,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 8,
+    "n_mismatch": 7,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 8,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.0658141036401503e-14
+    }
+   }
+  },
+  {
+   "class_id": "prism_n4_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 4,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 11,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 4.2780337774645346e-14
+    }
+   }
+  },
+  {
+   "class_id": "prism_n5_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 5,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 9,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 2.1967781368546482e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n5_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 5,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 15,
+    "n_mismatch": 14,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 15,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 2.1967811536350515e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n6_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 6,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 11,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.1200882873083048e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n6_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 6,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 18,
+    "n_mismatch": 17,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 18,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 1.1200892579283223e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n7_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 7,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 14,
+    "n_mismatch": 13,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 14,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 3.16314309204735e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n7_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 7,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 21,
+    "n_mismatch": 20,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 21,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 3.163144008685126e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n8_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 8,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 16,
+    "n_mismatch": 15,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 16,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 4.4938668397781776e-14
+    }
+   }
+  },
+  {
+   "class_id": "prism_n8_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 8,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 24,
+    "n_mismatch": 23,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 24,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 5.684341886080802e-14
+    }
+   }
+  },
+  {
+   "class_id": "prism_n9_open",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 9,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "open"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 18,
+    "n_mismatch": 17,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 18,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 4.04209535844905e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_n9_tuck",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 9,
+    "side": 60.0,
+    "h": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "lid": "tuck"
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 27,
+    "n_mismatch": 26,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 27,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062754,
+     "-35.0": 3.4414586181062754,
+     "180.0": 4.0420959181636037e-08
+    }
+   }
+  },
+  {
+   "class_id": "prism_tuck_window",
+   "family": "prism",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 0,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.42,
+    "side": 60.0,
+    "h": 100.0,
+    "bw": 20.0,
+    "tw_s": 14.0,
+    "lw": 18.0,
+    "flap_ratio": 0.0,
+    "hw": 0.0,
+    "hh": 0.0,
+    "dv_x": 0.0,
+    "dv_h": 0.0,
+    "rf": 0.0,
+    "spine_w": 0.0,
+    "cover_w": 0.0,
+    "tuck_t": 0.0,
+    "pad_d": 0.0,
+    "dome_k": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 21,
+    "n_mismatch": 5,
+    "n_undetermined": 4
+   },
+   "closure_sensitivity": {
+    "n_probed": 21,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917235153085,
+     "-35.0": 6.882917237272021,
+     "180.0": 1.1200892579283223e-08
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n10",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 10,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 19,
+    "n_mismatch": 9,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 19,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 32.04350199803588,
+     "-35.0": 31.60355883852267,
+     "180.0": 96.27916740840578
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n12",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 12,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 23,
+    "n_mismatch": 11,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 23,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 36.296834978539685,
+     "-35.0": 36.17219715492631,
+     "180.0": 93.67391712714478
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n4",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 4,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0,
+    "W": 0,
+    "H": 0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 7,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 7,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 10.825408781347848,
+     "-35.0": 10.825408781867434,
+     "180.0": 35.999999998183654
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n5",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 5,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 9,
+    "n_mismatch": 4,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 9,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 14.89989692710967,
+     "-35.0": 14.899896928974787,
+     "180.0": 49.54974913222612
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n6",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 6,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0,
+    "W": 0,
+    "H": 0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 11,
+    "n_mismatch": 5,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 11,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 18.75015801973396,
+     "-35.0": 18.75015802303977,
+     "180.0": 62.35382906580894
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n7",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 7,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 13,
+    "n_mismatch": 6,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 13,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 22.47919295053555,
+     "-35.0": 22.479192962709902,
+     "180.0": 74.75477025611302
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n8",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 8,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0,
+    "W": 0,
+    "H": 0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 15,
+    "n_mismatch": 7,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 15,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 26.134848695685807,
+     "-35.0": 26.1348486997823,
+     "180.0": 86.91168823858568
+    }
+   }
+  },
+  {
+   "class_id": "pyramid_frustum_n9",
+   "family": "pyramid",
+   "status": "QA_FAIL",
+   "level": "L0_REGISTERED",
+   "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 9,
+    "side_b": 60.0,
+    "side_t": 36.0,
+    "h": 80.0,
+    "board_t": 0.42,
+    "glue_w": 0,
+    "side": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 17,
+    "n_mismatch": 8,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 17,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 29.742566179876995,
+     "-35.0": 29.742566184139456,
+     "180.0": 97.90555878606175
+    }
+   }
+  },
+  {
+   "class_id": "rsc_css",
+   "family": "rsc",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 160.0,
+    "D": 100.0,
+    "H": 80.0,
+    "flap_ratio": 0.5,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "variant": 2
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 4,
+    "undetected": [
+     "e_b1",
+     "e_b3",
+     "e_t1",
+     "e_t3"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212553,
+     "-35.0": 6.882917236212553,
+     "180.0": 1.4210854715202004e-14
+    }
+   }
+  },
+  {
+   "class_id": "rsc_display_panel",
+   "family": "rsc",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 1,
+    "W": 120.0,
+    "D": 60.0,
+    "H": 100.0,
+    "glue_w": 12.0,
+    "board_t": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "ridge_off": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "Hf": 40.0,
+    "flap_ratio": 0.5,
+    "side": 0.0,
+    "h": 0.0,
+    "g": 0.0,
+    "S": 0.0,
+    "C": 0.0,
+    "t": 0.0,
+    "bw": 0.0,
+    "tw": 0.0,
+    "wl": 0.0,
+    "xt": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414586181062763,
+     "-35.0": 3.4414586181062763,
+     "180.0": 12.0
+    }
+   }
+  },
+  {
+   "class_id": "rsc_handhole",
+   "family": "rsc",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 2,
+    "W": 160.0,
+    "D": 100.0,
+    "H": 80.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "side": 0.0,
+    "h": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "flap_ratio": 0.5,
+    "hw": 15.0,
+    "hh": 22.0,
+    "dv_x": 0.0,
+    "dv_h": 0.0,
+    "rf": 0.0,
+    "spine_w": 0.0,
+    "cover_w": 0.0,
+    "tuck_t": 0.0,
+    "pad_d": 0.0,
+    "dome_k": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 8,
+    "undetected": [
+     "e_b0",
+     "e_b1",
+     "e_b2",
+     "e_b3",
+     "e_t0",
+     "e_t1",
+     "e_t2",
+     "e_t3"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 5.551115123125783e-15,
+     "-35.0": 5.551115123125783e-15,
+     "180.0": 5.551115123125783e-15
+    }
+   }
+  },
+  {
+   "class_id": "rsc_hsc",
+   "family": "rsc",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 160.0,
+    "D": 100.0,
+    "H": 80.0,
+    "flap_ratio": 0.5,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "variant": 1
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 8,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 8,
+    "n_undetected": 4,
+    "undetected": [
+     "e_b0",
+     "e_b1",
+     "e_b2",
+     "e_b3"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212553,
+     "-35.0": 6.882917236212553,
+     "180.0": 1.6653345369377348e-14
+    }
+   }
+  },
+  {
+   "class_id": "rsc_lock",
+   "family": "rsc",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 160.0,
+    "D": 100.0,
+    "H": 80.0,
+    "flap_ratio": 0.5,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "variant": 3
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 6,
+    "undetected": [
+     "e_b1",
+     "e_b3",
+     "e_t0",
+     "e_t1",
+     "e_t2",
+     "e_t3"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212553,
+     "-35.0": 6.882917236212553,
+     "180.0": 1.4383281002407285e-14
+    }
+   }
+  },
+  {
+   "class_id": "rsc_rsc",
+   "family": "rsc",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 160.0,
+    "D": 100.0,
+    "H": 80.0,
+    "flap_ratio": 0.5,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "variant": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 8,
+    "undetected": [
+     "e_b0",
+     "e_b1",
+     "e_b2",
+     "e_b3",
+     "e_t0",
+     "e_t1",
+     "e_t2",
+     "e_t3"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212553,
+     "-35.0": 6.882917236212553,
+     "180.0": 8.881784197001252e-15
+    }
+   }
+  },
+  {
+   "class_id": "slide_box",
+   "family": "slide",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 100.0,
+    "D": 60.0,
+    "H": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "clear": 0.0,
+    "friction": 0.0,
+    "rf": 0.0,
+    "web_w": 6.0,
+    "hw": 0.0,
+    "ad": 0.0,
+    "cs": 1.5,
+    "drop": 6.0,
+    "bs": 25.0,
+    "kind": 5
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 15,
+    "n_mismatch": 8,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 15,
+    "n_undetected": 4,
+    "undetected": [
+     "e_gs",
+     "e_gd",
+     "e_db1",
+     "e_db3"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 1.4210854715202004e-14,
+     "-35.0": 1.4210854715202004e-14,
+     "180.0": 1.4210854715202004e-14
+    }
+   }
+  },
+  {
+   "class_id": "tray_4corner",
+   "family": "tray",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "fam": 1,
+    "W": 120.0,
+    "D": 80.0,
+    "H": 40.0,
+    "Hf": 25.0,
+    "Hb": 60.0,
+    "side": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 8,
+    "n_mismatch": 4,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 8,
+    "n_undetected": 4,
+    "undetected": [
+     "e_cFR",
+     "e_cRB",
+     "e_cBL",
+     "e_cLF"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212549,
+     "-35.0": 6.882917236212549,
+     "180.0": 6.2803698347351005e-15
+    }
+   }
+  },
+  {
+   "class_id": "tray_6corner",
+   "family": "tray",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "fam": 2,
+    "W": 120.0,
+    "D": 80.0,
+    "H": 50.0,
+    "Hf": 25.0,
+    "Hb": 60.0,
+    "side": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 5.8e-05,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 0,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 6,
+    "undetected": [
+     "e_c0",
+     "e_c1",
+     "e_c2",
+     "e_c3",
+     "e_c4",
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.4414442649329526,
+     "-35.0": 3.4414211854364964,
+     "180.0": 5.845339151733242e-05
+    }
+   }
+  },
+  {
+   "class_id": "tray_domelid",
+   "family": "tray",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 6,
+    "W": 120.0,
+    "D": 80.0,
+    "H": 40.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "side": 0.0,
+    "h": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "flap_ratio": 0.0,
+    "hw": 0.0,
+    "hh": 0.0,
+    "dv_x": 0.0,
+    "dv_h": 0.0,
+    "rf": 0.0,
+    "spine_w": 0.0,
+    "cover_w": 0.0,
+    "tuck_t": 0.0,
+    "pad_d": 0.0,
+    "dome_k": 4,
+    "lip_d": 10.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 13,
+    "n_mismatch": 5,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 13,
+    "n_undetected": 4,
+    "undetected": [
+     "e_cFR",
+     "e_cRB",
+     "e_cBL",
+     "e_cLF"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 5.735764380884945,
+     "-35.0": 5.735764346135966,
+     "180.0": 1.7374493843647087e-08
+    }
+   }
+  },
+  {
+   "class_id": "tray_lid_overfit",
+   "family": "tray",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 2,
+    "W": 90.0,
+    "D": 60.0,
+    "H": 25.0,
+    "glue_w": 12.0,
+    "board_t": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "ridge_off": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "Hf": 0.0,
+    "flap_ratio": 0.0,
+    "side": 0.0,
+    "h": 0.0,
+    "g": 0.0,
+    "S": 0.0,
+    "C": 0.0,
+    "t": 0.0,
+    "bw": 0.0,
+    "tw": 0.0,
+    "wl": 0.0,
+    "xt": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 10,
+    "n_mismatch": 6,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 10,
+    "n_undetected": 4,
+    "undetected": [
+     "e_cFR",
+     "e_cRB",
+     "e_cBL",
+     "e_cLF"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212553,
+     "-35.0": 6.882917236212549,
+     "180.0": 7.628290615314396e-15
+    }
+   }
+  },
+  {
+   "class_id": "tray_wedge",
+   "family": "tray",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "fam": 3,
+    "W": 100.0,
+    "D": 60.0,
+    "H": 40.0,
+    "Hf": 25.0,
+    "Hb": 60.0,
+    "side": 40.0,
+    "glue_w": 12.0,
+    "board_t": 0.45
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 5,
+    "n_mismatch": 1,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 5,
+    "n_undetected": 1,
+    "undetected": [
+     "e_glue"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 6.882917236212553,
+     "-35.0": 6.882917236212553,
+     "180.0": 9.739636741317752e-15
+    }
+   }
+  },
+  {
+   "class_id": "tube_cap_end",
+   "family": "tube",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 4,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "glue_w": 20.0,
+    "board_t": 0.42,
+    "side": 20.0,
+    "h": 140.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "flap_ratio": 0.0,
+    "hw": 0.0,
+    "hh": 0.0,
+    "dv_x": 0.0,
+    "dv_h": 0.0,
+    "rf": 6.0,
+    "spine_w": 0.0,
+    "cover_w": 0.0,
+    "tuck_t": 0.0,
+    "pad_d": 0.0,
+    "dome_k": 0.0,
+    "lip_d": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 40,
+    "n_mismatch": 31,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 40,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.441458618106253,
+     "-35.0": 3.441458618106253,
+     "180.0": 11.999999990311814
+    }
+   }
+  },
+  {
+   "class_id": "tube_double_seam",
+   "family": "tube",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "kind": 4,
+    "W": 0.0,
+    "D": 0.0,
+    "H": 0.0,
+    "glue_w": 0.0,
+    "board_t": 0.0,
+    "Hb": 0.0,
+    "Hr": 0.0,
+    "ridge_off": 0.0,
+    "Ef": 0.0,
+    "fin_gap_mm": 0.0,
+    "Hf": 0.0,
+    "flap_ratio": 0.0,
+    "side": 25.0,
+    "h": 120.0,
+    "g": 6.0,
+    "S": 0.0,
+    "C": 0.0,
+    "t": 0.0,
+    "bw": 0.0,
+    "tw": 0.0,
+    "wl": 0.0,
+    "xt": 0.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 24,
+    "n_mismatch": 7,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 24,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 7.169705454388074,
+     "-35.0": 7.169705454388074,
+     "180.0": 48.35533905932736
+    }
+   }
+  },
+  {
+   "class_id": "tube_glue",
+   "family": "tube",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 0,
+    "side_b": 0,
+    "side_t": 0,
+    "h": 140.0,
+    "board_t": 0.42,
+    "glue_w": 20.0,
+    "side": 20.0,
+    "W": 0,
+    "H": 0,
+    "D": 0,
+    "k": 0,
+    "spine_w": 0,
+    "cover_w": 0,
+    "tuck_t": 0,
+    "side_d": 0,
+    "bot_d": 0,
+    "corner_e": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 16,
+    "n_mismatch": 15,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 16,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 12.028231980170878,
+     "-35.0": 12.028231980170872,
+     "180.0": 39.99999999999994
+    }
+   }
+  },
+  {
+   "class_id": "tube_glue_n24",
+   "family": "tube",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 24,
+    "side_b": 0,
+    "side_t": 0,
+    "h": 140.0,
+    "board_t": 0.42,
+    "glue_w": 20.0,
+    "side": 20.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 24,
+    "n_mismatch": 23,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 24,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 12.028231980170856,
+     "-35.0": 12.028231980170816,
+     "180.0": 39.99999999999992
+    }
+   }
+  },
+  {
+   "class_id": "tube_glue_n8",
+   "family": "tube",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "n": 8,
+    "side_b": 0,
+    "side_t": 0,
+    "h": 140.0,
+    "board_t": 0.42,
+    "glue_w": 20.0,
+    "side": 20.0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 8,
+    "n_mismatch": 7,
+    "n_undetermined": 1
+   },
+   "closure_sensitivity": {
+    "n_probed": 8,
+    "n_undetected": 0,
+    "undetected": [],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 12.028231980170915,
+     "-35.0": 12.028231980170917,
+     "180.0": 39.99999999999999
+    }
+   }
+  },
+  {
+   "class_id": "tuck_top_box",
+   "family": "tuck",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 110.0,
+    "D": 70.0,
+    "H": 60.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 12.0,
+    "dust_r": 0.5,
+    "ins": 12.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "clear": 0.0,
+    "friction": 0.0,
+    "rf": 0.0,
+    "web_w": 0.0,
+    "hw": 0.0,
+    "ad": 0.0,
+    "cs": 0.0,
+    "drop": 0.0,
+    "bs": 0.0,
+    "kind": 0
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 12,
+    "n_mismatch": 3,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 12,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 3.441458618106271,
+     "-35.0": 3.4414586181062745,
+     "180.0": 2.2469334198890888e-14
+    }
+   }
+  },
+  {
+   "class_id": "two_piece",
+   "family": "two",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 80.0,
+    "D": 60.0,
+    "H": 45.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 0.0,
+    "dust_r": 0.0,
+    "ins": 0.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "bw": 0.0,
+    "tw_s": 0.0,
+    "lw": 0.0,
+    "clear": 1.5,
+    "friction": 2.0,
+    "rf": 5.0,
+    "web_w": 6.0,
+    "hw": 0.0,
+    "ad": 0.0,
+    "cs": 0.0,
+    "drop": 0.0,
+    "bs": 0.0,
+    "kind": 3
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 26,
+    "n_mismatch": 16,
+    "n_undetermined": 0
+   },
+   "closure_sensitivity": {
+    "n_probed": 26,
+    "n_undetected": 13,
+    "undetected": [
+     "e_gb",
+     "e_bb1",
+     "e_bb3",
+     "e_be0",
+     "e_be2",
+     "e_be3",
+     "e_gl",
+     "e_ltR"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 7.105427357601002e-15,
+     "-35.0": 7.105427357601002e-15,
+     "180.0": 7.105427357601002e-15
+    }
+   }
+  },
+  {
+   "class_id": "window_box",
+   "family": "window",
+   "status": "GREEN",
+   "level": "L1_GEOMETRY_VALID",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "params": {
+    "W": 110.0,
+    "D": 70.0,
+    "H": 60.0,
+    "glue_w": 12.0,
+    "board_t": 0.45,
+    "tuck_d": 12.0,
+    "dust_r": 0.5,
+    "ins": 12.0,
+    "tab_h": 0.0,
+    "slot_w": 0.0,
+    "slot_d": 0.0,
+    "bw": 20.0,
+    "tw_s": 14.0,
+    "lw": 18.0,
+    "clear": 0.0,
+    "friction": 0.0,
+    "rf": 0.0,
+    "web_w": 0.0,
+    "hw": 0.0,
+    "ad": 0.0,
+    "cs": 0.0,
+    "drop": 0.0,
+    "bs": 0.0,
+    "kind": 2
+   },
+   "qa_worst_closure_mm": 0.0,
+   "fold_semantics": {
+    "declared": false,
+    "n_edges": 15,
+    "n_mismatch": 3,
+    "n_undetermined": 3
+   },
+   "closure_sensitivity": {
+    "n_probed": 15,
+    "n_undetected": 1,
+    "undetected": [
+     "e_g"
+    ],
+    "n_uncovered": 0,
+    "min_worst_residual_mm_by_angle": {
+     "35.0": 2.753166894485021,
+     "-35.0": 2.753166894485021,
+     "180.0": 2.2469334198890888e-14
+    }
+   }
+  }
+ ]
+}

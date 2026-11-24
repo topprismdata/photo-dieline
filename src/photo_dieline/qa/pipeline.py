@@ -7,6 +7,7 @@ G09 报告自检 (门齐全/状态合法/整体状态与各门一致) | G10 core
 """
 from __future__ import annotations
 
+import json
 import math
 import re
 from pathlib import Path
@@ -16,7 +17,7 @@ import numpy as np
 from shapely.geometry import LineString, Polygon
 from shapely.ops import unary_union
 
-from ..core.ir import MIN_PHOTO_PX, GeometryIR
+from ..core.ir import ARError, MIN_PHOTO_PX, GeometryIR, from_raw
 from ..export import layout as lay
 from ..export import pdf as pdfx
 from ..folding.engine import fold_all
@@ -110,6 +111,119 @@ def _path_pts(ops: str) -> list[tuple[float, float]]:
     return [(float(x), float(y)) for x, y in re.findall(r"(-?[\d.]+) (-?[\d.]+) [ml]\b", ops)]
 
 
+def _panel_normal(P) -> np.ndarray | None:
+    """面板正面法线 (世界坐标): 取 polygon_2d 绕序下的首个非退化三角。"""
+    P = np.asarray(P, float)
+    for i in range(1, len(P) - 1):
+        n = np.cross(P[i] - P[0], P[i + 1] - P[0])
+        nn = float(np.linalg.norm(n))
+        if nn > 1e-9:
+            return n / nn
+    return None
+
+
+def _hinge_endpoints(world, ir: GeometryIR, e) -> tuple[np.ndarray, np.ndarray]:
+    """折线两端在父面板折叠后的世界坐标 (seg_2d 端点落在父面板边上, 不必是顶点)。"""
+    P = np.asarray(world[e.parent], float)
+    P2 = np.asarray(ir.panel(e.parent)["polygon_2d"], float)
+    out = []
+    for q in (np.asarray(e.seg_2d[0], float), np.asarray(e.seg_2d[1], float)):
+        best = None
+        for i in range(len(P2)):
+            p, r = P2[i], P2[(i + 1) % len(P2)]
+            d = r - p
+            L2 = float(d @ d)
+            if L2 < 1e-18:
+                continue
+            t = float(np.clip((q - p) @ d / L2, 0.0, 1.0))
+            dist = float(np.linalg.norm(q - (p + t * d)))
+            if best is None or dist < best[0]:
+                best = (dist, P[i] + t * (P[(i + 1) % len(P2)] - P[i]))
+        if best is None or best[0] > 1e-6:
+            raise ARError(f"折线 {e.id} 的端点不在父面板 {e.parent} 的边上")
+        out.append(best[1])
+    return out[0], out[1]
+
+
+MT_VA_REFERENCE = "polygon_2d_ccw"   # 折线语义观察面约定: 父面板 polygon_2d 逆时针法线一侧
+
+
+def fold_semantics(ir: GeometryIR, world) -> dict:
+    """折线语义核对: 以父面板正面 (polygon_2d 逆时针法线一侧) 为观察面,
+    子面板折向观察者 = VALLEY, 折离观察者 = MOUNTAIN。
+    只有模板在 package.template.mt_va_reference 声明该约定, mt_va 才有判定基准; 未声明 = 语义未经验证。"""
+    declared = ir.package["template"].get("mt_va_reference") == MT_VA_REFERENCE
+    mismatch, undetermined = [], []
+    for e in ir.edges:
+        if e.mt_va == "SCORE":
+            continue
+        side = None
+        n = _panel_normal(world[e.parent])
+        if n is not None:
+            a, b = _hinge_endpoints(world, ir, e)
+            v = np.asarray(world[e.child], float).mean(0) - (a + b) / 2.0
+            s = float(v @ n) / (float(np.linalg.norm(v)) + 1e-12)
+            if abs(s) >= 0.2:
+                side = s > 0
+        if side is None:
+            undetermined.append(e.id)
+        elif e.mt_va != ("VALLEY" if side else "MOUNTAIN"):
+            mismatch.append(e.id)
+    return {"declared": declared, "n_edges": len(ir.edges), "n_mismatch": len(mismatch),
+            "mismatch": mismatch, "n_undetermined": len(undetermined)}
+
+
+def _rotate(v: np.ndarray, axis: np.ndarray, ang: float) -> np.ndarray:
+    """Rodrigues: 把 v 绕单位轴 axis 旋转 ang 弧度。"""
+    c, s = math.cos(ang), math.sin(ang)
+    return v * c + np.cross(axis, v) * s + axis * float(axis @ v) * (1.0 - c)
+
+
+def closure_sensitivity(ir: GeometryIR, angles_deg: tuple = (35.0, -35.0, 180.0)) -> dict:
+    """闭合判据灵敏度 (通用负探针): 逐条折线把显式折向绕真实铰链轴旋转指定角度,
+    模板的闭合判据必须在每个角度上都检出 (最大残差 > TOL_MM)。返回未检出的折线与各角度的最小"最大残差"。
+    无显式折向 (target_dir_3d) 的折线无法做定向扰动, 记为未覆盖。"""
+    mod = templates.get(ir.package["template"]["id"])
+    world = fold_all(ir)
+    undetected, uncovered = [], []
+    worst_by_angle = {a: float("inf") for a in angles_deg}
+    n_probed = 0
+    for e in ir.edges:
+        if e.target_dir_3d is None:
+            uncovered.append(e.id)
+            continue
+        try:
+            a, b = _hinge_endpoints(world, ir, e)
+        except ARError:
+            uncovered.append(e.id)
+            continue
+        axis = b - a
+        if float(np.linalg.norm(axis)) < 1e-9:
+            uncovered.append(e.id)
+            continue
+        axis = axis / np.linalg.norm(axis)
+        n_probed += 1
+        detected_all = True
+        for ang in angles_deg:
+            d1 = _rotate(np.asarray(e.target_dir_3d, float), axis, math.radians(ang))
+            raw = json.loads(json.dumps(ir.raw))
+            next(x for x in raw["edges"] if x["id"] == e.id)["fold"]["target_dir_3d"] = [float(x) for x in d1]
+            try:
+                ir2 = from_raw(raw)
+                res = mod.closure_checks(ir2, fold_all(ir2))
+                worst = max(float(v) for v in res.values()) if res else 0.0   # 没有判据 = 什么都检不出
+            except Exception:  # noqa: BLE001  (折叠或判据抛错 = 破坏被检出)
+                worst = float("inf")
+            worst_by_angle[ang] = min(worst_by_angle[ang], worst)
+            if not worst > TOL_MM:
+                detected_all = False
+        if not detected_all:
+            undetected.append(e.id)
+    return {"n_probed": n_probed, "n_undetected": len(undetected), "undetected": undetected,
+            "n_uncovered": len(uncovered),
+            "min_worst_residual_mm_by_angle": {str(k): v for k, v in worst_by_angle.items()}}
+
+
 def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     g = []
 
@@ -194,17 +308,27 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
         g03.fail(str(exc))
     g.append(g03)
 
-    # G04 折叠闭合 (跨链顶点重合)
+    # G04 折叠闭合 (跨链顶点重合) + 折线语义 (模板声明观察面约定时核对)
     g04 = Gate("G04", "fold_closure")
     try:
         world = fold_all(ir)
         mod = templates.get(ir.package["template"]["id"])
-        residual = {k: round(float(v), 6) for k, v in mod.closure_checks(ir, world).items()}
-        worst = max(residual.values())
-        if worst <= TOL_MM:
-            g04.ok({"worst_residual_mm": worst, **residual})
+        res = mod.closure_checks(ir, world)
+        residual = {k: round(float(v), 6) for k, v in res.items()}
+        worst = max(residual.values()) if residual else float("inf")
+        sem = fold_semantics(ir, world)
+        metrics = {"worst_residual_mm": worst, "n_closure_checks": len(residual),
+                   "fold_semantics": {"declared": sem["declared"], "n_edges": sem["n_edges"],
+                                      "n_mismatch": sem["n_mismatch"], "n_undetermined": sem["n_undetermined"]},
+                   **residual}
+        if not residual:
+            g04.fail("模板没有任何闭合判据", metrics)
+        elif worst > TOL_MM:
+            g04.fail(f"最大闭合残差 {worst:.3f}mm > {TOL_MM}mm", metrics)
+        elif sem["declared"] and sem["n_mismatch"]:
+            g04.fail(f"折线语义与声明的观察面约定不一致: {sem['mismatch'][:6]}", metrics)
         else:
-            g04.fail(f"最大闭合残差 {worst:.3f}mm > {TOL_MM}mm", residual)
+            g04.ok(metrics)
     except Exception as exc:  # noqa: BLE001
         g04.fail(str(exc))
     g.append(g04)

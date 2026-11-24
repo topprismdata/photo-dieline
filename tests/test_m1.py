@@ -1,6 +1,7 @@
 """M1 验收测试: 16 项合同中可机器判定部分的自动化 (pytest)."""
 from __future__ import annotations
 
+import copy
 import json
 import math
 import re
@@ -286,19 +287,27 @@ def test_qa_report_has_ten_gates(env):
 
 
 def test_zoo_exports_stay_on_page_and_parse():
-    """全动物园回归: 每个注册类的 SVG/PDF 都须几何在页内、PDF 可被独立解析器打开。"""
+    """全动物园回归: 每个注册类要么导出成功且 G07/G08/G09 通过 (几何在页内、PDF 可被独立解析器打开),
+要么导出被拒 —— 而拒绝必须对应拓扑门 (G03) 的真实缺陷, 不允许"拒了但说不出为什么"。"""
     from photo_dieline.batch import _build_class
     from photo_dieline.core.ir import from_raw
-    bad = {}
+    bad, refused = {}, {}
     for cls_id in templates.all_classes():
         _mod, _params, raw = _build_class(cls_id)
         ir = from_raw(raw)
         x0, y0, x1, y1 = svgx.net_bbox(ir)
-        rep = run_qa(ir, svgx.render(ir, x1 - x0, y1 - y0), pdfx.build_pdf(ir, x1 - x0, y1 - y0))
+        try:
+            rep = run_qa(ir, svgx.render(ir, x1 - x0, y1 - y0), pdfx.build_pdf(ir, x1 - x0, y1 - y0))
+        except ARError as exc:
+            refused[cls_id] = str(exc)
+            if _gate(run_qa(ir, "", b""), "G03")["status"] != "PASS":
+                continue
+            bad[cls_id] = f"导出被拒但 G03 没有报出原因: {exc}"
+            continue
         fails = [g["id"] for g in rep["gates"] if g["id"] in ("G07", "G08", "G09") and g["status"] != "PASS"]
         if fails:
             bad[cls_id] = fails
-    assert not bad, bad
+    assert not bad, {"bad": bad, "refused": refused}
 
 
 def _split_edge_at_fold(raw):
@@ -352,3 +361,155 @@ def test_subdivided_hinge_stays_a_fold(env):
         assert to_net(s).intersection(fold_line).length < 1e-6   # CUT 层没有任何一段落在铰链上
     creases = [s for k in ("CREASE-MOUNTAIN", "CREASE-VALLEY") for s in shapes[k]]
     assert any(to_net(s).covers(fold_line) for s in creases)     # 铰链完整地留在折线层
+
+
+# ---- 独立金标: 页面坐标手算, 不经过任何被验证的模块 ----
+def _page_lines(svg_text, gid):
+    """SVG 某图层的线段, 换算成页面坐标 (y 向上, mm)."""
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(svg_text)
+    h = float(root.get("height")[:-2])
+    grp = next(x for x in root.iter("{http://www.w3.org/2000/svg}g") if x.get("id") == gid)
+    return [(float(e.get("x1")), h - float(e.get("y1")), float(e.get("x2")), h - float(e.get("y2")))
+            for e in grp.iter("{http://www.w3.org/2000/svg}line")]
+
+
+def test_hand_computed_golden_page(env):
+    """独立金标: 页面坐标由 spec 参数手算 (勾股求坡面长; 粘口 + 四面墙; 底折页 + 墙 + 坡面 + 立鳍)。
+    导出器与 QA 共用坐标变换时三者可以一致地错 — 这条对账是外部基准 (GPT R1 A1–4 签署条件)。"""
+    W, D, Hb, Hr, Ef, gw = (SPEC["params"][k] for k in ("W", "D", "Hb", "Hr", "Ef", "glue_w"))
+    m = 12.0
+    s = math.hypot(D / 2, Hr)
+    page_w, page_h = gw + 4 * W + 2 * m, D + Hb + s + Ef + 2 * m
+    crease_x = [m + gw, m + gw + W, m + gw + 2 * W, m + gw + 3 * W]
+    crease_y = [m + D, m + D + Hb, m + D + Hb + s]
+    cut_x, cut_y = [m, m + gw + 4 * W], [m, m + D + Hb + s + Ef]
+
+    svg = env[1]
+    root_h = float(__import__("re").search(r'height="([\d.]+)mm"', svg).group(1))
+    root_w = float(__import__("re").search(r'width="([\d.]+)mm"', svg).group(1))
+    assert (root_w, root_h) == pytest.approx((page_w, page_h), abs=1e-3)
+    creases = _page_lines(svg, "CREASE-MOUNTAIN") + _page_lines(svg, "CREASE-VALLEY")
+    assert sorted({a for a, _b, c, _d in creases if abs(a - c) < 1e-9}) == pytest.approx(crease_x, abs=1e-3)
+    assert sorted({b for _a, b, _c, d in creases if abs(b - d) < 1e-9}) == pytest.approx(crease_y, abs=1e-3)
+    import xml.etree.ElementTree as ET
+    grp = next(x for x in ET.fromstring(svg).iter("{http://www.w3.org/2000/svg}g") if x.get("id") == "CUT")
+    pts = []
+    for e in grp.iter("{http://www.w3.org/2000/svg}polygon"):
+        v = [float(t) for t in e.get("points").replace(",", " ").split()]
+        pts += list(zip(v[0::2], v[1::2]))
+    assert [min(p[0] for p in pts), max(p[0] for p in pts)] == pytest.approx(cut_x, abs=1e-3)
+    assert [page_h - max(p[1] for p in pts), page_h - min(p[1] for p in pts)] == pytest.approx(cut_y, abs=1e-3)
+    bar = max(_page_lines(svg, "INFO"), key=lambda t: abs(t[2] - t[0]))
+    assert (bar[0], bar[1], bar[3]) == pytest.approx((m, page_h - 8, page_h - 8), abs=1e-3)
+    assert bar[2] - bar[0] == pytest.approx(50.0, abs=1e-3)
+
+    import io
+    import re
+    import pypdf
+    page = pypdf.PdfReader(io.BytesIO(env[2]), strict=True).pages[0]
+    k = 72 / 25.4
+    assert (float(page.mediabox.width), float(page.mediabox.height)) == pytest.approx((page_w * k, page_h * k), abs=0.05)
+    blocks = dict(re.findall(r"/OC (/P\d+) BDC\n(.*?)\nEMC", page.get_contents().get_data().decode("latin-1"), re.S))
+
+    def segs(ops):
+        return [tuple(float(v) / k for v in s) for s in re.findall(r"([\d.]+) ([\d.]+) m\n([\d.]+) ([\d.]+) l", ops)]
+
+    crease = segs(blocks["/P1"]) + segs(blocks["/P2"])
+    assert sorted({a for a, _b, c, _d in crease if abs(a - c) < 1e-9}) == pytest.approx(crease_x, abs=1e-3)
+    assert sorted({b for _a, b, _c, d in crease if abs(b - d) < 1e-9}) == pytest.approx(crease_y, abs=1e-3)
+    bar = max(segs(blocks["/P6"]), key=lambda t: abs(t[2] - t[0]))
+    assert (bar[0], bar[1], bar[3]) == pytest.approx((m, page_h - 8, page_h - 8), abs=1e-3)
+    assert bar[2] - bar[0] == pytest.approx(50.0, abs=1e-3)
+
+
+def test_golden_template_is_fold_valid():
+    """金标模板: 折线语义已声明且自洽; 每条折线的 ±35°/180° 扰动都被闭合判据检出 (修复前 4/12 漏检)。"""
+    from photo_dieline.qa.pipeline import closure_sensitivity, fold_semantics
+    from photo_dieline.core.ir import from_raw
+    ir = from_raw(gable_top.build_ir(SPEC["params"]))
+    world = fold_all(ir)
+    sem = fold_semantics(ir, world)
+    assert sem["declared"] and sem["n_mismatch"] == 0 and sem["n_undetermined"] == 0
+    sens = closure_sensitivity(ir)
+    assert sens["n_probed"] == len(ir.edges) and sens["n_undetected"] == 0 and sens["n_uncovered"] == 0
+    assert min(sens["min_worst_residual_mm_by_angle"].values()) > 0.2
+
+
+def _set_tdir(eid, v):
+    return lambda raw: next(e for e in raw["edges"] if e["id"] == eid)["fold"].update(target_dir_3d=list(v))
+
+
+def _mutate(raw, fn):
+    fn(raw)
+    return raw
+
+
+def _finB_like_finF(raw):
+    ff = next(e for e in raw["edges"] if e["id"] == "e_sl_ff")["fold"]["target_dir_3d"]
+    next(e for e in raw["edges"] if e["id"] == "e_sl_fb")["fold"]["target_dir_3d"] = list(ff)
+
+
+def _flip_all_mt_va(raw):
+    for e in raw["edges"]:
+        e["fold"]["mt_va"] = {"MOUNTAIN": "VALLEY", "VALLEY": "MOUNTAIN"}[e["fold"]["mt_va"]]
+
+
+def _third_panel_shares_fold(raw):
+    ghost = copy.deepcopy(next(p for p in raw["panels"] if p["id"] == "back"))
+    ghost["id"] = "back_dup"
+    raw["panels"].append(ghost)
+
+
+def _self_intersect_front(raw):
+    pts = next(p for p in raw["panels"] if p["id"] == "front")["polygon_2d"]
+    pts[0], pts[1] = pts[1], pts[0]   # 矩形顶点 0/1 对调 → 自交 (蝶形)
+
+
+def _score_one_edge(raw):
+    next(e for e in raw["edges"] if e["id"] == "e_wl_bk")["fold"]["mt_va"] = "SCORE"
+
+
+MUTATIONS = [
+    ("粘口折向盒外", _set_tdir("e_glue", (-1, 0, 0)), "G04"),
+    ("背底板下垂未折", _set_tdir("e_bk_fl", (0, 0, -1)), "G04"),
+    ("左底板折到墙外", _set_tdir("e_wl_fl", (-1, 0, 0)), "G04"),
+    ("右底板折到墙外", _set_tdir("e_wr_fl", (1, 0, 0)), "G04"),
+    ("两鳍重合", _finB_like_finF, "G04"),
+    ("折线 M/V 全部互换", _flip_all_mt_va, "G04"),
+    ("第三块板共享折线 (非流形)", _third_panel_shares_fold, "G03"),
+    ("面板多边形自交", _self_intersect_front, "G03"),
+    ("折线语义改成 SCORE (无对应图层)", _score_one_edge, "G07"),
+]
+
+
+@pytest.mark.parametrize("label,mutate,gate", MUTATIONS, ids=[m[0] for m in MUTATIONS])
+def test_golden_mutations_are_rejected(label, mutate, gate):
+    """审计变异矩阵回放: 每种单点破坏必须被指定门拒绝 (修复前 27 个里 15 个仍判 VALIDATED)。"""
+    import copy
+    from photo_dieline.core.ir import from_raw
+    raw = copy.deepcopy(gable_top.build_ir(SPEC["params"]))
+    mutate(raw)
+    ir = from_raw(raw)
+    x0, y0, x1, y1 = svgx.net_bbox(ir)
+    try:
+        svg_text, pdf_bytes = svgx.render(ir, x1 - x0, y1 - y0), pdfx.build_pdf(ir, x1 - x0, y1 - y0)
+    except ARError:   # 导出器直接拒绝 (如 SCORE 无对应图层)
+        svg_text, pdf_bytes = "", b""
+    report = run_qa(ir, svg_text, pdf_bytes)
+    assert _gate(report, gate)["status"] == "FAIL", label
+    assert report["status"] == "DRAFT", label
+
+
+def test_maturity_level_requires_semantics_and_sensitivity():
+    from photo_dieline.batch import FOLD_GATES, GEOMETRY_GATES, maturity_level
+    ok = {g: "PASS" for g in GEOMETRY_GATES + FOLD_GATES}
+    good = {"n_probed": 12, "n_undetected": 0, "n_uncovered": 0}
+    sem = {"declared": True, "n_mismatch": 0}
+    assert maturity_level(ok, sem, good) == "L2_FOLD_VALID"
+    assert maturity_level(ok, {**sem, "declared": False}, good) == "L1_GEOMETRY_VALID"
+    assert maturity_level(ok, {**sem, "n_mismatch": 1}, good) == "L1_GEOMETRY_VALID"
+    assert maturity_level(ok, sem, {**good, "n_undetected": 1}) == "L1_GEOMETRY_VALID"
+    assert maturity_level(ok, sem, {**good, "n_probed": 0}) == "L1_GEOMETRY_VALID"
+    assert maturity_level({**ok, "G04": "FAIL"}, sem, good) == "L1_GEOMETRY_VALID"
+    assert maturity_level({**ok, "G03": "FAIL"}, sem, good) == "L0_REGISTERED"

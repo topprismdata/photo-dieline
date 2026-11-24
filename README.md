@@ -19,7 +19,7 @@
 2. **证据分级**：实测 > 可信来源 > 约束推导 > 模型推断 > 默认值；模型值永不覆盖实测（ADR-003）。
 3. **三态交付**：DRAFT → VALIDATED（数值 QA 全过）→ PRINT-READY（印厂人工签核）；系统不得自动升级（ADR-008）。
 
-## 模板动物园（100 类注册，84 类过十门）
+## 模板动物园（100 类注册：L2 折叠有效 1 · L1 展开几何有效 83 · L0 仅已注册 16）
 
 | 家族（29） | 类数 | 代表拓扑 |
 |---|---|---|
@@ -30,17 +30,24 @@
 | 托盘食品系（tray/food/egg/divided/cup/sushi…） | 17 | 四角/六角/楔形/汉堡铰链/粉盒/薯条套/便当/卷饼袋/寿司托/蛋托/三分格/杯套 |
 | 异形展示（pyramid/pillow/pyramid_ext/mailer/envelope/display…） | 14 | 棱台×8/锥管×3/枕形/书封/信封×2/陈列台/扣夹盒/硬衬 |
 
-验收现状（2026-11-24 从头复查）：`photo-dieline batch` **84/100 类十门全绿**；**16 类拓扑门（G03）失败**——展开图面板重叠、面板多边形自交或裁切缝切穿结构，这些类的刀版不可切（根因与逐类位置见 [docs/reviews/recheck_2026-11-24/findings.md](docs/reviews/recheck_2026-11-24/findings.md) F4-23）。G04 折叠闭合最差残差 5.8e-05mm（门 0.2mm）；G05 尺寸对账 ≤0.5mm。
+验收现状（2026-11-24 从头复查）：`photo-dieline batch` 给每个类定**成熟度**（机器可判定的前三档；逐类明细在 `output/zoo100/batch_report.json`，根因见 [docs/reviews/recheck_2026-11-24/findings.md](docs/reviews/recheck_2026-11-24/findings.md)）。
 
-读这张表须知：(1) 100 类中 39 类是同一家族按多边形边数派生的变体，真实不同结构 ≤61 类，尚未对齐 ECMA/FEFCO 编码；(2) "过门"不等于"可制造"——另有 37 类粘口折回自身墙板（筒体不闭合）、2 类无底板，现有门检不出（F4-24…F4-28），模板附带的 `probe()` 负探针只覆盖 40 类且未接入批量验证。全量 contact sheet 见 `docs/images/zoo100_contact_sheet.png`。
+| 级别 | 类数 | 判据 | 现状 |
+|---|---|---|---|
+| **L2 折叠有效** | **1** | L1 + 折叠闭合/尺寸/穿插全过 + 折线语义已声明观察面约定且自洽 + 每条折线的 ±35°/180° 扰动都被闭合判据检出 | 仅 `gable_top` 金标 |
+| **L1 展开几何有效** | 83 | schema + 展开拓扑 + 两个导出件独立解析全过 | 都未声明折线语义约定；其中 65 类的闭合判据存在扰动漏检 |
+| **L0 仅已注册** | 16 | 模板能构建 | 15 类展开图面板重叠/裁切缝切穿结构，1 类底板自交、导出被拒 |
+| L3 样件验证 / L4 生产签核 | 0 | 实物裁切、折叠、尺寸回测 / 指定工艺人工签核 | 尚无任何类做过实物试制 |
+
+**过门不等于可制造。** 全园 1591 条折线中 1066 条（67%）的 MOUNTAIN/VALLEY 标注与"以父面板正面为观察面"的约定不一致——除金标外，现有导出的两个压线图层语义不可信；另有 37 类粘口折回自身墙板（筒体不闭合）、2 类无底板，现有门检不出（findings F4-24…F4-28）。100 类中 39 类是同一家族按多边形边数派生的变体，尚未对齐 ECMA/FEFCO 编码。contact sheet 见 `docs/images/zoo100_contact_sheet.png`（绿 L2 / 橙 L1 / 红 L0）。
 
 ## 里程碑
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
-| **M1** | gable-top 屋顶包垂直切片：照片+三尺寸 → Geometry IR → 自研 2D 布局 → 1:1 分层 SVG/PDF → 纯 Python 折叠 QA（十门） | ✅ **VALIDATED**（2026-11-24 复查修复导出缺陷后重验：十门为独立解析核对，36 项测试含负探针；CI 可复跑：`pytest tests/`） |
-| M2 | 模板库扩展（FEFCO 0201）＋ **Twins Data Engine**（合成孪生数据飞轮）＋ T1 箱型分类 / T2 参数回归 | 模板动物园 100 类（84 过门）；TDE v0.8；T1/T2 **仅合成域结果**（分类 top-1 71.1%；比例回归相对误差 5.4–5.8%），真实照片上未达可用（findings F2-01…F2-10） |
-| M2.5 | 货架孪生渲染 + ESR 资产样例（`scripts/build_hxl_shelf.py` 与三门脚本） | **实验性**：资产层与验收报告在复查中发现失效，待修（findings F4-04…F4-09） |
+| **M1** | gable-top 屋顶包垂直切片：照片+三尺寸 → Geometry IR → 自研 2D 布局 → 1:1 分层 SVG/PDF → 纯 Python 折叠 QA（十门） | ✅ **VALIDATED**（2026-11-24 复查修复后重验：十门为独立解析核对 + 手算金标对账 + 49 项测试含变异矩阵回放；模板成熟度 L2） |
+| M2 | 模板库扩展（FEFCO 0201）＋ **Twins Data Engine**（合成孪生数据飞轮）＋ T1 箱型分类 / T2 参数回归 | 模板动物园 100 类（成熟度 L2 1 / L1 83 / L0 16）；TDE v0.8；T1/T2 **仅合成域结果**（分类 top-1 71.1%；比例回归相对误差 5.4–5.8%），真实照片上未达可用（findings F2-01…F2-10） |
+| M2.5 | 货架孪生渲染 + ESR 资产样例（`scripts/build_hxl_shelf.py` 与三门脚本） | **实验性，建议迁出本仓**：资产层与验收报告在复查中发现失效（findings F4-04…F4-09） |
 | M3 | TRELLIS.2 视觉辅证 · 智能补参交互 · 端到端候选 IR 研究 | 规划 |
 
 ## 快速开始（M1 垂直切片）
@@ -60,7 +67,7 @@ photo-dieline render --ir examples/gable_top/artifacts/geometry-ir.json \
   --photo examples/gable_top/reference_photo.jpg \
   --out examples/gable_top/artifacts/compare_usda.png
 
-pytest tests/   # 36 项机器验收 (含负探针: 坏交付物必须被对应门拒绝)
+pytest tests/   # 49 项机器验收 (含负探针与变异矩阵: 坏交付物/坏折叠必须被对应门拒绝)
 ```
 
 输出 `artifacts/`：`geometry-ir.json`（五对象协议）· `dieline.svg` · `dieline.pdf`（7 图层 OCGroups）·

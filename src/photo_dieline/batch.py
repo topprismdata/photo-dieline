@@ -1,7 +1,10 @@
-"""批量验证: 注册表全类 → build→QA→fold→渲染 → 对账 JSON + contact sheet.
+"""批量验证: 注册表全类 → build → QA 十门 → 折线语义/闭合灵敏度 → 成熟度分级 → 对账 JSON + contact sheet.
 
 用法: photo-dieline batch --out output/zoo100 [--prefix prism]
-验收口径: gate_green = G02-G10 全 PASS (G01 照片门按证据分级单列)
+成熟度 (机器可判定的前三档; L3 样件验证 / L4 生产签核须实物, 不在此判定):
+  L0_REGISTERED      模板能构建
+  L1_GEOMETRY_VALID  schema + 展开拓扑 + 两个导出件独立解析 全过
+  L2_FOLD_VALID      L1 + 折叠闭合/尺寸/穿插 全过 + 折线语义已声明且自洽 + 每条折线的扰动都被闭合判据检出
 """
 from __future__ import annotations
 
@@ -15,7 +18,7 @@ from PIL import Image, ImageDraw
 from .core.ir import class_defaults, class_module, from_raw
 from .folding.engine import fold_all
 from .parametric import base as templates
-from .qa.pipeline import run_qa
+from .qa.pipeline import closure_sensitivity, run_qa
 from .export.svg import render as svg_render, net_bbox
 from .export.pdf import build_pdf
 from .render.twin import render_twin
@@ -28,6 +31,23 @@ def _build_class(cls_id: str):
     return mod, params, mod.build_ir(params)
 
 
+GEOMETRY_GATES = ("G02", "G03", "G07", "G08", "G09", "G10")
+FOLD_GATES = ("G04", "G05", "G06")
+LEVELS = ("L0_REGISTERED", "L1_GEOMETRY_VALID", "L2_FOLD_VALID")
+
+
+def maturity_level(gates: dict, semantics: dict, sensitivity: dict) -> str:
+    if not all(gates.get(g) == "PASS" for g in GEOMETRY_GATES):
+        return "L0_REGISTERED"
+    if not all(gates.get(g) == "PASS" for g in FOLD_GATES):
+        return "L1_GEOMETRY_VALID"
+    if not (semantics.get("declared") and semantics.get("n_mismatch", 1) == 0):
+        return "L1_GEOMETRY_VALID"
+    if not sensitivity.get("n_probed") or sensitivity.get("n_undetected", 1) or sensitivity.get("n_uncovered", 1):
+        return "L1_GEOMETRY_VALID"
+    return "L2_FOLD_VALID"
+
+
 def run_batch(out_dir: str, prefix: str | None = None, thumb: int = 320) -> dict:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -36,7 +56,7 @@ def run_batch(out_dir: str, prefix: str | None = None, thumb: int = 320) -> dict
     rows = []
     t0 = time.time()
     for cls_id in classes:
-        row: dict = {"class_id": cls_id, "family": None, "status": "FAIL", "gates": {}}
+        row: dict = {"class_id": cls_id, "family": None, "status": "FAIL", "level": "L0_REGISTERED", "gates": {}}
         try:
             mod, params, ir_raw = _build_class(cls_id)
             ir_raw.pop("_derived", None)  # 模板内部派生量不进 IR 协议 (build 同款清理)
@@ -48,9 +68,17 @@ def run_batch(out_dir: str, prefix: str | None = None, thumb: int = 320) -> dict
             pdf_bytes = build_pdf(ir, x1 - x0, y1 - y0)
             report = run_qa(ir, svg_text, pdf_bytes)
             row["gates"] = {g["id"]: g["status"] for g in report["gates"] if g["id"] != "G01"}
-            row["qa_worst_closure_mm"] = next((g["metrics"].get("worst_residual_mm") for g in report["gates"]
-                                               if g["id"] == "G04" and g["status"] == "PASS"), None)
-            world = fold_all(ir)
+            g04 = next((g for g in report["gates"] if g["id"] == "G04"), {})
+            row["qa_worst_closure_mm"] = (g04.get("metrics", {}).get("worst_residual_mm")
+                                          if g04.get("status") == "PASS" else None)
+            row["fold_semantics"] = g04.get("metrics", {}).get("fold_semantics", {})
+            try:
+                sens = closure_sensitivity(ir)
+            except Exception as exc:  # noqa: BLE001  (灵敏度探针自身失败 = 未验证, 不冒充通过)
+                sens = {"n_probed": 0, "n_undetected": 0, "n_uncovered": 0, "error": str(exc)[:120]}
+            row["closure_sensitivity"] = {**sens, "undetected": list(sens.get("undetected", []))[:8]}
+            row["level"] = maturity_level(row["gates"], row["fold_semantics"], sens)
+            fold_all(ir)
             twin = render_twin(ir, size=thumb)
             twin.save(out / "thumbs" / f"{cls_id}.png")
             row["status"] = "GREEN" if all(v == "PASS" for v in row["gates"].values()) else "QA_FAIL"
@@ -60,11 +88,15 @@ def run_batch(out_dir: str, prefix: str | None = None, thumb: int = 320) -> dict
         rows.append(row)
 
     green = sum(1 for r in rows if r["status"] == "GREEN")
+    by_level = {lv: sum(1 for r in rows if r["level"] == lv) for lv in LEVELS}
     report = {
-        "batch_version": "0.1",
+        "batch_version": "0.2",
         "total_classes": len(rows),
         "green": green,
         "gate_green_ratio": round(green / max(1, len(rows)), 4),
+        "maturity": by_level,
+        "fold_edges_mislabeled": sum(r.get("fold_semantics", {}).get("n_mismatch", 0) for r in rows),
+        "fold_edges_total": sum(r.get("fold_semantics", {}).get("n_edges", 0) for r in rows),
         "elapsed_s": round(time.time() - t0, 1),
         "rows": rows,
     }
@@ -87,8 +119,9 @@ def _contact_sheet(rows: list[dict], path: Path, thumb: int, cols: int = 6) -> N
             sheet.paste(im, (cx, cy))
         except Exception:  # noqa: BLE001
             pass
-        color = (30, 130, 60) if r["status"] == "GREEN" else (200, 80, 60)
-        d.text((cx, cy + thumb + 2), f"{r['class_id']} [{r['status']}]", fill=color)
+        level = r.get("level", "L0_REGISTERED")[:2]
+        color = {"L2": (30, 130, 60), "L1": (190, 130, 10)}.get(level, (200, 70, 50))
+        d.text((cx, cy + thumb + 2), f"{r['class_id']} [{level}{'✓' if r['status'] == 'GREEN' else ''}]", fill=color)
     sheet.save(path)
 
 

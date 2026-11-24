@@ -1,0 +1,50 @@
+== C1 cut inside foreign panel interior (total mm > 0.5) ==
+  crashlock_divider: total=226.0 by_victim=[('dvl', 166.0), ('bF', 60.0)] n=5
+  cup_sleeve: total=312.0 by_victim=[('w0', 26.0), ('w1', 26.0), ('w2', 26.0), ('w3', 26.0), ('w4', 26.0)] n=36
+  divided_tray_3comp: total=309.17 by_victim=[('floor', 137.07999999999998), ('dvl', 93.33), ('dvt', 78.75)] n=6
+  egg_tray_2x4: total=440.0 by_victim=[('floor', 440.0)] n=8
+  food_noodle_pail: total=610.11 by_victim=[('w0', 105.48), ('w4', 105.48), ('w1', 57.2), ('w2', 57.2), ('w3', 57.2)] n=34
+  food_sushi_tray: total=727.26 by_victim=[('floor', 247.89), ('lfloor', 184.0), ('w2', 73.48), ('w6', 73.48), ('L2', 45.94)] n=44
+  food_tray_liner: total=2.93 by_victim=[('w0', 2.31), ('glue', 0.62)] n=3
+  gable_screw_cap: total=427.64 by_victim=[('sb3', 28.44), ('sb4', 28.44), ('sf3', 28.44), ('sf4', 28.44), ('sb2', 28.360000000000003)] n=160
+  pyramid_frustum_n10: total=1164.98 by_victim=[('w0', 116.5), ('w1', 116.5), ('w2', 116.5), ('w3', 116.5), ('w4', 116.5)] n=20
+  pyramid_frustum_n12: total=1669.12 by_victim=[('w0', 139.1), ('w1', 139.1), ('w2', 139.1), ('w3', 139.1), ('w4', 139.1)] n=24
+  pyramid_frustum_n4: total=203.65 by_victim=[('w0', 50.92), ('w1', 50.92), ('w2', 50.92), ('w3', 50.92)] n=8
+  pyramid_frustum_n5: total=306.23 by_victim=[('w0', 61.24), ('w1', 61.24), ('w2', 61.24), ('w3', 61.24), ('w4', 61.24)] n=10
+  pyramid_frustum_n6: total=432.0 by_victim=[('w0', 72.0), ('w1', 72.0), ('w2', 72.0), ('w3', 72.0), ('w4', 72.0)] n=12
+  pyramid_frustum_n7: total=580.8 by_victim=[('w0', 82.98), ('w1', 82.98), ('w2', 82.98), ('w3', 82.98), ('w4', 82.98)] n=14
+  pyramid_frustum_n8: total=752.58 by_victim=[('w0', 94.08), ('w1', 94.08), ('w2', 94.08), ('w3', 94.08), ('w4', 94.08)] n=16
+  pyramid_frustum_n9: total=947.31 by_victim=[('w0', 105.26), ('w1', 105.26), ('w2', 105.26), ('w3', 105.26), ('w4', 105.26)] n=18
+== C2 cut overlapping a fold (crease drawn as cut) ==
+  crashlock_divider: [('e_bF', 136.0)]
+  divided_tray_3comp: [('e_wf', 215.0), ('e_wb', 155.0), ('e_wr', 35.0), ('e_wl', 35.0)]
+  egg_tray_2x4: [('e_wf', 280.0), ('e_wb', 280.0), ('e_wr', 164.0), ('e_wl', 136.0)]
+  food_noodle_pail: [('e_tf0', 18.0), ('e_tf4', 18.0)]
+  gable_screw_cap: [('e_sl_fb', 19.0), ('e_sl_ff', 19.0)]
+  rsc_handhole: [('e_t0', 130.0)]
+== D under-backed folds ==
+  crashlock_divider: [('e_dvl', 'bF', 0.0), ('e_dvt', 'bF', 0.0)]
+  divided_tray_3comp: [('e_wr', 'floor', 0.0), ('e_dvl', 'floor', 0.0), ('e_dvt', 'floor', 0.0)]
+  egg_tray_2x4: [('e_dvm', 'floor', 0.0), ('e_cs1', 'wAf', 0.0), ('e_cn1', 'wAb', 0.0), ('e_cs2', 'wAf', 0.0), ('e_cn2', 'wAb', 0.0), ('e_cs3', 'wAf', 0.0)]
+  food_noodle_pail: [('e_tf0', 'w0', 0.563), ('e_tf4', 'w4', 0.563)]
+  gable_screw_cap: [('e_sl_fb', 'finB', 0.422), ('e_sl_ff', 'finF', 0.422)]
+  rsc_handhole: [('e_t0', 'w0', 0.812)]
+== holes ==
+  divided_tray_3comp: holes=[850.0, 1350.0]
+  food_tray_liner: holes=[13.86]
+  gable_screw_cap: holes=[22.38, 22.38]
+  gable_window_front: holes=[2376.0]
+  mailer_diecut: holes=[6000.0]
+  prism_dust_n10: holes=[692.48, 692.48, 692.48, 692.48, 692.48, 692.48, 692.48, 692.48, 692.48]
+  prism_dust_n11: holes=[766.28, 766.28, 766.28, 766.28, 766.28, 766.28, 766.28, 766.28, 766.28, 766.28]
+  prism_dust_n12: holes=[839.71, 839.71, 839.71, 839.71, 839.71, 839.71, 839.71, 839.71, 839.71, 839.71, 839.71]
+  prism_dust_n4: holes=[225.0, 225.0, 225.0]
+  prism_dust_n5: holes=[309.69, 309.69, 309.69, 309.69]
+  prism_dust_n6: holes=[389.71, 389.71, 389.71, 389.71, 389.71]
+  prism_dust_n7: holes=[467.22, 467.22, 467.22, 467.22, 467.22, 467.22]
+  prism_dust_n8: holes=[543.2, 543.2, 543.2, 543.2, 543.2, 543.2, 543.2]
+  prism_dust_n9: holes=[618.18, 618.18, 618.18, 618.18, 618.18, 618.18, 618.18, 618.18]
+  prism_tuck_window: holes=[1584.0]
+  rsc_handhole: holes=[660.0]
+  window_box: holes=[1924.0]
+== multi-part nets == []

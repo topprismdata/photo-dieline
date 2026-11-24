@@ -1,0 +1,4352 @@
+{
+ "aseptic_brick": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 24,
+  "n_parts": 1
+ },
+ "brick_250ml": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 24,
+  "n_parts": 1
+ },
+ "clamp_shell": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 22,
+  "n_parts": 1
+ },
+ "clv_double_cover": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 26,
+  "n_parts": 1
+ },
+ "clv_double_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 31,
+  "n_parts": 1
+ },
+ "clv_glue_seal": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "clv_hinged_flap": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "clv_partial_lid": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 22,
+  "n_parts": 1
+ },
+ "clv_snap_lock": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 38,
+  "n_parts": 1
+ },
+ "clv_tuck_insert": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 30,
+  "n_parts": 1
+ },
+ "cone_wrap": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 50,
+  "n_parts": 1
+ },
+ "cone_wrap_n12": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 38,
+  "n_parts": 1
+ },
+ "cone_wrap_n20": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 62,
+  "n_parts": 1
+ },
+ "crashlock_divider": {
+  "cut_in_foreign_total": 226.0,
+  "cut_in_foreign": [
+   [
+    [
+     "bF"
+    ],
+    "dvl",
+    50.0
+   ],
+   [
+    [
+     "bF"
+    ],
+    "dvl",
+    50.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "dvl",
+    36.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "bF",
+    60.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "dvl",
+    30.0
+   ]
+  ],
+  "cut_on_fold": [
+   [
+    [
+     "bF"
+    ],
+    "e_bF",
+    50.0
+   ],
+   [
+    [
+     "bF"
+    ],
+    "e_bF",
+    50.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "e_bF",
+    36.0
+   ]
+  ],
+  "fold_underbacked": [
+   [
+    "e_dvl",
+    "bF",
+    0.0
+   ],
+   [
+    "e_dvt",
+    "bF",
+    0.0
+   ]
+  ],
+  "holes": [],
+  "n_cut_segs": 37,
+  "n_parts": 1
+ },
+ "crashlock_rect": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 26,
+  "n_parts": 1
+ },
+ "crashlock_rect_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 34,
+  "n_parts": 1
+ },
+ "cup_sleeve": {
+  "cut_in_foreign_total": 312.0,
+  "cut_in_foreign": [
+   [
+    [
+     "hemB0"
+    ],
+    "w0",
+    5.0
+   ],
+   [
+    [
+     "hemB0"
+    ],
+    "w0",
+    16.0
+   ],
+   [
+    [
+     "hemB0"
+    ],
+    "w0",
+    5.0
+   ],
+   [
+    [
+     "hemB1"
+    ],
+    "w1",
+    5.0
+   ],
+   [
+    [
+     "hemB1"
+    ],
+    "w1",
+    16.0
+   ],
+   [
+    [
+     "hemB1"
+    ],
+    "w1",
+    5.0
+   ],
+   [
+    [
+     "hemB2"
+    ],
+    "w2",
+    5.0
+   ],
+   [
+    [
+     "hemB2"
+    ],
+    "w2",
+    16.0
+   ],
+   [
+    [
+     "hemB2"
+    ],
+    "w2",
+    5.0
+   ],
+   [
+    [
+     "hemB3"
+    ],
+    "w3",
+    5.0
+   ],
+   [
+    [
+     "hemB3"
+    ],
+    "w3",
+    16.0
+   ],
+   [
+    [
+     "hemB3"
+    ],
+    "w3",
+    5.0
+   ],
+   [
+    [
+     "hemB4"
+    ],
+    "w4",
+    5.0
+   ],
+   [
+    [
+     "hemB4"
+    ],
+    "w4",
+    16.0
+   ],
+   [
+    [
+     "hemB4"
+    ],
+    "w4",
+    5.0
+   ],
+   [
+    [
+     "hemB5"
+    ],
+    "w5",
+    5.0
+   ],
+   [
+    [
+     "hemB5"
+    ],
+    "w5",
+    16.0
+   ],
+   [
+    [
+     "hemB5"
+    ],
+    "w5",
+    5.0
+   ],
+   [
+    [
+     "hemB6"
+    ],
+    "w6",
+    5.0
+   ],
+   [
+    [
+     "hemB6"
+    ],
+    "w6",
+    16.0
+   ],
+   [
+    [
+     "hemB6"
+    ],
+    "w6",
+    5.0
+   ],
+   [
+    [
+     "hemB7"
+    ],
+    "w7",
+    5.0
+   ],
+   [
+    [
+     "hemB7"
+    ],
+    "w7",
+    16.0
+   ],
+   [
+    [
+     "hemB7"
+    ],
+    "w7",
+    5.0
+   ],
+   [
+    [
+     "hemB8"
+    ],
+    "w8",
+    5.0
+   ],
+   [
+    [
+     "hemB8"
+    ],
+    "w8",
+    16.0
+   ],
+   [
+    [
+     "hemB8"
+    ],
+    "w8",
+    5.0
+   ],
+   [
+    [
+     "hemB9"
+    ],
+    "w9",
+    5.0
+   ],
+   [
+    [
+     "hemB9"
+    ],
+    "w9",
+    16.0
+   ],
+   [
+    [
+     "hemB9"
+    ],
+    "w9",
+    5.0
+   ],
+   [
+    [
+     "hemB10"
+    ],
+    "w10",
+    5.0
+   ],
+   [
+    [
+     "hemB10"
+    ],
+    "w10",
+    16.0
+   ],
+   [
+    [
+     "hemB10"
+    ],
+    "w10",
+    5.0
+   ],
+   [
+    [
+     "hemB11"
+    ],
+    "w11",
+    5.0
+   ],
+   [
+    [
+     "hemB11"
+    ],
+    "w11",
+    16.0
+   ],
+   [
+    [
+     "hemB11"
+    ],
+    "w11",
+    5.0
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 76,
+  "n_parts": 1
+ },
+ "dispenser_top": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 36,
+  "n_parts": 1
+ },
+ "display_counter": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 14,
+  "n_parts": 1
+ },
+ "divided_tray_3comp": {
+  "cut_in_foreign_total": 309.17,
+  "cut_in_foreign": [
+   [
+    [
+     "floor"
+    ],
+    "dvl",
+    58.33
+   ],
+   [
+    [
+     "floor"
+    ],
+    "dvt",
+    43.75
+   ],
+   [
+    [
+     "dvl"
+    ],
+    "floor",
+    73.33
+   ],
+   [
+    [
+     "dvl"
+    ],
+    "dvt",
+    35.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "floor",
+    63.75
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "dvl",
+    35.0
+   ]
+  ],
+  "cut_on_fold": [
+   [
+    [
+     "floor"
+    ],
+    "e_wf",
+    60.0
+   ],
+   [
+    [
+     "floor"
+    ],
+    "e_wf",
+    120.0
+   ],
+   [
+    [
+     "floor"
+    ],
+    "e_wb",
+    120.0
+   ],
+   [
+    [
+     "dvl"
+    ],
+    "e_wr",
+    35.0
+   ],
+   [
+    [
+     "dvl"
+    ],
+    "e_wl",
+    35.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "e_wf",
+    35.0
+   ],
+   [
+    [
+     "dvt"
+    ],
+    "e_wb",
+    35.0
+   ]
+  ],
+  "fold_underbacked": [
+   [
+    "e_wr",
+    "floor",
+    0.0
+   ],
+   [
+    "e_dvl",
+    "floor",
+    0.0
+   ],
+   [
+    "e_dvt",
+    "floor",
+    0.0
+   ]
+  ],
+  "holes": [
+   850.0,
+   1350.0
+  ],
+  "n_cut_segs": 22,
+  "n_parts": 1
+ },
+ "egg_tray_2x4": {
+  "cut_in_foreign_total": 440.0,
+  "cut_in_foreign": [
+   [
+    [
+     "cs3",
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ],
+   [
+    [
+     "cs2",
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ],
+   [
+    [
+     "cs1",
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ],
+   [
+    [
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ],
+   [
+    [
+     "dvm"
+    ],
+    "floor",
+    160.0
+   ],
+   [
+    [
+     "cs1",
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ],
+   [
+    [
+     "cs2",
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ],
+   [
+    [
+     "cs3",
+     "wAf"
+    ],
+    "floor",
+    40.0
+   ]
+  ],
+  "cut_on_fold": [
+   [
+    [
+     "floor"
+    ],
+    "e_wr",
+    40.0
+   ],
+   [
+    [
+     "floor"
+    ],
+    "e_wr",
+    40.0
+   ],
+   [
+    [
+     "floor"
+    ],
+    "e_wl",
+    40.0
+   ],
+   [
+    [
+     "floor"
+    ],
+    "e_wl",
+    40.0
+   ],
+   [
+    [
+     "cs3",
+     "wAf"
+    ],
+    "e_wr",
+    28.0
+   ],
+   [
+    [
+     "wAf"
+    ],
+    "e_wl",
+    28.0
+   ],
+   [
+    [
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "cs1",
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "cs2",
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "cs3",
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ],
+   [
+    [
+     "cn1",
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ],
+   [
+    [
+     "cn2",
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ],
+   [
+    [
+     "cn3",
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ],
+   [
+    [
+     "dvm"
+    ],
+    "e_wr",
+    28.0
+   ],
+   [
+    [
+     "dvm"
+    ],
+    "e_wl",
+    28.0
+   ],
+   [
+    [
+     "cs1",
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "cn1",
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ],
+   [
+    [
+     "cs2",
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "cn2",
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ],
+   [
+    [
+     "cs3",
+     "wAf"
+    ],
+    "e_wf",
+    40.0
+   ],
+   [
+    [
+     "cs3",
+     "wAf"
+    ],
+    "e_wr",
+    28.0
+   ],
+   [
+    [
+     "cn3",
+     "wAb"
+    ],
+    "e_wb",
+    40.0
+   ]
+  ],
+  "fold_underbacked": [
+   [
+    "e_dvm",
+    "floor",
+    0.0
+   ],
+   [
+    "e_cs1",
+    "wAf",
+    0.0
+   ],
+   [
+    "e_cn1",
+    "wAb",
+    0.0
+   ],
+   [
+    "e_cs2",
+    "wAf",
+    0.0
+   ],
+   [
+    "e_cn2",
+    "wAb",
+    0.0
+   ],
+   [
+    "e_cs3",
+    "wAf",
+    0.0
+   ],
+   [
+    "e_cn3",
+    "wAb",
+    0.0
+   ]
+  ],
+  "holes": [],
+  "n_cut_segs": 47,
+  "n_parts": 1
+ },
+ "envelope_square": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 11,
+  "n_parts": 1
+ },
+ "envelope_wedge": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 11,
+  "n_parts": 1
+ },
+ "food_bento_lid_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 26,
+  "n_parts": 1
+ },
+ "food_clamshell_burger": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 24,
+  "n_parts": 1
+ },
+ "food_fries_sleeve": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 16,
+  "n_parts": 1
+ },
+ "food_noodle_pail": {
+  "cut_in_foreign_total": 610.11,
+  "cut_in_foreign": [
+   [
+    [
+     "w0"
+    ],
+    "tf0",
+    7.0
+   ],
+   [
+    [
+     "w0"
+    ],
+    "tf0",
+    14.0
+   ],
+   [
+    [
+     "w0"
+    ],
+    "tf0",
+    7.0
+   ],
+   [
+    [
+     "w4"
+    ],
+    "tf4",
+    7.0
+   ],
+   [
+    [
+     "w4"
+    ],
+    "tf4",
+    14.0
+   ],
+   [
+    [
+     "w4"
+    ],
+    "tf4",
+    7.0
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    18.6
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    18.6
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    18.6
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    20.0
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    18.6
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    18.6
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    20.0
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    18.6
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    18.6
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    20.0
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    18.6
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    18.6
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    18.6
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    18.6
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    20.0
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    18.6
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    18.6
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    20.0
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    18.6
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    18.6
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    20.0
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    18.6
+   ],
+   [
+    [
+     "wg0"
+    ],
+    "w0",
+    24.14
+   ],
+   [
+    [
+     "wg0"
+    ],
+    "w0",
+    20.0
+   ],
+   [
+    [
+     "wg0"
+    ],
+    "w0",
+    24.14
+   ],
+   [
+    [
+     "wg4"
+    ],
+    "w4",
+    24.14
+   ],
+   [
+    [
+     "wg4"
+    ],
+    "w4",
+    20.0
+   ],
+   [
+    [
+     "wg4"
+    ],
+    "w4",
+    24.14
+   ]
+  ],
+  "cut_on_fold": [
+   [
+    [
+     "w0"
+    ],
+    "e_tf0",
+    9.0
+   ],
+   [
+    [
+     "w0"
+    ],
+    "e_tf0",
+    9.0
+   ],
+   [
+    [
+     "w4"
+    ],
+    "e_tf4",
+    9.0
+   ],
+   [
+    [
+     "w4"
+    ],
+    "e_tf4",
+    9.0
+   ]
+  ],
+  "fold_underbacked": [
+   [
+    "e_tf0",
+    "w0",
+    0.563
+   ],
+   [
+    "e_tf4",
+    "w4",
+    0.563
+   ]
+  ],
+  "holes": [],
+  "n_cut_segs": 50,
+  "n_parts": 1
+ },
+ "food_sushi_tray": {
+  "cut_in_foreign_total": 727.26,
+  "cut_in_foreign": [
+   [
+    [
+     "w2"
+    ],
+    "lfloor",
+    3.0
+   ],
+   [
+    [
+     "w2"
+    ],
+    "L2",
+    12.0
+   ],
+   [
+    [
+     "w3"
+    ],
+    "lfloor",
+    29.7
+   ],
+   [
+    [
+     "w3"
+    ],
+    "L2",
+    5.3
+   ],
+   [
+    [
+     "w3"
+    ],
+    "L2",
+    11.67
+   ],
+   [
+    [
+     "w3"
+    ],
+    "lfloor",
+    4.24
+   ],
+   [
+    [
+     "w3"
+    ],
+    "L2",
+    16.97
+   ],
+   [
+    [
+     "w4"
+    ],
+    "lfloor",
+    35.0
+   ],
+   [
+    [
+     "w4"
+    ],
+    "lfloor",
+    35.0
+   ],
+   [
+    [
+     "w5"
+    ],
+    "lfloor",
+    4.24
+   ],
+   [
+    [
+     "w5"
+    ],
+    "L6",
+    16.97
+   ],
+   [
+    [
+     "w5"
+    ],
+    "L6",
+    11.67
+   ],
+   [
+    [
+     "w5"
+    ],
+    "lfloor",
+    29.7
+   ],
+   [
+    [
+     "w5"
+    ],
+    "L6",
+    5.3
+   ],
+   [
+    [
+     "w6"
+    ],
+    "lfloor",
+    3.0
+   ],
+   [
+    [
+     "w6"
+    ],
+    "L6",
+    12.0
+   ],
+   [
+    [
+     "web"
+    ],
+    "lfloor",
+    8.0
+   ],
+   [
+    [
+     "web"
+    ],
+    "lfloor",
+    8.0
+   ],
+   [
+    [
+     "LB"
+    ],
+    "lfloor",
+    12.06
+   ],
+   [
+    [
+     "LB"
+    ],
+    "lfloor",
+    12.06
+   ],
+   [
+    [
+     "L0"
+    ],
+    "floor",
+    12.0
+   ],
+   [
+    [
+     "L0"
+    ],
+    "floor",
+    156.49
+   ],
+   [
+    [
+     "L0"
+    ],
+    "floor",
+    12.0
+   ],
+   [
+    [
+     "L0"
+    ],
+    "lglue",
+    4.24
+   ],
+   [
+    [
+     "L1"
+    ],
+    "w2",
+    12.0
+   ],
+   [
+    [
+     "L1"
+    ],
+    "floor",
+    11.7
+   ],
+   [
+    [
+     "L1"
+    ],
+    "w2",
+    16.24
+   ],
+   [
+    [
+     "L1"
+    ],
+    "floor",
+    12.0
+   ],
+   [
+    [
+     "L2"
+    ],
+    "w2",
+    33.24
+   ],
+   [
+    [
+     "L2"
+    ],
+    "w3",
+    19.5
+   ],
+   [
+    [
+     "L2"
+    ],
+    "w2",
+    12.0
+   ],
+   [
+    [
+     "L6"
+    ],
+    "w6",
+    12.0
+   ],
+   [
+    [
+     "L6"
+    ],
+    "w5",
+    19.5
+   ],
+   [
+    [
+     "L6"
+    ],
+    "w6",
+    33.24
+   ],
+   [
+    [
+     "L7"
+    ],
+    "floor",
+    6.0
+   ],
+   [
+    [
+     "L7"
+    ],
+    "floor",
+    11.7
+   ],
+   [
+    [
+     "L7"
+    ],
+    "w6",
+    16.24
+   ],
+   [
+    [
+     "L7"
+    ],
+    "w6",
+    12.0
+   ],
+   [
+    [
+     "lglue"
+    ],
+    "floor",
+    10.0
+   ],
+   [
+    [
+     "lglue"
+    ],
+    "L0",
+    1.51
+   ],
+   [
+    [
+     "lglue"
+    ],
+    "floor",
+    6.0
+   ],
+   [
+    [
+     "lglue"
+    ],
+    "L0",
+    6.0
+   ],
+   [
+    [
+     "lglue"
+    ],
+    "floor",
+    10.0
+   ],
+   [
+    [
+     "lglue"
+    ],
+    "L0",
+    5.76
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 54,
+  "n_parts": 1
+ },
+ "food_tray_liner": {
+  "cut_in_foreign_total": 2.93,
+  "cut_in_foreign": [
+   [
+    [
+     "w0"
+    ],
+    "glue",
+    0.62
+   ],
+   [
+    [
+     "glue"
+    ],
+    "w0",
+    1.24
+   ],
+   [
+    [
+     "glue"
+    ],
+    "w0",
+    1.07
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   13.86
+  ],
+  "n_cut_segs": 43,
+  "n_parts": 1
+ },
+ "food_wrap_pocket": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 14,
+  "n_parts": 1
+ },
+ "gable_fin_gap_wide": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 30,
+  "n_parts": 1
+ },
+ "gable_finless": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "gable_rect_base": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 30,
+  "n_parts": 1
+ },
+ "gable_screw_cap": {
+  "cut_in_foreign_total": 427.64,
+  "cut_in_foreign": [
+   [
+    [
+     "sb0"
+    ],
+    "sb1",
+    9.0
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "sb2",
+    2.37
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "sb3",
+    0.05
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "slopeB",
+    1.79
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "sb1",
+    1.79
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "sb2",
+    0.98
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "sb3",
+    0.03
+   ],
+   [
+    [
+     "sb0"
+    ],
+    "slopeB",
+    9.0
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb2",
+    9.0
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb3",
+    2.37
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb4",
+    0.05
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "slopeB",
+    0.03
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb0",
+    1.79
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb2",
+    1.79
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb3",
+    0.98
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb4",
+    0.03
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "slopeB",
+    0.05
+   ],
+   [
+    [
+     "sb1"
+    ],
+    "sb0",
+    9.0
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb3",
+    9.0
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb4",
+    2.37
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb5",
+    0.05
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb0",
+    0.98
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb1",
+    1.79
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb3",
+    1.79
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb4",
+    0.98
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb5",
+    0.03
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb0",
+    2.37
+   ],
+   [
+    [
+     "sb2"
+    ],
+    "sb1",
+    9.0
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb4",
+    9.0
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb5",
+    2.37
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb6",
+    0.05
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb0",
+    0.03
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb1",
+    0.98
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb2",
+    1.79
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb4",
+    1.79
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb5",
+    0.98
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb6",
+    0.03
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb0",
+    0.05
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb1",
+    2.37
+   ],
+   [
+    [
+     "sb3"
+    ],
+    "sb2",
+    9.0
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb5",
+    9.0
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb6",
+    2.37
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb7",
+    0.05
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb1",
+    0.03
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb2",
+    0.98
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb3",
+    1.79
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb5",
+    1.79
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb6",
+    0.98
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb7",
+    0.03
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb1",
+    0.05
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb2",
+    2.37
+   ],
+   [
+    [
+     "sb4"
+    ],
+    "sb3",
+    9.0
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb6",
+    9.0
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb7",
+    2.37
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb2",
+    0.03
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb3",
+    0.98
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb4",
+    1.79
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb6",
+    1.79
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb7",
+    0.98
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb2",
+    0.05
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb3",
+    2.37
+   ],
+   [
+    [
+     "sb5"
+    ],
+    "sb4",
+    9.0
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "slopeB",
+    0.05
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb7",
+    9.0
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "slopeB",
+    0.03
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb3",
+    0.03
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb4",
+    0.98
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb5",
+    1.79
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb7",
+    1.79
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb3",
+    0.05
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb4",
+    2.37
+   ],
+   [
+    [
+     "sb6"
+    ],
+    "sb5",
+    9.0
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "slopeB",
+    9.0
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "slopeB",
+    1.79
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "sb4",
+    0.03
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "sb5",
+    0.98
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "sb6",
+    1.79
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "sb4",
+    0.05
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "sb5",
+    2.37
+   ],
+   [
+    [
+     "sb7"
+    ],
+    "sb6",
+    9.0
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "sf1",
+    9.0
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "sf2",
+    2.37
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "sf3",
+    0.05
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "slopeF",
+    1.79
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "sf1",
+    1.79
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "sf2",
+    0.98
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "sf3",
+    0.03
+   ],
+   [
+    [
+     "sf0"
+    ],
+    "slopeF",
+    9.0
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf2",
+    9.0
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf3",
+    2.37
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf4",
+    0.05
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "slopeF",
+    0.03
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf0",
+    1.79
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf2",
+    1.79
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf3",
+    0.98
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf4",
+    0.03
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "slopeF",
+    0.05
+   ],
+   [
+    [
+     "sf1"
+    ],
+    "sf0",
+    9.0
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf3",
+    9.0
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf4",
+    2.37
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf5",
+    0.05
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf0",
+    0.98
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf1",
+    1.79
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf3",
+    1.79
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf4",
+    0.98
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf5",
+    0.03
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf0",
+    2.37
+   ],
+   [
+    [
+     "sf2"
+    ],
+    "sf1",
+    9.0
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf4",
+    9.0
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf5",
+    2.37
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf6",
+    0.05
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf0",
+    0.03
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf1",
+    0.98
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf2",
+    1.79
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf4",
+    1.79
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf5",
+    0.98
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf6",
+    0.03
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf0",
+    0.05
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf1",
+    2.37
+   ],
+   [
+    [
+     "sf3"
+    ],
+    "sf2",
+    9.0
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf5",
+    9.0
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf6",
+    2.37
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf7",
+    0.05
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf1",
+    0.03
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf2",
+    0.98
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf3",
+    1.79
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf5",
+    1.79
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf6",
+    0.98
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf7",
+    0.03
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf1",
+    0.05
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf2",
+    2.37
+   ],
+   [
+    [
+     "sf4"
+    ],
+    "sf3",
+    9.0
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf6",
+    9.0
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf7",
+    2.37
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf2",
+    0.03
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf3",
+    0.98
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf4",
+    1.79
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf6",
+    1.79
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf7",
+    0.98
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf2",
+    0.05
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf3",
+    2.37
+   ],
+   [
+    [
+     "sf5"
+    ],
+    "sf4",
+    9.0
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "slopeF",
+    0.05
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf7",
+    9.0
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "slopeF",
+    0.03
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf3",
+    0.03
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf4",
+    0.98
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf5",
+    1.79
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf7",
+    1.79
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf3",
+    0.05
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf4",
+    2.37
+   ],
+   [
+    [
+     "sf6"
+    ],
+    "sf5",
+    9.0
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "slopeF",
+    9.0
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "slopeF",
+    1.79
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "sf4",
+    0.03
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "sf5",
+    0.98
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "sf6",
+    1.79
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "sf4",
+    0.05
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "sf5",
+    2.37
+   ],
+   [
+    [
+     "sf7"
+    ],
+    "sf6",
+    9.0
+   ]
+  ],
+  "cut_on_fold": [
+   [
+    [
+     "finB"
+    ],
+    "e_sl_fb",
+    9.5
+   ],
+   [
+    [
+     "finB"
+    ],
+    "e_sl_fb",
+    9.5
+   ],
+   [
+    [
+     "finF"
+    ],
+    "e_sl_ff",
+    9.5
+   ],
+   [
+    [
+     "finF"
+    ],
+    "e_sl_ff",
+    9.5
+   ]
+  ],
+  "fold_underbacked": [
+   [
+    "e_sl_fb",
+    "finB",
+    0.422
+   ],
+   [
+    "e_sl_ff",
+    "finF",
+    0.422
+   ]
+  ],
+  "holes": [
+   22.38,
+   22.38
+  ],
+  "n_cut_segs": 82,
+  "n_parts": 1
+ },
+ "gable_top": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 30,
+  "n_parts": 1
+ },
+ "gable_window_front": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   2376.0
+  ],
+  "n_cut_segs": 40,
+  "n_parts": 1
+ },
+ "handle_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 36,
+  "n_parts": 1
+ },
+ "hanger_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 36,
+  "n_parts": 1
+ },
+ "hexagonal_flip": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "lockbottom_123": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 18,
+  "n_parts": 1
+ },
+ "mailer_bookwrap": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 10,
+  "n_parts": 1
+ },
+ "mailer_diecut": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   6000.0
+  ],
+  "n_cut_segs": 20,
+  "n_parts": 1
+ },
+ "mailer_rigid_pad": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 12,
+  "n_parts": 1
+ },
+ "pillow_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 26,
+  "n_parts": 1
+ },
+ "prism_dust_n10": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   692.48,
+   692.48,
+   692.48,
+   692.48,
+   692.48,
+   692.48,
+   692.48,
+   692.48,
+   692.48
+  ],
+  "n_cut_segs": 112,
+  "n_parts": 1
+ },
+ "prism_dust_n11": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   766.28,
+   766.28,
+   766.28,
+   766.28,
+   766.28,
+   766.28,
+   766.28,
+   766.28,
+   766.28,
+   766.28
+  ],
+  "n_cut_segs": 123,
+  "n_parts": 1
+ },
+ "prism_dust_n12": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71,
+   839.71
+  ],
+  "n_cut_segs": 134,
+  "n_parts": 1
+ },
+ "prism_dust_n4": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   225.0,
+   225.0,
+   225.0
+  ],
+  "n_cut_segs": 46,
+  "n_parts": 1
+ },
+ "prism_dust_n5": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   309.69,
+   309.69,
+   309.69,
+   309.69
+  ],
+  "n_cut_segs": 57,
+  "n_parts": 1
+ },
+ "prism_dust_n6": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   389.71,
+   389.71,
+   389.71,
+   389.71,
+   389.71
+  ],
+  "n_cut_segs": 68,
+  "n_parts": 1
+ },
+ "prism_dust_n7": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   467.22,
+   467.22,
+   467.22,
+   467.22,
+   467.22,
+   467.22
+  ],
+  "n_cut_segs": 79,
+  "n_parts": 1
+ },
+ "prism_dust_n8": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   543.2,
+   543.2,
+   543.2,
+   543.2,
+   543.2,
+   543.2,
+   543.2
+  ],
+  "n_cut_segs": 90,
+  "n_parts": 1
+ },
+ "prism_dust_n9": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   618.18,
+   618.18,
+   618.18,
+   618.18,
+   618.18,
+   618.18,
+   618.18,
+   618.18
+  ],
+  "n_cut_segs": 101,
+  "n_parts": 1
+ },
+ "prism_n10_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 44,
+  "n_parts": 1
+ },
+ "prism_n10_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 64,
+  "n_parts": 1
+ },
+ "prism_n11_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 48,
+  "n_parts": 1
+ },
+ "prism_n11_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 70,
+  "n_parts": 1
+ },
+ "prism_n12_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 52,
+  "n_parts": 1
+ },
+ "prism_n12_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 76,
+  "n_parts": 1
+ },
+ "prism_n4_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 20,
+  "n_parts": 1
+ },
+ "prism_n4_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "prism_n5_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 24,
+  "n_parts": 1
+ },
+ "prism_n5_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 34,
+  "n_parts": 1
+ },
+ "prism_n6_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "prism_n6_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 40,
+  "n_parts": 1
+ },
+ "prism_n7_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 32,
+  "n_parts": 1
+ },
+ "prism_n7_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 46,
+  "n_parts": 1
+ },
+ "prism_n8_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 36,
+  "n_parts": 1
+ },
+ "prism_n8_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 52,
+  "n_parts": 1
+ },
+ "prism_n9_open": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 40,
+  "n_parts": 1
+ },
+ "prism_n9_tuck": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 58,
+  "n_parts": 1
+ },
+ "prism_tuck_window": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   1584.0
+  ],
+  "n_cut_segs": 51,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n10": {
+  "cut_in_foreign_total": 1164.98,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    58.25
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    58.25
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    58.25
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    58.25
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    58.25
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    58.25
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    58.25
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    58.25
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    58.25
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    58.25
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    58.25
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    58.25
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    58.25
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    58.25
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    58.25
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    58.25
+   ],
+   [
+    [
+     "tf8"
+    ],
+    "w8",
+    58.25
+   ],
+   [
+    [
+     "tf8"
+    ],
+    "w8",
+    58.25
+   ],
+   [
+    [
+     "tf9"
+    ],
+    "w9",
+    58.25
+   ],
+   [
+    [
+     "tf9"
+    ],
+    "w9",
+    58.25
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 32,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n12": {
+  "cut_in_foreign_total": 1669.12,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    69.55
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    69.55
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    69.55
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    69.55
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    69.55
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    69.55
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    69.55
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    69.55
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    69.55
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    69.55
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    69.55
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    69.55
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    69.55
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    69.55
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    69.55
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    69.55
+   ],
+   [
+    [
+     "tf8"
+    ],
+    "w8",
+    69.55
+   ],
+   [
+    [
+     "tf8"
+    ],
+    "w8",
+    69.55
+   ],
+   [
+    [
+     "tf9"
+    ],
+    "w9",
+    69.55
+   ],
+   [
+    [
+     "tf9"
+    ],
+    "w9",
+    69.55
+   ],
+   [
+    [
+     "tf10"
+    ],
+    "w10",
+    69.55
+   ],
+   [
+    [
+     "tf10"
+    ],
+    "w10",
+    69.55
+   ],
+   [
+    [
+     "tf11"
+    ],
+    "w11",
+    69.55
+   ],
+   [
+    [
+     "tf11"
+    ],
+    "w11",
+    69.55
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 38,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n4": {
+  "cut_in_foreign_total": 203.65,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    25.46
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    25.46
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    25.46
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    25.46
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    25.46
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    25.46
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    25.46
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    25.46
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 14,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n5": {
+  "cut_in_foreign_total": 306.23,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    30.62
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    30.62
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    30.62
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    30.62
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    30.62
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    30.62
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    30.62
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    30.62
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    30.62
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    30.62
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 17,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n6": {
+  "cut_in_foreign_total": 432.0,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    36.0
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    36.0
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    36.0
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    36.0
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    36.0
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    36.0
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    36.0
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    36.0
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    36.0
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    36.0
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    36.0
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    36.0
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 20,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n7": {
+  "cut_in_foreign_total": 580.8,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    41.49
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    41.49
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    41.49
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    41.49
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    41.49
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    41.49
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    41.49
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    41.49
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    41.49
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    41.49
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    41.49
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    41.49
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    41.49
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    41.49
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 23,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n8": {
+  "cut_in_foreign_total": 752.58,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    47.04
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    47.04
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    47.04
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    47.04
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    47.04
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    47.04
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    47.04
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    47.04
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    47.04
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    47.04
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    47.04
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    47.04
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    47.04
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    47.04
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    47.04
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    47.04
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 26,
+  "n_parts": 1
+ },
+ "pyramid_frustum_n9": {
+  "cut_in_foreign_total": 947.31,
+  "cut_in_foreign": [
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    52.63
+   ],
+   [
+    [
+     "tf0"
+    ],
+    "w0",
+    52.63
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    52.63
+   ],
+   [
+    [
+     "tf1"
+    ],
+    "w1",
+    52.63
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    52.63
+   ],
+   [
+    [
+     "tf2"
+    ],
+    "w2",
+    52.63
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    52.63
+   ],
+   [
+    [
+     "tf3"
+    ],
+    "w3",
+    52.63
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    52.63
+   ],
+   [
+    [
+     "tf4"
+    ],
+    "w4",
+    52.63
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    52.63
+   ],
+   [
+    [
+     "tf5"
+    ],
+    "w5",
+    52.63
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    52.63
+   ],
+   [
+    [
+     "tf6"
+    ],
+    "w6",
+    52.63
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    52.63
+   ],
+   [
+    [
+     "tf7"
+    ],
+    "w7",
+    52.63
+   ],
+   [
+    [
+     "tf8"
+    ],
+    "w8",
+    52.63
+   ],
+   [
+    [
+     "tf8"
+    ],
+    "w8",
+    52.63
+   ]
+  ],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 29,
+  "n_parts": 1
+ },
+ "rsc_css": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "rsc_display_panel": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 29,
+  "n_parts": 1
+ },
+ "rsc_handhole": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [
+   [
+    [
+     "w0"
+    ],
+    "e_t0",
+    65.0
+   ],
+   [
+    [
+     "w0"
+    ],
+    "e_t0",
+    65.0
+   ]
+  ],
+  "fold_underbacked": [
+   [
+    "e_t0",
+    "w0",
+    0.812
+   ]
+  ],
+  "holes": [
+   660.0
+  ],
+  "n_cut_segs": 33,
+  "n_parts": 1
+ },
+ "rsc_hsc": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 20,
+  "n_parts": 1
+ },
+ "rsc_lock": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 36,
+  "n_parts": 1
+ },
+ "rsc_rsc": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 28,
+  "n_parts": 1
+ },
+ "slide_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 35,
+  "n_parts": 1
+ },
+ "tray_4corner": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 16,
+  "n_parts": 1
+ },
+ "tray_6corner": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 31,
+  "n_parts": 1
+ },
+ "tray_domelid": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 26,
+  "n_parts": 1
+ },
+ "tray_lid_overfit": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 20,
+  "n_parts": 1
+ },
+ "tray_wedge": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 14,
+  "n_parts": 1
+ },
+ "tube_cap_end": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 76,
+  "n_parts": 1
+ },
+ "tube_double_seam": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 52,
+  "n_parts": 1
+ },
+ "tube_glue": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 36,
+  "n_parts": 1
+ },
+ "tube_glue_n24": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 52,
+  "n_parts": 1
+ },
+ "tube_glue_n8": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 20,
+  "n_parts": 1
+ },
+ "tuck_top_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 30,
+  "n_parts": 1
+ },
+ "two_piece": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [],
+  "n_cut_segs": 57,
+  "n_parts": 1
+ },
+ "window_box": {
+  "cut_in_foreign_total": 0.0,
+  "cut_in_foreign": [],
+  "cut_on_fold": [],
+  "fold_underbacked": [],
+  "holes": [
+   1924.0
+  ],
+  "n_cut_segs": 41,
+  "n_parts": 1
+ }
+}

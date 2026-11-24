@@ -99,6 +99,9 @@ def page_shapes(ir) -> dict[str, list[Shape]]:
         return x - x0 + MARGIN, y - y0 + MARGIN
 
     out: dict[str, list[Shape]] = {k: [] for k in LAYERS}
+    invalid = [p["id"] for p in ir.panels if not Polygon(p["polygon_2d"]).is_valid]
+    if invalid:
+        raise ARError(f"面板多边形自交或退化, 无法导出: {invalid}")
     outline = unary_union([Polygon(p["polygon_2d"]) for p in ir.panels]).buffer(0)
     parts = _parts(outline)
     if not parts:

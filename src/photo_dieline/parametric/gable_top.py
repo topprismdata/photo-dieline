@@ -60,32 +60,49 @@ def solid_roles():
 
 
 def closure_checks(ir, world):
-    """G04 折叠闭合残差 (从 qa/pipeline.py 原硬编码迁移, 数值语义不变)."""
+    """G04 折叠闭合残差。每条判据须对至少一种已知折叠破坏敏感
+    (qa.pipeline.closure_sensitivity 逐条折线扰动回放):
+
+    - 脊线端点落在山墙尖; 前后底板远缘互达对侧墙底; 左右底板远缘在中线汇合
+    - 粘口远缘落在前脸闭合缝外表面、内移 glue_w (粘口折向盒外或未折即偏离)
+    - 过脊双鳍顶缘中点距 = fin_gap_mm (超域时倾角钳位 → 2*Ef)
+
+    原 "wallL.top.B == slopeB.bottom.L" 两条比较的是铰链上的点, 残差恒为 0, 已删。
+    """
     import numpy as np
     def pair(name, pa, ia, pb, ib):
         return name, float(np.linalg.norm(world[pa][ia] - world[pb][ib]))
+    gw = float(ir.param("glue_w"))
+    ef, gap = float(ir.param("Ef")), float(ir.param("fin_gap_mm"))
+    off = np.array([gw, 0.0, 0.0])
     checks = [
         pair("slopeB.ridge.L == wallL.apex", "slopeB", 3, "wallL", 3),
         pair("slopeF.ridge.L == wallR.apex", "slopeF", 3, "wallR", 3),
         pair("slopeB.ridge.R == wallR.apex", "slopeB", 2, "wallR", 3),
         pair("slopeF.ridge.R == wallL.apex", "slopeF", 2, "wallL", 3),
-        pair("wallL.top.B == slopeB.bottom.L", "wallL", 2, "slopeB", 0),
-        pair("wallR.top.B == slopeF.bottom.L", "wallR", 2, "slopeF", 0),
+        ("glue.far.on_front",
+         float(np.linalg.norm((world["glue"][0] - world["front"][1]) - off)
+               + np.linalg.norm((world["glue"][3] - world["front"][2]) - off))),
         ("flapF.far.mid == flapB.attach.mid",
          float(np.linalg.norm(np.mean(world["flapF"][0:2], axis=0) - np.mean(world["flapB"][2:4], axis=0)))),
+        ("flapB.far.mid == flapF.attach.mid",
+         float(np.linalg.norm(np.mean(world["flapB"][0:2], axis=0) - np.mean(world["flapF"][2:4], axis=0)))),
         ("flapL.far.mid == flapR.far.mid",
          float(np.linalg.norm(np.mean(world["flapL"][0:2], axis=0) - np.mean(world["flapR"][0:2], axis=0)))),
+        ("fin.top_gap",
+         abs(float(np.linalg.norm(np.mean(world["finB"][2:4], axis=0) - np.mean(world["finF"][2:4], axis=0)))
+             - min(gap, 2.0 * ef))),
     ]
     res = dict(checks)
-    flapL_mid = tuple(np.mean(world["flapL"][0:2], axis=0))
-    flapR_mid = tuple(np.mean(world["flapR"][0:2], axis=0))
-    res["flapL.far.x0"] = abs(flapL_mid[0])
-    res["flapR.far.x0"] = abs(flapR_mid[0])
+    res["flapL.far.x0"] = abs(float(np.mean(world["flapL"][0:2], axis=0)[0]))
+    res["flapR.far.x0"] = abs(float(np.mean(world["flapR"][0:2], axis=0)[0]))
     return res
 DEFAULTS = {"W": 45.0, "D": 45.0, "Hb": 100.0, "Hr": 12.0,
             "Ef": 14.0, "fin_gap_mm": 3.0, "glue_w": 12.0, "board_t": 0.45}
 
-TEMPLATE = {"id": "gable_top", "version": "0.1"}
+# mt_va_reference: 折线 MOUNTAIN/VALLEY 的观察面约定 = 父面板 polygon_2d 逆时针法线一侧
+# (qa.pipeline.fold_semantics 据此核对; 本模板墙体该侧为盒内面)
+TEMPLATE = {"id": "gable_top", "version": "0.1", "mt_va_reference": "polygon_2d_ccw"}
 
 
 def slant(D: float, Hr: float) -> float:
@@ -151,7 +168,7 @@ def build_ir(params: dict | None = None) -> dict:
     # 全部折线显式 target_dir_3d (模板解析已知封闭盒: wallL x=-W/2 平面 y 0..D;
     # back y=D; wallR x=+W/2; front y=0; 脊 y=D/2, z=Hb+Hr; 底 z=0)
     edges = [
-        fold("e_glue", (x1, 0), (x1, Hb), "wallL", "glue", "MOUNTAIN",
+        fold("e_glue", (x1, 0), (x1, Hb), "wallL", "glue", "VALLEY",
              tdir=(1.0, 0.0, 0.0)),
         fold("e_wl_bk", (x2, 0), (x2, Hb), "wallL", "back", "VALLEY",
              tdir=(1.0, 0.0, 0.0)),
@@ -169,14 +186,15 @@ def build_ir(params: dict | None = None) -> dict:
              tdir=(0.0, -math.sin(lean), math.cos(lean))),
         fold("e_sl_ff", (x4, Hb + s), (x5, Hb + s), "slopeF", "finF", "MOUNTAIN",
              tdir=(0.0, math.sin(lean), math.cos(lean))),
-        # 底封板: 全宽前后板内折成底 (水平 z=0 平面), 侧插板内折至中线
-        fold("e_ft_fl", (x4, 0), (x5, 0), "front", "flapF", "MOUNTAIN",
+        # 底封板: 全宽前后板内折成底 (水平 z=0 平面), 侧插板内折至中线。
+        # 粘口与底板都朝 polygon_2d 正面一侧折 → 以该面为观察面是 VALLEY (原先误标 MOUNTAIN)
+        fold("e_ft_fl", (x4, 0), (x5, 0), "front", "flapF", "VALLEY",
              tdir=(0.0, 1.0, 0.0)),
-        fold("e_bk_fl", (x2, 0), (x3, 0), "back", "flapB", "MOUNTAIN",
+        fold("e_bk_fl", (x2, 0), (x3, 0), "back", "flapB", "VALLEY",
              tdir=(0.0, -1.0, 0.0)),
-        fold("e_wl_fl", (x1, 0), (x2, 0), "wallL", "flapL", "MOUNTAIN",
+        fold("e_wl_fl", (x1, 0), (x2, 0), "wallL", "flapL", "VALLEY",
              tdir=(1.0, 0.0, 0.0)),
-        fold("e_wr_fl", (x3, 0), (x4, 0), "wallR", "flapR", "MOUNTAIN",
+        fold("e_wr_fl", (x3, 0), (x4, 0), "wallR", "flapR", "VALLEY",
              tdir=(-1.0, 0.0, 0.0)),
     ]
 
@@ -191,7 +209,8 @@ def build_ir(params: dict | None = None) -> dict:
         "meta": {
             "ir_version": "0.1", "units": "mm",
             "generator": "photo_dieline.parametric.gable_top 0.1",
-            "notes": "M1 golden sample; 板厚补偿 P1; 鳍双层顶缘距=fin_gap_mm",
+            "notes": "M1 golden sample; 板厚补偿 P1; 鳍双层顶缘距=fin_gap_mm; "
+                     "mt_va 观察面 = polygon_2d 正面 (本模板墙体该侧为盒内面)",
         },
         "package": {
             "type": "gable_top",

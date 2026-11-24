@@ -1,5 +1,12 @@
 # SimReady 官方资产对标实验 (2026-11-21)
 
+> ⚠️ **2026-11-24 从头复查: 本文的 "ESR COMPLIANT / 140-140 / 超越 SimReady" 结论对当前代码不成立, 已撤回。**
+> - 提交 `0a03d31` 重导出 SKU 资产后, 18 个 USD 丢失尺寸与语义标签 (`box_tp_00` 实为 1m 立方); 本文与 `data/shelf_twin/*.json` 的报告都落盘于回归之前。
+> - 三道门没有否决力: 语义门接受任意标签属性; 物理门不读 USD; 渲染门是手写的 `pass: true`; 像素门给白噪声图判 ALIGNED。
+> - 对标官方应直接跑 SimReady Foundation 校验器并固定规则版本, 而不是自建 10 项子集。
+>
+> 证据: `docs/reviews/recheck_2026-11-24/findings.md` F4-04…F4-09; 处置: 货架孪生 / ESR 线迁出本仓后重建 (GPT 复查评审第 1 轮裁决)。下文仅作历史记录保留。
+
 ## 目的
 
 "超越 SimReady"声明的第一块硬证据:官方 SimReady 资产能否被 ESR 三门直接量测——

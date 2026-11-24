@@ -5,7 +5,8 @@
     "type": "gable_top",
     "template": {
       "id": "gable_top",
-      "version": "0.1"
+      "version": "0.1",
+      "mt_va_reference": "polygon_2d_ccw"
     },
     "params": {
       "W": 57.15,
@@ -69,7 +70,10 @@
       "metrics": {
         "max_shared_len_diff_mm": 0.0,
         "panels": 13,
-        "folds": 12
+        "folds": 12,
+        "n_overlap_pairs": 0,
+        "cut_on_fold_mm": 0.0,
+        "cut_in_panel_mm": 0.0
       },
       "detail": ""
     },
@@ -79,14 +83,22 @@
       "status": "PASS",
       "metrics": {
         "worst_residual_mm": 0.0,
+        "n_closure_checks": 11,
+        "fold_semantics": {
+          "declared": true,
+          "n_edges": 12,
+          "n_mismatch": 0,
+          "n_undetermined": 0
+        },
         "slopeB.ridge.L == wallL.apex": 0.0,
         "slopeF.ridge.L == wallR.apex": 0.0,
         "slopeB.ridge.R == wallR.apex": 0.0,
         "slopeF.ridge.R == wallL.apex": 0.0,
-        "wallL.top.B == slopeB.bottom.L": 0.0,
-        "wallR.top.B == slopeF.bottom.L": 0.0,
+        "glue.far.on_front": 0.0,
         "flapF.far.mid == flapB.attach.mid": 0.0,
+        "flapB.far.mid == flapF.attach.mid": 0.0,
         "flapL.far.mid == flapR.far.mid": 0.0,
+        "fin.top_gap": 0.0,
         "flapL.far.x0": 0.0,
         "flapR.far.x0": 0.0
       },
