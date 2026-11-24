@@ -59,9 +59,22 @@ def solid_roles():
     return ("wall", "slope")
 
 
+def _vertex_at(ir, pid, xy):
+    """面板在展开图坐标 xy 处的顶点下标 — 按坐标而不是按下标取点:
+    使用者插入共线分点或轮换起始顶点时, 判据不受影响 (GPT R2 正向挑战集 POS-04/05)。"""
+    import numpy as np
+    pts = np.asarray(ir.panel(pid)["polygon_2d"], float)
+    d = np.linalg.norm(pts - np.asarray(xy, float), axis=1)
+    i = int(d.argmin())
+    if d[i] > 1e-6:
+        raise ValueError(f"{pid} 没有坐标为 {tuple(xy)} 的顶点 (最近 {d[i]:.3g}mm)")
+    return i
+
+
 def closure_checks(ir, world):
     """G04 折叠闭合残差。每条判据须对至少一种已知折叠破坏敏感
-    (qa.pipeline.closure_sensitivity 逐条折线扰动回放):
+    (qa.pipeline.closure_sensitivity 逐条折线扰动回放); 顶点一律按展开图坐标定位
+    (对共线分点、起始顶点轮换、整体平移不变):
 
     - 脊线端点落在山墙尖; 前后底板远缘互达对侧墙底; 左右底板远缘在中线汇合
     - 粘口远缘落在前脸闭合缝外表面、内移 glue_w (粘口折向盒外或未折即偏离)
@@ -70,32 +83,48 @@ def closure_checks(ir, world):
     原 "wallL.top.B == slopeB.bottom.L" 两条比较的是铰链上的点, 残差恒为 0, 已删。
     """
     import numpy as np
-    def pair(name, pa, ia, pb, ib):
-        return name, float(np.linalg.norm(world[pa][ia] - world[pb][ib]))
-    gw = float(ir.param("glue_w"))
-    ef, gap = float(ir.param("Ef")), float(ir.param("fin_gap_mm"))
+    p = ir.package["params"]
+    W, D, Hb, Hr, Ef, gw = (float(p[k]) for k in ("W", "D", "Hb", "Hr", "Ef", "glue_w"))
+    gap = float(p["fin_gap_mm"])
+    s = slant(D, Hr)
+    x1, x2, x3, x4, x5 = gw, gw + D, gw + D + W, gw + D + W + D, gw + D + W + D + W
+    glue_pts = np.asarray(ir.panel("glue")["polygon_2d"], float)
+    ox, oy = float(glue_pts[:, 0].min()), float(glue_pts[:, 1].min())   # 以粘口左下角为原点 → 整体平移不变
+
+    def P(pid, xy):
+        return np.asarray(world[pid][_vertex_at(ir, pid, (xy[0] + ox, xy[1] + oy))], float)
+
+    def mid(pid, a, b):
+        return (P(pid, a) + P(pid, b)) / 2.0
+
+    def pair(name, a, b):
+        return name, float(np.linalg.norm(a - b))
+
+    apex_l, apex_r = (x2 - D / 2, Hb + Hr), (x4 - D / 2, Hb + Hr)
+    top = Hb + s + Ef
+    flap_l_far = mid("flapL", (x1, -W / 2), (x2, -W / 2))
+    flap_r_far = mid("flapR", (x3, -W / 2), (x4, -W / 2))
     off = np.array([gw, 0.0, 0.0])
     checks = [
-        pair("slopeB.ridge.L == wallL.apex", "slopeB", 3, "wallL", 3),
-        pair("slopeF.ridge.L == wallR.apex", "slopeF", 3, "wallR", 3),
-        pair("slopeB.ridge.R == wallR.apex", "slopeB", 2, "wallR", 3),
-        pair("slopeF.ridge.R == wallL.apex", "slopeF", 2, "wallL", 3),
+        pair("slopeB.ridge.L == wallL.apex", P("slopeB", (x2, Hb + s)), P("wallL", apex_l)),
+        pair("slopeF.ridge.L == wallR.apex", P("slopeF", (x4, Hb + s)), P("wallR", apex_r)),
+        pair("slopeB.ridge.R == wallR.apex", P("slopeB", (x3, Hb + s)), P("wallR", apex_r)),
+        pair("slopeF.ridge.R == wallL.apex", P("slopeF", (x5, Hb + s)), P("wallL", apex_l)),
         ("glue.far.on_front",
-         float(np.linalg.norm((world["glue"][0] - world["front"][1]) - off)
-               + np.linalg.norm((world["glue"][3] - world["front"][2]) - off))),
+         float(np.linalg.norm((P("glue", (0.0, 0.0)) - P("front", (x5, 0.0))) - off)
+               + np.linalg.norm((P("glue", (0.0, Hb)) - P("front", (x5, Hb))) - off))),
         ("flapF.far.mid == flapB.attach.mid",
-         float(np.linalg.norm(np.mean(world["flapF"][0:2], axis=0) - np.mean(world["flapB"][2:4], axis=0)))),
+         float(np.linalg.norm(mid("flapF", (x4, -D), (x5, -D)) - mid("flapB", (x2, 0.0), (x3, 0.0))))),
         ("flapB.far.mid == flapF.attach.mid",
-         float(np.linalg.norm(np.mean(world["flapB"][0:2], axis=0) - np.mean(world["flapF"][2:4], axis=0)))),
-        ("flapL.far.mid == flapR.far.mid",
-         float(np.linalg.norm(np.mean(world["flapL"][0:2], axis=0) - np.mean(world["flapR"][0:2], axis=0)))),
+         float(np.linalg.norm(mid("flapB", (x2, -D), (x3, -D)) - mid("flapF", (x4, 0.0), (x5, 0.0))))),
+        ("flapL.far.mid == flapR.far.mid", float(np.linalg.norm(flap_l_far - flap_r_far))),
         ("fin.top_gap",
-         abs(float(np.linalg.norm(np.mean(world["finB"][2:4], axis=0) - np.mean(world["finF"][2:4], axis=0)))
-             - min(gap, 2.0 * ef))),
+         abs(float(np.linalg.norm(mid("finB", (x2, top), (x3, top)) - mid("finF", (x4, top), (x5, top))))
+             - min(gap, 2.0 * Ef))),
     ]
     res = dict(checks)
-    res["flapL.far.x0"] = abs(float(np.mean(world["flapL"][0:2], axis=0)[0]))
-    res["flapR.far.x0"] = abs(float(np.mean(world["flapR"][0:2], axis=0)[0]))
+    res["flapL.far.x0"] = abs(float(flap_l_far[0]))
+    res["flapR.far.x0"] = abs(float(flap_r_far[0]))
     return res
 DEFAULTS = {"W": 45.0, "D": 45.0, "Hb": 100.0, "Hr": 12.0,
             "Ef": 14.0, "fin_gap_mm": 3.0, "glue_w": 12.0, "board_t": 0.45}
@@ -108,6 +137,31 @@ TEMPLATE = {"id": "gable_top", "version": "0.1", "mt_va_reference": "polygon_2d_
 def slant(D: float, Hr: float) -> float:
     """坡面板斜高 s = sqrt((D/2)^2 + Hr^2)."""
     return math.hypot(D / 2.0, Hr)
+
+
+SLOPE_ANGLE_MIN_DEG = 5.0   # 屋脊坡角 atan(2*Hr/D) 下限, 依据见 param_domain_violations
+
+
+def param_domain_violations(params: dict) -> list[str]:
+    """模板适用域 (G02 核对)。域外不是"算错了", 而是本模板的假设不成立 — 不得出 VALIDATED。
+    - 各参数须为正的有限数 (与 validate_params 同口径, 入口已拒; 这里兜底);
+    - fin_gap_mm < 2*Ef: 鳍倾角 lean = asin(fin_gap_mm / (2*Ef)) 须 < 90° (等于 90° 时鳍高为 0);
+    - 屋脊坡角 atan(2*Hr/D) >= SLOPE_ANGLE_MIN_DEG: 再低时屋脊抬高量落在闭合容差与关键点噪声的量级内,
+      山墙三角退化, 与平顶盒不可区分 — "屋顶包"模板不描述这种形体。"""
+    out = []
+    for k in PARAM_ORDER:
+        v = params.get(k)
+        if not isinstance(v, (int, float)) or isinstance(v, bool) or not math.isfinite(v) or v <= 0.0:
+            out.append(f"{k}={v!r} 须为正的有限数")
+    if out:
+        return out
+    gap, Ef, D, Hr = (float(params[k]) for k in ("fin_gap_mm", "Ef", "D", "Hr"))
+    if gap >= 2.0 * Ef:
+        out.append(f"fin_gap_mm={gap:g} >= 2*Ef={2.0 * Ef:g} (鳍倾角 >= 90°, 鳍高为 0)")
+    slope = math.degrees(math.atan2(2.0 * Hr, D))
+    if slope < SLOPE_ANGLE_MIN_DEG:
+        out.append(f"屋脊坡角 {slope:.2f}° < {SLOPE_ANGLE_MIN_DEG:g}° (Hr={Hr:g}, D={D:g}: 山墙三角退化, 与平顶盒不可区分)")
+    return out
 
 
 def build_ir(params: dict | None = None) -> dict:

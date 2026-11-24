@@ -21,6 +21,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
+measure = ["scipy>=1.10", "trimesh>=3.6"]   # B0 参数化测量求解器 (src/photo_dieline/measurement)
 
 [project.scripts]
 photo-dieline = "photo_dieline.cli:main"

@@ -24,6 +24,8 @@ from ..folding.engine import fold_all
 from ..parametric import base as templates
 TOL_MM = 0.2          # 折叠闭合残差门
 GOLDEN_TOL_MM = 0.5   # golden 尺寸门
+CONTACT_TOL_MM = 0.2    # 穿插门的接触容差 (= 闭合容差): 比它更浅的交叉按数值接触处理, 只在棱上相触不算穿插
+MIN_LAMINATE_MM2 = 0.01  # 共面面板须有实际重叠面积才算层叠穿插
 ALLOWED_OVERLAP = {   # 模板契约: 允许叠层 (真实工艺)
     frozenset({"flapF", "flapB"}), frozenset({"flapL", "flapR"}),
     frozenset({"glue", "front"}), frozenset({"finB", "finF"}),
@@ -112,14 +114,9 @@ def _path_pts(ops: str) -> list[tuple[float, float]]:
 
 
 def _panel_normal(P) -> np.ndarray | None:
-    """面板正面法线 (世界坐标): 取 polygon_2d 绕序下的首个非退化三角。"""
-    P = np.asarray(P, float)
-    for i in range(1, len(P) - 1):
-        n = np.cross(P[i] - P[0], P[i + 1] - P[0])
-        nn = float(np.linalg.norm(n))
-        if nn > 1e-9:
-            return n / nn
-    return None
+    """面板正面法线 (世界坐标, 按 polygon_2d 绕序): Newell 法, 对共线分点与起始顶点轮换稳健。"""
+    n = _poly_normal(np.asarray(P, float))
+    return n if n.any() else None
 
 
 def _hinge_endpoints(world, ir: GeometryIR, e) -> tuple[np.ndarray, np.ndarray]:
@@ -144,15 +141,32 @@ def _hinge_endpoints(world, ir: GeometryIR, e) -> tuple[np.ndarray, np.ndarray]:
         out.append(best[1])
     return out[0], out[1]
 
+def hinge_orthogonality(ir: GeometryIR, world) -> list[str]:
+    """折向合同: target_dir_3d 须为单位向量且垂直于自身铰链 (绕铰链折叠, 折向只能落在垂直铰链的平面内)。
+    偏离超过 1e-3 (约 0.06°) 的折线即违例。闭合判据对"带铰链轴分量"的折向不敏感, 须由本项补上。"""
+    bad = []
+    for e in ir.edges:
+        if e.target_dir_3d is None:
+            continue
+        t = np.asarray(e.target_dir_3d, float)
+        a, b = _hinge_endpoints(world, ir, e)
+        axis = (b - a) / (float(np.linalg.norm(b - a)) + 1e-12)
+        if abs(float(np.linalg.norm(t)) - 1.0) > 1e-3 or abs(float(t @ axis)) > 1e-3:
+            bad.append(e.id)
+    return bad
 
-MT_VA_REFERENCE = "polygon_2d_ccw"   # 折线语义观察面约定: 父面板 polygon_2d 逆时针法线一侧
+
+# 折线语义观察面约定 (模板在 package.template.mt_va_reference 声明): 父面板 polygon_2d 的逆时针法线一侧 (ccw)
+# 或其另一侧 (cw)。参考面翻转时 M/V 互换 — 物理折法不变的等价表示。
+MT_VA_REFERENCES = {"polygon_2d_ccw": 1.0, "polygon_2d_cw": -1.0}
 
 
 def fold_semantics(ir: GeometryIR, world) -> dict:
-    """折线语义核对: 以父面板正面 (polygon_2d 逆时针法线一侧) 为观察面,
-    子面板折向观察者 = VALLEY, 折离观察者 = MOUNTAIN。
-    只有模板在 package.template.mt_va_reference 声明该约定, mt_va 才有判定基准; 未声明 = 语义未经验证。"""
-    declared = ir.package["template"].get("mt_va_reference") == MT_VA_REFERENCE
+    """折线语义核对: 以声明的参考面为观察面, 子面板折向观察者 = VALLEY, 折离观察者 = MOUNTAIN。
+    只有模板声明了约定, mt_va 才有判定基准; 未声明 = 语义未经验证 (不是通过)。
+    注意这里只核对"标签与声明的参考面自洽", 不证明 target_dir_3d 本身正确, 也不涉及印刷面/压线工艺面。"""
+    ref = ir.package["template"].get("mt_va_reference")
+    sign = MT_VA_REFERENCES.get(ref, 1.0)   # 未声明时按 ccw 口径统计 (只报告, 不判定)
     mismatch, undetermined = [], []
     for e in ir.edges:
         if e.mt_va == "SCORE":
@@ -162,15 +176,15 @@ def fold_semantics(ir: GeometryIR, world) -> dict:
         if n is not None:
             a, b = _hinge_endpoints(world, ir, e)
             v = np.asarray(world[e.child], float).mean(0) - (a + b) / 2.0
-            s = float(v @ n) / (float(np.linalg.norm(v)) + 1e-12)
+            s = sign * float(v @ n) / (float(np.linalg.norm(v)) + 1e-12)
             if abs(s) >= 0.2:
                 side = s > 0
         if side is None:
             undetermined.append(e.id)
         elif e.mt_va != ("VALLEY" if side else "MOUNTAIN"):
             mismatch.append(e.id)
-    return {"declared": declared, "n_edges": len(ir.edges), "n_mismatch": len(mismatch),
-            "mismatch": mismatch, "n_undetermined": len(undetermined)}
+    return {"declared": ref in MT_VA_REFERENCES, "reference": ref, "n_edges": len(ir.edges),
+            "n_mismatch": len(mismatch), "mismatch": mismatch, "n_undetermined": len(undetermined)}
 
 
 def _rotate(v: np.ndarray, axis: np.ndarray, ang: float) -> np.ndarray:
@@ -243,14 +257,18 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
         missing = []
         try:
             mod = templates.get(ir.package["template"]["id"])
-            missing = [k for k in mod.PARAM_ORDER if k not in ir.package["params"]]
+            missing = ["<未注册模板>"] if mod is None else [k for k in mod.PARAM_ORDER if k not in ir.package["params"]]
         except KeyError:
             missing = ["<未注册模板>"]
+        violations = [] if missing else list(getattr(mod, "param_domain_violations", lambda _p: ())(ir.package["params"]))
         if missing:
             g02.fail(f"模板参数缺失: {missing}")
+        elif violations:
+            g02.fail("参数超出模板适用域: " + "; ".join(violations[:4]))
         else:
             g02.ok({"top_level": ["meta", "package", "panels", "edges", "features"],
-                    "template": ir.package["template"]["id"]})
+                    "template": ir.package["template"]["id"],
+                    "param_domain": "PASS" if hasattr(mod, "param_domain_violations") else "未声明"})
     except Exception as exc:  # noqa: BLE001
         g02.fail(str(exc))
     g.append(g02)
@@ -317,15 +335,20 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
         residual = {k: round(float(v), 6) for k, v in res.items()}
         worst = max(residual.values()) if residual else float("inf")
         sem = fold_semantics(ir, world)
+        orth = hinge_orthogonality(ir, world)
         metrics = {"worst_residual_mm": worst, "n_closure_checks": len(residual),
                    "fold_semantics": {"declared": sem["declared"], "n_edges": sem["n_edges"],
                                       "n_mismatch": sem["n_mismatch"], "n_undetermined": sem["n_undetermined"]},
+                   "n_hinge_off": len(orth),
                    **residual}
         if not residual:
             g04.fail("模板没有任何闭合判据", metrics)
         elif worst > TOL_MM:
             g04.fail(f"最大闭合残差 {worst:.3f}mm > {TOL_MM}mm", metrics)
         elif sem["declared"] and sem["n_mismatch"]:
+            g04.fail(f"折线语义与声明的观察面约定不一致: {sem['mismatch'][:6]}", metrics)
+        elif orth:
+            g04.fail(f"折向不垂直于自身铰链 (或非单位向量): {orth[:6]}", metrics)
             g04.fail(f"折线语义与声明的观察面约定不一致: {sem['mismatch'][:6]}", metrics)
         else:
             g04.ok(metrics)
@@ -365,24 +388,31 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
         mod = templates.get(ir.package["template"]["id"])
         allowed = mod.allowed_overlap()
         roles = {pp["id"]: pp["role"] for pp in ir.panels}
-        bad = []
+        bad, checked = [], 0
+        skipped = {"allowed_overlap": 0, "share_fold": 0, "flap_flap": 0}
         ids = list(world)
         for i in range(len(ids)):
             for j in range(i + 1, len(ids)):
                 a, b = ids[i], ids[j]
                 key = frozenset({a, b})
                 if key in allowed or key in ALLOWED_OVERLAP:
+                    skipped["allowed_overlap"] += 1
                     continue
                 if _panels_share_fold(ir, a, b):
+                    skipped["share_fold"] += 1
                     continue
                 if roles.get(a) == "flap" and roles.get(b) == "flap":
-                    continue  # 底板层间接触契约
+                    skipped["flap_flap"] += 1   # 底板层间接触契约 (一刀切豁免, 见 findings F4-27; 待改显式层叠对)
+                    continue
+                checked += 1
                 if _intersect3d(world[a], world[b]):
                     bad.append((a, b))
+        metrics = {"checked_pairs": checked, "skipped_pairs": skipped,
+                   "total_pairs": len(ids) * (len(ids) - 1) // 2, "contact_tol_mm": CONTACT_TOL_MM}
         if bad:
-            g06.fail(f"穿插对: {bad}")
+            g06.fail(f"穿插对: {bad}", metrics)
         else:
-            g06.ok({"checked_pairs": len(ids) * (len(ids) - 1) // 2})
+            g06.ok(metrics)
     except Exception as exc:  # noqa: BLE001
         g06.fail(str(exc))
     g.append(g06)
@@ -519,6 +549,7 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     g.append(g09)
 
     gates = sorted((x.as_dict() for x in g), key=lambda d: d["id"])
+    photo = ir.package.get("photo") or {}
     return {
         "qa_version": "0.1",
         "status": status,
@@ -527,8 +558,19 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
                     "params": ir.package["params"],
                     "params_evidence": ir.package.get("params_evidence", {})},
         "photo": ir.package["photo"],
+        # 输入使用声明 (GPT R2-15): 当前照片只作证据存档, 不参与尺寸恢复 — 不得被读成"照片测量"
+        "input_usage": {
+            "photo_provided": bool(photo.get("sha256")),
+            "photo_used_for_dimensions": False,
+            "dimension_source": "spec.params + spec.measurements (MEASURED / VERIFIED_SOURCE 优先)",
+        },
+        # 制造特征约束 (粘口/插舌/插槽/压线/锁底/出血…): 尚无规范来源 → 未评估, 不默认通过
+        "manufacturing_constraints": {
+            "status": "NOT_ASSESSED",
+            "note": "VALIDATED 只表示数值几何门通过, 不等于可制造; 工艺约束须有来源、适用材料与阈值后方可评估",
+        },
         "gates": gates,
-        "tolerances": {"fold_closure_mm": TOL_MM, "golden_mm": GOLDEN_TOL_MM},
+        "tolerances": {"fold_closure_mm": TOL_MM, "golden_mm": GOLDEN_TOL_MM, "contact_mm": CONTACT_TOL_MM},
     }
 
 
@@ -546,35 +588,68 @@ def _panels_share_fold(ir: GeometryIR, a: str, b: str) -> bool:
     return False
 
 
+def _poly_normal(p: np.ndarray) -> np.ndarray:
+    """面板法线 (Newell 法): 对共线分点与起始顶点轮换稳健 — 首三角法在插入共线中点后退化。"""
+    n = np.cross(p, np.roll(p, -1, axis=0)).sum(axis=0)
+    nn = float(np.linalg.norm(n))
+    return n / nn if nn > 1e-12 else np.zeros(3)
+
+
+def _depth_to_boundary(pt: np.ndarray, poly: np.ndarray) -> float:
+    """点到面板各边线段的最小距离 (pt 位于该面板平面内)."""
+    best = float("inf")
+    for i in range(len(poly)):
+        a, b = poly[i], poly[(i + 1) % len(poly)]
+        ab = b - a
+        t = float(np.clip((pt - a) @ ab / max(float(ab @ ab), 1e-18), 0.0, 1.0))
+        best = min(best, float(np.linalg.norm(pt - (a + t * ab))))
+    return best
+
+
 def _intersect3d(pa: np.ndarray, pb: np.ndarray) -> bool:
-    """保守近似: 两面板三角形扇在公共平面投影相交 → 视为穿插候选."""
-    na = np.cross(pa[1] - pa[0], pa[2] - pa[0])
-    nb = np.cross(pb[1] - pb[0], pb[2] - pb[0])
-    na, nb = na / (np.linalg.norm(na) + 1e-12), nb / (np.linalg.norm(nb) + 1e-12)
-    if abs(float(na @ nb)) > 0.999:  #近平行面: 距离检查
-        d = float(np.dot(pa[0] - pb[0], na))
-        return abs(d) < 1e-6 and _proj_overlap(pa, pb, na)
-    # 取 b 投到 a 平面
-    n = na
-    dist = np.dot(pb - pa[0], n)
-    if (dist > 0).all() or (dist < 0).all():
-        return False  # 完全同侧 → 无穿插
-    return _proj_overlap(pa, pb, n)
-
-
-def _proj_overlap(pa: np.ndarray, pb: np.ndarray, n: np.ndarray) -> bool:
-    def frame(nvec):
-        t = np.array([1.0, 0, 0]) if abs(nvec[0]) < 0.9 else np.array([0, 1.0, 0])
-        u = np.cross(nvec, t)
+    """零板厚面板穿插检测 (带容差):
+    - 平面相交: 交线同时穿过两面板的重合段, 且其中点到两面板边界的距离都 > CONTACT_TOL_MM 才算穿插
+      (只在棱上相触、或比闭合容差更浅的交叉, 按接触处理 — GPT R2 正向挑战 POS-07);
+    - 平行/共面: 贴合 (距离 ≤ 容差) 且重叠面积 > MIN_LAMINATE_MM2 才算 (层叠穿插)。"""
+    na, nb = _poly_normal(pa), _poly_normal(pb)
+    if not na.any() or not nb.any():
+        return False   # 退化面板由 G03 报告
+    dist_b = (pb - pa[0]) @ na
+    if abs(float(na @ nb)) > 0.999:                       # 两平面平行
+        if np.abs(dist_b).max() > CONTACT_TOL_MM:
+            return False                                  # 平行但不贴合
+        t = np.array([1.0, 0.0, 0.0]) if abs(na[0]) < 0.9 else np.array([0.0, 1.0, 0.0])
+        u = np.cross(na, t)
         u /= np.linalg.norm(u)
-        v = np.cross(nvec, u)
-        return u, v
-
-    u, v = frame(n)
-
-    def poly2(p):
-        return [(float(q @ u), float(q @ v)) for q in p]
-
-    A = Polygon(poly2(pa)).buffer(0)
-    B = Polygon(poly2(pb)).buffer(0)
-    return A.intersects(B) and A.intersection(B).area > 1e-6
+        v = np.cross(na, u)
+        A = Polygon([(float(q @ u), float(q @ v)) for q in pa]).buffer(0)
+        B = Polygon([(float(q @ u), float(q @ v)) for q in pb]).buffer(0)
+        if A.is_empty or B.is_empty:
+            return False
+        return A.intersection(B).area > MIN_LAMINATE_MM2
+    e1 = np.cross(na, nb)
+    e1 /= np.linalg.norm(e1)                              # 两平面交线方向
+    w = np.cross(nb, e1)                                  # B 平面内、垂直于交线的方向
+    w /= np.linalg.norm(w)
+    den = float(w @ na)
+    if abs(den) < 1e-9:
+        return False
+    p0 = pb[0] - float((pb[0] - pa[0]) @ na) / den * w    # 交线上一点: 自 pb[0] 沿 w (在 B 平面内) 走到 A 平面
+    m = na + nb if np.linalg.norm(na + nb) > 1e-6 else na - nb
+    m /= np.linalg.norm(m)                                # 投影平面法向 (⊥ 交线): 两面板的投影都不退化
+    e2 = np.cross(m, e1)
+    A = Polygon([(float(q @ e1), float(q @ e2)) for q in pa]).buffer(0)
+    B = Polygon([(float(q @ e1), float(q @ e2)) for q in pb]).buffer(0)
+    if A.is_empty or B.is_empty:
+        return False
+    c = float(p0 @ e2)
+    t0, t1 = min(A.bounds[0], B.bounds[0]) - 1.0, max(A.bounds[2], B.bounds[2]) + 1.0
+    line = LineString([(t0, c), (t1, c)]).buffer(1e-7)      # 交线在投影平面上的像 (过 p0、沿 e1)
+    # 交线落在各面板内的那一段 (交线在两平面内, 其像与面板投影的交即为其在面板内的部分), 再取两段的公共部分。
+    # 不能用"两投影的重叠区 ∩ 交线": 投影重叠 ≠ 三维相交 (会把手抛物面式的只在一点相触报成穿插)。
+    seg = A.intersection(line).intersection(B.intersection(line))
+    if seg.is_empty or seg.length <= 1e-6:
+        return False                                      # 两面板在交线上没有公共段 (至多棱上相触)
+    t_mid = (seg.bounds[0] + seg.bounds[2]) / 2.0
+    mid = p0 + (t_mid - float(p0 @ e1)) * e1               # 重合段中点 (三维)
+    return min(_depth_to_boundary(mid, pa), _depth_to_boundary(mid, pb)) > CONTACT_TOL_MM

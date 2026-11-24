@@ -480,6 +480,8 @@ MUTATIONS = [
     ("第三块板共享折线 (非流形)", _third_panel_shares_fold, "G03"),
     ("面板多边形自交", _self_intersect_front, "G03"),
     ("折线语义改成 SCORE (无对应图层)", _score_one_edge, "G07"),
+    ("参考面翻到另一侧但标签不翻", lambda raw: raw["package"]["template"].update(mt_va_reference="polygon_2d_cw"), "G04"),
+    ("折向带铰链轴分量 (不垂直铰链, 闭合判据不敏感)", _set_tdir("e_bk_sl", (0.3, -0.88, 0.47)), "G04"),
 ]
 
 
@@ -501,12 +503,34 @@ def test_golden_mutations_are_rejected(label, mutate, gate):
     assert report["status"] == "DRAFT", label
 
 
+def _hr_for_slope(deg):
+    """使屋脊坡角 atan(2*Hr/D) = deg 的 Hr。"""
+    return SPEC["params"]["D"] / 2.0 * math.tan(math.radians(deg))
+
+
+@pytest.mark.parametrize("label,params,domain_ok", [
+    ("鳍顶距 = 2*Ef (鳍倾角 90°, 鳍高为 0)", {"fin_gap_mm": 2 * SPEC["params"]["Ef"]}, False),
+    ("屋脊坡角 4.5° (低于下限, 与平顶盒不可区分)", {"Hr": _hr_for_slope(4.5)}, False),
+    ("屋脊坡角 5.5° (域内下沿, 不得过拒)", {"Hr": _hr_for_slope(5.5)}, True),
+], ids=["fin_gap=2Ef", "slope_4.5deg", "slope_5.5deg"])
+def test_param_domain_boundary(label, params, domain_ok):
+    """模板适用域 (G02): 几何自洽但超出模板假设的参数不得出 VALIDATED (修复前 Hr=0.001 判 VALIDATED);
+    域内下沿必须仍通过 — 域是对模板假设的声明, 不是越严越好。"""
+    from photo_dieline.core.ir import from_raw
+    raw = gable_top.build_ir({**SPEC["params"], **params})
+    ir = from_raw(raw)
+    x0, y0, x1, y1 = svgx.net_bbox(ir)
+    report = run_qa(ir, svgx.render(ir, x1 - x0, y1 - y0), pdfx.build_pdf(ir, x1 - x0, y1 - y0))
+    assert (_gate(report, "G02")["status"] == "PASS") is domain_ok, label
+    assert (report["status"] == "VALIDATED") is domain_ok, label
+
+
 def test_maturity_level_requires_semantics_and_sensitivity():
     from photo_dieline.batch import FOLD_GATES, GEOMETRY_GATES, maturity_level
     ok = {g: "PASS" for g in GEOMETRY_GATES + FOLD_GATES}
     good = {"n_probed": 12, "n_undetected": 0, "n_uncovered": 0}
     sem = {"declared": True, "n_mismatch": 0}
-    assert maturity_level(ok, sem, good) == "L2_FOLD_VALID"
+    assert maturity_level(ok, sem, good) == "L2_KINEMATIC"
     assert maturity_level(ok, {**sem, "declared": False}, good) == "L1_GEOMETRY_VALID"
     assert maturity_level(ok, {**sem, "n_mismatch": 1}, good) == "L1_GEOMETRY_VALID"
     assert maturity_level(ok, sem, {**good, "n_undetected": 1}) == "L1_GEOMETRY_VALID"
