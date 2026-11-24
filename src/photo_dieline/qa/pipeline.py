@@ -13,7 +13,7 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import Polygon
+from shapely.geometry import LineString, Polygon
 from shapely.ops import unary_union
 
 from ..core.ir import MIN_PHOTO_PX, GeometryIR
@@ -141,7 +141,7 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
         g02.fail(str(exc))
     g.append(g02)
 
-    # G03 拓扑: 折线共享边长度一致 + 并集轮廓闭合
+    # G03 拓扑: 折线共享边长度一致 + 并集为单部件 + 面板自有效 + 展开图面板两两不重叠 + 裁切缝不切穿结构
     g03 = Gate("G03", "topology")
     try:
         max_len_diff = 0.0
@@ -152,15 +152,44 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
             clen = _seg_len_in_panel(_poly_pts(ir, e.child), a, b)
             max_len_diff = max(max_len_diff, abs(fold_len - plen), abs(fold_len - clen))
         polys = [Polygon(p["polygon_2d"]) for p in ir.panels]
-        u = unary_union(polys).buffer(0)
-        n_rings = 1 if u.geom_type == "Polygon" else len(u.geoms)
-        if max_len_diff > 1e-6:
-            g03.fail(f"折线-面板共享边长不一致 max={max_len_diff:.2e}mm")
-        elif n_rings != 1:
-            g03.fail(f"网并集不连通: {n_rings} 个环/部件")
+        invalid = [ir.panels[i]["id"] for i, pg in enumerate(polys) if not pg.is_valid]
+        polys_clean = [pg.buffer(0) for pg in polys]
+        u = unary_union(polys_clean).buffer(0)
+        n_parts = 1 if u.geom_type == "Polygon" else len(u.geoms)
+        # 展开图里一块材料只能属于一块面板: 两两交集面积须为 0
+        overlaps = []
+        for i in range(len(polys_clean)):
+            for j in range(i + 1, len(polys_clean)):
+                area_ij = polys_clean[i].intersection(polys_clean[j]).area
+                if area_ij > 1e-6:
+                    overlaps.append((f"{ir.panels[i]['id']}|{ir.panels[j]['id']}", round(area_ij, 3)))
+        # 裁切缝落点: 并集边界之外的非折线面板边 (内部裁切缝) 不得与折线共线重叠, 不得落入任何面板内部
+        bnd = u.boundary
+        fold_lines = [LineString([e.seg_2d[0], e.seg_2d[1]]) for e in ir.edges]
+        shrunk = [pg.buffer(-1e-6) for pg in polys_clean]
+        cut_on_fold = 0.0
+        cut_in_panel = 0.0
+        for a, b in lay.cut_segments(ir):
+            seg = LineString([a, b])
+            if bnd.distance(seg) < 1e-6:
+                continue   # 落在并集边界上 = 正常外轮廓
+            cut_on_fold = max(cut_on_fold, max((seg.intersection(fl).length for fl in fold_lines), default=0.0))
+            cut_in_panel = max(cut_in_panel, max((seg.intersection(sp).length for sp in shrunk), default=0.0))
+        metrics = {"max_shared_len_diff_mm": max_len_diff, "panels": len(ir.panels), "folds": len(ir.edges),
+                   "n_overlap_pairs": len(overlaps), "cut_on_fold_mm": round(cut_on_fold, 3),
+                   "cut_in_panel_mm": round(cut_in_panel, 3)}
+        if invalid:
+            g03.fail(f"面板多边形自交: {invalid}", metrics)
+        elif max_len_diff > 1e-6:
+            g03.fail(f"折线-面板共享边长不一致 max={max_len_diff:.2e}mm", metrics)
+        elif n_parts != 1:
+            g03.fail(f"网并集不连通: {n_parts} 个部件", metrics)
+        elif overlaps:
+            g03.fail(f"展开图面板重叠 {len(overlaps)} 对 (面板对, mm²): {overlaps[:4]}", metrics)
+        elif cut_on_fold > 1e-6 or cut_in_panel > 1e-6:
+            g03.fail(f"裁切缝切穿结构: 与折线重叠 {cut_on_fold:.1f}mm, 落入面板内部 {cut_in_panel:.1f}mm", metrics)
         else:
-            g03.ok({"max_shared_len_diff_mm": max_len_diff,
-                    "panels": len(ir.panels), "folds": len(ir.edges)})
+            g03.ok(metrics)
     except Exception as exc:  # noqa: BLE001
         g03.fail(str(exc))
     g.append(g03)

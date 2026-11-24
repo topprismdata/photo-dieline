@@ -299,3 +299,33 @@ def test_zoo_exports_stay_on_page_and_parse():
         if fails:
             bad[cls_id] = fails
     assert not bad, bad
+
+
+def test_qa_rejects_overlapping_panels_and_hinge_cut(env):
+    """展开图面板重叠 / 折线一侧被细分致铰链被画成裁切 → G03 必须 FAIL (15 类曾带着切穿结构的刀版判 GREEN)。"""
+    import copy
+    from photo_dieline.core.ir import from_raw
+    base = env[0].raw
+    assert _gate(env[3], "G03")["metrics"]["n_overlap_pairs"] == 0
+
+    dup = copy.deepcopy(base)
+    ghost = copy.deepcopy(next(p for p in dup["panels"] if p["id"] == "glue"))
+    ghost["id"] = "glue_dup"
+    ghost["polygon_2d"] = [[x + 20.0, y] for x, y in ghost["polygon_2d"]]  # 压在 wallL 上
+    dup["panels"].append(ghost)
+    g03 = _gate(run_qa(from_raw(dup), "", b""), "G03")
+    assert g03["status"] == "FAIL" and "展开图面板重叠" in g03["detail"]
+
+    split = copy.deepcopy(base)
+    fold = next(e for e in split["edges"] if e["fold"]["parent"] == "front" and e["fold"]["child"] == "flapF")
+    (ax, ay), (bx, by) = fold["seg_2d"]
+    pts = next(p for p in split["panels"] if p["id"] == "front")["polygon_2d"]
+    for i in range(len(pts)):
+        p, q = pts[i], pts[(i + 1) % len(pts)]
+        if ([p, q] == [[ax, ay], [bx, by]]) or ([p, q] == [[bx, by], [ax, ay]]):
+            pts.insert(i + 1, [(ax + bx) / 2, (ay + by) / 2])  # 折线仍是整段, 面板边被一分为二
+            break
+    else:
+        raise AssertionError("front|flapF 折线不是 front 的一条完整边")
+    g03 = _gate(run_qa(from_raw(split), "", b""), "G03")
+    assert g03["status"] == "FAIL" and "裁切缝切穿结构" in g03["detail"]
