@@ -105,7 +105,8 @@ rigid/<family>/<asset_id>/
 """
     (dst / "README.md").write_text(card, encoding="utf-8")
     print(f"HF 树组装完成: {copied} 资产 → {dst}")
-    print(f"  主集 {n_main} + 拒收 {n_refusal} (无资产记录) · VSR {vsr.get('vsr')}")
+    n_refusal_assets = n_refusal - 2
+    print(f"  主集 {n_main} + 拒收先验 {n_refusal} ({n_refusal_assets} 带资产 + 2 拓扑拒绝记录) · VSR {vsr.get('vsr')}")
     print(f"  上传: hf upload 大文件协议, 仓库 <org>/pack10k-retail-preview (用户 token)")
 
 
