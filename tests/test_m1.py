@@ -301,14 +301,25 @@ def test_zoo_exports_stay_on_page_and_parse():
     assert not bad, bad
 
 
-def test_qa_rejects_overlapping_panels_and_hinge_cut(env):
-    """展开图面板重叠 / 折线一侧被细分致铰链被画成裁切 → G03 必须 FAIL (15 类曾带着切穿结构的刀版判 GREEN)。"""
+def _split_edge_at_fold(raw):
+    """把 front|flapF 折线所在的 front 面板边从中点一分为二 (折线仍是整段, 面板边被细分). 返回折线端点."""
+    fold = next(e for e in raw["edges"] if e["fold"]["parent"] == "front" and e["fold"]["child"] == "flapF")
+    (ax, ay), (bx, by) = fold["seg_2d"]
+    pts = next(p for p in raw["panels"] if p["id"] == "front")["polygon_2d"]
+    for i in range(len(pts)):
+        p, q = pts[i], pts[(i + 1) % len(pts)]
+        if ([p, q] == [[ax, ay], [bx, by]]) or ([p, q] == [[bx, by], [ax, ay]]):
+            pts.insert(i + 1, [(ax + bx) / 2, (ay + by) / 2])
+            return (ax, ay), (bx, by)
+    raise AssertionError("front|flapF 折线不是 front 的一条完整边")
+
+
+def test_qa_rejects_overlapping_panels(env):
+    """展开图面板两两重叠 (正面积) → G03 必须 FAIL (14 类曾带着面板重叠的刀版判 GREEN)。"""
     import copy
     from photo_dieline.core.ir import from_raw
-    base = env[0].raw
     assert _gate(env[3], "G03")["metrics"]["n_overlap_pairs"] == 0
-
-    dup = copy.deepcopy(base)
+    dup = copy.deepcopy(env[0].raw)
     ghost = copy.deepcopy(next(p for p in dup["panels"] if p["id"] == "glue"))
     ghost["id"] = "glue_dup"
     ghost["polygon_2d"] = [[x + 20.0, y] for x, y in ghost["polygon_2d"]]  # 压在 wallL 上
@@ -316,16 +327,28 @@ def test_qa_rejects_overlapping_panels_and_hinge_cut(env):
     g03 = _gate(run_qa(from_raw(dup), "", b""), "G03")
     assert g03["status"] == "FAIL" and "展开图面板重叠" in g03["detail"]
 
-    split = copy.deepcopy(base)
-    fold = next(e for e in split["edges"] if e["fold"]["parent"] == "front" and e["fold"]["child"] == "flapF")
-    (ax, ay), (bx, by) = fold["seg_2d"]
-    pts = next(p for p in split["panels"] if p["id"] == "front")["polygon_2d"]
-    for i in range(len(pts)):
-        p, q = pts[i], pts[(i + 1) % len(pts)]
-        if ([p, q] == [[ax, ay], [bx, by]]) or ([p, q] == [[bx, by], [ax, ay]]):
-            pts.insert(i + 1, [(ax + bx) / 2, (ay + by) / 2])  # 折线仍是整段, 面板边被一分为二
-            break
-    else:
-        raise AssertionError("front|flapF 折线不是 front 的一条完整边")
-    g03 = _gate(run_qa(from_raw(split), "", b""), "G03")
-    assert g03["status"] == "FAIL" and "裁切缝切穿结构" in g03["detail"]
+
+def test_subdivided_hinge_stays_a_fold(env):
+    """折线一侧的顶点细分与折线端点不对应, 本身不是模板错误: 导出须做共线归一 —
+    铰链仍是折线, 不得画成裁切 (rsc_handhole 顶翼-前墙的全部实际连接 130mm、egg_tray_2x4 的 860mm 曾被画成 CUT)。"""
+    import copy
+    from shapely.geometry import LineString
+    from photo_dieline.core.ir import from_raw
+    from photo_dieline.export import layout as lay
+    split = copy.deepcopy(env[0].raw)
+    a, b = _split_edge_at_fold(split)
+    ir = from_raw(split)
+    x0, y0, x1, y1 = svgx.net_bbox(ir)
+    report = run_qa(ir, svgx.render(ir, x1 - x0, y1 - y0), pdfx.build_pdf(ir, x1 - x0, y1 - y0))
+    g03 = _gate(report, "G03")
+    assert g03["status"] == "PASS" and g03["metrics"]["cut_on_fold_mm"] == 0.0
+    fold_line = LineString([a, b])
+
+    def to_net(shape):
+        return LineString([(x + x0 - lay.MARGIN, y + y0 - lay.MARGIN) for x, y in shape.pts])  # 页面 → 模板坐标
+
+    shapes = lay.page_shapes(ir)
+    for s in shapes["CUT"]:
+        assert to_net(s).intersection(fold_line).length < 1e-6   # CUT 层没有任何一段落在铰链上
+    creases = [s for k in ("CREASE-MOUNTAIN", "CREASE-VALLEY") for s in shapes[k]]
+    assert any(to_net(s).covers(fold_line) for s in creases)     # 铰链完整地留在折线层
