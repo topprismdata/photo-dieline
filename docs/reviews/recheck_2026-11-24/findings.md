@@ -288,3 +288,31 @@ roll 有符号残差扫描 — 40 帧随机位姿 roll± 组均值差 **0.002px*
 
 **R4 清单状态 (13 项)**: WP1 4/4 ✅ · WP2 5/5 ✅ · WP3 2/4 (probe12 对账 ✅ + probe13 合法挑战 ✅; 剩 A4 专项、PDF 独立渲染)。
 **测试 75 passed。**
+
+### 5.8 R3-A4 专项: 冲突实测 / 派生重算 / 约束传播 (probe14, 第五批; 同日)
+
+`audits/probes/probe14_a4_constraint.py` (修复前后双日志 `evidence/probe14_a4_prefix.log` / `_postfix.log`)。
+非 gable 分发已由 probe13(c) 覆盖, 本探针补其余两半:
+
+**(a) 冲突实测 (锚-观测矛盾) — 静默吸收实证, 无拟合内检测通道**: 锚 Hb 声称 100 而观测几何是 105 →
+W/D 吸收偏移 (45→47.25), rms 仅 0.017px, σW 0.83→0.87 几乎不变, 照常 MANUFACTURING_DIMENSIONS。
+与 B06 战役同机理 (锚即真值假设, 偏差全数入 θ)。**对策在协议层: 锚边须双人独立实测 + 二次复核,
+不得单读** (入 R5 真实采集协议)。
+
+**(b) 域外真值 → 高置信错误解 (比沉默更糟) — 已修**: 真值坡角 3.81° (声明域 <5° 不描述) →
+多起点拟合跑飞到域内 Hr=8.0 (坡角 19°), rms 1.335px 且照常交付 MANUFACTURING。
+修复: solve 加**失配门** — `rms_px > 2*noise_px + 0.2px` → INSUFFICIENT_PRECISION (misfit_px 字段;
+声明噪声口径, 合成干净观测 0.2px 即拦下)。注: 参数界 (Hr≥8) 使拟合值本身不可达域外,
+OUT_OF_DOMAIN 检查挂接为不变量 (MODELS["gable_top"]["domain"], 测量子集以模板默认补全 glue_w/board_t 后过域)。
+
+**(c) 派生重算 (防共因失效) — 通过**: 关键点几何独立重实现 (从文档化数学重抄; 捕捉转写/单位/约定漂移,
+不防规格本身错 — 如实声明) 与库逐位一致 (max|ΔP|=0); 派生尺寸独立公式 (总高 Z_top=Hb+Hr+Ef·cos(lean),
+含鳍 Y_total=D+2·Ef·sin(lean)); 独立几何+解位姿 → 像素回程 max|Δuv|=1.34e-10px。
+
+**(d) 无效锚静默接受 — 已修**: 锚键名拼错 (Ww) / 未注册参数 (H) 此前静默接受; 现直接拒绝
+`{"ok": false, "reason": "unknown_anchor_keys: [...]"}, delivery=NO_GO`。
+
+**约束传播闭环**: 测量层 θ → (下游 dieline build_ir 参数管道, probe13 已验参数一致性与域判定) —
+域声明两侧现共用同一 `param_domain_violations` (测量侧适配子集), 消除双口径。
+
+**合同测试新增**: unknown_anchor 拒绝 / 失配门拦截+policy MANUAL / 合法参数不触发域检查。**测试 77 passed。**

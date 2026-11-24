@@ -171,3 +171,25 @@ def test_capture_protocol_and_closure():
     # i.i.d. 下归一化闭合差 (闭合差/跨站合成精度) 应在噪声量级内; 单站深度退化由 σ 归一吸收
     assert cl["n_views_solved"] == 3
     assert cl["W_closure_over_sigma"] < 6.0 and cl["D_closure_over_sigma"] < 6.0, cl
+
+
+def test_solve_rejects_unknown_anchor_keys():
+    """R3-A4: 锚键名拼错/模型不消费的参数必须拒绝, 不得静默接受。"""
+    idx, uv, _ = observe(gab, GABLE_PARAMS, CAM, FX)
+    for bad in ({"H": 120.0}, {"Ww": 45.0}):
+        r = solve(gab, idx, uv, FX, bad, 0.8)
+        assert not r["ok"] and "unknown_anchor_keys" in r["reason"], r
+
+
+def test_solve_misfit_gate_and_domain_invariant():
+    """R3-A4: 域外真值会跑飞到域内高置信错误解 → 失配门 (rms > 2·noise+0.2px) 拦截;
+    合法参数不得触发域检查 (测量子集补全后再过域)。"""
+    idx, uv, _ = observe(gab, GABLE_PARAMS, CAM, FX)
+    ok = solve(gab, idx, uv, FX, {"Hb": 100.0}, 0.85)
+    assert ok["delivery"] == "MANUFACTURING_DIMENSIONS" and not ok["domain_violations"]
+
+    p_ill = {**GABLE_PARAMS, "Hr": 1.5}                       # slope 3.81° < 5°, 声明域外
+    idx2, uv2, _ = observe(gab, p_ill, CAM, FX)
+    r = solve(gab, idx2, uv2, FX, {"Hb": 100.0}, 0.85, noise_px=0.2)
+    assert r["delivery"] == "INSUFFICIENT_PRECISION" and r["misfit_px"], r  # 不给 MANUFACTURING
+    assert delivery_policy(r, tol_mm=1.0, k=2.0) == "MANUAL"

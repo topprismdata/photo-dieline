@@ -1,0 +1,19 @@
+=== (a) 锚-观测冲突: 锚与观测几何矛盾, 静默吸收量化 ===
+ 无冲突(对照)        delivery=MANUFACTURING_DIMENSIONS W=45.00 D=45.00 Hr=12.00 rms=0.000px σW=0.83
+ Hb 锚错 +5mm     delivery=MANUFACTURING_DIMENSIONS W=47.25 D=47.24 Hr=12.60 rms=0.017px σW=0.87
+ D 锚错 -5mm      delivery=MANUFACTURING_DIMENSIONS W=40.01 D=40.00 Hr=10.67 rms=0.044px σW=1.57
+
+=== (b) 拟合参数违反模板声明域 (坡角 atan(2Hr/D) < 5°) ===
+ truth Hr=1.5 → 拟合 Hr=8.00 坡角=19.16° delivery=INSUFFICIENT_PRECISION
+ rms=1.335px cond_theta=84.7 ident=IDENTIFIABLE distinct_minima=0 (域声明: <5° 不得交付; 解跑飞到域内高置信错误=更严重)
+
+=== (c) 派生重算: 独立实现关键点几何 + 像素回程 + 派生尺寸 ===
+ 关键点独立实现 vs 库: max|ΔP|=0.00e+00mm max|Δc|=0.00e+00mm
+ 派生尺寸 (独立公式): 总高 Z_top=125.919mm 含鳍 Y_total=48.000mm (lean=6.15°)
+ 像素回程 (独立几何+解位姿 → 重投影 vs 观测): max|Δuv|=1.34e-10px
+
+=== (d) 无效锚: 模型不消费的参数 / 键名拼错 ===
+ 未注册参数 H      → ok=False delivery=NO_GO reason=unknown_anchor_keys: ['H'] (静默接受=缺陷)
+ 键名拼错 Ww      → ok=False delivery=NO_GO reason=unknown_anchor_keys: ['Ww'] (静默接受=缺陷)
+
+PROBE14_DONE

@@ -81,6 +81,17 @@ def _mesh(quads):
 
 MODELS = {"gable_top": {"kp": gable_keypoints, "faces": gable_faces, "params": ("W", "D", "Hb", "Hr", "Ef"), "target": ("W", "D", "Hr", "Ef")},
           "cuboid": {"kp": cuboid_keypoints, "faces": cuboid_faces, "params": ("W", "D", "H"), "target": ("W", "D", "H")}}
+try:  # R3-A4 约束传播: 拟合参数违反模板声明域 → 不得交付确定尺寸 (parametric 不反向依赖 measurement, 无环)
+    from ..parametric.gable_top import DEFAULTS as _gable_defaults
+    from ..parametric.gable_top import param_domain_violations as _gable_param_domain_violations
+
+    def _gable_domain_violations(q):
+        # 测量层只携带几何子集 (无 glue_w/board_t) — 以模板默认值补全后再过域检查
+        return _gable_param_domain_violations({**_gable_defaults, **q})
+
+    MODELS["gable_top"]["domain"] = _gable_domain_violations
+except ImportError:
+    pass
 
 
 def to_world(P, c):
@@ -159,12 +170,18 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
       交付决策应对比 sigma_mm 与特征容差, 而不是只看条件数。
     - delivery: MANUFACTURING_DIMENSIONS (实测锚 + 满秩良态) / INSUFFICIENT_PRECISION (实测锚但 WEAK,
       误差棒可能超容差) / PRIOR_DEPENDENT_ESTIMATE (仅模板先验, 只可作研究估计) / REFUSED
-      (NO_METRIC_ANCHOR 或 UNIDENTIFIABLE, 禁止交付确定尺寸)。"""
+      (NO_METRIC_ANCHOR 或 UNIDENTIFIABLE, 禁止交付确定尺寸)。
+      R3-A4 增补: OUT_OF_DOMAIN (拟合参数违反模板声明域) / 失配门 rms_px > 2*noise_px+0.2px → INSUFFICIENT_PRECISION
+      (域外真值会跑飞到域内高置信错误解, probe14-b); 无效锚键名直接拒绝 (unknown_anchor_keys)。"""
     try:
         from scipy.optimize import least_squares
     except ImportError as exc:  # 可选依赖: pip install photo-dieline[measure]
         raise ImportError("measurement.solve 需要 scipy: pip install photo-dieline[measure]") from exc
     pnames = model["params"]
+    unknown = sorted(k for k in anchors if k not in pnames and k != "fin_gap_mm")
+    if unknown:  # R3-A4: 无效锚 (键名拼错/模型不消费的参数) 必须拒绝, 不得静默接受
+        return {"ok": False, "reason": f"unknown_anchor_keys: {unknown}",
+                "delivery": "NO_GO", "sigma_mm": {}, "sigma_mm_robust": {}}
     names = [n for n in pnames if n not in anchors]
     if free_fin_gap and model is MODELS["gable_top"] and "fin_gap_mm" not in names:
         names = names + ["fin_gap_mm"]
@@ -275,10 +292,20 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
         scale_source = "TEMPLATE_PRIOR_ANCHOR"      # fin_gap=3mm 是绝对长度先验, "无锚点"并非无尺度约束
     else:
         scale_source = "NO_METRIC_ANCHOR"
+    rms_px = float(math.sqrt(np.mean(best.fun ** 2) / 2))
+    # R3-A4 约束传播: ① 拟合参数违反模板声明域 (参数界内通常不可达, 挂检查作不变量);
+    # ② 残差超过声明噪声 2σ+0.2px → 系统性失配 (域外真值会跑飞到域内高置信错误解, probe14-b 实证)。
+    dom_fn = model.get("domain")
+    violations = list(dom_fn(params([best.x[i] for i in range(len(names))]))) if dom_fn else []
+    misfit_px = rms_px > 2.0 * noise_px + 0.2
     if level == "UNIDENTIFIABLE" or scale_source == "NO_METRIC_ANCHOR":
         delivery = "REFUSED"
     elif scale_source == "TEMPLATE_PRIOR_ANCHOR":
         delivery = "PRIOR_DEPENDENT_ESTIMATE"
+    elif violations:
+        delivery = "OUT_OF_DOMAIN"
+    elif misfit_px:
+        delivery = "INSUFFICIENT_PRECISION"          # 实测锚在但几何失配, 误差棒无意义 → 人工复核
     elif level == "WEAK":
         delivery = "INSUFFICIENT_PRECISION"          # 实测锚在, 但误差棒可能超特征容差 → 交付决策看 sigma_mm
     else:
@@ -295,6 +322,7 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
             "cond": float(sv[0] / sv[-1]) if sv[-1] > 0 else float("inf"),
             "cond_theta": cond_theta, "identifiable": level != "UNIDENTIFIABLE",
             "identifiability": level, "scale_source": scale_source, "delivery": delivery,
+            "domain_violations": violations, "misfit_px": misfit_px,
             "sigma_mm": sigma, "sigma_mm_robust": sigma_r,
             "sigma_inflation": (float(np.median([sigma_r[k] / max(sigma[k], 1e-9) for k in names
                                                  if sigma_r and math.isfinite(sigma_r[k]) and math.isfinite(sigma[k])]))
