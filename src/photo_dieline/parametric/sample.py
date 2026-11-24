@@ -17,6 +17,30 @@ SCALABLE_KEYS = {
     "clv": ("W", "D", "H"),
     "cone": ("side_b", "side_t", "h"),
     "food": ("W", "D", "H", "Hl"),
+    # 2026-11-25 全家族覆盖 (逐族 class_defaults 实测枚举; 保守取主尺寸, 耦合工艺键不动)
+    "aseptic": ("W", "D", "Hb"),
+    "brick": ("W", "D", "Hb"),
+    "clamp": ("W", "D", "H"),
+    "crashlock": ("W", "D", "H", "Hf", "Hb"),
+    "cup": ("H", "side_b", "side_t"),
+    "dispenser": ("W", "D", "H"),
+    "display": ("W", "D", "H", "Hf"),
+    "envelope": ("S", "flap_d"),
+    "handle": ("W", "D", "H"),
+    "hanger": ("W", "D", "H"),
+    "hexagonal": ("H", "side"),
+    "lockbottom": ("W", "D", "H", "Hf", "Hb", "side"),
+    "mailer": ("h", "spine_w", "cover_w", "tuck_t"),
+    "pillow": ("W", "H", "D"),
+    "prism": ("side", "h"),
+    "pyramid": ("side_b", "side_t", "h"),
+    "rsc": ("W", "D", "H"),
+    "slide": ("W", "D", "H"),
+    "tray": ("W", "D", "H", "Hf", "Hb", "side"),
+    "tube": ("side", "h"),
+    "tuck": ("W", "D", "H"),
+    "two": ("W", "D", "H"),
+    "window": ("W", "D", "H"),
 }
 
 
@@ -64,4 +88,8 @@ def sample_variant(cls_id: str, variant_index: int, scale_range=(0.8, 1.25), all
             last_err = e
             continue
         return p, {"scale": round(s, 4), "scaled_keys": scaled, "seed": seed_from(cls_id, variant_index)}
+    if allow_identity:
+        mod.validate_params(base)
+        return dict(base), {"scale": 1.0, "scaled_keys": [], "seed": seed_from(cls_id, variant_index),
+                            "no_scaling_coverage": True, "resample_exhausted": True}
     raise ValueError(f"{cls_id}: 8 次采样均被 validate_params 拒绝 (last: {last_err})")
