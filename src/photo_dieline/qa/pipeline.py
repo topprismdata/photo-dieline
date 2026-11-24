@@ -1,15 +1,14 @@
-"""QA 管线: 十道门 → JSON 报告 (机器可判定; 全过 = VALIDATED, 缺照片参照 = DRAFT).
+"""QA 管线: 十道门 → JSON 报告 (机器可判定; 硬门全过 = VALIDATED; G01 照片门不计入整体状态 —
+batch 模板验证没有照片, 单独报告)。
 
 G01 照片证据 | G02 IR Schema | G03 拓扑闭合 | G04 折叠闭合(跨链顶点重合)
-G05 golden 尺寸 | G06 面板穿插 | G07 SVG 1:1+分层+校验条 | G08 PDF MediaBox+50mm
-G09 报告自检 | G10 core 隔离(无 bpy/trellis/torch)
+G05 golden 尺寸 | G06 面板穿插 | G07 SVG 1:1+分层+在页内+校验条 | G08 PDF 独立解析+图层挂载+在页内+校验条
+G09 报告自检 (门齐全/状态合法/整体状态与各门一致) | G10 core 隔离(无 bpy/trellis/torch)
 """
 from __future__ import annotations
 
-import json
 import math
 import re
-import zlib
 from pathlib import Path
 from dataclasses import dataclass, field
 
@@ -17,12 +16,11 @@ import numpy as np
 from shapely.geometry import Polygon
 from shapely.ops import unary_union
 
-from ..core.ir import ARError, GeometryIR
+from ..core.ir import MIN_PHOTO_PX, GeometryIR
+from ..export import layout as lay
 from ..export import pdf as pdfx
-from ..export import svg as svgx
 from ..folding.engine import fold_all
 from ..parametric import base as templates
-
 TOL_MM = 0.2          # 折叠闭合残差门
 GOLDEN_TOL_MM = 0.5   # golden 尺寸门
 ALLOWED_OVERLAP = {   # 模板契约: 允许叠层 (真实工艺)
@@ -65,9 +63,64 @@ def _poly_pts(ir: GeometryIR, pid: str):
     return ir.panel(pid)["polygon_2d"]
 
 
+def _svg_geometry(svg_text: str) -> dict:
+    """独立解析 SVG (XML) → 画布尺寸、各图层形状坐标、变换属性。QA 只信解析结果。"""
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(svg_text)
+    ns = "{http://www.w3.org/2000/svg}"
+    W = float(root.get("width").removesuffix("mm"))
+    H = float(root.get("height").removesuffix("mm"))
+    vb = [float(v) for v in root.get("viewBox", "").split()]
+    layers: dict[str, dict] = {}
+    for grp in root.iter(ns + "g"):
+        shapes = []
+        for el in grp:
+            tag = el.tag.replace(ns, "")
+            if tag in ("polygon", "polyline"):
+                v = [float(x) for x in el.get("points", "").replace(",", " ").split()]
+                shapes.append((list(zip(v[0::2], v[1::2])), tag == "polygon"))
+            elif tag == "line":
+                shapes.append(([(float(el.get("x1")), float(el.get("y1"))),
+                                (float(el.get("x2")), float(el.get("y2")))], False))
+        layers[grp.get("id")] = {"shapes": shapes,
+                                 "text": "".join(t.text or "" for t in grp.iter(ns + "text"))}
+    transforms = [el.get("transform") for el in root.iter() if el.get("transform")]
+    return {"W": W, "H": H, "viewBox": vb, "layers": layers, "transforms": transforms}
+
+
+def _pdf_geometry(pdf_bytes: bytes) -> dict:
+    """独立解析 PDF (pypdf 严格模式) → MediaBox、图层属性表、内容流图层块。语法错误直接抛出。"""
+    import io
+    import pypdf
+    reader = pypdf.PdfReader(io.BytesIO(pdf_bytes), strict=True)
+    if len(reader.pages) != 1:
+        raise ValueError(f"页数 {len(reader.pages)} ≠ 1")
+    page = reader.pages[0]
+    box = page.mediabox
+    props = page["/Resources"].get("/Properties")
+    ocg = {str(key): str(props[key].get("/Name")) for key in props.keys()}
+    raw = page.get_contents().get_data().decode("latin-1")
+    blocks = [(m.group(1), m.group(2), m.group(3))
+              for m in re.finditer(r"/(\w+) (/P\d+) BDC\n(.*?)\nEMC", raw, re.S)]
+    return {"W": float(box.width), "H": float(box.height), "ocg": ocg, "blocks": blocks, "raw": raw}
+
+
+def _path_pts(ops: str) -> list[tuple[float, float]]:
+    """内容流片段里的路径顶点 (pt): `x y m` / `x y l`。"""
+    return [(float(x), float(y)) for x, y in re.findall(r"(-?[\d.]+) (-?[\d.]+) [ml]\b", ops)]
+
+
 def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     g = []
 
+    # G01 照片证据门: 照片在册且分辨率达标 (batch 模板验证无照片 → FAIL, 不计入整体状态)
+    g01 = Gate("G01", "photo_evidence")
+    ph = ir.package.get("photo") or {}
+    if ph.get("sha256") and min(ph.get("width_px", 0), ph.get("height_px", 0)) >= MIN_PHOTO_PX:
+        g01.ok({"width_px": ph.get("width_px"), "height_px": ph.get("height_px"), "sha256": ph.get("sha256")})
+    else:
+        g01.fail("无照片证据或分辨率不足")
+    g.append(g01)
     # G02 IR Schema (已在 build 校验, 双重保险: 存在五顶层)
     g02 = Gate("G02", "ir_schema")
     try:
@@ -181,56 +234,106 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
         g06.fail(str(exc))
     g.append(g06)
 
-    # G07 SVG
+    # 图层内容对账基准: 折线按语义计数, 粘口按角色计数
+    n_mtn = sum(1 for e in ir.edges if e.mt_va == "MOUNTAIN")
+    n_val = sum(1 for e in ir.edges if e.mt_va == "VALLEY")
+    n_glue = sum(1 for p in ir.panels if p["role"] == "glue")
+    need_layers = {"CUT", "BLEED", "REGISTRATION", "INFO"}
+    if n_mtn:
+        need_layers.add("CREASE-MOUNTAIN")
+    if n_val:
+        need_layers.add("CREASE-VALLEY")
+    if n_glue:
+        need_layers.add("GLUE")
+    x0, y0, x1, y1 = lay.net_bbox(ir)
+    nw, nh = x1 - x0, y1 - y0
+
+    # G07 SVG: 1:1 物理页 + 分层内容 + 全部几何在页内 + 外轮廓落位 + 50mm 校验条 (独立 XML 解析)
     g07 = Gate("G07", "svg_physical")
     try:
-        x0, y0, x1, y1 = svgx.net_bbox(ir)
-        nw, nh = x1 - x0, y1 - y0
-        m = re.search(r'width="([\d.]+)mm" height="([\d.]+)mm"', svg_text)
-        vb = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg_text)
-        layers_ok = all(f'id="{l}"' in svg_text for l in pdfx.LAYERS)
-        w_mm, h_mm = float(m.group(1)), float(m.group(2))
-        vbw, vbh = float(vb.group(1)), float(vb.group(2))
-        size_ok = abs(w_mm - vbw) < 1e-3 and abs(h_mm - vbh) < 1e-3
-        cut_closed = svg_text.count("stroke-width=\"0.3\"") >= 1
-        if layers_ok and size_ok and cut_closed:
-            g07.ok({"svg_w_mm": w_mm, "svg_h_mm": h_mm, "net_w_mm": nw, "net_h_mm": nh,
-                    "layers": pdfx.LAYERS})
+        geo = _svg_geometry(svg_text)
+        W, H, vb = geo["W"], geo["H"], geo["viewBox"]
+        size_ok = (len(vb) == 4 and abs(vb[0]) < 1e-6 and abs(vb[1]) < 1e-6
+                   and abs(W - vb[2]) < 1e-3 and abs(H - vb[3]) < 1e-3
+                   and abs(W - (nw + 2 * lay.MARGIN)) < 1e-3 and abs(H - (nh + 2 * lay.MARGIN)) < 1e-3)
+        scale_ok = not geo["transforms"]
+        L = geo["layers"]
+        layers_ok = all(k in L for k in pdfx.LAYERS)
+        n_closed = lambda k: sum(1 for _pts, is_poly in L[k]["shapes"] if is_poly)  # noqa: E731
+        n_open = lambda k: sum(1 for _pts, is_poly in L[k]["shapes"] if not is_poly)  # noqa: E731
+        content_ok = (layers_ok and n_closed("CUT") >= 1 and n_open("CREASE-MOUNTAIN") == n_mtn
+                      and n_open("CREASE-VALLEY") == n_val and n_closed("GLUE") == n_glue
+                      and n_closed("BLEED") >= 1 and n_open("REGISTRATION") == 8)
+        xs, ys = [], []
+        for k in pdfx.LAYERS:
+            if k in L:
+                for pts, _is_poly in L[k]["shapes"]:
+                    xs += [p[0] for p in pts]
+                    ys += [p[1] for p in pts]
+        out_of_page = sum(1 for x, y in zip(xs, ys)
+                          if x < -1e-3 or y < -1e-3 or x > W + 1e-3 or y > H + 1e-3)
+        in_page_ok = bool(xs) and out_of_page == 0
+        # CUT 闭合外轮廓的包围盒 = 净图平移到页边距 (证明 1:1 且未平移出页); SVG y 向下
+        cx = [p[0] for pts, is_poly in L["CUT"]["shapes"] if is_poly for p in pts]
+        cy = [p[1] for pts, is_poly in L["CUT"]["shapes"] if is_poly for p in pts]
+        place_ok = (bool(cx) and abs(min(cx) - lay.MARGIN) < 1e-3 and abs(max(cx) - (lay.MARGIN + nw)) < 1e-3
+                    and abs(min(cy) - (H - lay.MARGIN - nh)) < 1e-3 and abs(max(cy) - (H - lay.MARGIN)) < 1e-3)
+        bars = [math.hypot(b[0] - a[0], b[1] - a[1])
+                for pts, is_poly in L["INFO"]["shapes"] if not is_poly and len(pts) == 2 for a, b in [pts]]
+        bar_ok = any(abs(b - lay.CHECK_BAR_MM) < 0.01 for b in bars) and "CHECK BAR" in L["INFO"]["text"]
+        checks = {"size_ok": size_ok, "scale_ok": scale_ok, "layers_ok": layers_ok, "content_ok": content_ok,
+                  "in_page_ok": in_page_ok, "place_ok": place_ok, "bar_ok": bar_ok}
+        if all(checks.values()):
+            g07.ok({"svg_w_mm": W, "svg_h_mm": H, "net_w_mm": nw, "net_h_mm": nh, "layers": pdfx.LAYERS,
+                    "n_points": len(xs), "out_of_page_points": out_of_page, "bar_mm": lay.CHECK_BAR_MM})
         else:
-            g07.fail(f"layers_ok={layers_ok} size_ok={size_ok} cut={cut_closed}")
+            g07.fail("未通过: " + ", ".join(k for k, v in checks.items() if not v),
+                     {"svg_w_mm": W, "svg_h_mm": H, "out_of_page_points": out_of_page})
     except Exception as exc:  # noqa: BLE001
-        g07.fail(str(exc))
+        g07.fail(f"SVG 解析失败: {exc}")
     g.append(g07)
 
-    # G08 PDF
+    # G08 PDF: 独立解析器 (pypdf 严格模式) 打开 + MediaBox + 图层挂载 + 全部几何在页内 + 50mm 校验条
     g08 = Gate("G08", "pdf_physical")
     try:
-        head = pdf_bytes[:4096].decode("latin-1")
-        mb = re.search(r"/MediaBox \[0 0 ([\d.]+) ([\d.]+)\]", head)
-        x0, y0, x1, y1 = svgx.net_bbox(ir)
-        expect_w = (x1 - x0 + 24) * pdfx.PT_PER_MM
-        expect_h = (y1 - y0 + 24) * pdfx.PT_PER_MM
-        w_pt, h_pt = float(mb.group(1)), float(mb.group(2))
-        # 内容流: 解压找 50mm 校验条 (INFO 层内 141.732pt 线段)
-        st = re.search(rb"stream\n(.*?)\nendstream", pdf_bytes, re.S)
-        raw = zlib.decompress(st.group(1)).decode("latin-1")
+        expect_w = (nw + 2 * lay.MARGIN) * pdfx.PT_PER_MM
+        expect_h = (nh + 2 * lay.MARGIN) * pdfx.PT_PER_MM
+        geo = _pdf_geometry(pdf_bytes)
+        W, H = geo["W"], geo["H"]
+        size_ok = abs(W - expect_w) < 0.05 and abs(H - expect_h) < 0.05
+        keys = [f"/P{i}" for i in range(len(pdfx.LAYERS))]
+        ocg_ok = list(geo["ocg"].keys()) == keys and [geo["ocg"][k] for k in keys] == list(pdfx.LAYERS)
+        scale_ok = not re.search(r"\bcm\b", geo["raw"])
+        tags_ok = all(tag == "OC" and prop in geo["ocg"] for tag, prop, _ops in geo["blocks"])
+        used = [prop for _tag, prop, _ops in geo["blocks"]]
+        mount_ok = bool(used) and len(used) == len(set(used))
+        have = {pdfx.LAYERS[int(prop[2:])] for prop in used if prop in geo["ocg"]}
+        xs, ys = [], []
+        for _tag, _prop, ops in geo["blocks"]:
+            for x, y in _path_pts(ops):
+                xs.append(x)
+                ys.append(y)
+        out_of_page = sum(1 for x, y in zip(xs, ys)
+                          if x < -0.05 or y < -0.05 or x > W + 0.05 or y > H + 0.05)
+        in_page_ok = bool(xs) and out_of_page == 0
+        info_prop = f"/P{pdfx.LAYERS.index('INFO')}"
         bar_ok = False
-        for seg in re.findall(r"([\d.]+) ([\d.]+) m\n([\d.]+) ([\d.]+) l", raw):
-            ax, ay, bx, by = map(float, seg)
-            length = math.hypot(bx - ax, by - ay)
-            if abs(length - 50 * pdfx.PT_PER_MM) < 0.05:
-                bar_ok = True
-                break
-        ocg_n = len(re.findall(r"/Type /OCG", head))
-        size_ok = abs(w_pt - expect_w) < 0.2 and abs(h_pt - expect_h) < 0.2
-        if size_ok and bar_ok and ocg_n >= 7:
-            g08.ok({"mediabox_pt": [w_pt, h_pt], "expected_pt": [expect_w, expect_h],
-                    "bar_50mm": True, "ocg_layers": ocg_n})
+        for _tag, prop, ops in geo["blocks"]:
+            if prop == info_prop:
+                pts = _path_pts(ops)
+                bar_ok = any(abs(math.hypot(b[0] - a[0], b[1] - a[1]) - lay.CHECK_BAR_MM * pdfx.PT_PER_MM) < 0.05
+                             for a, b in zip(pts[0::2], pts[1::2]))
+        checks = {"size_ok": size_ok, "ocg_ok": ocg_ok, "scale_ok": scale_ok, "tags_ok": tags_ok,
+                  "mount_ok": mount_ok, "layers_ok": need_layers <= have, "in_page_ok": in_page_ok, "bar_ok": bar_ok}
+        if all(checks.values()):
+            g08.ok({"mediabox_pt": [W, H], "expected_pt": [expect_w, expect_h], "bar_50mm": True,
+                    "ocg_layers": len(keys), "mounted_layers": sorted(have), "n_points": len(xs),
+                    "out_of_page_points": out_of_page, "parser": "pypdf"})
         else:
-            g08.fail(f"size_ok={size_ok} bar={bar_ok} ocg={ocg_n}",
-                     {"mediabox_pt": [w_pt, h_pt]})
+            g08.fail("未通过: " + ", ".join(k for k, v in checks.items() if not v),
+                     {"mediabox_pt": [W, H], "out_of_page_points": out_of_page})
     except Exception as exc:  # noqa: BLE001
-        g08.fail(str(exc))
+        g08.fail(f"PDF 解析失败: {exc}")
     g.append(g08)
 
     # G10 core 隔离
@@ -245,12 +348,24 @@ def run_qa(ir: GeometryIR, svg_text: str, pdf_bytes: bytes) -> dict:
     if banned:
         g10.fail(f"core 不应硬依赖: {banned}")
     else:
-        g10.ok({"imports": "numpy/shapely/jsonschema/PIL/typer only"})
+        g10.ok({"imports": "numpy/shapely/jsonschema/PIL/typer/pypdf only"})
     g.append(g10)
 
-    gates = [x.as_dict() for x in g]
+    # G09 报告自检: 其余九道门齐全、状态合法、整体状态与各门一致
+    g09 = Gate("G09", "report_selfcheck")
+    expect_ids = [f"G{i:02d}" for i in range(1, 11) if i != 9]
+    ids = [x.id for x in g]
     hard = [x for x in g if x.id != "G01"]
     status = "VALIDATED" if all(x.status == "PASS" for x in hard) else "DRAFT"
+    # 每道门状态合法, 且每道 FAIL 必须带说明 (无说明的 FAIL 等于没检查)
+    explained = all(x.status in ("PASS", "FAIL") and (x.status == "PASS" or bool(x.detail)) for x in g)
+    if ids == expect_ids and explained:
+        g09.ok({"gates": ids + ["G09"], "n_gates": 10, "status": status})
+    else:
+        g09.fail(f"门不齐或 FAIL 无说明: ids={ids}")
+    g.append(g09)
+
+    gates = sorted((x.as_dict() for x in g), key=lambda d: d["id"])
     return {
         "qa_version": "0.1",
         "status": status,

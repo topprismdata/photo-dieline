@@ -36,6 +36,17 @@
   },
   "gates": [
     {
+      "id": "G01",
+      "name": "photo_evidence",
+      "status": "PASS",
+      "metrics": {
+        "width_px": 2100,
+        "height_px": 1500,
+        "sha256": "6dc5c7f5c7d99030fe397274ee3d4a8c4cc2f65a621f6f9b62313ceed64bbcf6"
+      },
+      "detail": ""
+    },
+    {
       "id": "G02",
       "name": "ir_schema",
       "status": "PASS",
@@ -46,7 +57,8 @@
           "panels",
           "edges",
           "features"
-        ]
+        ],
+        "template": "gable_top"
       },
       "detail": ""
     },
@@ -125,7 +137,10 @@
           "BLEED",
           "REGISTRATION",
           "INFO"
-        ]
+        ],
+        "n_points": 200,
+        "out_of_page_points": 0,
+        "bar_mm": 50.0
       },
       "detail": ""
     },
@@ -143,7 +158,41 @@
           575.9227602533606
         ],
         "bar_50mm": true,
-        "ocg_layers": 7
+        "ocg_layers": 7,
+        "mounted_layers": [
+          "BLEED",
+          "CREASE-MOUNTAIN",
+          "CREASE-VALLEY",
+          "CUT",
+          "GLUE",
+          "INFO",
+          "REGISTRATION"
+        ],
+        "n_points": 200,
+        "out_of_page_points": 0,
+        "parser": "pypdf"
+      },
+      "detail": ""
+    },
+    {
+      "id": "G09",
+      "name": "report_selfcheck",
+      "status": "PASS",
+      "metrics": {
+        "gates": [
+          "G01",
+          "G02",
+          "G03",
+          "G04",
+          "G05",
+          "G06",
+          "G07",
+          "G08",
+          "G10",
+          "G09"
+        ],
+        "n_gates": 10,
+        "status": "VALIDATED"
       },
       "detail": ""
     },
@@ -152,7 +201,7 @@
       "name": "core_isolation",
       "status": "PASS",
       "metrics": {
-        "imports": "numpy/shapely/jsonschema/PIL/typer only"
+        "imports": "numpy/shapely/jsonschema/PIL/typer/pypdf only"
       },
       "detail": ""
     }

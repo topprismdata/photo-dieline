@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
-from .core.ir import from_raw
+from .core.ir import class_defaults, class_module, from_raw
 from .folding.engine import fold_all
 from .parametric import base as templates
 from .qa.pipeline import run_qa
@@ -22,10 +22,9 @@ from .render.twin import render_twin
 
 
 def _build_class(cls_id: str):
-    mod = templates.get(cls_id)
-    params = dict(mod.DEFAULTS)
-    if hasattr(mod, "class_params"):
-        params.update(mod.class_params(cls_id))
+    """类默认参数 (家族模块按 class_params 派生) → 模板 IR; 与 CLI 的类分发同源."""
+    params = class_defaults(cls_id)
+    mod = class_module(cls_id)
     return mod, params, mod.build_ir(params)
 
 
@@ -46,8 +45,7 @@ def run_batch(out_dir: str, prefix: str | None = None, thumb: int = 320) -> dict
             ir = from_raw(ir_raw)
             x0, y0, x1, y1 = net_bbox(ir)
             svg_text = svg_render(ir, x1 - x0, y1 - y0)
-            from photo_dieline.cli import _layer_geo
-            pdf_bytes = build_pdf(ir, x1 - x0, y1 - y0, _layer_geo(ir))
+            pdf_bytes = build_pdf(ir, x1 - x0, y1 - y0)
             report = run_qa(ir, svg_text, pdf_bytes)
             row["gates"] = {g["id"]: g["status"] for g in report["gates"] if g["id"] != "G01"}
             row["qa_worst_closure_mm"] = next((g["metrics"].get("worst_residual_mm") for g in report["gates"]
