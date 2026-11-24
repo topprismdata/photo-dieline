@@ -4,7 +4,7 @@ import math
 import numpy as np
 import pytest
 
-from photo_dieline.measurement import MODELS, observe, ratio_mae, solve
+from photo_dieline.measurement import MODELS, delivery_policy, observe, ratio_mae, solve
 
 # 与 experiments 一致的相机口径: equiv_focal → fx, 眼距 = 距离 × 1.35 (ADJ_FOV)
 FX = 50.0 / 36.0 * 768.0
@@ -121,3 +121,24 @@ def test_multiview_and_free_fx_contract():
     assert abs(r["cam"]["fx_scale"] - 1.05) < 0.05
     th = {**r["anchors"], **r["theta"]}
     assert abs(th["W"] - GABLE_PARAMS["W"]) < 3.0
+
+
+def test_sandwich_robust_sigma_and_policy_gate():
+    """R4 WP1-III + B06 对策: 聚类三明治 σ 与交付门槛合同。"""
+    gab = MODELS["gable_top"]
+    CL = {0: 0, 1: 0, 4: 0, 5: 0, 2: 1, 3: 1, 6: 1, 7: 1, 8: 2, 9: 2, 10: 3, 11: 3, 12: 3, 13: 3}
+    rng = np.random.default_rng(31)
+    idx, uv, _ = observe(gab, GABLE_PARAMS, _gable_cam(), FX)
+    r = solve(gab, idx, uv + rng.normal(0, 1.0, uv.shape), FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8, point_clusters=CL)
+    assert r["ok"] and r["sigma_mm_robust"] is not None
+    # i.i.d. 下三明治不得系统性误伤 (逐帧 4 簇方差大, 只查宽界)
+    ratio = r["sigma_mm_robust"]["W"] / r["sigma_mm"]["W"]
+    assert 0.25 <= ratio <= 4.0, ratio
+    # 交付门槛: REFUSED → NO_GO
+    idx2, uv2, _ = observe(MODELS["cuboid"], {"W": 80.0, "D": 50.0, "H": 120.0}, CUBOID_CAM, FX)
+    r2 = solve(MODELS["cuboid"], idx2, uv2, FX, {}, 0.6)
+    assert delivery_policy(r2) == "NO_GO"
+    # MANUFACTURING + 巨大 σ → MANUAL (精度不足禁自动)
+    r3 = solve(gab, idx, uv + rng.normal(0, 8.0, uv.shape), FX, {"Hb": GABLE_PARAMS["Hb"]}, 0.8, point_clusters=CL)
+    if r3["delivery"] == "MANUFACTURING_DIMENSIONS":
+        assert delivery_policy(r3, tol_mm=1.0, k=2.0) == "MANUAL"

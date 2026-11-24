@@ -140,13 +140,15 @@ def observe(model, p, cam, fx, res=RES):
     return idx, uv[idx], eye
 
 
-def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, noise_px=1.0, extra_views=None, free_fx=False):
+def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, noise_px=1.0, extra_views=None, free_fx=False, point_clusters=None):
     """联合拟合: 未锚定的包装参数 + 相机 (注视点 3, 方位, 俯仰, 滚转, 眼距)。
     anchors: {参数名: 实测值 mm} (尺度锚定, 与待估参数严格分开)。多起点 (方位 × 俯仰), 取代价最低解。
     free_fin_gap: gable 的 fin_gap_mm 改为自由参数 (先验消融; 无锚点时应重新暴露绝对尺度自由度)。
     noise_px: 关键点噪声假设 (参数级误差棒的 σ 缩放)。
  extra_views: [(obs_idx, obs_uv, fx), ...] 附加视角; 参数跨视角共享, 位姿逐视角独立。
  free_fx: 附加一个共享焦距乘数 s (B0-B"部分未知内参"; s 与眼距耦合, 会进入 Schur 位姿块被边缘化)。
+ point_clusters: {关键点索引: 聚类 id} (如逐面分组) → 启用 sandwich 稳健协方差 sigma_mm_robust
+ (Liang-Zeger 聚类三明治 + HC1 校正; 相关噪声下 i.i.d. 误差棒过于乐观, R3 B03/B06 实证)。
 
     R3 WP1 合同 (round3_verdict.md §2):
     - scale_source: MEASURED_ANCHOR (有实测边) / TEMPLATE_PRIOR_ANCHOR (gable 隐含 fin_gap=3mm 绝对先验,
@@ -230,6 +232,43 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
     Sinv = np.linalg.inv(S) if full_rank else None
     sigma = {nm: (float(math.sqrt(max(Sinv[i, i], 0.0)) / scale[i] * noise_px) if full_rank else float("inf"))
              for i, nm in enumerate(names)}
+    # Sandwich 稳健协方差 (聚类三明治): 假定逐聚类相关+异方差, 不依赖 i.i.d.; 残差自带真实噪声尺度。
+    # 必须在 θ 边缘空间做: 全空间 H 含冗余位姿方向 (cond ~1e18), pinv 截断会毁掉 θθ 块;
+    # 投影得分 w_k = [I | −H_tp·H_pp⁺]·u_k, 则 i.i.d. 下 E[Σw_k w_kᵀ] = S·σ² 精确还原 S 路线。
+    sigma_r = None
+    if point_clusters and full_rank:
+        rows = int(best.fun.shape[0])
+        p_tot = int(best.jac.shape[1])
+        if rows > p_tot:
+            cid = np.full(rows, -1, dtype=int)
+            off = 0
+            for idx, _u, _f in views:
+                for i, kp in enumerate(idx):
+                    cid[off + 2 * i] = cid[off + 2 * i + 1] = int(point_clusters.get(int(kp), -1))
+                off += 2 * len(idx)
+            A = np.concatenate([np.eye(n), -Htp @ np.linalg.pinv(Hpp, rcond=1e-10)], axis=1)  # n×p_tot
+            # soft_l1 的 best.jac 已被 ρ′ 加权 → 数值重算原始 J (三明治要求未加权得分)
+            J_raw = np.empty((rows, p_tot))
+            for j in range(p_tot):
+                h = 1e-6 * max(1.0, abs(best.x[j]))
+                xp, xm = best.x.copy(), best.x.copy()
+                xp[j] += h
+                xm[j] -= h
+                J_raw[:, j] = (resid(xp) - resid(xm)) / (2 * h)
+            scores_raw = (J_raw / scale) * best.fun[:, None]
+            # HC3 杠杆校正 (小样本 m=2·关键点, 平均杠杆 ~p/m 大): 逐行 ψ_i/(1−h_i)
+            U_, S_, Vt_ = np.linalg.svd(J_raw / scale, full_matrices=False)
+            keep_ = S_ > 1e-12 * max(float(S_.max()), 1e-300)
+            hat_diag = np.sum(U_[:, keep_] ** 2, axis=1)
+            scores = scores_raw / np.clip(1.0 - hat_diag, 1e-3, None)[:, None]
+            W = np.zeros((n, n))
+            for c in np.unique(cid):
+                if c < 0:
+                    continue
+                w = A @ scores[cid == c].sum(axis=0)
+                W += np.outer(w, w)
+            V = (Sinv @ W @ Sinv)                                 # HC3 已含杠杆校正, 不再叠 HC1
+            sigma_r = {nm: float(math.sqrt(max(V[i, i], 0.0)) / scale[i]) for i, nm in enumerate(names)}
     if anchors:
         scale_source = "MEASURED_ANCHOR"
     elif model is MODELS["gable_top"] and not free_fin_gap:
@@ -256,10 +295,32 @@ def solve(model, obs_idx, obs_uv, fx, anchors, d0, n_az=6, free_fin_gap=False, n
             "cond": float(sv[0] / sv[-1]) if sv[-1] > 0 else float("inf"),
             "cond_theta": cond_theta, "identifiable": level != "UNIDENTIFIABLE",
             "identifiability": level, "scale_source": scale_source, "delivery": delivery,
-            "sigma_mm": sigma, "n_distinct_minima": int(distinct)}
+            "sigma_mm": sigma, "sigma_mm_robust": sigma_r,
+            "sigma_inflation": (float(np.median([sigma_r[k] / max(sigma[k], 1e-9) for k in names
+                                                 if sigma_r and math.isfinite(sigma_r[k]) and math.isfinite(sigma[k])]))
+                                if sigma_r else None),
+            "n_distinct_minima": int(distinct)}
 
 
 def ratio_mae(model, theta, truth):
     """与 CNN 同口径的指标: 目标比例向量的 raw MAE."""
     rel = REL if model is MODELS["gable_top"] else [("W", "H"), ("D", "H")]
     return float(np.mean([abs(theta[a] / theta[b] - truth[a] / truth[b]) for a, b in rel]))
+
+
+def delivery_policy(res, tol_mm=1.0, k=2.0):
+    """R4 WP1 第 III 层: σ 对比特征容差的自动交付门槛 (优先用稳健 σ, 缺则退 i.i.d. σ)。
+    AUTO: 实测锚 + 可辨识 + max(σ_W,σ_D) ≤ tol/k (k=2 安全系数), 可自动交付;
+    MANUAL: 实测锚可辨识但误差棒超容差 → 转人工复核; NO_GO: 拒绝/仅先验/不可辨识。
+    注意 B0-B 冻结结论: TOL=1mm 时单视角固有精度 1–4mm → 大量 MANUAL 是正确行为 (精度不足即不自动)。"""
+    if not res.get("ok"):
+        return "NO_GO"
+    if res.get("delivery") in ("REFUSED", "PRIOR_DEPENDENT_ESTIMATE"):
+        return "NO_GO"
+    if res.get("delivery") == "INSUFFICIENT_PRECISION":
+        return "MANUAL"
+    s = res.get("sigma_mm_robust") or res.get("sigma_mm") or {}
+    dims = [s[k] for k in ("W", "D") if k in s and math.isfinite(s.get(k, float("inf")))]
+    if res.get("delivery") != "MANUFACTURING_DIMENSIONS" or not dims:
+        return "NO_GO"
+    return "AUTO" if max(dims) <= tol_mm / k else "MANUAL"
