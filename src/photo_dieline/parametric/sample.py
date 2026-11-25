@@ -39,6 +39,7 @@ SCALABLE_KEYS = {
     "tray": ("W", "D", "H", "Hf", "Hb", "side"),
     "tube": ("side", "h"),
     "tuck": ("W", "D", "H"),
+    "pizza": ("W", "D", "H"),  # 压线唇/内贴翼宽固定 (工艺件不随包体缩放)
 }
 
 
