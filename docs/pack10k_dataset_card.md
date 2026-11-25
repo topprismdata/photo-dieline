@@ -88,3 +88,26 @@ P-GATE-01 包命名 / 02 USD 结构依赖 / 03 Package Profile / 04 资产能力
 - 代码: Apache-2.0 (与 USDCraft 对齐, 含其验证器引用的署名)
 - 数据集: CC-BY-4.0 (默认建议)
 - 品牌层: TOPPRISM 徽章化 (无客户资产)
+
+## NVIDIA USDCraft-10K 参照清单对账 (2026-11-25, manifest.csv 权威口径)
+
+数据集结构: 10,000 资产 = 1000 类 × 10 变体, 6 域。
+**图片形态**: 无每资产全分辨率渲染; 仅每资产 2 张 256×256 缩略图
+(`physx/.thumbs/256x256/model.usdc.png` 灰底 + `model.usdc_light.png` 亮底)。
+唯一大图 = figures/usdcraft-gallery.jpg + gallery.mp4。下载量 116k+。
+
+零售相关三档 (严格人工圈定, 关键词宽匹配会误伤至 144 类含电气柜/齿轮箱):
+
+| 口径 | 类 | 资产 | 缩略图 |
+|---|--:|--:|--:|
+| 核心: 商品包装+食品容器 | 27 | 270 | 540 |
+| 零售设备: 购物车/篮/扫码/售货 | 13 | 130 | 260 |
+| 物流容器: 周转箱/纸箱/集装 | 8 | 80 | 160 |
+| 合计 | 48 | 480 | 960 PNG |
+
+战役四族 (R422/R091/R043/R037): 各 10 资产 → 20 缩略图;
+R422 在 industrial 域, 其余三族在 kitchen_dining。
+
+**对账结论**: 参照物公开图片资产 = 256×256 双底缩略图;
+Pack10K 每资产全分辨率棚拍渲染在图片形态上超过参照自身公开资产。
+复现: `python3 scripts/usdcraft_manifest_survey.py` (缓存 /tmp/usdcraft_manifest.csv)
