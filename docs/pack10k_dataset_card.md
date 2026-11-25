@@ -93,7 +93,7 @@ P-GATE-01 包命名 / 02 USD 结构依赖 / 03 Package Profile / 04 资产能力
 
 数据集结构: 10,000 资产 = 1000 类 × 10 变体, 6 域。
 **图片形态**: 无每资产全分辨率渲染; 仅每资产 2 张 256×256 缩略图
-(`physx/.thumbs/256x256/model.usdc.png` 灰底 + `model.usdc_light.png` 亮底)。
+(`physx/.thumbs/256x256/` (目录名如此, **实际 1024×1024**) model.usdc.png 灰底 + model.usdc_light.png 亮底)。
 唯一大图 = figures/usdcraft-gallery.jpg + gallery.mp4。下载量 116k+。
 
 零售相关三档 (严格人工圈定, 关键词宽匹配会误伤至 144 类含电气柜/齿轮箱):
