@@ -237,9 +237,6 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
         mapi = UsdPhysics.MassAPI.Apply(bp)
         mapi.GetMassAttr().Set(round(float(mass_kg * share), 6))
         body_paths[link] = f"/Asset/Links/{link}"
-        if root_prim is None or part.get("joint") is None:
-            if part.get("joint") is None:
-                root_prim = bp if root_prim is None else root_prim
 
     n_joints = 0
     for part in parts:
@@ -268,8 +265,14 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
         dapi.CreateTypeAttr().Set("force")
         n_joints += 1
 
-    # 根: 第一个无 joint 的部件挂 ArticulationRoot + Physx 方言
-    if root_prim is not None:
+    # 根: 关节连通分量的根 (parent 集合 − 子集合); 无关节 → 不挂 root
+    # (静态刚体对齐其 static_rigid 类; 铰接体对齐其 articulated 类)
+    joint_children = {part["name"] for part in parts if part.get("joint")}
+    root_name = next((p["name"] for p in parts
+                      if p["name"] in {j.get("parent") for j in (q.get("joint") for q in parts) if j}
+                      and p["name"] not in joint_children), None)
+    if root_name is not None and n_joints > 0:
+        root_prim = stage.GetPrimAtPath(body_paths[root_name])
         UsdPhysics.ArticulationRootAPI.Apply(root_prim)
         schemas = list(root_prim.GetAppliedSchemas())
         if "PhysxArticulationAPI" not in schemas:
