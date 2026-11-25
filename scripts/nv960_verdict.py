@@ -34,8 +34,10 @@ def e1(path):
         im = Image.open(path).convert('L')
         w, h = im.size
         cw, ch = int(w * 0.62), int(h * 0.62)
-        im.crop(((w - cw) // 2, (h - ch) // 2, (w + cw) // 2, (h + ch) // 2)).save('/tmp/_e1crop.png')
-        d, _ = edge_stats(load_gray('/tmp/_e1crop.png'))
+        import os as _os
+        _t = f'/tmp/_e1crop_{_os.getpid()}.png'
+        im.crop(((w - cw) // 2, (h - ch) // 2, (w + cw) // 2, (h + ch) // 2)).save(_t)
+        d, _ = edge_stats(load_gray(_t))
         return d
     except Exception:
         return None

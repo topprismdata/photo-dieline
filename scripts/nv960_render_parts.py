@@ -160,7 +160,7 @@ def render_parts(parts_json: Path, out_png: Path):
         label_png = str(lp)
     # 设备类: 前板贴花 (薄盒 + 全 UV 标签, -Y 面朝镜头)
     lp2 = Path("/tmp/nv960_labels") / f"{cid}.png"
-    if lp2.exists() and cid not in RIGID_CLASSES:
+    if lp2.exists() and cid not in RIGID_CLASSES and cid != "tiered_fruit_basket":
         xs = [v[0] for p in parts for v in p["verts"]]
         zs = [v[2] for p in parts for v in p["verts"]]
         y0 = min(v[1] for p in parts for v in p["verts"])

@@ -25,7 +25,7 @@ def main() -> int:
         repo_id=REPO,
         repo_type="dataset",
         folder_path=str(HERE),
-        commit_message="Pack10K v0.2: 4 families + NV960 960-pair comparison (65.31% parity, 48 contact sheets, NVIDIA 480-asset independent audit)",
+        commit_message="Pack10K v0.3: 4 families + NV960 960-pair comparison (77.29% parity, 48 contact sheets, NVIDIA 480-asset audit 20.8% pass)",
     )
     print(f"已发布: https://huggingface.co/datasets/{REPO}")
     return 0
