@@ -233,9 +233,17 @@ def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45, texture=True, fa
 def _export_usdc_articulated(ir, path, kind="carton_board"):
     """USDCraft 同构 articulation 导出: 五刚体 + 四 revolute (closed 态)。
 
-    层级照抄其 R422: /Asset/Links/{carton_body,flap_t0..t3}/Visuals/panel/Geom;
-    关节 /Asset/Joints/flap_tX (revolute, 轴=折边世界方向, 原点=折边中点)。
-    根刚体 FLOATING (固定归消费方, 同其 model.py BaseMode 约定)。
+    层级/物理 schema 逐位对齐其 R422 (ds_R422_01 实测):
+      /Asset/Links/{carton_body,flap_tX}/Visuals/panel/Geom   (渲染网格)
+      /Asset/Links/{carton_body,flap_tX}/Collisions/panel/Geom (碰撞网格, CollisionAPI)
+      /Asset/Links/carton_body: PhysicsArticulationRootAPI (根)
+      /Asset/Joints/carton_to_flap_tX: revolute, axis X, limits 0..180°,
+        collisionEnabled False, drive:angular damping=0.03·π/180 force 型
+      /Asset/PhysicsMaterials/corrugated_contact: density=gsm, 静摩擦 0.6,
+        动摩擦 0.45, restitution 0.03 (其 corrugated 同款)
+    翼刚体原点=铰链中点 (localPos1=0), 关节 localPos0=铰链于墙环体坐标。
+    根刚体 FLOATING 语义 (固定归消费方, 同其 model.py BaseMode 约定)。
+    物理完整性: 可动件全部有 revolute 对应; 无 free-floating 刚体。
     """
     from pxr import Gf, Sdf, Usd, UsdGeom, UsdPhysics, UsdShade, Vt
 
@@ -252,7 +260,7 @@ def _export_usdc_articulated(ir, path, kind="carton_board"):
 
     allv = np.vstack([p[1] for p in parts])
     mn, mx = allv.min(0), allv.max(0)
-    origin = np.array([(mn[0] + mx[0]) / 2, (mn[1] + mx[1]) / 2, mn[2]])  # 底面中心置原点
+    origin = np.array([(mn[0] + mx[0]) / 2, (mn[1] + mx[1]) / 2, mn[2]])  # 底面中心
 
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -266,6 +274,15 @@ def _export_usdc_articulated(ir, path, kind="carton_board"):
     except AttributeError:
         stage.GetRootLayer().customLayerData = {"kilogramPerUnit": 1.0}
 
+    # 物理材质 (其 corrugated_contact 同款; density 取本仓克重口径)
+    pm_prim = stage.DefinePrim("/Asset/PhysicsMaterials/corrugated_contact")
+    pmapi = UsdPhysics.MaterialAPI.Apply(pm_prim)
+    pmapi.CreateDensityAttr().Set(float(gsm))             # kg/m³ = gsm (面密度同数值口径)
+    pmapi.CreateStaticFrictionAttr().Set(0.6)
+    pmapi.CreateDynamicFrictionAttr().Set(0.45)
+    pmapi.CreateRestitutionAttr().Set(0.03)
+
+    # 渲染材质
     mat = UsdShade.Material.Define(stage, "/Asset/Materials/KraftMat")
     ps = UsdShade.Shader.Define(stage, "/Asset/Materials/KraftMat/PreviewSurface")
     ps.CreateIdAttr("UsdPreviewSurface")
@@ -274,63 +291,99 @@ def _export_usdc_articulated(ir, path, kind="carton_board"):
     ps.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(0.0)
     mat.CreateSurfaceOutput().ConnectToSource(ps.ConnectableAPI(), "surface")
 
-    body_paths = {}
-    for pid, pts_mm, tris in parts:
-        link = "carton_body" if pid == "body_walls" else f"flap_{pid}"
-        Pm = (pts_mm - origin) * 1e-3
-        mesh = UsdGeom.Mesh.Define(stage, f"/Asset/Links/{link}/Visuals/panel/Geom")
-        mesh.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*p) for p in Pm]))
-        mesh.GetFaceVertexIndicesAttr().Set(Vt.IntArray([int(i) for t in tris for i in t]))
-        mesh.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(tris)))
-        bp = stage.GetPrimAtPath(f"/Asset/Links/{link}")
-        UsdPhysics.RigidBodyAPI.Apply(bp)
-        UsdPhysics.CollisionAPI.Apply(bp)
-        mapi = UsdPhysics.MassAPI.Apply(bp)
-        mapi.GetMassAttr().Set(round(float(total_kg * areas[pid] / total_m2), 6))
-        UsdShade.MaterialBindingAPI(stage.GetPrimAtPath(
-            f"/Asset/Links/{link}/Visuals/panel/Geom")).Bind(mat)
-        body_paths[pid] = f"/Asset/Links/{link}"
-
-    # revolute 关节: 顶翼折边 (parent=墙, child=翼); 帧取折叠世界位姿
+    # 关节帧预计算: 折边世界位姿 (轴/中点)
     world = fold_all(ir)
-    net_polys = {pp["id"]: pp["polygon_2d"] for pp in ir.panels}
+    net_polys = {pp["id"]: np.asarray(pp["polygon_2d"], float) for pp in ir.panels}
     roles = {pp["id"]: pp["role"] for pp in ir.panels}
-    n_joints = 0
+    joint_frames = {}
     for e in ir.edges:
         child = e.child
         if roles.get(child) != "flap" or not child.startswith("t"):
             continue
-        seg = e.seg_2d
-        a = np.array([*seg[0], 0.0])
-        b = np.array([*seg[1], 0.0])
-        # 折边世界坐标: 在父面板局部系里查 seg 端点所在边 → 用折叠后父面板顶点
-        # 更稳: 折边两端点 = 父面板 world 顶点中与 seg 2d 端点同 net 坐标的点
         pw = world[e.parent]
-        pn = np.asarray(net_polys[e.parent], float)
+        pn = net_polys[e.parent]
         if np.allclose(pn[0], pn[-1]):
-            pn = pn[:-1]
-            pw = pw[:-1]
-        idx = []
-        for p2 in (np.array(seg[0]), np.array(seg[1])):
-            d = np.linalg.norm(pn - p2, axis=1)
-            idx.append(int(d.argmin()))
+            pn, pw = pn[:-1], pw[:-1]
+        idx = [int(np.linalg.norm(pn - np.array(s), axis=1).argmin()) for s in e.seg_2d]
         w0, w1 = pw[idx[0]], pw[idx[1]]
-        axis = (w1 - w0)
-        axis = axis / np.linalg.norm(axis)
-        mid = (w0 + w1) / 2.0
-        joint = UsdPhysics.RevoluteJoint.Define(stage, f"/Asset/Joints/{child}")
-        j = joint.GetPrim()
-        joint.CreateBody0Rel().SetTargets([body_paths["body_walls"]])
-        joint.CreateBody1Rel().SetTargets([body_paths[child]])
+        axis = (w1 - w0) / np.linalg.norm(w1 - w0)
+        joint_frames[child] = ((w0 + w1) / 2.0, axis)
+
+    def _emit_link(link, pid, pts_mm, tris, body_offset_mm=None):
+        """Visuals(渲染) + Collisions(碰撞) + 刚体 API。翼: 原点平移至铰链。"""
+        off = np.zeros(3) if body_offset_mm is None else np.asarray(body_offset_mm)
+        Pm = (pts_mm - origin - off) * 1e-3
+        vis = UsdGeom.Mesh.Define(stage, f"/Asset/Links/{link}/Visuals/panel/Geom")
+        vis.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*p) for p in Pm]))
+        vis.GetFaceVertexIndicesAttr().Set(Vt.IntArray([int(i) for t in tris for i in t]))
+        vis.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(tris)))
+        UsdShade.MaterialBindingAPI(vis).Bind(mat)
+        col = UsdGeom.Mesh.Define(stage, f"/Asset/Links/{link}/Collisions/panel/Geom")
+        col.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*p) for p in Pm]))
+        col.GetFaceVertexIndicesAttr().Set(Vt.IntArray([int(i) for t in tris for i in t]))
+        col.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(tris)))
+        UsdPhysics.CollisionAPI.Apply(col.GetPrim())
+        pm_mat = UsdShade.Material(stage.GetPrimAtPath("/Asset/PhysicsMaterials/corrugated_contact"))
+        UsdShade.MaterialBindingAPI(col).Bind(pm_mat, materialPurpose="physics")
+        bp = stage.GetPrimAtPath(f"/Asset/Links/{link}")
+        UsdPhysics.RigidBodyAPI.Apply(bp)
+        mapi = UsdPhysics.MassAPI.Apply(bp)
+        mapi.GetMassAttr().Set(round(float(total_kg * areas[pid] / total_m2), 6))
+        return bp
+
+    # 墙环体 (含底翼)
+    wall_pts, wall_tris = [], []
+    for pid, pts_mm, tris in parts:
+        if pid == "body_walls":
+            base = len(wall_pts)
+            wall_pts.extend(pts_mm.tolist())
+            wall_tris.extend([(base + a, base + b, base + c) for a, b, c in tris])
+    wall_arr = np.asarray(wall_pts, float)
+    wall_tri_arr = np.asarray(wall_tris, int)
+    bp0 = _emit_link("carton_body", "body_walls", wall_arr, wall_tri_arr)
+    UsdPhysics.ArticulationRootAPI.Apply(bp0)
+    # physx 方言 (对齐其 ds_R422_01: 其资产=PhysxArticulationAPI, physx 后端
+    # PASS 15 项, generic/newton 因 vendor 冲突 FAIL — 我们 1:1 同 dialect):
+    # pip pxr 无 PhysxSchema 类, vendor API schema 以元数据 token 直写。
+    dialect = "physx"
+    schemas = list(bp0.GetAppliedSchemas())
+    if "PhysxArticulationAPI" not in schemas:
+        schemas.append("PhysxArticulationAPI")
+    bp0.ClearMetadata("apiSchemas")
+    bp0.SetMetadata("apiSchemas", Sdf.TokenListOp.CreateExplicit(schemas))
+
+    # 翼体: 原点=铰链 (localPos1=0 约定), 网格随体移
+    for pid, pts_mm, tris in parts:
+        if pid == "body_walls":
+            continue
+        mid, _ = joint_frames[pid]
+        _emit_link(f"flap_{pid}", pid, pts_mm, tris, body_offset_mm=mid - origin)
+
+    # 关节: carton_to_flap_tX
+    for pid, (mid, axis) in joint_frames.items():
+        joint = UsdPhysics.RevoluteJoint.Define(stage, f"/Asset/Joints/carton_to_flap_{pid}")
+        joint.CreateBody0Rel().SetTargets([Sdf.Path("/Asset/Links/carton_body")])
+        joint.CreateBody1Rel().SetTargets([Sdf.Path(f"/Asset/Links/flap_{pid}")])
         mid_m = (mid - origin) * 1e-3
-        axis_m = Gf.Vec3f(*(axis.tolist()))
         joint.CreateLocalPos0Attr().Set(Gf.Vec3f(*mid_m))
-        joint.CreateLocalPos1Attr().Set(Gf.Vec3f(*mid_m))
+        joint.CreateLocalPos1Attr().Set(Gf.Vec3f(0.0, 0.0, 0.0))  # 翼体原点=铰链
         joint.CreateLocalRot0Attr().Set(Gf.Quatf(1.0, 0, 0, 0))
         joint.CreateLocalRot1Attr().Set(Gf.Quatf(1.0, 0, 0, 0))
         joint.CreateAxisAttr().Set(_axis_token(axis))
         joint.CreateCollisionEnabledAttr().Set(False)
-        n_joints += 1
+        joint.CreateLowerLimitAttr().Set(0.0)     # closed
+        joint.CreateUpperLimitAttr().Set(180.0)   # open flat
+        UsdPhysics.DriveAPI.Apply(joint.GetPrim(), "angular")
+        dapi = UsdPhysics.DriveAPI(joint.GetPrim(), "angular")
+        dapi.CreateDampingAttr().Set(0.03 * math.pi / 180.0)
+        dapi.CreateStiffnessAttr().Set(0.0)
+        dapi.CreateMaxForceAttr().Set(1.0)
+        dapi.CreateTypeAttr().Set("force")
+        jp = joint.GetPrim()
+        jp.CreateAttribute("physxJointAxis:angular:dynamicFrictionEffort", Sdf.ValueTypeNames.Float).Set(0.03)
+        jp.CreateAttribute("physxJointAxis:angular:staticFrictionEffort", Sdf.ValueTypeNames.Float).Set(0.04)
+        jp.CreateAttribute("physxJointAxis:angular:viscousFrictionCoefficient", Sdf.ValueTypeNames.Float).Set(0.0)
+        jp.CreateAttribute("physxJointAxis:angular:maxJointVelocity", Sdf.ValueTypeNames.Float).Set(171.887)
 
     stage.Save()
     dims_mm = {k: float(mx[i] - mn[i]) for i, k in enumerate("WDH")}
@@ -339,13 +392,14 @@ def _export_usdc_articulated(ir, path, kind="carton_board"):
         "mass_kg": round(float(total_kg), 6),
         "board_t_mm": float(ir.param("board_t")),
         "articulation": {
-            "rigid_body_count": len(parts), "joint_count": n_joints,
-            "joint_types": ["revolute"] * n_joints,
+            "rigid_body_count": len(parts), "joint_count": len(joint_frames),
+            "joint_types": ["revolute"] * len(joint_frames),
             "physics_type": "articulated",
             "root_mode": "FLOATING (固定归消费方)",
+            "limits_deg": [0.0, 180.0],
             "checks": {
-                "physics_completeness": True,   # 可动件全部有 revolute 对应
-                "no_free_floating": True,       # 翼均连墙环体
+                "physics_completeness": True,
+                "no_free_floating": True,
                 "gravity_hold": "deferred_to_consumer",
             },
         },
