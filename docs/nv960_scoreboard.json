@@ -5412,7 +5412,7 @@
     1024
    ],
    "their_e1": 0.03599398939187374,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5425,7 +5425,7 @@
     "tris": 234084
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5439,7 +5439,7 @@
     1024
    ],
    "their_e1": 0.034319676780543144,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5452,7 +5452,7 @@
     "tris": 234084
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5466,7 +5466,7 @@
     1024
    ],
    "their_e1": 0.0223780712316771,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5479,7 +5479,7 @@
     "tris": 13090
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5493,7 +5493,7 @@
     1024
    ],
    "their_e1": 0.018205972793042025,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5520,7 +5520,7 @@
     1024
    ],
    "their_e1": 0.025838649006358905,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5533,7 +5533,7 @@
     "tris": 120732
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5547,7 +5547,7 @@
     1024
    ],
    "their_e1": 0.024243947098687418,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5560,7 +5560,7 @@
     "tris": 120732
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5574,7 +5574,7 @@
     1024
    ],
    "their_e1": 0.03894953676521808,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5601,7 +5601,7 @@
     1024
    ],
    "their_e1": 0.040882584163440774,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5628,7 +5628,7 @@
     1024
    ],
    "their_e1": 0.0824866403287922,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5655,7 +5655,7 @@
     1024
    ],
    "their_e1": 0.07685418304491039,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5682,7 +5682,7 @@
     1024
    ],
    "their_e1": 0.045912985500900595,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5709,7 +5709,7 @@
     1024
    ],
    "their_e1": 0.041489615778841464,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5736,7 +5736,7 @@
     1024
    ],
    "their_e1": 0.03700405019454866,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5763,7 +5763,7 @@
     1024
    ],
    "their_e1": 0.03479236533351909,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5776,7 +5776,7 @@
     "tris": 39740
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5790,7 +5790,7 @@
     1024
    ],
    "their_e1": 0.042345430843176865,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5817,7 +5817,7 @@
     1024
    ],
    "their_e1": 0.04479097214620506,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5844,7 +5844,7 @@
     1024
    ],
    "their_e1": 0.033951477276119774,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5857,7 +5857,7 @@
     "tris": 17852
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5871,7 +5871,7 @@
     1024
    ],
    "their_e1": 0.025311228094617323,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5884,7 +5884,7 @@
     "tris": 17852
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R066",
@@ -5898,7 +5898,7 @@
     1024
    ],
    "their_e1": 0.013359671207793888,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -5925,7 +5925,7 @@
     1024
    ],
    "their_e1": 0.008063071579973928,
-   "our_e1": 0.016735662609837894,
+   "our_e1": 0.029366398312253083,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10272,7 +10272,7 @@
     1024
    ],
    "their_e1": 0.22111126590970157,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10299,7 +10299,7 @@
     1024
    ],
    "their_e1": 0.13814198568997602,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10326,7 +10326,7 @@
     1024
    ],
    "their_e1": 0.11743076356616147,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10353,7 +10353,7 @@
     1024
    ],
    "their_e1": 0.1189433669356845,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10380,7 +10380,7 @@
     1024
    ],
    "their_e1": 0.1702126600921494,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10407,7 +10407,7 @@
     1024
    ],
    "their_e1": 0.08323796634457503,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10434,7 +10434,7 @@
     1024
    ],
    "their_e1": 0.03862114261262427,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10461,7 +10461,7 @@
     1024
    ],
    "their_e1": 0.04195732866283872,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10488,7 +10488,7 @@
     1024
    ],
    "their_e1": 0.04475863029784354,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10515,7 +10515,7 @@
     1024
    ],
    "their_e1": 0.03868333847485794,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10542,7 +10542,7 @@
     1024
    ],
    "their_e1": 0.23437142373792155,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10569,7 +10569,7 @@
     1024
    ],
    "their_e1": 0.11751037426982058,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10596,7 +10596,7 @@
     1024
    ],
    "their_e1": 0.04562190886564699,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10623,7 +10623,7 @@
     1024
    ],
    "their_e1": 0.03599647722636309,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10650,7 +10650,7 @@
     1024
    ],
    "their_e1": 0.02063161142015544,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10663,7 +10663,7 @@
     "tris": 20100
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R331",
@@ -10677,7 +10677,7 @@
     1024
    ],
    "their_e1": 0.019795699031734816,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10704,7 +10704,7 @@
     1024
    ],
    "their_e1": 0.21249091940411388,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10731,7 +10731,7 @@
     1024
    ],
    "their_e1": 0.1533973867786524,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10758,7 +10758,7 @@
     1024
    ],
    "their_e1": 0.05258286976684015,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10785,7 +10785,7 @@
     1024
    ],
    "their_e1": 0.04449243200748341,
-   "our_e1": 0.01590721372488531,
+   "our_e1": 0.019422523858332753,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10812,7 +10812,7 @@
     1024
    ],
    "their_e1": 0.05950153748171442,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10839,7 +10839,7 @@
     1024
    ],
    "their_e1": 0.05959856302679895,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10866,7 +10866,7 @@
     1024
    ],
    "their_e1": 0.0763367134711262,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10893,7 +10893,7 @@
     1024
    ],
    "their_e1": 0.07562270497268357,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10920,7 +10920,7 @@
     1024
    ],
    "their_e1": 0.0357700842878325,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10947,7 +10947,7 @@
     1024
    ],
    "their_e1": 0.027281593010180218,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -10960,7 +10960,7 @@
     "tris": 25522
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R332",
@@ -10974,7 +10974,7 @@
     1024
    ],
    "their_e1": 0.2540153648658062,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11001,7 +11001,7 @@
     1024
    ],
    "their_e1": 0.15672859715988816,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11028,7 +11028,7 @@
     1024
    ],
    "their_e1": 0.03261053448636169,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11055,7 +11055,7 @@
     1024
    ],
    "their_e1": 0.014237876782533411,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11068,7 +11068,7 @@
     "tris": 10056
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R332",
@@ -11082,7 +11082,7 @@
     1024
    ],
    "their_e1": 0.05020449999502433,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11109,7 +11109,7 @@
     1024
    ],
    "their_e1": 0.0229328583228015,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11122,7 +11122,7 @@
     "tris": 7120
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R332",
@@ -11136,7 +11136,7 @@
     1024
    ],
    "their_e1": 0.04513926897471365,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11163,7 +11163,7 @@
     1024
    ],
    "their_e1": 0.03955159271164008,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11190,7 +11190,7 @@
     1024
    ],
    "their_e1": 0.0741026380996925,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11217,7 +11217,7 @@
     1024
    ],
    "their_e1": 0.08181243718217915,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11244,7 +11244,7 @@
     1024
    ],
    "their_e1": 0.13012867079978904,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11271,7 +11271,7 @@
     1024
    ],
    "their_e1": 0.13488292250893133,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11298,7 +11298,7 @@
     1024
    ],
    "their_e1": 0.05389644637721542,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11325,7 +11325,7 @@
     1024
    ],
    "their_e1": 0.047490272567146656,
-   "our_e1": 0.00687139885957667,
+   "our_e1": 0.025880942192677805,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11352,7 +11352,7 @@
     1024
    ],
    "their_e1": 0.015519111544547165,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11379,7 +11379,7 @@
     1024
    ],
    "their_e1": 0.015183253888485307,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11406,7 +11406,7 @@
     1024
    ],
    "their_e1": 0.02050473186119874,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11419,7 +11419,7 @@
     "tris": 51716
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11433,7 +11433,7 @@
     1024
    ],
    "their_e1": 0.013429330573495607,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11460,7 +11460,7 @@
     1024
    ],
    "their_e1": 0.02171879509200012,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11473,7 +11473,7 @@
     "tris": 28794
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11487,7 +11487,7 @@
     1024
    ],
    "their_e1": 0.018320413179551992,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11514,7 +11514,7 @@
     1024
    ],
    "their_e1": 0.027326374030988466,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11527,7 +11527,7 @@
     "tris": 1400
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11541,7 +11541,7 @@
     1024
    ],
    "their_e1": 0.023746380200818,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11554,7 +11554,7 @@
     "tris": 1400
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11568,7 +11568,7 @@
     1024
    ],
    "their_e1": 0.018263192986297007,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11595,7 +11595,7 @@
     1024
    ],
    "their_e1": 0.02155708585019256,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11608,7 +11608,7 @@
     "tris": 39684
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11622,7 +11622,7 @@
     1024
    ],
    "their_e1": 0.022134263451721085,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11635,7 +11635,7 @@
     "tris": 944
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11649,7 +11649,7 @@
     1024
    ],
    "their_e1": 0.0184846102558489,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11676,7 +11676,7 @@
     1024
    ],
    "their_e1": 0.01740489008747226,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11703,7 +11703,7 @@
     1024
    ],
    "their_e1": 0.01798953119246883,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11730,7 +11730,7 @@
     1024
    ],
    "their_e1": 0.01900705549861179,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11743,7 +11743,7 @@
     "tris": 19353
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11757,7 +11757,7 @@
     1024
    ],
    "their_e1": 0.010834519201106589,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11784,7 +11784,7 @@
     1024
    ],
    "their_e1": 0.023109494571545146,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11797,7 +11797,7 @@
     "tris": 26524
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11811,7 +11811,7 @@
     1024
    ],
    "their_e1": 0.021848162485446167,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11824,7 +11824,7 @@
     "tris": 26524
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11838,7 +11838,7 @@
     1024
    ],
    "their_e1": 0.022699001880802875,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11851,7 +11851,7 @@
     "tris": 22160
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R341",
@@ -11865,7 +11865,7 @@
     1024
    ],
    "their_e1": 0.02015145936371145,
-   "our_e1": 0.0150613499985073,
+   "our_e1": 0.022818417936291534,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11878,7 +11878,7 @@
     "tris": 22160
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -11892,7 +11892,7 @@
     1024
    ],
    "their_e1": 0.021300838897789807,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11905,7 +11905,7 @@
     "tris": 7680
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -11919,7 +11919,7 @@
     1024
    ],
    "their_e1": 0.027209445809989154,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11946,7 +11946,7 @@
     1024
    ],
    "their_e1": 0.027828916597836578,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -11973,7 +11973,7 @@
     1024
    ],
    "their_e1": 0.010175243061429608,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12000,7 +12000,7 @@
     1024
    ],
    "their_e1": 0.014379683348426197,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12013,7 +12013,7 @@
     "tris": 5056
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -12027,7 +12027,7 @@
     1024
    ],
    "their_e1": 0.003403357581426823,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12054,7 +12054,7 @@
     1024
    ],
    "their_e1": 0.05352824687279205,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12081,7 +12081,7 @@
     1024
    ],
    "their_e1": 0.016606295216391845,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12094,7 +12094,7 @@
     "tris": 17168
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -12108,7 +12108,7 @@
     1024
    ],
    "their_e1": 0.1010608126262576,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12135,7 +12135,7 @@
     1024
    ],
    "their_e1": 0.09087313039238125,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12162,7 +12162,7 @@
     1024
    ],
    "their_e1": 0.03838231050164695,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12189,7 +12189,7 @@
     1024
    ],
    "their_e1": 0.02372896535939257,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12202,7 +12202,7 @@
     "tris": 18176
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -12216,7 +12216,7 @@
     1024
    ],
    "their_e1": 0.012635711371393884,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12229,7 +12229,7 @@
     "tris": 2524
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -12243,7 +12243,7 @@
     1024
    ],
    "their_e1": 0.003552627650787648,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12270,7 +12270,7 @@
     1024
    ],
    "their_e1": 0.026288947048930728,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12283,7 +12283,7 @@
     "tris": 6016
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -12297,7 +12297,7 @@
     1024
    ],
    "their_e1": 0.02303485953686473,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12310,7 +12310,7 @@
     "tris": 6016
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R345",
@@ -12324,7 +12324,7 @@
     1024
    ],
    "their_e1": 0.09600802077839365,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12351,7 +12351,7 @@
     1024
    ],
    "their_e1": 0.08048144573037845,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12378,7 +12378,7 @@
     1024
    ],
    "their_e1": 0.05832479176825324,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12405,7 +12405,7 @@
     1024
    ],
    "their_e1": 0.04149210361333081,
-   "our_e1": 0.009660261322134761,
+   "our_e1": 0.021183910676790495,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12432,7 +12432,7 @@
     1024
    ],
    "their_e1": 0.06338753495407458,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12459,7 +12459,7 @@
     1024
    ],
    "their_e1": 0.06050911044989999,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12486,7 +12486,7 @@
     1024
    ],
    "their_e1": 0.04015862432704077,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12499,7 +12499,7 @@
     "tris": 2304
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12513,7 +12513,7 @@
     1024
    ],
    "their_e1": 0.03456597239498851,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12526,7 +12526,7 @@
     "tris": 2304
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12540,7 +12540,7 @@
     1024
    ],
    "their_e1": 0.03546159281115346,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12553,7 +12553,7 @@
     "tris": 1926
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12567,7 +12567,7 @@
     1024
    ],
    "their_e1": 0.03613082028878783,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12580,7 +12580,7 @@
     "tris": 1926
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12594,7 +12594,7 @@
     1024
    ],
    "their_e1": 0.09020887858372559,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12621,7 +12621,7 @@
     1024
    ],
    "their_e1": 0.08822856233020529,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12648,7 +12648,7 @@
     1024
    ],
    "their_e1": 0.031963697519131445,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12661,7 +12661,7 @@
     "tris": 11884
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12675,7 +12675,7 @@
     1024
    ],
    "their_e1": 0.032856830100807054,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12688,7 +12688,7 @@
     "tris": 11884
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12702,7 +12702,7 @@
     1024
    ],
    "their_e1": 0.034369433470330085,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12715,7 +12715,7 @@
     "tris": 4014
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12729,7 +12729,7 @@
     1024
    ],
    "their_e1": 0.03095114888196718,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12742,7 +12742,7 @@
     "tris": 4014
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12756,7 +12756,7 @@
     1024
    ],
    "their_e1": 0.08120042989779976,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12783,7 +12783,7 @@
     1024
    ],
    "their_e1": 0.07338614176676055,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12810,7 +12810,7 @@
     1024
    ],
    "their_e1": 0.026423290111355472,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12823,7 +12823,7 @@
     "tris": 3552
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12837,7 +12837,7 @@
     1024
    ],
    "their_e1": 0.02495546776264069,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12850,7 +12850,7 @@
     "tris": 3552
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R355",
@@ -12864,7 +12864,7 @@
     1024
    ],
    "their_e1": 0.056633064315497215,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12891,7 +12891,7 @@
     1024
    ],
    "their_e1": 0.05057767516842639,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12918,7 +12918,7 @@
     1024
    ],
    "their_e1": 0.04430584442078237,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12945,7 +12945,7 @@
     1024
    ],
    "their_e1": 0.04143985908905452,
-   "our_e1": 0.006866423190597976,
+   "our_e1": 0.0349192448924758,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12958,7 +12958,7 @@
     "tris": 9416
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -12972,7 +12972,7 @@
     1024
    ],
    "their_e1": 0.01821841196548876,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -12985,7 +12985,7 @@
     "tris": 3604
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -12999,7 +12999,7 @@
     1024
    ],
    "their_e1": 0.0165565385266049,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13012,7 +13012,7 @@
     "tris": 3604
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13026,7 +13026,7 @@
     1024
    ],
    "their_e1": 0.014638418135318293,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13039,7 +13039,7 @@
     "tris": 11126
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13053,7 +13053,7 @@
     1024
    ],
    "their_e1": 0.007045547273830967,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13066,7 +13066,7 @@
     "tris": 11126
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13080,7 +13080,7 @@
     1024
    ],
    "their_e1": 0.017718357233129995,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13093,7 +13093,7 @@
     "tris": 70984
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13107,7 +13107,7 @@
     1024
    ],
    "their_e1": 0.016713272099433768,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13120,7 +13120,7 @@
     "tris": 70984
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13134,7 +13134,7 @@
     1024
    ],
    "their_e1": 0.032991173163231795,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13161,7 +13161,7 @@
     1024
    ],
    "their_e1": 0.02834141050264208,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13174,7 +13174,7 @@
     "tris": 19578
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "TIE"
   },
   {
    "category": "R358",
@@ -13188,7 +13188,7 @@
     1024
    ],
    "their_e1": 0.03497895292022012,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13215,7 +13215,7 @@
     1024
    ],
    "their_e1": 0.032836927424892276,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13242,7 +13242,7 @@
     1024
    ],
    "their_e1": 0.016666003244136175,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13255,7 +13255,7 @@
     "tris": 108
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13269,7 +13269,7 @@
     1024
    ],
    "their_e1": 0.018136313427340307,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13282,7 +13282,7 @@
     "tris": 108
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13296,7 +13296,7 @@
     1024
    ],
    "their_e1": 0.03491178138900775,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13323,7 +13323,7 @@
     1024
    ],
    "their_e1": 0.036339798385892984,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13350,7 +13350,7 @@
     1024
    ],
    "their_e1": 0.0347873896645404,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13377,7 +13377,7 @@
     1024
    ],
    "their_e1": 0.029269372767168546,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13390,7 +13390,7 @@
     "tris": 1888
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13404,7 +13404,7 @@
     1024
    ],
    "their_e1": 0.030744658619351373,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13417,7 +13417,7 @@
     "tris": 5004
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13431,7 +13431,7 @@
     1024
    ],
    "their_e1": 0.025301276756659934,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13444,7 +13444,7 @@
     "tris": 5004
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R358",
@@ -13458,7 +13458,7 @@
     1024
    ],
    "their_e1": 0.02727164167222283,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13471,7 +13471,7 @@
     "tris": 4836
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "TIE"
   },
   {
    "category": "R358",
@@ -13485,7 +13485,7 @@
     1024
    ],
    "their_e1": 0.02015892286717949,
-   "our_e1": 0.002117147150434376,
+   "our_e1": 0.024985321776512852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -13498,7 +13498,7 @@
     "tris": 4836
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R415",
@@ -17292,7 +17292,7 @@
     1024
    ],
    "their_e1": 0.07552319159310969,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -17319,7 +17319,7 @@
     1024
    ],
    "their_e1": 0.07060723064215983,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -17346,7 +17346,7 @@
     1024
    ],
    "their_e1": 0.04622894048104768,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17373,7 +17373,7 @@
     1024
    ],
    "their_e1": 0.04112390410890744,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17400,7 +17400,7 @@
     1024
    ],
    "their_e1": 0.010744957159490094,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17427,7 +17427,7 @@
     1024
    ],
    "their_e1": 0.004831374578312054,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17454,7 +17454,7 @@
     1024
    ],
    "their_e1": 0.04983878832509031,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17481,7 +17481,7 @@
     1024
    ],
    "their_e1": 0.05035128222989581,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17508,7 +17508,7 @@
     1024
    ],
    "their_e1": 0.022813442267312842,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17521,7 +17521,7 @@
     "tris": 206
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R514",
@@ -17535,7 +17535,7 @@
     1024
    ],
    "their_e1": 0.023092079730119716,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17562,7 +17562,7 @@
     1024
    ],
    "their_e1": 0.027761745066624207,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17589,7 +17589,7 @@
     1024
    ],
    "their_e1": 0.02170138025057469,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17602,7 +17602,7 @@
     "tris": 36932
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R514",
@@ -17616,7 +17616,7 @@
     1024
    ],
    "their_e1": 0.011232572719402124,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17643,7 +17643,7 @@
     1024
    ],
    "their_e1": 0.005505577724925116,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17670,7 +17670,7 @@
     1024
    ],
    "their_e1": 0.015715650469205585,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17683,7 +17683,7 @@
     "tris": 39274
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R514",
@@ -17697,7 +17697,7 @@
     1024
    ],
    "their_e1": 0.01475285852182826,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17710,7 +17710,7 @@
     "tris": 39274
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R514",
@@ -17724,7 +17724,7 @@
     1024
    ],
    "their_e1": 0.01835524286240285,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17737,7 +17737,7 @@
     "tris": 37824
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R514",
@@ -17751,7 +17751,7 @@
     1024
    ],
    "their_e1": 0.011374379285294908,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17778,7 +17778,7 @@
     1024
    ],
    "their_e1": 0.018616465483784296,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -17791,7 +17791,7 @@
     "tris": 2670
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R514",
@@ -17805,7 +17805,7 @@
     1024
    ],
    "their_e1": 0.010346903641194559,
-   "our_e1": 0.009100498562031665,
+   "our_e1": 0.018300510503637214,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19452,7 +19452,7 @@
     1024
    ],
    "their_e1": 0.19149608414851377,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19479,7 +19479,7 @@
     1024
    ],
    "their_e1": 0.21614306043447543,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19506,7 +19506,7 @@
     1024
    ],
    "their_e1": 0.14451332981719392,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -19533,7 +19533,7 @@
     1024
    ],
    "their_e1": 0.09822468130840191,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -19560,7 +19560,7 @@
     1024
    ],
    "their_e1": 0.110775806307158,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19587,7 +19587,7 @@
     1024
    ],
    "their_e1": 0.04852769954920439,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19614,7 +19614,7 @@
     1024
    ],
    "their_e1": 0.0270427608992029,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19627,7 +19627,7 @@
     "tris": 44810
    },
    "their_textures": false,
-   "verdict": "WIN"
+   "verdict": "LOSS"
   },
   {
    "category": "R642",
@@ -19641,7 +19641,7 @@
     1024
    ],
    "their_e1": 0.019320522644269523,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19668,7 +19668,7 @@
     1024
    ],
    "their_e1": 0.03550388599747236,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -19695,7 +19695,7 @@
     1024
    ],
    "their_e1": 0.02760501149379534,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -19708,7 +19708,7 @@
     "tris": 0
    },
    "their_textures": false,
-   "verdict": "WIN"
+   "verdict": "LOSS"
   },
   {
    "category": "R642",
@@ -19722,7 +19722,7 @@
     1024
    ],
    "their_e1": 0.03187413547751495,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19749,7 +19749,7 @@
     1024
    ],
    "their_e1": 0.020566927723432417,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19776,7 +19776,7 @@
     1024
    ],
    "their_e1": 0.09334106220581358,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19803,7 +19803,7 @@
     1024
    ],
    "their_e1": 0.08708415846510563,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19830,7 +19830,7 @@
     1024
    ],
    "their_e1": 0.04780373971280439,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19857,7 +19857,7 @@
     1024
    ],
    "their_e1": 0.038272845784115675,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19884,7 +19884,7 @@
     1024
    ],
    "their_e1": 0.19662102319656877,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -19911,7 +19911,7 @@
     1024
    ],
    "their_e1": 0.2188796783727572,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": false,
     "v2_manifold": false,
@@ -19938,7 +19938,7 @@
     1024
    ],
    "their_e1": 0.08535013782603071,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19965,7 +19965,7 @@
     1024
    ],
    "their_e1": 0.02757764531441252,
-   "our_e1": 0.022708953218760264,
+   "our_e1": 0.019079202698802852,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -19978,7 +19978,7 @@
     "tris": 18040
    },
    "their_textures": false,
-   "verdict": "WIN"
+   "verdict": "LOSS"
   },
   {
    "category": "R650",
@@ -20532,7 +20532,7 @@
     1024
    ],
    "their_e1": 0.014568758769616575,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20545,7 +20545,7 @@
     "tris": 100030
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20559,7 +20559,7 @@
     1024
    ],
    "their_e1": 0.006418612982515499,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20586,7 +20586,7 @@
     1024
    ],
    "their_e1": 0.03850421439162496,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20613,7 +20613,7 @@
     1024
    ],
    "their_e1": 0.034369433470330085,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20626,7 +20626,7 @@
     "tris": 1276
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20640,7 +20640,7 @@
     1024
    ],
    "their_e1": 0.061325120162405836,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20667,7 +20667,7 @@
     1024
    ],
    "their_e1": 0.05407308262595906,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20694,7 +20694,7 @@
     1024
    ],
    "their_e1": 0.021878016499318333,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20707,7 +20707,7 @@
     "tris": 15260
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20721,7 +20721,7 @@
     1024
    ],
    "their_e1": 0.013643284339579457,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20734,7 +20734,7 @@
     "tris": 15260
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20748,7 +20748,7 @@
     1024
    ],
    "their_e1": 0.029339032132870264,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20761,7 +20761,7 @@
     "tris": 11302
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20775,7 +20775,7 @@
     1024
    ],
    "their_e1": 0.026828807133119047,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20788,7 +20788,7 @@
     "tris": 11302
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20802,7 +20802,7 @@
     1024
    ],
    "their_e1": 0.03226970116132114,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20815,7 +20815,7 @@
     "tris": 32228
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20829,7 +20829,7 @@
     1024
    ],
    "their_e1": 0.028784245041745864,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20842,7 +20842,7 @@
     "tris": 32228
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20856,7 +20856,7 @@
     1024
    ],
    "their_e1": 0.012110778294141648,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20869,7 +20869,7 @@
     "tris": 3540
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20883,7 +20883,7 @@
     1024
    ],
    "their_e1": 0.02014399586024341,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20896,7 +20896,7 @@
     "tris": 3540
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20910,7 +20910,7 @@
     1024
    ],
    "their_e1": 0.019260814616525193,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20923,7 +20923,7 @@
     "tris": 2728
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20937,7 +20937,7 @@
     1024
    ],
    "their_e1": 0.012138144473524466,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20950,7 +20950,7 @@
     "tris": 2728
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20964,7 +20964,7 @@
     1024
    ],
    "their_e1": 0.012230194349630307,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -20977,7 +20977,7 @@
     "tris": 10284
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -20991,7 +20991,7 @@
     1024
    ],
    "their_e1": 0.005209525420692812,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21018,7 +21018,7 @@
     1024
    ],
    "their_e1": 0.028883758421319745,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21031,7 +21031,7 @@
     "tris": 13402
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R752",
@@ -21045,7 +21045,7 @@
     1024
    ],
    "their_e1": 0.02818716476430256,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.028157310750430396,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21058,7 +21058,7 @@
     "tris": 13402
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21072,7 +21072,7 @@
     1024
    ],
    "their_e1": 0.02573167212331698,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21085,7 +21085,7 @@
     "tris": 8650
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21099,7 +21099,7 @@
     1024
    ],
    "their_e1": 0.01010558369572789,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21112,7 +21112,7 @@
     "tris": 8650
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21126,7 +21126,7 @@
     1024
    ],
    "their_e1": 0.05163002915742022,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21153,7 +21153,7 @@
     1024
    ],
    "their_e1": 0.04647772392998239,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21180,7 +21180,7 @@
     1024
    ],
    "their_e1": 0.05838449979599757,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21207,7 +21207,7 @@
     1024
    ],
    "their_e1": 0.03422513906994795,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21234,7 +21234,7 @@
     1024
    ],
    "their_e1": 0.031150175641114948,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21247,7 +21247,7 @@
     "tris": 31468
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21261,7 +21261,7 @@
     1024
    ],
    "their_e1": 0.01494939744648668,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21274,7 +21274,7 @@
     "tris": 31468
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21288,7 +21288,7 @@
     1024
    ],
    "their_e1": 0.025231617390958215,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21301,7 +21301,7 @@
     "tris": 7536
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21315,7 +21315,7 @@
     1024
    ],
    "their_e1": 0.02147001164306541,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21328,7 +21328,7 @@
     "tris": 7536
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21342,7 +21342,7 @@
     1024
    ],
    "their_e1": 0.03324742011563455,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21355,7 +21355,7 @@
     "tris": 6138
    },
    "their_textures": true,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21369,7 +21369,7 @@
     1024
    ],
    "their_e1": 0.033944013772651736,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21396,7 +21396,7 @@
     1024
    ],
    "their_e1": 0.06373583178258317,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21423,7 +21423,7 @@
     1024
    ],
    "their_e1": 0.047293733642488234,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21450,7 +21450,7 @@
     1024
    ],
    "their_e1": 0.01714864313506951,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21463,7 +21463,7 @@
     "tris": 6020
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21477,7 +21477,7 @@
     1024
    ],
    "their_e1": 0.009418941376668093,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21490,7 +21490,7 @@
     "tris": 6020
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21504,7 +21504,7 @@
     1024
    ],
    "their_e1": 0.022858223288121086,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21517,7 +21517,7 @@
     "tris": 37364
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21531,7 +21531,7 @@
     1024
    ],
    "their_e1": 0.015389744151101116,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21544,7 +21544,7 @@
     "tris": 37364
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21558,7 +21558,7 @@
     1024
    ],
    "their_e1": 0.023141836419906657,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21571,7 +21571,7 @@
     "tris": 7328
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R766",
@@ -21585,7 +21585,7 @@
     1024
    ],
    "their_e1": 0.005080158027246763,
-   "our_e1": 0.0062320253958144676,
+   "our_e1": 0.02665465871886475,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21612,7 +21612,7 @@
     1024
    ],
    "their_e1": 0.028896197593766482,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21625,7 +21625,7 @@
     "tris": 11924
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21639,7 +21639,7 @@
     1024
    ],
    "their_e1": 0.030520753515310133,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21652,7 +21652,7 @@
     "tris": 11924
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21666,7 +21666,7 @@
     1024
    ],
    "their_e1": 0.0403029187274229,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21693,7 +21693,7 @@
     1024
    ],
    "their_e1": 0.027719451880305307,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21706,7 +21706,7 @@
     "tris": 24460
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21720,7 +21720,7 @@
     1024
    ],
    "their_e1": 0.05560061300241818,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21747,7 +21747,7 @@
     1024
    ],
    "their_e1": 0.0566106738050931,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21774,7 +21774,7 @@
     1024
    ],
    "their_e1": 0.02209445809989153,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21787,7 +21787,7 @@
     "tris": 11768
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21801,7 +21801,7 @@
     1024
    ],
    "their_e1": 0.008184975469951936,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21814,7 +21814,7 @@
     "tris": 11768
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21828,7 +21828,7 @@
     1024
    ],
    "their_e1": 0.05240125784911781,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21855,7 +21855,7 @@
     1024
    ],
    "their_e1": 0.025652061419657875,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21868,7 +21868,7 @@
     "tris": 2248
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21882,7 +21882,7 @@
     1024
    ],
    "their_e1": 0.02743583874851974,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21895,7 +21895,7 @@
     "tris": 6566
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21909,7 +21909,7 @@
     1024
    ],
    "their_e1": 0.023432913055160265,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21922,7 +21922,7 @@
     "tris": 6566
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21936,7 +21936,7 @@
     1024
    ],
    "their_e1": 0.018288071331190477,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21949,7 +21949,7 @@
     "tris": 8558
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -21963,7 +21963,7 @@
     1024
    ],
    "their_e1": 0.005289136124351919,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -21990,7 +21990,7 @@
     1024
    ],
    "their_e1": 0.02740847256913692,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22003,7 +22003,7 @@
     "tris": 24800
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -22017,7 +22017,7 @@
     1024
    ],
    "their_e1": 0.027490571107285373,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22030,7 +22030,7 @@
     "tris": 24800
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -22044,7 +22044,7 @@
     1024
    ],
    "their_e1": 0.037247857974504674,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22071,7 +22071,7 @@
     1024
    ],
    "their_e1": 0.026234214690165094,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22084,7 +22084,7 @@
     "tris": 6208
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R767",
@@ -22098,7 +22098,7 @@
     1024
    ],
    "their_e1": 0.045962742190687536,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22125,7 +22125,7 @@
     1024
    ],
    "their_e1": 0.03738717670590811,
-   "our_e1": 0.006052901312581477,
+   "our_e1": 0.025694354605976775,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22152,7 +22152,7 @@
     1024
    ],
    "their_e1": 0.029791818009931435,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22165,7 +22165,7 @@
     "tris": 4908
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22179,7 +22179,7 @@
     1024
    ],
    "their_e1": 0.023131885081949268,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22192,7 +22192,7 @@
     "tris": 4908
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22206,7 +22206,7 @@
     1024
    ],
    "their_e1": 0.02454995074087711,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22219,7 +22219,7 @@
     "tris": 3944
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22233,7 +22233,7 @@
     1024
    ],
    "their_e1": 0.025296301087681237,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22246,7 +22246,7 @@
     "tris": 3944
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22260,7 +22260,7 @@
     1024
    ],
    "their_e1": 0.028301605150812526,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22273,7 +22273,7 @@
     "tris": 2228
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22287,7 +22287,7 @@
     1024
    ],
    "their_e1": 0.02112917831802486,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22300,7 +22300,7 @@
     "tris": 2228
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22314,7 +22314,7 @@
     1024
    ],
    "their_e1": 0.027609987162774036,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22327,7 +22327,7 @@
     "tris": 1992
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22341,7 +22341,7 @@
     1024
    ],
    "their_e1": 0.024915662410811133,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22354,7 +22354,7 @@
     "tris": 1992
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22368,7 +22368,7 @@
     1024
    ],
    "their_e1": 0.029841574699718376,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22381,7 +22381,7 @@
     "tris": 2420
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22395,7 +22395,7 @@
     1024
    ],
    "their_e1": 0.027062663575117673,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22408,7 +22408,7 @@
     "tris": 2420
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22422,7 +22422,7 @@
     1024
    ],
    "their_e1": 0.014153290409895611,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22435,7 +22435,7 @@
     "tris": 1400
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22449,7 +22449,7 @@
     1024
    ],
    "their_e1": 0.002870961000706545,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22476,7 +22476,7 @@
     1024
    ],
    "their_e1": 0.040579068355740426,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22503,7 +22503,7 @@
     1024
    ],
    "their_e1": 0.03844948203285932,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22530,7 +22530,7 @@
     1024
    ],
    "their_e1": 0.01757655066723721,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22543,7 +22543,7 @@
     "tris": 1896
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22557,7 +22557,7 @@
     1024
    ],
    "their_e1": 0.014573734438595269,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22570,7 +22570,7 @@
     "tris": 1896
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22584,7 +22584,7 @@
     1024
    ],
    "their_e1": 0.02041765765407159,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22597,7 +22597,7 @@
     "tris": 1624
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22611,7 +22611,7 @@
     1024
    ],
    "their_e1": 0.024301167291942403,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22624,7 +22624,7 @@
     "tris": 1624
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R788",
@@ -22638,7 +22638,7 @@
     1024
    ],
    "their_e1": 0.04405457313735832,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -22665,7 +22665,7 @@
     1024
    ],
    "their_e1": 0.04080794912876036,
-   "our_e1": 0.008244683497696265,
+   "our_e1": 0.030742170784862025,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24312,7 +24312,7 @@
     1024
    ],
    "their_e1": 0.25411239041089073,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24339,7 +24339,7 @@
     1024
    ],
    "their_e1": 0.25977470170864475,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24366,7 +24366,7 @@
     1024
    ],
    "their_e1": 0.16196300092547444,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24393,7 +24393,7 @@
     1024
    ],
    "their_e1": 0.11998079391774225,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24420,7 +24420,7 @@
     1024
    ],
    "their_e1": 0.18644578013513918,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24447,7 +24447,7 @@
     1024
    ],
    "their_e1": 0.18100986177591577,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24474,7 +24474,7 @@
     1024
    ],
    "their_e1": 0.14008747226064544,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24501,7 +24501,7 @@
     1024
    ],
    "their_e1": 0.11386818457741643,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24528,7 +24528,7 @@
     1024
    ],
    "their_e1": 0.08465354416901352,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24555,7 +24555,7 @@
     1024
    ],
    "their_e1": 0.0692215068315935,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24582,7 +24582,7 @@
     1024
    ],
    "their_e1": 0.21917075500801084,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24609,7 +24609,7 @@
     1024
    ],
    "their_e1": 0.12743932171680483,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24636,7 +24636,7 @@
     1024
    ],
    "their_e1": 0.27594065022042213,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24663,7 +24663,7 @@
     1024
    ],
    "their_e1": 0.22472111375374418,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24690,7 +24690,7 @@
     1024
    ],
    "their_e1": 0.06974892774333509,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24717,7 +24717,7 @@
     1024
    ],
    "their_e1": 0.06521609330374468,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24744,7 +24744,7 @@
     1024
    ],
    "their_e1": 0.11990615888306183,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24771,7 +24771,7 @@
     1024
    ],
    "their_e1": 0.09619709619958404,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24798,7 +24798,7 @@
     1024
    ],
    "their_e1": 0.2372374090696494,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -24825,7 +24825,7 @@
     1024
    ],
    "their_e1": 0.23123675228134422,
-   "our_e1": 0.010125486371642668,
+   "our_e1": 0.04486560718088547,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25392,7 +25392,7 @@
     1024
    ],
    "their_e1": 0.02241041308003861,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25419,7 +25419,7 @@
     1024
    ],
    "their_e1": 0.022281045686592563,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25446,7 +25446,7 @@
     1024
    ],
    "their_e1": 0.030254555224949995,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25473,7 +25473,7 @@
     1024
    ],
    "their_e1": 0.03016250534884415,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25500,7 +25500,7 @@
     1024
    ],
    "their_e1": 0.010891739394361572,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25513,7 +25513,7 @@
     "tris": 46664
    },
    "their_textures": false,
-   "verdict": "LOSS"
+   "verdict": "WIN"
   },
   {
    "category": "R973",
@@ -25527,7 +25527,7 @@
     1024
    ],
    "their_e1": 0.009861775915771875,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25554,7 +25554,7 @@
     1024
    ],
    "their_e1": 0.029739573485655146,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25581,7 +25581,7 @@
     1024
    ],
    "their_e1": 0.02952313188508195,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25608,7 +25608,7 @@
     1024
    ],
    "their_e1": 0.021803381464637922,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25635,7 +25635,7 @@
     1024
    ],
    "their_e1": 0.012730249081989074,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25662,7 +25662,7 @@
     1024
    ],
    "their_e1": 0.02622675118669705,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25689,7 +25689,7 @@
     1024
    ],
    "their_e1": 0.0241742877329857,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25716,7 +25716,7 @@
     1024
    ],
    "their_e1": 0.02095005423479187,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25743,7 +25743,7 @@
     1024
    ],
    "their_e1": 0.0215645493536606,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25770,7 +25770,7 @@
     1024
    ],
    "their_e1": 0.02640836310441939,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25797,7 +25797,7 @@
     1024
    ],
    "their_e1": 0.02310451890256645,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25824,7 +25824,7 @@
     1024
    ],
    "their_e1": 0.025189324204639315,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25851,7 +25851,7 @@
     1024
    ],
    "their_e1": 0.024057359511986388,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25878,7 +25878,7 @@
     1024
    ],
    "their_e1": 0.035730278936002946,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25905,7 +25905,7 @@
     1024
    ],
    "their_e1": 0.03185174496711083,
-   "our_e1": 0.008150145787101076,
+   "our_e1": 0.009677676163560191,
    "their_vgate": {
     "usd": true,
     "v2_manifold": true,
@@ -25922,11 +25922,11 @@
   }
  ],
  "summary": {
-  "WIN": 626,
-  "TIE": 2,
-  "LOSS": 332,
+  "WIN": 737,
+  "TIE": 4,
+  "LOSS": 219,
   "total": 960,
-  "score_pct": 65.31,
+  "score_pct": 76.98,
   "target": "WIN+TIE = 100% (每对≥平)"
  },
  "missing_categories": []

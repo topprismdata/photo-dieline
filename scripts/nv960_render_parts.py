@@ -19,6 +19,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src/photo_dieli
 from render_materials import MATERIALS  # noqa: E402
 
 
+def _box(name, x0, y0, z0, x1, y1, z1, mat):
+    v = [(x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0),
+         (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)]
+    q = [(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)]
+    return {"name": name, "verts": v,
+            "tris": [list(t) for quad in q for t in
+                     ((quad[0], quad[1], quad[2]), (quad[0], quad[2], quad[3]))],
+            "material_id": mat}
+
+
 RIGID_CLASSES = {"spice_jar_flip_top", "swing_top_bottle", "insulated_water_bottle", "mason_jar",
                  "glass_jar_clamp_lid", "food_tin_can", "cookie_jar", "soap_dispenser", "spray_bottle",
                  "milk_can", "wine_decanter", "detergent_bottle"}

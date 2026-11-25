@@ -26,6 +26,7 @@ CLASSES = [
     "muffin_tin_6cup",
     "tiered_fruit_basket",
     "jerry_can",
+    "condiment_pump_dispenser",
 ]
 
 DEFAULTS = {
@@ -48,6 +49,7 @@ DEFAULTS = {
     "muffin_tin_6cup": {"H": 60.0, "D": 250.0},
     "tiered_fruit_basket": {"H": 500.0, "D": 320.0},
     "jerry_can": {"H": 300.0, "D": 56.0},
+    "condiment_pump_dispenser": {"H": 320.0, "D": 90.0},
 }
 
 
@@ -246,6 +248,16 @@ def build_parts(params: dict) -> list[dict]:
         P = [_box("body", -w / 2, -D / 4, 0, w / 2, D / 4, H - 30.0, "plastic_hdpe")]
         P.append(_cyl("cap", 28.0, H - 30.0, H, "plastic_hdpe", cx=w / 2 - 45.0, cy=0.0))
         P.append(_box("handle", -w / 2 + 20.0, -8.0, H - 45.0, w / 2 - 70.0, 8.0, H - 20.0, "plastic_hdpe"))
+        return P
+
+    if cid == "condiment_pump_dispenser":
+        # 瓶体(半透) + 泵头(圆柱+喷嘴) + 底座
+        H, D = params["H"], params["D"]
+        P = [_cyl("bottle", D / 2, 0, H * 0.78, "plastic_pp_translucent"),
+             _cyl("base", D / 2 + 6, 0, 12, pp),
+             _cyl("pump_collar", D / 5, H * 0.78, H * 0.88, pp),
+             _cyl("pump_head", D / 5, H * 0.88, H, pp),
+             _box("nozzle", D / 5 - 2, -D / 5 - 8, H - 18, D / 5 + 14, 0, H - 4, pp)]
         return P
 
     # 兜底: 素盒
