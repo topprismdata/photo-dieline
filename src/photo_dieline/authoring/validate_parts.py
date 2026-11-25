@@ -14,13 +14,14 @@ import numpy as np
 
 MATERIALS = {
     "paper_kraft", "paper_white", "glass_clear", "metal_alu", "metal_steel",
-    "plastic_pp", "plastic_pet_clear", "plastic_hdpe", "wood_pine",
+    "plastic_pp", "plastic_pp_translucent", "plastic_pet_clear", "plastic_hdpe", "wood_pine",
     "ceramic_gloss", "tape_craft", "label_paper", "foil_lid",
 }
 # kg/m³ (通用工程口径, 量产按实测替换)
 DENSITY = {
     "paper_kraft": 700.0, "paper_white": 800.0, "glass_clear": 2500.0,
     "metal_alu": 2700.0, "metal_steel": 7850.0, "plastic_pp": 905.0,
+    "plastic_pp_translucent": 905.0,
     "plastic_pet_clear": 1380.0, "plastic_hdpe": 960.0, "wood_pine": 500.0,
     "ceramic_gloss": 2400.0, "tape_craft": 800.0, "label_paper": 80.0,
     "foil_lid": 150.0,
@@ -178,6 +179,7 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
         "metal_alu": ((0.91, 0.92, 0.92), 0.25, 1.0, 0.0),
         "metal_steel": ((0.77, 0.78, 0.78), 0.3, 1.0, 0.0),
         "plastic_pp": ((0.85, 0.86, 0.84), 0.38, 0.0, 0.0),
+        "plastic_pp_translucent": ((0.80, 0.86, 0.88), 0.30, 0.0, 0.35),
         "plastic_pet_clear": ((0.9, 0.94, 0.95), 0.08, 0.0, 1.0),
         "plastic_hdpe": ((0.86, 0.86, 0.84), 0.45, 0.0, 0.0),
         "wood_pine": ((0.72, 0.56, 0.36), 0.6, 0.0, 0.0),
@@ -198,7 +200,7 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
         if transmission:
             s.CreateInput("transmission", Sdf.ValueTypeNames.Float).Set(transmission)
             s.CreateInput("ior", Sdf.ValueTypeNames.Float).Set(1.5)
-            s.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(0.35)
+            s.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(round(0.35 + 0.4 * transmission, 2))
         m.CreateSurfaceOutput().ConnectToSource(s.ConnectableAPI(), "surface")
         mat_paths[mid] = f"/Asset/Materials/{mid}"
         pm = stage.DefinePrim(f"/Asset/PhysicsMaterials/{mid}")
