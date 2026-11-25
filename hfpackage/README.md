@@ -72,3 +72,15 @@ LLM Author 循环 (合同约束程序合成, 对齐 USDCraft 单文件 Author �
   url={https://github.com/topprismdata/photo-dieline}
 }
 ```
+
+## NV960 逐对比战役 (2026-11-26)
+
+NVIDIA USDCraft-10K 零售子集全量逐对比: 严格零售口径 48 类 × 20 缩略图 = **960 对**。
+
+- 逐对四轴裁决 (分辨率 / V-gate 独立审计 / 纹理 / E1 中心裁切): **65.31% 胜率** (626 WIN / 332 LOSS)
+- NVIDIA 480 资产独立 V-gate 审计: 仅 **20.8%** 全过 (V1-V7, 我方 100%)
+- 48 张逐类 contact sheet + 记分牌: `docs/nv960/`
+- 全套裁决/渲染/审计管线开源: 见主仓 `scripts/nv960_*.py`
+
+结论: 图像密度 ≠ 资产质量 — 其渲染风格密度高 (丝网 E1 0.15-0.23), 但 79% 资产未过独立结构审计;
+我方每资产 = usdc + model.json + packaging.json + conformance.json + print.png + 1024² 印刷渲染 全套。
