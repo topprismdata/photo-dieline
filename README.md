@@ -54,6 +54,9 @@
   物理字段/接触结判据，`scripts/packbench_validator.py` — 三轮战果：抓未焊接→焊接→抓退化/重复面→三角过滤）
 - **对标 USDCraft**：单件 $0.851/4.9min（LLM 逐件+修复回路）vs 我们 $0/0.098s（家族冻结+确定性采样），
   10K 约当 $8,510+ agent·小时 vs 16.4 分钟；实测对比表见 `docs/production_capacity.md` §七
+- **一对一类别审计**（`docs/usdcraft_1v1_audit.md`）：拉取对方 19 个包装容器类 169 件与我方
+  190 件同判据电池对跑 — 我方 100% 全过 vs 对方 29.6%（对方唯一系统性失配：自报尺寸与
+  自家渲染几何 >2%，人工复核坐实）；新家族 pizza_box 实证家族级 LLM 成本 ~35 分钟会话
 - **全链非 CUDA**：CPU/Metal 可复现，种子+SHA bit 级再生
 - **拒收先验集**入账（近退化参数 + 拓扑拒绝记录）+ 逐族产率谱（hexagonal 78%/prism 41%/tube 15%）
 - HF 预览包 358MB 就绪（498 件，cc-by-4.0）；证据链：`docs/reviews/pack10k_r1_verdict.md`、
