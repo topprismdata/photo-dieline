@@ -19,6 +19,54 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src/photo_dieli
 from render_materials import MATERIALS  # noqa: E402
 
 
+def add_label_band(parts, label_png):
+    """圆柱标签带 (150° 弧段朝 az−45° 相机, 贴身最大半径段), 酒标配方泛化。"""
+    import math as _m
+    body = max(parts, key=lambda p: len(p["verts"]))
+    vs = body["verts"]
+    zs = [v[2] for v in vs]
+    rs = [_m.hypot(v[0], v[1]) for v in vs]
+    r_body = sorted(rs)[int(len(rs) * 0.7)]  # 70 分位半径 (避开盖/头)
+    z_min, z_max = min(zs), max(zs)
+    z0 = z_min + (z_max - z_min) * 0.22
+    z1 = z_min + (z_max - z_min) * 0.62
+    r_band = r_body + 0.35
+    CENTER_A = _m.radians(-45.0)
+    HALF_ARC = _m.radians(75.0)
+    SEGS = 96
+    verts, faces = [], []
+    for i in range(SEGS + 1):
+        a = CENTER_A - HALF_ARC + (2 * HALF_ARC) * i / SEGS
+        verts.append((r_band * _m.cos(a), r_band * _m.sin(a), z0))
+        verts.append((r_band * _m.cos(a), r_band * _m.sin(a), z1))
+    for i in range(SEGS):
+        a0, b0 = 2 * i, 2 * i + 1
+        a1, b1 = 2 * (i + 1), 2 * (i + 1) + 1
+        faces.append((a0, b0, b1, a1))
+    tris = []
+    for f in faces:
+        tris.append([f[0], f[1], f[2]])
+        tris.append([f[0], f[2], f[3]])
+    return {"name": "label_band", "verts": verts, "tris": tris,
+            "material_id": "label_paper", "label_png": str(label_png),
+            "u_span": (CENTER_A - HALF_ARC, CENTER_A + HALF_ARC),
+            "z_span": (z0, z1)}
+
+
+def _label_uv(me, part):
+    """标签带 UV: u=角度展开, v=z 展开 (无翻转=正向文字)。"""
+    import math as _m
+    a0, a1 = part["u_span"]
+    z0, z1 = part["z_span"]
+    uv = me.uv_layers.new(name="st")
+    for loop in me.loops:
+        v = me.vertices[loop.vertex_index]
+        ang = _m.atan2(v.co.y, v.co.x)
+        u = (ang - a0) / (a1 - a0)
+        w = (v.co.z - z0) / (z1 - z0)
+        uv.data[loop.index].uv = (min(max(u, 0.0), 1.0), min(max(w, 0.0), 1.0))
+
+
 def studio(scene):
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 192
@@ -61,6 +109,12 @@ def studio(scene):
 def render_parts(parts_json: Path, out_png: Path):
     rec = json.loads(parts_json.read_text())
     parts = rec["parts"]
+    label_png = None
+    cid = rec.get("class_id", parts_json.stem.replace("_parts", ""))
+    lp = Path("/tmp/nv960_labels") / f"{cid}.png"
+    if lp.exists():
+        parts = parts + [add_label_band(parts, lp)]
+        label_png = str(lp)
     allz = [v[2] for p in parts for v in p["verts"]]
     gz = min(allz) - 0.001
 
@@ -91,19 +145,29 @@ def render_parts(parts_json: Path, out_png: Path):
         me.from_pydata([tuple(v) for v in p["verts"]], [], [tuple(t) for t in p["tris"]])
         me.validate()
         me.transform(mathutils.Matrix.Scale(0.001, 4))  # mm→m 统一
-        rgb, rough, metallic, transmission, ior = MATERIALS[p["material_id"]]
-        m = bpy.data.materials.new(p["material_id"])
-        m.use_nodes = True
-        b = m.node_tree.nodes["Principled BSDF"]
-        b.inputs["Base Color"].default_value = (*rgb, 1.0)
-        b.inputs["Roughness"].default_value = rough
-        b.inputs["Metallic"].default_value = metallic
-        b.inputs["IOR"].default_value = ior
-        if transmission:
-            for key in ("Transmission Weight", "Transmission"):
-                if key in b.inputs:
-                    b.inputs[key].default_value = 1.0
-                    break
+        if p.get("name") == "label_band" and label_png:
+            _label_uv(me, p)
+            m = bpy.data.materials.new("label")
+            m.use_nodes = True
+            tex = m.node_tree.nodes.new("ShaderNodeTexImage")
+            tex.image = bpy.data.images.load(label_png)
+            b = m.node_tree.nodes["Principled BSDF"]
+            b.inputs["Roughness"].default_value = 0.5
+            m.node_tree.links.new(tex.outputs["Color"], b.inputs["Base Color"])
+        else:
+            rgb, rough, metallic, transmission, ior = MATERIALS[p["material_id"]]
+            m = bpy.data.materials.new(p["material_id"])
+            m.use_nodes = True
+            b = m.node_tree.nodes["Principled BSDF"]
+            b.inputs["Base Color"].default_value = (*rgb, 1.0)
+            b.inputs["Roughness"].default_value = rough
+            b.inputs["Metallic"].default_value = metallic
+            b.inputs["IOR"].default_value = ior
+            if transmission:
+                for key in ("Transmission Weight", "Transmission"):
+                    if key in b.inputs:
+                        b.inputs[key].default_value = 1.0
+                        break
         me.materials.append(m)
         ob = bpy.data.objects.new(p["name"], me)
         sc.collection.objects.link(ob)

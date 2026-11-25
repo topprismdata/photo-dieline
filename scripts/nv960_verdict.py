@@ -5,6 +5,7 @@
 用法: python3 scripts/nv960_verdict.py --ours manifests/nv960_ours_map.json --out docs/nv960_scoreboard.json
 """
 import argparse, csv, json, glob, os, sys
+from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 from pixel_framework import load_gray, edge_stats  # 既有客观框架
 
@@ -20,13 +21,11 @@ def their_assets():
     return rows
 
 def their_vgate():
-    """我方独立审计 (V1-V7) 结果: {asset_path: full_pass}"""
-    j = json.load(open(os.path.join(os.path.dirname(__file__), '..', 'docs/reviews/usdcraft_1v1_audit.json')))
-    out = {}
-    for cat, det in j.get('categories', {}).items():
-        for a in det.get('assets', []):
-            out[a.get('path', a.get('asset', ''))] = bool(a.get('full_pass'))
-    return out
+    """我方独立审计 (V1-V7, 路径键控): {asset_base: full_pass}"""
+    p = Path(__file__).resolve().parent.parent / "docs/reviews/nv960_audit480.json"
+    if p.exists():
+        return json.load(open(p))
+    return {}
 
 def e1(path):
     try:
