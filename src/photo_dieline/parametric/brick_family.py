@@ -289,17 +289,55 @@ def _arc_pts_net(xc: float, yb: float, Rc: float) -> list:
              yb + Rc * math.sin(math.pi - j * math.pi / _NSK)) for j in range(_NSK + 1)]
 
 
-def _sliver_quads(arc: list, ctr2: tuple, Hc: float) -> tuple[list, list]:
-    """孔缘裙片: 弦 [A_j,A_j+1] + 内向 ⊥ 弦偏移 Hc (世界竖立后侧缝逐位重合)."""
+def _sliver_quads(arc: list, ctr2: tuple, betas: list, inward: set) -> tuple[list, list]:
+    """孔缘裙片: 弦 [A_j,A_j+1] + ⊥弦偏移梯形 (角高 β_j/β_{j+1}, 逐缝一致).
+
+    放置侧逐片选择: 陡中弦向内 (孔域内互不重叠 — 间隔 ≥90°), 其余向外 (座板
+    开同形避让槽); 半圆缺口全内放时 8 片必互压 (片深总面积 > 半圆孔)。
+    角高 β 逐缝一致 → 折上后裙缝逐位重合; 向外片 β 收短至板缘内 → 槽不穿板缘,
+    座板保持单环。
+    """
     chords, quads = [], []
     for j in range(_NSK):
         a, b = arc[j], arc[j + 1]
         mid = ((a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0)
-        nh = _unit(np.array([ctr2[0] - mid[0], ctr2[1] - mid[1]]))
+        nh = _unit(np.array([mid[0] - ctr2[0], mid[1] - ctr2[1]]))
+        sgn = -1.0 if j in inward else 1.0
         chords.append((a, b))
-        quads.append([a, b, (b[0] + Hc * nh[0], b[1] + Hc * nh[1]),
-                      (a[0] + Hc * nh[0], a[1] + Hc * nh[1])])
+        quads.append([a, b, (b[0] + sgn * betas[j + 1] * nh[0], b[1] + sgn * betas[j + 1] * nh[1]),
+                      (a[0] + sgn * betas[j] * nh[0], a[1] + sgn * betas[j] * nh[1])])
     return chords, quads
+
+
+def _fin_net_with_slots(x_lo: float, x_hi: float, yb: float, Ef: float,
+                        arc: list, betas: list, inward: set) -> list:
+    """座板净图: 矩形 − 半圆缺口 − 向外裙片避让槽 (槽形 = 外放梯形, β 收短不穿板缘).
+
+    环起点旋到弧顶 (fan 自 v0).
+    """
+    from shapely.geometry import Polygon as _SPoly
+
+    ytop = yb + Ef
+    n = len(arc) - 1
+    ctr = ((arc[0][0] + arc[-1][0]) / 2.0, yb)
+    rect = _SPoly([(x_lo, yb), (x_hi, yb), (x_hi, ytop), (x_lo, ytop)])
+    cut = []
+    for j in range(n):
+        a, b = arc[j], arc[j + 1]
+        cut.append(tuple(a))
+        if j in inward:
+            continue   # 向内片: 沿缺口弧走过该弦 (弦仍留在座板边界上)
+        mx, my = (a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0
+        nh = _unit(np.array([mx - ctr[0], my - ctr[1]]))
+        cut += [(a[0] + betas[j] * nh[0], a[1] + betas[j] * nh[1]),
+                (b[0] + betas[j + 1] * nh[0], b[1] + betas[j + 1] * nh[1])]
+    cut.append(tuple(arc[n]))   # 闭合边 = arc[n]→arc[0] 直径 (缺口∪槽 的花形环)
+    fin = rect.difference(_SPoly(cut).buffer(0))
+    ring = list(fin.exterior.coords)[:-1]
+    apex = tuple(arc[n // 2])
+    k = min(range(len(ring)), key=lambda i: (ring[i][0] - apex[0]) ** 2
+            + (ring[i][1] - apex[1]) ** 2)
+    return [[float(x), float(y)] for x, y in (ring[k:] + ring[:k])]
 
 
 def _screw_build(p: dict, cls_id: str) -> dict:
@@ -311,14 +349,34 @@ def _screw_build(p: dict, cls_id: str) -> dict:
 
     arcB = _arc_pts_net(x2 + W / 2.0, Hb + s, Rc)
     arcF = _arc_pts_net(x4 + W / 2.0, Hb + s, Rc)
-    chB, qB = _sliver_quads(arcB, (x2 + W / 2.0, Hb + s), Hc)
-    chF, qF = _sliver_quads(arcF, (x4 + W / 2.0, Hb + s), Hc)
 
-    finB_net = ([(x2, Hb + s)] + arcB + [(x3, Hb + s), (x3, Hb + s + Ef), (x2, Hb + s + Ef)])
-    finF_net = ([(x4, Hb + s)] + arcF + [(x5, Hb + s), (x5, Hb + s + Ef), (x4, Hb + s + Ef)])
-    # 顶点序旋转: 起点移到弧顶 (脱开脊线; 引擎 fan 自 v0, 凹多边形共线三元组会退化)
-    finB_net = finB_net[5:] + finB_net[:5]
-    finF_net = finF_net[5:] + finF_net[:5]
+    # 裙片角高 β_j (arc[j] 处, 相邻两片共享): 全高 Hc; 向外片的角收短至座板缘内
+    # (留 w 裕量 → 相邻槽间裙桥通道保持正宽, 座板单环不断), 向内片不占板域全高。
+    _INWARD = {2, 4}   # 陡中弦向内 (互距 90°, 孔域内无互压)
+
+    def _betas(arc):
+        ytop = Hb + s + Ef
+        ctr = ((arc[0][0] + arc[-1][0]) / 2.0, Hb + s)
+        nout_y = []
+        for j in range(_NSK):
+            a, b = arc[j], arc[j + 1]
+            mx, my = (a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0
+            nout_y.append(_unit(np.array([mx - ctr[0], my - ctr[1]]))[1])
+        betas = [Hc] * (_NSK + 1)
+        w = 0.3
+        for j in range(_NSK + 1):
+            outs = [k for k in (j - 1, j) if 0 <= k < _NSK and k not in _INWARD]
+            if outs:
+                slack = max(ytop - arc[j][1] - w, 0.0)
+                betas[j] = min(betas[j], slack / max(nout_y[k] for k in outs))
+        return betas
+
+    betas = _betas(arcB)
+    chB, qB = _sliver_quads(arcB, (x2 + W / 2.0, Hb + s), betas, _INWARD)
+    chF, qF = _sliver_quads(arcF, (x4 + W / 2.0, Hb + s), betas, _INWARD)
+
+    finB_net = _fin_net_with_slots(x2, x3, Hb + s, Ef, arcB, betas, _INWARD)
+    finF_net = _fin_net_with_slots(x4, x5, Hb + s, Ef, arcF, betas, _INWARD)
 
     # 世界像: 座板平鳍 z=zr; finB 体伸 -y, finF 体伸 +y; 缺口对合 16 边形圆孔
     arcB_w = [[Rc * math.cos(math.pi - j * math.pi / _NSK),
@@ -426,7 +484,8 @@ def _screw_build(p: dict, cls_id: str) -> dict:
     return _ir(cls_id, p, panels, edges,
                "旋盖屋顶包: gable 拓扑 + 脊上双平鳍座板(深 "
                f"{Ef:.0f}mm, 半圆缺口对合 {2 * _NSK} 边形圆孔 R={Rc:.1f}mm) + 孔缘 "
-               f"{2 * _NSK} 片竖立盖裙(高 {Hc:.1f}mm, 裙缝逐位重合)")
+               f"{2 * _NSK} 片竖立盖裙(高 {Hc:.1f}mm, 裙缝逐位重合, 净图外放座板侧 "
+               "避让槽)")
 
 
 def _screw_closure(ir, world) -> dict:

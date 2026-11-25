@@ -450,10 +450,12 @@ def _build_crashlock_div(p):
         _fold("e_gL0", (2 * W + 2 * D, 0), (2 * W + D + (D - ya), 0), "wL", "gL0",
               (1.0, 0.0, 0.0), "MOUNTAIN"),
         _fold("e_gR0", (W, 0), (W + ya, 0), "wR", "gR0", (-1.0, 0.0, 0.0), "MOUNTAIN"),
-        # 十字隔板: 自 bF 铰链立起 (dvl 纵隔全宽 @y=D/2 / dvt 横隔全深 @x=dv_x)
-        _fold("e_dvl", (0, -D / 2.0), (W, -D / 2.0), "bF", "dvl", (0.0, 0.0, 1.0),
-              "MOUNTAIN"),
-        _fold("e_dvt", (dv_x, 0), (dv_x, -D), "bF", "dvt", (0.0, 0.0, 1.0), "MOUNTAIN"),
+        # 十字隔板: 纵隔 dvl 经底板远缘翻折桥 tab 立起 (净图外置避让); 横隔 dvt
+        # 铰链于右互锁翼外缘 (world x=W/2 中线, 足沿底面延至 y=D 全深)
+        _fold("e_tab", (0, -D), (W, -D), "bF", "tab", (0.0, -1.0, 0.0), "MOUNTAIN"),
+        _fold("e_dvl", (0, -D - D / 2.0), (W, -D - D / 2.0), "tab", "dvl",
+              (0.0, 0.0, 1.0), "MOUNTAIN"),
+        _fold("e_dvt", (W, -hd), (W + yb, -hd), "gR0", "dvt", (0.0, 0.0, 1.0), "MOUNTAIN"),
     ]
 
     def _net_to_world(parent, q):
@@ -483,13 +485,18 @@ def _build_crashlock_div(p):
                (W + yb, -hd), (W + ya, 0),
                (W - hd, yb), (float(W), ya), "gR0")
 
-    panels.append(_poly("dvl", "wall", [(0, -D / 2.0 - dv_h), (W, -D / 2.0 - dv_h),
-                                        (W, -D / 2.0), (0, -D / 2.0)]))
-    panels.append(_poly("dvt", "wall", [(dv_x, 0), (dv_x, -D),
-                                        (dv_x + dv_h, -D), (dv_x + dv_h, 0)]))
+    panels.append(_poly("tab", "flap", [(0, -D - D / 2.0), (W, -D - D / 2.0),
+                                        (W, -D), (0, -D)]))
+    panels.append(_poly("dvl", "wall", [(0, -D - D / 2.0 - dv_h), (W, -D - D / 2.0 - dv_h),
+                                        (W, -D - D / 2.0), (0, -D - D / 2.0)]))
+    # dvt: 5 顶点环 ((W+yb,-hd) 共线补点供铰链 seg 端点) — 铰链 = gR0 外缘
+    # (world x=hd=W/2 中线), 足部沿底面延伸至 world y=D (全深), 立面平面 x=dv_x
+    panels.append(_poly("dvt", "wall", [(W, -hd), (W + yb, -hd), (W + D, -hd),
+                                        (W + D, -hd - dv_h), (W, -hd - dv_h)]))
     notes = (f"crashlock_divider: 带隔板顺央底盒 — 4 墙链 + 全深底板 bF/bB + 菱形互锁 "
              f"斜折片×4 (90°下折+180°斜折平铺互锁) + 盒内十字隔板 (纵隔全宽 @y=D/2 × "
-             f"横隔全深 @x={dv_x:g}, T 字相贯, 高 {dv_h:g}, 自底板铰链立起)")
+             f"横隔全深 @x=dv_x=W/2, T 字相贯, 高 {dv_h:g}) — 纵隔经底板远缘 180° "
+             f"翻折桥 (tab) 净图外置 (槽位已占), 横隔铰链于互锁翼外缘 (互隔片原位)")
     return panels, edges, notes, _features("glue", "gL0", "gR0"), "wF", _R_CHAIN, [0.0, 0.0, 0.0]
 
 
@@ -515,16 +522,16 @@ def _closure_crashlock_div(ir, world) -> dict:
     res["lock.iso"] = abs(float(np.linalg.norm(world["gL1"][2] - world["gL1"][1])) - hd)
     res["lock.flat"] = abs(float(world["gL1"][2][2])) + abs(float(world["gR1"][2][2]))
     res["glue.planar_y0"] = float(np.max(np.abs(world["glue"][:, 1])))
-    # 十字隔板: 立面落位 + 全高 + 横隔足线居中
+    # 十字隔板: 立面落位 + 全高 + 横隔足线居中 (dvt 环含共线补点: 足角=0,2 顶角=3,4)
     dv = np.asarray(world["dvl"], float)
     dt = np.asarray(world["dvt"], float)
     res["dvl.plane"] = abs(float(np.mean(dv[:, 1])) - D / 2.0)
     res["dvl.top"] = abs(float(np.mean(dv[0:2], axis=0)[2]) - dv_h)
     res["dvl.seat"] = abs(float(np.mean(dv[2:4], axis=0)[2]))
     res["dvt.plane"] = abs(float(np.mean(dt[:, 0])) - dv_x)
-    res["dvt.top"] = abs(float(np.mean(dt[2:4], axis=0)[2]) - dv_h)
-    res["dvt.seat"] = abs(float(np.mean(dt[0:2], axis=0)[2]))
-    res["dvt.foot_y"] = abs(float(np.mean(dt[0:2], axis=0)[1]) - D / 2.0)
+    res["dvt.top"] = abs(float(np.mean(dt[[3, 4]], axis=0)[2]) - dv_h)
+    res["dvt.seat"] = abs(float(np.mean(dt[[0, 2]], axis=0)[2]))
+    res["dvt.foot_y"] = abs(float(np.mean(dt[[0, 2]], axis=0)[1]) - D / 2.0)
     return res
 
 
@@ -808,6 +815,8 @@ def validate_params(params: dict) -> None:
             raise ValueError("glue_w/互锁翼过宽 (须 < W/2 且 < D/2)")
         if not (2.0 < float(p["dv_x"]) < float(p["W"]) - 2.0):
             raise ValueError("横隔位 dv_x 须落在盒宽内 (留 2mm 边距)")
+        if abs(float(p["dv_x"]) - float(p["W"]) / 2.0) > 1e-9:
+            raise ValueError("横隔须居中 dv_x=W/2 (铰链落互锁翼外缘镜像线, 单件构造合同)")
         if float(p["dv_h"]) >= float(p["H"]):
             raise ValueError("隔板高 dv_h 须小于盒高 H")
     elif kind == 4:    # tube_cap_end
@@ -920,7 +929,7 @@ def allowed_overlap():
     s.add(frozenset({"glue", "w3"}))
     s.add(frozenset({"w0", "w3"}))
     # ④ crashlock_divider: z=0 底板/互锁片全对 + 隔板与底板/墙/互锁片贴合对
-    bottoms = ("bF", "bB", "gL0", "gL1", "gR0", "gR1")
+    bottoms = ("bF", "bB", "gL0", "gL1", "gR0", "gR1", "tab")
     for i in range(len(bottoms)):
         for j in range(i + 1, len(bottoms)):
             s.add(frozenset({bottoms[i], bottoms[j]}))
