@@ -24,9 +24,27 @@ from photo_dieline.core.ir import class_module  # noqa: E402
 from photo_dieline.export.print_layer import draw_print_texture  # noqa: E402
 
 
+def enable_gpu():
+    """Metal GPU (M 系列 10-50× 于 CPU; 之前一直 CPU 渲染 = 慢根因)"""
+    prefs = bpy.context.preferences.addons["cycles"].preferences
+    for dev_type in ("METAL", "OPTIX", "CUDA"):
+        try:
+            prefs.compute_device_type = dev_type
+            prefs.get_devices()
+            for d in prefs.devices:
+                d.use = True
+            bpy.context.scene.cycles.device = "GPU"
+            print(f"GPU: {dev_type}", flush=True)
+            return True
+        except Exception:
+            continue
+    print("GPU: 不可用, 回退 CPU", flush=True)
+    return False
+
 def studio(scene):
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 192
+    enable_gpu()
     scene.render.resolution_x = scene.render.resolution_y = 1024
     scene.view_settings.view_transform = "AgX"
     scene.view_settings.look = "AgX - Punchy"
@@ -101,6 +119,15 @@ def render_one(variant_dir: Path, out_png: Path):
     me = bpy.data.meshes.new("body")
     me.from_pydata([tuple(p) for p in Pm], [], [tuple(t) for t in tris])
     me.validate()
+    # 法线重算 (Cycles 反转法线 = 假开盖透视内壁; Workbench 不暴露)
+    import bmesh
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(me)
+    bm.free()
+    ob_tmp = bpy.data.objects.new("body", me)
+    sc.collection.objects.link(ob_tmp)
     _, (nx0, ny0, nw_mm, nh_mm) = draw_print_texture(ir, meta.get("family", "sundry"))
     uv = me.uv_layers.new(name="st")
     for loop in me.loops:
@@ -115,8 +142,7 @@ def render_one(variant_dir: Path, out_png: Path):
     tex.image = bpy.data.images.load(str(png))
     mat.node_tree.links.new(tex.outputs["Color"], b.inputs["Base Color"])
     me.materials.append(mat)
-    ob = bpy.data.objects.new("body", me)
-    sc.collection.objects.link(ob)
+    ob = ob_tmp  # 法线重算时已建 — 复用防双对象 z-fighting
 
     # 相机 (USDCraft 口径: az45/el30, 焦距感知取景)
     az, el = math.radians(45.0), math.radians(30.0)

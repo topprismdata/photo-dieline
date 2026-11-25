@@ -28,8 +28,14 @@ def their_vgate():
     return {}
 
 def e1(path):
+    """中心 62% 裁切 E1 (消背景观感差: 我方黑棚 vs 其浅底棚拍, 同口径比产品区)"""
     try:
-        d, _ = edge_stats(load_gray(path))
+        from PIL import Image
+        im = Image.open(path).convert('L')
+        w, h = im.size
+        cw, ch = int(w * 0.62), int(h * 0.62)
+        im.crop(((w - cw) // 2, (h - ch) // 2, (w + cw) // 2, (h + ch) // 2)).save('/tmp/_e1crop.png')
+        d, _ = edge_stats(load_gray('/tmp/_e1crop.png'))
         return d
     except Exception:
         return None
@@ -63,8 +69,10 @@ def main():
             # 轴1 分辨率
             res_win = ow * oh > tw * th; res_tie = ow * oh == tw * th
             # 轴2 V-gate: their full_pass=False → 我胜; True → 平 (双方均过)
-            tv = vgate.get(path)
-            vg_win = (tv is False)
+            tv = vgate.get(os.path.basename(t)
+                           .replace('_physx_.thumbs_256x256_model.usdc.png', '')
+                           .replace('_physx_.thumbs_256x256_model.usdc_light.png', ''))
+            vg_win = isinstance(tv, dict) and tv.get('full_pass') is False
             # 轴3 纹理: their has_textures=false → 我胜; true → 比 E1
             ht = r['has_textures'] == 'true'
             tx_win = (not ht)

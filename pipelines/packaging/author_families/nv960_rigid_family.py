@@ -318,4 +318,15 @@ def build_parts(params: dict) -> list[dict]:
         v, t = _revolve(p)
         parts.append({"name": "cap", "verts_mm": v, "tris": t,
                       "material_id": "plastic_hdpe"})
+        # 帽纹环 ×3 (旋盖视觉)
+        for k in range(3):
+            zz = z_body + 3.0 + k * 4.0
+            pp2 = []
+            _append(pp2, [(zz - 0.5, 0.0)])
+            _append(pp2, [(zz - 0.5, r_t + 0.4)])
+            _append(pp2, [(zz + 0.5, r_t + 0.4)])
+            _append(pp2, [(zz + 0.5, 0.0)])
+            v2, t2 = _revolve(pp2)
+            parts.append({"name": f"knurl_{k}", "verts_mm": v2, "tris": t2,
+                          "material_id": "plastic_hdpe"})
     return parts

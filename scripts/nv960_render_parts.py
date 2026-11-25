@@ -19,6 +19,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src/photo_dieli
 from render_materials import MATERIALS  # noqa: E402
 
 
+RIGID_CLASSES = {"spice_jar_flip_top", "swing_top_bottle", "insulated_water_bottle", "mason_jar",
+                 "glass_jar_clamp_lid", "food_tin_can", "cookie_jar", "soap_dispenser", "spray_bottle",
+                 "milk_can", "wine_decanter", "detergent_bottle"}
+
+
+def _decal_uv(me):
+    uv = me.uv_layers.new(name="st")
+    for loop in me.loops:
+        vi = loop.vertex_index
+        # 前/后 4 顶点映射全标签, 侧棱随 x
+        uv.data[loop.index].uv = (0.0 if vi % 8 in (0, 3, 4, 7) else 1.0,
+                                  0.0 if vi % 8 in (0, 1, 4, 5) else 1.0)
+
+
 def add_label_band(parts, label_png):
     """圆柱标签带 (150° 弧段朝 az−45° 相机, 贴身最大半径段), 酒标配方泛化。"""
     import math as _m
@@ -28,9 +42,9 @@ def add_label_band(parts, label_png):
     rs = [_m.hypot(v[0], v[1]) for v in vs]
     r_body = sorted(rs)[int(len(rs) * 0.7)]  # 70 分位半径 (避开盖/头)
     z_min, z_max = min(zs), max(zs)
-    z0 = z_min + (z_max - z_min) * 0.22
-    z1 = z_min + (z_max - z_min) * 0.62
-    r_band = r_body + 0.35
+    z0 = z_min + (z_max - z_min) * 0.28
+    z1 = z_min + (z_max - z_min) * 0.58
+    r_band = r_body + 1.2
     CENTER_A = _m.radians(-45.0)
     HALF_ARC = _m.radians(75.0)
     SEGS = 96
@@ -57,7 +71,7 @@ def _label_uv(me, part):
     """标签带 UV: u=角度展开, v=z 展开 (无翻转=正向文字)。"""
     import math as _m
     a0, a1 = part["u_span"]
-    z0, z1 = part["z_span"]
+    z0, z1 = part["z_span"][0] / 1000.0, part["z_span"][1] / 1000.0  # mm→m
     uv = me.uv_layers.new(name="st")
     for loop in me.loops:
         v = me.vertices[loop.vertex_index]
@@ -67,9 +81,27 @@ def _label_uv(me, part):
         uv.data[loop.index].uv = (min(max(u, 0.0), 1.0), min(max(w, 0.0), 1.0))
 
 
+def enable_gpu():
+    """Metal GPU (M 系列 10-50× 于 CPU; 之前一直 CPU 渲染 = 慢根因)"""
+    prefs = bpy.context.preferences.addons["cycles"].preferences
+    for dev_type in ("METAL", "OPTIX", "CUDA"):
+        try:
+            prefs.compute_device_type = dev_type
+            prefs.get_devices()
+            for d in prefs.devices:
+                d.use = True
+            bpy.context.scene.cycles.device = "GPU"
+            print(f"GPU: {dev_type}", flush=True)
+            return True
+        except Exception:
+            continue
+    print("GPU: 不可用, 回退 CPU", flush=True)
+    return False
+
 def studio(scene):
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 192
+    enable_gpu()
     scene.render.resolution_x = scene.render.resolution_y = 1024
     scene.view_settings.view_transform = "AgX"
     scene.view_settings.look = "AgX - Punchy"
@@ -114,7 +146,24 @@ def render_parts(parts_json: Path, out_png: Path):
     lp = Path("/tmp/nv960_labels") / f"{cid}.png"
     if lp.exists():
         parts = parts + [add_label_band(parts, lp)]
+        print(f"BANDDBG added for {cid}, band verts={len(parts[-1]['verts'])}", flush=True)
         label_png = str(lp)
+    # 设备类: 前板贴花 (薄盒 + 全 UV 标签, -Y 面朝镜头)
+    lp2 = Path("/tmp/nv960_labels") / f"{cid}.png"
+    if lp2.exists() and cid not in RIGID_CLASSES:
+        xs = [v[0] for p in parts for v in p["verts"]]
+        zs = [v[2] for p in parts for v in p["verts"]]
+        y0 = min(v[1] for p in parts for v in p["verts"])
+        x0, x1 = min(xs), max(xs)
+        z0, z1 = min(zs), max(zs)
+        dw = (x1 - x0) * 0.85
+        dh = (z1 - z0) * 0.5
+        dz = z0 + (z1 - z0) * 0.45
+        cx = (x0 + x1) / 2
+        dec = _box("decal", cx - dw / 2, y0 - 3.5, dz - dh / 2, cx + dw / 2, y0 - 0.5, dz + dh / 2, "label_paper")
+        dec["decal_png"] = str(lp2)
+        parts = parts + [dec]
+        label_png = label_png or str(lp2)
     allz = [v[2] for p in parts for v in p["verts"]]
     gz = min(allz) - 0.001
 
@@ -145,7 +194,18 @@ def render_parts(parts_json: Path, out_png: Path):
         me.from_pydata([tuple(v) for v in p["verts"]], [], [tuple(t) for t in p["tris"]])
         me.validate()
         me.transform(mathutils.Matrix.Scale(0.001, 4))  # mm→m 统一
-        if p.get("name") == "label_band" and label_png:
+        if p.get("name") in ("label_band", "decal"):
+            print(f"BANDDBG mesh={p['name']} verts={len(p['verts'])} label_png={p.get('decal_png') or label_png}", flush=True)
+        if p.get("name") == "decal":
+            _decal_uv(me)
+            m = bpy.data.materials.new("decal")
+            m.use_nodes = True
+            tex = m.node_tree.nodes.new("ShaderNodeTexImage")
+            tex.image = bpy.data.images.load(p["decal_png"])
+            b = m.node_tree.nodes["Principled BSDF"]
+            b.inputs["Roughness"].default_value = 0.5
+            m.node_tree.links.new(tex.outputs["Color"], b.inputs["Base Color"])
+        elif p.get("name") == "label_band" and label_png:
             _label_uv(me, p)
             m = bpy.data.materials.new("label")
             m.use_nodes = True
@@ -187,8 +247,9 @@ def render_parts(parts_json: Path, out_png: Path):
     cam = bpy.data.objects.new("c", cam_data)
     sc.collection.objects.link(cam)
     sc.camera = cam
+    target = mathutils.Vector((cx, cy, (min(zs) + max(zs)) / 2))
     cam.location = eye
-    cam.rotation_euler = (-eye).to_track_quat("-Z", "Y").to_euler()
+    cam.rotation_euler = (target - eye).to_track_quat("-Z", "Y").to_euler()
 
     studio(sc)
     out_png.parent.mkdir(parents=True, exist_ok=True)
