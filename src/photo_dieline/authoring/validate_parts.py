@@ -174,7 +174,7 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
     # 材质: 渲染 (UsdPreviewSurface 按库) + 物理 (MaterialAPI 按 density)
     mat_paths = {}
     _USD_PARAMS = {
-        "glass_clear": ((0.9, 0.92, 0.9), 0.05, 0.0, 1.0),
+        "glass_clear": ((0.62, 0.74, 0.68), 0.02, 0.0, 0.92),
         "metal_alu": ((0.91, 0.92, 0.92), 0.25, 1.0, 0.0),
         "metal_steel": ((0.77, 0.78, 0.78), 0.3, 1.0, 0.0),
         "plastic_pp": ((0.85, 0.86, 0.84), 0.38, 0.0, 0.0),
