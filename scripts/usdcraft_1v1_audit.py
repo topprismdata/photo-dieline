@@ -43,6 +43,19 @@ MAPPING = {
     "R041_glass_jar_with_clamp_lid": ("prism", "材质注记: 玻璃"),
     "R092_food_tin_can": ("cup", "材质注记: 金属罐 vs 纸板圆筒"),
     "R094_cookie_jar": ("prism", "材质注记: 玻璃/陶"),
+    # --- 扩容 v2: 零售产品容器 12 类 (瓶/罐/分配器) ---
+    "R036_swing_top_bottle": ("prism", "材质注记: 玻璃摇摆盖瓶 vs 纸板棱柱"),
+    "R039_insulated_water_bottle": ("tube", "管状瓶; 材质注记: 金属 vs 纸板圆筒"),
+    "R043_beverage_can_with_pull_tab": ("cup", "直接同构: 饮料罐 = 我方罐族"),
+    "R090_glass_carafe": ("tube", "材质注记: 玻璃水瓶"),
+    "R091_wine_bottle": ("tube", "细长瓶; 材质注记: 玻璃 vs 纸板圆筒"),
+    "R232_soap_dispenser": ("tube", "泵瓶; 形态注记"),
+    "R252_spray_bottle": ("tube", "喷雾瓶; 与我方 zoo 喷雾瓶同款"),
+    "R528_milk_can": ("tube", "传统奶罐; 材质注记: 金属"),
+    "R569_cooler_box": ("tuck", "保温箱; 形态注记: 硬壳箱 vs 纸板插盖"),
+    "R619_insulated_food_jar": ("cup", "保温食品罐; 材质注记"),
+    "R797_detergent_bottle": ("tube", "日化瓶; 材质注记: HDPE vs 纸板"),
+    "R973_jerry_can": ("prism", "便携方桶; 材质注记: HDPE vs 纸板"),
 }
 
 
