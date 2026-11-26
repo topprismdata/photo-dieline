@@ -31,7 +31,8 @@ The project emphasizes:
   with six-level attribute provenance (measured / official_spec / derived / estimated /
   sampled / unknown)
 - **Simulation-oriented delivery**: OpenUSD-based assets with documented physical
-  properties and validation status
+  properties and validation status — every shipped asset passes NVIDIA's own USDCraft
+  validation toolchain (`_validate_usd_asset`, PhysX backend) 15/15
 - **Reproducible evidence**: transparent validation protocols, test results, and asset
   provenance — including published negative results
 
