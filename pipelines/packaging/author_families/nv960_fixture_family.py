@@ -116,10 +116,19 @@ def build_parts(params: dict) -> list[dict]:
              _box("wall_e", w / 2 - t, -w / 2, 0, w / 2, w / 2, H, pp),
              _box("wall_w", -w / 2, -w / 2, 0, -w / 2 + t, w / 2, H, pp),
              _box("floor", -w / 2, -w / 2, 0, w / 2, w / 2, t, pp)]
-        P += _grid_bars("gr", -w / 2, -w / 2, t + 1, w / 2, w / 2, 6, 0.8, pp, axis="x")
-        P += _grid_bars("gr2", -w / 2, -w / 2, t + 1, w / 2, w / 2, 6, 0.8, pp, axis="y")
+        pitch = params.get("pitch", 6)
+        P += _grid_bars("gr", -w / 2, -w / 2, t + 1, w / 2, w / 2, pitch, 0.8, pp, axis="x")
+        P += _grid_bars("gr2", -w / 2, -w / 2, t + 1, w / 2, w / 2, pitch, 0.8, pp, axis="y")
         P.append(_box("handle", -w / 2 + 10, -w / 2 - 2, H, w / 2 - 10, -w / 2 + 4, H + 14, pp))
         P.append(_box("handle2", -w / 2 + 10, w / 2 - 4, H, w / 2 - 10, w / 2 + 2, H + 14, pp))
+        # 载货 (使用态): 内装商品盒堆
+        if params.get("load", 0):
+            zc = t + 6
+            P.append(_box("cargo1", -w / 2 + 50, -w / 2 + 50, zc, -w / 2 + 180, -w / 2 + 180, zc + 130, "paper_kraft"))
+            P.append(_box("cargo2", -w / 2 + 190, -w / 2 + 60, zc, -w / 2 + 320, -w / 2 + 190, zc + 110, "paper_kraft"))
+            P.append(_box("cargo3", -w / 2 + 60, -w / 2 + 190, zc, -w / 2 + 200, w / 2 - 60, zc + 95, "paper_kraft"))
+            P.append(_box("cargo4", w / 2 - 150, -w / 2 + 200, zc, w / 2 - 50, w / 2 - 60, zc + 120, "paper_kraft"))
+            P.append(_box("cargo5", -w / 2 + 90, -w / 2 + 70, zc + 130, -w / 2 + 210, -w / 2 + 190, zc + 220, "paper_kraft"))
         return P
 
     if cid == "shopping_cart":
@@ -128,16 +137,26 @@ def build_parts(params: dict) -> list[dict]:
              _box("fr_s", -bw / 2, -bw / 2, zb, bw / 2, -bw / 2 + t, zb + bh, steel),
              _box("fr_e", bw / 2 - t, -bw / 2, zb, bw / 2, bw / 2, zb + bh, steel),
              _box("fr_w", -bw / 2, -bw / 2, zb, -bw / 2 + t, bw / 2, zb + bh, steel)]
+        gp = params.get("pitch", 7)
         for zi, zf in enumerate((0.35, 0.65)):
             zz = zb + bh * zf
-            P += _grid_bars(f"gxz{zi}", -bw / 2, -bw / 2, zz, bw / 2, bw / 2, 7, 1.2, steel, "x")
-            P += _grid_bars(f"gyz{zi}", -bw / 2, -bw / 2, zz, bw / 2, bw / 2, 7, 1.2, steel, "y")
+            P += _grid_bars(f"gxz{zi}", -bw / 2, -bw / 2, zz, bw / 2, bw / 2, gp, 1.2, steel, "x")
+            P += _grid_bars(f"gyz{zi}", -bw / 2, -bw / 2, zz, bw / 2, bw / 2, gp, 1.2, steel, "y")
         P.append(_box("frame_lo", -bw / 2, -bw / 2, zb - 5, bw / 2, bw / 2, zb, steel))
         for sx, xn in ((-1, "l"), (1, "r")):
             for sy, yn in ((-1, "f"), (1, "b")):
                 P.append(_cyl(f"wheel_{xn}{yn}", 42, 0, 20, pp,
                               cx=sx * (bw / 2 - 60), cy=sy * (bw / 2 - 60)))
         P.append(_box("handle", -bw / 2, -bw / 2 - 8, zb + bh, bw / 2, -bw / 2 + 4, 775.0, steel))
+        # 载货 (使用态): 篮内 3 箱 + 顶挂 1 袋
+        zbase = zb + 10
+        P.append(_box("cargo_a", -bw / 2 + 40, -bw / 2 + 30, zbase, -bw / 2 + 240, bw / 2 - 60, zbase + 220, "paper_kraft"))
+        P.append(_box("cargo_b", -bw / 2 + 250, -bw / 2 + 30, zbase, bw / 2 - 30, bw / 2 - 200, zbase + 180, "paper_kraft"))
+        P.append(_box("cargo_c", -bw / 2 + 250, bw / 2 - 190, zbase, bw / 2 - 30, bw / 2 - 30, zbase + 150, "paper_kraft"))
+        P.append(_box("cargo_bag", bw / 2 - 220, -bw / 2 + 20, zb + bh - 10, bw / 2 - 40, bw / 2 - 40, zb + bh + 90, pp))
+        P.append(_box("cargo_d", -bw / 2 + 50, -bw / 2 + 40, zbase + 230, -bw / 2 + 230, bw / 2 - 70, zbase + 400, "paper_kraft"))
+        P.append(_box("cargo_e", bw / 2 - 230, -bw / 2 + 40, zbase + 190, bw / 2 - 40, bw / 2 - 210, zbase + 360, "paper_kraft"))
+        P.append(_box("cargo_f", -bw / 2 + 60, bw / 2 - 180, zbase + 160, -bw / 2 + 230, bw / 2 - 40, zbase + 300, "paper_kraft"))
         return P
 
     if cid == "barcode_scanner":
@@ -176,6 +195,13 @@ def build_parts(params: dict) -> list[dict]:
              _cyl("rim2", 268.0, H * 0.4, H * 0.43, steel)]
         for k in range(3):
             P.append(_cyl(f"rib_{k}", 266.0, H * (0.25 + k * 0.18), H * (0.25 + k * 0.18) + 14.0, steel))
+        # 穿孔排带 (真实垃圾桶冲孔, 密度 parity): 3 条 × 36 孔圆片
+        import math as _m
+        for b in range(3):
+            zb = H * (0.15 + b * 0.22)
+            for k in range(36):
+                a = 2 * _m.pi * k / 36
+                P.append(_cyl(f"perf_{b}_{k}", 9.0, zb, zb + 9.0, pp, cx=278.0 * _m.cos(a), cy=278.0 * _m.sin(a), n=8))
         P.append(_box("pedal", -70.0, 300.0, 0.0, 70.0, 360.0, 18.0, steel))
         return P
 
@@ -192,11 +218,28 @@ def build_parts(params: dict) -> list[dict]:
         for kx, px in enumerate((-w / 2, w / 2)):
             for ky, py in enumerate((-D / 2, D / 2)):
                 P.append(_box(f"post_{kx}_{ky}", px - 25, py - 25, 0, px + 25, py + 25, H, steel))
+        cartons = []
         for lvl in (0.35, 0.68):
             z = H * lvl
             P.append(_box("beam_a", -w / 2, -D / 2, z, w / 2, -D / 2 + 40, z + 45, steel))
             P.append(_box("beam_b", -w / 2, D / 2 - 40, z, w / 2, D / 2, z + 45, steel))
             P.append(_box("deck", -w / 2 + 20, -D / 2 + 30, z + 45, w / 2 - 20, D / 2 - 30, z + 60, alu))
+            # 满载纸箱 (使用态): 每层 2车道 × 4列, 前倾 (重力流)
+            zd = z + 60
+            for lane, y0 in ((0, -D / 2 + 60), (1, 20.0)):
+                for col in range(4):
+                    cx0 = -w / 2 + 90 + col * 210
+                    tilt = 2.5  # 度, 流向微倾
+                    ca, sa = math.cos(math.radians(tilt)), math.sin(math.radians(tilt))
+                    cv = [(cx0, y0, zd), (cx0 + 190, y0, zd), (cx0 + 190, y0 + 170, zd), (cx0, y0 + 170, zd),
+                          (cx0, y0, zd + 300), (cx0 + 190, y0, zd + 300), (cx0 + 190, y0 + 170, zd + 300), (cx0, y0 + 170, zd + 300)]
+                    rv = [(vx - cx0 - 95, vz - zd) for vx, _, vz in cv]
+                    cv2 = [(cx0 + 95 + rx * ca - rz * sa, y, zd + rx * sa + rz * ca) for (rx, rz), (_, y, _) in zip(rv, cv)]
+                    cartons.append({"name": f"carton_l{lvl}_{lane}_{col}", "verts": cv2,
+                                    "tris": [[0, 3, 2], [0, 2, 1], [4, 5, 6], [4, 6, 7], [0, 1, 5], [0, 5, 4],
+                                             [1, 2, 6], [1, 6, 5], [2, 3, 7], [2, 7, 6], [3, 0, 4], [3, 4, 7]],
+                                    "material_id": "paper_kraft"})
+        P = P + cartons
         return P
 
     if cid in ("storage_basket_mesh", "wire_mesh_container", "bulk_container_mesh"):
@@ -205,19 +248,21 @@ def build_parts(params: dict) -> list[dict]:
         w = D
         t = 3.0 if cid == "storage_basket_mesh" else 4.0
         h = H
-        pitch = 10 if cid != "bulk_container_mesh" else 14
+        pitch = params.get("pitch", 10 if cid != "bulk_container_mesh" else 14)
+        bar_t = bar_t if t < 4.0 else 2.0
+        band = params.get("band", 12.0)
         P = [_box("floor", -w / 2, -w / 2, 0, w / 2, w / 2, t, steel)]
         # 竖栅: 四壁全高
-        P += _grid_bars("vz_x", -w / 2, -w / 2, h * 0.98, w / 2, w / 2, pitch, t * 0.5, steel, "x")
-        P += _grid_bars("vz_y", -w / 2, -w / 2, h * 0.98, w / 2, w / 2, pitch, t * 0.5, steel, "y")
+        P += _grid_bars("vz_x", -w / 2, -w / 2, h * 0.98, w / 2, w / 2, pitch, bar_t, steel, "x")
+        P += _grid_bars("vz_y", -w / 2, -w / 2, h * 0.98, w / 2, w / 2, pitch, bar_t, steel, "y")
         # 横带: 每 12mm 一层全高
         zi = 0
-        zz = t + 12.0
+        zz = t + band
         while zz < h - 8.0:
-            P += _grid_bars(f"hxy{zi}", -w / 2, -w / 2, zz, w / 2, w / 2, pitch, t * 0.5, steel, "x")
-            P += _grid_bars(f"hyx{zi}", -w / 2, -w / 2, zz, w / 2, w / 2, pitch, t * 0.5, steel, "y")
+            P += _grid_bars(f"hxy{zi}", -w / 2, -w / 2, zz, w / 2, w / 2, pitch, bar_t, steel, "x")
+            P += _grid_bars(f"hyx{zi}", -w / 2, -w / 2, zz, w / 2, w / 2, pitch, bar_t, steel, "y")
             zi += 1
-            zz += 12.0
+            zz += band
         # 上缘框
         P.append(_box("rim", -w / 2, -w / 2, h - 6.0, w / 2, w / 2, h, steel))
         return P

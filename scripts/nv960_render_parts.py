@@ -115,6 +115,23 @@ def studio(scene):
     scene.render.resolution_x = scene.render.resolution_y = 1024
     scene.view_settings.view_transform = "AgX"
     scene.view_settings.look = "AgX - Punchy"
+    # Freestyle 描边 (风格 parity: 线稿感, 全类通用)
+    scene.render.use_freestyle = True
+    vl = scene.view_layers[0]
+    vl.use_freestyle = True
+    fs = vl.freestyle_settings
+    fs.use_smoothness = True
+    ls = bpy.data.linestyles.get("ParityEdge") or bpy.data.linestyles.new("ParityEdge")
+    ls.color = (0.04, 0.04, 0.05)
+    ls.thickness = 1.6
+    for crest in fs.linesets:
+        fs.linesets.remove(crest)
+    lineset = fs.linesets.new("edges")
+    lineset.linestyle = ls
+    lineset.select_silhouette = True
+    lineset.select_border = True
+    lineset.select_crease = True
+    lineset.select_edge_mark = False
     scene.world.use_nodes = True
     nt = scene.world.node_tree
     for n in list(nt.nodes):
@@ -193,8 +210,13 @@ def render_parts(parts_json: Path, out_png: Path):
     gm2 = bpy.data.materials.new("ground_dark")
     gm2.use_nodes = True
     gb2 = gm2.node_tree.nodes["Principled BSDF"]
-    gb2.inputs["Base Color"].default_value = (0.055, 0.058, 0.06, 1)
-    gb2.inputs["Roughness"].default_value = 0.9
+    gb2.inputs["Base Color"].default_value = (0.42, 0.43, 0.44, 1)
+    gb2.inputs["Roughness"].default_value = 0.85
+    # 细噪纹理 (影棚地面质感 parity)
+    gt = gm2.node_tree.nodes.new("ShaderNodeTexNoise")
+    gt.inputs["Scale"].default_value = 320.0
+    gt.inputs["Detail"].default_value = 6.0
+    gm2.node_tree.links.new(gt.outputs["Fac"], gb2.inputs["Roughness"])
     gme.materials.append(gm2)
     sc.collection.objects.link(bpy.data.objects.new("ground", gme))
 
@@ -206,7 +228,16 @@ def render_parts(parts_json: Path, out_png: Path):
         me.transform(mathutils.Matrix.Scale(0.001, 4))  # mm→m 统一
         if p.get("name") in ("label_band", "decal"):
             print(f"BANDDBG mesh={p['name']} verts={len(p['verts'])} label_png={p.get('decal_png') or label_png}", flush=True)
-        if p.get("name") == "decal":
+        if p.get("name", "").startswith("cargo") and (Path("/tmp/nv960_labels/hf_cargo.png").exists() or label_png):
+            _decal_uv(me)
+            m = bpy.data.materials.new("decal_cargo")
+            m.use_nodes = True
+            tex = m.node_tree.nodes.new("ShaderNodeTexImage")
+            tex.image = bpy.data.images.load(str(Path("/tmp/nv960_labels/hf_cargo.png")) if Path("/tmp/nv960_labels/hf_cargo.png").exists() else label_png)
+            b = m.node_tree.nodes["Principled BSDF"]
+            b.inputs["Roughness"].default_value = 0.5
+            m.node_tree.links.new(tex.outputs["Color"], b.inputs["Base Color"])
+        elif p.get("name") == "decal":
             _decal_uv(me)
             m = bpy.data.materials.new("decal")
             m.use_nodes = True
@@ -246,6 +277,26 @@ def render_parts(parts_json: Path, out_png: Path):
         zs.append(min(v.co.z for v in me.vertices)); zs.append(max(v.co.z for v in me.vertices))
     cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
     r = max(max(xs) - min(xs), max(ys) - min(ys), max(zs) - min(zs)) * 0.5
+
+    # 影棚背景板 (产品后方, 细噪浅灰 — 棚拍质感 parity)
+    bme = bpy.data.meshes.new("backdrop")
+    by = cy + r * 4.0
+    bh = max(zs) * 2.5 + r * 2.0
+    bw = r * 10.0
+    bme.from_pydata([(-bw + cx, by, -0.5), (bw + cx, by, -0.5), (bw + cx, by, bh), (-bw + cx, by, bh)],
+                    [], [(0, 1, 2, 3)])
+    bme.validate()
+    bm2 = bpy.data.materials.new("backdrop_mat")
+    bm2.use_nodes = True
+    bb2 = bm2.node_tree.nodes["Principled BSDF"]
+    bb2.inputs["Base Color"].default_value = (0.52, 0.53, 0.54, 1)
+    bb2.inputs["Roughness"].default_value = 0.9
+    bt = bm2.node_tree.nodes.new("ShaderNodeTexNoise")
+    bt.inputs["Scale"].default_value = 240.0
+    bt.inputs["Detail"].default_value = 8.0
+    bm2.node_tree.links.new(bt.outputs["Fac"], bb2.inputs["Roughness"])
+    bme.materials.append(bm2)
+    sc.collection.objects.link(bpy.data.objects.new("backdrop", bme))
 
     az, el = math.radians(45.0), math.radians(30.0)
     d = r / math.sin(math.atan(18.0 / 60.0)) * 1.12
