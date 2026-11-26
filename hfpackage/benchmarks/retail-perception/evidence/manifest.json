@@ -1,0 +1,29 @@
+{
+ "benchmark": "retail-perception v0",
+ "protocol": "experimental-protocol.md (bench_a_perception_protocol.md, v0.1 修订版)",
+ "iterations": [
+  {
+   "id": "v0.1-synthetic-only",
+   "corpus": "141 img / 4739 boxes (labels-pixel contradiction VOID, regenerated)",
+   "note": "superseded"
+  },
+  {
+   "id": "v0.2-domain-randomization",
+   "corpus": "120 img / 3979 boxes / 12 classes",
+   "syn_val_mAP50": 0.858,
+   "real_mAP50": 0.0032
+  },
+  {
+   "id": "v0.3-real-finetuning",
+   "train": "6 real img / 102 boxes + 40 syn",
+   "real_mAP50": 0.0015
+  }
+ ],
+ "w1_audit": "failure-mode distribution NO_DET 18% / WRONG_CLASS 78% / POOR_IOU 3% / OK 1%",
+ "counterfactual": "blur-9px collapses detections 226.6→6.6; posterize/gray survive",
+ "model_checkpoint": {
+  "path": "runs/yolov8n/weights/best.pt (v0.2 DR)",
+  "sha256": "a1a0ba8e9e8af4cd9fd0f1897a6e15c20542a7e75e4dec421395fcf1332c59ad"
+ },
+ "eval_set": "5 real photos / 177 boxes / web-sourced / single-annotator+20% double-pass"
+}
