@@ -41,6 +41,12 @@ Pairwise comparison under two independently defined protocols (full formulas & t
 | Seven-metric pixel composite | **82.0%** of pairs net-positive | In this study's predefined seven-metric composite protocol |
 | Strict four-axis contract | **90.94%** (873W/87L) | Independent four-axis contract experiment, fully disclosed |
 
+The two protocols answer different questions: the strict four-axis contract asks
+"who wins this specific four-clause asset contract" (binary per pair); the seven-metric
+composite asks "across the full pixel-statistics spectrum, in what fraction of pairs does
+the net advantage lie" — independent experiments, not strict/loose versions of one scale.
+Full formulas: `docs/nv960/protocols.md`.
+
 Metric-level (qualified phrasing): 98.1% of pairs score higher on S1 sharpness; 88.4% higher
 on E1 edge density; 70.2% higher on E2 direction entropy. Higher metric values are not
 claims of superior realism or asset quality. Statistical unit: 960 pairs derive from 480

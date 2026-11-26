@@ -5,7 +5,7 @@
 - 960 对源自 480 个参考资产 (每资产 2 缩略图), **非 960 个独立资产**; 族级 (48) 为现役聚合粒度。
 - 8.4pp = E1 轴胜率变化 (96.8%→88.4%), 非 99.84% 整体胜率降 8.4pp。
 - 双协议公式/平局策略/差异解释: docs/nv960_protocols.md; 逐对台账含双 md5+统一分辨率对照:
-  docs/nv960_evidence_ledger.json (统一 256²: 884W/72L, 结论稳健)。
+  docs/nv960_evidence_ledger.json (统一 256²: 884W/4T/72L=960 对 (决出对胜率 92.08%), 结论稳健)。
 - 环境边界: docs/nv960_environment.json (Apple M1 Max 64GB 本地实证; Windows/CPU 未测)。
 - 许可与归因: docs/nv960_licenses.json (NVIDIA USDCraft-10K Apache-2.0, 并排研究性引用)。
 
