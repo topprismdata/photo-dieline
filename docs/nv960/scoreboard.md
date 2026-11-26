@@ -5,7 +5,11 @@
 - 960 对源自 480 个参考资产 (每资产 2 缩略图), **非 960 个独立资产**; 族级 (48) 为现役聚合粒度。
 - 8.4pp = E1 轴胜率变化 (96.8%→88.4%), 非 99.84% 整体胜率降 8.4pp。
 - 双协议公式/平局策略/差异解释: docs/nv960/protocols.md; 逐对台账含双 md5+统一分辨率对照:
-  docs/nv960/evidence_ledger.json (统一 256² 重裁: 884W/4T/72L (汇总回执) → **逐轴修正后 847W/41T/72L** (全样本 88.23%, 非平局 92.17%); 负对集合不变, 37 对 WIN→TIE (E1 容差带内); 结论: 不反转, 但逐件裁决受分辨率影响)。
+  docs/nv960/evidence_ledger.json (统一 256² 重裁 (逐轴复算确认): **884W/4T/72L** (全样本 92.08%; 非平局 92.47%) —
+原始统一口径经逐轴复算确认正确 (回归门禁 native/unified 不一致数均 = 0);
+过程记录: axes 重建初版因 texture 列缺失短暂得出 847W/41T/72L, 已废弃。
+迁移矩阵 (逐对, native→unified): WIN 859 保持 / 12→LOSS / 2→TIE; LOSS 60 保持 /
+25→WIN / 2→TIE — 整体不反转, 逐件有双向迁移 (migration_matrices.json)。
 - 环境边界: docs/nv960/environment.json (Apple M1 Max 64GB 本地实证; Windows/CPU 未测)。
 - 许可与归因: docs/nv960/licenses.json (NVIDIA USDCraft-10K Apache-2.0, 并排研究性引用)。
 
