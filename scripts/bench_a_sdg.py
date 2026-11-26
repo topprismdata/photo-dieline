@@ -287,7 +287,7 @@ def make_scene(idx, split):
     SCENE_OBJS = []
     boards = build_shelf()
     def _tint(lo, hi):
-        return (rng.uniform(lo, hi), rng.uniform(0.9, 1.0), rng.uniform(0.8, 1.0), 1)
+        return (rng.uniform(lo, hi), rng.uniform(0.9, 1.0), rng.uniform(0.8, 1.0))
     key = add_light("sun_", (rng.uniform(0.1, 0.9), rng.uniform(-1.4, -0.9), rng.uniform(1.9, 2.4)),
                     rng.uniform(220, 560), rng.uniform(1.2, 2.6))
     key.data.color = _tint(0.75, 1.0)
@@ -324,18 +324,29 @@ def make_scene(idx, split):
                     continue
                 obs, ws, hs = spawn(cid, (fx + rng.uniform(-0.006, 0.006), -0.22 + rng.uniform(-0.02, 0.02), zboard), yaw + rng.uniform(-4, 4))
                 records.append((obs, cid))
-                if rng.random() < 0.20:
-                    bpy.ops.mesh.primitive_cube_add(size=1,
-                        location=(fx + rng.uniform(-0.03, 0.03), -0.30 + rng.uniform(-0.03, 0.0),
-                                  zboard + rng.uniform(0.02, H * 0.5)))
-                    occ = bpy.context.object
-                    occ.scale = (W * rng.uniform(0.9, 1.4), 0.05, H * rng.uniform(0.25, 0.6))
-                    occ.name = f"occluder_{len(records)}"
-                    om = bpy.data.materials.new(f"occ{len(records)}")
-                    om.use_nodes = True
-                    ob = om.node_tree.nodes['Principled BSDF']
-                    ob.inputs['Base Color'].default_value = (rng.uniform(0.1, 0.5),)*3 + (1,)
-                    occ.data.materials.append(om)
+    bpy.context.view_layer.update()
+
+    # 前景遮挡注入 (v0.2): 最多2个, 深色, 位于货架前缘; 无标签=背景
+    for k in range(rng.randint(0, 3)):
+        if not records:
+            break
+        obs_t, cid_t = records[rng.randint(0, len(records)-1)]
+        pts = [o.matrix_world @ Vector(c) for o in obs_t for c in o.bound_box]
+        if not pts:
+            continue
+        cx = sum(p.x for p in pts) / len(pts)
+        cz = sum(p.z for p in pts) / len(pts)
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(cx + rng.uniform(-0.02, 0.02), -0.32, cz))
+        occ = bpy.context.object
+        occ.scale = (rng.uniform(0.06, 0.10), 0.04, rng.uniform(0.10, 0.22))
+        occ.rotation_euler = (0, math.radians(rng.uniform(-8, 8)), math.radians(rng.uniform(-10, 10)))
+        om = bpy.data.materials.new(f"occ_{idx}_{k}")
+        om.use_nodes = True
+        ob = om.node_tree.nodes['Principled BSDF']
+        g = rng.uniform(0.04, 0.18)
+        ob.inputs['Base Color'].default_value = (g, g * rng.uniform(0.9, 1.1), g * rng.uniform(0.85, 1.1), 1)
+        occ.data.materials.append(om)
+        SCENE_OBJS.append(occ)
     bpy.context.view_layer.update()
 
     labels, ann = [], []
