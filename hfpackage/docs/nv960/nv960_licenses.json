@@ -1,0 +1,17 @@
+{
+ "our_assets": "自有生成 (Blender 参数化 + TOPPRISM 印刷), 许可随 hfpackage LICENSE",
+ "third_party_data": {
+  "NVIDIA USDCraft-10K thumbnails": {
+   "license": "Apache-2.0 (nvidia/USDCraft-10K)",
+   "use": "本地逐对比研究 + contact sheets 内并排展示 (低分辨率缩略图)",
+   "attribution": "© NVIDIA, USDCraft-10K, Apache-2.0; 来源: https://huggingface.co/datasets/nvidia/USDCraft-10K | 论文: https://arxiv.org/abs/2610.11322",
+   "redistribution_note": "Sheets 仅为研究性并排引用, 完整数据集请取自官方源"
+  },
+  "CC 资产 (印刷底图/道具)": "CC0 / CC-BY, 逐件存证 assets/models/zoo/lic_*.txt"
+ },
+ "citations": [
+  "NVIDIA USDCraft 官方主页: https://nvlabs.github.io/USDCraft/",
+  "数据集: https://huggingface.co/datasets/nvidia/USDCraft-10K",
+  "论文: https://arxiv.org/abs/2610.11322"
+ ]
+}

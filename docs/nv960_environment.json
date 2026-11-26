@@ -1,0 +1,31 @@
+{
+ "hardware": {
+  "chip": "Apple M1 Max",
+  "memory_gb": 64,
+  "os": "macOS-27.2.1-arm64-arm-64bit-Mach-O",
+  "arch": "arm64"
+ },
+ "render": {
+  "blender": "5.2.2 LTS (hash d13f752e3b8c)",
+  "backend": "Metal (Cycles/Eevee via Blender Metal)",
+  "local": true
+ },
+ "training_inference": {
+  "pytorch": "MPS backend (local)",
+  "sdxl_detail_pass": "/tmp/sdvenv diffusers 0.33.1 + transformers 4.51.3 + huggingface-hub 0.30.2, fp32 + attention_slicing (local; 实测对线稿渲染负收益, 存档未用于终版)"
+ },
+ "verdict": {
+  "all_local": true,
+  "numpy_pillow_only": true
+ },
+ "external_calls": {
+  "gpt_review": "OpenAI ChatGPT (外部, 仅用于评审文本, 不参与指标计算)",
+  "note": "指标全部本地计算; 外部模型仅辅助生成评审意见与部分标签文案设计, 已在此披露"
+ },
+ "not_tested": [
+  "Windows",
+  "Linux CPU-only",
+  "其他 GPU 后端"
+ ],
+ "claim": "已在 Apple Silicon 实证端到端; 已验证执行路径无 CUDA 硬依赖; 未测平台见 not_tested"
+}
