@@ -57,7 +57,7 @@ scene.render.engine = 'CYCLES'
 scene.cycles.device = 'CPU'
 scene.cycles.samples = 48
 scene.cycles.use_denoising = True
-scene.view_settings.exposure = -1.7
+scene.view_settings.exposure = -1.35
 scene.render.resolution_x = scene.render.resolution_y = args.res
 scene.render.film_transparent = False
 
@@ -127,6 +127,8 @@ ASSETS = {}
 for cid in CLASSES:
     ASSETS[cid] = import_asset(cid)
 
+SCENE_OBJS = []
+
 # 玻璃透射钳制: 语料可读性优先 (透射>0.5 压到 0.4, 底色加深)
 for m in bpy.data.materials:
     if not m.use_nodes:
@@ -152,6 +154,7 @@ def spawn(cid, loc, yaw_deg, scale_jitter=0.04):
         d.matrix_world = M_place @ lmat
         bpy.context.scene.collection.objects.link(d)
         obs.append(d)
+        SCENE_OBJS.append(d)
     return obs, W * s, H * s
 
 # ---- 货架搭建 ----
@@ -175,6 +178,7 @@ def build_shelf(broads=3, width=1.6, depth=0.42, gap=0.42):
     bp = bpy.context.object
     bp.scale = (width + 0.1, 0.03, 1.6)
     bp.data.materials.append(board_mat)
+    bp.name = "backplate"
     return ys
 
 def visible_frac(obs, cam, res):
@@ -214,9 +218,16 @@ def project_bbox(obs, cam, w, h):
 
 # ---- 场景生成 ----
 def make_scene(idx, split):
-    for o in list(bpy.data.objects):
-        if o.name.startswith(("inst_", "cam_", "sun_", "fill_")):
+    global SCENE_OBJS
+    for o in SCENE_OBJS:
+        try:
             bpy.data.objects.remove(o, do_unlink=True)
+        except Exception:
+            pass
+    for o in list(bpy.data.objects):
+        if o.name.startswith(("cam_", "sun_", "fill_", "board", "backplate")):
+            bpy.data.objects.remove(o, do_unlink=True)
+    SCENE_OBJS = []
     boards = build_shelf()
     add_light("sun_", (0.5, -1.2, 2.2), rng.uniform(300, 480), 2.0)
     add_light("fill_", (-0.9, -0.8, 1.6), rng.uniform(120, 220), 1.5)
