@@ -13,13 +13,13 @@ from pathlib import Path
 import numpy as np
 
 MATERIALS = {
-    "paper_kraft", "paper_white", "glass_clear", "metal_alu", "metal_steel",
+    "paper_kraft", "paper_white", "glass_clear", "glass_amber", "glass_green", "glass_frosted", "metal_alu", "metal_steel",
     "plastic_pp", "plastic_pp_translucent", "plastic_pet_clear", "plastic_hdpe", "wood_pine",
     "ceramic_gloss", "tape_craft", "label_paper", "foil_lid",
 }
 # kg/m³ (通用工程口径, 量产按实测替换)
 DENSITY = {
-    "paper_kraft": 700.0, "paper_white": 800.0, "glass_clear": 2500.0,
+    "paper_kraft": 700.0, "paper_white": 800.0, "glass_clear": 2500.0, "glass_amber": 2500.0, "glass_green": 2500.0, "glass_frosted": 2500.0,
     "metal_alu": 2700.0, "metal_steel": 7850.0, "plastic_pp": 905.0,
     "plastic_pp_translucent": 905.0,
     "plastic_pet_clear": 1380.0, "plastic_hdpe": 960.0, "wood_pine": 500.0,
@@ -176,6 +176,9 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
     mat_paths = {}
     _USD_PARAMS = {
         "glass_clear": ((0.62, 0.74, 0.68), 0.02, 0.0, 0.92),
+        "glass_amber": ((0.55, 0.33, 0.10), 0.02, 0.0, 0.92),
+        "glass_green": ((0.28, 0.52, 0.30), 0.02, 0.0, 0.92),
+        "glass_frosted": ((0.78, 0.76, 0.71), 0.38, 0.0, 0.85),
         "metal_alu": ((0.91, 0.92, 0.92), 0.25, 1.0, 0.0),
         "metal_steel": ((0.77, 0.78, 0.78), 0.3, 1.0, 0.0),
         "plastic_pp": ((0.85, 0.86, 0.84), 0.38, 0.0, 0.0),

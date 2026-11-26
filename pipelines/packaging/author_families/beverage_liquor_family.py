@@ -49,7 +49,7 @@ MAT_GLASS_GREEN = "glass_green"
 MAT_GLASS_FROST = "glass_frosted"
 MAT_ALU = "metal_alu"
 MAT_STEEL = "metal_steel"
-MAT_CROWN = "metal_crown_steel"
+MAT_CROWN = "metal_steel"
 MAT_PAPER_KRAFT = "paper_kraft"
 
 
@@ -113,7 +113,7 @@ def _beer_bottle(H, D, mat):
     lip_r = R * 0.52
     z_lip = H - 12.0
     outer = [
-        (R * 0.82, 1.2), (R, 5.0), (R, H * 0.34), (R, H * 0.62),
+        (R * 0.82, 0.0), (R, 5.0), (R, H * 0.34), (R, H * 0.62),
         (R * 0.96, H * 0.66), (R * 0.78, H * 0.72),
         (lip_r + 1.8, H * 0.80), (lip_r + 1.8, z_lip),
         (lip_r, z_lip), (lip_r, z_lip - wall), (lip_r + 1.8, z_lip - wall),
@@ -137,7 +137,7 @@ def _baijiu_500(H, D):
     belly = R * 1.06
     nr = R * 0.44
     outer = [
-        (R * 0.78, 1.5), (R * 0.97, 7.0), (belly, H * 0.34), (belly * 0.99, H * 0.52),
+        (R * 0.78, 0.0), (R * 0.97, 7.0), (belly, H * 0.34), (belly * 0.99, H * 0.52),
         (R * 0.72, H * 0.72), (nr + wall, H * 0.84), (nr + wall, H - 12.0),
         (nr, H - 12.0), (nr, H - 12.0 - wall), (nr + wall, H - 12.0 - wall),
     ]
@@ -159,7 +159,7 @@ def _whisky_700(H, D):
     wall = 2.4
     nr = R * 0.50
     outer = [
-        (R * 0.85, 2.0), (R, 8.0), (R, H * 0.48), (R * 0.93, H * 0.58),
+        (R * 0.85, 0.0), (R, 8.0), (R, H * 0.48), (R * 0.93, H * 0.58),
         (R * 0.62, H * 0.70), (nr + wall, H * 0.78), (nr + wall, H - 11.0),
         (nr, H - 11.0), (nr, H - 11.0 - wall), (nr + wall, H - 11.0 - wall),
     ]
@@ -181,7 +181,7 @@ def _vodka_700(H, D):
     wall = 2.2
     nr = R * 0.46
     outer = [
-        (R * 0.82, 2.0), (R, 7.0), (R, H * 0.56), (R * 0.80, H * 0.66),
+        (R * 0.82, 0.0), (R, 7.0), (R, H * 0.56), (R * 0.80, H * 0.66),
         (nr + wall, H * 0.74), (nr + wall, H - 10.0),
         (nr, H - 10.0), (nr, H - 10.0 - wall), (nr + wall, H - 10.0 - wall),
     ]
@@ -204,7 +204,7 @@ def _beer_can_500(H, D):
     dome = 5.0
     z_rim = H - 2.0
     outer = [
-        (R * 0.86, 0.8), (R, dome), (R, z_rim - 2.0), (R * 0.965, z_rim),
+        (R * 0.86, 0.0), (R, dome), (R, z_rim - 2.0), (R * 0.965, z_rim),
         (R * 0.965, H - 0.8), (R * 0.62, H - 0.8),
         (R * 0.62, H - 1.6), (R * 0.965, H - 1.6), (R * 0.965 - wall, z_rim),
         (R * 0.965 - wall, H - 2.2),

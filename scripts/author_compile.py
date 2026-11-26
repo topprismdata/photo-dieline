@@ -21,10 +21,17 @@ def main() -> int:
     ap.add_argument("family_file")
     ap.add_argument("--out-dir", default="/tmp/author")
     ap.add_argument("--render-json", action="store_true")
+    ap.add_argument("--class", dest="class_id", default=None,
+                    help="编译指定类 (默认 CLASSES[0])")
     args = ap.parse_args()
 
     mod = load_family(args.family_file)
     params = dict(mod.DEFAULTS)
+    if args.class_id:
+        if args.class_id not in mod.DEFAULTS:
+            print(f"COMPILATION FAIL — unknown class {args.class_id}")
+            return 1
+        params["class_id"] = args.class_id
     parts = mod.build_parts(params)
     rep = validate_parts(parts, params, mod.FAMILY)
     if not rep["ok"]:
@@ -35,7 +42,7 @@ def main() -> int:
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    cls = mod.CLASSES[0]
+    cls = args.class_id or mod.CLASSES[0]
     usdc = out_dir / f"{cls}.usdc"
     ev = export_parts_usdc(parts, usdc, rep["mass_kg"], mod.FAMILY)
     print(f"COMPILATION PASS — {mod.FAMILY}/{cls}: parts={len(parts)} "
