@@ -4,10 +4,10 @@
 
 - 960 对源自 480 个参考资产 (每资产 2 缩略图), **非 960 个独立资产**; 族级 (48) 为现役聚合粒度。
 - 8.4pp = E1 轴胜率变化 (96.8%→88.4%), 非 99.84% 整体胜率降 8.4pp。
-- 双协议公式/平局策略/差异解释: docs/nv960_protocols.md; 逐对台账含双 md5+统一分辨率对照:
-  docs/nv960_evidence_ledger.json (统一 256² 重裁: 884W/4T/72L (汇总回执) → **逐轴修正后 847W/41T/72L** (全样本 88.23%, 非平局 92.17%); 负对集合不变, 37 对 WIN→TIE (E1 容差带内); 结论: 不反转, 但逐件裁决受分辨率影响)。
-- 环境边界: docs/nv960_environment.json (Apple M1 Max 64GB 本地实证; Windows/CPU 未测)。
-- 许可与归因: docs/nv960_licenses.json (NVIDIA USDCraft-10K Apache-2.0, 并排研究性引用)。
+- 双协议公式/平局策略/差异解释: docs/nv960/protocols.md; 逐对台账含双 md5+统一分辨率对照:
+  docs/nv960/evidence_ledger.json (统一 256² 重裁: 884W/4T/72L (汇总回执) → **逐轴修正后 847W/41T/72L** (全样本 88.23%, 非平局 92.17%); 负对集合不变, 37 对 WIN→TIE (E1 容差带内); 结论: 不反转, 但逐件裁决受分辨率影响)。
+- 环境边界: docs/nv960/environment.json (Apple M1 Max 64GB 本地实证; Windows/CPU 未测)。
+- 许可与归因: docs/nv960/licenses.json (NVIDIA USDCraft-10K Apache-2.0, 并排研究性引用)。
 
 ## ⚠️ 指标混杂撤回声明 (2026-11-26 像素级审计)
 

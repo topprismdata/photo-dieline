@@ -1,0 +1,16 @@
+{
+ "native_to_unified": {
+  "WIN->WIN": 832,
+  "LOSS->LOSS": 60,
+  "WIN->TIE": 29,
+  "LOSS->WIN": 15,
+  "WIN->LOSS": 12,
+  "LOSS->TIE": 12
+ },
+ "unified_initial_to_fixed": {
+  "WIN->WIN": 847,
+  "LOSS->LOSS": 72,
+  "WIN->TIE": 41
+ },
+ "note": "初版=缺陷聚合(无负轴即WIN); 修正版=逐轴聚合; 逐对生成非汇总倒推"
+}
