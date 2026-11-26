@@ -38,7 +38,30 @@ REAL = {
     "beverage_can_330": (0.066, 0.115), "bottle_wine": (0.076, 0.300),
     "food_container_1l": (0.120, 0.100), "rsc_rsc_closed": (0.300, 0.220),
 }
-MAT_OVERRIDE = {}  # usdc 自带素材质
+# 零件名 → 材质 (素材质库, 与 render_materials.py 同源色值; USD 绑定丢失的兜底)
+RENDER_LIB = {
+    "glass_clear":  ((0.22, 0.34, 0.28), 0.10, 0.0, 0.30),
+    "glass_amber":  ((0.38, 0.22, 0.07), 0.10, 0.0, 0.28),
+    "glass_green":  ((0.16, 0.34, 0.19), 0.10, 0.0, 0.28),
+    "glass_frosted":((0.52, 0.50, 0.45), 0.42, 0.0, 0.15),
+    "metal_alu":    ((0.60, 0.61, 0.62), 0.30, 1.0, 0.0),
+    "metal_steel":  ((0.45, 0.46, 0.47), 0.35, 1.0, 0.0),
+    "paper_kraft":  ((0.44, 0.315, 0.198), 0.84, 0.0, 0.0),
+}
+PART_MATERIALS = {
+    "glass_shell": "glass_clear", "crown_cap": "metal_steel", "screw_cap": "metal_steel",
+    "can_shell": "metal_alu", "lid": "metal_alu", "pull_tab": "metal_alu",
+    "floor": "paper_kraft", "wall": "paper_kraft", "box": "paper_kraft",
+    "body": "paper_kraft",
+}
+ASSET_BODY_MAT = {
+    "beer_bottle_330": "glass_green", "beer_bottle_500": "glass_amber",
+    "beer_can_500": "metal_alu", "baijiu_bottle_500": "glass_frosted",
+    "wine_bottle_750": "glass_green", "whisky_bottle_700": "glass_amber",
+    "vodka_bottle_700": "glass_clear", "liquor_gift_dual": "paper_kraft",
+    "beverage_can_330": "metal_alu", "bottle_wine": "glass_green",
+    "food_container_1l": "glass_clear", "rsc_rsc_closed": "paper_kraft",
+}
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--num-images", type=int, default=300)
@@ -120,6 +143,36 @@ def import_asset(cid):
         o.data.transform(root.matrix_world.copy())   # 变换烘进顶点
         o.parent = None
         o.matrix_world = Matrix.Identity(4)
+        # USD 材质绑定常丢失 → 沿父链匹配零件名; 失败则用资产级兜底
+        names = [o.name.lower()]
+        par = o.parent
+        while par is not None:
+            names.append(par.name.lower())
+            par = par.parent
+        part_mat = None
+        for nm in names:
+            for key, mid in PART_MATERIALS.items():
+                if key in nm:
+                    part_mat = mid
+                    break
+            if part_mat:
+                break
+        if part_mat is None:
+            part_mat = ASSET_BODY_MAT.get(cid, 'glass_clear')
+        if part_mat:
+            if part_mat not in bpy.data.materials:
+                m = bpy.data.materials.new(part_mat)
+                m.use_nodes = True
+                b = m.node_tree.nodes['Principled BSDF']
+                rgb, rough, metal, transp = RENDER_LIB[part_mat]
+                b.inputs['Base Color'].default_value = (*rgb, 1.0)
+                b.inputs['Roughness'].default_value = rough
+                b.inputs['Metallic'].default_value = metal
+                tw = b.inputs.get('Transmission Weight')
+                if tw is not None:
+                    tw.default_value = min(transp, 0.35)
+            o.data.materials.clear()
+            o.data.materials.append(bpy.data.materials[part_mat])
         locals_.append((o, Matrix.Identity(4)))
     return col, root, locals_, (W, H)
 
