@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """NV960 战役: 48 类逐对对比 contact sheet 生成.
-输入: docs/nv960_scoreboard.json (逐对裁决) + ours_map + /tmp/nv960 缩略图
+输入: docs/nv960/scoreboard.json (逐对裁决) + ours_map + /tmp/nv960 缩略图
 输出: docs/images/nv960/contact_sheets/<CID>.png (每类 10 资产 × 2 底 vs 我方渲染 + 判定角标)
 """
 import argparse
@@ -72,7 +72,7 @@ def sheet_for(cid, pairs, our_path, out_path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--board', default='docs/nv960_scoreboard.json')
+    ap.add_argument('--board', default='docs/nv960/scoreboard.json')
     ap.add_argument('--ours', default='manifests/nv960_ours_map.json')
     ap.add_argument('--out', default='docs/images/nv960/contact_sheets')
     args = ap.parse_args()

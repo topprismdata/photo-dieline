@@ -11,7 +11,7 @@
   T1 纹理熵 (灰度 64-bin 共现粗粒度 → 用 16-bin 灰度熵代理, 冻结参数)
 裁决: 每指标 my>their=win / <0.85*their=loss / 其余 tie (与 E1 判负线同容差);
       复合 = win 数 - loss 数. 输出逐类胜率矩阵 + 与 E1-only 裁决的一致性复查.
-用法: python3 scripts/nv960_pixel_audit.py --ours manifests/nv960_ours_map.json --out docs/nv960_pixel_audit.json
+用法: python3 scripts/nv960_pixel_audit.py --ours manifests/nv960_ours_map.json --out docs/nv960/pixel_audit.json
 """
 import argparse, csv, json, glob, os, sys
 from pathlib import Path

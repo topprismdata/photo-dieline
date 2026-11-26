@@ -2,7 +2,7 @@
 """960 逐对裁决引擎: NVIDIA USDCraft-10K 零售缩略图 vs Pack10K 同语义类渲染.
 四轴: 分辨率 / V-gate (我方独立 V1-V7) / 纹理 / E1 边缘密度.
 判: 任一轴胜且无轴负=WIN; 全平=TIE; 任一轴负=LOSS.
-用法: python3 scripts/nv960_verdict.py --ours manifests/nv960_ours_map.json --out docs/nv960_scoreboard.json
+用法: python3 scripts/nv960_verdict.py --ours manifests/nv960_ours_map.json --out docs/nv960/scoreboard.json
 """
 import argparse, csv, json, glob, os, sys
 from pathlib import Path
