@@ -1,0 +1,18 @@
+{
+ "hardware": "Apple M1 Max 64GB (无独显, 无CUDA)",
+ "render_48_fixtures": {
+  "total_min": 26.6,
+  "per_fixture_s": 33.9,
+  "tool": "Blender 5.2.2 Metal headless"
+ },
+ "verdict_960_pairs_s": 52,
+ "pixel_audit_960_pairs_s": 76,
+ "package_size": {
+  "hfpackage_mb": 28.4
+ },
+ "sdxl_detail_pass": {
+  "peak_mem_note": "实测 23.5GB 级 (MPS fp32), 终版未采用 (负收益)",
+  "status": "archived"
+ },
+ "claim": "单资产生产+全量960对裁决可在消费级 Mac 单机完成"
+}
