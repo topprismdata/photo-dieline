@@ -1,0 +1,760 @@
+{
+ "s03": {
+  "gt": 25,
+  "preds": 246,
+  "NO_DET": 1,
+  "WRONG_CLS": 24,
+  "POOR_IOU": 0,
+  "OK": 0,
+  "detail": [
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=7)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=11)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=2)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=9)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=2)"
+   },
+   {
+    "gt_cls": 6,
+    "mode": "WRONG_CLASS(gt=6,pred=2)"
+   },
+   {
+    "gt_cls": 6,
+    "mode": "WRONG_CLASS(gt=6,pred=2)"
+   },
+   {
+    "gt_cls": 6,
+    "mode": "WRONG_CLASS(gt=6,pred=2)"
+   },
+   {
+    "gt_cls": 5,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 5,
+    "mode": "WRONG_CLASS(gt=5,pred=2)"
+   },
+   {
+    "gt_cls": 5,
+    "mode": "WRONG_CLASS(gt=5,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   }
+  ]
+ },
+ "s07": {
+  "gt": 40,
+  "preds": 126,
+  "NO_DET": 12,
+  "WRONG_CLS": 25,
+  "POOR_IOU": 1,
+  "OK": 2,
+  "detail": [
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=6)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=6)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "OK(iou=0.65,conf=0.15)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "OK(iou=0.53,conf=0.17)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=5)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=9)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "POOR_IOU(0.41)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=5)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=5)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   }
+  ]
+ },
+ "s12": {
+  "gt": 37,
+  "preds": 300,
+  "NO_DET": 3,
+  "WRONG_CLS": 32,
+  "POOR_IOU": 2,
+  "OK": 0,
+  "detail": [
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=9)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "POOR_IOU(0.23)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "POOR_IOU(0.49)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=7)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=8)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=8)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=7)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=8)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   }
+  ]
+ },
+ "s15": {
+  "gt": 41,
+  "preds": 257,
+  "NO_DET": 5,
+  "WRONG_CLS": 35,
+  "POOR_IOU": 1,
+  "OK": 0,
+  "detail": [
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "POOR_IOU(0.43)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=9)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=1)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=2)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=2)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=2)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=1)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=9)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=1)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=1)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=1)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=1)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=4)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=9)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=9)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=2)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=1)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=8)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=2)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=4)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=4)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=4)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=9)"
+   },
+   {
+    "gt_cls": 3,
+    "mode": "WRONG_CLASS(gt=3,pred=4)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   },
+   {
+    "gt_cls": 4,
+    "mode": "WRONG_CLASS(gt=4,pred=2)"
+   }
+  ]
+ },
+ "s23": {
+  "gt": 34,
+  "preds": 186,
+  "NO_DET": 11,
+  "WRONG_CLS": 22,
+  "POOR_IOU": 1,
+  "OK": 0,
+  "detail": [
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "POOR_IOU(0.11)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=11)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=11)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=11)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "WRONG_CLASS(gt=7,pred=5)"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   },
+   {
+    "gt_cls": 7,
+    "mode": "NO_DETECTION"
+   }
+  ]
+ }
+}
