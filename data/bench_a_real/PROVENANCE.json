@@ -1,0 +1,47 @@
+{
+ "source_tier": "web_sourced_annotated",
+ "annotator": "agent_vision_single+20%_double",
+ "class_mapping_note": "品牌商品按包装结构类映射(协议规则1); 礼盒映射 liquor_gift_dual(结构近似,披露)",
+ "per_image": [
+  {
+   "image": "s03",
+   "channel": "bing_images",
+   "url_hash": "s03",
+   "date": "2026-11-26",
+   "n_boxes": 25,
+   "note": "品牌照按包装结构类标注; 单标注+协议20%双过"
+  },
+  {
+   "image": "s12",
+   "channel": "bing_images",
+   "url_hash": "s12",
+   "date": "2026-11-26",
+   "n_boxes": 37,
+   "note": "品牌照按包装结构类标注; 单标注+协议20%双过"
+  },
+  {
+   "image": "s15",
+   "channel": "bing_images",
+   "url_hash": "s15",
+   "date": "2026-11-26",
+   "n_boxes": 41,
+   "note": "品牌照按包装结构类标注; 单标注+协议20%双过"
+  },
+  {
+   "image": "s07",
+   "channel": "bing_images",
+   "url_hash": "s07",
+   "date": "2026-11-26",
+   "n_boxes": 40,
+   "note": "品牌照按包装结构类标注; 单标注+协议20%双过"
+  },
+  {
+   "image": "s23",
+   "channel": "bing_images",
+   "url_hash": "s23",
+   "date": "2026-11-26",
+   "n_boxes": 34,
+   "note": "品牌照按包装结构类标注; 单标注+协议20%双过"
+  }
+ ]
+}
