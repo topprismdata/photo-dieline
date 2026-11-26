@@ -1,0 +1,157 @@
+{
+ "mode": "real",
+ "per_item": [
+  {
+   "id": "wandashan_200",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.20557598634199664,
+    "D/Hb": 0.2829505747014826,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "jinrixian_200",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.1409827308221297,
+    "D/Hb": 0.35872029716318304,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "haihe_250",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.1870237986246745,
+    "D/Hb": 0.2827009956041972,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "guangda_250",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.07267496983210248,
+    "D/Hb": 0.29920969406763714,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "yantang_250",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.1979873577753703,
+    "D/Hb": 0.34217087427775067,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "wds_applepeach_1L",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.30985506798358675,
+    "D/Hb": 0.34093072439761873,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "wds_hawberry_1L",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.3107000234279227,
+    "D/Hb": 0.3686712625178885,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  },
+  {
+   "id": "wds_mango_1L",
+   "status": "OK",
+   "n_cam": 1,
+   "raw_MAE": {
+    "W/Hb": 0.3194745423945975,
+    "D/Hb": 0.34937723900409456,
+    "Hr/Hb": null,
+    "Ef/Hb": null
+   },
+   "ratios_available": [
+    "W/Hb",
+    "D/Hb"
+   ]
+  }
+ ],
+ "notes": [],
+ "pairs_gate": {
+  "pass": false,
+  "n_images": 0,
+  "missing_label": 0,
+  "missing_camera_fields": 0,
+  "missing_frame_decl": 0,
+  "exemption": "WEB-SOURCED: 相机参数不可追溯(I1/I2豁免留痕); 照片=供应商按品渲染图(非实拍), 无ECXIF契约"
+ },
+ "denom": {
+  "expected": 8,
+  "actual": 8,
+  "pass": true
+ },
+ "rel_used": [
+  "W/Hb",
+  "D/Hb",
+  "Hr/Hb",
+  "Ef/Hb"
+ ],
+ "summary": {
+  "overall_raw_MAE": {
+   "W/Hb": 0.218,
+   "D/Hb": 0.3281,
+   "Hr/Hb": null,
+   "Ef/Hb": null
+  },
+  "n_valid_items": 8,
+  "baseline_synthetic": 0.0166,
+  "sim2real_gap_pp": 25.6,
+  "note_head": "模型头 4 比例 (按 ckpt 自适应)"
+ }
+}

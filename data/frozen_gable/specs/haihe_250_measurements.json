@@ -1,0 +1,16 @@
+{
+ "measurements": [
+  {
+   "name": "W",
+   "value_mm": 55
+  },
+  {
+   "name": "D",
+   "value_mm": 40
+  },
+  {
+   "name": "Hb",
+   "value_mm": 120
+  }
+ ]
+}
