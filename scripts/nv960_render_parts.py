@@ -168,6 +168,9 @@ def studio(scene):
 def render_parts(parts_json: Path, out_png: Path):
     rec = json.loads(parts_json.read_text())
     parts = rec["parts"]
+    for _p in parts:
+        if "verts" not in _p and "verts_mm" in _p:
+            _p["verts"] = _p["verts_mm"]
     label_png = None
     cid = rec.get("class_id", parts_json.stem.replace("_parts", ""))
     lp = Path("/tmp/nv960_labels") / f"{cid}.png"
@@ -291,10 +294,15 @@ def render_parts(parts_json: Path, out_png: Path):
     bb2 = bm2.node_tree.nodes["Principled BSDF"]
     bb2.inputs["Base Color"].default_value = (0.52, 0.53, 0.54, 1)
     bb2.inputs["Roughness"].default_value = 0.9
-    bt = bm2.node_tree.nodes.new("ShaderNodeTexNoise")
-    bt.inputs["Scale"].default_value = 240.0
-    bt.inputs["Detail"].default_value = 8.0
-    bm2.node_tree.links.new(bt.outputs["Fac"], bb2.inputs["Roughness"])
+    if __import__("os").environ.get("NV960_BG_NOISE", "1") != "0":
+        bt = bm2.node_tree.nodes.new("ShaderNodeTexNoise")
+        bt.inputs["Scale"].default_value = 240.0
+        bt.inputs["Detail"].default_value = float(__import__("os").environ.get("NV960_BG_DETAIL", "8"))
+        mm = bm2.node_tree.nodes.new("ShaderNodeMath")
+        mm.operation = 'MULTIPLY'
+        mm.inputs[1].default_value = float(__import__("os").environ.get("NV960_BG_AMP", "1.0"))
+        bm2.node_tree.links.new(bt.outputs["Fac"], mm.inputs[0])
+        bm2.node_tree.links.new(mm.outputs[0], bb2.inputs["Roughness"])
     bme.materials.append(bm2)
     sc.collection.objects.link(bpy.data.objects.new("backdrop", bme))
 
