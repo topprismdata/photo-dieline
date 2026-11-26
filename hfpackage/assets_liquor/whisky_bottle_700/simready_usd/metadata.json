@@ -1,0 +1,58 @@
+{
+ "asset": "whisky_bottle_700",
+ "family": "beverage_liquor",
+ "axes": {
+  "product_category": "whisky",
+  "packaging_structure": "glass_bottle_shouldered"
+ },
+ "branding": "NONE — 通用几何, 零商标零文字零贴图",
+ "attributes": {
+  "nominal_capacity_ml": {
+   "value": 700,
+   "source_tier": "official_spec",
+   "note": "行业公称包装级容量, 非标定内容积"
+  },
+  "dimensions_mm": {
+   "value": {
+    "X": 88.0,
+    "Y": 88.0,
+    "Z": 239.6
+   },
+   "source_tier": "derived",
+   "note": "参数化 DEFAULTS 声明值, G-F 门禁复测一致"
+  },
+  "mass_kg": {
+   "value": 0.4021,
+   "source_tier": "estimated",
+   "note": "材质工程密度×闭壳体积, 非实测"
+  },
+  "closure": {
+   "value": "screw_cap",
+   "source_tier": "derived"
+  },
+  "body_material": {
+   "value": "glass_amber",
+   "source_tier": "derived"
+  },
+  "fill_state": {
+   "value": "empty",
+   "source_tier": "derived",
+   "note": "空容器几何"
+  }
+ },
+ "validation": {
+  "geometry": "pass",
+  "appearance": "pass",
+  "semantics": "pending",
+  "physics": "pending",
+  "runtime": "not_tested",
+  "composition": "not_tested"
+ },
+ "textures": "NONE (素材质, 无贴图文件)",
+ "license": "CC-BY-4.0 (随仓声明)",
+ "provenance_notes": [
+  "geometry: author_compile G-F1..G-F7 全过 (2026-11-26)",
+  "appearance: 素材质预览渲染自检通过 (非验收渲染)",
+  "physics: 仅静态质量估算; 无运行时 payload (不做未验证兼容)"
+ ]
+}

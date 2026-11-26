@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pack10k/retail-asset-spec-v0",
+  "title": "Pack10K Retail Asset Spec v0",
+  "description": "零售资产机器可读规格。核心纪律: 每个物理/几何属性必须带 source_tier; 无来源的属性必须标 unknown。禁止 estimated 冒充 measured。",
+  "type": "object",
+  "required": ["asset", "family", "axes", "branding", "attributes", "validation", "license"],
+  "properties": {
+    "asset": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "family": {"type": "string"},
+    "axes": {
+      "type": "object",
+      "description": "双轴分离: 商品类目 ≠ 包装结构",
+      "required": ["product_category", "packaging_structure"],
+      "properties": {
+        "product_category": {"type": "string", "description": "零售商品轴: beer/baijiu/whisky/vodka/wine/gift_set/... (retail_categories.json#product_categories)"},
+        "packaging_structure": {"type": "string", "description": "包装结构轴: glass_bottle_longneck/can_alu/glass_bottle_belly/glass_bottle_shouldered/gift_box_carton/..."}
+      },
+      "additionalProperties": false
+    },
+    "branding": {"type": "string", "pattern": "^NONE"},
+    "attributes": {
+      "type": "object",
+      "description": "每属性: {value, source_tier, note?}. source_tier 六级:",
+      "required": ["dimensions_mm", "mass_kg"],
+      "properties": {
+        "nominal_capacity_ml": {"$ref": "#/definitions/attributedInt"},
+        "dimensions_mm": {"$ref": "#/definitions/attributedObject"},
+        "mass_kg": {"$ref": "#/definitions/attributedNumber"},
+        "closure": {"$ref": "#/definitions/attributedString"},
+        "body_material": {"$ref": "#/definitions/attributedString"},
+        "fill_state": {"oneOf": [
+            {"enum": ["full", "empty", "not_applicable"]},
+            {"$ref": "#/definitions/attributedString"}
+        ]}
+      },
+      "additionalProperties": true
+    },
+    "validation": {
+      "type": "object",
+      "description": "六层验收 (GPT 定位讨论): 只能声明已执行的层",
+      "required": ["geometry", "appearance", "semantics", "physics", "runtime", "composition"],
+      "properties": {
+        "geometry": {"$ref": "#/definitions/validationStatus"},
+        "appearance": {"$ref": "#/definitions/validationStatus"},
+        "semantics": {"$ref": "#/definitions/validationStatus"},
+        "physics": {"$ref": "#/definitions/validationStatus"},
+        "runtime": {"$ref": "#/definitions/validationStatus"},
+        "composition": {"$ref": "#/definitions/validationStatus"}
+      },
+      "additionalProperties": false
+    },
+    "textures": {"type": "string"},
+    "license": {"type": "string"},
+    "provenance_notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "definitions": {
+    "sourceTier": {
+      "description": "measured=实物测量; official_spec=厂商公开规格; derived=几何推导; estimated=工程估算(如密度×体积); sampled=合成采样; unknown=未知",
+      "enum": ["measured", "official_spec", "derived", "estimated", "sampled", "unknown"]
+    },
+    "validationStatus": {
+      "enum": ["pass", "fail", "pending", "not_tested"]
+    },
+    "attributedNumber": {
+      "type": "object",
+      "required": ["value", "source_tier"],
+      "properties": {
+        "value": {"type": "number"},
+        "source_tier": {"$ref": "#/definitions/sourceTier"},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "attributedInt": {
+      "type": "object",
+      "required": ["value", "source_tier"],
+      "properties": {
+        "value": {"type": "integer"},
+        "source_tier": {"$ref": "#/definitions/sourceTier"},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "attributedString": {
+      "type": "object",
+      "required": ["value", "source_tier"],
+      "properties": {
+        "value": {"type": "string"},
+        "source_tier": {"$ref": "#/definitions/sourceTier"},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "attributedObject": {
+      "type": "object",
+      "required": ["value", "source_tier"],
+      "properties": {
+        "value": {"type": "object"},
+        "source_tier": {"$ref": "#/definitions/sourceTier"},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

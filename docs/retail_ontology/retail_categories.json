@@ -1,0 +1,41 @@
+{
+  "$comment": "零售双轴注册表 v0 — 商品类目 × 包装结构分离 (GPT 定位讨论 TOP1)。映射: 每资产类注册两轴; 新类目扩此表不扩 schema。",
+  "product_categories": {
+    "beer":       {"name_zh": "啤酒", "nv_gap": "NVIDIA 无专类, beerBottle 散见"},
+    "baijiu":     {"name_zh": "白酒", "nv_gap": "NVIDIA 无"},
+    "whisky":     {"name_zh": "威士忌", "nv_gap": "NVIDIA 无"},
+    "vodka":      {"name_zh": "伏特加", "nv_gap": "NVIDIA 无"},
+    "wine":       {"name_zh": "葡萄酒", "nv_gap": "散见"},
+    "juice":      {"name_zh": "果汁", "nv_gap": "food_beverage 有"},
+    "water":      {"name_zh": "饮用水", "nv_gap": "散见"},
+    "yogurt":     {"name_zh": "酸奶", "nv_gap": "food_dairy 2"},
+    "milk":       {"name_zh": "鲜奶", "nv_gap": "food_dairy 2"},
+    "gift_set":   {"name_zh": "礼盒组合", "nv_gap": "NVIDIA 无"}
+  },
+  "packaging_structures": {
+    "glass_bottle_longneck":  {"name_zh": "长颈玻璃瓶", "closure_options": ["crown_cap", "screw_cap"], "parametric": true},
+    "glass_bottle_belly":     {"name_zh": "鼓腹玻璃瓶", "closure_options": ["screw_cap"], "parametric": true},
+    "glass_bottle_shouldered":{"name_zh": "方肩玻璃瓶", "closure_options": ["screw_cap"], "parametric": true},
+    "glass_bottle_straight":  {"name_zh": "细长直身玻璃瓶", "closure_options": ["screw_cap"], "parametric": true},
+    "glass_bottle_bordeaux":  {"name_zh": "波尔多直肩瓶", "closure_options": ["cork", "crown_cap_placeholder"], "parametric": true},
+    "can_alu":                {"name_zh": "铝易拉罐", "closure_options": ["aluminium_lid_pull_tab"], "parametric": true},
+    "pet_bottle":             {"name_zh": "PET 瓶", "closure_options": ["screw_cap"], "parametric": false, "note": "v2 规划"},
+    "gable_carton":           {"name_zh": "屋顶包纸盒", "closure_options": ["folded_gable"], "parametric": true, "note": "TDE 语料侧"},
+    "gift_box_carton":        {"name_zh": "瓦楞礼盒", "closure_options": ["none"], "parametric": true}
+  },
+  "mappings": [
+    {"asset": "beer_bottle_330",   "product_category": "beer",   "packaging_structure": "glass_bottle_longneck",  "closure": "crown_cap"},
+    {"asset": "beer_bottle_500",   "product_category": "beer",   "packaging_structure": "glass_bottle_longneck",  "closure": "crown_cap"},
+    {"asset": "beer_can_500",      "product_category": "beer",   "packaging_structure": "can_alu",                "closure": "aluminium_lid_pull_tab"},
+    {"asset": "baijiu_bottle_500", "product_category": "baijiu", "packaging_structure": "glass_bottle_belly",     "closure": "screw_cap"},
+    {"asset": "wine_bottle_750",   "product_category": "wine",   "packaging_structure": "glass_bottle_bordeaux",  "closure": "crown_cap_placeholder", "note": "精版接 bottle_family.bottle_wine (软木塞)"},
+    {"asset": "whisky_bottle_700", "product_category": "whisky", "packaging_structure": "glass_bottle_shouldered","closure": "screw_cap"},
+    {"asset": "vodka_bottle_700",  "product_category": "vodka",  "packaging_structure": "glass_bottle_straight",  "closure": "screw_cap"},
+    {"asset": "liquor_gift_dual",  "product_category": "gift_set", "packaging_structure": "gift_box_carton",      "closure": "none"}
+  ],
+  "rules": [
+    "同一商品类目允许多包装结构 (同啤酒: 玻璃瓶+罐+礼盒), 语义识别按双轴注册而非几何命名",
+    "新类目先注册本表再建资产; schema 不随类目增长",
+    "closure 必须落在该 packaging_structure 的 closure_options 内"
+  ]
+}
