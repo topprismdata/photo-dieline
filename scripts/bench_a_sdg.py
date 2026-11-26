@@ -80,7 +80,7 @@ scene.render.engine = 'CYCLES'
 scene.cycles.device = 'CPU'
 scene.cycles.samples = 48
 scene.cycles.use_denoising = True
-scene.view_settings.exposure = -1.35
+scene.view_settings.exposure = rng.uniform(-1.75, -0.95)
 scene.render.resolution_x = scene.render.resolution_y = args.res
 scene.render.film_transparent = False
 
@@ -215,8 +215,12 @@ def build_shelf(broads=3, width=1.6, depth=0.42, gap=0.42):
     board_mat = bpy.data.materials.new("board")
     board_mat.use_nodes = True
     bn = board_mat.node_tree.nodes["Principled BSDF"]
-    bn.inputs["Base Color"].default_value = (0.42, 0.40, 0.38, 1)
-    bn.inputs["Roughness"].default_value = 0.55
+    palette = [(0.42, 0.40, 0.38), (0.30, 0.32, 0.35), (0.55, 0.50, 0.44),
+               (0.25, 0.28, 0.26), (0.62, 0.58, 0.52)]
+    c = palette[rng.randint(0, len(palette)-1)]
+    j = rng.uniform(0.85, 1.15)
+    bn.inputs["Base Color"].default_value = (c[0]*j, c[1]*j, c[2]*j, 1)
+    bn.inputs["Roughness"].default_value = rng.uniform(0.35, 0.75)
     ys = []
     for i in range(broads):
         z = 0.9 + i * gap
@@ -282,15 +286,26 @@ def make_scene(idx, split):
             bpy.data.objects.remove(o, do_unlink=True)
     SCENE_OBJS = []
     boards = build_shelf()
-    add_light("sun_", (0.5, -1.2, 2.2), rng.uniform(300, 480), 2.0)
-    add_light("fill_", (-0.9, -0.8, 1.6), rng.uniform(120, 220), 1.5)
+    def _tint(lo, hi):
+        return (rng.uniform(lo, hi), rng.uniform(0.9, 1.0), rng.uniform(0.8, 1.0), 1)
+    key = add_light("sun_", (rng.uniform(0.1, 0.9), rng.uniform(-1.4, -0.9), rng.uniform(1.9, 2.4)),
+                    rng.uniform(220, 560), rng.uniform(1.2, 2.6))
+    key.data.color = _tint(0.75, 1.0)
+    fill = add_light("fill_", (rng.uniform(-1.2, -0.5), rng.uniform(-1.0, -0.5), rng.uniform(1.2, 1.9)),
+                     rng.uniform(90, 300), rng.uniform(0.9, 2.0))
+    fill.data.color = _tint(0.8, 1.0)
+    if rng.random() < 0.5:
+        rim = add_light("rim_", (rng.uniform(-0.8, 0.8), 0.6, rng.uniform(1.4, 2.0)),
+                        rng.uniform(60, 180), 1.4)
+        rim.data.color = _tint(0.8, 1.0)
     cds = bpy.data.cameras.new("cam_")
-    cds.lens = rng.choice([38, 40, 42])
+    cds.lens = rng.uniform(30, 52)
     cam = bpy.data.objects.new("cam_", cds)
     bpy.context.collection.objects.link(cam)
-    cam.location = (rng.uniform(-0.08, 0.08), -1.72 + rng.uniform(-0.06, 0.06), 1.32 + rng.uniform(-0.05, 0.05))
-    target = Vector((0, 0, 1.30))
+    cam.location = (rng.uniform(-0.28, 0.28), rng.uniform(-1.95, -1.35), rng.uniform(1.14, 1.58))
+    target = Vector((rng.uniform(-0.10, 0.10), 0, rng.uniform(1.18, 1.42)))
     cam.rotation_euler = (target - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    cam.rotation_euler.z += math.radians(rng.uniform(-6, 6))   # roll
     scene.camera = cam
 
     records = []
@@ -309,6 +324,18 @@ def make_scene(idx, split):
                     continue
                 obs, ws, hs = spawn(cid, (fx + rng.uniform(-0.006, 0.006), -0.22 + rng.uniform(-0.02, 0.02), zboard), yaw + rng.uniform(-4, 4))
                 records.append((obs, cid))
+                if rng.random() < 0.20:
+                    bpy.ops.mesh.primitive_cube_add(size=1,
+                        location=(fx + rng.uniform(-0.03, 0.03), -0.30 + rng.uniform(-0.03, 0.0),
+                                  zboard + rng.uniform(0.02, H * 0.5)))
+                    occ = bpy.context.object
+                    occ.scale = (W * rng.uniform(0.9, 1.4), 0.05, H * rng.uniform(0.25, 0.6))
+                    occ.name = f"occluder_{len(records)}"
+                    om = bpy.data.materials.new(f"occ{len(records)}")
+                    om.use_nodes = True
+                    ob = om.node_tree.nodes['Principled BSDF']
+                    ob.inputs['Base Color'].default_value = (rng.uniform(0.1, 0.5),)*3 + (1,)
+                    occ.data.materials.append(om)
     bpy.context.view_layer.update()
 
     labels, ann = [], []
