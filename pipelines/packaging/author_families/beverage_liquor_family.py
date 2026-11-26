@@ -26,9 +26,12 @@ CLASSES = [
     "beer_bottle_500",
     "beer_can_500",
     "baijiu_bottle_500",
+    "baijiu_bottle_jiangxiang_500",
     "wine_bottle_750",
     "whisky_bottle_700",
     "vodka_bottle_700",
+    "pet_bottle_500",
+    "pet_bottle_1500",
     "liquor_gift_dual",
 ]
 
@@ -37,7 +40,10 @@ DEFAULTS = {
     "beer_bottle_500":   {"H": 265.0, "D": 66.0},
     "beer_can_500":      {"H": 168.0, "D": 66.0},
     "baijiu_bottle_500": {"H": 245.0, "D": 78.0},
+    "baijiu_bottle_jiangxiang_500": {"H": 235.0, "D": 74.0},
     "wine_bottle_750":   {"H": 300.0, "D": 76.0},
+    "pet_bottle_500":    {"H": 210.0, "D": 64.0},
+    "pet_bottle_1500":   {"H": 320.0, "D": 88.0},
     "whisky_bottle_700": {"H": 240.0, "D": 88.0},
     "vodka_bottle_700":  {"H": 290.0, "D": 72.0},
     "liquor_gift_dual":  {"H": 340.0, "D": 200.0},
@@ -51,6 +57,7 @@ MAT_ALU = "metal_alu"
 MAT_STEEL = "metal_steel"
 MAT_CROWN = "metal_steel"
 MAT_PAPER_KRAFT = "paper_kraft"
+MAT_PET_CLEAR = "plastic_pet_clear"
 
 
 def _lathe_closed(name, loop, mat, n=96):
@@ -260,6 +267,12 @@ def build_parts(params: dict) -> list[dict]:
         return _beer_can_500(H, D)
     if cid == "baijiu_bottle_500":
         return _baijiu_500(H, D)
+    if cid == "baijiu_bottle_jiangxiang_500":
+        return _baijiu_jiangxiang(H, D)
+    if cid == "pet_bottle_500":
+        return _pet_bottle(H, D, rib=True)
+    if cid == "pet_bottle_1500":
+        return _pet_bottle(H, D, rib=True)
     if cid == "wine_bottle_750":
         return _beer_bottle(H, D, MAT_GLASS_CLEAR)
     if cid == "whisky_bottle_700":
@@ -269,3 +282,55 @@ def build_parts(params: dict) -> list[dict]:
     if cid == "liquor_gift_dual":
         return _gift_dual(H, D)
     raise ValueError(cid)
+
+
+def _pet_bottle(H, D, rib=True):
+    """PET 饮料瓶: 薄壁闭壳 + 瓶身环肋 + 瓣底座形制简化 + 旋盖。素面零印刷。"""
+    R = D / 2.0
+    wall = 0.8
+    nr = R * 0.38
+    shoulder_z = H * 0.62
+    outer = [(R * 0.86, 0.0)]
+    z = 1.0
+    body_z1 = shoulder_z
+    n_rib = 4 if rib else 0
+    seg = (body_z1 - 6.0) / (n_rib * 2 + 1) if n_rib else body_z1 - 6.0
+    zz = 4.0
+    outer.append((R, zz))
+    for k in range(n_rib):
+        zz += seg
+        outer.append((R * 0.965, zz))
+        zz += 0.06 * (body_z1 - 6.0)
+        outer.append((R, zz))
+    zz += seg
+    outer += [(R, max(zz, body_z1 * 0.9)), (R * 0.88, shoulder_z), (nr + wall, H * 0.78),
+              (nr + wall, H - 9.0), (nr, H - 9.0), (nr, H - 9.0 - wall), (nr + wall, H - 9.0 - wall)]
+    inner = [(max(r - wall, 0.5), max(z - 0.6, 0.3)) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("pet_shell", loop, MAT_PET_CLEAR, n=72)]
+    cr = nr + 2.2
+    cz = H - 9.0 - wall
+    cap = [(cr * 0.8, cz + 0.4), (cr, cz + 1.2), (cr, cz + 8.0), (cr * 0.9, cz + 10.0), (cr * 0.5, cz + 10.5)]
+    P.append(_lathe_closed("screw_cap", cap, MAT_STEEL, n=48))
+    return P
+
+
+def _baijiu_jiangxiang(H, D):
+    """酱香形白酒瓶: 高颈直筒微收 (素面陶瓷感磨砂) + 旋盖。"""
+    R = D / 2.0
+    wall = 2.4
+    nr = R * 0.40
+    outer = [
+        (R * 0.88, 0.0), (R, 6.0), (R, H * 0.55), (R * 0.97, H * 0.62),
+        (R * 0.72, H * 0.72), (nr + wall, H * 0.80), (nr + wall, H - 11.0),
+        (nr, H - 11.0), (nr, H - 11.0 - wall), (nr + wall, H - 11.0 - wall),
+    ]
+    inner = [(max(r - wall, 1.0), z - (1.5 if i == 0 else 0.0))
+             for i, (r, z) in enumerate(reversed(outer[1:-1]))]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("ceramic_shell", loop, MAT_GLASS_FROST, n=80)]
+    cr = nr + 2.5
+    cz = H - 11.0 - wall
+    cap = [(cr * 0.8, cz + 0.5), (cr, cz + 1.5), (cr, cz + 9.0), (cr * 0.9, cz + 11.0), (cr * 0.5, cz + 11.5)]
+    P.append(_lathe_closed("screw_cap", cap, MAT_STEEL, n=56))
+    return P
