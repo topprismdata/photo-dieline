@@ -1,0 +1,2 @@
+Contact sheets 含 NVIDIA USDCraft-10K 缩略图的并排研究性引用。
+© NVIDIA, USDCraft-10K, Apache-2.0; 来源: https://huggingface.co/datasets/nvidia/USDCraft-10K | 论文: https://arxiv.org/abs/2610.11322
