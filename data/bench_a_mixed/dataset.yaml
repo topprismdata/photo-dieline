@@ -1,0 +1,16 @@
+path: /Users/guohongbin/photo-dieline/data/bench_a_mixed
+train: images
+val: images
+names:
+  0: beer_bottle_330
+  1: beer_bottle_500
+  2: beer_can_500
+  3: baijiu_bottle_500
+  4: wine_bottle_750
+  5: whisky_bottle_700
+  6: vodka_bottle_700
+  7: liquor_gift_dual
+  8: beverage_can_330
+  9: bottle_wine
+  10: food_container_1l
+  11: rsc_rsc_closed
