@@ -111,3 +111,11 @@ bordeaux/can_alu/pet_bottle/gable_carton/gift_box_carton)。全链: G-F → 结�
 dairy 家族 (yogurt_cup_160: 锥度 PP 杯 + 铝箔拱顶膜封, 极点焊接 lathe + 绕序翻转):
 G-F → simready (61×61×87.2mm, 0.0402kg) → spec 1/1 → NVIDIA 原版验证器 PASS →
 打包契约 176/176。本体结构轴 +1 (cup), 商品轴 yogurt 获首个资产。
+
+## 侧车契约双轨事实 (2026-11-27 补)
+
+10K 构建每件自带 5 文件生产契约侧车 (model.usdc / model.json / packaging.json /
+conformance.json / build.json / print.png — 我方 schema, 产线再生凭证)。
+NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件精选域;
+9386 件构建的 NVIDIA-schema 重发射为可选后处理 (emitter ~0.5s/件), 未执行 —
+两套 schema 并存事实记录在案, 消费端按需选择。
