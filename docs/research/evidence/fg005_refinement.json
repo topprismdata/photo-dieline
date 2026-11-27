@@ -1,0 +1,266 @@
+{
+ "A_ratio_boundary": [
+  {
+   "side": 8,
+   "h": 60,
+   "ratio": 0.6,
+   "glue_w": 4.8,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 8,
+   "h": 60,
+   "ratio": 0.65,
+   "glue_w": 5.2,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 8,
+   "h": 60,
+   "ratio": 0.67,
+   "glue_w": 5.36,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 8,
+   "h": 60,
+   "ratio": 0.7,
+   "glue_w": 5.6,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 8,
+   "h": 60,
+   "ratio": 0.75,
+   "glue_w": 6.0,
+   "fails": [
+    "G06"
+   ],
+   "pass": false
+  },
+  {
+   "side": 12,
+   "h": 60,
+   "ratio": 0.6,
+   "glue_w": 7.2,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 60,
+   "ratio": 0.65,
+   "glue_w": 7.8,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 60,
+   "ratio": 0.67,
+   "glue_w": 8.04,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 60,
+   "ratio": 0.7,
+   "glue_w": 8.4,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 60,
+   "ratio": 0.75,
+   "glue_w": 9.0,
+   "fails": [
+    "G06"
+   ],
+   "pass": false
+  },
+  {
+   "side": 16,
+   "h": 60,
+   "ratio": 0.6,
+   "glue_w": 9.6,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 16,
+   "h": 60,
+   "ratio": 0.65,
+   "glue_w": 10.4,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 16,
+   "h": 60,
+   "ratio": 0.67,
+   "glue_w": 10.72,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 16,
+   "h": 60,
+   "ratio": 0.7,
+   "glue_w": 11.2,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 16,
+   "h": 60,
+   "ratio": 0.75,
+   "glue_w": 12.0,
+   "fails": [
+    "G06"
+   ],
+   "pass": false
+  },
+  {
+   "side": 20,
+   "h": 60,
+   "ratio": 0.6,
+   "glue_w": 12.0,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 20,
+   "h": 60,
+   "ratio": 0.65,
+   "glue_w": 13.0,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 20,
+   "h": 60,
+   "ratio": 0.67,
+   "glue_w": 13.4,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 20,
+   "h": 60,
+   "ratio": 0.7,
+   "glue_w": 14.0,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 20,
+   "h": 60,
+   "ratio": 0.75,
+   "glue_w": 15.0,
+   "fails": [
+    "G06"
+   ],
+   "pass": false
+  }
+ ],
+ "B_height_sensitivity": [
+  {
+   "side": 12,
+   "h": 30,
+   "ratio": 0.65,
+   "glue_w": 7.8,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 30,
+   "ratio": 0.7,
+   "glue_w": 8.4,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 30,
+   "ratio": 0.75,
+   "glue_w": 9.0,
+   "fails": [
+    "G06"
+   ],
+   "pass": false
+  },
+  {
+   "side": 12,
+   "h": 120,
+   "ratio": 0.65,
+   "glue_w": 7.8,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 120,
+   "ratio": 0.7,
+   "glue_w": 8.4,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "side": 12,
+   "h": 120,
+   "ratio": 0.75,
+   "glue_w": 9.0,
+   "fails": [
+    "G06"
+   ],
+   "pass": false
+  }
+ ],
+ "C_product_recheck": [
+  {
+   "object_id": "5_HTP",
+   "side": 14.148,
+   "h": 88.80000000000001,
+   "glue_w": 4.0,
+   "ratio": 0.283,
+   "fails": [
+    "G03"
+   ],
+   "pass": false
+  },
+  {
+   "object_id": "AllergenFree_JarroDophilus",
+   "side": 14.402,
+   "h": 96.0,
+   "glue_w": 4.0,
+   "ratio": 0.278,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "object_id": "Beta_Glucan",
+   "side": 14.456,
+   "h": 97.6,
+   "glue_w": 4.0,
+   "ratio": 0.277,
+   "fails": [],
+   "pass": true
+  },
+  {
+   "object_id": "Bifidus_Balance_FOS",
+   "side": 14.362,
+   "h": 96.5,
+   "glue_w": 4.0,
+   "ratio": 0.279,
+   "fails": [],
+   "pass": true
+  }
+ ]
+}

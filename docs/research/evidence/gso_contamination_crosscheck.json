@@ -1,0 +1,25 @@
+{
+ "_meta": {
+  "purpose": "R24 裁决 4.4: 污染对象逐 ID 对照 (原实验 vs 新母体一致性)",
+  "date": "2026-11-28"
+ },
+ "pairs": [
+  {
+   "object_id": "ACE_Coffee_Mug_Kristen_16_oz_cup",
+   "pool02_status": "PACKAGING_SUPPORTED"
+  },
+  {
+   "object_id": "Aroma_Stainless_Steel_Milk_Frother_2_Cup",
+   "pool02_status": "NON_PACKAGING"
+  },
+  {
+   "object_id": "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
+   "pool02_status": "NON_PACKAGING"
+  },
+  {
+   "object_id": "KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces",
+   "pool02_status": "PACKAGING_SUPPORTED"
+  }
+ ],
+ "finding": "不一致: ['ACE_Coffee_Mug_Kristen_16_oz_cup', 'KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces']"
+}

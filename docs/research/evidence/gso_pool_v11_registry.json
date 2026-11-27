@@ -10,11 +10,13 @@
    "IDENTITY_UNRESOLVED",
    "EVIDENCE_INSUFFICIENT"
   ],
-  "immutability": "GSO-PN-RUN-01 原结果不可变 (R23 裁决); 本台账为资格治理新版本 v1.1"
+  "immutability": "GSO-PN-RUN-01 原结果不可变 (R23 裁决); 本台账为资格治理新版本 v1.1",
+  "v": "1.2",
+  "fix": "名称下划线归一化后再匹配 (coffee_mug 的 \\bmug\\b 因下划线属\\w而失配的假阳性已修); ACE mug → NON_PACKAGING"
  },
  "counts": {
-  "PACKAGING_SUPPORTED": 101,
-  "NON_PACKAGING": 2,
+  "PACKAGING_SUPPORTED": 99,
+  "NON_PACKAGING": 4,
   "IDENTITY_UNRESOLVED": 21
  },
  "registry": [
@@ -23,868 +25,868 @@
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "ACE_Coffee_Mug_Kristen_16_oz_cup",
-   "identity_axis": "PACKAGING",
+   "identity_axis": "NON_PACKAGING",
    "geometry_axis": "cylinder",
-   "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "status": "NON_PACKAGING",
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "AllergenFree_JarroDophilus",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Aroma_Stainless_Steel_Milk_Frother_2_Cup",
    "identity_axis": "NON_PACKAGING",
    "geometry_axis": "cylinder",
    "status": "NON_PACKAGING",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Beta_Glucan",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Bifidus_Balance_FOS",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
    "identity_axis": "NON_PACKAGING",
    "geometry_axis": "cylinder",
    "status": "NON_PACKAGING",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Black_Forest_Fruit_Snacks_28_Pack_Grape",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Black_Forest_Fruit_Snacks_Juicy_Filled_Centers_10_pouches_9_oz_total",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Blackcurrant_Lutein",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Blue_Jasmine_Includes_Digital_Copy_UltraViolet_DVD",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Borage_GLA240Gamma_Tocopherol",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Brisk_Iced_Tea_Lemon_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Canon_Pixma_Chromalife_100_Magenta_8",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "CoQ10",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "CoQ10_BjTLbuRVt1t",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "CoQ10_wSSVoxVppVD",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Creatine_Monohydrate",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Crunch_Girl_Scouts_Candy_Bars_Peanut_Butter_Creme_78_oz_box",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "DIM_CDG",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Diet_Pepsi_Soda_Cola12_Pack_12_oz_Cans",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Don_Franciscos_Gourmet_Coffee_Medium_Decaf_100_Colombian_12_oz_340_g",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Final_Fantasy_XIV_A_Realm_Reborn_60Day_Subscription",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Folic_Acid",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Fresca_Peach_Citrus_Sparkling_Flavored_Soda_12_PK",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Germanium_GE132",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Hyaluronic_Acid",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Inositol",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "IsoRich_Soy",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "JarroDophilusFOS_Value_Size",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "JarroSil_Activated_Silicon",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "JarroSil_Activated_Silicon_5exdZHIeLAp",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Jarrow_Formulas_Glucosamine_Hci_Mega_1000_100_ct",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Jarrow_Glucosamine_Chondroitin_Combination_120_Caps",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Just_For_Men_ShampooIn_Haircolor_Jet_Black_60",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Just_For_Men_ShampooIn_Haircolor_Light_Brown_25",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Just_For_Men_Shampoo_In_Haircolor_Darkest_Brown_50",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Justified_The_Complete_Fourth_Season_3_Discs_DVD",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Krill_Oil",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "LTyrosine",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Lactoferrin",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Leap_Frog_Paint_Dabber_Dot_Art_5_paint_bottles",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Little_House_on_the_Prairie_Season_Two_5_Discs_Includes_Digital",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Lutein",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "MK7",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Marc_Anthony_Skip_Professional_Oil_of_Morocco_Conditioner_with_Argan_Oil",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Marc_Anthony_Strictly_Curls_Curl_Envy_Perfect_Curl_Cream_6_fl_oz_bottle",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Marc_Anthony_True_Professional_Oil_of_Morocco_Argan_Oil_Treatment",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Marc_Anthony_True_Professional_Strictly_Curls_Curl_Defining_Lotion",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Mastic_Gum",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Melissa_Doug_Shape_Sorting_Clock",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "cylinder",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "NattoMax",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nescafe_Memento_Latte_Caramel_8_08_oz_23_g_packets_64_oz_184_g",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nescafe_Momento_Mocha_Specialty_Coffee_Mix_8_ct",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nescafe_Tasters_Choice_Instant_Coffee_Decaf_House_Blend_Light_7_oz",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestl_Crunch_Girl_Scouts_Cookie_Flavors_Caramel_Coconut_78_oz_box",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestl_Skinny_Cow_Heavenly_Crisp_Candy_Bar_Chocolate_Raspberry_6_pack_462_oz_total",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Candy_19_oz_Butterfinger_Singles_116567",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Carnation_Cinnamon_Coffeecake_Kit_1913OZ",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Nesquik_Chocolate_Powder_Flavored_Milk_Additive_109_Oz_Canister",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Nips_Hard_Candy_Peanut_Butter",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Pure_Life_Exotics_Sparkling_Water_Strawberry_Dragon_Fruit_8_count_12_fl_oz_can",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Pure_Life_Exotics_Sparkling_Water_Strawberry_Dragon_Fruit_8_count_12_fl_oz_can_aX0ygjh3bxi",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Raisinets_Milk_Chocolate_35_oz_992_g",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nestle_Skinny_Cow_Dreamy_Clusters_Candy_Dark_Chocolate_6_pack_1_oz_pouches",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Nips_Hard_Candy_Rich_Creamy_Butter_Rum_4_oz_1133_g",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Now_Designs_Snack_Bags_Bicycle_2_count",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "OXO_Soft_Works_Can_Opener_SnapLock",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Orbit_Bubblemint_Mini_Bottle_6_ct",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Organic_Whey_Protein_Unflavored",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Organic_Whey_Protein_Vanilla",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Pepsi_Cola_Caffeine_Free_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Pepsi_Cola_Wild_Cherry_Diet_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Pepsi_Max_Cola_Zero_Calorie_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Perricone_MD_Health_Weight_Management_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "cylinder",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Perricone_MD_Omega_3_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Perricone_MD_Skin_Clear_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Perricone_MD_Skin_Total_Body_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Perricone_MD_Super_Berry_Powder_with_Acai_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Perricone_MD_The_Metabolic_Formula_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Persona_Q_Shadow_of_the_Labyrinth_Nintendo_3DS",
    "identity_axis": "PACKAGING",
    "geometry_axis": "flat",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Pet_Dophilus_powder",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Phillips_Milk_of_Magnesia_Saline_Laxative_Liquid_Original",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "PhosphOmega",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Prostate_Optimizer",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "QAbsorb_CoQ10",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "QAbsorb_CoQ10_53iUqjWjW3O",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "QHPomegranate",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Quercetin_500",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "ReadytoUse_Rolled_Fondant_Pure_White_24_oz_box",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Remington_TStudio_Silk_Ceramic_Hair_Straightener_2_Inch_Floating_Plates",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Saccharomyces_Boulardii_MOS_Value_Size",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Snack_Catcher_Snack_Dispenser",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Spritz_Easter_Basket_Plastic_Teal",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Squirtin_Barnyard_Friends_4pk",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Super_Mario_Kart_Super_Nintendo_Entertainment_System",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Swiss_Miss_Hot_Cocoa_KCups_Milk_Chocolate_12_count",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "The_Coffee_Bean_Tea_Leaf_KCup_Packs_Jasmine_Green_Tea_16_count",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Theanine",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Threshold_Bead_Cereal_Bowl_White",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Threshold_Porcelain_Coffee_Mug_All_Over_Bead_White",
-   "identity_axis": "PACKAGING",
+   "identity_axis": "NON_PACKAGING",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "status": "NON_PACKAGING",
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Threshold_Porcelain_Spoon_Rest_White",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Threshold_Porcelain_Teapot_White",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Twinlab_100_Whey_Protein_Fuel_Chocolate",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Twinlab_100_Whey_Protein_Fuel_Cookies_and_Cream",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Twinlab_100_Whey_Protein_Fuel_Vanilla",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Twinlab_Nitric_Fuel",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Twinlab_Premium_Creatine_Fuel_Powder",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "U_By_Kotex_Sleek_Regular_Unscented_Tampons_36_Ct_Box",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Ubisoft_RockSmith_Real_Tone_Cable_Xbox_360",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Ultra_JarroDophilus",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
    "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "VANS_FIRE_ROASTED_VEGGIE_CRACKERS_GLUTEN_FREE",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Vans_Cereal_Honey_Nut_Crunch_11_oz_box",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Weston_No_22_Cajun_Jerky_Tonic_12_fl_oz_nLj64ZnGwDh",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Weston_No_33_Signature_Sausage_Tonic_12_fl_oz",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Whey_Protein_3_Flavor_Variety_Pack_12_Packets",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Whey_Protein_Chocolate_12_Packets",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Whey_Protein_Vanilla",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Whey_Protein_Vanilla_12_Packets",
    "identity_axis": "PACKAGING",
    "geometry_axis": "cylinder",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Womens_Bluefish_2Eye_Boat_Shoe_in_White_Tumbled_YG44xIePRHw",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Womens_Multi_13",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   },
   {
    "object_id": "Xyli_Pure_Xylitol",
    "identity_axis": "PACKAGING",
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
-   "evidence": "NAME_EVIDENCE(name/category pattern, 无图像核验)"
+   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
   }
  ],
  "excluded_51_recheck": {
@@ -903,5 +905,10 @@
    ]
   },
   "action": "cartridge(20)+toy_game(16) 建议复入候选(PACKAGING box 表达); houseware(15) 维持排除 — 待 GPT 批准后生效, 原排除台账保留"
+ },
+ "gso_pn_contamination_correction": {
+  "KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces": "POOL-02 维持 PACKAGING_SUPPORTED (真包装); GSO-PN 原'污染'归因更正为几何轴误分类 (立方盒 |x-y|<=0.08 误入 cylinder 规则→棱柱近似→DIM01 超差)",
+  "ACE_Coffee_Mug": "污染确认 (v1.1 假阳性已修)",
+  "net_contamination_count": "GSO-PN 污染=3 非包装 (mug/frother/coffeemaker) + 1 几何误分类 (KS)"
  }
 }
