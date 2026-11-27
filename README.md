@@ -57,6 +57,14 @@
 - **一对一类别审计**（`docs/usdcraft_1v1_audit.md`）：拉取对方 31 个包装/零售容器类 277 件与我方
   310 件同判据电池对跑 — 我方 100% 全过 vs 对方 25.6%（对方唯一系统性失配：自报尺寸与
   自家渲染几何 >2%，人工复核坐实）；新家族 pizza_box 实证家族级 LLM 成本 ~35 分钟会话
+- **五域合规台账**（[docs/nvidia_compliance_ledger.md](docs/nvidia_compliance_ledger.md)）：170 usdc
+  （酒饮 11 / legacy 4 / 零售设备 20 / 参数变体 35 / TDE 纸包装试点 100）逐件 NVIDIA 原版验证器
+  15 项检查 **170/170 PASS**；打包契约 8 文件同构（meta / 包清单哈希链 / BOM / 双 conformance
+  fail-closed 实跑判决）+ usdc 伴生 model.json 快照 + 双缩略图，单命令审计
+  `scripts/nvidia_audit_all.py`（时间戳证据 JSON；曾自纠 meta COM 缺失 0→170/170）
+- **方言对照实验**：NVIDIA 自家带关节件在 generic/newton 后端同样 FAIL（同款冲突错误）→
+  按后端分目录、单文件单方言 = 其发行模型；我方 PhysX 方言选择逐字同构
+  （控制实验记录见姊妹仓 `docs/usdcraft_study.md` §〇e）
 - **全链非 CUDA**：CPU/Metal 可复现，种子+SHA bit 级再生
 - **拒收先验集**入账（近退化参数 + 拓扑拒绝记录）+ 逐族产率谱（hexagonal 78%/prism 41%/tube 15%）
 - HF 预览包 358MB 就绪（498 件，cc-by-4.0）；证据链：`docs/reviews/pack10k_r1_verdict.md`、
