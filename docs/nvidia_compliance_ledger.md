@@ -146,3 +146,16 @@ NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件�
   解析圆柱+implicitfast 修复; MJCF 单位 bug (轮在 -186m 空转 300rad/s) 被
   位移≈自由落体距离的量级对照当场抓出。下游评测即探测器, 与审计同哲学。
 - _fit_declared_dims 同步缩放 joint origin (G-F6 由构造满足的必要补丁)。
+
+## M7.2 第二件铰接资产与多场景下游评测 (2026-11-27 补)
+
+- rotating_display_stand 铰接化: 4 层货架绕极轴自由 revolute (轴承语义,
+  origin 在极轴上满足 G-F6), NVIDIA 原版验证器 PASS, 变体扫/审计仍全绿。
+- 评测器泛化多场景 (scripts/mujoco_downstream_eval.py): 转换约定固化为
+  「锁定 revolute (limits 0,0) 并根=焊接等价; 自由 revolute → 子体 hinge」;
+  per-class 碰撞语义表 (车: 轮触地/架不碰; 架: 底座触地/货架由铰点承载)。
+- 双场景判决: cart「roll」0.812m/21.2rad/s/100%触地 PASS; stand「spin」
+  4 层货架 111.9 rad (≈17.8 圈) 真旋转/穿透 4.9mm/零爆炸 PASS。
+- 教训: MJCF 场景碰撞语义必须 per-class 声明 (整车架 contype=0 依赖轮承载,
+  展示架底座必须 contype=1 落地) — 否则整机自由落体 (位移≈0.5gt² 量级对照
+  当场可判)。

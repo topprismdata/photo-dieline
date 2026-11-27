@@ -231,7 +231,11 @@ def _build_raw(params: dict) -> list[dict]:
         lv = 4
         for i in range(lv):
             z = 200 + i * (H - 300) / lv
-            P.append(_cyl(f"shelf_{i}", D / 2, z, z + 10, alu))
+            sh = _cyl(f"shelf_{i}", D / 2, z, z + 10, alu)
+            # 展示架真旋转: 每层货架绕极轴自由 revolute (轴承语义), 原点在极轴上
+            sh["joint"] = {"parent": "pole", "axis": (0, 0, 1),
+                           "origin": (0.0, 0.0, z + 5), "limits_deg": (-360, 360)}
+            P.append(sh)
         return P
 
     if cid in ("soda_fountain", "juice_dispenser", "cereal_dispenser"):
