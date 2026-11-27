@@ -1,0 +1,40 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 363,
+   "hash": {
+    "sha256": "2904fbc4afcd00d2f5885127f6debaebf4804e22a666d1a16ea40da7923f67b0"
+   }
+  },
+  {
+   "relative_path": "renders/whisky_bottle_bordeaux_700.png",
+   "size": 249458,
+   "hash": {
+    "sha256": "dec8fa858b9ad225e17dc2cba4037045195ca26a9776ef89e4cfb5130673636a"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1212,
+   "hash": {
+    "sha256": "c73b235cab74c54da557736ead99a188ec4db3c94a5032dc4a8fcf08fef268aa"
+   }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 281,
+   "hash": {
+    "sha256": "16bac8ea97bd2dc94777a0ae30312945cfbfefcfe020f3f0fa611e5b27ed0e03"
+   }
+  },
+  {
+   "relative_path": "simready_usd/whisky_bottle_bordeaux_700.usdc",
+   "size": 29479,
+   "hash": {
+    "sha256": "af30d2f4a40d82b840f1f2a19da4738b3e8230804616d8b6bd2df7f46b4e496c"
+   }
+  }
+ ]
+}

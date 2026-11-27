@@ -7,12 +7,12 @@
 
 | 域 | 位置 | 件数 | 判决 |
 |---|---|---|---|
-| 酒饮包装 (simready_usd) | hfpackage/assets_liquor | 11 | **11/11 PASS** |
+| 酒饮包装 (simready_usd) | hfpackage/assets_liquor | 15 (含 M3 结构轴扩容: vodka×belly / baijiu×straight / whisky×bordeaux / wine×straight) | **15/15 PASS** |
 | 刚体 legacy | hfpackage/families | 4 | **4/4 PASS** |
 | 零售设备正典 | output/nv960_usd | 20 | **20/20 PASS** |
 | 设备参数变体 | output/nv960_variants | 35 | **35/35 PASS** |
 | TDE 纸包装试点 (gable/clv/cone/food) | output/pack10k_pilot | 100 | **100/100 PASS** |
-| **总计** | | **170** | **170/170 PASS** |
+| **总计** | | **174** | **174/174 PASS** |
 
 ## 方言模型 (对照实验裁决)
 
@@ -92,3 +92,10 @@ meta 完整性 + 双缩略图齐备} → `docs/nvidia_full_audit_2026-11-27.json
 叙事终态: 10,000 尝试 → 9,386 GREEN (我方 G-F 门禁, 产率 93.9%, 16.4 分钟)
 → 9,386/9,386 NVIDIA 工具链全量背书 (52.4s)。
 产能: 我方全量验证吞吐 ~179 件/秒, NVIDIA 单件 $0.851/4.9min。
+
+## M3 结构轴扩容 (2026-11-27 补)
+
+本体映射 11→15 条: 新增 4 组合 = 已注册结构轴的空白填充 (vodka×belly / baijiu×straight /
+whisky×bordeaux / wine×straight, 每类独立 lathe profile)。全链: G-F 门禁 → simready 结构化
+(pxr 实测 dims/mass 回填) → NVIDIA 原版验证器 4/4 PASS → hfpackage 并入 (spec 15/15) →
+打包契约发射 (总 174/174)。

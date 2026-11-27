@@ -179,6 +179,30 @@
    "product_category": "water",
    "packaging_structure": "pet_bottle",
    "closure": "screw_cap"
+  },
+  {
+   "asset": "vodka_bottle_round_700",
+   "product_category": "vodka",
+   "packaging_structure": "glass_bottle_belly",
+   "closure": "screw_cap"
+  },
+  {
+   "asset": "baijiu_bottle_straight_500",
+   "product_category": "baijiu",
+   "packaging_structure": "glass_bottle_straight",
+   "closure": "screw_cap"
+  },
+  {
+   "asset": "whisky_bottle_bordeaux_700",
+   "product_category": "whisky",
+   "packaging_structure": "glass_bottle_bordeaux",
+   "closure": "screw_cap"
+  },
+  {
+   "asset": "wine_bottle_straight_750",
+   "product_category": "wine",
+   "packaging_structure": "glass_bottle_straight",
+   "closure": "foil_cap"
   }
  ],
  "rules": [

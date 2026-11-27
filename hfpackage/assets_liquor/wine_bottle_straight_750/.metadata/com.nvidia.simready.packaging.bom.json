@@ -1,0 +1,40 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 357,
+   "hash": {
+    "sha256": "b04ab4c3fb2c499e0c7020f8ebc001be7030c06de05c449b885a7a061932755a"
+   }
+  },
+  {
+   "relative_path": "renders/wine_bottle_straight_750.png",
+   "size": 247037,
+   "hash": {
+    "sha256": "1e287d68b8a44fd93e8bac61066d21dc2960abd63f1537641566026a02a0c776"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1207,
+   "hash": {
+    "sha256": "eb0ad89b55f35a1e810b726f4fdfa8a49ebac7c580a71bfce19ed7a359524fbb"
+   }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 275,
+   "hash": {
+    "sha256": "c9a3bf8965c2afada68b1157e43f1e0ee4da7678747afef7fde21fea6effb59b"
+   }
+  },
+  {
+   "relative_path": "simready_usd/wine_bottle_straight_750.usdc",
+   "size": 29483,
+   "hash": {
+    "sha256": "51e6aab626c2a39edfbcb1b7def6d91aa25cde5d7cfd1fff4c5e9f34226d51a1"
+   }
+  }
+ ]
+}

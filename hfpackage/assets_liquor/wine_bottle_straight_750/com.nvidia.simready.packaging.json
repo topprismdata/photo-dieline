@@ -1,0 +1,37 @@
+{
+ "format_version": "1.0",
+ "package_id": "simready.hf.topprism.photo-dieline.wine_bottle_straight_750.1.0.0",
+ "license": "CC-BY-4.0",
+ "metadata": [
+  {
+   "name": "com.nvidia.simready.conformance.Package-Candidate@1.3.0.json",
+   "hash": {
+    "sha256": "e9019428689e2a60008fd727f9e41337f1c9e3d734c47a93496ca55c6ccbff0c"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.conformance.Package@1.0.0.json",
+   "hash": {
+    "sha256": "e0edaa0a1f16d5f5362111dd1c9f860f9710b8e80e5ce66368974b0f9d2b587e"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.packaging.bom.json",
+   "hash": {
+    "sha256": "17be3736472758deb81c6c5d496acbd852cc5a50fbb9f9b630c1896255b4e8b6"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.root_usds.json",
+   "hash": {
+    "sha256": "b7ffc7cd747b6998b2b717f92aded9100a6e85ba6031c1d11dd4ca177a8eeac1"
+   }
+  }
+ ],
+ "content_hash": {
+  "sha256": "20c94e0f43c77f5f7364896efcc7837542e7b2790f27a14bc502eb0b53712891"
+ },
+ "package_hash": {
+  "sha256": "da620790ff180519b7df32e99ac90c18820c85db2db51b3fe0697a5c78d3e4e6"
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 363,
+   "hash": {
+    "sha256": "afd17d630d8c45d03729e4bc8dd39eb18b6255cfeffd27bdde17865d3c776c84"
+   }
+  },
+  {
+   "relative_path": "renders/baijiu_bottle_straight_500.png",
+   "size": 250646,
+   "hash": {
+    "sha256": "3c00aeecb2e8a09a2243c507b8bc2fdf865f7a4953dfe0ba95bd3792dd825de4"
+   }
+  },
+  {
+   "relative_path": "simready_usd/baijiu_bottle_straight_500.usdc",
+   "size": 20249,
+   "hash": {
+    "sha256": "bf34bd2540cb06f6ecbc8223f7845404a74cb7a94b2dec0c117f6f324603176b"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1212,
+   "hash": {
+    "sha256": "d419bdf0566a1c3fdbdc0db4fabd5c72253fa9b8f0f6b0394b936dc94b02ea79"
+   }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 281,
+   "hash": {
+    "sha256": "5984e8f56e6b8fca06e8a6c11bc9e75095dd3cde908f87a636b2f53f89dfe157"
+   }
+  }
+ ]
+}

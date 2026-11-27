@@ -1,0 +1,17 @@
+{
+ "object_id": "tpd_vodka_bottle_round_700",
+ "category_id": "beverage_liquor",
+ "category": "vodka_bottle_round_700",
+ "title": "vodka_bottle_round_700",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "center_of_mass_m": [
+  -Infinity,
+  -Infinity,
+  -Infinity
+ ],
+ "provenance": "parametric"
+}

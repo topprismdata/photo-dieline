@@ -1,0 +1,55 @@
+{
+ "asset": "wine_bottle_straight_750",
+ "family": "beverage_liquor",
+ "axes": {
+  "product_category": "wine",
+  "packaging_structure": "glass_bottle_straight"
+ },
+ "branding": "NONE — 通用几何, 零商标零文字零贴图",
+ "attributes": {
+  "nominal_capacity_ml": {
+   "value": 750,
+   "source_tier": "official_spec",
+   "note": "行业公称包装级容量"
+  },
+  "dimensions_mm": {
+   "value": {
+    "X": 78.0,
+    "Y": 78.0,
+    "Z": 282.0
+   },
+   "source_tier": "derived",
+   "note": "G-F 门禁复测一致"
+  },
+  "mass_kg": {
+   "value": 0.3125,
+   "source_tier": "estimated",
+   "note": "材质密度×闭壳体积, 非实测"
+  },
+  "closure": {
+   "value": "foil_cap",
+   "source_tier": "derived"
+  },
+  "body_material": {
+   "value": "glass_green",
+   "source_tier": "derived"
+  },
+  "fill_state": {
+   "value": "empty",
+   "source_tier": "derived"
+  }
+ },
+ "validation": {
+  "geometry": "pass",
+  "appearance": "pass",
+  "semantics": "pending",
+  "physics": "pending",
+  "runtime": "not_tested",
+  "composition": "not_tested"
+ },
+ "textures": "NONE (素材质)",
+ "license": "CC-BY-4.0 (随仓声明)",
+ "provenance_notes": [
+  "M2 扩容 (2026-11-27): author_compile G-F 全过"
+ ]
+}

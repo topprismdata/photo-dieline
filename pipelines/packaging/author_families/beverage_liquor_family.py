@@ -33,6 +33,10 @@ CLASSES = [
     "pet_bottle_500",
     "pet_bottle_1500",
     "liquor_gift_dual",
+    "vodka_bottle_round_700",
+    "baijiu_bottle_straight_500",
+    "whisky_bottle_bordeaux_700",
+    "wine_bottle_straight_750",
 ]
 
 DEFAULTS = {
@@ -45,6 +49,10 @@ DEFAULTS = {
     "pet_bottle_500":    {"H": 210.0, "D": 64.0},
     "pet_bottle_1500":   {"H": 320.0, "D": 88.0},
     "whisky_bottle_700": {"H": 240.0, "D": 88.0},
+    "vodka_bottle_round_700": {"H": 240.0, "D": 80.0},
+    "baijiu_bottle_straight_500": {"H": 230.0, "D": 65.0},
+    "whisky_bottle_bordeaux_700": {"H": 250.0, "D": 80.0},
+    "wine_bottle_straight_750": {"H": 300.0, "D": 78.0},
     "vodka_bottle_700":  {"H": 290.0, "D": 72.0},
     "liquor_gift_dual":  {"H": 340.0, "D": 200.0},
 }
@@ -230,6 +238,93 @@ def _beer_can_500(H, D):
     return P
 
 
+def _vodka_round(H, D):
+    """圆肚伏特加: 球腹收颈 + 高平盖 (frosted)。"""
+    R = D / 2.0
+    wall = 2.0
+    belly_r = R
+    neck_r = R * 0.30
+    cap_r = neck_r + 2.2
+    outer = [
+        (R * 0.70, 0.0), (R * 0.95, 4.0), (belly_r, H * 0.22), (belly_r, H * 0.40),
+        (belly_r * 0.88, H * 0.58), (belly_r * 0.62, H * 0.72), (neck_r + wall, H * 0.80),
+        (neck_r + wall, H * 0.90), (neck_r, H * 0.90), (neck_r, H * 0.90 - wall),
+        (neck_r + wall, H * 0.90 - wall), (neck_r + wall, H * 0.80),
+    ]
+    inner = [(max(r - wall, 1.0), z) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("glass_shell", loop, MAT_GLASS_FROST, n=96)]
+    cap = [(cap_r * 0.8, H * 0.90 - wall), (cap_r, H * 0.90 + 2.0),
+           (cap_r, H * 0.90 + 16.0), (cap_r * 0.88, H * 0.90 + 18.0),
+           (cap_r * 0.55, H * 0.90 + 18.0), (cap_r * 0.55, H * 0.90 + 2.0)]
+    P.append(_lathe_closed("cap", cap + [cap[0]], MAT_ALU, n=64))
+    return P
+
+
+def _baijiu_straight(H, D):
+    """直筒二锅头形: 圆柱身 + 短锥肩 + 压盖。"""
+    R = D / 2.0
+    wall = 1.8
+    body_top = H * 0.86
+    outer = [
+        (R * 0.80, 0.0), (R, 4.0), (R, body_top - 14.0), (R * 0.62, body_top - 4.0),
+        (R * 0.52, body_top), (R * 0.52, body_top + 2.0),
+    ]
+    inner = [(max(r - wall, 1.0), z) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("glass_shell", loop, MAT_GLASS_CLEAR, n=96)]
+    cap = [(R * 0.54, body_top), (R * 0.60, body_top + 1.0),
+           (R * 0.60, body_top + 14.0), (R * 0.52, body_top + 15.0),
+           (R * 0.42, body_top + 14.0), (R * 0.42, body_top + 1.0)]
+    P.append(_lathe_closed("cap", cap + [cap[0]], MAT_ALU, n=64))
+    return P
+
+
+def _whisky_bordeaux(H, D):
+    """波尔多肩威士忌: 直身高肩斜坡 + 短颈 (amber)。"""
+    R = D / 2.0
+    wall = 2.0
+    neck_r = R * 0.32
+    shoulder = H * 0.68
+    outer = [
+        (R * 0.72, 0.0), (R, 6.0), (R, shoulder - 18.0), (R * 0.92, shoulder),
+        (neck_r + wall, shoulder + 34.0), (neck_r + wall, H - 16.0),
+        (neck_r, H - 16.0), (neck_r, H - 16.0 - wall), (neck_r + wall, H - 16.0 - wall),
+        (neck_r + wall, shoulder + 34.0),
+    ]
+    inner = [(max(r - wall, 1.0), z) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("glass_shell", loop, MAT_GLASS_AMBER, n=96)]
+    cap_r = neck_r + 2.6
+    cap = [(cap_r * 0.75, H - 16.0 - wall), (cap_r, H - 14.0),
+           (cap_r, H - 2.0), (cap_r * 0.85, H), (cap_r * 0.5, H), (cap_r * 0.5, H - 14.0)]
+    P.append(_lathe_closed("cap", cap + [cap[0]], MAT_ALU, n=64))
+    return P
+
+
+def _wine_straight(H, D):
+    """直颈平肩葡萄酒 (Rhône 形): 直身高 + 缓肩长颈 (green)。"""
+    R = D / 2.0
+    wall = 2.2
+    neck_r = R * 0.30
+    shoulder = H * 0.62
+    outer = [
+        (R * 0.70, 0.0), (R, 5.0), (R, shoulder - 20.0), (R * 0.94, shoulder),
+        (neck_r + wall, shoulder + 52.0), (neck_r + wall, H - 18.0),
+        (neck_r, H - 18.0), (neck_r, H - 18.0 - wall), (neck_r + wall, H - 18.0 - wall),
+        (neck_r + wall, shoulder + 52.0),
+    ]
+    inner = [(max(r - wall, 1.0), z) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("glass_shell", loop, MAT_GLASS_GREEN, n=96)]
+    cap_r = neck_r + 2.8
+    cap = [(cap_r * 0.7, H - 18.0 - wall), (cap_r, H - 16.0),
+           (cap_r, H - 4.0), (cap_r * 0.85, H - 2.0), (cap_r * 0.5, H - 2.0),
+           (cap_r * 0.5, H - 16.0)]
+    P.append(_lathe_closed("cap_foil", cap + [cap[0]], MAT_ALU, n=64))
+    return P
+
+
 def _gift_dual(H, D):
     """双瓶位瓦楞礼盒: 底+四壁 (每零件独立闭合箱体)。素面零印刷。"""
     W = D
@@ -269,6 +364,14 @@ def build_parts(params: dict) -> list[dict]:
         return _baijiu_500(H, D)
     if cid == "baijiu_bottle_jiangxiang_500":
         return _baijiu_jiangxiang(H, D)
+    if cid == "vodka_bottle_round_700":
+        return _vodka_round(H, D)
+    if cid == "baijiu_bottle_straight_500":
+        return _baijiu_straight(H, D)
+    if cid == "whisky_bottle_bordeaux_700":
+        return _whisky_bordeaux(H, D)
+    if cid == "wine_bottle_straight_750":
+        return _wine_straight(H, D)
     if cid == "pet_bottle_500":
         return _pet_bottle(H, D, rib=True)
     if cid == "pet_bottle_1500":
