@@ -52,6 +52,9 @@
   全程 16.4 分钟（单 Mac，全链 98ms/件），API 成本 $0**；614 件门禁拒绝（fail-closed 逐族入账）
 - **独立验收 VSR = 1.0**（9386/9386 零失败；验收器异源于生产门禁：水密性/退化/尺寸核账/
   物理字段/接触结判据，`scripts/packbench_validator.py` — 三轮战果：抓未焊接→焊接→抓退化/重复面→三角过滤）
+- **NVIDIA 原版验证器全量普查 = 9386/9386 PASS**（2026-11-27，非抽检——全数逐件跑
+  [NVlabs/USDCraft](https://github.com/NVlabs/USDCraft) 官方 `_validate_usd_asset`（PhysX 后端 15 项），
+  耗时 52.4s，证据 `docs/scale10k_full_validation.json`；台账 [docs/nvidia_compliance_ledger.md](docs/nvidia_compliance_ledger.md)）
 - **对标 USDCraft**：单件 $0.851/4.9min（LLM 逐件+修复回路）vs 我们 $0/0.098s（家族冻结+确定性采样），
   10K 约当 $8,510+ agent·小时 vs 16.4 分钟；实测对比表见 `docs/production_capacity.md` §七
 - **一对一类别审计**（`docs/usdcraft_1v1_audit.md`）：拉取对方 31 个包装/零售容器类 277 件与我方
