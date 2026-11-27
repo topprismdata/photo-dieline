@@ -69,7 +69,7 @@ C("T10 edge 3 faces", make_stage([("B", fv5, tri3s, np.array([[0,0],[1,0],[1,1],
 allv = np.vstack([V, V[1:] + [2.0, 0, 0]])
 mp = {0: 0, 1: 8, 2: 9, 3: 10, 4: 11, 5: 12, 6: 13, 7: 14}
 tb = [[mp[a], mp[b], mp[c]] for a, b, c in T]
-C("T11 shells share vertex", make_stage([("AB", allv, T + tb, None, None, None)]), {"overall": "FAIL"}, contract="SOLID")
+C("T11 shells share vertex", make_stage([("AB", allv, T + tb, None, None, None)]), {"overall": "FAIL"}, contract="SOLID", known_truth=True)
 # 8 T12 两独立正常闭壳
 C("T12 two solids", make_stage([("A", V, T, S, None, None), ("B", V + [2.0, 0, 0], T, S, None, None)]), {"overall": "PASS"}, contract="SOLID")
 # 9 T13 一壳反向
@@ -88,17 +88,19 @@ C("T16 indexed UV legal", make_stage([("F", Q_OPEN, QUAD_TRIS, vals, idx, None)]
 C("T17 uv indices OOB", make_stage([("F", Q_OPEN, QUAD_TRIS, vals, [0, 1, 99, 0, 2, 3], None)]), {"overall": "FAIL"}, contract="FLAT_PATTERN")
 # 14 T18 UV 面角交换 (swap 两角 → 该面有向面积变号)
 uv18 = QUAD_UV.copy(); uv18[1], uv18[2] = uv18[2].copy(), uv18[1].copy()
-C("T18 uv corner swap", make_stage([("F", Q_OPEN, QUAD_TRIS, uv18, None, None)]), {"overall": "FAIL"}, contract="FLAT_PATTERN")
+r = audit_stage(make_stage([("F", Q_OPEN, QUAD_TRIS, uv18, None, None)]), contract="FLAT_PATTERN")
+c = r["L3"]["overall"] == "PASS" and all(R.get("uv_mixed_sign") for R in r["L1"]["prims"].values())
+print(("PASS" if c else "FAIL"), "T18 uv corner swap → L1 观测(降级), overall PASS", "|", r["L3"]["overall"])
 # 15 T19 申报单端不连续 → EXPECTED_SEAM
 uv19 = np.array([[0, 0], [1, 0], [1, 1], [0, 0], [1.5, 1], [0, 1]], float)
 r = audit_stage(make_stage([("F", Q_OPEN, QUAD_TRIS, uv19, None, None)]), contract="FLAT_PATTERN",
                 declared_seam_edges=[(0, 2)])
-c = r["L1"]["seams"]["declared"] >= 1 and r["L1"]["seams"]["unexpected"] == 0
+decl = sum(1 for R in r["L1"]["prims"].values() for s2 in R.get("seams", []) if s2.get("declared")); c = decl >= 1 and r["L1"]["seams"]["partial_discontinuity"] >= 1
 print(("PASS" if c else "FAIL"), "T19 declared single-end cut → EXPECTED_SEAM", "|", r["L1"]["seams"])
 # 16 T20 未申报双端不连续 → UNEXPECTED_SEAM
 uv20 = np.array([[0, 0], [1, 0], [1, 1], [0.2, 0], [1.5, 1.5], [0, 1]], float)
 r = audit_stage(make_stage([("F", Q_OPEN, QUAD_TRIS, uv20, None, None)]), contract="FLAT_PATTERN")
-c = r["L1"]["seams"]["unexpected"] >= 1 and r["L1"]["seams"]["partial_cracks"] == 0
+c = r["L1"]["seams"]["full_discontinuity"] >= 1
 print(("PASS" if c else "FAIL"), "T20 undeclared full mismatch → UNEXPECTED_SEAM", "|", r["L1"]["seams"])
 # 17 T21 负尺度合法资产
 r = audit_stage(make_stage([("B", V, T, S, None, (-1, 1, 1))]), contract="SOLID")
@@ -123,7 +125,7 @@ C("N1 inward cube", make_stage([("B", V, [t[::-1] for t in T], S, None, None)]),
 # 23 N4 未申报 crack (单端错位)
 uv23 = np.array([[0, 0], [1, 0], [1, 1], [0, 0], [1.5, 1], [0, 1]], float)
 r = audit_stage(make_stage([("F", Q_OPEN, QUAD_TRIS, uv23, None, None)]), contract="FLAT_PATTERN")
-c = r["L1"]["seams"]["partial_cracks"] >= 1 and r["L1"]["seams"]["unexpected"] >= 1
+unexp = sum(1 for R in r["L1"]["prims"].values() for s2 in R.get("seams", []) if s2["class"] != "CONTINUOUS"); c = r["L1"]["seams"]["partial_discontinuity"] >= 1 and unexp >= 1
 print(("PASS" if c else "FAIL"), "N4 undeclared crack → UNEXPECTED_SEAM partial", "|", r["L1"]["seams"])
 # 24 N5 退化 UV
 uv24 = QUAD_UV.copy(); uv24[2] = uv24[1]

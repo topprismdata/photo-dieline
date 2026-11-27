@@ -1,0 +1,35 @@
+{
+ "sku": "aseptic_brick_v0000",
+ "candidate": "model_folded_welded_noglue.usdc",
+ "weld": "round(1e-6); glue flap excluded (interior bonded duplicate sheet)",
+ "audit": {
+  "overall": "FAIL",
+  "findings": [
+   "topology:dup-directed-edges:4",
+   "vertex_manifold:nonfan:1",
+   "topology:boundary-not-walkable",
+   "closure:solid-with-open-boundary",
+   "uv:no-st"
+  ],
+  "disputed": [],
+  "shells": [
+   {
+    "closed": false,
+    "tris": 19,
+    "boundary": 19
+   },
+   {
+    "closed": false,
+    "tris": 1,
+    "boundary": 3
+   }
+  ]
+ },
+ "verts": 18,
+ "tris": 20,
+ "bbox_m": [
+  0.0955,
+  0.0382,
+  0.1386
+ ]
+}
