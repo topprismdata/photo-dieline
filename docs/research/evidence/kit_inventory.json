@@ -1,0 +1,736 @@
+{
+ "_meta": {
+  "source": "archive.iar.kit.edu ObjectModelsWebUI listAll",
+  "count": 145,
+  "license": "研究/非商业 + 通知作者义务",
+  "fetched": "2026-11-28",
+  "note": "名称层枚举; tags 需逐详情页"
+ },
+ "items": [
+  {
+   "kit_id": 1,
+   "name": "OrangeMarmelade",
+   "tags": ""
+  },
+  {
+   "kit_id": 2,
+   "name": "BlueSaltCube",
+   "tags": ""
+  },
+  {
+   "kit_id": 3,
+   "name": "YellowSaltCube",
+   "tags": ""
+  },
+  {
+   "kit_id": 4,
+   "name": "FruitTea",
+   "tags": ""
+  },
+  {
+   "kit_id": 5,
+   "name": "GreenSaltCylinder",
+   "tags": ""
+  },
+  {
+   "kit_id": 6,
+   "name": "MashedPotatoes",
+   "tags": ""
+  },
+  {
+   "kit_id": 7,
+   "name": "YellowSaltCylinder",
+   "tags": ""
+  },
+  {
+   "kit_id": 8,
+   "name": "Rusk",
+   "tags": ""
+  },
+  {
+   "kit_id": 9,
+   "name": "Knaeckebrot",
+   "tags": ""
+  },
+  {
+   "kit_id": 10,
+   "name": "Amicelli",
+   "tags": ""
+  },
+  {
+   "kit_id": 11,
+   "name": "HotPot",
+   "tags": ""
+  },
+  {
+   "kit_id": 12,
+   "name": "YellowSaltCube2",
+   "tags": ""
+  },
+  {
+   "kit_id": 13,
+   "name": "Sauerkraut",
+   "tags": ""
+  },
+  {
+   "kit_id": 14,
+   "name": "LivioClassicOil",
+   "tags": ""
+  },
+  {
+   "kit_id": 15,
+   "name": "LivioSunflowerOil",
+   "tags": ""
+  },
+  {
+   "kit_id": 16,
+   "name": "DanishHam",
+   "tags": ""
+  },
+  {
+   "kit_id": 17,
+   "name": "TomatoSoup",
+   "tags": ""
+  },
+  {
+   "kit_id": 18,
+   "name": "SauerkrautSmall",
+   "tags": ""
+  },
+  {
+   "kit_id": 19,
+   "name": "HeringTin",
+   "tags": ""
+  },
+  {
+   "kit_id": 20,
+   "name": "RavioliLarge",
+   "tags": ""
+  },
+  {
+   "kit_id": 21,
+   "name": "InstantSoup",
+   "tags": ""
+  },
+  {
+   "kit_id": 22,
+   "name": "Toothpaste",
+   "tags": ""
+  },
+  {
+   "kit_id": 23,
+   "name": "HotPot2",
+   "tags": ""
+  },
+  {
+   "kit_id": 24,
+   "name": "KnaeckebrotRye",
+   "tags": ""
+  },
+  {
+   "kit_id": 25,
+   "name": "CeylonTea",
+   "tags": ""
+  },
+  {
+   "kit_id": 26,
+   "name": "Rice",
+   "tags": ""
+  },
+  {
+   "kit_id": 27,
+   "name": "FennelTea",
+   "tags": ""
+  },
+  {
+   "kit_id": 28,
+   "name": "MuesliBars",
+   "tags": ""
+  },
+  {
+   "kit_id": 29,
+   "name": "Deodorant",
+   "tags": ""
+  },
+  {
+   "kit_id": 30,
+   "name": "HygieneSpray",
+   "tags": ""
+  },
+  {
+   "kit_id": 31,
+   "name": "PowderedSugar",
+   "tags": ""
+  },
+  {
+   "kit_id": 32,
+   "name": "CondensedMilk",
+   "tags": ""
+  },
+  {
+   "kit_id": 33,
+   "name": "SoftCakeOrange",
+   "tags": ""
+  },
+  {
+   "kit_id": 34,
+   "name": "CoffeeFilters",
+   "tags": ""
+  },
+  {
+   "kit_id": 35,
+   "name": "PineappleSlices",
+   "tags": ""
+  },
+  {
+   "kit_id": 36,
+   "name": "FruitDrink",
+   "tags": ""
+  },
+  {
+   "kit_id": 37,
+   "name": "InstantIceCoffee",
+   "tags": ""
+  },
+  {
+   "kit_id": 38,
+   "name": "ChoppedTomatoes",
+   "tags": ""
+  },
+  {
+   "kit_id": 39,
+   "name": "MilkDrinkVanilla",
+   "tags": ""
+  },
+  {
+   "kit_id": 40,
+   "name": "WhippedCream",
+   "tags": ""
+  },
+  {
+   "kit_id": 41,
+   "name": "PotatoeStarch",
+   "tags": ""
+  },
+  {
+   "kit_id": 42,
+   "name": "InstantDumplings",
+   "tags": ""
+  },
+  {
+   "kit_id": 43,
+   "name": "ChocolateBars",
+   "tags": ""
+  },
+  {
+   "kit_id": 44,
+   "name": "JamSugar",
+   "tags": ""
+  },
+  {
+   "kit_id": 45,
+   "name": "YellowSaltCylinderSmall",
+   "tags": ""
+  },
+  {
+   "kit_id": 46,
+   "name": "InstantMousse",
+   "tags": ""
+  },
+  {
+   "kit_id": 47,
+   "name": "TomatoSauce",
+   "tags": ""
+  },
+  {
+   "kit_id": 48,
+   "name": "PowderedSugarMill",
+   "tags": ""
+  },
+  {
+   "kit_id": 49,
+   "name": "SauceThickener",
+   "tags": ""
+  },
+  {
+   "kit_id": 50,
+   "name": "CoffeeFilters2",
+   "tags": ""
+  },
+  {
+   "kit_id": 51,
+   "name": "ShowerGel",
+   "tags": ""
+  },
+  {
+   "kit_id": 52,
+   "name": "Margarine",
+   "tags": ""
+  },
+  {
+   "kit_id": 53,
+   "name": "MilkRice",
+   "tags": ""
+  },
+  {
+   "kit_id": 54,
+   "name": "Patches",
+   "tags": ""
+  },
+  {
+   "kit_id": 55,
+   "name": "PotatoeDumplings",
+   "tags": ""
+  },
+  {
+   "kit_id": 56,
+   "name": "CoughDropsLemon",
+   "tags": ""
+  },
+  {
+   "kit_id": 57,
+   "name": "CoughDropsHoney",
+   "tags": ""
+  },
+  {
+   "kit_id": 58,
+   "name": "CoughDropsBerries",
+   "tags": ""
+  },
+  {
+   "kit_id": 59,
+   "name": "FruitBars",
+   "tags": ""
+  },
+  {
+   "kit_id": 60,
+   "name": "PatchesSensitive",
+   "tags": ""
+  },
+  {
+   "kit_id": 61,
+   "name": "SardinesCan",
+   "tags": ""
+  },
+  {
+   "kit_id": 62,
+   "name": "DropsOrange",
+   "tags": ""
+  },
+  {
+   "kit_id": 63,
+   "name": "DropsCherry",
+   "tags": ""
+  },
+  {
+   "kit_id": 64,
+   "name": "FizzyTablets",
+   "tags": ""
+  },
+  {
+   "kit_id": 65,
+   "name": "FizzyTabletsCalcium",
+   "tags": ""
+  },
+  {
+   "kit_id": 66,
+   "name": "PotatoeSticks",
+   "tags": ""
+  },
+  {
+   "kit_id": 67,
+   "name": "Wafflerolls",
+   "tags": ""
+  },
+  {
+   "kit_id": 68,
+   "name": "Shampoo",
+   "tags": ""
+  },
+  {
+   "kit_id": 69,
+   "name": "HamburgerSauce",
+   "tags": ""
+  },
+  {
+   "kit_id": 70,
+   "name": "RuskWholemeal",
+   "tags": ""
+  },
+  {
+   "kit_id": 71,
+   "name": "NutCandy",
+   "tags": ""
+  },
+  {
+   "kit_id": 72,
+   "name": "KoalaCandy",
+   "tags": ""
+  },
+  {
+   "kit_id": 73,
+   "name": "ChickenSoup",
+   "tags": ""
+  },
+  {
+   "kit_id": 74,
+   "name": "InstantTomatoSoup",
+   "tags": ""
+  },
+  {
+   "kit_id": 75,
+   "name": "BroccoliSoup",
+   "tags": ""
+  },
+  {
+   "kit_id": 76,
+   "name": "CoffeeCookies",
+   "tags": ""
+  },
+  {
+   "kit_id": 77,
+   "name": "BakingSoda",
+   "tags": ""
+  },
+  {
+   "kit_id": 78,
+   "name": "Sweetener",
+   "tags": ""
+  },
+  {
+   "kit_id": 79,
+   "name": "BakingVanilla",
+   "tags": ""
+  },
+  {
+   "kit_id": 80,
+   "name": "ChocoIcing",
+   "tags": ""
+  },
+  {
+   "kit_id": 81,
+   "name": "CleaningCloths",
+   "tags": ""
+  },
+  {
+   "kit_id": 82,
+   "name": "NutellaGo",
+   "tags": ""
+  },
+  {
+   "kit_id": 83,
+   "name": "StrawberryPorridge",
+   "tags": ""
+  },
+  {
+   "kit_id": 84,
+   "name": "OrgFruitTea",
+   "tags": ""
+  },
+  {
+   "kit_id": 85,
+   "name": "OrgHerbTea",
+   "tags": ""
+  },
+  {
+   "kit_id": 86,
+   "name": "WhippedCream2",
+   "tags": ""
+  },
+  {
+   "kit_id": 87,
+   "name": "Marjoram",
+   "tags": ""
+  },
+  {
+   "kit_id": 88,
+   "name": "Curry",
+   "tags": ""
+  },
+  {
+   "kit_id": 89,
+   "name": "Paprika",
+   "tags": ""
+  },
+  {
+   "kit_id": 90,
+   "name": "TomatoHerbSauce",
+   "tags": ""
+  },
+  {
+   "kit_id": 91,
+   "name": "ChocSticks",
+   "tags": ""
+  },
+  {
+   "kit_id": 92,
+   "name": "ChocSticks2",
+   "tags": ""
+  },
+  {
+   "kit_id": 93,
+   "name": "Peanuts",
+   "tags": ""
+  },
+  {
+   "kit_id": 94,
+   "name": "Peanuts2",
+   "tags": ""
+  },
+  {
+   "kit_id": 95,
+   "name": "InstantSauce2",
+   "tags": ""
+  },
+  {
+   "kit_id": 96,
+   "name": "Peas",
+   "tags": ""
+  },
+  {
+   "kit_id": 97,
+   "name": "HerbSalt",
+   "tags": ""
+  },
+  {
+   "kit_id": 98,
+   "name": "SoftCheese",
+   "tags": ""
+  },
+  {
+   "kit_id": 99,
+   "name": "BathDetergent",
+   "tags": ""
+  },
+  {
+   "kit_id": 100,
+   "name": "ChocMarshmallows",
+   "tags": ""
+  },
+  {
+   "kit_id": 102,
+   "name": "CokePlasticLarge",
+   "tags": ""
+  },
+  {
+   "kit_id": 103,
+   "name": "CokePlasticSmall",
+   "tags": ""
+  },
+  {
+   "kit_id": 104,
+   "name": "VitalisCereals",
+   "tags": ""
+  },
+  {
+   "kit_id": 105,
+   "name": "SmacksCereals",
+   "tags": ""
+  },
+  {
+   "kit_id": 106,
+   "name": "Sprudelflasche",
+   "tags": ""
+  },
+  {
+   "kit_id": 107,
+   "name": "Wineglass",
+   "tags": ""
+  },
+  {
+   "kit_id": 108,
+   "name": "Waterglass",
+   "tags": ""
+  },
+  {
+   "kit_id": 109,
+   "name": "SmallGlass",
+   "tags": ""
+  },
+  {
+   "kit_id": 110,
+   "name": "Glassbowl",
+   "tags": ""
+  },
+  {
+   "kit_id": 111,
+   "name": "WhiteCup",
+   "tags": ""
+  },
+  {
+   "kit_id": 112,
+   "name": "Pitcher",
+   "tags": ""
+  },
+  {
+   "kit_id": 113,
+   "name": "Sprayflask",
+   "tags": ""
+  },
+  {
+   "kit_id": 114,
+   "name": "InstantSauce",
+   "tags": ""
+  },
+  {
+   "kit_id": 116,
+   "name": "GreenCup",
+   "tags": ""
+  },
+  {
+   "kit_id": 117,
+   "name": "ToyCarYelloq",
+   "tags": ""
+  },
+  {
+   "kit_id": 118,
+   "name": "FlowerCup",
+   "tags": ""
+  },
+  {
+   "kit_id": 119,
+   "name": "MelforBottle",
+   "tags": ""
+  },
+  {
+   "kit_id": 120,
+   "name": "CokePlasticSmallGrasp",
+   "tags": ""
+  },
+  {
+   "kit_id": 121,
+   "name": "RedCup",
+   "tags": ""
+  },
+  {
+   "kit_id": 122,
+   "name": "CatLying",
+   "tags": ""
+  },
+  {
+   "kit_id": 123,
+   "name": "CatSitting",
+   "tags": ""
+  },
+  {
+   "kit_id": 124,
+   "name": "Clown",
+   "tags": ""
+  },
+  {
+   "kit_id": 125,
+   "name": "Dog",
+   "tags": ""
+  },
+  {
+   "kit_id": 126,
+   "name": "Dwarf",
+   "tags": ""
+  },
+  {
+   "kit_id": 127,
+   "name": "Fish",
+   "tags": ""
+  },
+  {
+   "kit_id": 128,
+   "name": "Heart1",
+   "tags": ""
+  },
+  {
+   "kit_id": 129,
+   "name": "LetterP",
+   "tags": ""
+  },
+  {
+   "kit_id": 130,
+   "name": "Moon",
+   "tags": ""
+  },
+  {
+   "kit_id": 131,
+   "name": "Pony",
+   "tags": ""
+  },
+  {
+   "kit_id": 132,
+   "name": "Seal",
+   "tags": ""
+  },
+  {
+   "kit_id": 133,
+   "name": "Tortoise",
+   "tags": ""
+  },
+  {
+   "kit_id": 134,
+   "name": "CoffeeBox",
+   "tags": ""
+  },
+  {
+   "kit_id": 140,
+   "name": "Cutter",
+   "tags": ""
+  },
+  {
+   "kit_id": 141,
+   "name": "Brush",
+   "tags": ""
+  },
+  {
+   "kit_id": 142,
+   "name": "Flashlight",
+   "tags": ""
+  },
+  {
+   "kit_id": 143,
+   "name": "Phillips",
+   "tags": ""
+  },
+  {
+   "kit_id": 144,
+   "name": "Slotted_Screwdriver",
+   "tags": ""
+  },
+  {
+   "kit_id": 145,
+   "name": "Wrench",
+   "tags": ""
+  },
+  {
+   "kit_id": 146,
+   "name": "Spraybottle",
+   "tags": ""
+  },
+  {
+   "kit_id": 147,
+   "name": "Stanley_Lever",
+   "tags": ""
+  },
+  {
+   "kit_id": 148,
+   "name": "Stanley_Extension_Short",
+   "tags": ""
+  },
+  {
+   "kit_id": 149,
+   "name": "Stanley_Extension_Long",
+   "tags": ""
+  },
+  {
+   "kit_id": 150,
+   "name": "Stanley_Extension_Medium",
+   "tags": ""
+  },
+  {
+   "kit_id": 151,
+   "name": "Stanley_Handle",
+   "tags": ""
+  },
+  {
+   "kit_id": 152,
+   "name": "Pliers",
+   "tags": ""
+  }
+ ]
+}

@@ -15,5 +15,32 @@
   }
  ],
  "method": "name token + brand matching",
- "result": "GSO×YCB 十件身份级重叠=NONE (两处名称token假阳性已裁定); KIT 去重 D3 执行"
+ "result": "GSO×YCB: NONE; KIT×YCB: 名称层命中5处默认不同身份待人工核; KIT许可=非商业+通知义务",
+ "kit_x_ycb_name_hits": [
+  {
+   "ycb": "tomato_soup_can",
+   "kit": "instanttomatosoup",
+   "verdict": "名称层命中→身份待人工核"
+  },
+  {
+   "ycb": "tomato_soup_can",
+   "kit": "tomatosoup",
+   "verdict": "名称层命中→身份待人工核"
+  },
+  {
+   "ycb": "sugar_box",
+   "kit": "jamsugar",
+   "verdict": "名称层命中→身份待人工核"
+  },
+  {
+   "ycb": "sugar_box",
+   "kit": "powderedsugarmill",
+   "verdict": "名称层命中→身份待人工核"
+  },
+  {
+   "ycb": "sugar_box",
+   "kit": "powderedsugar",
+   "verdict": "名称层命中→身份待人工核"
+  }
+ ]
 }
