@@ -1,10 +1,10 @@
 {
- "timestamp": "2026-11-27T01:39:30",
+ "timestamp": "2026-11-27T01:57:33",
  "validator": "NVIDIA USDCraft _validate_usd_asset (physx), live run",
  "domains": {
   "liquor": {
-   "count": 11,
-   "pass": 11,
+   "count": 16,
+   "pass": 16,
    "assets": [
     {
      "asset": "liquor/simready_usd/baijiu_bottle_500.usdc",
@@ -28,6 +28,18 @@
      "meta_mass": false,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "liquor/simready_usd/baijiu_bottle_straight_500.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": false,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -115,6 +127,18 @@
      "overall": "PASS"
     },
     {
+     "asset": "liquor/simready_usd/vodka_bottle_round_700.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": false,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "liquor/simready_usd/whisky_bottle_700.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -127,6 +151,30 @@
      "overall": "PASS"
     },
     {
+     "asset": "liquor/simready_usd/whisky_bottle_bordeaux_700.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": false,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "liquor/simready_usd/whisky_bottle_shouldered_700.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": false,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "liquor/simready_usd/wine_bottle_750.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -136,6 +184,18 @@
      "meta_mass": false,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "liquor/simready_usd/wine_bottle_straight_750.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": false,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     }
    ]
@@ -2074,7 +2134,7 @@
   }
  },
  "summary": {
-  "total": 170,
-  "pass": 170
+  "total": 175,
+  "pass": 175
  }
 }

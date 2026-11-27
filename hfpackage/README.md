@@ -32,7 +32,8 @@ The project emphasizes:
   sampled / unknown)
 - **Simulation-oriented delivery**: OpenUSD-based assets with documented physical
   properties and validation status — every shipped asset passes NVIDIA's own USDCraft
-  validation toolchain (`_validate_usd_asset`, PhysX backend) 15/15
+  validation toolchain (`_validate_usd_asset`, PhysX backend); full corpus audit
+  175/175 (`scripts/nvidia_audit_all.py`, incl. fixtures/TDE/variant domains)
 - **Reproducible evidence**: transparent validation protocols, test results, and asset
   provenance — including published negative results
 
@@ -65,8 +66,8 @@ directory) should be consulted before using assets in a specific simulation or r
 
 | Domain | Family | Classes | Validation |
 |---|---|---|---|
-| Liquor & beverage | beverage_liquor | 11 (beer bottles 330/500, can 500, baijiu ×2 profiles, wine, whisky, vodka, PET 500/1500, gift box) | G-F1..F7 pass · usdc · spec 11/11 · **NVIDIA validator 15/15** |
-| Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc (included in the 15 NVIDIA-validated) |
+| Liquor & beverage | beverage_liquor | 16 (beer bottles 330/500, can 500, baijiu ×3 profiles, wine ×2, whisky ×3, vodka ×2, PET 500/1500, gift box) | G-F1..F7 pass · usdc · spec 16/16 · **NVIDIA validator 16/16** |
+| Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc (included in the 175 NVIDIA-validated) |
 
 Also in the repository (not shipped as USD in this dataset version): parametric paper-packaging
 families (gable/clv/cone, TDE engine, ~25 variants with a 5010-sample training corpus) and
