@@ -1,0 +1,11 @@
+{
+ "author": "Topprism",
+ "asset_name": "pet_bottle_1500",
+ "asset_type": "prop",
+ "asset_license": "CC-BY-4.0",
+ "category": "pet_bottle_1500",
+ "source_file": "./pet_bottle_1500.usdc",
+ "rigid_body_count": 1,
+ "mass": null,
+ "asset_extents": []
+}

@@ -23,6 +23,13 @@
    }
   },
   {
+   "relative_path": "simready_usd/model.json",
+   "size": 254,
+   "hash": {
+    "sha256": "95d2ec016a9840e8194d9fc3efe9473267463b11bc923868fa395a22db276356"
+   }
+  },
+  {
    "relative_path": "simready_usd/whisky_bottle_700.usdc",
    "size": 29145,
    "hash": {

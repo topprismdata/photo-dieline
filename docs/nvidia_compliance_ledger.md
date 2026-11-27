@@ -50,3 +50,10 @@ conformance.Package@1.0.0, conformance.Package-Candidate@1.3.0}.json。
 **170/170 conformance PASS** (conformance = 发射时原版验证器实跑判决, fail-closed)。
 每域 meta 源: liquor=metadata.json / nv9正典=family重算 / 变体=文件名解码参数 / TDE=既有model.json / legacy=stage内省。
 证据: docs/nvidia_package_emit_results.json (170 条判决)。
+
+## usdc 伴生 model.json 快照 (2026-11-27 补)
+
+发行约定补齐: 每个 usdc 旁伴生 model.json (schema 逐字段照抄 NVIDIA 样本:
+author/asset_name/asset_license/category/source_file/rigid_body_count/mass/asset_extents)。
+170 usdc 全覆盖零缺失; 发射顺序 = 快照先于 BOM/契约 (哈希链含 model.json,
+hfpackage 11 资产独立复算 ALL OK)。

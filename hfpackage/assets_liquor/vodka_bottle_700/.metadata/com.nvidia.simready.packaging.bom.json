@@ -23,6 +23,13 @@
    }
   },
   {
+   "relative_path": "simready_usd/model.json",
+   "size": 251,
+   "hash": {
+    "sha256": "7cc86dede73d9d20561607c811ae39a38073791054e39dedec1daf7c0619e23e"
+   }
+  },
+  {
    "relative_path": "simready_usd/vodka_bottle_700.usdc",
    "size": 26833,
    "hash": {

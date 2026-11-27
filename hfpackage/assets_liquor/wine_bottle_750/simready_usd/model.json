@@ -1,0 +1,11 @@
+{
+ "author": "Topprism",
+ "asset_name": "wine_bottle_750",
+ "asset_type": "prop",
+ "asset_license": "CC-BY-4.0",
+ "category": "wine_bottle_750",
+ "source_file": "./wine_bottle_750.usdc",
+ "rigid_body_count": 1,
+ "mass": null,
+ "asset_extents": []
+}

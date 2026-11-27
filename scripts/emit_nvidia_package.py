@@ -131,6 +131,23 @@ def stage_meta(usdc: Path) -> dict:
             'joints': joints, 'rigid_bodies': rigid, 'center_of_mass_m': com}
 
 
+
+def emit_model_json(asset_dir: Path, usdc: Path, asset_id: str, meta_src: dict) -> None:
+    """发行约定: 每个 usdc 旁伴生 model.json 快照 (schema 逐字段照抄 NVIDIA USDCraft-10K 样本)。"""
+    mass = meta_src.get('mass_kg')
+    model = {
+        'author': 'Topprism',
+        'asset_name': asset_id,
+        'asset_type': 'prop',
+        'asset_license': 'CC-BY-4.0',
+        'category': meta_src.get('category', asset_id),
+        'source_file': f'./{usdc.name}',
+        'rigid_body_count': meta_src.get('rigid_bodies') or meta_src.get('part_count') or 1,
+        'mass': round(float(mass), 4) if mass else None,
+        'asset_extents': meta_src.get('dims_m') or [],
+    }
+    (usdc.parent / 'model.json').write_text(json.dumps(model, indent=1, ensure_ascii=False))
+
 def main():
     root = Path('/Users/guohongbin/photo-dieline/hfpackage/assets_liquor')
     results = {}
@@ -138,7 +155,9 @@ def main():
         usdc = ad / 'simready_usd' / f'{ad.name}.usdc'
         if not usdc.exists():
             continue
-        v = emit(ad, usdc, ad.name, json.loads((usdc.parent / 'metadata.json').read_text()))
+        ms = json.loads((usdc.parent / 'metadata.json').read_text())
+        emit_model_json(ad, usdc, ad.name, ms)
+        v = emit(ad, usdc, ad.name, ms)
         results[ad.name] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
     # nv960 正典 20 (meta 由 family 重算)
     sys.path.insert(0, '/Users/guohongbin/photo-dieline/src')
@@ -154,6 +173,7 @@ def main():
         meta = {'category': fam.FAMILY, 'dims_m': [rep['dims_mm'][k] / 1000 for k in 'XYZ'],
                 'mass_kg': rep['mass_kg'], 'part_count': len(rep.get('parts', [])) if isinstance(rep.get('parts'), list) else None,
                 'authoring_inputs': p, 'rigid_bodies': None, 'joints': 0}
+        emit_model_json(nroot, usdc, cid, meta)
         v = emit(nroot, usdc, cid, meta)
         results[f'nv960/{cid}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
     # nv960 变体 35 (params 从文件名解码)
@@ -169,6 +189,7 @@ def main():
         rep = validate_parts(fam.build_parts(p), p, fam.FAMILY)
         meta = {'category': fam.FAMILY, 'dims_m': [rep['dims_mm'][k] / 1000 for k in 'XYZ'],
                 'mass_kg': rep['mass_kg'], 'authoring_inputs': p, 'joints': 0}
+        emit_model_json(vroot, usdc, usdc.stem, meta)
         v = emit(vroot, usdc, usdc.stem, meta)
         results[f'variant/{usdc.stem}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
     # TDE 试点 100 (复用既有 model.json)
@@ -183,7 +204,9 @@ def main():
     # legacy 4 (stage 内省)
     lroot = Path('/Users/guohongbin/photo-dieline/hfpackage/families')
     for usdc in sorted(lroot.glob('*.usdc')):
-        v = emit(lroot, usdc, usdc.stem, stage_meta(usdc))
+        sm = stage_meta(usdc)
+        emit_model_json(lroot, usdc, usdc.stem, sm)
+        v = emit(lroot, usdc, usdc.stem, sm)
         results[f'legacy/{usdc.stem}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
     n_pass = sum(1 for v in results.values() if v == 'PASS')
     print(f'contract emit: {n_pass}/{len(results)} conformance PASS')

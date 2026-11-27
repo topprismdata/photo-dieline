@@ -28,6 +28,13 @@
    "hash": {
     "sha256": "4afc7e3eca87cff11f0f9b4edc5c8c29a0e59defb7724df7fd43b75a0c422e6c"
    }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 287,
+   "hash": {
+    "sha256": "69fca4b7ee8a4837234c2bf664297f4b9b33a2905bff62ef8bc89b70a58749d3"
+   }
   }
  ]
 }

@@ -1,0 +1,11 @@
+{
+ "author": "Topprism",
+ "asset_name": "beer_bottle_330",
+ "asset_type": "prop",
+ "asset_license": "CC-BY-4.0",
+ "category": "beer_bottle_330",
+ "source_file": "./beer_bottle_330.usdc",
+ "rigid_body_count": 1,
+ "mass": null,
+ "asset_extents": []
+}
