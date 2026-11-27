@@ -1,0 +1,14 @@
+{
+ "task": "R14-UV-01 轻量UV渲染验证 (R09-11 G1-04 关闭证据)",
+ "matrix": "brick 系两家族 (aseptic_brick, brick_250ml) × S0/S1/S2 × 六正交视角 = 36 张 512×512 Eevee Emission 诊断渲染",
+ "gates": {
+  "UV-R01": "PASS 仿射一致 S0/S1/S2 各 40/40 (residual<1e-4)",
+  "UV-R02": "PASS 红蓝分区空间对应: 三阶段 meanAbsDiff=0.00",
+  "UV-R03": "PASS L/R 角标无镜像/旋转/错位",
+  "UV-R04": "PASS 渐变斜线连续无断裂",
+  "UV-R05": "PASS 无新增缺面",
+  "UV-R06": "PASS 脚本+纹理+36渲染入库可复现"
+ },
+ "render_count": 36,
+ "verdict_request": "G1-04 关闭 → G1 五项全闭 → 授权 G2 九件候选"
+}
