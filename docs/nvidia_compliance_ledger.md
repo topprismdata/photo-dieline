@@ -199,3 +199,11 @@ NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件�
 - 至此 Gemini P0「数据集级 sim-ready 统计契约」在精选语料上达成:
   sim-ready 从 2 个特例 → 域级 60/60 → 全量 198/198。
 - P1 (同源 PhysX 动态) 仍门控待 Isaac Sim 安装指令; P2 caster 已闭环。
+
+## M7.6 批量落体补齐至全量 202/202 (2026-11-27 补)
+
+- legacy 4 (beverage_can_330 / bottle_wine / food_container_1l / rsc_rsc_closed,
+  位于 hfpackage/families/) 补入 glob → 全量重跑:
+  **202/202 PASS (16.2s)**, 静置穿透 p50 0.035 / max 0.044mm, 零失败。
+- Gemini P0 统计契约就此精确等于精选语料全量: 静态 202/202 (原版验证器) 与
+  动态 202/202 (MuJoCo 落体静置) 双 202 对齐。

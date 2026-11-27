@@ -23,7 +23,7 @@ SETTLE = 300
 _DOMAINS = {
     "hfpackage_liquor": ("hfpackage/assets_liquor", "**/simready_usd/*.usdc"),
     "hfpackage_dairy": ("hfpackage/assets_dairy", "**/simready_usd/*.usdc"),
-    "hfpackage_legacy": ("hfpackage/assets_legacy", "**/simready_usd/*.usdc"),
+    "hfpackage_legacy": ("hfpackage/families", "*.usdc"),
     "nv960_canonical": ("output/nv960_usd", "*.usdc"),
     "nv960_variants": ("output/nv960_variants", "*.usdc"),
     "tde_pilot": ("output/pack10k_pilot", "**/model.usdc"),
