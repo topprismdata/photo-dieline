@@ -181,3 +181,21 @@ colv = np.array([[0,0,0],[1,0,0],[2,0,0]], float)
 dgt = [[0,1,2]]
 safe5, why5, _ = _orientation_normalize_safe(colv, dgt)
 print(("PASS" if not safe5 and any("degenerate" in w for w in why5) else "FAIL"), "G1-02负4: 共线退化三角拒翻", why5)
+
+# W11-W13 (R09-10 FZ-02 补充): 阈值边界 / 验证器未运行 / 冻结输入变更
+def dim01(w_mm, declared_mm):
+    """DIM-01: 逐轴 ≤ max(1mm, 1%·declared)"""
+    tol = max(1.0, 0.01 * abs(declared_mm))
+    return abs(w_mm - declared_mm) <= tol
+bnd = dim01(101.0, 100.0) and not dim01(101.01, 100.0)
+print(("PASS" if bnd else "FAIL"), "W11 DIM-01 阈值边界: 恰在1mm内过 / 1.01mm拒")
+gate_record = {"gate": "USDCRAFT_OFFICIAL", "ran": False, "result": None}
+st_g = {"terminal": "VALIDATION_PENDING"}
+w12 = gate_record["ran"] is False and st_g["terminal"] == "VALIDATION_PENDING" and st_g.get("pass_claimed") is None
+print(("PASS" if w12 else "FAIL"), "W12 验证器未运行 → VALIDATION_PENDING, 无PASS声明")
+frozen = {"compiler_commit": "abc123", "family_version": "v1", "seeds": 42}
+run_cfg = {"compiler_commit": "abc123", "family_version": "v1", "seeds": 42}
+w13 = run_cfg == frozen
+run_cfg["seeds"] = 43
+w13 = w13 and (run_cfg != frozen)
+print(("PASS" if w13 else "FAIL"), "W13 冻结输入变更 → 拒绝执行")

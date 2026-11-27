@@ -5,7 +5,8 @@
    "vol_origin": -233078,
    "vol_translated": 14880595,
    "vol_trimesh": -240514,
-   "agree": false
+   "agree": false,
+   "winding_note": "快速检查误判 True (仅查部分配对); trimesh 权威口径 = False (绕向不一致)"
   },
   {
    "stage": "S1_family_fixed_export",
@@ -34,7 +35,7 @@
    "area_m2_local": 0.057546,
    "edges_undirected": 30,
    "watertight": true,
-   "winding_consistent": true,
+   "winding_consistent": false,
    "nonmanifold_edges": 0
   },
   "S1_family_fixed_export": {
@@ -64,6 +65,7 @@
    "watertight": true,
    "winding_consistent": true,
    "nonmanifold_edges": 0
-  }
+  },
+  "caliber_note": "winding_consistent 字段统一为 trimesh is_winding_consistent 权威口径 (S0 False = 5 面板对同向缺陷; S1/S2 True = 家族修复后)"
  }
 }
