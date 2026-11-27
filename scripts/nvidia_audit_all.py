@@ -66,6 +66,7 @@ def audit_asset(asset_dir: Path, usdc: Path, name: str) -> dict:
 def main():
     domains = {
         'liquor': sorted((ROOT / 'hfpackage/assets_liquor').glob('*/simready_usd/*.usdc')),
+        'dairy': sorted((ROOT / 'hfpackage/assets_dairy').glob('*/simready_usd/*.usdc')),
         'legacy': sorted((ROOT / 'hfpackage/families').glob('*.usdc')),
         'nv960_canonical': sorted((ROOT / 'output/nv960_usd').glob('*.usdc')),
         'nv960_variants': sorted((ROOT / 'output/nv960_variants').glob('*.usdc')),
