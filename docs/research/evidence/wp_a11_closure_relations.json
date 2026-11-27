@@ -1,0 +1,553 @@
+{
+ "ledger": [
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "triLB",
+    "wallL"
+   ],
+   "edge_weld": [
+    0,
+    1,
+    40,
+    39
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.054,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "back",
+    "wallL"
+   ],
+   "edge_weld": [
+    1,
+    2,
+    8,
+    11
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.226,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "triL",
+    "wallL"
+   ],
+   "edge_weld": [
+    2,
+    3,
+    24,
+    26
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.226,
+    0.6175
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "glue",
+    "wallL"
+   ],
+   "edge_weld": [
+    3,
+    0,
+    6,
+    5
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.054,
+    0.6175
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "front",
+    "wallL"
+   ],
+   "edge_weld": [
+    3,
+    0,
+    18,
+    17
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.054,
+    0.6175
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "GLUE_BOND",
+   "panels": [
+    "front",
+    "glue"
+   ],
+   "edge_weld": [
+    5,
+    6,
+    17,
+    18
+   ],
+   "orient": "fwd",
+   "source": "family_design:glue_flap",
+   "condition": "glue_w>0, state=folded",
+   "uv_before": [
+    0.054,
+    0.1016
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "back",
+    "slopeB2"
+   ],
+   "edge_weld": [
+    8,
+    9,
+    37,
+    36
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.226,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "back",
+    "wallR"
+   ],
+   "edge_weld": [
+    9,
+    10,
+    12,
+    15
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.484,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "back",
+    "slopeB"
+   ],
+   "edge_weld": [
+    10,
+    11,
+    21,
+    20
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.484,
+    0.6175
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "triRB",
+    "wallR"
+   ],
+   "edge_weld": [
+    12,
+    13,
+    43,
+    42
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.484,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "front",
+    "wallR"
+   ],
+   "edge_weld": [
+    13,
+    14,
+    16,
+    19
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.656,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "triR",
+    "wallR"
+   ],
+   "edge_weld": [
+    14,
+    15,
+    27,
+    29
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.656,
+    0.6175
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "front",
+    "slopeF2"
+   ],
+   "edge_weld": [
+    16,
+    17,
+    47,
+    46
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.656,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "front",
+    "slopeF"
+   ],
+   "edge_weld": [
+    18,
+    19,
+    31,
+    30
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.914,
+    0.6175
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "slopeB",
+    "triR"
+   ],
+   "edge_weld": [
+    21,
+    22,
+    29,
+    28
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.484,
+    0.6175
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeB",
+    "slopeF"
+   ],
+   "edge_weld": [
+    22,
+    23,
+    33,
+    32
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.398,
+    0.7191
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "FOLD_MEET",
+   "panels": [
+    "slopeB",
+    "triL"
+   ],
+   "edge_weld": [
+    23,
+    20,
+    25,
+    24
+   ],
+   "orient": "rev",
+   "source": "ir.edges:FOLD",
+   "condition": "always",
+   "uv_before": [
+    0.14,
+    0.7191
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeF",
+    "triL"
+   ],
+   "edge_weld": [
+    25,
+    26,
+    32,
+    31
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.14,
+    0.7191
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeF",
+    "triR"
+   ],
+   "edge_weld": [
+    27,
+    28,
+    30,
+    33
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.5124,
+    0.7872
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeB2",
+    "slopeF2"
+   ],
+   "edge_weld": [
+    34,
+    35,
+    45,
+    44
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.312,
+    0.0
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeB2",
+    "triRB"
+   ],
+   "edge_weld": [
+    35,
+    36,
+    41,
+    43
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.57,
+    0.0
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeB2",
+    "triLB"
+   ],
+   "edge_weld": [
+    37,
+    34,
+    39,
+    38
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.226,
+    0.1016
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeF2",
+    "triLB"
+   ],
+   "edge_weld": [
+    40,
+    38,
+    46,
+    45
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.054,
+    0.1016
+   ],
+   "uv_conflict": true,
+   "uv_after": null
+  },
+  {
+   "relation": "SEAL_MEET",
+   "panels": [
+    "slopeF2",
+    "triRB"
+   ],
+   "edge_weld": [
+    41,
+    42,
+    44,
+    47
+   ],
+   "orient": "rev",
+   "source": "family_design:end_seal",
+   "condition": "state=folded",
+   "uv_before": [
+    0.57,
+    0.0
+   ],
+   "uv_conflict": false,
+   "uv_after": null
+  }
+ ],
+ "boundary_after": 3,
+ "audit": {
+  "overall": "FAIL",
+  "findings": [
+   "topology:dup-directed-edges:1",
+   "vertex_manifold:nonfan:2",
+   "topology:boundary-not-walkable"
+  ],
+  "shells": [
+   {
+    "closed": false,
+    "tris": 22,
+    "boundary": 3
+   }
+  ]
+ },
+ "bbox_m": [
+  0.0955,
+  0.0382,
+  0.1386
+ ]
+}
