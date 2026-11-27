@@ -139,16 +139,14 @@ def _brick_world(p: dict) -> dict:
         "slopeB": [[hx, D, Hb], [tx, D, Hb], [tx - D / 2, D / 2, Hb + hr],
                    [hx - D / 2, D / 2, Hb + hr]],
         "triL": [[hx, D, Hb], [hx - D / 2, D / 2, Hb + hr], [hx, 0, Hb]],
-        "triR": [[tx, D, Hb], [tx - D / 2, D / 2, Hb + hr], [tx, 0, Hb]],
+        "triR": [[tx, 0, Hb], [tx - D / 2, D / 2, Hb + hr], [tx, D, Hb]],
         "slopeF": [[tx, 0, Hb], [hx, 0, Hb], [hx - D / 2, D / 2, Hb + hr],
                    [tx - D / 2, D / 2, Hb + hr]],
         # 底斜底链: 脊偏 +x D/2 (顶底反折)
-        "slopeB2": [[hx, D, 0], [tx, D, 0], [tx + D / 2, D / 2, -hr],
-                    [hx + D / 2, D / 2, -hr]],
-        "triLB": [[hx, 0, 0], [hx, D, 0], [hx + D / 2, D / 2, -hr]],
-        "triRB": [[tx, D, 0], [tx, 0, 0], [tx + D / 2, D / 2, -hr]],
-        "slopeF2": [[tx, 0, 0], [hx, 0, 0], [hx + D / 2, D / 2, -hr],
-                    [tx + D / 2, D / 2, -hr]],
+        "slopeB2": [[hx + D / 2, D / 2, -hr], [tx + D / 2, D / 2, -hr], [tx, D, 0], [hx, D, 0]],
+        "triLB": [[hx, 0, 0], [hx + D / 2, D / 2, -hr], [hx, D, 0]],
+        "triRB": [[tx, D, 0], [tx + D / 2, D / 2, -hr], [tx, 0, 0]],
+        "slopeF2": [[tx + D / 2, D / 2, -hr], [hx + D / 2, D / 2, -hr], [hx, 0, 0], [tx, 0, 0]],
     }
 
 
@@ -169,14 +167,13 @@ def _brick_net(p: dict) -> list:
         ("front", "wall", [(x4, 0), (x5, 0), (x5, Hb), (x4, Hb)]),
         ("slopeB", "slope", [(x2, Hb), (x3, Hb), (x3 - D / 2, Hb + s), (x2 - D / 2, Hb + s)]),
         ("triL", "slope", [(x2, Hb), (x2 - D / 2, Hb + s), (x1, Hb)]),
-        ("triR", "slope", [(x3, Hb), (x3 - D / 2, Hb + s),
-                           _circ_intersect((x3, Hb), D, (x3 - D / 2, Hb + s),
-                                           math.hypot(D / 2, s), 1.0)]),
+        ("triR", "slope", [_circ_intersect((x3, Hb), D, (x3 - D / 2, Hb + s),
+                           math.hypot(D / 2, s), 1.0), (x3 - D / 2, Hb + s), (x3, Hb)]),
         ("slopeF", "slope", [(x4, Hb), (x5, Hb), (x5 + D / 2, Hb + s), (x4 + D / 2, Hb + s)]),
-        ("slopeB2", "slope", [(x2, 0), (x3, 0), (x3 + D / 2, -s), (x2 + D / 2, -s)]),
-        ("triLB", "slope", [(x1, 0), (x2, 0), (x1 + D / 2, -s)]),
-        ("triRB", "slope", [(x3, 0), (x4, 0), (x3 + D / 2, -s)]),
-        ("slopeF2", "slope", [(x4, 0), (x5, 0), (x5 - D / 2, -s), (x4 - D / 2, -s)]),
+        ("slopeB2", "slope", [(x2 + D / 2, -s), (x3 + D / 2, -s), (x3, 0), (x2, 0)]),
+        ("triLB", "slope", [(x1 + D / 2, -s), (x2, 0), (x1, 0)]),
+        ("triRB", "slope", [(x3 + D / 2, -s), (x4, 0), (x3, 0)]),
+        ("slopeF2", "slope", [(x4 - D / 2, -s), (x5 - D / 2, -s), (x5, 0), (x4, 0)]),
     ]
 
 
