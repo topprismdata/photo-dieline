@@ -1,0 +1,354 @@
+[
+ {
+  "subfamily_class": "box_rect",
+  "object_id": "Black_Forest_Fruit_Snacks_28_Pack_Grape",
+  "subfamily": "food_snack_box",
+  "category": "Consumer Goods",
+  "brand": "Black",
+  "is_watertight": false,
+  "size_cm": [
+   21.71,
+   8.71,
+   25.74
+  ],
+  "obj_sha256": "2b63c8ea646ebb0aa8505fb04ea085445af196c36207ce43ba954b3b9c6cef95",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "box_rect",
+  "object_id": "Black_Forest_Fruit_Snacks_Juicy_Filled_Centers_10_pouches_9_oz_total",
+  "subfamily": "food_snack_box",
+  "category": "Consumer Goods",
+  "brand": "Black",
+  "is_watertight": false,
+  "size_cm": [
+   21.21,
+   5.62,
+   15.08
+  ],
+  "obj_sha256": "d4cc994b353d42b4149a8ddabb76424f73e5bb5a405706af54f1ba3b92e4adef",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "box_rect",
+  "object_id": "Canon_Pixma_Chromalife_100_Magenta_8",
+  "subfamily": "other_pkg",
+  "category": "Consumer Goods",
+  "brand": "Canon",
+  "is_watertight": false,
+  "size_cm": [
+   3.25,
+   9.27,
+   11.41
+  ],
+  "obj_sha256": "dc983fc29367dd0c887ddfd1f47142d16eddf68161a5ced2371d9ab2d74bd498",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "box_rect",
+  "object_id": "Crunch_Girl_Scouts_Candy_Bars_Peanut_Butter_Creme_78_oz_box",
+  "subfamily": "food_snack_box",
+  "category": "Consumer Goods",
+  "brand": "Crunch",
+  "is_watertight": false,
+  "size_cm": [
+   13.86,
+   6.32,
+   16.4
+  ],
+  "obj_sha256": "15af5173e6eaba4636c9088b9f4c9da325e57687b758648cf3bdd94730a3dec8",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "cylinder",
+  "object_id": "ACE_Coffee_Mug_Kristen_16_oz_cup",
+  "subfamily": "beverage_pkg",
+  "category": "Consumer Goods",
+  "brand": "ACE",
+  "is_watertight": false,
+  "size_cm": [
+   12.63,
+   9.06,
+   13.49
+  ],
+  "obj_sha256": "edf06b108af231c8e48aea1a5e82d1c5c595e0c1964e0ec8480d985980f389cb",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "cylinder",
+  "object_id": "Aroma_Stainless_Steel_Milk_Frother_2_Cup",
+  "subfamily": "beverage_pkg",
+  "category": "Consumer Goods",
+  "brand": "Aroma",
+  "is_watertight": false,
+  "size_cm": [
+   14.23,
+   15.77,
+   14.83
+  ],
+  "obj_sha256": "54470ffc446929d47080e3c4ce8aa5a7130f8ce44c5c34fc3444383b15f13fd2",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "cylinder",
+  "object_id": "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
+  "subfamily": "beverage_pkg",
+  "category": "",
+  "brand": "Black",
+  "is_watertight": false,
+  "size_cm": [
+   22.69,
+   32.36,
+   33.69
+  ],
+  "obj_sha256": "e6adfb2f534e52084f4026fc6335fba237484b0c59970a75523bf47dcf6545c2",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "cylinder",
+  "object_id": "KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces",
+  "subfamily": "food_snack_box",
+  "category": "Consumer Goods",
+  "brand": "KS",
+  "is_watertight": false,
+  "size_cm": [
+   17.02,
+   18.45,
+   17.23
+  ],
+  "obj_sha256": "faaffeb1762dccbddff36b90c65c71ebc53216760e6f7abf3b7ea809e19773e7",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "bottle_shaped",
+  "object_id": "5_HTP",
+  "subfamily": "supplement_bottle",
+  "category": "Bottles and Cans and Cups",
+  "brand": "Jarrow Formulas",
+  "is_watertight": false,
+  "size_cm": [
+   5.31,
+   5.25,
+   8.88
+  ],
+  "obj_sha256": "f33e18ed78c9e4bc4bafd072fd70f2a5249c9f3503d3bf9d4db822de44fff5f2",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "bottle_shaped",
+  "object_id": "AllergenFree_JarroDophilus",
+  "subfamily": "supplement_bottle",
+  "category": "Bottles and Cans and Cups",
+  "brand": "Jarrow Formulas",
+  "is_watertight": false,
+  "size_cm": [
+   5.39,
+   5.36,
+   9.6
+  ],
+  "obj_sha256": "80ed547fe752ed1d3a3e45b0889a72e7f75305e2360ecb7f3f452a12d4502d6b",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "bottle_shaped",
+  "object_id": "Beta_Glucan",
+  "subfamily": "supplement_bottle",
+  "category": "Bottles and Cans and Cups",
+  "brand": "Jarrow Formulas",
+  "is_watertight": false,
+  "size_cm": [
+   5.41,
+   5.38,
+   9.76
+  ],
+  "obj_sha256": "9176a30c4409b56a450333dd4adf945f05bbb125af25e5f0c88ca6b287bf4850",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "bottle_shaped",
+  "object_id": "Bifidus_Balance_FOS",
+  "subfamily": "supplement_bottle",
+  "category": "Bottles and Cans and Cups",
+  "brand": "Jarrow Formulas",
+  "is_watertight": false,
+  "size_cm": [
+   5.4,
+   5.32,
+   9.65
+  ],
+  "obj_sha256": "a35e3910662d0f0480f7db0557120e26bb79df38ae32c6599f4e6b4c636a22aa",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "flat_container",
+  "object_id": "Blue_Jasmine_Includes_Digital_Copy_UltraViolet_DVD",
+  "subfamily": "media_case",
+  "category": "Media Cases",
+  "brand": "Sony Pictures",
+  "is_watertight": false,
+  "size_cm": [
+   13.77,
+   19.3,
+   1.69
+  ],
+  "obj_sha256": "1787ae6cb3983c55c87e0e6d38d5b51434eefa5df95d38cb80ac3ec5290d7c95",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "flat_container",
+  "object_id": "Final_Fantasy_XIV_A_Realm_Reborn_60Day_Subscription",
+  "subfamily": "media_case",
+  "category": "Media Cases",
+  "brand": "Square Enix",
+  "is_watertight": false,
+  "size_cm": [
+   13.6,
+   1.81,
+   19.04
+  ],
+  "obj_sha256": "280164852f4383b804d4da77d4b7725691cdd888f6fa7cb509db5f74f5d18dcb",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "flat_container",
+  "object_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+  "subfamily": "media_case",
+  "category": "Media Cases",
+  "brand": "Sony Pictures",
+  "is_watertight": false,
+  "size_cm": [
+   14.35,
+   2.36,
+   19.09
+  ],
+  "obj_sha256": "d9041694cdede025849816fee8d5066a05834d4457e051b4d9f7652383d79d54",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ },
+ {
+  "subfamily_class": "flat_container",
+  "object_id": "Justified_The_Complete_Fourth_Season_3_Discs_DVD",
+  "subfamily": "media_case",
+  "category": "Media Cases",
+  "brand": "Justified:",
+  "is_watertight": false,
+  "size_cm": [
+   14.17,
+   2.14,
+   19.41
+  ],
+  "obj_sha256": "6a10b9e7881e3214c2b6bcf5a419715f1fbd045f6da1f6380b5a1af96dc2279e",
+  "src_gates": {
+   "G01": "PASS",
+   "G02": "PARTIAL",
+   "G03": "PARTIAL_no_mass",
+   "G04": "CONDITIONAL_scan_bbox",
+   "G05": "PASS_ccby4",
+   "G06": "PARTIAL"
+  }
+ }
+]

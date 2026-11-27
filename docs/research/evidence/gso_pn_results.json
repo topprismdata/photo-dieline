@@ -1,0 +1,348 @@
+{
+ "_meta": {
+  "protocol": "gso_pn_protocol.md v1.0",
+  "cohort": 16,
+  "date": "2026-11-28",
+  "compiler": "GOV-IR-01 后 (FG-004 契约修复)",
+  "quota_gap": "complex 类 0 件 (冻结分类规则下无剩余), 16/20 如实登记",
+  "pool_contamination_finding": "cylinder 类含非包装品 (马克杯/奶泡器/咖啡机) — GSO 'Bottles and Cans and Cups' 类目本身含家居器皿, 池级发现登记"
+ },
+ "results": [
+  {
+   "object_id": "Black_Forest_Fruit_Snacks_28_Pack_Grape",
+   "class": "box_rect",
+   "subfamily": "food_snack_box",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    257.4,
+    217.1,
+    87.1
+   ],
+   "scan_input_sorted_mm": [
+    257.4,
+    217.10000000000002,
+    87.10000000000001
+   ],
+   "usdc_sha256": "2cbaa6ecc78f1997"
+  },
+  {
+   "object_id": "Black_Forest_Fruit_Snacks_Juicy_Filled_Centers_10_pouches_9_oz_total",
+   "class": "box_rect",
+   "subfamily": "food_snack_box",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    212.1,
+    150.8,
+    56.2
+   ],
+   "scan_input_sorted_mm": [
+    212.10000000000002,
+    150.8,
+    56.2
+   ],
+   "usdc_sha256": "2ec79f48126db0aa"
+  },
+  {
+   "object_id": "Canon_Pixma_Chromalife_100_Magenta_8",
+   "class": "box_rect",
+   "subfamily": "other_pkg",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    114.1,
+    92.7,
+    32.5
+   ],
+   "scan_input_sorted_mm": [
+    114.1,
+    92.69999999999999,
+    32.5
+   ],
+   "usdc_sha256": "5656f35e081edc1f"
+  },
+  {
+   "object_id": "Crunch_Girl_Scouts_Candy_Bars_Peanut_Butter_Creme_78_oz_box",
+   "class": "box_rect",
+   "subfamily": "food_snack_box",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    164.0,
+    138.6,
+    63.2
+   ],
+   "scan_input_sorted_mm": [
+    164.0,
+    138.6,
+    63.2
+   ],
+   "usdc_sha256": "acc56e1910456056"
+  },
+  {
+   "object_id": "ACE_Coffee_Mug_Kristen_16_oz_cup",
+   "class": "cylinder",
+   "subfamily": "beverage_pkg",
+   "family": "prism_dust_n12",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": false,
+   "compiled_sorted_mm": [
+    134.9,
+    130.6,
+    130.6
+   ],
+   "scan_input_sorted_mm": [
+    134.9,
+    126.30000000000001,
+    90.60000000000001
+   ],
+   "usdc_sha256": "a66148da28ef39f7"
+  },
+  {
+   "object_id": "Aroma_Stainless_Steel_Milk_Frother_2_Cup",
+   "class": "cylinder",
+   "subfamily": "beverage_pkg",
+   "family": "prism_dust_n12",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": false,
+   "compiled_sorted_mm": [
+    157.7,
+    153.0,
+    153.0
+   ],
+   "scan_input_sorted_mm": [
+    157.7,
+    148.3,
+    142.3
+   ],
+   "usdc_sha256": "9dccae75ed28597b"
+  },
+  {
+   "object_id": "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
+   "class": "cylinder",
+   "subfamily": "beverage_pkg",
+   "family": "prism_dust_n12",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": false,
+   "compiled_sorted_mm": [
+    336.9,
+    330.25,
+    330.25
+   ],
+   "scan_input_sorted_mm": [
+    336.9,
+    323.6,
+    226.9
+   ],
+   "usdc_sha256": "54e88553de0e44ce"
+  },
+  {
+   "object_id": "KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces",
+   "class": "cylinder",
+   "subfamily": "food_snack_box",
+   "family": "prism_dust_n12",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": false,
+   "compiled_sorted_mm": [
+    184.5,
+    178.4,
+    178.4
+   ],
+   "scan_input_sorted_mm": [
+    184.5,
+    172.3,
+    170.2
+   ],
+   "usdc_sha256": "40387aa1a47e9ecd"
+  },
+  {
+   "object_id": "5_HTP",
+   "class": "bottle_shaped",
+   "subfamily": "supplement_bottle",
+   "family": "prism_dust_n12",
+   "coverage": "approx",
+   "qa": "FAIL:G03,G06",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    88.8,
+    52.8,
+    52.8
+   ],
+   "scan_input_sorted_mm": [
+    88.80000000000001,
+    53.099999999999994,
+    52.5
+   ],
+   "usdc_sha256": "9f36cf6ab6045d88"
+  },
+  {
+   "object_id": "AllergenFree_JarroDophilus",
+   "class": "bottle_shaped",
+   "subfamily": "supplement_bottle",
+   "family": "prism_dust_n12",
+   "coverage": "approx",
+   "qa": "FAIL:G06",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    96.0,
+    53.75,
+    53.75
+   ],
+   "scan_input_sorted_mm": [
+    96.0,
+    53.9,
+    53.6
+   ],
+   "usdc_sha256": "4821da11e1fe9349"
+  },
+  {
+   "object_id": "Beta_Glucan",
+   "class": "bottle_shaped",
+   "subfamily": "supplement_bottle",
+   "family": "prism_dust_n12",
+   "coverage": "approx",
+   "qa": "FAIL:G06",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    97.6,
+    53.95,
+    53.95
+   ],
+   "scan_input_sorted_mm": [
+    97.6,
+    54.1,
+    53.8
+   ],
+   "usdc_sha256": "c30f04d0a8d6d250"
+  },
+  {
+   "object_id": "Bifidus_Balance_FOS",
+   "class": "bottle_shaped",
+   "subfamily": "supplement_bottle",
+   "family": "prism_dust_n12",
+   "coverage": "approx",
+   "qa": "FAIL:G06",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    96.5,
+    53.6,
+    53.6
+   ],
+   "scan_input_sorted_mm": [
+    96.5,
+    54.0,
+    53.2
+   ],
+   "usdc_sha256": "d5b87515e16f0fe3"
+  },
+  {
+   "object_id": "Blue_Jasmine_Includes_Digital_Copy_UltraViolet_DVD",
+   "class": "flat_container",
+   "subfamily": "media_case",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    193.0,
+    137.7,
+    16.9
+   ],
+   "scan_input_sorted_mm": [
+    193.0,
+    137.7,
+    16.9
+   ],
+   "usdc_sha256": "fb0c247b342088e6"
+  },
+  {
+   "object_id": "Final_Fantasy_XIV_A_Realm_Reborn_60Day_Subscription",
+   "class": "flat_container",
+   "subfamily": "media_case",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    190.4,
+    136.0,
+    18.1
+   ],
+   "scan_input_sorted_mm": [
+    190.39999999999998,
+    136.0,
+    18.1
+   ],
+   "usdc_sha256": "1e74cc625f84e790"
+  },
+  {
+   "object_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+   "class": "flat_container",
+   "subfamily": "media_case",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    190.9,
+    143.5,
+    23.6
+   ],
+   "scan_input_sorted_mm": [
+    190.9,
+    143.5,
+    23.599999999999998
+   ],
+   "usdc_sha256": "7686f65414e1ec87"
+  },
+  {
+   "object_id": "Justified_The_Complete_Fourth_Season_3_Discs_DVD",
+   "class": "flat_container",
+   "subfamily": "media_case",
+   "family": "rsc_css",
+   "coverage": "native",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_scan_input": true,
+   "compiled_sorted_mm": [
+    194.1,
+    141.7,
+    21.4
+   ],
+   "scan_input_sorted_mm": [
+    194.1,
+    141.7,
+    21.400000000000002
+   ],
+   "usdc_sha256": "ebb5dbd2e67caad2"
+  }
+ ]
+}
