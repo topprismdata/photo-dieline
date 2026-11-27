@@ -58,8 +58,8 @@ Therefore:
 - Simulation and runtime compatibility are stated only for individually validated
   capabilities.
 
-Per-asset validation status and evidence (`metadata.json` in each asset directory)
-should be consulted before using assets in a specific simulation or research task.
+Per-asset validation status and evidence (`metadata.json` in each beverage_liquor asset
+directory) should be consulted before using assets in a specific simulation or research task.
 
 ## Asset families (v0.6, shipped in this dataset)
 
