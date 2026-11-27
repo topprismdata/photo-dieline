@@ -25,7 +25,7 @@ def main() -> int:
         repo_id=REPO,
         repo_type="dataset",
         folder_path=str(HERE),
-        commit_message="Pack10K v0.5: NV960 pixel-audited honest edition: strict 90.94%, composite 82.0%, backdrop-grain confound retracted",
+        commit_message="Open Retail Simulation Assets v0.6: 15 usdc pass NVIDIA USDCraft validator (physx) 15/15; honest sim2real scope; negative-result benchmarks published",
     )
     print(f"已发布: https://huggingface.co/datasets/{REPO}")
     return 0

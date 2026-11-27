@@ -61,14 +61,16 @@ Therefore:
 Per-asset validation status and evidence (`metadata.json` in each asset directory)
 should be consulted before using assets in a specific simulation or research task.
 
-## Asset families (v0.6)
+## Asset families (v0.6, shipped in this dataset)
 
 | Domain | Family | Classes | Validation |
 |---|---|---|---|
-| Liquor & beverage | beverage_liquor | 11 (beer bottles 330/500, can 500, baijiu ×2 profiles, wine, whisky, vodka, PET 500/1500, gift box) | G-F1..F7 pass · usdc · spec 11/11 |
-| Paper packaging | gable / clv / cone / food (TDE) | ~25 variants | 5010-sample training corpus |
-| Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc |
-| Retail fixtures | nv960_fixture | 20 | usdc |
+| Liquor & beverage | beverage_liquor | 11 (beer bottles 330/500, can 500, baijiu ×2 profiles, wine, whisky, vodka, PET 500/1500, gift box) | G-F1..F7 pass · usdc · spec 11/11 · **NVIDIA validator 15/15** |
+| Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc (included in the 15 NVIDIA-validated) |
+
+Also in the repository (not shipped as USD in this dataset version): parametric paper-packaging
+families (gable/clv/cone, TDE engine, ~25 variants with a 5010-sample training corpus) and
+retail fixtures (nv960, 20 usdc) — see the project repository for pipelines and validation.
 
 Brand-neutral rule: no trademarks, no real brand names, no text or graphics on asset
 geometry. Attribute provenance and per-asset validation status are recorded in
