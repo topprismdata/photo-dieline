@@ -1,0 +1,75 @@
+{
+ "validator_identity_ledger": [
+  {
+   "id": "V1",
+   "name": "USDCraft SDK _validate_usd_asset",
+   "backend": "physx",
+   "source": "NVlabs/USDCraft arXiv:2610.11322 官方仓 ~/usdcraft_study/code/sdk/_core/_usd_validate.py",
+   "checks": 15,
+   "our_runs": "175/175 PASS (2026-11-27 台账)",
+   "profile": "topprism-selfaudit",
+   "covers": [
+    "default_prim",
+    "Z-up",
+    "meters",
+    "kilograms",
+    "no_scene",
+    "finite",
+    "deps",
+    "relative_paths",
+    "vendor_ns",
+    "physics_dag",
+    "articulation",
+    "physx_schema"
+   ],
+   "does_not_cover": [
+    "MaterialBindingAPI",
+    "winding/体积符号",
+    "UV 质量几何"
+   ]
+  },
+  {
+   "id": "V2",
+   "name": "Pixar usdchecker (OpenUSD)",
+   "version": "系统 /usr/bin/usdchecker",
+   "our_runs": "抽样 2 件 exit=1 (MaterialBindingApiAppliedValidator)",
+   "covers": [
+    "usdShade validators",
+    "材料绑定",
+    "stage 规范"
+   ],
+   "does_not_cover": [
+    "流形/绕向/UV 质量"
+   ]
+  },
+  {
+   "id": "V3",
+   "name": "auditor v2.2 (我方)",
+   "source": "scripts/auditor_core.py",
+   "covers": [
+    "闭合性",
+    "绕向一致性",
+    "体积符号",
+    "非流形边",
+    "顶点扇形",
+    "UV 退化/仿射",
+    "往返一致"
+   ],
+   "does_not_cover": [
+    "材质绑定 API",
+    "官方规范符合性"
+   ]
+  },
+  {
+   "id": "V4",
+   "name": "trimesh 4.10 独立交叉",
+   "covers": [
+    "watertight",
+    "winding_consistent",
+    "volume"
+   ]
+  }
+ ],
+ "gap_action": "V2 的 MaterialBindingAPI 缺口 → WP-A0.2 裁决 ADOPT (导出器补 ApplyMaterialBindingAPI, 候选路径 G2 后)",
+ "principle": "三验证器互补; 任何'通过官方验证'声明必须注明验证器身份+版本+检查集"
+}
