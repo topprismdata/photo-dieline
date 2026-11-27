@@ -33,8 +33,7 @@ def validate(p: Path) -> dict:
         return {'passed': False, 'error': str(e)[:200]}
 
 
-def emit(asset_dir: Path, usdc: Path, asset_id: str) -> dict:
-    meta_src = json.loads((usdc.parent / 'metadata.json').read_text())
+def emit(asset_dir: Path, usdc: Path, asset_id: str, meta_src: dict) -> dict:
     verdict = validate(usdc)
 
     meta = {
@@ -102,6 +101,36 @@ def emit(asset_dir: Path, usdc: Path, asset_id: str) -> dict:
     return verdict
 
 
+def stage_meta(usdc: Path) -> dict:
+    """从 stage 内省派生 meta (legacy 4 无伴生 json 的兜底)。"""
+    from pxr import Usd, UsdGeom, UsdPhysics
+    st = Usd.Stage.Open(str(usdc))
+    bc = UsdGeom.BBoxCache(Usd.TimeCode.Default(), ['default', 'proxy'])
+    mesh = next((x for x in st.Traverse() if x.IsA(UsdGeom.Mesh)), None)
+    dims = None
+    if mesh is not None:
+        try:
+            b = bc.ComputeWorldBound(mesh)
+            rng = b.ComputeAlignedRange()
+            dims = [round(float(v), 4) for v in rng.GetSize()]
+        except Exception:
+            dims = None
+    mass, joints, rigid = 0.0, 0, 0
+    com = None
+    for x in st.Traverse():
+        if 'Joint' in str(x.GetTypeName()):
+            joints += 1
+        if x.HasAPI(UsdPhysics.MassAPI):
+            m = UsdPhysics.MassAPI(x).GetMassAttr().Get()
+            if m is not None:
+                mass += float(m); rigid += 1
+            c = UsdPhysics.MassAPI(x).GetCenterOfMassAttr().Get()
+            if c is not None and com is None:
+                com = [round(float(v), 4) for v in c]
+    return {'dims_m': dims, 'mass_kg': round(mass, 4) if mass else None,
+            'joints': joints, 'rigid_bodies': rigid, 'center_of_mass_m': com}
+
+
 def main():
     root = Path('/Users/guohongbin/photo-dieline/hfpackage/assets_liquor')
     results = {}
@@ -109,11 +138,56 @@ def main():
         usdc = ad / 'simready_usd' / f'{ad.name}.usdc'
         if not usdc.exists():
             continue
-        v = emit(ad, usdc, ad.name)
+        v = emit(ad, usdc, ad.name, json.loads((usdc.parent / 'metadata.json').read_text()))
         results[ad.name] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
-        print(f"{ad.name}: conformance {'PASS' if v['passed'] else 'FAIL'}")
-    json.dump(results, open(root.parent / 'docs' / 'nvidia_package_emit_results.json', 'w')
-              if (root.parent / 'docs').exists() else open('docs/nvidia_package_emit_results.json', 'w'), indent=1)
+    # nv960 正典 20 (meta 由 family 重算)
+    sys.path.insert(0, '/Users/guohongbin/photo-dieline/src')
+    from photo_dieline.authoring.validate_parts import load_family, validate_parts, export_parts_usdc
+    fam = load_family('/Users/guohongbin/photo-dieline/pipelines/packaging/author_families/nv960_fixture_family.py')
+    nroot = Path('/Users/guohongbin/photo-dieline/output/nv960_usd')
+    for cid in fam.DEFAULTS:
+        usdc = nroot / f'{cid}.usdc'
+        if not usdc.exists():
+            continue
+        p = dict(fam.DEFAULTS[cid]); p['class_id'] = cid
+        rep = validate_parts(fam.build_parts(p), p, fam.FAMILY)
+        meta = {'category': fam.FAMILY, 'dims_m': [rep['dims_mm'][k] / 1000 for k in 'XYZ'],
+                'mass_kg': rep['mass_kg'], 'part_count': len(rep.get('parts', [])) if isinstance(rep.get('parts'), list) else None,
+                'authoring_inputs': p, 'rigid_bodies': None, 'joints': 0}
+        v = emit(nroot, usdc, cid, meta)
+        results[f'nv960/{cid}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
+    # nv960 变体 35 (params 从文件名解码)
+    vroot = Path('/Users/guohongbin/photo-dieline/output/nv960_variants')
+    import re
+    for usdc in sorted(vroot.glob('*.usdc')):
+        m = re.match(r'(.+)_h(\d+)_d(\d+)$', usdc.stem)
+        if not m:
+            continue
+        cid, hi, di = m.group(1), int(m.group(2)) / 100, int(m.group(3)) / 100
+        p = dict(fam.DEFAULTS[cid]); p['H'] = round(fam.DEFAULTS[cid]['H'] * hi, 1)
+        p['D'] = round(fam.DEFAULTS[cid]['D'] * di, 1); p['class_id'] = cid
+        rep = validate_parts(fam.build_parts(p), p, fam.FAMILY)
+        meta = {'category': fam.FAMILY, 'dims_m': [rep['dims_mm'][k] / 1000 for k in 'XYZ'],
+                'mass_kg': rep['mass_kg'], 'authoring_inputs': p, 'joints': 0}
+        v = emit(vroot, usdc, usdc.stem, meta)
+        results[f'variant/{usdc.stem}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
+    # TDE 试点 100 (复用既有 model.json)
+    troot = Path('/Users/guohongbin/photo-dieline/output/pack10k_pilot')
+    for usdc in sorted(troot.glob('*/model.usdc')):
+        mj = json.loads((usdc.parent / 'model.json').read_text())
+        meta = {'category': mj.get('category'), 'dims_m': mj.get('asset_extents_m'),
+                'mass_kg': mj.get('mass_kg'), 'rigid_bodies': mj.get('rigid_body_count'),
+                'author': mj.get('author'), 'joints': 0}
+        v = emit(usdc.parent, usdc, usdc.parent.name, meta)
+        results[f'tde/{usdc.parent.name}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
+    # legacy 4 (stage 内省)
+    lroot = Path('/Users/guohongbin/photo-dieline/hfpackage/families')
+    for usdc in sorted(lroot.glob('*.usdc')):
+        v = emit(lroot, usdc, usdc.stem, stage_meta(usdc))
+        results[f'legacy/{usdc.stem}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
+    n_pass = sum(1 for v in results.values() if v == 'PASS')
+    print(f'contract emit: {n_pass}/{len(results)} conformance PASS')
+    json.dump(results, open('/Users/guohongbin/photo-dieline/docs/nvidia_package_emit_results.json', 'w'), indent=1)
 
 
 if __name__ == '__main__':

@@ -43,3 +43,10 @@ conformance.Package@1.0.0, conformance.Package-Candidate@1.3.0}.json。
   package_hash = 去除 package_hash 键的 canonical packaging.json 的 sha256 (自指排除)
 - 独立复核器同口径复验: BOM 抽样哈希/content_hash/package_hash 11/11 OK
 - 证据: docs/nvidia_package_emit_results.json
+
+## 打包契约全域覆盖 (2026-11-27 补)
+
+发射器扩展至全部五域 (hfpackage 11 / nv960 正典 20 / 设备变体 35 / TDE 试点 100 / legacy 4):
+**170/170 conformance PASS** (conformance = 发射时原版验证器实跑判决, fail-closed)。
+每域 meta 源: liquor=metadata.json / nv9正典=family重算 / 变体=文件名解码参数 / TDE=既有model.json / legacy=stage内省。
+证据: docs/nvidia_package_emit_results.json (170 条判决)。
