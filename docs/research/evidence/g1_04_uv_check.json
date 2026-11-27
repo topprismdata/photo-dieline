@@ -1,0 +1,107 @@
+{
+ "faces_total": 20,
+ "affine_pass": 20,
+ "note": "面角 UV 绑定 = 3D 面边向量的仿射像 (镜像/各向异性合法); 角交换/错配则仿射残差爆",
+ "per_face": [
+  {
+   "face": 0,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 1,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 2,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 3,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 4,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 5,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 6,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 7,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 8,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 9,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 10,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 11,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 12,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 13,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 14,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 15,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 16,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 17,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 18,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  },
+  {
+   "face": 19,
+   "affine_resid": 0.0,
+   "affine_ok": true
+  }
+ ]
+}

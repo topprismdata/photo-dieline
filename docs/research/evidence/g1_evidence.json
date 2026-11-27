@@ -1,0 +1,69 @@
+{
+ "g1_01_volume_tools": [
+  {
+   "stage": "S0_frozen",
+   "vol_origin": -233078,
+   "vol_translated": 14880595,
+   "vol_trimesh": -240514,
+   "agree": false
+  },
+  {
+   "stage": "S1_family_fixed_export",
+   "vol_origin": -276983,
+   "vol_translated": -276983,
+   "vol_trimesh": -276983,
+   "agree": true
+  },
+  {
+   "stage": "S2_normalized",
+   "vol_origin": 276983,
+   "vol_translated": 276983,
+   "vol_trimesh": 276983,
+   "agree": true
+  }
+ ],
+ "g1_03_invariants": {
+  "S0_frozen": {
+   "verts": 12,
+   "tris": 20,
+   "bbox_m": [
+    0.09549,
+    0.03819,
+    0.13858
+   ],
+   "area_m2_local": 0.057546,
+   "edges_undirected": 30,
+   "watertight": true,
+   "winding_consistent": true,
+   "nonmanifold_edges": 0
+  },
+  "S1_family_fixed_export": {
+   "verts": 12,
+   "tris": 20,
+   "bbox_m": [
+    0.09549,
+    0.03819,
+    0.13858
+   ],
+   "area_m2_local": 0.057546,
+   "edges_undirected": 30,
+   "watertight": true,
+   "winding_consistent": true,
+   "nonmanifold_edges": 0
+  },
+  "S2_normalized": {
+   "verts": 12,
+   "tris": 20,
+   "bbox_m": [
+    0.09549,
+    0.03819,
+    0.13858
+   ],
+   "area_m2_local": 0.057546,
+   "edges_undirected": 30,
+   "watertight": true,
+   "winding_consistent": true,
+   "nonmanifold_edges": 0
+  }
+ }
+}

@@ -157,3 +157,27 @@ for nm, R in r25["L1"]["prims"].items():
 c25 = len(vols) == 2 and abs(abs(vols[0]) - abs(vols[1])) > 0.1
 print(("PASS" if c25 else "FAIL"), "T25 bbox-identical different-geometry: 壳体积区分", vols)
 assert c25, "T25 FAIL"
+
+# 26-29 R09-11 G1-02 四类负向 + 正向 (方向规范化安全门)
+from photo_dieline.export.usd import _orientation_normalize_safe
+import numpy as _np
+vv = np.array([[x, y, z] for z in (0, 1) for y in (0, 1) for x in (0, 1)], float)
+ccube = [[0,2,3,1],[5,7,6,4],[1,5,4,0],[6,7,3,2],[4,6,2,0],[3,7,5,1]]
+ctri = []
+for a,b,c,d in ccube: ctri += [[a,b,c],[a,c,d]]
+ctri_in = [t[::-1] for t in ctri]
+safe, why, vol = _orientation_normalize_safe(vv, ctri_in)
+print(("PASS" if safe and vol < 0 else "FAIL"), "G1-02正向: 内向立方安全+检出负体积", safe, round(vol,3))
+op = ctri[:-2]  # 缺两面 → 开壳
+safe2, why2, _ = _orientation_normalize_safe(vv, op)
+print(("PASS" if not safe2 and any("open boundary" in w for w in why2) else "FAIL"), "G1-02负1: 开壳拒翻", why2)
+mix = ctri + [list(ctri[0])]
+safe3, why3, _ = _orientation_normalize_safe(vv, mix)
+print(("PASS" if not safe3 and any("dup" in w or "winding" in w or "nonmanifold" in w for w in why3) else "FAIL"), "G1-02负2: 重复面拒翻", why3)
+nanv = vv.copy(); nanv[0] = (np.nan, np.nan, np.nan)
+safe4, why4, _ = _orientation_normalize_safe(nanv, ctri)
+print(("PASS" if not safe4 and any("finite" in w for w in why4) else "FAIL"), "G1-02负3: 非有限坐标拒翻", why4)
+colv = np.array([[0,0,0],[1,0,0],[2,0,0]], float)
+dgt = [[0,1,2]]
+safe5, why5, _ = _orientation_normalize_safe(colv, dgt)
+print(("PASS" if not safe5 and any("degenerate" in w for w in why5) else "FAIL"), "G1-02负4: 共线退化三角拒翻", why5)

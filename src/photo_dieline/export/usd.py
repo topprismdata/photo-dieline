@@ -134,10 +134,41 @@ def _area_mm2(pts, tris):
     return float(0.5 * np.linalg.norm(np.cross(v1 - v0, v2 - v0), axis=1).sum())
 
 
+def _orientation_normalize_safe(pts, tri, atol=1e-6):
+    """R09-11 G1-02: 方向规范化安全前置检查链. 返回 (safe, reasons, vol)."""
+    import numpy as _np
+    pts = _np.asarray(pts, float); tri = _np.asarray(tri, int)
+    reasons = []
+    if not _np.all(_np.isfinite(pts)): reasons.append("non-finite coords")
+    if len(tri) == 0: reasons.append("empty mesh")
+    if reasons: return False, reasons, 0.0
+    P = pts[tri]
+    a3 = _np.linalg.norm(_np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1)
+    if _np.any(a3 < 1e-9): reasons.append("degenerate tris " + str(int(_np.sum(a3 < 1e-9))))
+    de = {}
+    for x, y, z in tri:
+        for u, v in ((int(x), int(y)), (int(y), int(z)), (int(z), int(x))):
+            de[(u, v)] = de.get((u, v), 0) + 1
+    und = {}
+    for (u, v), c in de.items():
+        k = (min(u, v), max(u, v)); und[k] = und.get(k, 0) + c
+    if any(c >= 3 for c in und.values()): reasons.append("nonmanifold edges")
+    if any(c != 2 for c in und.values()): reasons.append("open boundary (not closed)")
+    same = [k for k, c in und.items() if c == 2 and de.get((k[0], k[1]), 0) == 2]
+    if same: reasons.append("winding-inconsistent edges " + str(len(same)))
+    vol = float(_np.einsum('ij,ij->i', P[:, 0], _np.cross(P[:, 1], P[:, 2])).sum() / 6.0)
+    if reasons: return False, reasons, vol
+    return True, [], vol
+
+
 def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45, texture=True, family=None,
-                articulation=False):
+                articulation=False, normalize_orientation=False):
     """IR → .usdc (+ WP2 印刷层: 净图 UV + UsdPreviewSurface 材质 + print.png)。
     返回证据 dict (含 mm 口径 authored 尺寸, 供三方对账)。
+
+    normalize_orientation=True (R09-09 P0-02): SOLID 面片符号体积<0 时整体翻转
+    面索引并声明意图 (prim customData orientationIntent)。默认 False — 全局启用
+    未获授权 (R09-09 红线), 试点显式开启。本导出无显式 normals 属性 → NOT_APPLICABLE。
 
     articulation=True: USDCraft 同构五刚体口径 (对齐 NVlabs/USDCraft R422
     rigid_body_count=5: /Asset/Links/carton_body + flap_{t0..t3}, 四
@@ -181,8 +212,24 @@ def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45, texture=True, fa
 
     body = UsdGeom.Mesh.Define(stage, "/Asset/Body")
     body.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*p) for p in Pm]))
-    body.GetFaceVertexIndicesAttr().Set(Vt.IntArray([int(i) for t in tris for i in t]))
-    body.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(tris)))
+    # R09-09 P0-02: 方向规范化 (门控: normalize_orientation=True 时启用)
+    _tris = [tuple(t) for t in tris]
+    Pw = Pm[np.asarray(_tris)]
+    _vol = float(np.einsum('ij,ij->i', Pw[:, 0], np.cross(Pw[:, 1], Pw[:, 2])).sum() / 6.0)
+    _intent = "authored-outward"
+    _safe, _reasons = True, []
+    if normalize_orientation:
+        _safe, _reasons, _vol_chk = _orientation_normalize_safe(Pm, np.asarray(_tris))
+        if not _safe:
+            _intent = "UNSAFE_SKIP (" + "; ".join(_reasons[:3]) + ")"
+    if normalize_orientation and _safe and _vol < 0:
+        _tris = [tuple(reversed(t)) for t in _tris]
+        _intent = "normalized-outward (R09-11 G1-02: preconditions passed; negative signed volume flipped)"
+    elif normalize_orientation:
+        _intent = "UNSAFE_SKIP (" + "; ".join(_reasons[:3]) + ")"
+    body.GetFaceVertexIndicesAttr().Set(Vt.IntArray([int(i) for t in _tris for i in t]))
+    body.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(_tris)))
+    body.GetPrim().SetCustomData({"orientationIntent": _intent})
     bp = body.GetPrim()
     UsdPhysics.RigidBodyAPI.Apply(bp)
     UsdPhysics.CollisionAPI.Apply(bp)
@@ -196,7 +243,7 @@ def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45, texture=True, fa
         img.save(path.parent / "print.png")
         us = [1.0 - (p[0] - nx0) / nw_mm for p in nets_mm]  # u 预镜像: 折叠后外侧视印刷正读
         vs = [1.0 - (p[1] - ny0) / nh_mm for p in nets_mm]
-        st_vals = Vt.Vec2fArray([Gf.Vec2f(us[i], vs[i]) for t in tris for i in t])  # faceVarying 逐角
+        st_vals = Vt.Vec2fArray([Gf.Vec2f(us[i], vs[i]) for t in _tris for i in t])  # faceVarying 逐角 (与翻转后面角序一致)
         pv = UsdGeom.PrimvarsAPI(bp).CreatePrimvar(
             "st", Sdf.ValueTypeNames.TexCoord2fArray, "faceVarying", len(st_vals))
         pv.Set(st_vals)

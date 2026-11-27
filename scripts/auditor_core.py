@@ -256,3 +256,35 @@ def audit_stage(stage, contract="UNKNOWN", prim_contracts=None, declared_seam_ed
 
 def audit_file(path, **kw):
     return audit_stage(Usd.Stage.Open(path), **kw)
+
+def orientation_normalize_safe(pts, tri, atol=1e-6):
+    """R09-11 G1-02: 方向规范化前置检查链 (五项), 全过才允许翻转.
+    返回 (safe, reasons, vol)"""
+    reasons = []
+    pts = np.asarray(pts, float); tri = np.asarray(tri, int)
+    # R1 有限坐标
+    if not np.all(np.isfinite(pts)): reasons.append("non-finite coords")
+    if len(tri) == 0: reasons.append("empty mesh")
+    if reasons: return False, reasons, 0.0
+    # R2 有效几何 (无退化三角)
+    P = pts[tri]
+    a3 = np.linalg.norm(np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1)
+    if np.any(a3 < 1e-9): reasons.append(f"degenerate tris {int(np.sum(a3 < 1e-9))}")
+    # O2 无向边分类: n>=3 非流形边
+    de = {}
+    for x, y, z in tri:
+        for u, v in ((int(x), int(y)), (int(y), int(z)), (int(z), int(x))):
+            de[(u, v)] = de.get((u, v), 0) + 1
+    und = {}
+    for (u, v), c in de.items():
+        k = (min(u, v), max(u, v)); und[k] = und.get(k, 0) + c
+    nm = [k for k, c in und.items() if c >= 3]
+    if nm: reasons.append(f"nonmanifold edges {len(nm)}")
+    # R3 闭合 (全部 n=2)
+    if any(c != 2 for c in und.values()): reasons.append("open boundary (not closed)")
+    # R4 绕向一致 (n=2 内部边须反向: 同向即冲突)
+    same = [k for k, c in und.items() if c == 2 and de.get((k[0], k[1]), 0) == 2]
+    if same: reasons.append(f"winding-inconsistent edges {len(same)}")
+    vol = float(np.einsum('ij,ij->i', P[:, 0], np.cross(P[:, 1], P[:, 2])).sum() / 6.0)
+    if reasons: return False, reasons, vol
+    return True, [], vol
