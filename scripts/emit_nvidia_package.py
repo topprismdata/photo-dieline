@@ -16,7 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, '/Users/guohongbin/usdcraft_study/code')
 import importlib
-from pxr import Usd
+from pxr import Usd, UsdPhysics
 
 uv = importlib.import_module('sdk._core._usd_validate')
 
@@ -34,7 +34,28 @@ def validate(p: Path) -> dict:
 
 
 def emit(asset_dir: Path, usdc: Path, asset_id: str, meta_src: dict) -> dict:
+    meta_src = meta_src or {}
     verdict = validate(usdc)
+
+    # COM (质量加权, 来自 MassAPI authored 属性; 缺质量时均匀平均, derived 口径)
+    com_acc, mass_acc, coms = 0.0, 0.0, []
+    try:
+        st = Usd.Stage.Open(str(usdc))
+        for prim in st.Traverse():
+            if prim.HasAPI(UsdPhysics.MassAPI):
+                m = UsdPhysics.MassAPI(prim).GetMassAttr().Get()
+                c = UsdPhysics.MassAPI(prim).GetCenterOfMassAttr().Get()
+                if c is not None:
+                    coms.append((float(m) if m else 1.0, [float(v) for v in c]))
+                    if m:
+                        mass_acc += float(m)
+    except Exception:
+        pass
+    if coms:
+        wsum = sum(w for w, _ in coms)
+        meta_com = [round(sum(w * v[i] for w, v in coms) / wsum, 4) for i in range(3)]
+    else:
+        meta_com = None
 
     meta = {
         'object_id': f'tpd_{asset_id}',
@@ -46,6 +67,7 @@ def emit(asset_dir: Path, usdc: Path, asset_id: str, meta_src: dict) -> dict:
         'joint_count': meta_src.get('joints', 0),
         'dims_m': meta_src.get('bbox_dims_m', []),
         'mass_kg': meta_src.get('mass_kg'),
+        'center_of_mass_m': meta_com,
         'provenance': meta_src.get('provenance', 'parametric'),
     }
     (asset_dir / 'meta.json').write_text(json.dumps(meta, indent=1, ensure_ascii=False))

@@ -8,5 +8,10 @@
  "joint_count": 0,
  "dims_m": [],
  "mass_kg": null,
+ "center_of_mass_m": [
+  -0.0,
+  0.0,
+  0.1084
+ ],
  "provenance": "parametric"
 }

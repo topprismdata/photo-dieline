@@ -70,3 +70,10 @@ hfpackage 11 资产独立复算 ALL OK)。
 `scripts/nvidia_audit_all.py` 单命令: 170 件 × {原版验证器实跑 + BOM/content/package 三哈希复算 +
 meta 完整性 + 双缩略图齐备} → `docs/nvidia_full_audit_2026-11-27.json` (时间戳证据, fail-closed)。
 结果 **170/170 overall PASS**。
+
+## 审计自纠闭环 (2026-11-27 补)
+
+一体化审计首跑抓出 meta_com=0/170 (meta.json 缺 center_of_mass_m — 他们 meta 的
+物理消费字段): emitter 补质量加权 COM (来自 MassAPI authored 属性, 即 COM 修复会话
+写入的有限值), 修 emitter 静默 except 吞 NameError (模块级缺 UsdPhysics 导入)。
+复审计: **meta_com 170/170, overall 170/170 PASS**。
