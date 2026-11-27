@@ -1,0 +1,73 @@
+[
+ {
+  "case": "synth_cube",
+  "trimesh": {
+   "is_watertight": true,
+   "is_winding_consistent": true,
+   "volume": 1.0
+  },
+  "auditor": {
+   "closed_shells": true,
+   "winding_ok": true
+  },
+  "match": true
+ },
+ {
+  "case": "synth_cube_inward",
+  "trimesh": {
+   "is_watertight": true,
+   "is_winding_consistent": true,
+   "volume": -1.0
+  },
+  "auditor": {
+   "closed_shells": true,
+   "winding_ok": false
+  },
+  "match": false
+ },
+ {
+  "case": "rsc_rsc_rsc_v6959",
+  "prim_results": [
+   {
+    "prim": "Body",
+    "trimesh": {
+     "is_watertight": false,
+     "is_winding_consistent": true,
+     "volume": 0.002245118574701092
+    },
+    "auditor_closed_shell_exists": false
+   }
+  ],
+  "agree_watertight": true
+ },
+ {
+  "case": "aseptic_aseptic_brick_v0000",
+  "prim_results": [
+   {
+    "prim": "Body",
+    "trimesh": {
+     "is_watertight": true,
+     "is_winding_consistent": false,
+     "volume": -0.00024051370843352216
+    },
+    "auditor_closed_shell_exists": false
+   }
+  ],
+  "agree_watertight": false
+ },
+ {
+  "case": "tray_tray_4corner_v0130",
+  "prim_results": [
+   {
+    "prim": "Body",
+    "trimesh": {
+     "is_watertight": false,
+     "is_winding_consistent": true,
+     "volume": -0.0006467227986033321
+    },
+    "auditor_closed_shell_exists": false
+   }
+  ],
+  "agree_watertight": true
+ }
+]
