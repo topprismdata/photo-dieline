@@ -1,5 +1,5 @@
 {
- "timestamp": "2026-11-27T02:13:00",
+ "timestamp": "2026-11-27T02:29:25",
  "validator": "NVIDIA USDCraft _validate_usd_asset (physx), live run",
  "domains": {
   "liquor": {
@@ -519,8 +519,8 @@
    ]
   },
   "nv960_variants": {
-   "count": 35,
-   "pass": 35,
+   "count": 60,
+   "pass": 60,
    "assets": [
     {
      "asset": "nv960_variants/nv960_variants/barcode_scanner_h100_d100.usdc",
@@ -532,6 +532,30 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/barcode_scanner_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/barcode_scanner_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -583,6 +607,30 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/carton_flow_rack_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/carton_flow_rack_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/cereal_dispenser_h100_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -592,6 +640,18 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/cereal_dispenser_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -607,6 +667,42 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/condiment_pump_dispenser_h100_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/condiment_pump_dispenser_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/condiment_pump_dispenser_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/jerry_can_h100_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -616,6 +712,18 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/jerry_can_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -643,6 +751,18 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/juice_dispenser_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/juice_dispenser_h80_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -667,6 +787,30 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/muffin_tin_6cup_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/muffin_tin_6cup_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/napkin_dispenser_h100_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -676,6 +820,18 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/napkin_dispenser_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -703,6 +859,18 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/paper_towel_dispenser_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/paper_towel_dispenser_h80_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -727,6 +895,18 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/public_recycling_bin_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/public_recycling_bin_h80_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -739,6 +919,42 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/public_trash_can_h100_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/public_trash_can_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/public_trash_can_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/queue_ticket_dispenser_h100_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -748,6 +964,18 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/queue_ticket_dispenser_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -811,6 +1039,30 @@
      "overall": "PASS"
     },
     {
+     "asset": "nv960_variants/nv960_variants/shopping_basket_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/shopping_basket_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
      "asset": "nv960_variants/nv960_variants/shopping_cart_h100_d100.usdc",
      "validator": "PASS",
      "bom": "OK",
@@ -820,6 +1072,18 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/shopping_cart_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -844,6 +1108,18 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/soda_fountain_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -904,6 +1180,30 @@
      "meta_mass": true,
      "meta_com": true,
      "thumbs": 2,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/tiered_fruit_basket_h100_d125.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
+     "overall": "PASS"
+    },
+    {
+     "asset": "nv960_variants/nv960_variants/tiered_fruit_basket_h80_d100.usdc",
+     "validator": "PASS",
+     "bom": "OK",
+     "content_hash": "OK",
+     "package_hash": "OK",
+     "meta_dims": false,
+     "meta_mass": true,
+     "meta_com": true,
+     "thumbs": 0,
      "overall": "PASS"
     },
     {
@@ -2152,7 +2452,7 @@
   }
  },
  "summary": {
-  "total": 177,
-  "pass": 177
+  "total": 202,
+  "pass": 202
  }
 }

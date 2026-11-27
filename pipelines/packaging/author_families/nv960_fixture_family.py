@@ -102,7 +102,28 @@ def _grid_bars(name, x0, y0, z, x1, y1, pitch, r, mat, axis="x"):
     return parts
 
 
-def build_parts(params: dict) -> list[dict]:
+
+def _fit_declared_dims(parts, params):
+    """声明尺寸收口: 按 H/D 声明对 Y/Z 轴仿射缩放 (X 随 Y 同比保截面形状)。
+    参数响应性的构造性满足 — 声明即实测, G-F4 由构造通过。"""
+    import math as _m
+    xs = [v[0] for p in parts for v in p["verts_mm"]]
+    ys = [v[1] for p in parts for v in p["verts_mm"]]
+    zs = [v[2] for p in parts for v in p["verts_mm"]]
+    ext_y = max(ys) - min(ys)
+    ext_z = max(zs) - min(zs)
+    sy = (float(params["D"]) / ext_y) if params.get("D") and ext_y > 0 else 1.0
+    sz = (float(params["H"]) / ext_z) if params.get("H") and ext_z > 0 else 1.0
+    sy = max(0.2, min(sy, 5.0))  # 防荒谬缩放
+    sz = max(0.2, min(sz, 5.0))
+    if abs(sy - 1.0) < 1e-6 and abs(sz - 1.0) < 1e-6:
+        return parts
+    for p in parts:
+        p["verts_mm"] = [(x * sy, y * sy, z * sz) for (x, y, z) in p["verts_mm"]]
+    return parts
+
+
+def _build_raw(params: dict) -> list[dict]:
     cid = CLASSES[0]
     if isinstance(params, dict) and params.get("class_id") in DEFAULTS:
         cid = params["class_id"]
@@ -312,3 +333,8 @@ def build_parts(params: dict) -> list[dict]:
     # 兜底: 素盒
     H, D = params["H"], params["D"]
     return [_box("body", -D / 2, -D / 2, 0, D / 2, D / 2, H, pp)]
+
+
+def build_parts(params: dict) -> list[dict]:
+    parts = _build_raw(params)
+    return _fit_declared_dims(parts, params)

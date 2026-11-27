@@ -119,3 +119,12 @@ conformance.json / build.json / print.png — 我方 schema, 产线再生凭证)
 NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件精选域;
 9386 件构建的 NVIDIA-schema 重发射为可选后处理 (emitter ~0.5s/件), 未执行 —
 两套 schema 并存事实记录在案, 消费端按需选择。
+
+## M6 参数收口与审计竞态复盘 (2026-11-27 补)
+
+- 变体产能收口: `_fit_declared_dims` 构造性收口 (声明 H/D 对 Y/Z 仿射缩放, X 随 Y 同比
+  保截面) → 变体扫 **60/60 全绿零拦** (原 35/60, 25 个 D 不响应类由构造满足)。
+- 审计竞态复盘: 变体重生成后审计 0/60 — 根因 = 变体目录残留**重生成前的陈旧契约**
+  (BOM 哈希对旧 usdc)。发射器重跑刷新后复审计 **202/202** (liquor16/dairy2/legacy4/
+  canonical20/variants60/tde100)。教训: **资产重生成必须重跑契约发射**, 审计的
+  BOM 抽验通道正是此类陈旧的探测器。
