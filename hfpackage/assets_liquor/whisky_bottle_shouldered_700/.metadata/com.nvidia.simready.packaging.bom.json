@@ -1,0 +1,40 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 369,
+   "hash": {
+    "sha256": "89c61745759c3775f76b4c13d1928c09d4b2400e9fcc9bdc374a93f31dc9bb20"
+   }
+  },
+  {
+   "relative_path": "renders/whisky_bottle_shouldered_700.png",
+   "size": 249995,
+   "hash": {
+    "sha256": "92310ec103afa28e71181785b7f9137b42e8b7364d3efb9bf58146f87a3af972"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1216,
+   "hash": {
+    "sha256": "36585aef6dbbccfea741b7d80d4cf89c4e22dd65ba3f2490250ce2c1f5e11ee5"
+   }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 287,
+   "hash": {
+    "sha256": "5d1c46b45b713a0515eb2e1262399e39cc9572cfc326742a197dc6c350584324"
+   }
+  },
+  {
+   "relative_path": "simready_usd/whisky_bottle_shouldered_700.usdc",
+   "size": 31791,
+   "hash": {
+    "sha256": "1eaafe91afb73039232e97854b00362d32158aac3f48a5fff1efb47079e491fb"
+   }
+  }
+ ]
+}

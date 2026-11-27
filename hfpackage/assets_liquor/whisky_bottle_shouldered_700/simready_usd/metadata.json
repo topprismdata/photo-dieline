@@ -1,0 +1,55 @@
+{
+ "asset": "whisky_bottle_shouldered_700",
+ "family": "beverage_liquor",
+ "axes": {
+  "product_category": "whisky",
+  "packaging_structure": "glass_bottle_shouldered"
+ },
+ "branding": "NONE — 通用几何, 零商标零文字零贴图",
+ "attributes": {
+  "nominal_capacity_ml": {
+   "value": 700,
+   "source_tier": "official_spec",
+   "note": "行业公称包装级容量"
+  },
+  "dimensions_mm": {
+   "value": {
+    "X": 82.0,
+    "Y": 82.0,
+    "Z": 220.0
+   },
+   "source_tier": "derived",
+   "note": "G-F 门禁复测一致"
+  },
+  "mass_kg": {
+   "value": 0.2226,
+   "source_tier": "estimated",
+   "note": "材质密度×闭壳体积, 非实测"
+  },
+  "closure": {
+   "value": "screw_cap",
+   "source_tier": "derived"
+  },
+  "body_material": {
+   "value": "glass_amber",
+   "source_tier": "derived"
+  },
+  "fill_state": {
+   "value": "empty",
+   "source_tier": "derived"
+  }
+ },
+ "validation": {
+  "geometry": "pass",
+  "appearance": "pass",
+  "semantics": "pending",
+  "physics": "pending",
+  "runtime": "not_tested",
+  "composition": "not_tested"
+ },
+ "textures": "NONE (素材质)",
+ "license": "CC-BY-4.0 (随仓声明)",
+ "provenance_notes": [
+  "M2 扩容 (2026-11-27): author_compile G-F 全过"
+ ]
+}

@@ -203,6 +203,12 @@
    "product_category": "wine",
    "packaging_structure": "glass_bottle_straight",
    "closure": "foil_cap"
+  },
+  {
+   "asset": "whisky_bottle_shouldered_700",
+   "product_category": "whisky",
+   "packaging_structure": "glass_bottle_shouldered",
+   "closure": "screw_cap"
   }
  ],
  "rules": [

@@ -37,6 +37,7 @@ CLASSES = [
     "baijiu_bottle_straight_500",
     "whisky_bottle_bordeaux_700",
     "wine_bottle_straight_750",
+    "whisky_bottle_shouldered_700",
 ]
 
 DEFAULTS = {
@@ -53,6 +54,7 @@ DEFAULTS = {
     "baijiu_bottle_straight_500": {"H": 230.0, "D": 65.0},
     "whisky_bottle_bordeaux_700": {"H": 250.0, "D": 80.0},
     "wine_bottle_straight_750": {"H": 300.0, "D": 78.0},
+    "whisky_bottle_shouldered_700": {"H": 235.0, "D": 82.0},
     "vodka_bottle_700":  {"H": 290.0, "D": 72.0},
     "liquor_gift_dual":  {"H": 340.0, "D": 200.0},
 }
@@ -325,6 +327,27 @@ def _wine_straight(H, D):
     return P
 
 
+def _whisky_shouldered(H, D):
+    """宽肩威士忌 (shouldered): 鼓肩急收短颈 — 结构轴 shouldered 填充。"""
+    R = D / 2.0
+    wall = 2.0
+    neck_r = R * 0.30
+    outer = [
+        (R * 0.68, 0.0), (R, 6.0), (R, H * 0.42), (R * 0.97, H * 0.55),
+        (R * 0.78, H * 0.62), (neck_r + wall, H * 0.72), (neck_r + wall, H - 15.0),
+        (neck_r, H - 15.0), (neck_r, H - 15.0 - wall), (neck_r + wall, H - 15.0 - wall),
+        (neck_r + wall, H * 0.72),
+    ]
+    inner = [(max(r - wall, 1.0), z) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("glass_shell", loop, MAT_GLASS_AMBER, n=96)]
+    cap_r = neck_r + 2.6
+    cap = [(cap_r * 0.75, H - 15.0 - wall), (cap_r, H - 13.0),
+           (cap_r, H - 2.0), (cap_r * 0.85, H), (cap_r * 0.5, H), (cap_r * 0.5, H - 13.0)]
+    P.append(_lathe_closed("cap", cap + [cap[0]], MAT_ALU, n=64))
+    return P
+
+
 def _gift_dual(H, D):
     """双瓶位瓦楞礼盒: 底+四壁 (每零件独立闭合箱体)。素面零印刷。"""
     W = D
@@ -372,6 +395,8 @@ def build_parts(params: dict) -> list[dict]:
         return _whisky_bordeaux(H, D)
     if cid == "wine_bottle_straight_750":
         return _wine_straight(H, D)
+    if cid == "whisky_bottle_shouldered_700":
+        return _whisky_shouldered(H, D)
     if cid == "pet_bottle_500":
         return _pet_bottle(H, D, rib=True)
     if cid == "pet_bottle_1500":

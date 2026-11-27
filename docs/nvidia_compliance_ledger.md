@@ -7,12 +7,12 @@
 
 | 域 | 位置 | 件数 | 判决 |
 |---|---|---|---|
-| 酒饮包装 (simready_usd) | hfpackage/assets_liquor | 15 (含 M3 结构轴扩容: vodka×belly / baijiu×straight / whisky×bordeaux / wine×straight) | **15/15 PASS** |
+| 酒饮包装 (simready_usd) | hfpackage/assets_liquor | 16 (M3 结构轴扩容 + M4: vodka×belly / baijiu×straight / whisky×bordeaux / wine×straight / **whisky×shouldered**) | **16/16 PASS** |
 | 刚体 legacy | hfpackage/families | 4 | **4/4 PASS** |
 | 零售设备正典 | output/nv960_usd | 20 | **20/20 PASS** |
 | 设备参数变体 | output/nv960_variants | 35 | **35/35 PASS** |
 | TDE 纸包装试点 (gable/clv/cone/food) | output/pack10k_pilot | 100 | **100/100 PASS** |
-| **总计** | | **174** | **174/174 PASS** |
+| **总计** | | **175** | **175/175 PASS** |
 
 ## 方言模型 (对照实验裁决)
 
@@ -99,3 +99,9 @@ meta 完整性 + 双缩略图齐备} → `docs/nvidia_full_audit_2026-11-27.json
 whisky×bordeaux / wine×straight, 每类独立 lathe profile)。全链: G-F 门禁 → simready 结构化
 (pxr 实测 dims/mass 回填) → NVIDIA 原版验证器 4/4 PASS → hfpackage 并入 (spec 15/15) →
 打包契约发射 (总 174/174)。
+
+## M4 结构轴收口 (2026-11-27 补)
+
+whisky×shouldered 补齐 — **本体 9 结构轴 9/9 全有资产** (longneck/belly/shouldered/straight/
+bordeaux/can_alu/pet_bottle/gable_carton/gift_box_carton)。全链: G-F → 结构化 → NVIDIA
+验证器 PASS → spec 16/16 → 契约发射 175/175。

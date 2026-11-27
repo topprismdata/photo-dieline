@@ -6,13 +6,13 @@
   {
    "name": "com.nvidia.simready.conformance.Package-Candidate@1.3.0.json",
    "hash": {
-    "sha256": "3ea79b243ec681d3bc0ae2e0416ae6a6d12db4df44e011acd5395c01df0a5890"
+    "sha256": "b367eff92e7e3609270f95f133cbd3531e2bfc566d7826ce71c6ad21f2f69f98"
    }
   },
   {
    "name": "com.nvidia.simready.conformance.Package@1.0.0.json",
    "hash": {
-    "sha256": "e0edaa0a1f16d5f5362111dd1c9f860f9710b8e80e5ce66368974b0f9d2b587e"
+    "sha256": "3ae951ade92d717d14bd9dd05cf621b5a6ddbe0fa0cf28077c067eb14aab6b26"
    }
   },
   {
@@ -32,6 +32,6 @@
   "sha256": "a0c14f887379c03949dd06534f80ff31893761f03ed5cd931975fabae7d09341"
  },
  "package_hash": {
-  "sha256": "ac11b6b4a0755342f8b0211fd9d12b5f96959bd4be2a915b46caa3be0c69188e"
+  "sha256": "8884de35ba828932a8a5a2aceeebc41012c36d51d0e3951acfd3081806b99aa7"
  }
 }
