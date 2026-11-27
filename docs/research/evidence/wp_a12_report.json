@@ -1,0 +1,74 @@
+{
+ "A12-01": "OuterShell+GlueFlap 部件分离 usdc",
+ "A12-02_all_zero": false,
+ "A12-02_findings": [
+  "geometry:degenerate-3d",
+  "topology:dup-directed-edges:5",
+  "vertex_manifold:nonfan:3",
+  "topology:boundary-not-walkable",
+  "uv:degenerate-faces:5",
+  "closure:solid-with-open-boundary"
+ ],
+ "A12-03": "FOLD铰接wallL+BOND front(独立面片)",
+ "A12-04_identity_uv": true,
+ "A12-06_variants": {
+  "min": {
+   "overall": "FAIL",
+   "findings": [
+    "geometry:degenerate-3d",
+    "topology:dup-directed-edges:5",
+    "vertex_manifold:nonfan:3",
+    "topology:boundary-not-walkable",
+    "uv:no-st"
+   ],
+   "bbox_mm": [
+    99.4,
+    39.8,
+    138.5
+   ]
+  },
+  "typ": {
+   "overall": "FAIL",
+   "findings": [
+    "geometry:degenerate-3d",
+    "topology:dup-directed-edges:5",
+    "vertex_manifold:nonfan:3",
+    "topology:boundary-not-walkable",
+    "uv:no-st"
+   ],
+   "bbox_mm": [
+    95.5,
+    38.2,
+    138.6
+   ]
+  },
+  "max": {
+   "overall": "FAIL",
+   "findings": [
+    "geometry:degenerate-3d",
+    "topology:dup-directed-edges:5",
+    "vertex_manifold:nonfan:3",
+    "topology:boundary-not-walkable",
+    "uv:no-st"
+   ],
+   "bbox_mm": [
+    154.1,
+    61.6,
+    214.9
+   ]
+  }
+ },
+ "A12-07_deterministic": true,
+ "A12-02_blocking_reason": {
+  "status": "BLOCKED (按 R09-07 上限条款提交阻塞原因, 不追加盲修轮次)",
+  "achieved": "fold 树焊接成功: 12 面板 → 单连通壳 (20 tris), 封合空间焊接将边界边 24→20 并保留 D=38.194 精确",
+  "blocking": "闭缝焊接后出现 dup-directed 5 / nonfan 3 / degenerate-3d / boundary-not-walkable",
+  "analysis": [
+   "封合配对方向检测 (fwd/cross) 逻辑正确 (front↔wallL 缝验证为 cross-weld)",
+   "dup 5 的成因假设: 部分封合边交界顶点处存在 >2 面共边 (折叠链与封合边共享顶点), 简单顶点合并在此类顶点产生同向共边",
+   "需要结构语义指导的分级焊接 (FOLD→SEAL→GLUE 分级 + 每级方向校验) 或 TRIAL Manifold repair"
+  ],
+  "variant_note": "min/typ/max 三规格均编译连通但同因 FAIL",
+  "deterministic": true
+ }
+}

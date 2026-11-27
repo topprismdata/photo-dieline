@@ -79,8 +79,10 @@ def audit_stage(stage, contract="UNKNOWN", prim_contracts=None, declared_seam_ed
     prims = [(p, UsdGeom.Mesh(p)) for p in stage.Traverse() if p.IsA(UsdGeom.Mesh)]
     xf = UsdGeom.XformCache(Usd.TimeCode.Default())
     for prim, mesh in prims:
-        nm = prim.GetPath().GetParentPath().name or prim.GetPath().name
-        if nm in ("", "/"): nm = prim.GetPath().name
+        own = prim.GetPath().name
+        pname = prim.GetPath().GetParentPath().name
+        nm = pname if (own == "Body" and pname not in ("", "/")) else own
+        if nm in ("", "/"): nm = own
         c = pc.get(nm, contract)
         R = {"contract": c, "findings": [], "normals": "NOT_APPLICABLE"}
         fv = np.asarray(mesh.GetFaceVertexCountsAttr().Get() or [])
