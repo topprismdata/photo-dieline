@@ -1,0 +1,149 @@
+{
+ "_meta": {
+  "purpose": "R23-B/C/D 裁决要求: QA 与 DIM-01 集合关系逐件交叉统计 (不重跑)",
+  "date": "2026-11-28"
+ },
+ "counts": {
+  "qa_and_dim01": 8,
+  "qa_only": 4,
+  "dim01_only": 4,
+  "neither": 0
+ },
+ "detail": {
+  "qa_and_dim01": [
+   [
+    "Black_Forest_Fruit_Snacks_28_Pack_Grape",
+    "box_rect",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "Black_Forest_Fruit_Snacks_Juicy_Filled_Centers_10_pouches_9_oz_total",
+    "box_rect",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "Canon_Pixma_Chromalife_100_Magenta_8",
+    "box_rect",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "Crunch_Girl_Scouts_Candy_Bars_Peanut_Butter_Creme_78_oz_box",
+    "box_rect",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "Blue_Jasmine_Includes_Digital_Copy_UltraViolet_DVD",
+    "flat_container",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "Final_Fantasy_XIV_A_Realm_Reborn_60Day_Subscription",
+    "flat_container",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+    "flat_container",
+    "native",
+    "PASS",
+    true,
+    true
+   ],
+   [
+    "Justified_The_Complete_Fourth_Season_3_Discs_DVD",
+    "flat_container",
+    "native",
+    "PASS",
+    true,
+    true
+   ]
+  ],
+  "qa_only": [
+   [
+    "ACE_Coffee_Mug_Kristen_16_oz_cup",
+    "cylinder",
+    "native",
+    "PASS",
+    false,
+    true
+   ],
+   [
+    "Aroma_Stainless_Steel_Milk_Frother_2_Cup",
+    "cylinder",
+    "native",
+    "PASS",
+    false,
+    true
+   ],
+   [
+    "Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker",
+    "cylinder",
+    "native",
+    "PASS",
+    false,
+    true
+   ],
+   [
+    "KS_Chocolate_Cube_Box_Assortment_By_Neuhaus_2010_Ounces",
+    "cylinder",
+    "native",
+    "PASS",
+    false,
+    true
+   ]
+  ],
+  "dim01_only": [
+   [
+    "5_HTP",
+    "bottle_shaped",
+    "approx",
+    "FAIL:G03,G06",
+    true,
+    true
+   ],
+   [
+    "AllergenFree_JarroDophilus",
+    "bottle_shaped",
+    "approx",
+    "FAIL:G06",
+    true,
+    true
+   ],
+   [
+    "Beta_Glucan",
+    "bottle_shaped",
+    "approx",
+    "FAIL:G06",
+    true,
+    true
+   ],
+   [
+    "Bifidus_Balance_FOS",
+    "bottle_shaped",
+    "approx",
+    "FAIL:G06",
+    true,
+    true
+   ]
+  ],
+  "neither": []
+ }
+}

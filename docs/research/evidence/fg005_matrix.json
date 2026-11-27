@@ -1,0 +1,903 @@
+{
+ "_meta": {
+  "workorder": "FG-005 (R23-B/C/D 授权)",
+  "date": "2026-11-28",
+  "n": 12,
+  "h": 60.0,
+  "contract": "tuck_depth=apothem(12,side) 全程显式传入; cls_id 逐点登记 (GOV-IR-01 生效)",
+  "note": "35 点最小研究矩阵, 非产品验收标准"
+ },
+ "grid": {
+  "s8_g2": {
+   "params": {
+    "n": 12,
+    "side": 8.0,
+    "h": 60.0,
+    "tuck_depth": 14.928203,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s8_g4": {
+   "params": {
+    "n": 12,
+    "side": 8.0,
+    "h": 60.0,
+    "tuck_depth": 14.928203,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s8_g6": {
+   "params": {
+    "n": 12,
+    "side": 8.0,
+    "h": 60.0,
+    "tuck_depth": 14.928203,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s8_g8": {
+   "params": {
+    "n": 12,
+    "side": 8.0,
+    "h": 60.0,
+    "tuck_depth": 14.928203,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s8_g12": {
+   "params": {
+    "n": 12,
+    "side": 8.0,
+    "h": 60.0,
+    "tuck_depth": 14.928203,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s10_g2": {
+   "params": {
+    "n": 12,
+    "side": 10.0,
+    "h": 60.0,
+    "tuck_depth": 18.660254,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s10_g4": {
+   "params": {
+    "n": 12,
+    "side": 10.0,
+    "h": 60.0,
+    "tuck_depth": 18.660254,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s10_g6": {
+   "params": {
+    "n": 12,
+    "side": 10.0,
+    "h": 60.0,
+    "tuck_depth": 18.660254,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s10_g8": {
+   "params": {
+    "n": 12,
+    "side": 10.0,
+    "h": 60.0,
+    "tuck_depth": 18.660254,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s10_g12": {
+   "params": {
+    "n": 12,
+    "side": 10.0,
+    "h": 60.0,
+    "tuck_depth": 18.660254,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s12_g2": {
+   "params": {
+    "n": 12,
+    "side": 12.0,
+    "h": 60.0,
+    "tuck_depth": 22.392305,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s12_g4": {
+   "params": {
+    "n": 12,
+    "side": 12.0,
+    "h": 60.0,
+    "tuck_depth": 22.392305,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s12_g6": {
+   "params": {
+    "n": 12,
+    "side": 12.0,
+    "h": 60.0,
+    "tuck_depth": 22.392305,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s12_g8": {
+   "params": {
+    "n": 12,
+    "side": 12.0,
+    "h": 60.0,
+    "tuck_depth": 22.392305,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s12_g12": {
+   "params": {
+    "n": 12,
+    "side": 12.0,
+    "h": 60.0,
+    "tuck_depth": 22.392305,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s14_g2": {
+   "params": {
+    "n": 12,
+    "side": 14.0,
+    "h": 60.0,
+    "tuck_depth": 26.124356,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s14_g4": {
+   "params": {
+    "n": 12,
+    "side": 14.0,
+    "h": 60.0,
+    "tuck_depth": 26.124356,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s14_g6": {
+   "params": {
+    "n": 12,
+    "side": 14.0,
+    "h": 60.0,
+    "tuck_depth": 26.124356,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s14_g8": {
+   "params": {
+    "n": 12,
+    "side": 14.0,
+    "h": 60.0,
+    "tuck_depth": 26.124356,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s14_g12": {
+   "params": {
+    "n": 12,
+    "side": 14.0,
+    "h": 60.0,
+    "tuck_depth": 26.124356,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s16_g2": {
+   "params": {
+    "n": 12,
+    "side": 16.0,
+    "h": 60.0,
+    "tuck_depth": 29.856406,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s16_g4": {
+   "params": {
+    "n": 12,
+    "side": 16.0,
+    "h": 60.0,
+    "tuck_depth": 29.856406,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s16_g6": {
+   "params": {
+    "n": 12,
+    "side": 16.0,
+    "h": 60.0,
+    "tuck_depth": 29.856406,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s16_g8": {
+   "params": {
+    "n": 12,
+    "side": 16.0,
+    "h": 60.0,
+    "tuck_depth": 29.856406,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s16_g12": {
+   "params": {
+    "n": 12,
+    "side": 16.0,
+    "h": 60.0,
+    "tuck_depth": 29.856406,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "FAIL",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [
+    "G06"
+   ],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s20_g2": {
+   "params": {
+    "n": 12,
+    "side": 20.0,
+    "h": 60.0,
+    "tuck_depth": 37.320508,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s20_g4": {
+   "params": {
+    "n": 12,
+    "side": 20.0,
+    "h": 60.0,
+    "tuck_depth": 37.320508,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s20_g6": {
+   "params": {
+    "n": 12,
+    "side": 20.0,
+    "h": 60.0,
+    "tuck_depth": 37.320508,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s20_g8": {
+   "params": {
+    "n": 12,
+    "side": 20.0,
+    "h": 60.0,
+    "tuck_depth": 37.320508,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s20_g12": {
+   "params": {
+    "n": 12,
+    "side": 20.0,
+    "h": 60.0,
+    "tuck_depth": 37.320508,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s30_g2": {
+   "params": {
+    "n": 12,
+    "side": 30.0,
+    "h": 60.0,
+    "tuck_depth": 55.980762,
+    "glue_w": 2.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s30_g4": {
+   "params": {
+    "n": 12,
+    "side": 30.0,
+    "h": 60.0,
+    "tuck_depth": 55.980762,
+    "glue_w": 4.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s30_g6": {
+   "params": {
+    "n": 12,
+    "side": 30.0,
+    "h": 60.0,
+    "tuck_depth": 55.980762,
+    "glue_w": 6.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s30_g8": {
+   "params": {
+    "n": 12,
+    "side": 30.0,
+    "h": 60.0,
+    "tuck_depth": 55.980762,
+    "glue_w": 8.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  },
+  "s30_g12": {
+   "params": {
+    "n": 12,
+    "side": 30.0,
+    "h": 60.0,
+    "tuck_depth": 55.980762,
+    "glue_w": 12.0,
+    "board_t": 0.42
+   },
+   "gates": {
+    "G01": "FAIL",
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "fails": [],
+   "g03_overlaps": "",
+   "cls_id": "prism_dust_n12"
+  }
+ }
+}
