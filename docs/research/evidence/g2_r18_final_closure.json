@@ -1,0 +1,483 @@
+{
+ "R18_FINAL_CLOSURE": "九件候选最终证据清单",
+ "dim01_all_pass": true,
+ "nvsdk_all_pass": true,
+ "nine": [
+  {
+   "id": "brick_min_aseptic_brick_v0022",
+   "family": "aseptic_brick",
+   "variant_idx": 22,
+   "role": "min",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 83.549,
+     "generated_mm": 83.549,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 33.42,
+     "generated_mm": 33.42,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 124.259,
+     "generated_mm": 124.259,
+     "diff_mm": 0.0,
+     "tol_mm": 1.243,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "0f4c969ccead73d71d4b3892df7f5f5e3fc8832f5c560742e18d3e52deeb8026",
+   "usdc_path": "output/candidates/g2_nine/brick_min_aseptic_brick_v0022.usdc"
+  },
+  {
+   "id": "brick_typ_aseptic_brick_v0024",
+   "family": "aseptic_brick",
+   "variant_idx": 24,
+   "role": "typ",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 99.287,
+     "generated_mm": 99.287,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 39.715,
+     "generated_mm": 39.715,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 143.14499999999998,
+     "generated_mm": 143.145,
+     "diff_mm": 0.0,
+     "tol_mm": 1.431,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "fbe9725d2f44c72428a6449abaa15d76ffec94579768c7fb5f80b4266aa2171c",
+   "usdc_path": "output/candidates/g2_nine/brick_typ_aseptic_brick_v0024.usdc"
+  },
+  {
+   "id": "brick_max_aseptic_brick_v0015",
+   "family": "aseptic_brick",
+   "variant_idx": 15,
+   "role": "max",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 124.456,
+     "generated_mm": 124.456,
+     "diff_mm": 0.0,
+     "tol_mm": 1.245,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 49.782,
+     "generated_mm": 49.782,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 173.347,
+     "generated_mm": 173.347,
+     "diff_mm": 0.0,
+     "tol_mm": 1.733,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "c25e794b5369b08788e4d0297991fc1eaa7e58708769b61c257478306de88f7f",
+   "usdc_path": "output/candidates/g2_nine/brick_max_aseptic_brick_v0015.usdc"
+  },
+  {
+   "id": "b250_min_brick_250ml_v0022",
+   "family": "brick_250ml",
+   "variant_idx": 22,
+   "role": "min",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 59.053,
+     "generated_mm": 59.053,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 24.316,
+     "generated_mm": 24.316,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 98.499,
+     "generated_mm": 98.499,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "5f5ab02bd4eddff78b49e2a7712633a0bc95d02e4ba114d1fa6a36138653d1c6",
+   "usdc_path": "output/candidates/g2_nine/b250_min_brick_250ml_v0022.usdc"
+  },
+  {
+   "id": "b250_typ_brick_250ml_v0004",
+   "family": "brick_250ml",
+   "variant_idx": 4,
+   "role": "typ",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 75.999,
+     "generated_mm": 75.999,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 31.294,
+     "generated_mm": 31.294,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 122.175,
+     "generated_mm": 122.175,
+     "diff_mm": 0.0,
+     "tol_mm": 1.222,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "a87f5a269d7f904cf40cdc57bd8adadcfb88c05f6d1650210b1058ecd4576fc8",
+   "usdc_path": "output/candidates/g2_nine/b250_typ_brick_250ml_v0004.usdc"
+  },
+  {
+   "id": "b250_max_brick_250ml_v0011",
+   "family": "brick_250ml",
+   "variant_idx": 11,
+   "role": "max",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 84.869,
+     "generated_mm": 84.869,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 34.946,
+     "generated_mm": 34.946,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 134.56799999999998,
+     "generated_mm": 134.568,
+     "diff_mm": 0.0,
+     "tol_mm": 1.346,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "6f1ecd21e0572e3e6cc0e103eed47cd2948356bb4a2631f17ed57a6ca8e1596c",
+   "usdc_path": "output/candidates/g2_nine/b250_max_brick_250ml_v0011.usdc"
+  },
+  {
+   "id": "control_food_bento_lid_box_v0000",
+   "family": "food_bento_lid_box",
+   "variant_idx": 0,
+   "role": "control",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 112.704,
+     "generated_mm": 112.704,
+     "diff_mm": 0.0,
+     "tol_mm": 1.127,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 74.303,
+     "generated_mm": 74.303,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 35.901,
+     "generated_mm": 35.901,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "18b03be15f30ef84aac7ad523b1fe56fc55fb61adc24681419972d9fd542b58e",
+   "usdc_path": "output/candidates/g2_nine/control_food_bento_lid_box_v0000.usdc"
+  },
+  {
+   "id": "control_food_sushi_tray_v0000",
+   "family": "food_sushi_tray",
+   "variant_idx": 0,
+   "role": "control",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 162.938,
+     "generated_mm": 162.938,
+     "diff_mm": 0.0,
+     "tol_mm": 1.629,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 107.119,
+     "generated_mm": 107.119,
+     "diff_mm": 0.0,
+     "tol_mm": 1.071,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 38.822,
+     "generated_mm": 38.822,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "1730ccf227d3cb7df987076f8af7f5ecf041918863d721b34c618fdf08372ab7",
+   "usdc_path": "output/candidates/g2_nine/control_food_sushi_tray_v0000.usdc"
+  },
+  {
+   "id": "control_mailer_diecut_v0000",
+   "family": "mailer_diecut",
+   "variant_idx": 0,
+   "role": "control",
+   "terminal": "SUCCESS",
+   "dim01_pass": true,
+   "dim01": {
+    "x": {
+     "declared_mm": 40.0,
+     "generated_mm": 40.0,
+     "diff_mm": 0.0,
+     "tol_mm": 1.0,
+     "pass": true
+    },
+    "y": {
+     "declared_mm": 120.0,
+     "generated_mm": 120.0,
+     "diff_mm": 0.0,
+     "tol_mm": 1.2,
+     "pass": true
+    },
+    "z": {
+     "declared_mm": 160.0,
+     "generated_mm": 160.0,
+     "diff_mm": 0.0,
+     "tol_mm": 1.6,
+     "pass": true
+    }
+   },
+   "nvsdk_backend": "physx",
+   "nvsdk_checks_passed": [
+    "stage_open",
+    "default_prim",
+    "z_up",
+    "meters",
+    "kilograms",
+    "reusable_asset_no_scene",
+    "finite_authored_values",
+    "dependencies_resolved",
+    "relative_asset_paths",
+    "vendor_namespace_isolation",
+    "physics_graph_acyclic",
+    "joint_parent_child_order",
+    "articulation_root_coverage",
+    "articulation_root_body_binding",
+    "physx_schema_consistency"
+   ],
+   "nvsdk": "PASS",
+   "content_sha256": "c6c21cdefa7322f923f9f2e7e2ed29811f4e1c22a72d519b22c1248786438fc6",
+   "usdc_path": "output/candidates/g2_nine/control_mailer_diecut_v0000.usdc"
+  }
+ ],
+ "physics_simulation_state": "NOT_RUN (G2 范围=编译+结构+NVSDK; 物理仿真属消费端场景, 按 REP-IDENTITY 规划后续)",
+ "启动门禁偏差_如实登记": {
+  "G2 启动时序": "G2 九件编译与审计在 R14-UV-01 完成之后、R16 裁决回执之前启动",
+  "C1": "启动时 G1-04 尚有 F01/F02 补证 OPEN → 偏差: 启动时点未完全满足 (已于启动后补证)",
+  "C2": "SPEC-FROZEN 后置 (R16 启动后签发 SPEC APPROVED)",
+  "C3-C5": "g2_manifest.json 文件后置 (候选选择先于运行确定)",
+  "结论": "偏差如实登记; 原始结果保留; 启动时间未追溯修改 (遵 R17 §4.3)"
+ }
+}
