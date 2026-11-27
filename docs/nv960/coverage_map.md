@@ -81,3 +81,10 @@ R767 Cereal Dispenser / R788 Paper Towel Dispenser / R497 Public Trash Can / R51
 - their 480 全量 sidecar 判定 (需下载 model.usdc + sidecar, ~500MB)
 - E1 逐对比 (等 bg_686 缩略图)
 - 我方 19+13 新类资产补建 (P3)
+
+## NVIDIA 原版验证器合规 (2026-11-27)
+
+- 20/20 设备类 (author_compile G-F 门禁全绿 → usdc → NVIDIA `_validate_usd_asset(physx)` **20/20 PASS**)
+- 购物车 (shopping_cart, 293 部件/493×501×820mm/103.8kg) = NVIDIA 论文自报失败案例 ("细网格购物车钢丝重建失真") 的直接对标点: 我方参数化 authoring 一次过其全量校验
+- 修的三处 family bug: DEFAULTS 嵌套表扁平合并入口 / carton 纸箱 "verts"→"verts_mm" 契约键 / 纸箱名浮点层号 (USD prim 路径非法) / bar_t 未赋值先引用
+- 产物: output/nv960_usd/*.usdc (20) — 未并入数据集包 (包范围冻结不变)

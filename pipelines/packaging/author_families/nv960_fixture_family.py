@@ -106,6 +106,9 @@ def build_parts(params: dict) -> list[dict]:
     cid = CLASSES[0]
     if isinstance(params, dict) and params.get("class_id") in DEFAULTS:
         cid = params["class_id"]
+        if "H" not in params:  # 嵌套 per-class 表 → 扁平合并 (author_compile 契约)
+            params = {**params, **DEFAULTS[cid]}
+        cid = params["class_id"]
     P = []
     steel, pp, alu = "metal_steel", "plastic_pp", "metal_alu"
 
@@ -219,7 +222,7 @@ def build_parts(params: dict) -> list[dict]:
             for ky, py in enumerate((-D / 2, D / 2)):
                 P.append(_box(f"post_{kx}_{ky}", px - 25, py - 25, 0, px + 25, py + 25, H, steel))
         cartons = []
-        for lvl in (0.35, 0.68):
+        for li, lvl in enumerate((0.35, 0.68)):
             z = H * lvl
             P.append(_box("beam_a", -w / 2, -D / 2, z, w / 2, -D / 2 + 40, z + 45, steel))
             P.append(_box("beam_b", -w / 2, D / 2 - 40, z, w / 2, D / 2, z + 45, steel))
@@ -235,7 +238,7 @@ def build_parts(params: dict) -> list[dict]:
                           (cx0, y0, zd + 300), (cx0 + 190, y0, zd + 300), (cx0 + 190, y0 + 170, zd + 300), (cx0, y0 + 170, zd + 300)]
                     rv = [(vx - cx0 - 95, vz - zd) for vx, _, vz in cv]
                     cv2 = [(cx0 + 95 + rx * ca - rz * sa, y, zd + rx * sa + rz * ca) for (rx, rz), (_, y, _) in zip(rv, cv)]
-                    cartons.append({"name": f"carton_l{lvl}_{lane}_{col}", "verts": cv2,
+                    cartons.append({"name": f"carton_{li}_{lane}_{col}", "verts_mm": cv2,
                                     "tris": [[0, 3, 2], [0, 2, 1], [4, 5, 6], [4, 6, 7], [0, 1, 5], [0, 5, 4],
                                              [1, 2, 6], [1, 6, 5], [2, 3, 7], [2, 7, 6], [3, 0, 4], [3, 4, 7]],
                                     "material_id": "paper_kraft"})
@@ -249,7 +252,7 @@ def build_parts(params: dict) -> list[dict]:
         t = 3.0 if cid == "storage_basket_mesh" else 4.0
         h = H
         pitch = params.get("pitch", 10 if cid != "bulk_container_mesh" else 14)
-        bar_t = bar_t if t < 4.0 else 2.0
+        bar_t = 3.0 if t < 4.0 else 2.0
         band = params.get("band", 12.0)
         P = [_box("floor", -w / 2, -w / 2, 0, w / 2, w / 2, t, steel)]
         # 竖栅: 四壁全高
