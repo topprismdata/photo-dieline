@@ -30,7 +30,7 @@
   **负探针强制** (Rodrigues 绕真实铰链轴扰动, 残差须从 1e-14 爆到 mm 级) + M1 金样合同 (13 测试)。
 - 批跑器 `batch.run_batch` (单类失败不杀批), TDE 渲染域随机化管线, pd-guard 硬门禁,
   测量层 (参数化求解 + delivery_policy + 双率), usdcraft_gate 兼容门。
-- 真实尺寸分布台账 (coldcase dimension audit: 零售各品类实测值) — 变体采样可**证据接地**,
+- 真实尺寸分布台账 (coldcase dimension audit: 各品类实测值) — 变体采样可**证据接地**,
   不造幻想尺寸。
 
 ## 三、产能数学 (2026-11-25 本机实测, 单 Mac, 无 GPU 集群)

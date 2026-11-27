@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Benchmark A 场景合成器 — 通用零品牌商品类目检测语料 (协议: docs/bench_a_perception_protocol.md).
 
-继承 openusd 02 SDG 骨架 (project_bbox/异常状态机思想), 差异:
+继承上游研究仓 02 SDG 骨架 (project_bbox/异常状态机思想), 差异:
  - 类目 = 12 个通用包装结构类 (零品牌), 非货架状态类
  - 资产 = photo-dieline usdc (酒类8 + can330/wine/food_container/rsc)
  - 无状态异常注入 (v0 纯检测)

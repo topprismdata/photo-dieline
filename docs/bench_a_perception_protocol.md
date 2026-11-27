@@ -1,6 +1,6 @@
 # Benchmark A — 零售感知基准 协议 v0 (冻结于执行前)
 
-> 继承: openusd 仓 shelf SDG 场景合成 + YOLO 臂 (05_train_yolo_mps / run_pipeline --with-train),
+> 继承: 上游研究仓 shelf SDG 场景合成 + YOLO 臂 (05_train_yolo_mps / run_pipeline --with-train),
 > photo-dieline TDE 参数化包装资产。不另起炉灶。
 > 状态: **协议冻结, 执行未开始** (渲染语料 + 训练 + 评测 ≈ 数小时 MPS 预算)。
 
