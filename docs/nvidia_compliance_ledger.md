@@ -128,3 +128,21 @@ NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件�
   (BOM 哈希对旧 usdc)。发射器重跑刷新后复审计 **202/202** (liquor16/dairy2/legacy4/
   canonical20/variants60/tde100)。教训: **资产重生成必须重跑契约发射**, 审计的
   BOM 抽验通道正是此类陈旧的探测器。
+
+## M7 铰接资产与下游物理评测 (2026-11-27 补)
+
+回应外部评审攻击点①(无下游仿真证据)/③(293部件无关节):
+
+- shopping_cart 铰接化: 4 真滚动轮 (Y 轴圆盘, revolute ±360°) + 4 叉架
+  (锁定 revolute 焊接底盘) = 8 关节, root=frame_lo 挂 ArticulationRootAPI。
+  NVIDIA 原版验证器 PASS (铰接资产类), 全审计仍 202/202。
+- **pivot 约定修正**: 发射器 localPos1 原为 (0,0,0), 而部件顶点在资产坐标系
+  → 离原点铰点全部错位 (静态验证器不可见)。修正为 localPos0=localPos1=铰点
+  资产系坐标。教训: 关节正确性需要下游仿真才能暴露, 静态 Linter 盲区实证。
+- MuJoCo 下游评测 (scripts/mujoco_downstream_eval.py): 部件→MJCF (frame 合并
+  刚体, 轮=解析圆柱+hinge), 落地+四轮驱动 1200 步: **100% 四轮触地, 净位移
+  0.812 m, 轮速 21.2 rad/s, 最大穿透 1.198 mm, 零爆炸 → PASS**。
+- 评测器取证: mesh-hull 轮接触扛 111kg 车架时约束力失效整体脱离 (nefc 64→0),
+  解析圆柱+implicitfast 修复; MJCF 单位 bug (轮在 -186m 空转 300rad/s) 被
+  位移≈自由落体距离的量级对照当场抓出。下游评测即探测器, 与审计同哲学。
+- _fit_declared_dims 同步缩放 joint origin (G-F6 由构造满足的必要补丁)。

@@ -255,7 +255,7 @@ def export_parts_usdc(parts: list[dict], path: str | Path, mass_kg: float,
         jt.CreateBody1Rel().SetTargets([Sdf.Path(body_paths[part["name"]])])
         o_m = (np.asarray(j["origin"], float) - origin) * 1e-3
         jt.CreateLocalPos0Attr().Set(Gf.Vec3f(*o_m))
-        jt.CreateLocalPos1Attr().Set(Gf.Vec3f(0.0, 0.0, 0.0))
+        jt.CreateLocalPos1Attr().Set(Gf.Vec3f(*o_m))  # 两体共享资产系: 铰点同一坐标 (pivot 约定修正)
         jt.CreateLocalRot0Attr().Set(Gf.Quatf(1.0, 0, 0, 0))
         jt.CreateLocalRot1Attr().Set(Gf.Quatf(1.0, 0, 0, 0))
         jt.CreateAxisAttr().Set(tok)

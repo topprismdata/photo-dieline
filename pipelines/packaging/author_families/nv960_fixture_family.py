@@ -120,6 +120,9 @@ def _fit_declared_dims(parts, params):
         return parts
     for p in parts:
         p["verts_mm"] = [(x * sy, y * sy, z * sz) for (x, y, z) in p["verts_mm"]]
+        if p.get("joint"):
+            o = p["joint"]["origin"]
+            p["joint"]["origin"] = (o[0] * sy, o[1] * sy, o[2] * sz)
     return parts
 
 
@@ -167,10 +170,42 @@ def _build_raw(params: dict) -> list[dict]:
             P += _grid_bars(f"gxz{zi}", -bw / 2, -bw / 2, zz, bw / 2, bw / 2, gp, 1.2, steel, "x")
             P += _grid_bars(f"gyz{zi}", -bw / 2, -bw / 2, zz, bw / 2, bw / 2, gp, 1.2, steel, "y")
         P.append(_box("frame_lo", -bw / 2, -bw / 2, zb - 5, bw / 2, bw / 2, zb, steel))
+
+        def _cyl_y(name, r, y0, y1, mat, cx, cz, n=48):
+            """绕 Y 轴的横置圆盘 (滚动轮): 截面在 XZ 平面, 轴沿 Y。"""
+            v, tris = [], []
+            for k, yy in ((0, y0), (1, y1)):
+                base = len(v)
+                v.append((cx, yy, cz))
+                for i in range(n):
+                    a = 2 * math.pi * i / n
+                    v.append((cx + r * math.cos(a), yy, cz + r * math.sin(a)))
+                if k == 0:
+                    for i in range(n):
+                        tris.append([base, base + 1 + i, base + 1 + (i + 1) % n])
+                else:
+                    for i in range(n):
+                        tris.append([base, base + 1 + (i + 1) % n, base + 1 + i])
+            for i in range(n):
+                j = (i + 1) % n
+                tris.append([1 + i, 2 + n + j, 1 + j])
+                tris.append([1 + i, 2 + n + i, 2 + n + j])
+            return {"name": name, "verts_mm": v, "tris": tris, "material_id": mat}
+
+        # 真滚动轮: 圆盘立于 XZ 面 (轴沿 Y = 前进方向), 轮心 z=r 触地
+        rw = 42.0
         for sx, xn in ((-1, "l"), (1, "r")):
             for sy, yn in ((-1, "f"), (1, "b")):
-                P.append(_cyl(f"wheel_{xn}{yn}", 42, 0, 20, pp,
-                              cx=sx * (bw / 2 - 60), cy=sy * (bw / 2 - 60)))
+                wx, wy = sx * (bw / 2 - 60), sy * (bw / 2 - 60)
+                w = _cyl_y(f"wheel_{xn}{yn}", rw, wy - 20, wy + 20, pp, cx=wx, cz=rw)
+                w["joint"] = {"parent": f"fork_{xn}{yn}", "axis": (0, 1, 0),
+                              "origin": (wx, wy, rw), "limits_deg": (-360, 360)}
+                P.append(w)
+                # 叉架: 立板从轮轴到底盘 (锁定 revolute limits 0,0 = 焊接)
+                fk = _box(f"fork_{xn}{yn}", wx - 12, wy - 30, rw - 10, wx + 12, wy + 30, zb - 5, steel)
+                fk["joint"] = {"parent": "frame_lo", "axis": (0, 0, 1),
+                               "origin": (wx, wy, zb - 2), "limits_deg": (0, 0)}
+                P.append(fk)
         P.append(_box("handle", -bw / 2, -bw / 2 - 8, zb + bh, bw / 2, -bw / 2 + 4, params["H"], steel))
         # 载货 (使用态): 篮内 3 箱 + 顶挂 1 袋 — 顶全部钳到篮框上沿内 (随 H 参数化)
         zbase = zb + 10
