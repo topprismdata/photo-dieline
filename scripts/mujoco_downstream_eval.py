@@ -56,6 +56,9 @@ def build_mjcf(parts, cls):
         root_geoms.append(f'<geom name="{cls}_{p["name"]}" type="mesh" mesh="{cls}_{p["name"]}" '
                           f'density="{_mat_density(p["material_id"])}" '
                           f'contype="{root_col}" conaffinity="{root_col}" group="1"/>')
+    bodies = {}      # name -> joint+geom 内层 xml
+    parent_of = {}   # name -> 自由体父名 (链式 caster), 根自由体为 None
+    free_names_set = {p["name"] for p in free}
     for p in free:
         j = p["joint"]
         o_m = [v * 1e-3 for v in j["origin"]]
@@ -63,8 +66,7 @@ def build_mjcf(parts, cls):
         r = 0.042 if cls == "shopping_cart" else 0.25  # 解析替代: 轮圆柱 / 货架圆盘 (与网格同径)
         half = 0.02 if cls == "shopping_cart" else 0.005
         free_col = "1" if cls == "shopping_cart" else "0"  # 轮触地; 货架由铰点承载不碰地
-        children += (
-            f'<body name="{cls}_{p["name"]}" pos="0 0 0">'
+        bodies[p["name"]] = (
             f'<joint name="{cls}_{p["name"]}_j" type="hinge" axis="{ax}" '
             f'pos="{o_m[0]:.4f} {o_m[1]:.4f} {o_m[2]:.4f}" damping="0.002"/>'
             f'<geom name="{cls}_{p["name"]}" type="cylinder" size="{r} {half}" '
@@ -72,7 +74,17 @@ def build_mjcf(parts, cls):
             + ('euler="1.5707963 0 0" ' if cls == "shopping_cart" else "")
             + f'density="{_mat_density(p["material_id"])}" '
               f'solref="0.004 1" solimp="0.95 0.99 0.0001" '
-              f'contype="{free_col}" conaffinity="{free_col}" group="0"/></body>')
+              f'contype="{free_col}" conaffinity="{free_col}" group="0"/>')
+        parent_of[p["name"]] = j["parent"] if j["parent"] in free_names_set else None
+    # 嵌套: 自由体的父若也是自由体 → 作其子 body (所有体框架与资产系重合, pos 值不变)
+
+    def assemble(name):
+        kids = "".join(f'<body name="{cls}_{k}" pos="0 0 0">{assemble(k)}</body>'
+                       for k in bodies if parent_of.get(k) == name)
+        return bodies[name] + kids
+
+    children = "".join(f'<body name="{cls}_{n}" pos="0 0 0">{assemble(n)}</body>'
+                       for n in bodies if parent_of.get(n) is None)
     xml = f"""<mujoco model="nv960_{cls}_downstream">
   <compiler angle="radian" meshdir="."/>
   <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast"/>
@@ -87,7 +99,7 @@ def build_mjcf(parts, cls):
     </body>
   </worldbody>
   <actuator>
-    {''.join(f'<motor name="{p["name"]}_m" joint="{cls}_{p["name"]}_j" gear="1"/>' for p in free)}
+    {''.join(f'<motor name="{p["name"]}_m" joint="{cls}_{p["name"]}_j" gear="1"/>' for p in free if not p["name"].startswith("fork"))}
   </actuator>
 </mujoco>"""
     return xml, [p["name"] for p in free]
@@ -105,14 +117,18 @@ def contacts(model, data, prefix):
     return nwheel, -pen if pen < 0 else 0.0
 
 
-def run_case(cls, ctrl_val, settle, drive, q_start=None):
+def run_case(cls, ctrl_val, settle, drive, q_start=None, drive_filter=None):
     mod = load_family("pipelines/packaging/author_families/nv960_fixture_family.py")
-    parts = mod.build_parts(dict(mod.DEFAULTS[cls]))
+    p = dict(mod.DEFAULTS[cls])
+    p["class_id"] = cls  # 分发字段: DEFAULTS 不携带, 缺失会静默错建成首类 (假绿教训)
+    parts = mod.build_parts(p)
     xml, free_names = build_mjcf(parts, cls)
     (OUT / f"{cls}.xml").write_text(xml)
     model = mujoco.MjModel.from_xml_path(str(OUT / f"{cls}.xml"))
     data = mujoco.MjData(model)
-    aids = [model.actuator(f"{n}_m").id for n in free_names]
+    aids = [model.actuator(f"{n}_m").id for n in free_names
+            if (drive_filter is None or any(n.startswith(f) for f in drive_filter))
+            and mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, f"{n}_m") >= 0]
     grounded_pct, max_pen, bad = [], 0.0, 0
     for t in range(settle + drive):
         if t >= settle:
@@ -129,14 +145,25 @@ def run_case(cls, ctrl_val, settle, drive, q_start=None):
 
 
 def case_cart():
-    model, data, free, g, max_pen, bad, settle, drive = run_case("shopping_cart", 0.6, 300, 900)
+    model, data, free, g, max_pen, bad, settle, drive = run_case("shopping_cart", 0.6, 300, 900,
+                                                                 drive_filter=("wheel_lb", "wheel_rb"))
     pct = sum(1 for x in g if x >= 3) / drive
     disp = float(np.linalg.norm(data.qpos[:3]))  # 根位移 (起点≈0)
-    spins = [float(abs(data.qvel[model.jnt_dofadr[mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, f"shopping_cart_{n}_j")]])) for n in free]
+    yaw = []
+    for n in ("fork_lf", "fork_rf"):
+        jid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, f"shopping_cart_{n}_j")
+        yaw.append(round(float(abs(data.qpos[model.jnt_qposadr[jid]])), 3))
+    spins = []
+    for n in free:
+        jid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, f"shopping_cart_{n}_j")
+        assert jid >= 0, f"joint {n} not in model (错建/错名 = 假绿)"
+        spins.append(float(abs(data.qvel[model.jnt_dofadr[jid]])))
     rep = {"asset": "shopping_cart", "scenario": "roll", "steps": settle + drive,
            "wheels_grounded_pct": round(pct * 100, 1), "net_displacement_m": round(disp, 3),
            "wheel_spin_rad_s": [round(s, 1) for s in spins],
+           "caster_yaw_rad": yaw,
            "max_penetration_mm": round(max_pen * 1e3, 3), "explosions": bad}
+    assert all(n.startswith(("wheel_", "fork_")) for n in free) and sum(1 for n in free if n.startswith("wheel_")) == 4, f"cart 场景自由体异常: {free} (错建)"
     rep["verdict"] = "PASS" if (pct > 0.8 and disp > 0.1 and max(spins) > 2 and bad == 0
                                 and max_pen * 1e3 < 5) else "FAIL"
     return rep
@@ -148,12 +175,14 @@ def case_stand():
     angs = []
     for n in free:
         jid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, f"rotating_display_stand_{n}_j")
+        assert jid >= 0, f"joint {n} not in model (错建/错名 = 假绿)"
         angs.append(float(abs(data.qpos[model.jnt_qposadr[jid]])))
     qa = float(np.abs(data.qacc).max())
     rep = {"asset": "rotating_display_stand", "scenario": "spin", "steps": settle + drive,
            "shelf_rotation_rad": [round(a, 2) for a in angs],
            "max_penetration_mm": round(max_pen * 1e3, 3), "explosions": bad,
            "final_qacc_max": round(qa, 1)}
+    assert all(n.startswith("shelf_") for n in free), f"stand 场景混入非货架自由体: {free} (错建)"
     rep["verdict"] = "PASS" if (max(angs) > 2.0 and bad == 0 and max_pen * 1e3 < 5) else "FAIL"
     return rep
 

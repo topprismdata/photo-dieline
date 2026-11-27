@@ -193,18 +193,23 @@ def _build_raw(params: dict) -> list[dict]:
             return {"name": name, "verts_mm": v, "tris": tris, "material_id": mat}
 
         # 真滚动轮: 圆盘立于 XZ 面 (轴沿 Y = 前进方向), 轮心 z=r 触地
+        # 前轮 caster 拖距: 轮心相对叉架枢轴前移 +40mm (沿 +Y 运动向), 后轮锁定直驱
         rw = 42.0
         for sx, xn in ((-1, "l"), (1, "r")):
             for sy, yn in ((-1, "f"), (1, "b")):
                 wx, wy = sx * (bw / 2 - 60), sy * (bw / 2 - 60)
-                w = _cyl_y(f"wheel_{xn}{yn}", rw, wy - 20, wy + 20, pp, cx=wx, cz=rw)
+                wcy = wy + (40.0 if yn == "f" else 0.0)  # caster trail
+                w = _cyl_y(f"wheel_{xn}{yn}", rw, wcy - 20, wcy + 20, pp, cx=wx, cz=rw)
                 w["joint"] = {"parent": f"fork_{xn}{yn}", "axis": (0, 1, 0),
-                              "origin": (wx, wy, rw), "limits_deg": (-360, 360)}
+                              "origin": (wx, wcy, rw), "limits_deg": (-360, 360)}
                 P.append(w)
-                # 叉架: 立板从轮轴到底盘 (锁定 revolute limits 0,0 = 焊接)
-                fk = _box(f"fork_{xn}{yn}", wx - 12, wy - 30, rw - 10, wx + 12, wy + 30, zb - 5, steel)
+                # 叉架: 前叉解锁 Z 轴万向 swivel (真购物车 caster), 后叉锁定焊接
+                # 板长须覆盖拖距后的轮心 (G-F6 origin-in-parent)
+                fy0, fy1 = (wy - 30, wy + 70) if yn == "f" else (wy - 30, wy + 30)
+                fk = _box(f"fork_{xn}{yn}", wx - 12, fy0, rw - 10, wx + 12, fy1, zb - 5, steel)
                 fk["joint"] = {"parent": "frame_lo", "axis": (0, 0, 1),
-                               "origin": (wx, wy, zb - 2), "limits_deg": (0, 0)}
+                               "origin": (wx, wy, zb - 2),
+                               "limits_deg": (-360, 360) if yn == "f" else (0, 0)}
                 P.append(fk)
         P.append(_box("handle", -bw / 2, -bw / 2 - 8, zb + bh, bw / 2, -bw / 2 + 4, params["H"], steel))
         # 载货 (使用态): 篮内 3 箱 + 顶挂 1 袋 — 顶全部钳到篮框上沿内 (随 H 参数化)
