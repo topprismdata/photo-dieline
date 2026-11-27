@@ -1,0 +1,12 @@
+{
+ "object_id": "tpd_beer_can_500",
+ "category_id": "beverage_liquor",
+ "category": "beer_can_500",
+ "title": "beer_can_500",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "provenance": "parametric"
+}

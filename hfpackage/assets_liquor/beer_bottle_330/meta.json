@@ -1,0 +1,12 @@
+{
+ "object_id": "tpd_beer_bottle_330",
+ "category_id": "beverage_liquor",
+ "category": "beer_bottle_330",
+ "title": "beer_bottle_330",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "provenance": "parametric"
+}

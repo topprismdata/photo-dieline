@@ -1,0 +1,37 @@
+{
+ "format_version": "1.0",
+ "package_id": "simready.hf.topprism.photo-dieline.vodka_bottle_700.1.0.0",
+ "license": "CC-BY-4.0",
+ "metadata": [
+  {
+   "name": "com.nvidia.simready.conformance.Package-Candidate@1.3.0.json",
+   "hash": {
+    "sha256": "90c7672f510d2c601b25d9b7790c8bb5641d63fd5b4d637244edd35eb1dbc9f2"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.conformance.Package@1.0.0.json",
+   "hash": {
+    "sha256": "e67c4f0c1b79df564fa9ae15f9d58b64b191ada40b57402bc132b161893ca2f8"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.packaging.bom.json",
+   "hash": {
+    "sha256": "1e124073bcd3c16cad98fe945844618f44eddb720a26f738e1d64b2ed71d5931"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.root_usds.json",
+   "hash": {
+    "sha256": "0a56dedfa07bdf4f9b1ac5a25780efa9ba7b6d28e5ac03dae2e7b80bab1d992d"
+   }
+  }
+ ],
+ "content_hash": {
+  "sha256": "ba26f6919eb38b123258597fbf0a834ce6eb2f9b254039dbb0aaad2a6cfebb61"
+ },
+ "package_hash": {
+  "sha256": "59ce6f33a26a3ad1173a6685b34b879db9696d0656bc3c6eb89406af454cebd7"
+ }
+}

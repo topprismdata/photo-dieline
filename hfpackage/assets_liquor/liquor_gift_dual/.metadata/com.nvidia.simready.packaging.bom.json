@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 268,
+   "hash": {
+    "sha256": "d1e830da31d1799b47541df33861e385e6a51862959fe82afc56f30731fb1e82"
+   }
+  },
+  {
+   "relative_path": "renders/liquor_gift_dual.png",
+   "size": 269189,
+   "hash": {
+    "sha256": "722ca843ecd2bd652d0e741cd28843a78dd6a20af115d823f8d0125755cdafcc"
+   }
+  },
+  {
+   "relative_path": "simready_usd/liquor_gift_dual.usdc",
+   "size": 5074,
+   "hash": {
+    "sha256": "dc551432b96984e31f0069ba2fc48bdba29524d5f30ac4e0bc1192e0936ba041"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1421,
+   "hash": {
+    "sha256": "57ec32d4a77189dd1de0685de5e04a2b4253b142d5d7219d21c877088332c43e"
+   }
+  }
+ ]
+}

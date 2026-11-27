@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 271,
+   "hash": {
+    "sha256": "a24d285deaee277ef4127a176814d2453c87b210cc700dc50ed81778d817038a"
+   }
+  },
+  {
+   "relative_path": "renders/baijiu_bottle_500.png",
+   "size": 258306,
+   "hash": {
+    "sha256": "7c953a8b137f8cac12ba6eadd33881d808ddc85bae885644695850691c3c9b87"
+   }
+  },
+  {
+   "relative_path": "simready_usd/baijiu_bottle_500.usdc",
+   "size": 29145,
+   "hash": {
+    "sha256": "52c920cb7fcc4471575cdeb1ec7ced243fc694c69323e7264c32781888a5c343"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1464,
+   "hash": {
+    "sha256": "0558c0eaa5e6d197980ea560dc92d0e6fb2331f564694824c3f9d428c497ce4d"
+   }
+  }
+ ]
+}

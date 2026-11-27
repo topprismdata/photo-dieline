@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 265,
+   "hash": {
+    "sha256": "02bad1258a103feb95c1788d35c0bad25ca3178a6c0798f447affa3d56b37c2b"
+   }
+  },
+  {
+   "relative_path": "renders/pet_bottle_1500.png",
+   "size": 247428,
+   "hash": {
+    "sha256": "906103c204f22ffd83e2b362f26cfb77a1ccc164b1980ccc930380c228051219"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1196,
+   "hash": {
+    "sha256": "f3d398c90ca9fff53fecc0bda01ca36cb60041b6b689c80b0c5d4bf9eb61cc0a"
+   }
+  },
+  {
+   "relative_path": "simready_usd/pet_bottle_1500.usdc",
+   "size": 35114,
+   "hash": {
+    "sha256": "6f4ce4e04312a12dc6ba19240e24b10d258b46d4bf4035d8541cf87f0fe2c5bb"
+   }
+  }
+ ]
+}

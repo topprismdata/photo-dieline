@@ -28,3 +28,18 @@ generic/newton FAIL / physx PASS (R168 shelf 对照实验, 见 usdcraft_study.md
 - G-F4 尺寸对账门禁 (声明 mm vs 实测 bbox, 容差 max(1mm, 1%)) 逐件仲裁参数真实性 —
   变体扫实截 25 个假参数变体; NVIDIA 10K 无逐件对账 (bench 抽检 60+40 件)
 - 参数族产能: 1 次 authoring → N 件验证背书实例, 编译+门禁+导出 ~2.0s/件
+
+## 打包契约对齐 (2026-11-27)
+
+对齐 NVIDIA USDCraft-10K per-asset 打包 schema (8 文件契约):
+meta.json / com.nvidia.simready.packaging.json / .metadata/{root_usds, packaging.bom,
+conformance.Package@1.0.0, conformance.Package-Candidate@1.3.0}.json。
+发射器: `scripts/emit_nvidia_package.py` (hfpackage 11 资产)。
+
+- **conformance fail-closed**: FET_031/033 pass 标志来自发射时 NVIDIA 原版验证器实跑判决,
+  非缓存声明; 验证失败则 passed=false 并带错误串
+- 哈希语义 (我方显式定义, 其内部链序未公开):
+  content_hash = BOM 文件集按 relative_path 排序的 sha256 摘要链;
+  package_hash = 去除 package_hash 键的 canonical packaging.json 的 sha256 (自指排除)
+- 独立复核器同口径复验: BOM 抽样哈希/content_hash/package_hash 11/11 OK
+- 证据: docs/nvidia_package_emit_results.json

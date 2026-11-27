@@ -1,0 +1,37 @@
+{
+ "format_version": "1.0",
+ "package_id": "simready.hf.topprism.photo-dieline.beer_bottle_330.1.0.0",
+ "license": "CC-BY-4.0",
+ "metadata": [
+  {
+   "name": "com.nvidia.simready.conformance.Package-Candidate@1.3.0.json",
+   "hash": {
+    "sha256": "6ae698cd738f680414a9b6f6ebb62741d9236f0d24cbea5aadf8336f72622371"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.conformance.Package@1.0.0.json",
+   "hash": {
+    "sha256": "e67c4f0c1b79df564fa9ae15f9d58b64b191ada40b57402bc132b161893ca2f8"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.packaging.bom.json",
+   "hash": {
+    "sha256": "e4a4e06e14c8a3697a1d23117a6d28b5a69d74b7d68628ecaffe14ea137eb0c0"
+   }
+  },
+  {
+   "name": "com.nvidia.simready.root_usds.json",
+   "hash": {
+    "sha256": "0f8c6a414146622ec4faca831960d1f355bb5b61bd23b32664b6625753a01f19"
+   }
+  }
+ ],
+ "content_hash": {
+  "sha256": "58588f77d6d36a0b670c40c8b4e7fd4ad80ecdb03c43a27cebf7af6d57b76f3a"
+ },
+ "package_hash": {
+  "sha256": "6cbcad41b70e92b8dc43930d3116812964b7932835f7d1146357e8a4895e2efe"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 268,
+   "hash": {
+    "sha256": "6fa9179feaf4f6131da8cc9cea954bdd88f54d9d04ba5abe4650b22f27033605"
+   }
+  },
+  {
+   "relative_path": "renders/vodka_bottle_700.png",
+   "size": 255902,
+   "hash": {
+    "sha256": "78b8369177af43edcbe7d2cf692605482c64a188e9e4dec8c4dff0b89a931786"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1459,
+   "hash": {
+    "sha256": "91c8978cde49661e966a7b2425ad2160f7f83106102f5b97966c9aca9c3f358b"
+   }
+  },
+  {
+   "relative_path": "simready_usd/vodka_bottle_700.usdc",
+   "size": 26833,
+   "hash": {
+    "sha256": "16eaf2ceb0726907e68934bf3c94b40248d1c190547a0aa0503eedac94d7c31d"
+   }
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+ "object_id": "tpd_liquor_gift_dual",
+ "category_id": "beverage_liquor",
+ "category": "liquor_gift_dual",
+ "title": "liquor_gift_dual",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "provenance": "parametric"
+}

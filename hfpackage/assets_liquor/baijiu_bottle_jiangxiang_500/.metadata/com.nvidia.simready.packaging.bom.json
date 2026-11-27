@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 304,
+   "hash": {
+    "sha256": "31df8e246c63df81b214740201c22e29981cc1f90b0eb6ce75edf3592a0464ab"
+   }
+  },
+  {
+   "relative_path": "renders/baijiu_bottle_jiangxiang_500.png",
+   "size": 249268,
+   "hash": {
+    "sha256": "64a6206e5a8e4593d9d98000d27b7f197ddbee1e0dc3869e6b8ef909625c3d70"
+   }
+  },
+  {
+   "relative_path": "simready_usd/baijiu_bottle_jiangxiang_500.usdc",
+   "size": 25197,
+   "hash": {
+    "sha256": "5751918de0491ff23d1a00aabc4fc63f16c335e173061d6682f4974101979333"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1213,
+   "hash": {
+    "sha256": "4afc7e3eca87cff11f0f9b4edc5c8c29a0e59defb7724df7fd43b75a0c422e6c"
+   }
+  }
+ ]
+}

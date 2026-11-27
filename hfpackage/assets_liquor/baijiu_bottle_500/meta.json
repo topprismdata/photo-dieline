@@ -1,0 +1,12 @@
+{
+ "object_id": "tpd_baijiu_bottle_500",
+ "category_id": "beverage_liquor",
+ "category": "baijiu_bottle_500",
+ "title": "baijiu_bottle_500",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "provenance": "parametric"
+}

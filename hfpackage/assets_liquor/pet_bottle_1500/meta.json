@@ -1,0 +1,12 @@
+{
+ "object_id": "tpd_pet_bottle_1500",
+ "category_id": "beverage_liquor",
+ "category": "pet_bottle_1500",
+ "title": "pet_bottle_1500",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "provenance": "parametric"
+}

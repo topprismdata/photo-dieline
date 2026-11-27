@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 265,
+   "hash": {
+    "sha256": "2f5e12e07bf717d8090b2a1ac92c5c4cc5235aa8885071e60a2b3d8458131c8f"
+   }
+  },
+  {
+   "relative_path": "renders/wine_bottle_750.png",
+   "size": 255413,
+   "hash": {
+    "sha256": "c73bf820c7694a3efbcda7ada8fe462d185570ad2734e9208a9a67778a79896a"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1471,
+   "hash": {
+    "sha256": "524be4d7b9ded425065b02a447b7ae8cfa2c6393d5c99f33e61a4217a651199f"
+   }
+  },
+  {
+   "relative_path": "simready_usd/wine_bottle_750.usdc",
+   "size": 32993,
+   "hash": {
+    "sha256": "2765407d6c41663c1e2e073a2665c1f2a1b4217c3d928ad8a63acddc3947cec5"
+   }
+  }
+ ]
+}

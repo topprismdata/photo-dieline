@@ -1,0 +1,33 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 265,
+   "hash": {
+    "sha256": "74db102cca991fe3896a22db1a6d2e53a9a60b380818654647db3f6676daf428"
+   }
+  },
+  {
+   "relative_path": "renders/beer_bottle_330.png",
+   "size": 262880,
+   "hash": {
+    "sha256": "bd127418587761f3274c1a1dfa02e554c0d9c0720ca5301539da4fe541813a51"
+   }
+  },
+  {
+   "relative_path": "simready_usd/beer_bottle_330.usdc",
+   "size": 32993,
+   "hash": {
+    "sha256": "7bba11f67aefd08c7e18a39bce39745b6cbaa16ce873f4b05f558a57de14ac08"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1459,
+   "hash": {
+    "sha256": "0f3e6a394b5649986d000ffefdba05b2d2302a5659058aee271029bcc17ba786"
+   }
+  }
+ ]
+}
