@@ -3,7 +3,9 @@
   "finding": "prism n12 家族折叠/拓扑闭合数值仅特定 side 窄带成立 (family-level latent defect)",
   "date": "2026-11-28",
   "workline": "WP-FG-01 家族异常治理证据",
-  "discovered_via": "WP1-P10-YCB 通道A census"
+  "discovered_via": "WP1-P10-YCB 通道A census",
+  "superseded_by": "fg004_closure_report.md (R23-A: CALLER_CONTRACT_VIOLATION)",
+  "status": "SUPERSEDED_RETAINED (原错误结论保留不删改)"
  },
  "defect_scope": {
   "classes": [

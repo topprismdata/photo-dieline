@@ -1,0 +1,17 @@
+{
+ "_meta": {
+  "source": "R23-A §二 两处口径更正",
+  "date": "2026-11-28"
+ },
+ "diameter_definition": {
+  "issue": "n12: D_vertex(外接圆径)=s/sin(15°) vs D_face(对边距)=s/tan(15°), 比值 1.03528 (3.53% > DIM-01 1% 容差)",
+  "pilot10_convention": "side=Ø·tan(π/12) → 编译输入 Ø 语义 = **对边距 (D_face)**: 棱柱面对面宽 == 官方 Ø; 外接圆径 = Ø/cos(15°) = 1.035·Ø",
+  "implication": "外接圆径比实物圆罐直径大 3.53% (棱柱外接圆为包络上界); DIM-01 排序对照实测通过因圆柱 Ø 取双近等轴均值=对边距",
+  "action": "登记为 prism_dust 契约字段 known_limitations; 契约试点 parameter_schema 明确 Ø=D_face"
+ },
+ "pass_band_formula": {
+  "issue": "幻影带理论区间应为 |s/2-30|≤0.2 → [59.6, 60.4], 非观测 [59.9,60.1]",
+  "resolution": "观测范围=离散实验点集, 非数学边界; 实际门禁公式 = closure_checks 判据 worst_residual ≤ TOL_MM=0.2mm (qa.pipeline), 幻影带由 n=4+默认tuck 的 apothem 几何决定",
+  "action": "研究表述收口: 不再将离散观测写为严格数学边界"
+ }
+}
