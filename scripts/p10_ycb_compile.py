@@ -40,10 +40,13 @@ def params_for(it):
         dia = (d[1] + d[2]) / 2.0
         h = d[0]
         side = dia * math.tan(math.pi / N_PRISM)
-        return "prism_dust_n12", {"n": N_PRISM, "side": round(side, 3), "h": float(h), "_approx": "bottle→n12棱柱, Ø=横截面均值"}
+        return "prism_dust_n12", {"n": N_PRISM, "side": round(side, 3), "h": float(h),
+                                   "tuck_depth": round(dia / 2.0, 3),  # FG-004: 契约 tuck_depth=apothem(n,side)=Ø/2
+                                   "_approx": "bottle→n12棱柱, Ø=横截面均值"}
     dia, h = it["dims"]
     side = dia * math.tan(math.pi / N_PRISM)  # 外接圆径 == 官方 Ø (FZ05 约定)
-    return "prism_dust_n12", {"n": N_PRISM, "side": round(side, 3), "h": float(h)}
+    return "prism_dust_n12", {"n": N_PRISM, "side": round(side, 3), "h": float(h),
+                               "tuck_depth": round(dia / 2.0, 3)}  # FG-004: 契约 tuck_depth=apothem(n,side)=Ø/2
 
 def main():
     out_root = Path("output/pilot10_ycb/compiled")

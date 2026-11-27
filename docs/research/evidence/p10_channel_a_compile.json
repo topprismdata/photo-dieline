@@ -11,13 +11,14 @@
    "params": {
     "n": 12,
     "side": 20.096,
-    "h": 250.0
+    "h": 250.0,
+    "tuck_depth": 37.5
    },
-   "status": "QA_FAIL",
+   "status": "OK",
    "gates": {
     "G02": "PASS",
     "G03": "PASS",
-    "G04": "FAIL",
+    "G04": "PASS",
     "G05": "PASS",
     "G06": "PASS",
     "G07": "PASS",
@@ -25,9 +26,7 @@
     "G09": "PASS",
     "G10": "PASS"
    },
-   "gate_fails": [
-    "G04"
-   ],
+   "gate_fails": [],
    "stage_dims_m": [
     0.074999,
     0.074999,
@@ -71,7 +70,7 @@
     }
    },
    "nvsdk_pass": true,
-   "usdc_sha256": "230fa53c5f6a96f9c5076c36a0d9ffaacbdf348967d5a35d0f248693f8636448"
+   "usdc_sha256": "d6b8884382ceb8cbbe0b9845e44d3b08c55577a1b151465c161221a4666a04bc"
   },
   {
    "id": "002_master_chef_can",
@@ -79,13 +78,14 @@
    "params": {
     "n": 12,
     "side": 27.331,
-    "h": 139.0
+    "h": 139.0,
+    "tuck_depth": 51.0
    },
-   "status": "QA_FAIL",
+   "status": "OK",
    "gates": {
     "G02": "PASS",
     "G03": "PASS",
-    "G04": "FAIL",
+    "G04": "PASS",
     "G05": "PASS",
     "G06": "PASS",
     "G07": "PASS",
@@ -93,9 +93,7 @@
     "G09": "PASS",
     "G10": "PASS"
    },
-   "gate_fails": [
-    "G04"
-   ],
+   "gate_fails": [],
    "stage_dims_m": [
     0.102001,
     0.102001,
@@ -139,7 +137,7 @@
     }
    },
    "nvsdk_pass": true,
-   "usdc_sha256": "86ddfd6a1ec2b7d11933fc773456d190da62e91d72957378060389a61f49fba9"
+   "usdc_sha256": "4329f10b6b409685d626203d504503bb17155aa1c8e185b6c4ab10bdfb568473"
   },
   {
    "id": "003_cracker_box",
@@ -279,13 +277,14 @@
    "params": {
     "n": 12,
     "side": 17.685,
-    "h": 101.0
+    "h": 101.0,
+    "tuck_depth": 33.0
    },
-   "status": "QA_FAIL",
+   "status": "OK",
    "gates": {
     "G02": "PASS",
     "G03": "PASS",
-    "G04": "FAIL",
+    "G04": "PASS",
     "G05": "PASS",
     "G06": "PASS",
     "G07": "PASS",
@@ -293,9 +292,7 @@
     "G09": "PASS",
     "G10": "PASS"
    },
-   "gate_fails": [
-    "G04"
-   ],
+   "gate_fails": [],
    "stage_dims_m": [
     0.066001,
     0.066001,
@@ -339,7 +336,7 @@
     }
    },
    "nvsdk_pass": true,
-   "usdc_sha256": "e575cf233edc2300962f3af98613bd73cd931f15d2356e429c03690644336c7f"
+   "usdc_sha256": "81db810ecf98062bf3ce55aba5b2cd0dac62d53225edf5924e49a9df8c06c2cc"
   },
   {
    "id": "006_mustard_bottle",
@@ -348,13 +345,14 @@
     "n": 12,
     "side": 18.087,
     "h": 175.0,
+    "tuck_depth": 33.75,
     "_approx": "bottle\u2192n12\u68f1\u67f1, \u00d8=\u6a2a\u622a\u9762\u5747\u503c"
    },
-   "status": "QA_FAIL",
+   "status": "OK",
    "gates": {
     "G02": "PASS",
     "G03": "PASS",
-    "G04": "FAIL",
+    "G04": "PASS",
     "G05": "PASS",
     "G06": "PASS",
     "G07": "PASS",
@@ -362,9 +360,7 @@
     "G09": "PASS",
     "G10": "PASS"
    },
-   "gate_fails": [
-    "G04"
-   ],
+   "gate_fails": [],
    "stage_dims_m": [
     0.067502,
     0.067502,
@@ -408,7 +404,7 @@
     }
    },
    "nvsdk_pass": true,
-   "usdc_sha256": "970b6a83010af2ed90c600e3a50f1bf1db8bca58e7008a5ab0e33617cff56fbf"
+   "usdc_sha256": "4830d02f0b5c12ca57408cc6ada83ea3ebbc8e88f2c1dc3733d8e3e294ae60e5"
   },
   {
    "id": "007_tuna_fish_can",
@@ -416,13 +412,14 @@
    "params": {
     "n": 12,
     "side": 22.776,
-    "h": 33.0
+    "h": 33.0,
+    "tuck_depth": 42.5
    },
-   "status": "QA_FAIL",
+   "status": "OK",
    "gates": {
     "G02": "PASS",
     "G03": "PASS",
-    "G04": "FAIL",
+    "G04": "PASS",
     "G05": "PASS",
     "G06": "PASS",
     "G07": "PASS",
@@ -430,9 +427,7 @@
     "G09": "PASS",
     "G10": "PASS"
    },
-   "gate_fails": [
-    "G04"
-   ],
+   "gate_fails": [],
    "stage_dims_m": [
     0.085001,
     0.085001,
@@ -476,7 +471,7 @@
     }
    },
    "nvsdk_pass": true,
-   "usdc_sha256": "5421c3b65e379093b1c9cd109dc8263b3b40e6030bc054c0126499b7a680c230"
+   "usdc_sha256": "4bada9f49f06a601b75f2b7ca4af1a9f675456531d952610eb6751cc6aa9dcb5"
   },
   {
    "id": "008_pudding_box",

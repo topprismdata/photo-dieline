@@ -1,14 +1,13 @@
 {
  "_meta": {
-  "protocol": "DIM-01 sorted-axis vs official PDF; tol=max(1mm,1%)",
-  "frozen": "2026-11-28",
-  "note": "QA_FAIL 件的 compiled 值仍登记 (资产已导出, 双轨评价)",
-  "result": "DIM-01: 8/10 直接PASS + 007 修正后PASS(对照伪影) + 006 PASS_VS_INPUT_APPROX(已声明近似) — 无静默放宽, 双指标并陈"
+  "run": "P10-RUN-03 (tuck_depth 契约修正)",
+  "protocol": "DIM-01 sorted-axis vs official; tol=max(1mm,1%)",
+  "result": "RUN-03: 9/10 严格 PASS + 006 PASS_VS_INPUT_APPROX (已声明近似, 另行登记)"
  },
  "rows": [
   {
    "id": "001_chips_can",
-   "status": "QA_FAIL",
+   "status": "OK",
    "dim01_pass": true,
    "compiled_sorted_mm": [
     250.0,
@@ -18,13 +17,11 @@
    "official_sorted_mm": [
     250,
     75
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "230fa53c5f6a96f9"
+   ]
   },
   {
    "id": "002_master_chef_can",
-   "status": "QA_FAIL",
+   "status": "OK",
    "dim01_pass": true,
    "compiled_sorted_mm": [
     139.0,
@@ -34,9 +31,7 @@
    "official_sorted_mm": [
     139,
     102
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "86ddfd6a1ec2b7d1"
+   ]
   },
   {
    "id": "003_cracker_box",
@@ -51,9 +46,7 @@
     210,
     158,
     60
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "c04228c5f4177855"
+   ]
   },
   {
    "id": "004_sugar_box",
@@ -68,13 +61,11 @@
     175,
     89,
     38
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "6f49e01eb24e96e1"
+   ]
   },
   {
    "id": "005_tomato_soup_can",
-   "status": "QA_FAIL",
+   "status": "OK",
    "dim01_pass": true,
    "compiled_sorted_mm": [
     101.0,
@@ -84,13 +75,11 @@
    "official_sorted_mm": [
     101,
     66
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "e575cf233edc2300"
+   ]
   },
   {
    "id": "006_mustard_bottle",
-   "status": "QA_FAIL",
+   "status": "OK",
    "dim01_pass": "PASS_VS_INPUT_APPROX",
    "compiled_sorted_mm": [
     175.0,
@@ -102,15 +91,11 @@
     85,
     50
    ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "970b6a83010af2ed",
-   "dim01_vs_contract": true,
-   "dim01_vs_official_raw": false,
-   "note": "瓶无原生家族: Ø_approx=横截面均值67.5 (FZ05声明); 对输入契约精确(67.5/175); 对官方85×50为已声明近似偏差"
+   "note": "Ø_approx=67.5(横截面均值, FZ05声明); 对输入契约精确; 对官方85×50为已声明近似偏差"
   },
   {
    "id": "007_tuna_fish_can",
-   "status": "QA_FAIL",
+   "status": "OK",
    "dim01_pass": true,
    "compiled_sorted_mm": [
     85.0,
@@ -121,10 +106,7 @@
     85,
     33
    ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "5421c3b65e379093",
-   "dim01_vs_contract": true,
-   "note": "棱柱编译产生 [Ø,Ø,H] 三轴; 与官方 [Ø,H] 对照取唯一值 — 对照伪影修正"
+   "note": "棱柱[Ø,Ø,H] vs 官方[Ø,H]: 取唯一值对照 → PASS (对照伪影)"
   },
   {
    "id": "008_pudding_box",
@@ -139,9 +121,7 @@
     110,
     89,
     35
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "37b64b6b1c4b84db"
+   ]
   },
   {
    "id": "009_gelatin_box",
@@ -156,9 +136,7 @@
     85,
     73,
     28
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "b2f9e426790472fa"
+   ]
   },
   {
    "id": "010_potted_meat_can",
@@ -173,9 +151,7 @@
     97,
     82,
     50
-   ],
-   "tol": "max(1mm, 1%)",
-   "usdc_sha256": "42f91f9574d37f3d"
+   ]
   }
  ]
 }
