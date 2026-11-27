@@ -77,3 +77,10 @@ meta 完整性 + 双缩略图齐备} → `docs/nvidia_full_audit_2026-11-27.json
 物理消费字段): emitter 补质量加权 COM (来自 MassAPI authored 属性, 即 COM 修复会话
 写入的有限值), 修 emitter 静默 except 吞 NameError (模块级缺 UsdPhysics 导入)。
 复审计: **meta_com 170/170, overall 170/170 PASS**。
+
+## 10K 规模抽检 (2026-11-27)
+
+10K 生产构建 (9,386 件 GREEN, 我方门禁) 的 NVIDIA 原版验证器随机抽检
+(seed=42, 分层覆盖各家族): n=60 → 60/60, **n=300 → 300/300 PASS** (3.06s)。
+产能叙事升级: 10K 级产线获工具链背书 (此前仅我方门禁绿)。
+证据脚本可复现: 抽样 seed 固定, 验证器实跑。
