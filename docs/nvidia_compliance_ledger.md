@@ -207,3 +207,11 @@ NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件�
   **202/202 PASS (16.2s)**, 静置穿透 p50 0.035 / max 0.044mm, 零失败。
 - Gemini P0 统计契约就此精确等于精选语料全量: 静态 202/202 (原版验证器) 与
   动态 202/202 (MuJoCo 落体静置) 双 202 对齐。
+
+## M7.7 P1 平台门判定 (2026-11-27 补)
+
+- Isaac Sim pip 安装实测: darwin/arm64 上元数据生成失败 — isaacsim 官方轮子
+  仅 Linux x86_64 (PyPI), **macOS 无原生 Isaac Sim**。
+- P1 (同源 PhysX 动态验证) 由此从「许可门」改判「平台门」: 需 Linux/Windows
+  机器执行 (远程服务器或未来 Linux 盒)。判定依据 = pip 实测输出, 非推测。
+- MuJoCo 动态统计契约 (202/202 + 双场景) 维持为当前机器上的动态证据层。
