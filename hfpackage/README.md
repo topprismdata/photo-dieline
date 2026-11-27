@@ -62,12 +62,13 @@ Therefore:
 Per-asset validation status and evidence (`metadata.json` in each beverage_liquor asset
 directory) should be consulted before using assets in a specific simulation or research task.
 
-## Asset families (v0.6, shipped in this dataset)
+## Asset families (v0.7, shipped in this dataset)
 
 | Domain | Family | Classes | Validation |
 |---|---|---|---|
 | Liquor & beverage | beverage_liquor | 16 (beer bottles 330/500, can 500, baijiu ×3 profiles, wine ×2, whisky ×3, vodka ×2, PET 500/1500, gift box) | G-F1..F7 pass · usdc · spec 16/16 · **NVIDIA validator 16/16** |
-| Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc (included in the 175 NVIDIA-validated) |
+| Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc (included in the 176 NVIDIA-validated) |
+| Dairy | dairy | 1 (yogurt cup 160, PP cup + foil seal) | G-F1..F7 pass · usdc · spec 1/1 · **NVIDIA validator PASS** |
 
 Also in the repository (not shipped as USD in this dataset version): parametric paper-packaging
 families (gable/clv/cone, TDE engine, ~25 variants with a 5010-sample training corpus) and
