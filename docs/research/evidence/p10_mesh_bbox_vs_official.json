@@ -1,0 +1,510 @@
+{
+ "_meta": {
+  "note": "\u9010\u53d8\u4f53\u7f51\u683c\u5b9e\u6d4b bbox vs \u5b98\u65b9PDF; m\u2192mm \u81ea\u52a8; \u5706\u67f1\u53d6 \u00d8=xy\u5747\u503c H=z",
+  "frozen": "2026-11-28",
+  "unit_assumption": "YCB obj \u5355\u4f4d=\u7c73"
+ },
+ "items": [
+  {
+   "obj": "001_chips_can",
+   "shape": "cylinder",
+   "official_mm": [
+    75,
+    250
+   ],
+   "variants": [
+    {
+     "variant": "001_chips_can/poisson/textured.obj",
+     "ext_mm": [
+      79.5,
+      77.6,
+      245.5
+     ],
+     "faces": 29060
+    },
+    {
+     "variant": "001_chips_can/tsdf/textured.obj",
+     "ext_mm": [
+      83.5,
+      86.1,
+      240.6
+     ],
+     "faces": 42554
+    }
+   ],
+   "compare": {
+    "dia_mesh_mm": 78.5,
+    "dia_off_mm": 75,
+    "dia_err_pct": 4.73,
+    "h_mesh_mm": 245.5,
+    "h_off_mm": 250,
+    "h_err_pct": 1.8
+   }
+  },
+  {
+   "obj": "002_master_chef_can",
+   "shape": "cylinder",
+   "official_mm": [
+    102,
+    139
+   ],
+   "variants": [
+    {
+     "variant": "002_master_chef_can/google_16k/textured.obj",
+     "ext_mm": [
+      102.5,
+      102.4,
+      140.2
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "002_master_chef_can/poisson/textured.obj",
+     "ext_mm": [
+      103.0,
+      103.5,
+      139.6
+     ],
+     "faces": 19280
+    },
+    {
+     "variant": "002_master_chef_can/tsdf/textured.obj",
+     "ext_mm": [
+      107.6,
+      109.0,
+      132.2
+     ],
+     "faces": 33404
+    }
+   ],
+   "compare": {
+    "dia_mesh_mm": 102.5,
+    "dia_off_mm": 102,
+    "dia_err_pct": 0.44,
+    "h_mesh_mm": 140.2,
+    "h_off_mm": 139,
+    "h_err_pct": 0.86
+   }
+  },
+  {
+   "obj": "003_cracker_box",
+   "shape": "box",
+   "official_mm": [
+    60,
+    158,
+    210
+   ],
+   "variants": [
+    {
+     "variant": "003_cracker_box/google_16k/textured.obj",
+     "ext_mm": [
+      71.8,
+      164.0,
+      213.4
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "003_cracker_box/poisson/textured.obj",
+     "ext_mm": [
+      90.0,
+      167.8,
+      238.4
+     ],
+     "faces": 49900
+    },
+    {
+     "variant": "003_cracker_box/tsdf/textured.obj",
+     "ext_mm": [
+      90.7,
+      172.3,
+      231.1
+     ],
+     "faces": 67680
+    }
+   ],
+   "compare": {
+    "mesh_sorted_mm": [
+     213.4,
+     164.0,
+     71.8
+    ],
+    "off_sorted_mm": [
+     210.0,
+     158.0,
+     60.0
+    ],
+    "rel_err_pct": [
+     1.62,
+     3.8,
+     19.67
+    ]
+   }
+  },
+  {
+   "obj": "004_sugar_box",
+   "shape": "box",
+   "official_mm": [
+    38,
+    89,
+    175
+   ],
+   "variants": [
+    {
+     "variant": "004_sugar_box/google_16k/textured.obj",
+     "ext_mm": [
+      49.5,
+      94.2,
+      176.0
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "004_sugar_box/poisson/textured.obj",
+     "ext_mm": [
+      91.5,
+      81.3,
+      176.8
+     ],
+     "faces": 21796
+    },
+    {
+     "variant": "004_sugar_box/tsdf/textured.obj",
+     "ext_mm": [
+      100.8,
+      90.0,
+      171.3
+     ],
+     "faces": 33409
+    }
+   ],
+   "compare": {
+    "mesh_sorted_mm": [
+     176.0,
+     94.2,
+     49.5
+    ],
+    "off_sorted_mm": [
+     175.0,
+     89.0,
+     38.0
+    ],
+    "rel_err_pct": [
+     0.57,
+     5.84,
+     30.26
+    ]
+   }
+  },
+  {
+   "obj": "005_tomato_soup_can",
+   "shape": "cylinder",
+   "official_mm": [
+    66,
+    101
+   ],
+   "variants": [
+    {
+     "variant": "005_tomato_soup_can/google_16k/textured.obj",
+     "ext_mm": [
+      67.9,
+      67.7,
+      101.9
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "005_tomato_soup_can/poisson/textured.obj",
+     "ext_mm": [
+      70.8,
+      70.9,
+      99.6
+     ],
+     "faces": 16382
+    },
+    {
+     "variant": "005_tomato_soup_can/tsdf/textured.obj",
+     "ext_mm": [
+      74.4,
+      76.9,
+      92.5
+     ],
+     "faces": 16281
+    }
+   ],
+   "compare": {
+    "dia_mesh_mm": 67.8,
+    "dia_off_mm": 66,
+    "dia_err_pct": 2.73,
+    "h_mesh_mm": 101.9,
+    "h_off_mm": 101,
+    "h_err_pct": 0.89
+   }
+  },
+  {
+   "obj": "006_mustard_bottle",
+   "shape": "bottle",
+   "official_mm": [
+    50,
+    85,
+    175
+   ],
+   "variants": [
+    {
+     "variant": "006_mustard_bottle/google_16k/textured.obj",
+     "ext_mm": [
+      97.2,
+      66.6,
+      191.3
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "006_mustard_bottle/poisson/textured.obj",
+     "ext_mm": [
+      82.9,
+      94.0,
+      187.5
+     ],
+     "faces": 34198
+    },
+    {
+     "variant": "006_mustard_bottle/tsdf/textured.obj",
+     "ext_mm": [
+      85.5,
+      96.0,
+      185.2
+     ],
+     "faces": 33332
+    }
+   ],
+   "compare": {
+    "mesh_sorted_mm": [
+     191.3,
+     97.2,
+     66.6
+    ],
+    "off_sorted_mm": [
+     175.0,
+     85.0,
+     50.0
+    ],
+    "rel_err_pct": [
+     9.31,
+     14.35,
+     33.2
+    ]
+   }
+  },
+  {
+   "obj": "007_tuna_fish_can",
+   "shape": "cylinder",
+   "official_mm": [
+    85,
+    33
+   ],
+   "variants": [
+    {
+     "variant": "007_tuna_fish_can/google_16k/textured.obj",
+     "ext_mm": [
+      85.6,
+      85.5,
+      33.5
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "007_tuna_fish_can/poisson/textured.obj",
+     "ext_mm": [
+      89.7,
+      89.3,
+      46.3
+     ],
+     "faces": 9604
+    },
+    {
+     "variant": "007_tuna_fish_can/tsdf/textured.obj",
+     "ext_mm": [
+      91.7,
+      95.9,
+      31.4
+     ],
+     "faces": 8997
+    }
+   ],
+   "compare": {
+    "dia_mesh_mm": 59.5,
+    "dia_off_mm": 85,
+    "dia_err_pct": 30.0,
+    "h_mesh_mm": 85.6,
+    "h_off_mm": 33,
+    "h_err_pct": 159.39
+   }
+  },
+  {
+   "obj": "008_pudding_box",
+   "shape": "box",
+   "official_mm": [
+    35,
+    110,
+    89
+   ],
+   "variants": [
+    {
+     "variant": "008_pudding_box/google_16k/textured.obj",
+     "ext_mm": [
+      137.9,
+      128.8,
+      38.9
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "008_pudding_box/poisson/textured.obj",
+     "ext_mm": [
+      89.8,
+      74.6,
+      111.9
+     ],
+     "faces": 17256
+    },
+    {
+     "variant": "008_pudding_box/tsdf/textured.obj",
+     "ext_mm": [
+      97.9,
+      84.1,
+      105.8
+     ],
+     "faces": 20478
+    }
+   ],
+   "compare": {
+    "mesh_sorted_mm": [
+     137.9,
+     128.8,
+     38.9
+    ],
+    "off_sorted_mm": [
+     110.0,
+     89.0,
+     35.0
+    ],
+    "rel_err_pct": [
+     25.36,
+     44.72,
+     11.14
+    ]
+   }
+  },
+  {
+   "obj": "009_gelatin_box",
+   "shape": "box",
+   "official_mm": [
+    28,
+    85,
+    73
+   ],
+   "variants": [
+    {
+     "variant": "009_gelatin_box/google_16k/textured.obj",
+     "ext_mm": [
+      89.4,
+      101.1,
+      30.1
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "009_gelatin_box/poisson/textured.obj",
+     "ext_mm": [
+      70.6,
+      64.7,
+      89.4
+     ],
+     "faces": 10424
+    },
+    {
+     "variant": "009_gelatin_box/tsdf/textured.obj",
+     "ext_mm": [
+      77.4,
+      74.4,
+      83.2
+     ],
+     "faces": 13588
+    }
+   ],
+   "compare": {
+    "mesh_sorted_mm": [
+     101.1,
+     89.4,
+     30.1
+    ],
+    "off_sorted_mm": [
+     85.0,
+     73.0,
+     28.0
+    ],
+    "rel_err_pct": [
+     18.94,
+     22.47,
+     7.5
+    ]
+   }
+  },
+  {
+   "obj": "010_potted_meat_can",
+   "shape": "box",
+   "official_mm": [
+    50,
+    97,
+    82
+   ],
+   "variants": [
+    {
+     "variant": "010_potted_meat_can/google_16k/textured.obj",
+     "ext_mm": [
+      102.1,
+      60.1,
+      83.5
+     ],
+     "faces": 16384
+    },
+    {
+     "variant": "010_potted_meat_can/poisson/textured.obj",
+     "ext_mm": [
+      96.7,
+      88.4,
+      85.2
+     ],
+     "faces": 16948
+    },
+    {
+     "variant": "010_potted_meat_can/tsdf/textured.obj",
+     "ext_mm": [
+      99.0,
+      93.4,
+      76.2
+     ],
+     "faces": 17731
+    }
+   ],
+   "compare": {
+    "mesh_sorted_mm": [
+     102.1,
+     83.5,
+     60.1
+    ],
+    "off_sorted_mm": [
+     97.0,
+     82.0,
+     50.0
+    ],
+    "rel_err_pct": [
+     5.26,
+     1.83,
+     20.2
+    ]
+   }
+  }
+ ]
+}

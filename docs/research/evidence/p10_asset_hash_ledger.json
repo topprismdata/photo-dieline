@@ -1,0 +1,131 @@
+{
+ "_meta": {
+  "frozen_date": "2026-11-28",
+  "purpose": "P10-FZ01 \u8d44\u4ea7\u83b7\u53d6+\u5b8c\u6574\u54c8\u5e0c\u767b\u8bb0",
+  "source_base": "http://ycb-benchmarks.s3-website-us-east-1.amazonaws.com/data/"
+ },
+ "files": [
+  {
+   "file": "001_chips_can_berkeley_meshes.tgz",
+   "bytes": 23405883,
+   "sha256": "eae869ea539d221e53fcd4d6111a30832fb76fd0f177f56e6d45b50a68cc50d6",
+   "valid_gzip": true
+  },
+  {
+   "file": "001_chips_can_google_16k.tgz",
+   "bytes": 375,
+   "sha256": "5da07a8b3d217805a3d64100780fab6d759541c0a050c03f219effcb64e72a63",
+   "valid_gzip": false,
+   "status": "DOWNLOAD_ERROR_PAGE",
+   "note": "<html>\n<head><title>404 Not Found</title></head>\n<body>\n<h1>404 Not Found</h1>\n<ul>\n<li>Code: NoSuchKey</li>\n<li>Message"
+  },
+  {
+   "file": "002_master_chef_can_berkeley_meshes.tgz",
+   "bytes": 18210920,
+   "sha256": "5bf9dd6ca0d3b27b117133b11dbf810db66c3e7c26a9a02e3448a495ff49f88d",
+   "valid_gzip": true
+  },
+  {
+   "file": "002_master_chef_can_google_16k.tgz",
+   "bytes": 11741544,
+   "sha256": "2f8dcc63e243911c546058476c35276448601997f5e658296ccdf4a83af24c10",
+   "valid_gzip": true
+  },
+  {
+   "file": "003_cracker_box_berkeley_meshes.tgz",
+   "bytes": 44069321,
+   "sha256": "2d2ac726358d940138a1ac1b73ac86b9e89cd3f69ea83bcabd90b1b04eb8b6fc",
+   "valid_gzip": true
+  },
+  {
+   "file": "003_cracker_box_google_16k.tgz",
+   "bytes": 11434893,
+   "sha256": "0f084b0212274700d416384b9bc290521257d2b15ab66f68768a6a22806226b6",
+   "valid_gzip": true
+  },
+  {
+   "file": "004_sugar_box_berkeley_meshes.tgz",
+   "bytes": 17152599,
+   "sha256": "afa3558a0aa52305e2633503681aa8ceaa8b1174d78c9cc1a30cbf4c2a948253",
+   "valid_gzip": true
+  },
+  {
+   "file": "004_sugar_box_google_16k.tgz",
+   "bytes": 12636314,
+   "sha256": "38e5820b942e7db501ba105cfb42ba8b470f27540dbab95324105a52de8617c6",
+   "valid_gzip": true
+  },
+  {
+   "file": "005_tomato_soup_can_berkeley_meshes.tgz",
+   "bytes": 9526170,
+   "sha256": "96fb9b9d43c950d1eefe92e13cc7a06c7b3be5d302bd15e2372328674d62d1aa",
+   "valid_gzip": true
+  },
+  {
+   "file": "005_tomato_soup_can_google_16k.tgz",
+   "bytes": 10606298,
+   "sha256": "264f28559475e8e548b20420a7b6db944b4b27471039a73733d2c08a4ba2cc3d",
+   "valid_gzip": true
+  },
+  {
+   "file": "006_mustard_bottle_berkeley_meshes.tgz",
+   "bytes": 20051277,
+   "sha256": "be22fd4c7e77cbfbdff7119d6ca2c02af0dbccfa749ef2933a60786c537bb676",
+   "valid_gzip": true
+  },
+  {
+   "file": "006_mustard_bottle_google_16k.tgz",
+   "bytes": 10703139,
+   "sha256": "992621f78a4fa6267da71418e530cd547bd066775da0242e578ddfb561d7cb5d",
+   "valid_gzip": true
+  },
+  {
+   "file": "007_tuna_fish_can_berkeley_meshes.tgz",
+   "bytes": 6448182,
+   "sha256": "0ae779e857b5baf767ed4ccec5cca8f398f401339423432c187ef5011168cca4",
+   "valid_gzip": true
+  },
+  {
+   "file": "007_tuna_fish_can_google_16k.tgz",
+   "bytes": 8938529,
+   "sha256": "b44bde265f9ebab879680ad843fafedb9c6549c7414f7325c66faa49207cd502",
+   "valid_gzip": true
+  },
+  {
+   "file": "008_pudding_box_berkeley_meshes.tgz",
+   "bytes": 11060648,
+   "sha256": "cdd985fec625cbd3cb012fb2bfa8ad0c69613e9a11409c2d9b0bfa9e68445fa4",
+   "valid_gzip": true
+  },
+  {
+   "file": "008_pudding_box_google_16k.tgz",
+   "bytes": 10164954,
+   "sha256": "3c7ea25076552304a570abef26146ee5621e0a7b432ec435b42d0aabe8273440",
+   "valid_gzip": true
+  },
+  {
+   "file": "009_gelatin_box_berkeley_meshes.tgz",
+   "bytes": 7231282,
+   "sha256": "75e0cbec38af6169f9e81bb4ea320ecb2859e3bf819f286a81a5660cad973142",
+   "valid_gzip": true
+  },
+  {
+   "file": "009_gelatin_box_google_16k.tgz",
+   "bytes": 9815773,
+   "sha256": "426b76c4a63c7ec719d0c78a9570871c2cdad7671a47b3a831b303740083c5b5",
+   "valid_gzip": true
+  },
+  {
+   "file": "010_potted_meat_can_berkeley_meshes.tgz",
+   "bytes": 10113596,
+   "sha256": "dc8e55678898b54d5036a8010f8b784289002eda94a2699e3e0c34e1a1ae17e4",
+   "valid_gzip": true
+  },
+  {
+   "file": "010_potted_meat_can_google_16k.tgz",
+   "bytes": 9656325,
+   "sha256": "197f0741d40c740e94bccb11dec6be7a4d6473dd3d140f500a0b4357efcab604",
+   "valid_gzip": true
+  }
+ ]
+}

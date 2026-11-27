@@ -1,0 +1,19 @@
+{
+ "ycb_items": [],
+ "overlaps": [
+  {
+   "ycb": "cracker_box",
+   "gso_hit": "VANS_FIRE_ROASTED_VEGGIE_CRACKERS_GLUTEN_FREE",
+   "verdict": "FALSE_POSITIVE(名称token相同,商品身份不同: Vans蔬菜饼干≠Cheez-it)",
+   "identity_overlap": "NONE"
+  },
+  {
+   "ycb": "sugar_box",
+   "gso_hit": "Wilton_Pearlized_Sugar_Sprinkles_525_oz_Gold",
+   "verdict": "FALSE_POSITIVE(装饰糖珠≠Domino砂糖盒)",
+   "identity_overlap": "NONE"
+  }
+ ],
+ "method": "name token + brand matching",
+ "result": "GSO×YCB 十件身份级重叠=NONE (两处名称token假阳性已裁定); KIT 去重 D3 执行"
+}

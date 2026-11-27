@@ -1,0 +1,311 @@
+{
+ "_meta": {
+  "method": "圆柱=AABB双近等轴判别(Ø=均值,H=独异轴); 盒/瓶=AABB与OBB双指标; m→mm自动; 网格=google_16k(001用poisson)",
+  "frozen": "2026-11-28",
+  "finding_1": "圆柱件 Ø/H 与官方PDF高吻合 (Ø 0.4-4.7%, H 0.9-2.0%)",
+  "finding_2": "盒/瓶件厚度轴系统性膨胀 vs 印刷规格 (+12%~-+86%) — 机理假设: 官方PDF=包装规格尺寸(空盒态), 扫描=装填态实物; 两态不可互换, 须分开登记 (对应 R21 §3.2 '同一物理样品' 问题: 同产品线不同测量状态)",
+  "finding_3": "OBB(PCA)对圆柱退化(45°对称面→Ø×√2), 圆柱禁用PCA-OBB"
+ },
+ "items": [
+  {
+   "obj": "001_chips_can",
+   "shape": "cylinder",
+   "mesh": "001_chips_can/001_chips_can/poisson/textured.obj",
+   "aabb_mm": [
+    245.5,
+    79.5,
+    77.6
+   ],
+   "obb_mm": [
+    246.2,
+    108.7,
+    107.7
+   ],
+   "official_mm": [
+    75,
+    250
+   ],
+   "compare": {
+    "dia_mm": 78.6,
+    "dia_off": 75,
+    "dia_err_pct": 4.74,
+    "h_mm": 245.5,
+    "h_off": 250,
+    "h_err_pct": 1.79
+   }
+  },
+  {
+   "obj": "002_master_chef_can",
+   "shape": "cylinder",
+   "mesh": "002_master_chef_can/002_master_chef_can/google_16k/textured.obj",
+   "aabb_mm": [
+    140.2,
+    102.5,
+    102.4
+   ],
+   "obb_mm": [
+    143.0,
+    142.7,
+    140.9
+   ],
+   "official_mm": [
+    102,
+    139
+   ],
+   "compare": {
+    "dia_mm": 102.5,
+    "dia_off": 102,
+    "dia_err_pct": 0.44,
+    "h_mm": 140.2,
+    "h_off": 139,
+    "h_err_pct": 0.85
+   }
+  },
+  {
+   "obj": "003_cracker_box",
+   "shape": "box",
+   "mesh": "003_cracker_box/003_cracker_box/google_16k/textured.obj",
+   "aabb_mm": [
+    213.4,
+    164.0,
+    71.8
+   ],
+   "obb_mm": [
+    215.4,
+    164.6,
+    75.6
+   ],
+   "official_mm": [
+    60,
+    158,
+    210
+   ],
+   "compare": {
+    "rel_err_aabb_pct": [
+     1.64,
+     3.82,
+     19.67
+    ],
+    "rel_err_obb_pct": [
+     2.55,
+     4.19,
+     25.94
+    ]
+   }
+  },
+  {
+   "obj": "004_sugar_box",
+   "shape": "box",
+   "mesh": "004_sugar_box/004_sugar_box/google_16k/textured.obj",
+   "aabb_mm": [
+    176.0,
+    94.2,
+    49.5
+   ],
+   "obb_mm": [
+    178.7,
+    96.5,
+    55.8
+   ],
+   "official_mm": [
+    38,
+    89,
+    175
+   ],
+   "compare": {
+    "rel_err_aabb_pct": [
+     0.58,
+     5.8,
+     30.25
+    ],
+    "rel_err_obb_pct": [
+     2.09,
+     8.44,
+     46.77
+    ]
+   }
+  },
+  {
+   "obj": "005_tomato_soup_can",
+   "shape": "cylinder",
+   "mesh": "005_tomato_soup_can/005_tomato_soup_can/google_16k/textured.obj",
+   "aabb_mm": [
+    101.9,
+    67.9,
+    67.7
+   ],
+   "obb_mm": [
+    102.2,
+    89.6,
+    89.2
+   ],
+   "official_mm": [
+    66,
+    101
+   ],
+   "compare": {
+    "dia_mm": 67.8,
+    "dia_off": 66,
+    "dia_err_pct": 2.77,
+    "h_mm": 101.9,
+    "h_off": 101,
+    "h_err_pct": 0.85
+   }
+  },
+  {
+   "obj": "006_mustard_bottle",
+   "shape": "bottle",
+   "mesh": "006_mustard_bottle/006_mustard_bottle/google_16k/textured.obj",
+   "aabb_mm": [
+    191.3,
+    97.2,
+    66.6
+   ],
+   "obb_mm": [
+    191.8,
+    111.7,
+    93.2
+   ],
+   "official_mm": [
+    50,
+    85,
+    175
+   ],
+   "compare": {
+    "rel_err_aabb_pct": [
+     9.31,
+     14.35,
+     33.24
+    ],
+    "rel_err_obb_pct": [
+     9.61,
+     31.47,
+     86.36
+    ]
+   }
+  },
+  {
+   "obj": "007_tuna_fish_can",
+   "shape": "cylinder",
+   "mesh": "007_tuna_fish_can/007_tuna_fish_can/google_16k/textured.obj",
+   "aabb_mm": [
+    85.6,
+    85.5,
+    33.5
+   ],
+   "obb_mm": [
+    119.0,
+    119.0,
+    33.7
+   ],
+   "official_mm": [
+    85,
+    33
+   ],
+   "compare": {
+    "dia_mm": 85.5,
+    "dia_off": 85,
+    "dia_err_pct": 0.65,
+    "h_mm": 33.5,
+    "h_off": 33,
+    "h_err_pct": 1.63
+   }
+  },
+  {
+   "obj": "008_pudding_box",
+   "shape": "box",
+   "mesh": "008_pudding_box/008_pudding_box/google_16k/textured.obj",
+   "aabb_mm": [
+    137.9,
+    128.8,
+    38.9
+   ],
+   "obb_mm": [
+    142.6,
+    132.3,
+    41.6
+   ],
+   "official_mm": [
+    35,
+    110,
+    89
+   ],
+   "compare": {
+    "rel_err_aabb_pct": [
+     25.4,
+     44.67,
+     11.11
+    ],
+    "rel_err_obb_pct": [
+     29.62,
+     48.67,
+     18.85
+    ]
+   }
+  },
+  {
+   "obj": "009_gelatin_box",
+   "shape": "box",
+   "mesh": "009_gelatin_box/009_gelatin_box/google_16k/textured.obj",
+   "aabb_mm": [
+    101.1,
+    89.4,
+    30.1
+   ],
+   "obb_mm": [
+    104.0,
+    91.8,
+    31.2
+   ],
+   "official_mm": [
+    28,
+    85,
+    73
+   ],
+   "compare": {
+    "rel_err_aabb_pct": [
+     18.95,
+     22.47,
+     7.41
+    ],
+    "rel_err_obb_pct": [
+     22.39,
+     25.69,
+     11.5
+    ]
+   }
+  },
+  {
+   "obj": "010_potted_meat_can",
+   "shape": "box",
+   "mesh": "010_potted_meat_can/010_potted_meat_can/google_16k/textured.obj",
+   "aabb_mm": [
+    102.1,
+    83.5,
+    60.1
+   ],
+   "obb_mm": [
+    104.4,
+    83.8,
+    61.9
+   ],
+   "official_mm": [
+    50,
+    97,
+    82
+   ],
+   "compare": {
+    "rel_err_aabb_pct": [
+     5.24,
+     1.88,
+     20.21
+    ],
+    "rel_err_obb_pct": [
+     7.58,
+     2.21,
+     23.83
+    ]
+   }
+  }
+ ]
+}
