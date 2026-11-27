@@ -25,8 +25,44 @@ def get(cls_id: str):
     if cls_id not in _CACHE:
         if cls_id not in REGISTRY:
             raise KeyError(f"未注册模板类: {cls_id}")
-        _CACHE[cls_id] = import_module(f".{REGISTRY[cls_id]}", __package__)
+        _CACHE[cls_id] = _wrap_identity_guard(cls_id, import_module(f".{REGISTRY[cls_id]}", __package__))
     return _CACHE[cls_id]
+
+
+class _IdentityGuard:
+    """GOV-IR-01 (R23-A 授权): 输入身份冲突 FAIL-CLOSED。
+    调用方经 get(cls_id) 取模块并 build_ir(params) 时, 产物 template.id 必须与
+    请求的 cls_id 一致; 共享模块 (如 prism_dust 同服务 n4..n12) 的参数默认值
+    静默改写身份 (漏传 n → n4) 由此在编译入口直接拒绝, 不再产出错误身份资产。"""
+
+    def __init__(self, cls_id: str, mod):
+        self._cls_id = cls_id
+        self._mod = mod
+        self.__doc__ = getattr(mod, "__doc__", "")
+
+    def __getattr__(self, name):
+        return getattr(self._mod, name)
+
+    def build_ir(self, params: dict | None = None) -> dict:
+        ir_raw = self._mod.build_ir(params)
+        got = ir_raw.get("package", {}).get("template", {}).get("id")
+        # 仅当产物身份是【另一注册类】(兄弟类, 如 prism_dust_n4 vs 请求 n12) 时拒绝;
+        # 模块级模板标识 (如 rsc_rsc, 不在注册表) 是该模块自身的合法标记, 放行。
+        if got != self._cls_id and got in REGISTRY:
+            raise IdentityConflictError(
+                f"GOV-IR-01 身份冲突: 请求类 {self._cls_id} 但参数产物为注册类 {got} "
+                f"(共享模块默认值静默生效; 请显式传全身份参数, 如 n)")
+        return ir_raw
+
+
+class IdentityConflictError(ValueError):
+    pass
+
+
+def _wrap_identity_guard(cls_id: str, mod):
+    if not hasattr(mod, "build_ir"):
+        return mod
+    return _IdentityGuard(cls_id, mod)
 
 
 def all_classes() -> list[str]:
