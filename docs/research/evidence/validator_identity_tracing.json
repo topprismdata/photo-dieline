@@ -1,0 +1,31 @@
+{
+ "tracing_result": "实物追溯完成 — 历史175件验证器身份已闭环",
+ "validator_artifact": {
+  "path": "~/usdcraft_study/code/sdk/_core/_usd_validate.py",
+  "sha256_16": "725e97d4afa6877f",
+  "bytes": 61645,
+  "copyright": "NVIDIA CORPORATION & AFFILIATES (Apache-2.0)",
+  "signature": "backend: Literal[\"generic\", \"physx\", \"newton\"] = \"generic\"",
+  "genuine": "真 NVIDIA SDK 件 (非自研)"
+ },
+ "run_evidence": {
+  "file": "docs/nvidia_package_emit_results.json",
+  "entries": 202,
+  "breakdown": {
+   "liquor": 16,
+   "dairy": 2,
+   "nv960": 20,
+   "variant": 60,
+   "tde": 100,
+   "legacy": 4
+  },
+  "all_verdict": "PASS (fail-closed: 发射时实跑判决)",
+  "口径修正": "台账'175'算术错误: variant 记 35 实为 60 (20家族×3规格), dairy 2 漏记 → 真实总数 202; 逐资产判决全部在案, 无证据造假, 属台账记账口径错误"
+ },
+ "material_binding_gap": {
+  "usdchecker": "MaterialBindingApiAppliedValidator 红灯 (旧 pxr Bind() 不打 apiSchemas 标)",
+  "patch": "export/usd.py 三处显式 MaterialBindingAPI.Apply (独立补丁, 不混入绕向实验)",
+  "regression": "usdchecker exit=1 → Success! exit=0 (aseptic_brick v0000 候选)"
+ },
+ "legacy_175_identity": "已闭环: 当年175件 (口径修正后202件) = V1 USDCraft SDK physx 后端实跑判决"
+}

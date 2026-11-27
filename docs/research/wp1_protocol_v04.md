@@ -71,3 +71,12 @@ coverage_table / terminal_state_distribution / cost_ledger / evidence（逐件�
 ## 9. 冻结签署行
 
 GPT 签核（十例机器测试通过 + 本 v0.4 审查）+ 用户批准 → 状态 FROZEN。
+
+
+## 10. 机器门禁与历史验证器身份台账（v0.4.1 增补）
+
+- 协议机器门禁 = `scripts/wp1_protocol_selftest.py`（W01-W10 十例，实测 10/10 PASS）。协议文本与 selftest 公式**同源**：任何公式修改必须先改 selftest 再改文档（版本关联）。
+- 历史 175 件验证器身份台账（WP-V 遗留追溯闭环，见 evidence/validator_identity_tracing.json）：
+  - 工具实物：`~/usdcraft_study/code/sdk/_core/_usd_validate.py`（NVIDIA SDK，sha256 前 16 位 725e97d4afa6877f）
+  - 运行记录：`docs/nvidia_package_emit_results.json` **202 条逐资产判决**（fail-closed）
+  - 口径修正：台账"175"系记账口径错误（variant 记 35 实为 60、dairy 2 漏记）——真实总数 202；逐资产判决全部在案，无证据造假

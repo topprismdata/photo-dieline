@@ -264,6 +264,7 @@ def export_usdc(ir, path, kind="carton_board", board_t_mm=0.45, texture=True, fa
         ps.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(0.0)
         ps.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).ConnectToSource(tex.ConnectableAPI(), "rgb")
         mat.CreateSurfaceOutput().ConnectToSource(ps.ConnectableAPI(), "surface")
+        UsdShade.MaterialBindingAPI.Apply(bp)
         UsdShade.MaterialBindingAPI(bp).Bind(mat)
         tex_note = {"print_png": "print.png", "roughness": rough,
                     "scope": "程序化占位印刷 (WP2 v0), 非真实品牌版面"}
@@ -364,6 +365,7 @@ def _export_usdc_articulated(ir, path, kind="carton_board"):
         vis.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*p) for p in Pm]))
         vis.GetFaceVertexIndicesAttr().Set(Vt.IntArray([int(i) for t in tris for i in t]))
         vis.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(tris)))
+        UsdShade.MaterialBindingAPI.Apply(vis)
         UsdShade.MaterialBindingAPI(vis).Bind(mat)
         col = UsdGeom.Mesh.Define(stage, f"/Asset/Links/{link}/Collisions/panel/Geom")
         col.GetPointsAttr().Set(Vt.Vec3fArray([Gf.Vec3f(*p) for p in Pm]))
@@ -371,6 +373,7 @@ def _export_usdc_articulated(ir, path, kind="carton_board"):
         col.GetFaceVertexCountsAttr().Set(Vt.IntArray([3] * len(tris)))
         UsdPhysics.CollisionAPI.Apply(col.GetPrim())
         pm_mat = UsdShade.Material(stage.GetPrimAtPath("/Asset/PhysicsMaterials/corrugated_contact"))
+        UsdShade.MaterialBindingAPI.Apply(col)
         UsdShade.MaterialBindingAPI(col).Bind(pm_mat, materialPurpose="physics")
         bp = stage.GetPrimAtPath(f"/Asset/Links/{link}")
         UsdPhysics.RigidBodyAPI.Apply(bp)
