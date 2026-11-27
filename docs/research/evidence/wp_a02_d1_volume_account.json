@@ -1,0 +1,29 @@
+{
+ "sku": "aseptic_brick_v0000",
+ "stages": [
+  {
+   "stage": "S0 冻结发行件 (家族绕向缺陷期)",
+   "signed_volume_mm3": -233078,
+   "state": "折叠体, 绕向混合 (5 面板对同向/反向不一致)",
+   "evidence": "trimesh winding False, watertight True"
+  },
+  {
+   "stage": "S1 家族 net 绕向修复后重导出 (normalize_orientation=False)",
+   "signed_volume_mm3": -276983,
+   "state": "折叠体, 绕向统一 (全部内向)",
+   "evidence": "trimesh winding True, watertight True"
+  },
+  {
+   "stage": "S2 导出规范化翻转 (normalize_orientation=True)",
+   "signed_volume_mm3": 276983,
+   "state": "折叠体, 外向",
+   "evidence": "auditor SOLID PASS + trimesh 全绿"
+  }
+ ],
+ "explanation": {
+  "S0→S1 体积变化 (-233,078 → -276,983, |Δ|=43,905)": "绕向混合→统一: 缺陷期部分面板反向, 其对体积积分的贡献符号与主流相反, 相互抵消一部分; 修复统一为内向后不再抵消, 量值回升至几何真值 |V|=276,983 (即完整折叠砖内容积)",
+  "S1→S2 体积变化 (-276,983 → +276,983, |Δ|=553,966=2|V|)": "纯方向翻转 (面索引反转), 几何不变: bbox/面积/顶点位置逐项不变 (P0-03 回归证明)",
+  "真值主张": "|V|=276,983 mm³ 与解析 folded 内容积一致 (D×跨×高积分), 修复链两阶段均有独立证据"
+ },
+ "geometric_invariance_note": "翻转不变量: bbox✓ 表面积✓ 顶点位置✓ 面数✓; 翻转变量: 符号体积/法线方向"
+}

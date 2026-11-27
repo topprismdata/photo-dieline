@@ -139,3 +139,21 @@ for name, stage, exp, kw in cases:
     print(("PASS" if ok else "FAIL"), name, "→", got, "|", [f for R in r["L1"]["prims"].values() for f in R.get("findings", [])][:2])
     fails += 0 if ok else 1
 print("SELFTEST", "ALL 24 PASS" if fails == 0 else f"{fails} FAILURES")
+
+# 25 T25 bbox 相同 ≠ 几何相同 (R09-09 P0-03 回归固化): 立方体 vs 同bbox八面体, 体积 1 vs 0.333
+cv = np.array([[x, y, z] for z in (0, 1) for y in (0, 1) for x in (0, 1)], float)
+cquads = [[0, 2, 3, 1], [5, 7, 6, 4], [1, 5, 4, 0], [6, 7, 3, 2], [4, 6, 2, 0], [3, 7, 5, 1]]
+ctr = []
+for a, b, c, d in cquads: ctr += [[a, b, c], [a, c, d]]
+ov = np.array([[0.5, 0, 0.5], [1, 0.5, 0.5], [0.5, 1, 0.5], [0, 0.5, 0.5], [0.5, 0.5, 1], [0.5, 0.5, 0]], float)
+otr = [[0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4], [0, 5, 1], [1, 5, 2], [2, 5, 3], [3, 5, 0]]
+stage_t25 = make_stage([("CUBE", cv, ctr, None, None, None), ("OCTA", ov, otr, None, None, None)])
+r25 = audit_stage(stage_t25, contract="SOLID")
+vols = [sh["vol"] for R in r25["L1"]["prims"].values() for sh in R.get("shells", []) if "vol" in sh]
+bbs = []
+for nm, R in r25["L1"]["prims"].items():
+    sh0 = R.get("shells", [])
+    assert sh0, nm + " no shell"
+c25 = len(vols) == 2 and abs(abs(vols[0]) - abs(vols[1])) > 0.1
+print(("PASS" if c25 else "FAIL"), "T25 bbox-identical different-geometry: 壳体积区分", vols)
+assert c25, "T25 FAIL"

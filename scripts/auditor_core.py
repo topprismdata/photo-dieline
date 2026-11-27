@@ -125,10 +125,10 @@ def audit_stage(stage, contract="UNKNOWN", prim_contracts=None, declared_seam_ed
                     des[(u, v)] = des.get((u, v), 0) + 1
             bnd = [e for e in des if (e[1], e[0]) not in des]
             closed = len(bnd) == 0
-            shells.append({"closed": closed, "tris": len(sub), "boundary": len(bnd)})
             if closed:
                 Pc = pts[sub]
                 vol = np.einsum('ij,ij->i', Pc[:, 0], np.cross(Pc[:, 1], Pc[:, 2])).sum() / 6.0
+                shells.append({"closed": True, "tris": len(sub), "boundary": 0, "vol": float(vol)})
                 if vol <= 1e-9: R["findings"].append(f"winding:closed-vol:{vol:.4f}")
             else:
                 bv = {}
@@ -137,6 +137,7 @@ def audit_stage(stage, contract="UNKNOWN", prim_contracts=None, declared_seam_ed
                     R["findings"].append("topology:boundary-not-walkable")
                 elif c == "SOLID":
                     R["findings"].append("closure:solid-with-open-boundary")
+                shells.append({"closed": False, "tris": len(sub), "boundary": len(bnd)})
         R["shells"] = shells
         # IR 边界保持 (T23)
         if ir_boundary is not None:
