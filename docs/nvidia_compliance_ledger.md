@@ -187,3 +187,15 @@ NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件�
 - 教训: 下游判决必须带「类别守卫」(自由体名单断言) + 名字查找 fail-closed;
   修复后全链: 变体 60/60, 80 件 NVIDIA PASS, 契约+审计 202/202。
 - P1 (同源 PhysX 动态) 门控: Isaac Sim 不在机 (~10GB), 待用户盘/时间指令。
+
+## M7.5 全量批量落体统计契约 (Gemini P0 收口, 2026-11-27 补)
+
+- 通用 usdc→MJCF 加载器 (scripts/mujoco_batch_drop_usd.py): 直接读 USD Links
+  网格 (含资产 PhysicsMaterial density), 合并单刚体, 六域统一路径。
+- 覆盖 hfpackage liquor 16 + dairy 2 + nv960 canonical 20 + variants 60 +
+  TDE pilot 100 = **198 件, 50cm 落体 + 300 步静置: 198/198 PASS (14.7s)** —
+  静置穿透 p50 0.035mm / max 0.041mm (近零), 零爆炸, 零残余速度。
+- (legacy 4 无独立 hfpackage 目录, 未入本轮 glob; 后续按其实际路径补齐。)
+- 至此 Gemini P0「数据集级 sim-ready 统计契约」在精选语料上达成:
+  sim-ready 从 2 个特例 → 域级 60/60 → 全量 198/198。
+- P1 (同源 PhysX 动态) 仍门控待 Isaac Sim 安装指令; P2 caster 已闭环。
