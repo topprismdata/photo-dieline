@@ -1,0 +1,12 @@
+{
+ "object_id": "tpd_rsc_rsc_closed",
+ "category_id": "beverage_liquor",
+ "category": "rsc_rsc_closed",
+ "title": "rsc_rsc_closed",
+ "physics_type": "rigid_body",
+ "part_count": 5,
+ "joint_count": 4,
+ "dims_m": [],
+ "mass_kg": 0.0938,
+ "provenance": "parametric"
+}

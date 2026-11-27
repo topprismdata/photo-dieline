@@ -57,3 +57,10 @@ conformance.Package@1.0.0, conformance.Package-Candidate@1.3.0}.json。
 author/asset_name/asset_license/category/source_file/rigid_body_count/mass/asset_extents)。
 170 usdc 全覆盖零缺失; 发射顺序 = 快照先于 BOM/契约 (哈希链含 model.json,
 hfpackage 11 资产独立复算 ALL OK)。
+
+## 双缩略图约定 (2026-11-27 补)
+
+对齐 NVIDIA .thumbs 惯例 (256x256, 暗底+亮底双图, 相机契约同 USDCraft 45°/30°):
+170 usdc × 2 = **340 png 全覆盖零失败** (批量 Blender 单进程 ~15min, 断点续传清单)。
+发射器重跑后 BOM 纳入 thumbs, hfpackage 11 资产哈希链复算 ALL OK。
+脚本: scripts/render_thumbs_batch.py (manifest 驱动, 可断点重放)。

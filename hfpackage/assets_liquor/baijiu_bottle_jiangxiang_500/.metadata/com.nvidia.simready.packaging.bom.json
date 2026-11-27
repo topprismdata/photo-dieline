@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/baijiu_bottle_jiangxiang_500.usdc.png",
+   "size": 113520,
+   "hash": {
+    "sha256": "a976e83bd519085768d2c8df47279e236c081dadcd41696dcf408349ff3043bb"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/baijiu_bottle_jiangxiang_500.usdc_light.png",
+   "size": 113520,
+   "hash": {
+    "sha256": "876297e8d3786c8df664872ec54c2381f2462c67718cdfa3cffd4b7bb4d3c82f"
+   }
+  },
+  {
    "relative_path": "simready_usd/baijiu_bottle_jiangxiang_500.usdc",
    "size": 25197,
    "hash": {

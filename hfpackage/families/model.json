@@ -1,0 +1,15 @@
+{
+ "author": "Topprism",
+ "asset_name": "rsc_rsc_closed",
+ "asset_type": "prop",
+ "asset_license": "CC-BY-4.0",
+ "category": "rsc_rsc_closed",
+ "source_file": "./rsc_rsc_closed.usdc",
+ "rigid_body_count": 5,
+ "mass": 0.0938,
+ "asset_extents": [
+  0.1939,
+  0.1212,
+  0.097
+ ]
+}

@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/liquor_gift_dual.usdc.png",
+   "size": 129385,
+   "hash": {
+    "sha256": "22e9355418e459ee6d03466071f7eb24e19dd13505572319e37debabf5aade21"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/liquor_gift_dual.usdc_light.png",
+   "size": 129385,
+   "hash": {
+    "sha256": "5ea7c3be47d3f8b51d68ec020839af655cd10f2e0480aa2c73dff7e2a8e1efd2"
+   }
+  },
+  {
    "relative_path": "simready_usd/liquor_gift_dual.usdc",
    "size": 5074,
    "hash": {

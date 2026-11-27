@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/baijiu_bottle_500.usdc.png",
+   "size": 119377,
+   "hash": {
+    "sha256": "8fcb91dd5854a873ecbaef3b98134ec7a6c7e40aaa310b65cade4dfc6f0f7141"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/baijiu_bottle_500.usdc_light.png",
+   "size": 119377,
+   "hash": {
+    "sha256": "149d99b70ae37b08df4f8f514001d9bac4e5dea671087745c343441f868dffb5"
+   }
+  },
+  {
    "relative_path": "simready_usd/baijiu_bottle_500.usdc",
    "size": 29145,
    "hash": {

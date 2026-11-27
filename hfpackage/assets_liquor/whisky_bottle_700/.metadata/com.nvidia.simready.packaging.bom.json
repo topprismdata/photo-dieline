@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/whisky_bottle_700.usdc.png",
+   "size": 116470,
+   "hash": {
+    "sha256": "c427ed117228c8d18b966a6b11998601db14b6118837121d0ad9f30968a65be4"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/whisky_bottle_700.usdc_light.png",
+   "size": 116470,
+   "hash": {
+    "sha256": "eff71616387da8b56c2690726bab0191001401907375ecaaebf8ea122f3fa0cb"
+   }
+  },
+  {
    "relative_path": "simready_usd/metadata.json",
    "size": 1465,
    "hash": {

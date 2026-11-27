@@ -1,0 +1,35 @@
+{
+ "format_version": "1.0",
+ "profile": "Package",
+ "profile_version": "1.0.0",
+ "timestamp": "2026-11-27T01:31:14",
+ "assets": [
+  {
+   "asset": "com.nvidia.simready.packaging.json",
+   "features": [
+    {
+     "FET_030_STANDARD": {
+      "version": "0.1.0",
+      "passed": true,
+      "failing_requirements": [],
+      "dependencies": []
+     }
+    },
+    {
+     "FET_032_STANDARD": {
+      "version": "0.1.0",
+      "passed": true,
+      "failing_requirements": [],
+      "dependencies": [
+       {
+        "FET_030_STANDARD": {
+         "version": "0.1.0"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

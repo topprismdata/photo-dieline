@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/vodka_bottle_700.usdc.png",
+   "size": 129728,
+   "hash": {
+    "sha256": "2d0dcc6e55e016a322a8f4063802a471d0127157b5d8515f1e368cbf2a655f0e"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/vodka_bottle_700.usdc_light.png",
+   "size": 129728,
+   "hash": {
+    "sha256": "df056d08396f3866b8ea96a7c3071711b184e58bb6b2b9179f5a93b789c470ce"
+   }
+  },
+  {
    "relative_path": "simready_usd/metadata.json",
    "size": 1459,
    "hash": {

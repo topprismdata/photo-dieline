@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/pet_bottle_500.usdc.png",
+   "size": 113244,
+   "hash": {
+    "sha256": "872da1305c5dc22e4996a3a709c6b5711a51317f6f1608eec5ecf66c83d1b4fc"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/pet_bottle_500.usdc_light.png",
+   "size": 113244,
+   "hash": {
+    "sha256": "109a32d88f64d63fc19be7a0cc84556c2e5f1ec5b594c929cfa06c2adb1a24e5"
+   }
+  },
+  {
    "relative_path": "simready_usd/metadata.json",
    "size": 1194,
    "hash": {

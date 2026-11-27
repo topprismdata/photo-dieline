@@ -16,6 +16,20 @@
    }
   },
   {
+   "relative_path": "simready_usd/.thumbs/256x256/wine_bottle_750.usdc.png",
+   "size": 129550,
+   "hash": {
+    "sha256": "b22ce755250fb4419dff47df916d6bdda7d38b41fae52e3d491bd1c7ec336e27"
+   }
+  },
+  {
+   "relative_path": "simready_usd/.thumbs/256x256/wine_bottle_750.usdc_light.png",
+   "size": 129550,
+   "hash": {
+    "sha256": "0effa56d9dc3dbb5b023a433ed33c6d18116a0cca704625c338974214b0868e2"
+   }
+  },
+  {
    "relative_path": "simready_usd/metadata.json",
    "size": 1471,
    "hash": {

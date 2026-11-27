@@ -1,0 +1,110 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": ".thumbs/256x256/beverage_can_330.usdc.png",
+   "size": 119061,
+   "hash": {
+    "sha256": "f77d4af296c8eed50c2df34214f0c68901682d08f71e0f8dc77092aa23b482f8"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/beverage_can_330.usdc_light.png",
+   "size": 119061,
+   "hash": {
+    "sha256": "b811aaef46e6c067201937213339d1e0377d551423c367bf584c6c3f45acc426"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/bottle_wine.usdc.png",
+   "size": 129643,
+   "hash": {
+    "sha256": "77d624db9fd53ec746b625b6eaff8985a40705b2b24c8150ec6648d04aad012e"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/bottle_wine.usdc_light.png",
+   "size": 129643,
+   "hash": {
+    "sha256": "d3f767c17b94c85ac8cbcc2306b1fe394b788d87104627c6569b1c2607a035a0"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/food_container_1l.usdc.png",
+   "size": 117708,
+   "hash": {
+    "sha256": "ffd28484b50bc4739e2faf823a96293b78dd996caf81840568af723c86c21482"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/food_container_1l.usdc_light.png",
+   "size": 117708,
+   "hash": {
+    "sha256": "4d980ad90ed742803268dc8c653097e086e07c54a676a22fa76a9e8193e6358e"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/rsc_rsc_closed.usdc.png",
+   "size": 114066,
+   "hash": {
+    "sha256": "4a12d7d5a59af0ca2bdb8a4aca3b9087acdaee7063cce39c82a602fe92b79b15"
+   }
+  },
+  {
+   "relative_path": ".thumbs/256x256/rsc_rsc_closed.usdc_light.png",
+   "size": 114066,
+   "hash": {
+    "sha256": "a9c69ce86e53fa58126a523e8be005f09c0b74e5d0d3f000755d69bcc3657990"
+   }
+  },
+  {
+   "relative_path": "beverage_can_330.usdc",
+   "size": 161584,
+   "hash": {
+    "sha256": "a098e58e9a46c0dada447f6ba9297280607e8ef6130666640f069abcd5ba7dcb"
+   }
+  },
+  {
+   "relative_path": "bottle_wine.usdc",
+   "size": 136738,
+   "hash": {
+    "sha256": "ce0d380ca7777867b274e2edb3e346805d13bc92749b6368c440e386bf18337c"
+   }
+  },
+  {
+   "relative_path": "food_container_1l.usdc",
+   "size": 147764,
+   "hash": {
+    "sha256": "08a4a98c5949361ae8b72a34d407d3950dfc3789adb8d7312bdf770933486309"
+   }
+  },
+  {
+   "relative_path": "hinged_family_v6.py",
+   "size": 41274,
+   "hash": {
+    "sha256": "ca7f9cc9599b78aeac294649086fa2e9b92d36d15fe2e0e15b98a4215b4efb67"
+   }
+  },
+  {
+   "relative_path": "meta.json",
+   "size": 264,
+   "hash": {
+    "sha256": "81d5c4a143b734d7ee52ce4e355b2829ae00af67e670ba643894f8b0ce7e5bb3"
+   }
+  },
+  {
+   "relative_path": "model.json",
+   "size": 277,
+   "hash": {
+    "sha256": "06cf2f9d5d931b2f79e1ec6d97364e909b53cb0b835170e5569adc44d4a72796"
+   }
+  },
+  {
+   "relative_path": "rsc_rsc_closed.usdc",
+   "size": 4537,
+   "hash": {
+    "sha256": "e27e297d552ced7dce046ab3ea764f0be41186ca4a086efdc013b5431c499cce"
+   }
+  }
+ ]
+}
