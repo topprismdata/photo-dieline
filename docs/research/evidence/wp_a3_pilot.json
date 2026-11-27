@@ -1,0 +1,36 @@
+{
+ "blank": "FAIL",
+ "folded": "FAIL",
+ "folded_findings": [
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary",
+  "closure:solid-with-open-boundary"
+ ],
+ "folded_disputed": [],
+ "folded_bbox_m": [
+  0.09549,
+  0.03819,
+  0.13858
+ ],
+ "analytic": "{'W': 95.485, 'D': 38.194, 'H': 138.582}",
+ "delta_mm": {
+  "W": 0.005,
+  "D": 0.004,
+  "H": 0.002
+ },
+ "delta_note": "analytic {W:95.485,D:38.194,H:138.582} vs folded bbox mm [95.49,38.19,138.58] — 差异为浮点舍入级(<0.01mm), 尺寸正确性 CONFIRMED",
+ "verdict_notes": {
+  "blank": "FAIL: net 展开图 5 条重复有向边+边界不可走 — 真实 net 排样拓扑缺陷 (D1 次根因)",
+  "folded": "FAIL: 12 开壳 (fold 树 net 键焊接未生效) + 空间焊接变体剩 1 孤立三角 — 焊接完备性待修",
+  "dimension": "CONFIRMED — 撤回 NOT CONFIRMED 的部分就绪"
+ }
+}
