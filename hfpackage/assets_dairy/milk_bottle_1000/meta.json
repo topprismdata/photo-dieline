@@ -1,0 +1,17 @@
+{
+ "object_id": "tpd_milk_bottle_1000",
+ "category_id": "dairy",
+ "category": "milk_bottle_1000",
+ "title": "milk_bottle_1000",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "center_of_mass_m": [
+  -Infinity,
+  -Infinity,
+  -Infinity
+ ],
+ "provenance": "parametric"
+}

@@ -7,14 +7,17 @@ FAMILY = "dairy"
 
 CLASSES = [
     "yogurt_cup_160",
+    "milk_bottle_1000",
 ]
 
 DEFAULTS = {
     "yogurt_cup_160": {"H": 92.0, "D": 58.0},
+    "milk_bottle_1000": {"H": 235.0, "D": 85.0},
 }
 
 MAT_PP_CUP = "plastic_pp"
 MAT_ALU_FOIL = "metal_alu"
+MAT_HDPE_MILK = "plastic_hdpe"
 
 
 def _lathe_closed(name, loop, mat, n=96):
@@ -91,6 +94,29 @@ def _yogurt_cup(H, D):
     return P
 
 
+def _milk_bottle(H, D):
+    """HDPE 鲜奶瓶 1L: 方圆肩身 + 大口径短颈 + 螺旋盖 (半透明奶白)。"""
+    R = D / 2.0
+    wall = 1.6
+    neck_r = R * 0.42
+    cap_r = neck_r + 3.0
+    outer = [
+        (R * 0.74, 0.0), (R * 0.94, 5.0), (R, 18.0), (R, H * 0.52),
+        (R * 0.94, H * 0.66), (R * 0.80, H * 0.74), (neck_r + wall, H * 0.80),
+        (neck_r + wall, H - 14.0), (neck_r, H - 14.0), (neck_r, H - 14.0 - wall),
+        (neck_r + wall, H - 14.0 - wall), (neck_r + wall, H * 0.80),
+    ]
+    inner = [(max(r - wall, 1.0), z) for r, z in reversed(outer[1:-1])]
+    loop = outer + inner + [outer[0]]
+    P = [_lathe_closed("hdpe_shell", loop, MAT_HDPE_MILK, n=96)]
+    cap = [(cap_r * 0.82, H - 14.0 - wall), (cap_r, H - 12.0),
+           (cap_r, H - 2.0), (cap_r * 0.9, H), (cap_r * 0.55, H),
+           (cap_r * 0.55, H - 12.0)]
+    P.append(_lathe_closed("screw_cap", cap + [cap[0]], MAT_ALU_FOIL, n=64))
+    return P
+
+
+
 def build_parts(params: dict) -> list[dict]:
     cid = CLASSES[0]
     if isinstance(params, dict) and params.get("class_id") in DEFAULTS:
@@ -98,4 +124,6 @@ def build_parts(params: dict) -> list[dict]:
     D0 = DEFAULTS[cid]
     if cid == "yogurt_cup_160":
         return _yogurt_cup(D0["H"], D0["D"])
+    if cid == "milk_bottle_1000":
+        return _milk_bottle(D0["H"], D0["D"])
     raise KeyError(f"unknown class {cid}")

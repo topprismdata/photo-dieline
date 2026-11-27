@@ -68,7 +68,7 @@ directory) should be consulted before using assets in a specific simulation or r
 |---|---|---|---|
 | Liquor & beverage | beverage_liquor | 16 (beer bottles 330/500, can 500, baijiu ×3 profiles, wine ×2, whisky ×3, vodka ×2, PET 500/1500, gift box) | G-F1..F7 pass · usdc · spec 16/16 · **NVIDIA validator 16/16** |
 | Rigid legacy | beverage_can_330 / bottle_wine / food_container_1l / rsc | 4 | usdc (included in the 176 NVIDIA-validated) |
-| Dairy | dairy | 1 (yogurt cup 160, PP cup + foil seal) | G-F1..F7 pass · usdc · spec 1/1 · **NVIDIA validator PASS** |
+| Dairy | dairy | 2 (yogurt cup 160 · PP cup + foil seal; milk bottle 1000 · HDPE + screw cap) | G-F1..F7 pass · usdc · spec 1/1 · **NVIDIA validator PASS** |
 
 Also in the repository (not shipped as USD in this dataset version): parametric paper-packaging
 families (gable/clv/cone, TDE engine, ~25 variants with a 5010-sample training corpus) and

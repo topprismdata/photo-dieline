@@ -1,0 +1,40 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 323,
+   "hash": {
+    "sha256": "0d3f45882796d6f4e85ba889c5b3a8826db77ecfd47505475cf45d9bf2cbb0db"
+   }
+  },
+  {
+   "relative_path": "renders/milk_bottle_1000.png",
+   "size": 253451,
+   "hash": {
+    "sha256": "8d59cf2ef6df22fa6af05c807f831e408be44bf0e9e203418d173395923c7dad"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1192,
+   "hash": {
+    "sha256": "23cbdf694b07b12f89eccd402b65e5fdc6819099d7ccbb049747eea512321b03"
+   }
+  },
+  {
+   "relative_path": "simready_usd/milk_bottle_1000.usdc",
+   "size": 34111,
+   "hash": {
+    "sha256": "887550da1ae36ffe2aa5320fb328389a60904c200d804a621cde7f4401a71df7"
+   }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 251,
+   "hash": {
+    "sha256": "dede4f474e9d809a66b8015e9ee2d338b25a7497d2128c6d65d2e3dce1eb1ce6"
+   }
+  }
+ ]
+}

@@ -218,6 +218,12 @@
    "product_category": "yogurt",
    "packaging_structure": "cup",
    "closure": "foil_seal"
+  },
+  {
+   "asset": "milk_bottle_1000",
+   "product_category": "milk",
+   "packaging_structure": "glass_bottle_straight",
+   "closure": "screw_cap"
   }
  ],
  "rules": [
