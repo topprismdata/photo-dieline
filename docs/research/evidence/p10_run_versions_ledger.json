@@ -1,0 +1,19 @@
+{
+ "_meta": {
+  "note": "R22 §2.4 要求: 两个独立运行版本均保留, 不得覆盖",
+  "date": "2026-11-28"
+ },
+ "P10-RUN-01": {
+  "mapping": "排序赋值 (sorted desc → W,D,H)",
+  "status": "SUPERSEDED_BUT_RETAINED",
+  "evidence": "p10_channel_a_compile.json 初版 + p10_cmp01_initial.json 初版 Chamfer ~40mm",
+  "result": "5/10 OK; Chamfer 含轴向伪影"
+ },
+ "P10-RUN-02": {
+  "mapping": "PDF 原序 W×D×H (FZ05 修正)",
+  "status": "CURRENT",
+  "evidence": "p10_cmp01_initial.json 现版 (compiled_xyz_mm=PDF序) + Chamfer 2.65-21.65mm",
+  "result": "5/10 OK; 形状修正后实测"
+ },
+ "provenance_note": "实际时间线: RUN-01 于 D2-D3 执行 (DIM-01 表基于排序语义仍有效, 因 DIM-01 用排序对照); RUN-02 于 D4 修正后重编译并仅重测 5 box 件 Chamfer/形状轴; 棱柱 5 件不受赋值影响 (prism 参数 side/h 无排序语义)"
+}
