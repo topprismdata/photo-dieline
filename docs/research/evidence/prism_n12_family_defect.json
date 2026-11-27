@@ -1,0 +1,53 @@
+{
+ "_meta": {
+  "finding": "prism n12 家族折叠/拓扑闭合数值仅特定 side 窄带成立 (family-level latent defect)",
+  "date": "2026-11-28",
+  "workline": "WP-FG-01 家族异常治理证据",
+  "discovered_via": "WP1-P10-YCB 通道A census"
+ },
+ "defect_scope": {
+  "classes": [
+   "prism_dust_n12",
+   "prism_n12_tuck",
+   "prism_n12_open"
+  ],
+  "gate": "G04 (dust) / G03 (tuck, open) — 折叠闭合与拓扑闭合",
+  "input_independence": "合法样本域变体 (sample_variant grid, side=58.31) 同样失败 → 非输入问题"
+ },
+ "boundary_sweep": {
+  "prism_dust_n12": {
+   "pass_band": "side ∈ [59.9, 60.1] (h 全域通过)",
+   "fail_outside": "side=15..58.99, 61..90 全 FAIL (含 h=30..245 全网格)",
+   "test_matrix": "side×h = 7×5 网格"
+  },
+  "prism_n12_tuck": {
+   "pass": [
+    60.0,
+    90.0
+   ],
+   "fail": [
+    17.7,
+    60.1
+   ]
+  },
+  "prism_n12_open": {
+   "pass": [
+    60.0,
+    90.0
+   ],
+   "fail": [
+    17.7,
+    59.9,
+    60.1
+   ]
+  },
+  "cone_wrap_n12": "glue 面板退化拒收 (side<60 时)"
+ },
+ "mathematical_expectation": "正 n 棱柱折叠闭合应与 side 无关 (几何相似缩放不变量) — 现实现破坏该不变量",
+ "suspected_root_cause": "折叠引擎数值容差与 side 耦合 (硬编码尺度假设), 精确根因待 WP-FG-01 取证",
+ "pilot10_impact": {
+  "channel_A_census": "5/10 box 项 OK; 5/10 cylinder/bottle 项 QA_FAIL (家族缺陷, 如实在分母)",
+  "no_silent_swap": "未暗中换家族规避; FZ05 映射保持原冻结, 缺陷如实上报"
+ },
+ "note": "NVSDK 结构验证 10/10 全过 (含 QA_FAIL 件) — 结构合法性与折叠闭合 QA 是两层独立评价, 双轨登记"
+}

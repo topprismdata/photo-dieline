@@ -1,0 +1,682 @@
+{
+ "_meta": {
+  "protocol": "WP1-P10-YCB 通道A 规格驱动",
+  "frozen": "2026-11-28",
+  "census": 10,
+  "census_result": "5/10 OK (box) + 5/10 QA_FAIL (prism_n12 家族固有闭合缺陷, 见 prism_n12_family_defect.json)",
+  "nvsdk_all": "10/10 结构 PASS"
+ },
+ "results": [
+  {
+   "id": "001_chips_can",
+   "cls_id": "prism_dust_n12",
+   "params": {
+    "n": 12,
+    "side": 20.096,
+    "h": 250.0
+   },
+   "status": "QA_FAIL",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "FAIL",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [
+    "G04"
+   ],
+   "stage_dims_m": [
+    0.074999,
+    0.074999,
+    0.25
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0003,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 74.999,
+       "folded": 74.999,
+       "stage": 74.999
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0003,
+      "analytic_vs_stage": 0.0003
+     },
+     "D": {
+      "mm": {
+       "analytic": 74.999,
+       "folded": 74.999,
+       "stage": 74.999
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0003,
+      "analytic_vs_stage": 0.0003
+     },
+     "H": {
+      "mm": {
+       "analytic": 250.0,
+       "folded": 250.0,
+       "stage": 250.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "230fa53c5f6a96f9c5076c36a0d9ffaacbdf348967d5a35d0f248693f8636448"
+  },
+  {
+   "id": "002_master_chef_can",
+   "cls_id": "prism_dust_n12",
+   "params": {
+    "n": 12,
+    "side": 27.331,
+    "h": 139.0
+   },
+   "status": "QA_FAIL",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "FAIL",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [
+    "G04"
+   ],
+   "stage_dims_m": [
+    0.102001,
+    0.102001,
+    0.139
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0003,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 102.001,
+       "folded": 102.001,
+       "stage": 102.001
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0003,
+      "analytic_vs_stage": 0.0003
+     },
+     "D": {
+      "mm": {
+       "analytic": 102.001,
+       "folded": 102.001,
+       "stage": 102.001
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0003,
+      "analytic_vs_stage": 0.0003
+     },
+     "H": {
+      "mm": {
+       "analytic": 139.0,
+       "folded": 139.0,
+       "stage": 139.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "86ddfd6a1ec2b7d11933fc773456d190da62e91d72957378060389a61f49fba9"
+  },
+  {
+   "id": "003_cracker_box",
+   "cls_id": "rsc_css",
+   "params": {
+    "W": 210.0,
+    "D": 158.0,
+    "H": 60.0
+   },
+   "status": "OK",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [],
+   "stage_dims_m": [
+    0.21,
+    0.158,
+    0.06
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 210.0,
+       "folded": 210.0,
+       "stage": 210.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "D": {
+      "mm": {
+       "analytic": 158.0,
+       "folded": 158.0,
+       "stage": 158.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "H": {
+      "mm": {
+       "analytic": 60.0,
+       "folded": 60.0,
+       "stage": 60.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "c04228c5f41778558e130f883278d100b988bfa6456ee70de876c52d1acaefde"
+  },
+  {
+   "id": "004_sugar_box",
+   "cls_id": "rsc_css",
+   "params": {
+    "W": 175.0,
+    "D": 89.0,
+    "H": 38.0
+   },
+   "status": "OK",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [],
+   "stage_dims_m": [
+    0.175,
+    0.089,
+    0.038
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 175.0,
+       "folded": 175.0,
+       "stage": 175.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "D": {
+      "mm": {
+       "analytic": 89.0,
+       "folded": 89.0,
+       "stage": 89.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "H": {
+      "mm": {
+       "analytic": 38.0,
+       "folded": 38.0,
+       "stage": 38.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "6f49e01eb24e96e166dca990a5d0cb1df426715647acf5b1f290c1a1ef16a4ef"
+  },
+  {
+   "id": "005_tomato_soup_can",
+   "cls_id": "prism_dust_n12",
+   "params": {
+    "n": 12,
+    "side": 17.685,
+    "h": 101.0
+   },
+   "status": "QA_FAIL",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "FAIL",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [
+    "G04"
+   ],
+   "stage_dims_m": [
+    0.066001,
+    0.066001,
+    0.101
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0003,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 66.001,
+       "folded": 66.001,
+       "stage": 66.001
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0003,
+      "analytic_vs_stage": 0.0003
+     },
+     "D": {
+      "mm": {
+       "analytic": 66.001,
+       "folded": 66.001,
+       "stage": 66.001
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0003,
+      "analytic_vs_stage": 0.0003
+     },
+     "H": {
+      "mm": {
+       "analytic": 101.0,
+       "folded": 101.0,
+       "stage": 101.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "e575cf233edc2300962f3af98613bd73cd931f15d2356e429c03690644336c7f"
+  },
+  {
+   "id": "006_mustard_bottle",
+   "cls_id": "prism_dust_n12",
+   "params": {
+    "n": 12,
+    "side": 18.087,
+    "h": 175.0,
+    "_approx": "bottle→n12棱柱, Ø=横截面均值"
+   },
+   "status": "QA_FAIL",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "FAIL",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [
+    "G04"
+   ],
+   "stage_dims_m": [
+    0.067502,
+    0.067502,
+    0.175
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0004,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 67.502,
+       "folded": 67.502,
+       "stage": 67.502
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0004,
+      "analytic_vs_stage": 0.0004
+     },
+     "D": {
+      "mm": {
+       "analytic": 67.502,
+       "folded": 67.502,
+       "stage": 67.502
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0004,
+      "analytic_vs_stage": 0.0004
+     },
+     "H": {
+      "mm": {
+       "analytic": 175.0,
+       "folded": 175.0,
+       "stage": 175.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "970b6a83010af2ed90c600e3a50f1bf1db8bca58e7008a5ab0e33617cff56fbf"
+  },
+  {
+   "id": "007_tuna_fish_can",
+   "cls_id": "prism_dust_n12",
+   "params": {
+    "n": 12,
+    "side": 22.776,
+    "h": 33.0
+   },
+   "status": "QA_FAIL",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "FAIL",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [
+    "G04"
+   ],
+   "stage_dims_m": [
+    0.085001,
+    0.085001,
+    0.033
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0002,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 85.001,
+       "folded": 85.001,
+       "stage": 85.001
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0002,
+      "analytic_vs_stage": 0.0002
+     },
+     "D": {
+      "mm": {
+       "analytic": 85.001,
+       "folded": 85.001,
+       "stage": 85.001
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0002,
+      "analytic_vs_stage": 0.0002
+     },
+     "H": {
+      "mm": {
+       "analytic": 33.0,
+       "folded": 33.0,
+       "stage": 33.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "5421c3b65e379093b1c9cd109dc8263b3b40e6030bc054c0126499b7a680c230"
+  },
+  {
+   "id": "008_pudding_box",
+   "cls_id": "rsc_css",
+   "params": {
+    "W": 110.0,
+    "D": 89.0,
+    "H": 35.0
+   },
+   "status": "OK",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [],
+   "stage_dims_m": [
+    0.11,
+    0.089,
+    0.035
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 110.0,
+       "folded": 110.0,
+       "stage": 110.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "D": {
+      "mm": {
+       "analytic": 89.0,
+       "folded": 89.0,
+       "stage": 89.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "H": {
+      "mm": {
+       "analytic": 35.0,
+       "folded": 35.0,
+       "stage": 35.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "37b64b6b1c4b84db26391c154d62738b029e75cd5e1a23d1172fad9965bf66e8"
+  },
+  {
+   "id": "009_gelatin_box",
+   "cls_id": "rsc_css",
+   "params": {
+    "W": 85.0,
+    "D": 73.0,
+    "H": 28.0
+   },
+   "status": "OK",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [],
+   "stage_dims_m": [
+    0.085,
+    0.073,
+    0.028
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 85.0,
+       "folded": 85.0,
+       "stage": 85.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "D": {
+      "mm": {
+       "analytic": 73.0,
+       "folded": 73.0,
+       "stage": 73.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "H": {
+      "mm": {
+       "analytic": 28.0,
+       "folded": 28.0,
+       "stage": 28.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "b2f9e426790472fa392301d842902914e3539dacb3c5a7d35f7acdc1bf3ee85f"
+  },
+  {
+   "id": "010_potted_meat_can",
+   "cls_id": "rsc_css",
+   "params": {
+    "W": 97.0,
+    "D": 82.0,
+    "H": 50.0
+   },
+   "status": "OK",
+   "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+   },
+   "gate_fails": [],
+   "stage_dims_m": [
+    0.097,
+    0.082,
+    0.05
+   ],
+   "reconcile": {
+    "ok": true,
+    "tol_mm": 0.5,
+    "worst_diff_mm": 0.0,
+    "axes": {
+     "W": {
+      "mm": {
+       "analytic": 97.0,
+       "folded": 97.0,
+       "stage": 97.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "D": {
+      "mm": {
+       "analytic": 82.0,
+       "folded": 82.0,
+       "stage": 82.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     },
+     "H": {
+      "mm": {
+       "analytic": 50.0,
+       "folded": 50.0,
+       "stage": 50.0
+      },
+      "analytic_vs_folded": 0.0,
+      "folded_vs_stage": 0.0,
+      "analytic_vs_stage": 0.0
+     }
+    }
+   },
+   "nvsdk_pass": true,
+   "usdc_sha256": "42f91f9574d37f3df77cb2a33dd2211b86d86fef8b1bf82fc7735572c8de07dc"
+  }
+ ]
+}
