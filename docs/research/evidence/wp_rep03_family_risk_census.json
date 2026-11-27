@@ -1,0 +1,40 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workline": "WP-REP-03 全量质量风险普查(只读)",
+  "nine_sku_nvsdk": "9/9 PASS (g2_dim01_nvsdk.json)",
+  "frozen_set_caller_bug_check": "pack10k 经 sample_variant 全参数域生成 -> 无 GOV-IR-01 场景; 实证抽样核验登记待执行"
+ },
+ "family_identity_risk": {
+  "total_families": 77,
+  "all_match": true,
+  "note": "77 家族全 MATCH (rep_identity_governance_ledger per_family)"
+ },
+ "topology_observation": {
+  "closed": 1484,
+  "clean_3d": 9386,
+  "open": 7902
+ },
+ "family_findings_ledger": {
+  "FG-001_food_bento_lid_box": {
+   "finding": "uv:degenerate 5 (G2 对照审计)",
+   "status": "已登记待治理裁决",
+   "evidence": "g2_run_results.json"
+  },
+  "FG-002_food_sushi_tray": {
+   "finding": "dup16 + nonfan2 拓扑",
+   "status": "已登记待治理裁决",
+   "evidence": "同上"
+  },
+  "FG-003_mailer_diecut": {
+   "finding": "nonfan3 刀版多面交汇",
+   "status": "已登记待治理裁决(开壳语义候选)",
+   "evidence": "同上"
+  },
+  "FG-004_prism_n12": {
+   "finding": "RETRACTED — 调用方契约违反",
+   "status": "CLOSED (R23-A)",
+   "evidence": "fg004_closure_report.md"
+  }
+ }
+}

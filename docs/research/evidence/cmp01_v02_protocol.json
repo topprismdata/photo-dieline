@@ -1,0 +1,21 @@
+{
+ "_meta": {
+  "version": "0.2",
+  "date": "2026-11-28",
+  "supersedes": "wp_cmp01_protocol.md v0.1 指标节",
+  "authority": "R22 6.3"
+ },
+ "metric_spec": {
+  "chamfer_formula": "对称 Chamfer: 双向最近邻距离算术平均, 分向登记 compiled->scan 与 scan->compiled (不平方, mm, 另报 P50/P95)",
+  "sampling": "均匀面积采样 n=4000/对象; 种子固定 20261128",
+  "coords": "变换三段分存: 单位换算(m->mm)/轴向(排序对照)/刚性配准(仅质心平移, 无旋转无缩放)",
+  "scale_discipline": "禁止缩放消除尺寸误差; 毫米值+相对物体尺度误差双报",
+  "dual_reference": "每件 google_16k 与 berkeley_meshes 双对照, 参考间 Chamfer=参考不确定性上界; 参考-规格冲突单独登记",
+  "failure_denominator": "分母=census 全件; 未闭合件不入形状对照但保留行登记"
+ },
+ "dual_reference_008": {
+  "finding": "google_16k vs berkeley 系互 Chamfer 15-18mm; berkeley 系互 2-2.9mm -> google_16k = 离群参考",
+  "attribution_update": "008 Chamfer 21.65mm 主因=参考侧异常(google_16k); 参数化侧误差待以 berkeley 参考重算",
+  "new_conflict": "berkeley 两变体一致但深度轴 vs 官方 PDF 74.6/84.1 vs 35mm -> 参考-规格冲突待裁决"
+ }
+}

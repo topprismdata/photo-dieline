@@ -1,0 +1,79 @@
+{
+ "_meta": {
+  "purpose": "R23-C \u53cc\u53c2\u8003\u4ea4\u53c9\u9a8c\u8bc1: \u5206\u79bb\u53c2\u8003\u7f51\u683c\u4e0d\u786e\u5b9a\u6027\u4e0e\u53c2\u6570\u5316\u8bef\u5dee (008 pudding \u4e3a Chamfer \u6700\u5927\u4ef6)",
+  "date": "2026-11-28",
+  "unit": "mm, \u8d28\u5fc3\u5bf9\u9f50\u539f\u59cb\u5c3a\u5ea6, \u91c7\u6837 n=4000",
+  "official_sorted_mm": [
+   110.0,
+   89.0,
+   35.0
+  ]
+ },
+ "variants": {
+  "google_16k": {
+   "ext_sorted_mm": [
+    137.9,
+    128.8,
+    38.9
+   ],
+   "rel_err_vs_official_pct": [
+    25.4,
+    44.67,
+    11.11
+   ],
+   "faces": 16384
+  },
+  "poisson": {
+   "ext_sorted_mm": [
+    111.9,
+    89.8,
+    74.6
+   ],
+   "rel_err_vs_official_pct": [
+    1.7,
+    0.87,
+    113.22
+   ],
+   "faces": 17256
+  },
+  "tsdf": {
+   "ext_sorted_mm": [
+    105.8,
+    97.9,
+    84.1
+   ],
+   "rel_err_vs_official_pct": [
+    3.78,
+    9.96,
+    140.42
+   ],
+   "faces": 20478
+  }
+ },
+ "cross_chamfer": {
+  "google_16k__poisson": {
+   "compiled_to_ref_mean": 18,
+   "ref_to_compiled_mean": 15.15,
+   "p95": [
+    28.38,
+    36.31
+   ]
+  },
+  "google_16k__tsdf": {
+   "compiled_to_ref_mean": 16,
+   "ref_to_compiled_mean": 15.15,
+   "p95": [
+    28.58,
+    33.07
+   ]
+  },
+  "poisson__tsdf": {
+   "compiled_to_ref_mean": 2,
+   "ref_to_compiled_mean": 2.88,
+   "p95": [
+    10.38,
+    5.89
+   ]
+  }
+ }
+}
