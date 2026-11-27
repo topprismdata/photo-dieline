@@ -1,0 +1,2006 @@
+[
+ {
+  "file": "aseptic_aseptic_brick_v0000",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "brick_brick_250ml_v0001",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "clamp_clamp_shell_v0002",
+  "shells": [
+   {
+    "closed": true,
+    "tris": 12,
+    "boundary_edges": 0
+   }
+  ],
+  "G01": true,
+  "G02": false,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [
+   "Body:G02 closed shell vol -0.00 <= 0 (inward)",
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_double_cover_v0084",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_double_tuck_v0057",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_glue_seal_v0030",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_hinged_flap_v0003",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_partial_lid_v0165",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_snap_lock_v0138",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_tuck_insert_v0111",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "cone_cone_wrap_n12_v0004",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "crashlock_crashlock_rect_tuck_v0005",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 10
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "cup_cup_sleeve_v0006",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "dispenser_dispenser_top_v0007",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "display_display_counter_v0008",
+  "shells": [
+   {
+    "closed": true,
+    "tris": 12,
+    "boundary_edges": 0
+   }
+  ],
+  "G01": true,
+  "G02": false,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [
+   "Body:G02 closed shell vol -0.00 <= 0 (inward)",
+   "Body:G03 degenerate UV faces 4"
+  ],
+  "G05": true
+ },
+ {
+  "file": "envelope_envelope_square_v0036",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 2,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 2,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "envelope_envelope_wedge_v0009",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 2,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 2,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "food_food_bento_lid_box_v0091",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 10
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G03 degenerate UV faces 5"
+  ],
+  "G05": true
+ },
+ {
+  "file": "food_food_clamshell_burger_v0064",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 22,
+    "boundary_edges": 14
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 22,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "food_food_fries_sleeve_v0037",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "food_food_noodle_pail_v0010",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 40,
+    "boundary_edges": 28
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 40,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "food_food_sushi_tray_v0172",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 46,
+    "boundary_edges": 42
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 16,
+  "cracks": 0,
+  "faces": 46,
+  "issues": [
+   "Body:G01 duplicate directed edges 16",
+   "Body:G02 open-shell flipped adjacent tris 16"
+  ],
+  "G05": true
+ },
+ {
+  "file": "food_food_tray_liner_v0145",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 17,
+    "boundary_edges": 15
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 6,
+  "cracks": 0,
+  "faces": 17,
+  "issues": [
+   "Body:G01 duplicate directed edges 6",
+   "Body:G01 odd boundary edges 15 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 6"
+  ],
+  "G05": true
+ },
+ {
+  "file": "food_food_wrap_pocket_v0118",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "gable_gable_rect_base_v0038",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 14,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 14,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "gable_gable_window_front_v0011",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 22
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "handle_handle_box_v0012",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "hanger_hanger_box_v0013",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "hexagonal_hexagonal_flip_v0014",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "lockbottom_lockbottom_123_v0015",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "mailer_mailer_diecut_v0016",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 15,
+    "boundary_edges": 19
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 15,
+  "issues": [
+   "Body:G01 odd boundary edges 19 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "pillow_pillow_box_v0017",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 4,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 4,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_dust_n4_v4203",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 15,
+    "boundary_edges": 23
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 15,
+  "issues": [
+   "Body:G01 odd boundary edges 23 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_dust_n5_v4932",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 19,
+    "boundary_edges": 29
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 19,
+  "issues": [
+   "Body:G01 odd boundary edges 29 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n10_open_v1017",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 20
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n10_tuck_v0990",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 20
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n11_open_v0207",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 22,
+    "boundary_edges": 22
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 22,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n11_tuck_v3204",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 22,
+    "boundary_edges": 22
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 22,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n12_open_v0153",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n12_tuck_v0882",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n4_open_v0099",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n4_tuck_v0072",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n5_open_v0045",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 10
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n5_tuck_v1530",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 10
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n6_open_v0747",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n6_tuck_v0720",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n7_open_v3717",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 14,
+    "boundary_edges": 14
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 14,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n7_tuck_v2178",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 14,
+    "boundary_edges": 14
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 14,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n8_open_v0639",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n8_tuck_v0612",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n9_open_v0585",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 18,
+    "boundary_edges": 18
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 18,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_n9_tuck_v1314",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 18,
+    "boundary_edges": 18
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 18,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "prism_prism_tuck_window_v0531",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 21,
+    "boundary_edges": 25
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 21,
+  "issues": [
+   "Body:G01 odd boundary edges 25 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n10_v0208",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 20
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n12_v0073",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n4_v0154",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n5_v0019",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 10
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n6_v0100",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n7_v0181",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 14,
+    "boundary_edges": 14
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 14,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n8_v0046",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n9_v0127",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 18,
+    "boundary_edges": 18
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 18,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "rsc_rsc_handhole_v0020",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "rsc_rsc_rsc_v0047",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "slide_slide_box_v0021",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 17,
+    "boundary_edges": 19
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 17,
+  "issues": [
+   "Body:G01 odd boundary edges 19 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tray_tray_4corner_v0130",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tray_tray_6corner_v0076",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 17,
+    "boundary_edges": 25
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 6,
+  "cracks": 0,
+  "faces": 17,
+  "issues": [
+   "Body:G01 duplicate directed edges 6",
+   "Body:G01 odd boundary edges 25 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 6"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tray_tray_domelid_v0022",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tray_tray_lid_overfit_v0103",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tray_tray_wedge_v0049",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tube_tube_cap_end_v2075",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 32,
+    "boundary_edges": 32
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 32,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "tube_tube_double_seam_v0131",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "tube_tube_glue_n24_v4343",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 48,
+    "boundary_edges": 48
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 48,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "tube_tube_glue_n8_v1049",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "tube_tube_glue_v0482",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 32,
+    "boundary_edges": 32
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 32,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "tuck_tuck_top_box_v0024",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "two_two_piece_v0025",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "window_window_box_v0026",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 17,
+    "boundary_edges": 21
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 17,
+  "issues": [
+   "Body:G01 odd boundary edges 21 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "cone_cone_wrap_n12_v9481",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "brick_brick_250ml_v1081",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "handle_handle_box_v2253",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "food_food_wrap_pocket_v1819",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "envelope_envelope_wedge_v8109",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 2,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 2,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "cup_cup_sleeve_v1977",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "cone_cone_wrap_n12_v5566",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "two_two_piece_v9880",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "clv_clv_tuck_insert_v0678",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n7_v0397",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 14,
+    "boundary_edges": 14
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 14,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "brick_brick_250ml_v4078",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "brick_brick_250ml_v3214",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "cone_cone_wrap_n12_v1678",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "envelope_envelope_wedge_v4059",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 2,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 2,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "food_food_fries_sleeve_v2872",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 10,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 10,
+  "issues": [
+   "Body:G03 degenerate UV faces 3"
+  ],
+  "G05": true
+ },
+ {
+  "file": "tuck_tuck_top_box_v2130",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "brick_brick_250ml_v1756",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "window_window_box_v6938",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 17,
+    "boundary_edges": 21
+   }
+  ],
+  "G01": false,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 17,
+  "issues": [
+   "Body:G01 odd boundary edges 21 (crack)"
+  ],
+  "G05": true
+ },
+ {
+  "file": "display_display_counter_v8216",
+  "shells": [
+   {
+    "closed": true,
+    "tris": 12,
+    "boundary_edges": 0
+   }
+  ],
+  "G01": true,
+  "G02": false,
+  "G03": false,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [
+   "Body:G02 closed shell vol -0.00 <= 0 (inward)",
+   "Body:G03 degenerate UV faces 4"
+  ],
+  "G05": true
+ },
+ {
+  "file": "two_two_piece_v9691",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 16,
+    "boundary_edges": 16
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 16,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n6_v1612",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 12,
+    "boundary_edges": 12
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 12,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "envelope_envelope_wedge_v5625",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 2,
+    "boundary_edges": 4
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 2,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "rsc_rsc_rsc_v6959",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "handle_handle_box_v3630",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "aseptic_aseptic_brick_v2889",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 20,
+    "boundary_edges": 7
+   }
+  ],
+  "G01": false,
+  "G02": false,
+  "G03": true,
+  "seams": 7,
+  "cracks": 0,
+  "faces": 20,
+  "issues": [
+   "Body:G01 duplicate directed edges 7",
+   "Body:G01 odd boundary edges 7 (crack)",
+   "Body:G02 open-shell flipped adjacent tris 7"
+  ],
+  "G05": true
+ },
+ {
+  "file": "dispenser_dispenser_top_v0871",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "pyramid_pyramid_frustum_n7_v2989",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 14,
+    "boundary_edges": 14
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 14,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "lockbottom_lockbottom_123_v3444",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "handle_handle_box_v3495",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 8,
+    "boundary_edges": 8
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 8,
+  "issues": [],
+  "G05": true
+ },
+ {
+  "file": "cup_cup_sleeve_v9024",
+  "shells": [
+   {
+    "closed": false,
+    "tris": 24,
+    "boundary_edges": 24
+   }
+  ],
+  "G01": true,
+  "G02": true,
+  "G03": true,
+  "seams": 0,
+  "cracks": 0,
+  "faces": 24,
+  "issues": [],
+  "G05": true
+ }
+]

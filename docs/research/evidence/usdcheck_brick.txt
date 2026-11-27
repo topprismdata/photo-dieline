@@ -1,0 +1,6 @@
+
+Validation Result with no explicit variants set
+Error: (usdShadeValidators:MaterialBindingApiAppliedValidator.MissingMaterialBindingAPI) Found material bindings but no MaterialBindingAPI applied on the prim </Asset/Body>.
+	Possible Fixes which can be applied:
+	- ApplyMaterialBindingAPI: Applies the MaterialBindingAPI to the prim..
+Failed!
