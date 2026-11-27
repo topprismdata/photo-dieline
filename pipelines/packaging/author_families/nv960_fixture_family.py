@@ -135,7 +135,7 @@ def build_parts(params: dict) -> list[dict]:
         return P
 
     if cid == "shopping_cart":
-        bw, bh, zb, t = 493.0, 510.0, 220.0, 5.0
+        bw, bh, zb, t = 493.0, params["H"] - 310.0, 220.0, 5.0
         P = [_box("fr_n", -bw / 2, bw / 2 - t, zb, bw / 2, bw / 2, zb + bh, steel),
              _box("fr_s", -bw / 2, -bw / 2, zb, bw / 2, -bw / 2 + t, zb + bh, steel),
              _box("fr_e", bw / 2 - t, -bw / 2, zb, bw / 2, bw / 2, zb + bh, steel),
@@ -150,16 +150,17 @@ def build_parts(params: dict) -> list[dict]:
             for sy, yn in ((-1, "f"), (1, "b")):
                 P.append(_cyl(f"wheel_{xn}{yn}", 42, 0, 20, pp,
                               cx=sx * (bw / 2 - 60), cy=sy * (bw / 2 - 60)))
-        P.append(_box("handle", -bw / 2, -bw / 2 - 8, zb + bh, bw / 2, -bw / 2 + 4, 775.0, steel))
-        # 载货 (使用态): 篮内 3 箱 + 顶挂 1 袋
+        P.append(_box("handle", -bw / 2, -bw / 2 - 8, zb + bh, bw / 2, -bw / 2 + 4, params["H"], steel))
+        # 载货 (使用态): 篮内 3 箱 + 顶挂 1 袋 — 顶全部钳到篮框上沿内 (随 H 参数化)
         zbase = zb + 10
-        P.append(_box("cargo_a", -bw / 2 + 40, -bw / 2 + 30, zbase, -bw / 2 + 240, bw / 2 - 60, zbase + 220, "paper_kraft"))
-        P.append(_box("cargo_b", -bw / 2 + 250, -bw / 2 + 30, zbase, bw / 2 - 30, bw / 2 - 200, zbase + 180, "paper_kraft"))
-        P.append(_box("cargo_c", -bw / 2 + 250, bw / 2 - 190, zbase, bw / 2 - 30, bw / 2 - 30, zbase + 150, "paper_kraft"))
-        P.append(_box("cargo_bag", bw / 2 - 220, -bw / 2 + 20, zb + bh - 10, bw / 2 - 40, bw / 2 - 40, zb + bh + 90, pp))
-        P.append(_box("cargo_d", -bw / 2 + 50, -bw / 2 + 40, zbase + 230, -bw / 2 + 230, bw / 2 - 70, zbase + 400, "paper_kraft"))
-        P.append(_box("cargo_e", bw / 2 - 230, -bw / 2 + 40, zbase + 190, bw / 2 - 40, bw / 2 - 210, zbase + 360, "paper_kraft"))
-        P.append(_box("cargo_f", -bw / 2 + 60, bw / 2 - 180, zbase + 160, -bw / 2 + 230, bw / 2 - 40, zbase + 300, "paper_kraft"))
+        ztop = zb + bh - 10  # 篮框内沿
+        P.append(_box("cargo_a", -bw / 2 + 40, -bw / 2 + 30, zbase, -bw / 2 + 240, bw / 2 - 60, min(zbase + 220, ztop), "paper_kraft"))
+        P.append(_box("cargo_b", -bw / 2 + 250, -bw / 2 + 30, zbase, bw / 2 - 30, bw / 2 - 200, min(zbase + 180, ztop), "paper_kraft"))
+        P.append(_box("cargo_c", -bw / 2 + 250, bw / 2 - 190, zbase, bw / 2 - 30, bw / 2 - 30, min(zbase + 150, ztop), "paper_kraft"))
+        P.append(_box("cargo_bag", bw / 2 - 220, -bw / 2 + 20, zb + bh - 10, bw / 2 - 40, bw / 2 - 40, params["H"], pp))
+        P.append(_box("cargo_d", -bw / 2 + 50, -bw / 2 + 40, zbase + 230, -bw / 2 + 230, bw / 2 - 70, min(zbase + 400, ztop), "paper_kraft"))
+        P.append(_box("cargo_e", bw / 2 - 230, -bw / 2 + 40, zbase + 190, bw / 2 - 40, bw / 2 - 210, min(zbase + 360, ztop), "paper_kraft"))
+        P.append(_box("cargo_f", -bw / 2 + 60, bw / 2 - 180, zbase + 160, -bw / 2 + 230, bw / 2 - 40, min(zbase + 300, ztop), "paper_kraft"))
         return P
 
     if cid == "barcode_scanner":
