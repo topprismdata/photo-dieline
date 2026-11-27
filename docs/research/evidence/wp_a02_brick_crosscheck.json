@@ -1,0 +1,48 @@
+{
+ "sku": "aseptic_aseptic_brick_v0000",
+ "raw_index_caliber": {
+  "duplicate_directed_edges": [
+   [
+    1,
+    3
+   ],
+   [
+    3,
+    9
+   ],
+   [
+    6,
+    8
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    8,
+    10
+   ],
+   [
+    9,
+    7
+   ],
+   [
+    10,
+    6
+   ]
+  ],
+  "bbox_mm_extent": [
+   0.0955,
+   0.0382,
+   0.1386
+  ],
+  "flat_axis": "Y (extent==0)"
+ },
+ "diagnostic_topology_caliber": {
+  "trimesh_watertight": true,
+  "trimesh_watertight_artifact": "顶点副本使索引边配对假性闭合; 几何重复边仍存在",
+  "undirected_edge_facecount": {},
+  "volume": -0.00024051370843352216
+ },
+ "verdict": "D1 实锤: 平板化(展开态)+重复有向边; 修复须定位生成端首个退化阶段 (WP-A2)"
+}

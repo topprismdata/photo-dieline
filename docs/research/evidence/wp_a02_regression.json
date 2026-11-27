@@ -1,0 +1,37 @@
+{
+ "base_24_cases": "scripts/wp_a01_selftest.py 全部 PASS (v2.2 语义, 见会话日志)",
+ "targeted_regressions": [
+  {
+   "case": "T18-corner-swap-demotion",
+   "expect": "mixed-sign 只记观测不 FAIL",
+   "result": "PASS"
+  },
+  {
+   "case": "T11-disputed-known-truth",
+   "expect": "known_truth=True 时 DISPUTED 升格 FAIL",
+   "result": "PASS"
+  },
+  {
+   "case": "T24-unknown-contract",
+   "expect": "无客观缺陷+未登记契约 → CONTRACT_UNKNOWN",
+   "result": "PASS"
+  },
+  {
+   "case": "T19-declared-seam",
+   "expect": "申报边 → PARTIAL_DISCONTINUITY+declared → PASS",
+   "result": "PASS"
+  },
+  {
+   "case": "T20-undeclared-full",
+   "expect": "未申报 FULL_DISCONTINUITY → 计数>0",
+   "result": "PASS"
+  }
+ ],
+ "semantic_changes_v22": [
+  "corner-swap 降级 L1 观测 (仲裁A)",
+  "vertex nonfan → DISPUTED_FINDING (仲裁B)",
+  "无向边分类 O2/O3 (P0-02)",
+  "UNKNOWN 不吞客观 FAIL (P0-03)",
+  "EXPECTED_SEAM 命名废弃 (P0-04)"
+ ]
+}

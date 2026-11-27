@@ -1,0 +1,71 @@
+{
+ "pilot_families": [
+  {
+   "family": "rsc_rsc",
+   "folded": "SOLID",
+   "blank": "FLAT_PATTERN",
+   "print_mirror": "FORBIDDEN_ON_PRINT_FACES",
+   "parts": {
+    "body": {
+     "contract": "SOLID",
+     "evidence": "封闭瓦楞箱, 体积>0"
+    },
+    "collision": {
+     "contract": "COLLISION_PROXY",
+     "evidence": "简化凸包"
+    }
+   },
+   "current_state": {
+    "objective_defects": 0,
+    "notes": "样本全过 (探索性扫描无客观 findings)"
+   }
+  },
+  {
+   "family": "aseptic_aseptic_brick",
+   "folded": "SOLID(目标)",
+   "blank": "FLAT_PATTERN",
+   "print_mirror": "FORBIDDEN_ON_PRINT_FACES",
+   "parts": {
+    "body": {
+     "contract": "SOLID",
+     "evidence": "无菌砖应为封闭立体"
+    }
+   },
+   "current_state": {
+    "objective_defects": "ALL",
+    "notes": "当前导出为平板展开态+重复边 → 已立案 D1, 生成端根因待 WP-A2"
+   }
+  },
+  {
+   "family": "tray_tray_4corner",
+   "folded": "SOLID",
+   "blank": "FLAT_PATTERN",
+   "print_mirror": "FORBIDDEN_ON_PRINT_FACES",
+   "current_state": {
+    "objective_defects": "uv:degenerate-faces",
+    "notes": "退化 UV 面已观测, 修复候选=图集抑制"
+   }
+  },
+  {
+   "family": "clv_clv",
+   "folded": "SOLID",
+   "blank": "FLAT_PATTERN",
+   "print_mirror": "FORBIDDEN_ON_PRINT_FACES",
+   "current_state": {
+    "objective_defects": 0,
+    "notes": "样本过"
+   }
+  },
+  {
+   "family": "mailer_mailer_diecut",
+   "folded": "SOLID",
+   "blank": "FLAT_PATTERN(可能为设计主态)",
+   "print_mirror": "FORBIDDEN_ON_PRINT_FACES",
+   "current_state": {
+    "objective_defects": "boundary 相关",
+    "notes": "diecut 语义需产品确认: 刀版展开态是否即交付形态"
+   }
+  }
+ ],
+ "rule": "契约登记后, L3 才能对契约依赖项签发 PASS/FAIL; 未登记 → UNKNOWN"
+}
