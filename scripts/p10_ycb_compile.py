@@ -33,8 +33,8 @@ N_PRISM = 12
 
 def params_for(it):
     if it["shape"] == "box":
-        d = sorted(it["dims"], reverse=True)
-        return "rsc_css", {"W": float(d[0]), "D": float(d[1]), "H": float(d[2])}
+        w, d, h = it["dims"]  # FZ05修正: PDF原序 = W×D×H 语义 (排序赋值会扁平化形状)
+        return "rsc_css", {"W": float(w), "D": float(d), "H": float(h)}
     if it["shape"] == "bottle":  # 无原生瓶家族: prism 近似, Ø=横截面两值均值 (FZ05 登记 approximation)
         d = sorted(it["dims"], reverse=True)
         dia = (d[1] + d[2]) / 2.0

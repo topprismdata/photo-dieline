@@ -1,0 +1,12 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "rule": "元数据完备(size_cm+license+brand+category+sha256)=PROVISIONAL_ADMIT; 终裁待实物抽验(D5)",
+  "pool_size": 124
+ },
+ "counts": {
+  "PROVISIONAL_ADMIT": 124,
+  "EXCLUDED_incomplete": 0
+ },
+ "excluded_ids": []
+}

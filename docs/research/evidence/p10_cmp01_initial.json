@@ -1,0 +1,244 @@
+{
+ "_meta": {
+  "protocol": "wp_cmp01_protocol.md v0.1",
+  "date": "2026-11-28",
+  "fz05_amendment": "盒件 W/D/H 改 PDF 原序语义 (排序赋值曾扁平化形状); DIM-01 改逐轴语义对照",
+  "initial_findings": [
+   "形状修正后 Chamfer 3.8-21.7mm (编译空盒面片 vs 装填态扫描, 质心对齐原始尺度)",
+   "尺寸精度 vs 扫描OBB: 两长轴 2-17%, 厚度轴 20-32% (装填态膨胀效应, 与官方PDF同模式)",
+   "008 pudding 扫描件质量差 (google_16k 137×129 异常) → Chamfer 21.7mm 主因登记为扫描侧偏差"
+  ]
+ },
+ "rows": [
+  {
+   "id": "001_chips_can",
+   "qa_status": "QA_FAIL",
+   "scan_faces": 29060,
+   "scan_aabb_mm": [
+    245.5,
+    79.5,
+    77.6
+   ],
+   "scan_obb_mm": [
+    246.2,
+    108.7,
+    107.7
+   ],
+   "note": "编译侧结构未闭合(家族缺陷) → 形状对照无效, 仅尺寸登记"
+  },
+  {
+   "id": "002_master_chef_can",
+   "qa_status": "QA_FAIL",
+   "scan_faces": 19280,
+   "scan_aabb_mm": [
+    140.2,
+    102.5,
+    102.4
+   ],
+   "scan_obb_mm": [
+    143.0,
+    142.7,
+    140.9
+   ],
+   "note": "编译侧结构未闭合(家族缺陷) → 形状对照无效, 仅尺寸登记"
+  },
+  {
+   "id": "003_cracker_box",
+   "qa_status": "OK",
+   "scan_faces": 49900,
+   "scan_aabb_mm": [
+    213.4,
+    164.0,
+    71.8
+   ],
+   "scan_obb_mm": [
+    215.4,
+    164.6,
+    75.6
+   ],
+   "compiled_xyz_mm": [
+    60.0,
+    158.0,
+    210.0
+   ],
+   "size_err_vs_scan_obb_pct": [
+    2.51,
+    4.01,
+    20.63
+   ],
+   "chamfer_mm": {
+    "compiled_to_scan_mean": 3.85,
+    "scan_to_compiled_mean": 6.7
+   },
+   "note_size": "尺寸轴=排序对照(OBB无语义轴向); 形状=PDF序语义(Chamfer)"
+  },
+  {
+   "id": "004_sugar_box",
+   "qa_status": "OK",
+   "scan_faces": 21796,
+   "scan_aabb_mm": [
+    176.0,
+    94.2,
+    49.5
+   ],
+   "scan_obb_mm": [
+    178.7,
+    96.5,
+    55.8
+   ],
+   "compiled_xyz_mm": [
+    38.0,
+    89.0,
+    175.0
+   ],
+   "size_err_vs_scan_obb_pct": [
+    2.07,
+    7.77,
+    31.9
+   ],
+   "chamfer_mm": {
+    "compiled_to_scan_mean": 2.65,
+    "scan_to_compiled_mean": 4.92
+   },
+   "note_size": "尺寸轴=排序对照(OBB无语义轴向); 形状=PDF序语义(Chamfer)"
+  },
+  {
+   "id": "005_tomato_soup_can",
+   "qa_status": "QA_FAIL",
+   "scan_faces": 16382,
+   "scan_aabb_mm": [
+    101.9,
+    67.9,
+    67.7
+   ],
+   "scan_obb_mm": [
+    102.2,
+    89.6,
+    89.2
+   ],
+   "note": "编译侧结构未闭合(家族缺陷) → 形状对照无效, 仅尺寸登记"
+  },
+  {
+   "id": "006_mustard_bottle",
+   "qa_status": "QA_FAIL",
+   "scan_faces": 34198,
+   "scan_aabb_mm": [
+    191.3,
+    97.2,
+    66.6
+   ],
+   "scan_obb_mm": [
+    191.8,
+    111.7,
+    93.2
+   ],
+   "note": "编译侧结构未闭合(家族缺陷) → 形状对照无效, 仅尺寸登记"
+  },
+  {
+   "id": "007_tuna_fish_can",
+   "qa_status": "QA_FAIL",
+   "scan_faces": 9604,
+   "scan_aabb_mm": [
+    85.6,
+    85.5,
+    33.5
+   ],
+   "scan_obb_mm": [
+    119.0,
+    119.0,
+    33.7
+   ],
+   "note": "编译侧结构未闭合(家族缺陷) → 形状对照无效, 仅尺寸登记"
+  },
+  {
+   "id": "008_pudding_box",
+   "qa_status": "OK",
+   "scan_faces": 17256,
+   "scan_aabb_mm": [
+    137.9,
+    128.8,
+    38.9
+   ],
+   "scan_obb_mm": [
+    142.6,
+    132.3,
+    41.6
+   ],
+   "compiled_xyz_mm": [
+    35.0,
+    110.0,
+    89.0
+   ],
+   "size_err_vs_scan_obb_pct": [
+    22.86,
+    32.73,
+    15.87
+   ],
+   "chamfer_mm": {
+    "compiled_to_scan_mean": 21.65,
+    "scan_to_compiled_mean": 18.46
+   },
+   "note_size": "尺寸轴=排序对照(OBB无语义轴向); 形状=PDF序语义(Chamfer)"
+  },
+  {
+   "id": "009_gelatin_box",
+   "qa_status": "OK",
+   "scan_faces": 10424,
+   "scan_aabb_mm": [
+    101.1,
+    89.4,
+    30.1
+   ],
+   "scan_obb_mm": [
+    104.0,
+    91.8,
+    31.2
+   ],
+   "compiled_xyz_mm": [
+    28.0,
+    85.0,
+    73.0
+   ],
+   "size_err_vs_scan_obb_pct": [
+    18.27,
+    20.48,
+    10.26
+   ],
+   "chamfer_mm": {
+    "compiled_to_scan_mean": 17.95,
+    "scan_to_compiled_mean": 12.56
+   },
+   "note_size": "尺寸轴=排序对照(OBB无语义轴向); 形状=PDF序语义(Chamfer)"
+  },
+  {
+   "id": "010_potted_meat_can",
+   "qa_status": "OK",
+   "scan_faces": 16948,
+   "scan_aabb_mm": [
+    102.1,
+    83.5,
+    60.1
+   ],
+   "scan_obb_mm": [
+    104.4,
+    83.8,
+    61.9
+   ],
+   "compiled_xyz_mm": [
+    50.0,
+    97.0,
+    82.0
+   ],
+   "size_err_vs_scan_obb_pct": [
+    7.09,
+    2.15,
+    19.22
+   ],
+   "chamfer_mm": {
+    "compiled_to_scan_mean": 11.31,
+    "scan_to_compiled_mean": 11.95
+   },
+   "note_size": "尺寸轴=排序对照(OBB无语义轴向); 形状=PDF序语义(Chamfer)"
+  }
+ ]
+}
