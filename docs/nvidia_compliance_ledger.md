@@ -215,3 +215,8 @@ NVIDIA 8 文件契约 (meta/root_usds/BOM/双 conformance) 已发射于 175 件�
 - P1 (同源 PhysX 动态验证) 由此从「许可门」改判「平台门」: 需 Linux/Windows
   机器执行 (远程服务器或未来 Linux 盒)。判定依据 = pip 实测输出, 非推测。
 - MuJoCo 动态统计契约 (202/202 + 双场景) 维持为当前机器上的动态证据层。
+
+- P1 远程路由补记: 本机 ssh 配置含 ghbstudio (192.168.10.2) 与 192.168.31.191
+  两台 Linux 候选机, 实测当前均连接超时 (LAN 离线/休眠)。主机在线后即可承载
+  isaacsim 安装与 PhysX 同源动态验证 (P1 执行路径已完备: py3.10 venv +
+  pip isaacsim[all,extscache])。
