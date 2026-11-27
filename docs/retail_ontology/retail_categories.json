@@ -109,6 +109,9 @@
     "none"
    ],
    "parametric": true
+  },
+  "cup": {
+   "description": "锥度杯 (酸奶/布丁), 顶宽底窄拔模, 铝箔膜封"
   }
  },
  "mappings": [
@@ -209,6 +212,12 @@
    "product_category": "whisky",
    "packaging_structure": "glass_bottle_shouldered",
    "closure": "screw_cap"
+  },
+  {
+   "asset": "yogurt_cup_160",
+   "product_category": "yogurt",
+   "packaging_structure": "cup",
+   "closure": "foil_seal"
   }
  ],
  "rules": [

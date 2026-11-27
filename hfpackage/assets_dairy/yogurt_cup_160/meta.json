@@ -1,0 +1,17 @@
+{
+ "object_id": "tpd_yogurt_cup_160",
+ "category_id": "dairy",
+ "category": "yogurt_cup_160",
+ "title": "yogurt_cup_160",
+ "physics_type": "rigid_body",
+ "part_count": 1,
+ "joint_count": 0,
+ "dims_m": [],
+ "mass_kg": null,
+ "center_of_mass_m": [
+  -Infinity,
+  -Infinity,
+  -Infinity
+ ],
+ "provenance": "parametric"
+}

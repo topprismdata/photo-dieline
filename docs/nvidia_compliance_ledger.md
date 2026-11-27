@@ -105,3 +105,9 @@ whisky×bordeaux / wine×straight, 每类独立 lathe profile)。全链: G-F 门
 whisky×shouldered 补齐 — **本体 9 结构轴 9/9 全有资产** (longneck/belly/shouldered/straight/
 bordeaux/can_alu/pet_bottle/gable_carton/gift_box_carton)。全链: G-F → 结构化 → NVIDIA
 验证器 PASS → spec 16/16 → 契约发射 175/175。
+
+## M5 乳品域 (2026-11-27 补)
+
+dairy 家族 (yogurt_cup_160: 锥度 PP 杯 + 铝箔拱顶膜封, 极点焊接 lathe + 绕序翻转):
+G-F → simready (61×61×87.2mm, 0.0402kg) → spec 1/1 → NVIDIA 原版验证器 PASS →
+打包契约 176/176。本体结构轴 +1 (cup), 商品轴 yogurt 获首个资产。

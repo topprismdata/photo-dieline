@@ -181,6 +181,17 @@ def main():
         emit_model_json(ad, usdc, ad.name, ms)
         v = emit(ad, usdc, ad.name, ms)
         results[ad.name] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
+    # dairy 域
+    droot = Path('/Users/guohongbin/photo-dieline/hfpackage/assets_dairy')
+    if droot.exists():
+        for ad in sorted(droot.iterdir()):
+            usdc = ad / 'simready_usd' / f'{ad.name}.usdc'
+            if not usdc.exists():
+                continue
+            ms = json.loads((usdc.parent / 'metadata.json').read_text())
+            emit_model_json(ad, usdc, ad.name, ms)
+            v = emit(ad, usdc, ad.name, ms)
+            results[f'dairy/{ad.name}'] = 'PASS' if v['passed'] else f"FAIL: {v['error']}"
     # nv960 正典 20 (meta 由 family 重算)
     sys.path.insert(0, '/Users/guohongbin/photo-dieline/src')
     from photo_dieline.authoring.validate_parts import load_family, validate_parts, export_parts_usdc

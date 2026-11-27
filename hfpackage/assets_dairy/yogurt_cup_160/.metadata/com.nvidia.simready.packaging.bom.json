@@ -1,0 +1,40 @@
+{
+ "format_version": "1.0",
+ "items": [
+  {
+   "relative_path": "meta.json",
+   "size": 317,
+   "hash": {
+    "sha256": "bdb4ad164c08626ec14256f5ddb829908a902ce31c7db305fb2cbd339864eaa1"
+   }
+  },
+  {
+   "relative_path": "renders/yogurt_cup_160.png",
+   "size": 264263,
+   "hash": {
+    "sha256": "e161ac82eba31be2d90d17629deca269c3723aaec393f50ae38aa8fe84749c58"
+   }
+  },
+  {
+   "relative_path": "simready_usd/metadata.json",
+   "size": 1170,
+   "hash": {
+    "sha256": "6498360535a82c74dbddbc1b48d57a6276a9b35f29216f1ec90a6785f0e6b9c9"
+   }
+  },
+  {
+   "relative_path": "simready_usd/model.json",
+   "size": 245,
+   "hash": {
+    "sha256": "32fa291c120a7e1e2a9fc13ee3486ad1f5324152457eaf848b940b2a45885e54"
+   }
+  },
+  {
+   "relative_path": "simready_usd/yogurt_cup_160.usdc",
+   "size": 26697,
+   "hash": {
+    "sha256": "0e9db2588d545c80849eb4bacc297fbf09ff9c066175be58a46948c5e561c9db"
+   }
+  }
+ ]
+}
