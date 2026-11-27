@@ -64,3 +64,9 @@ hfpackage 11 资产独立复算 ALL OK)。
 170 usdc × 2 = **340 png 全覆盖零失败** (批量 Blender 单进程 ~15min, 断点续传清单)。
 发射器重跑后 BOM 纳入 thumbs, hfpackage 11 资产哈希链复算 ALL OK。
 脚本: scripts/render_thumbs_batch.py (manifest 驱动, 可断点重放)。
+
+## 一体化审计 (2026-11-27)
+
+`scripts/nvidia_audit_all.py` 单命令: 170 件 × {原版验证器实跑 + BOM/content/package 三哈希复算 +
+meta 完整性 + 双缩略图齐备} → `docs/nvidia_full_audit_2026-11-27.json` (时间戳证据, fail-closed)。
+结果 **170/170 overall PASS**。
