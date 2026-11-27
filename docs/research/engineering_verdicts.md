@@ -54,3 +54,12 @@ G01 三角化前后几何边界一致性；G02 面绕向与法线方向；G03 fa
 5. usdchecker 出入定性 **P0 证据一致性**问题：启动验证器证据追溯（WP-V），暂不判定历史验证虚假。
 6. **WP1 协议：REVISE BEFORE FREEZE**（分母 4/10、统计 5/10）：须补七种终态、四主指标、真实商品一致性门禁（尺寸阈值先冻结；无实测质量数据不得宣称已验证；无铰接标 NOT_APPLICABLE）、合法输入冻结+盲测隔离、命名 WP1-Pilot-100、成本公式 C_i=r_h·t_h+r_m·t_m+C_ext 与 C_delivered=总成本/交付数（防失败件拉低单位成本假象）、环境未就绪记 VALIDATION_PENDING 不得用自研门禁替代官方验证计入成功率。
 7. **R09 工作包**（5 工作日）：WP-A0 审计器独立验收（合成真值+负向测试）→ WP-A1 107 件重分类 → WP-A2 D1 首故障阶段定位+购物车单变量因果实验 → WP-V 验证器证据追溯 → WP-M MaterialBindingAPI 候选修复 → WP1-v0.2。**下一送审件：六项制品。**
+
+## 九、WP-A0 送审裁决追加（全文 evidence/gpt_wpa0_verdict.md）
+
+1. 审计器 v2 四项 P0：crack 分类需 L1 观测/L2 结构语义分层（EXPECTED_SEAM/UNEXPECTED_SEAM/UNKNOWN）；顶点并查集不足以逐壳审计（补面连通分量/顶点邻域流形性/逐壳绕向体积）；G05 往返检查未完成（法线可 NOT_APPLICABLE 但不得声称通过）；7 例不足需补 17 例（T08-T23）。
+2. 需独立实现交叉检查：trimesh is_watertight/is_winding_consistent/符号体积 + pxr 官方 UV 解析；分歧以人工可解析几何+结构契约仲裁。
+3. WP-A1 仅授权探索性扫描（107 件只读观测/v1v2 对比/契约识别允许；正式通过率/批量修复/覆盖冻结集不允许）。
+4. 新工作包 **WP-A0.1**：审计器 v2.1 + 24 例真值测试 + auditor_contract.md + wp_a0_crosscheck.json + 探索性观测 preview；下一送审提交源码与可执行测试（文字报告≠独立复现）。
+5. 战略沉淀：审计体系三层架构 L1 OBSERVATION / L2 CONTRACT / L3 VERDICT，纳入商品数字对象本体与编译器契约。
+6. WP-V、WP-P 并行继续；WP-A2 等 A1 结论。
