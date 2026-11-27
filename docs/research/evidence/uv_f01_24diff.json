@@ -1,0 +1,218 @@
+[
+ {
+  "family": "aseptic_brick",
+  "view": "px",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "px",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "nx",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "nx",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "py",
+  "pair": "S0->S1",
+  "mean_abs_diff": 1e-06,
+  "max_abs_diff": 1.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "py",
+  "pair": "S0->S2",
+  "mean_abs_diff": 1e-06,
+  "max_abs_diff": 1.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "ny",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.197756,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 611,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "ny",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.197756,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 611,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "pz",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "pz",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "nz",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.778244,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 2104,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "aseptic_brick",
+  "view": "nz",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.778244,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 2104,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "px",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "px",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "nx",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "nx",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "py",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "py",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "ny",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.125104,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 420,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "ny",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.125104,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 420,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "pz",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "pz",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.0,
+  "max_abs_diff": 0.0,
+  "changed_pixel_count": 0,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "nz",
+  "pair": "S0->S1",
+  "mean_abs_diff": 0.683628,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 1854,
+  "foreground_mask_diff_px": 0
+ },
+ {
+  "family": "brick_250ml",
+  "view": "nz",
+  "pair": "S0->S2",
+  "mean_abs_diff": 0.683628,
+  "max_abs_diff": 160.0,
+  "changed_pixel_count": 1854,
+  "foreground_mask_diff_px": 0
+ }
+]

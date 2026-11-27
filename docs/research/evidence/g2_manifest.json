@@ -1,0 +1,59 @@
+{
+ "compiler_commit": "1b0ac4d (R09-11 G1闭合)",
+ "validator": "NVIDIA USDCraft SDK v1.0.0 _usd_validate.py sha256:725e97d4afa6877fe49389f9a8d6300174ee7143a25279c26511ef88247347f0 backend=physx",
+ "normalize_orientation": true,
+ "material_binding_patch": true,
+ "candidates": [
+  {
+   "id": "brick_min_aseptic_brick_v0022",
+   "family": "aseptic_brick",
+   "variant_idx": 22,
+   "role": "min"
+  },
+  {
+   "id": "brick_typ_aseptic_brick_v0024",
+   "family": "aseptic_brick",
+   "variant_idx": 24,
+   "role": "typ"
+  },
+  {
+   "id": "brick_max_aseptic_brick_v0015",
+   "family": "aseptic_brick",
+   "variant_idx": 15,
+   "role": "max"
+  },
+  {
+   "id": "b250_min_brick_250ml_v0022",
+   "family": "brick_250ml",
+   "variant_idx": 22,
+   "role": "min"
+  },
+  {
+   "id": "b250_typ_brick_250ml_v0004",
+   "family": "brick_250ml",
+   "variant_idx": 4,
+   "role": "typ"
+  },
+  {
+   "id": "b250_max_brick_250ml_v0011",
+   "family": "brick_250ml",
+   "variant_idx": 11,
+   "role": "max"
+  },
+  {
+   "id": "control_food_bento_lid_box_v0000",
+   "family": "food_bento_lid_box",
+   "role": "control"
+  },
+  {
+   "id": "control_food_sushi_tray_v0000",
+   "family": "food_sushi_tray",
+   "role": "control"
+  },
+  {
+   "id": "control_mailer_diecut_v0000",
+   "family": "mailer_diecut",
+   "role": "control"
+  }
+ ]
+}

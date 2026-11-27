@@ -1,0 +1,144 @@
+{
+ "G2_RUN": "R09-16 九件候选执行完成",
+ "C1_G1_closure": {
+  "G1-01": "CLOSED",
+  "G1-02": "CLOSED",
+  "G1-03": "CLOSED",
+  "G1-04": "CLOSED (UV-R01..R06 六门禁全过, 36渲染, F01/F02 已补证)",
+  "G1-05": "CLOSED"
+ },
+ "C2_SPEC_FROZEN": "WP1-Pilot-100 协议 v0.4 sha256 见送审 (设计冻结 per R14)",
+ "C3_input_freeze": {
+  "manifest": "docs/research/evidence/g2_manifest.json",
+  "nine_unique_ids": [
+   "brick_min_aseptic_brick_v0022",
+   "brick_typ_aseptic_brick_v0024",
+   "brick_max_aseptic_brick_v0015",
+   "b250_min_brick_250ml_v0022",
+   "b250_typ_brick_250ml_v0004",
+   "b250_max_brick_250ml_v0011",
+   "control_food_bento_lid_box_v0000",
+   "control_food_sushi_tray_v0000",
+   "control_mailer_diecut_v0000"
+  ],
+  "输入哈希": "逐件 export 时的 ir_raw 参数已冻结于 build.json 同构流程"
+ },
+ "C4_version_freeze": "NVIDIA USDCraft SDK v1.0.0 _usd_validate.py sha256:725e97d4afa6877fe49389f9a8d6300174ee7143a25279c26511ef88247347f0 backend=physx | compiler_commit: 1b0ac4d (R09-11 G1闭合)",
+ "C5_exec_params": {
+  "normalize_orientation": true,
+  "material_binding_patch": true,
+  "kind": "carton_board"
+ },
+ "nine_results": [
+  {
+   "id": "brick_min_aseptic_brick_v0022",
+   "terminal": "SUCCESS",
+   "audit": "PASS",
+   "usdchecker": "exit=0",
+   "findings_note": []
+  },
+  {
+   "id": "brick_typ_aseptic_brick_v0024",
+   "terminal": "SUCCESS",
+   "audit": "PASS",
+   "usdchecker": "exit=0",
+   "findings_note": []
+  },
+  {
+   "id": "brick_max_aseptic_brick_v0015",
+   "terminal": "SUCCESS",
+   "audit": "PASS",
+   "usdchecker": "exit=0",
+   "findings_note": []
+  },
+  {
+   "id": "b250_min_brick_250ml_v0022",
+   "terminal": "SUCCESS",
+   "audit": "PASS",
+   "usdchecker": "exit=0",
+   "findings_note": []
+  },
+  {
+   "id": "b250_typ_brick_250ml_v0004",
+   "terminal": "SUCCESS",
+   "audit": "PASS",
+   "usdchecker": "exit=0",
+   "findings_note": []
+  },
+  {
+   "id": "b250_max_brick_250ml_v0011",
+   "terminal": "SUCCESS",
+   "audit": "PASS",
+   "usdchecker": "exit=0",
+   "findings_note": []
+  },
+  {
+   "id": "control_food_bento_lid_box_v0000",
+   "terminal": "SUCCESS",
+   "audit": "FAIL",
+   "usdchecker": "exit=0",
+   "findings_note": [
+    "uv:degenerate-faces:5"
+   ]
+  },
+  {
+   "id": "control_food_sushi_tray_v0000",
+   "terminal": "SUCCESS",
+   "audit": "FAIL",
+   "usdchecker": "exit=0",
+   "findings_note": [
+    "topology:dup-directed-edges:16",
+    "vertex_manifold:nonfan:2",
+    "topology:boundary-not-walkable",
+    "topology:boundary-not-walkable"
+   ]
+  },
+  {
+   "id": "control_mailer_diecut_v0000",
+   "terminal": "SUCCESS",
+   "audit": "FAIL",
+   "usdchecker": "exit=0",
+   "findings_note": [
+    "vertex_manifold:nonfan:3",
+    "topology:boundary-not-walkable"
+   ]
+  }
+ ],
+ "traceability": [
+  {
+   "要求": "九件唯一 ID/家族/选样规则/规格/输入哈希",
+   "实现": "g2_manifest.json 逐件登记",
+   "测试": "键唯一性 202 式核验",
+   "证据": "g2_manifest.json",
+   "状态": "CLOSED"
+  },
+  {
+   "要求": "九件逐资产终态+失败原因+证据路径",
+   "实现": "auditor v2.2 SOLID/OPEN_SHELL 双契约审计 + trimesh + usdchecker",
+   "测试": "audit_stage + trimesh watertight/winding",
+   "证据": "g2_run_results.json + g2_controls_ab.json",
+   "状态": "CLOSED"
+  },
+  {
+   "要求": "启动授权记录",
+   "实现": "R16 条件自动授权引用",
+   "测试": "—",
+   "证据": "gpt_r16_verdict.md",
+   "状态": "CLOSED"
+  },
+  {
+   "要求": "接受真实失败 (不要求 9/9)",
+   "实现": "对照 3 件开壳家族 net 拓扑发现如实登记 (sushi_tray dup16 等)",
+   "测试": "auditor OPEN_SHELL 契约",
+   "证据": "g2_controls_ab.json",
+   "状态": "登记为新发现, 非编译回归 (A/B 几何一致)"
+  },
+  {
+   "要求": "F01 24条差分+F02 缺面充分证据",
+   "实现": "uv_f01_24diff.json 24条+前景mask diff全0+mesh台账三阶段全同",
+   "测试": "像素级+几何多重集合",
+   "证据": "uv_f01_24diff.json",
+   "状态": "CLOSED"
+  }
+ ]
+}

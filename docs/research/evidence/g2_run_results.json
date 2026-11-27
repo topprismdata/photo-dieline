@@ -1,0 +1,131 @@
+[
+ {
+  "id": "b250_max_brick_250ml_v0011",
+  "audit": "PASS",
+  "closed": true,
+  "findings": [],
+  "vol_mm3": 0.00022081169299781322,
+  "trimesh": {
+   "watertight": true,
+   "winding": true,
+   "vol_mm3": 220812
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "b250_min_brick_250ml_v0022",
+  "audit": "PASS",
+  "closed": true,
+  "findings": [],
+  "vol_mm3": 7.64413271099329e-05,
+  "trimesh": {
+   "watertight": true,
+   "winding": true,
+   "vol_mm3": 76441
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "b250_typ_brick_250ml_v0004",
+  "audit": "PASS",
+  "closed": true,
+  "findings": [],
+  "vol_mm3": 0.0001597306109033525,
+  "trimesh": {
+   "watertight": true,
+   "winding": true,
+   "vol_mm3": 159731
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "brick_max_aseptic_brick_v0015",
+  "audit": "PASS",
+  "closed": true,
+  "findings": [],
+  "vol_mm3": 0.000599794730078429,
+  "trimesh": {
+   "watertight": true,
+   "winding": true,
+   "vol_mm3": 599795
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "brick_min_aseptic_brick_v0022",
+  "audit": "PASS",
+  "closed": true,
+  "findings": [],
+  "vol_mm3": 0.00018806876323651522,
+  "trimesh": {
+   "watertight": true,
+   "winding": true,
+   "vol_mm3": 188069
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "brick_typ_aseptic_brick_v0024",
+  "audit": "PASS",
+  "closed": true,
+  "findings": [],
+  "vol_mm3": 0.00031027625664137304,
+  "trimesh": {
+   "watertight": true,
+   "winding": true,
+   "vol_mm3": 310276
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "control_food_bento_lid_box_v0000",
+  "audit": "FAIL",
+  "closed": false,
+  "findings": [
+   "closure:solid-with-open-boundary",
+   "uv:degenerate-faces:5"
+  ],
+  "vol_mm3": null,
+  "trimesh": {
+   "watertight": false,
+   "winding": true,
+   "vol_mm3": -367830
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "control_food_sushi_tray_v0000",
+  "audit": "FAIL",
+  "closed": false,
+  "findings": [
+   "topology:dup-directed-edges:16",
+   "vertex_manifold:nonfan:2",
+   "topology:boundary-not-walkable",
+   "topology:boundary-not-walkable"
+  ],
+  "vol_mm3": null,
+  "trimesh": {
+   "watertight": false,
+   "winding": false,
+   "vol_mm3": 268944
+  },
+  "usdchecker": null
+ },
+ {
+  "id": "control_mailer_diecut_v0000",
+  "audit": "FAIL",
+  "closed": false,
+  "findings": [
+   "vertex_manifold:nonfan:3",
+   "closure:solid-with-open-boundary",
+   "topology:boundary-not-walkable"
+  ],
+  "vol_mm3": null,
+  "trimesh": {
+   "watertight": false,
+   "winding": true,
+   "vol_mm3": 648000
+  },
+  "usdchecker": null
+ }
+]

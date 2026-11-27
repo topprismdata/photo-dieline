@@ -1,0 +1,30 @@
+[
+ {
+  "family": "food_bento_lid_box",
+  "normalize_on_off_same_geometry": true,
+  "OPEN_SHELL_audit": "FAIL",
+  "non_closure_findings": [
+   "uv:degenerate-faces:5"
+  ]
+ },
+ {
+  "family": "food_sushi_tray",
+  "normalize_on_off_same_geometry": true,
+  "OPEN_SHELL_audit": "FAIL",
+  "non_closure_findings": [
+   "topology:dup-directed-edges:16",
+   "vertex_manifold:nonfan:2",
+   "topology:boundary-not-walkable",
+   "topology:boundary-not-walkable"
+  ]
+ },
+ {
+  "family": "mailer_diecut",
+  "normalize_on_off_same_geometry": true,
+  "OPEN_SHELL_audit": "FAIL",
+  "non_closure_findings": [
+   "vertex_manifold:nonfan:3",
+   "topology:boundary-not-walkable"
+  ]
+ }
+]
