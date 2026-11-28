@@ -1,0 +1,86 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "protocol": "WP-L3-03 T1 four-arm (R53-B)",
+  "assumptions": "固定朝向/单排/零间隙/不考虑变形; A 组为事前解析参考 (GPT 冻结矩阵); D 组=文档尺寸 BBox 代理 (零编译)",
+  "discipline": "逐场景整数报告, 不以均值掩盖差异; 不为证明 RWI 有价值而设计偏向实验"
+ },
+ "independent_remeasure": {
+  "C_derived_width_mm": 66.8583,
+  "method": "pxr UsdGeom.BBoxCache 直接解析正式件 model.usdc"
+ },
+ "matrix": [
+  {
+   "shelf_mm": 600.0,
+   "A_doc": 8,
+   "B_v0131": 11,
+   "C_derived": 8,
+   "D_proxy": 8,
+   "B_overflow_faces": 3,
+   "C_overflow_faces": 0,
+   "D_overflow_faces": 0
+  },
+  {
+   "shelf_mm": 900.0,
+   "A_doc": 13,
+   "B_v0131": 16,
+   "C_derived": 13,
+   "D_proxy": 13,
+   "B_overflow_faces": 3,
+   "C_overflow_faces": 0,
+   "D_overflow_faces": 0
+  },
+  {
+   "shelf_mm": 1000.0,
+   "A_doc": 14,
+   "B_v0131": 18,
+   "C_derived": 14,
+   "D_proxy": 14,
+   "B_overflow_faces": 4,
+   "C_overflow_faces": 0,
+   "D_overflow_faces": 0
+  },
+  {
+   "shelf_mm": 1200.0,
+   "A_doc": 17,
+   "B_v0131": 22,
+   "C_derived": 17,
+   "D_proxy": 17,
+   "B_overflow_faces": 5,
+   "C_overflow_faces": 0,
+   "D_overflow_faces": 0
+  },
+  {
+   "shelf_mm": 133.8,
+   "A_doc": 1,
+   "B_v0131": 2,
+   "C_derived": 2,
+   "D_proxy": 1,
+   "B_overflow_faces": 1,
+   "C_overflow_faces": 1,
+   "D_overflow_faces": 0
+  },
+  {
+   "shelf_mm": 1005.0,
+   "A_doc": 15,
+   "B_v0131": 18,
+   "C_derived": 15,
+   "D_proxy": 15,
+   "B_overflow_faces": 3,
+   "C_overflow_faces": 0,
+   "D_overflow_faces": 0
+  }
+ ],
+ "findings": {
+  "D_vs_C": "D 与 C 不完全相同 (133.8mm 边界: C=2 vs D=1) — 编译资产在容差内仍翻转一次离散决策",
+  "D_vs_A": "D 与 A 全场景一致 → 限定负结果成立: 对当前规则单排容量任务, 编译完整几何资产相对文档 BBox 代理无新增决策价值",
+  "C_vs_A": "C 在 133.8mm 反例溢出 +1 排面 (容差通过 ≠ 离散业务一致, F-L3-002 实证)",
+  "B_vs_A": "B 溢出 +3~+5 排面/场景 (未适配资产的决策偏差量化)"
+ },
+ "cost": {
+  "A_D": "零编译零资产 (规格直用)",
+  "B": "L1 既有资产+pxr 测量 (秒级)",
+  "C": "一次参数化编译+门禁链+独立测量 (分钟级)",
+  "human_intervention": "A/D: 0 次; B/C: 需资产侧测量与哈希登记"
+ }
+}
