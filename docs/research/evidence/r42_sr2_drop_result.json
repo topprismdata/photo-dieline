@@ -1,0 +1,11 @@
+{
+ "initial_drop_height_mm": 105.0,
+ "sim_seconds": 1.5,
+ "floor_penetration_max_mm": 9.35,
+ "settled": true,
+ "final_z_mm": -0.0,
+ "tilt_from_upright_deg": 0.0,
+ "mass_note": "mass=0.05kg = 工程假设 (空1L奶瓶 40-60g 区间中值, 非实测)",
+ "asset_declared_mass_kg": 0.0156,
+ "asset_mass_note": "上游 SimReady 元数据自带头量 (1L 瓶 15.6g 物理荒谬) — 已登记"
+}

@@ -1,0 +1,39 @@
+{
+ "units": {
+  "upAxis": "Z",
+  "metersPerUnit": 1.0
+ },
+ "meshes": [
+  {
+   "path": "/Asset/Links/hdpe_shell/Visuals/panel/Geom",
+   "verts": 2112,
+   "faceIdx": 12672
+  },
+  {
+   "path": "/Asset/Links/hdpe_shell/Collisions/panel/Geom",
+   "verts": 2112,
+   "faceIdx": 12672
+  },
+  {
+   "path": "/Asset/Links/screw_cap/Visuals/panel/Geom",
+   "verts": 384,
+   "faceIdx": 2304
+  },
+  {
+   "path": "/Asset/Links/screw_cap/Collisions/panel/Geom",
+   "verts": 384,
+   "faceIdx": 2304
+  }
+ ],
+ "verts_total": 4992,
+ "faces_total": 29952,
+ "bbox_mm": [
+  85.0,
+  85.0,
+  235.0
+ ],
+ "physics_params_found": {
+  "mass": 0.015608999878168106,
+  "rigidbody": true
+ }
+}
