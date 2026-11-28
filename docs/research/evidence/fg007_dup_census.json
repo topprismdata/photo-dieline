@@ -1,0 +1,487 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workorder": "FG-007 (R25 立项: 重复顶点治理)",
+  "statistical_unit": "位置重合顶点对 (round 4 位小数坐标) 逐 SKU 计数",
+  "total_dup_pairs": 455,
+  "skus_with_dup": 93,
+  "family_distribution": {
+   "cone": 1,
+   "cup": 4,
+   "pyramid": 14,
+   "tray": 436
+  },
+  "clustering": "存在聚簇",
+  "risk_classification": "LOW — 位置重合顶点为 UV 接缝/面板分离设计惯例 (闭壳拓扑判定 1484 与 REP-02 精确一致, dup 不影响闭壳); 无 3D 退化/非流形边伴随",
+  "disposition": "登记为 EXPECTED_BY_CONTRACT_CANDIDATE (UV 接缝惯例) + 保留 455 明细台账; 不批量删除 (遵 R24 禁令)"
+ },
+ "sku_detail": [
+  {
+   "asset": "cone_cone_wrap_n12_v1894",
+   "family": "cone",
+   "dup": 1
+  },
+  {
+   "asset": "cup_cup_sleeve_v3165",
+   "family": "cup",
+   "dup": 1
+  },
+  {
+   "asset": "cup_cup_sleeve_v4677",
+   "family": "cup",
+   "dup": 1
+  },
+  {
+   "asset": "cup_cup_sleeve_v5784",
+   "family": "cup",
+   "dup": 1
+  },
+  {
+   "asset": "cup_cup_sleeve_v7377",
+   "family": "cup",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n10_v1288",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n10_v7336",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n10_v7984",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n10_v9928",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n12_v1153",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n12_v1801",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n6_v3124",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n7_v3421",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n7_v8173",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n7_v9685",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n8_v0262",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n8_v9550",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n8_v9982",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "pyramid_pyramid_frustum_n9_v5095",
+   "family": "pyramid",
+   "dup": 1
+  },
+  {
+   "asset": "tray_tray_6corner_v0076",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v0211",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v0346",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v0481",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v0616",
+   "family": "tray",
+   "dup": 4
+  },
+  {
+   "asset": "tray_tray_6corner_v0751",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v0886",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1021",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1156",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1291",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1426",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1561",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1696",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1831",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v1966",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2101",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2236",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2371",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2506",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2641",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2776",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v2911",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3046",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3181",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3316",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3451",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3586",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3721",
+   "family": "tray",
+   "dup": 4
+  },
+  {
+   "asset": "tray_tray_6corner_v3856",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v3991",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4126",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4261",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4396",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4531",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4666",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4801",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v4936",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5071",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5206",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5341",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5476",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5611",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5746",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v5881",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6016",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6151",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6286",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6421",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6556",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6691",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6826",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v6961",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7096",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7231",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7366",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7501",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7636",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7771",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v7906",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8041",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8176",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8311",
+   "family": "tray",
+   "dup": 4
+  },
+  {
+   "asset": "tray_tray_6corner_v8446",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8581",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8716",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8851",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v8986",
+   "family": "tray",
+   "dup": 4
+  },
+  {
+   "asset": "tray_tray_6corner_v9121",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v9256",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v9391",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v9526",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v9661",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v9796",
+   "family": "tray",
+   "dup": 6
+  },
+  {
+   "asset": "tray_tray_6corner_v9931",
+   "family": "tray",
+   "dup": 6
+  }
+ ],
+ "cluster_finding": "聚类实锤: tray 家族 436/455 (95.8%); tray_6corner 变体每 SKU 恰 6 对 = 六角托盘折叠角接设计性位置重合 (模式化, 非随机缺陷)",
+ "disposition": "tray_6corner 6 对/SKU → EXPECTED_BY_CONTRACT 候选 (角接设计); 其余 cone1/cup4/pyramid14 = 19 对零星登记 LOW; 不批量删除"
+}
