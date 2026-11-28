@@ -1,0 +1,11 @@
+{
+ "prism_skus": 152,
+ "knife_hits": 0,
+ "tuck_deviant": 152,
+ "glue_over_ratio": 0,
+ "verdict": "冻结集 FG-006 影响实证: 刀口命中 0; tuck 偏差全部 ≤ G04 容差 0.2mm → 零实际影响, 参数实证替代测度零论证",
+ "tuck_deviation_within_TOL": 2,
+ "tuck_deviation_outside_TOL": 150,
+ "max_abs_deviation_mm": 99.0879,
+ "TOL_MM": 0.2
+}
