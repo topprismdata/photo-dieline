@@ -118,7 +118,7 @@
    "object_id": "Canon_Pixma_Chromalife_100_Magenta_8",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
@@ -244,14 +244,14 @@
    "object_id": "JarroSil_Activated_Silicon",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "JarroSil_Activated_Silicon_5exdZHIeLAp",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
@@ -307,7 +307,7 @@
    "object_id": "Krill_Oil",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
@@ -811,7 +811,7 @@
    "object_id": "Ultra_JarroDophilus",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
