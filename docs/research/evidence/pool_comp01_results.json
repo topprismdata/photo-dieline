@@ -1,0 +1,45 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "protocol": "POOL-COMP-01 (R24 4.4 批准 ≤6件)",
+  "family": "rsc_css box 表达能力"
+ },
+ "results": [
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_8",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_input": true
+  },
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_251_M",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_input": true
+  },
+  {
+   "object_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_input": true
+  },
+  {
+   "object_id": "Granimals_20_Wooden_ABC_Blocks_Wagon_g2TinmUGGHI",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_input": true
+  },
+  {
+   "object_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_input": true
+  },
+  {
+   "object_id": "U_By_Kotex_Sleek_Regular_Unscented_Tampons_36_Ct_Box",
+   "qa": "PASS",
+   "nvsdk": true,
+   "dim01_vs_input": true
+  }
+ ]
+}
