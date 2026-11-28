@@ -1,0 +1,35 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "experiment": "R41-FINAL 光源角尺寸 5mm (角尺寸≈0.7°≪粗糙度展宽)",
+  "roughness": [
+   0.05,
+   0.1,
+   0.4,
+   0.7
+  ]
+ },
+ "results": {
+  "r05": {
+   "peak": 152.0,
+   "streak_width_px": 360,
+   "contrast": 0.18
+  },
+  "r10": {
+   "peak": 152.0,
+   "streak_width_px": 360,
+   "contrast": 0.18
+  },
+  "r40": {
+   "peak": 152.0,
+   "streak_width_px": 360,
+   "contrast": 0.19
+  },
+  "r70": {
+   "peak": 152.0,
+   "streak_width_px": 360,
+   "contrast": 0.19
+  }
+ },
+ "verdict": "仍不可辨: 材质链路负结果最终成立"
+}
