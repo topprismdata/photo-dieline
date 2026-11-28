@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "date": "2026-11-28",
+    "workline": "R29 收尾: GOV-IR-01 真实状态 + CMP 登记 + REP-M01..M10 终台账"
+  },
+  "gov_ir_01_gates_true_status": {
+    "IR-G01": {"req": "固定家族与有效 n 一致时正常执行", "status": "PASS", "evidence": "回归: prism n12 显式 n 正常执行 + rsc_css/aseptic_brick 正确参数调用过 (commit GOV-IR-01 补丁)"},
+    "IR-G02": {"req": "显式 n 冲突时拒绝", "status": "PASS", "evidence": "IdentityConflictError: 请求 n12 但参数产物 n4 → 拒绝 (实测)"},
+    "IR-G03": {"req": "遗漏 n 不得导致家族静默降级", "status": "PASS", "evidence": "漏 n 幻影调用实测被拒 (FG-004 复现场景)"},
+    "IR-G04": {"req": "通用模块合法默认行为不受影响", "status": "PASS", "evidence": "兄弟类判定仅在产物为另一注册类时触发; 模块级模板标识放行 (rsc_rsc 案例)"},
+    "IR-G05": {"req": "参数来源及最终有效值可追溯", "status": "PARTIAL", "evidence": "build.json params+derivation 已登记; HF 侧 provenance 字段未实现 (登记 DEFERRED)"},
+    "IR-G06": {"req": "生成 cls_id 与请求家族一致", "status": "PASS", "evidence": "同 IR-G02/G06 守卫核心"},
+    "IR-G07": {"req": "既有合法输入输出语义无变化", "status": "PASS", "evidence": "WP1-PROTOCOL-SELFTEST 10/10 ALL PASS (补丁后)"},
+    "IR-G08": {"req": "冻结发行集零覆盖", "status": "PASS", "evidence": "9,386 冻结集零重编译; 抽样 3/3 身份一致 (wp_rep03_govir01_spotcheck.json)"}
+  },
+  "cmp_register": {
+    "completed": ["尺寸精度 (排序轴 + OBB 对照)", "v0.1 Chamfer 双向均值 (5 box 件)", "008 双参考交叉验证 (google_16k 离群实证)", "参考-规格冲突登记 (008 深度轴)", "FZ05 轴向语义修正 (PDF 原序)"],
+    "not_completed": ["P50/P95 分位数 (v0.2 要求)", "面积加权采样种子固定化落实", "prism 5 件形状对照 (QA_FAIL 结构未闭合, RUN-03 后已可纳入 — CMP 扩展授权待执行)", "视觉保真轴 (固定机位盲评)", "印刷纹理对比"],
+    "deferred": ["容器开壳语义对比", "碰撞/仿真适用性 (消费端层, R28 未授权)"]
+  },
+  "rep_m01_to_m10_final": {
+    "REP-M01": {"status": "PARTIAL→RESOLVED_BY_TAX", "note": "GOV-TAX-01 交叉映射已建 (27/101/77/9386); 家族数量表述按层标注", "evidence": "family_taxonomy_crosswalk.json"},
+    "REP-M02": {"status": "PASS", "note": "表达身份 100% MATCH 继承全量普查", "evidence": "rep_identity_governance_ledger.json"},
+    "REP-M03": {"status": "PARTIAL", "note": "逐家族权威契约: prism_dust 八字段试点已落档, 其余家族未建", "evidence": "fg004_closure_report.md §参数域契约"},
+    "REP-M04": {"status": "PARTIAL", "note": "表达×拓扑交叉: REP-02 拓扑观测已入; 与身份维度交叉表未出", "evidence": "wp_rep02_topology_obs.json"},
+    "REP-M05": {"status": "PASS (几何层) + PARTIAL (UV 层)", "note": "3D 层全量 0 退化/0 非流形边; UV-primvar 层仅三对照件复算 (FG-001..003: UV 退化 8-10 面实锤), 全量 UV 层扫描未做", "evidence": "rep_m05_mesh_audit.json + fg001_003_recompute.json"},
+    "REP-M06": {"status": "PARTIAL", "note": "未执行与不适用分列: 物理仿真 NOT_RUN / 视觉保真未验已声明; 更细粒度待终表"},
+    "REP-M07": {"status": "PARTIAL", "note": "FG-001..003 复算证据齐 (fg001_003_recompute + auditor_samecaliber), 语义裁决待 GPT R30", "evidence": "fg001_003_auditor_samecaliber.json"},
+    "REP-M08": {"status": "PASS (抽样)", "note": "3/3 抽样身份一致; 全量参数实证= FG-006 复算 152 prism 0 刀口命中+偏差≤容差", "evidence": "wp_rep03_govir01_spotcheck.json + fg006_frozen_recompute.json"},
+    "REP-M09": {"status": "PARTIAL", "note": "风险队列: FG 台账+FG-007 聚类已入; 独立异常全量普查=L3 几何层已完成, UV 层未全量", "evidence": "fg007_dup_census.json"},
+    "REP-M10": {"status": "CONDITIONAL PASS", "note": "冻结集零覆盖维持; 完整性复核=待 R29-08 manifest (逐文件哈希)", "evidence": "baseline_freeze_manifest.json (候选版)"}
+  }
+}
