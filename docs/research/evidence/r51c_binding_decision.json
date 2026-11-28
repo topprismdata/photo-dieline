@@ -1,0 +1,66 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "record_id": "R51-C-BINDING-DECISION-001",
+  "subject": "Coca-Cola Original Taste 330ml can ↔ tube_tube_double_seam_v0131",
+  "protocol": "WP-L3-02-DOC (R51), 判据冻结于 r51b_decision_contract.json (执行前冻结)"
+ },
+ "gates": {
+  "BIND-G01": {
+   "verdict": "PASS_WITH_NOTE",
+   "product_identity": "Brand Coca-Cola + 330ml can + Inner Component GTIN 05449000000996",
+   "declarer": "Erudus 平台厂商提交规格表 (PDF 无供应商法人字段 — 附注登记, 第三方平台托管层级如实)",
+   "version": "Version 1.0, Status Published, Changed 2023-12-19",
+   "dims_semantics": "Inner Component 显式单件口径 (67×67×116 mm)"
+  },
+  "BIND-G02": {
+   "verdict": "PASS",
+   "asset_sha256": "49802b254e4d67ab26bab8a53e7bc4da2eed3c8632e17b19df9e66344fc70eb8",
+   "verification": "实测 == 登记值 (本会话内独立重算)",
+   "frozen_source": "L1 冻结发行集 output/pack10k_scale10k (零改动)"
+  },
+  "BIND-G03": {
+   "verdict": "PASS",
+   "units": "两侧 mm (资产 m×1000 转换留痕: 0.053779→53.779)",
+   "axis_semantics": "罐体直径/直径/高, 两侧一致",
+   "independently_recomputable": "Δ_i = A_i − D_i, δ_i = Δ_i/D_i×100%"
+  },
+  "BIND-G04": {
+   "verdict": "PASS",
+   "frozen_tolerance": "任一轴 > 1mm → MISMATCH",
+   "per_axis_delta_mm": [-13.221, -13.221, -9.077],
+   "per_axis_delta_percent": [-19.73, -19.73, -7.83],
+   "decision": "三轴全部超差 → 按【预冻结】判据正确拒绝 (非事后调整)"
+  },
+  "BIND-G05": {
+   "verdict": "PASS",
+   "traceability": "EV-DOC-005 (快照 sha256 f2aada8c…) + 资产 sha256 49802b25… + model.json asset_extents_m 字段 + r51a 原文提取, 全链可回溯"
+  }
+ },
+ "binding_decision": {
+  "binding_status": "CANDIDATE_REJECTED",
+  "binding_basis": "DOCUMENTED_ONLY",
+  "verification": {
+   "verdict": "UNRESOLVED",
+   "documented_spec_match": "MISMATCH",
+   "physical_verification": "BLOCKED",
+   "dimensions": {
+    "unit": "mm",
+    "documented": [67, 67, 116],
+    "asset_declared": [53.779, 53.779, 106.923],
+    "delta_mm": [-13.221, -13.221, -9.077],
+    "delta_percent": [-19.73, -19.73, -7.83]
+   },
+   "gtin": {"inner_component": "05449000000996", "status": "GTIN_UNVERIFIED"},
+   "rejection_reason": ["DIMENSION_TOLERANCE_EXCEEDED"],
+   "rejection_scope": ["CURRENT_ASSET_AS_IS", "DOCUMENTED_DIMENSION_MATCH"]
+  }
+ },
+ "mechanism_conclusion": {
+  "label": "DOCUMENTED_BINDING_DECISION_MECHANISM_PASS",
+  "scope": "本双案例样本范围内, 五门禁全过",
+  "not_equal": "PRODUCT_ASSET_BINDING_PASS (任何具体商品-资产绑定未成立)",
+  "covered_branches": ["证据不足→UNRESOLVED (金典)", "证据充分但资产不符→CANDIDATE_REJECTED (可口可乐)"],
+  "uncovered_branch": "证据充分且资产符合 (BINDING_ACCEPTED) — 尚未验证"
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "contract_id": "R51-B-DECISION-CONTRACT-v1",
+  "authority": "R50 终裁批准 R51-B 冻结; 容差为研究级暂定标准, 非行业通用, 非制造公差",
+  "pre_freeze_note": "容差在 R51-C 执行前冻结, 防止看到结果后调整判据"
+ },
+ "axis_semantics": {
+  "cylindrical_single_item": "width = depth = 直径, height = 轴向",
+  "requirement": "两侧轴语义必须一致; 不一致 → NOT_COMPUTABLE",
+  "asset_side": "model.json asset_extents_m (米, ×1000 转 mm, 转换留痕)",
+  "document_side": "规格表 Inner Component (mm, Width/Depth/Height 显式)"
+ },
+ "tolerance": {
+  "pass_tentative": "三轴 |delta| 均 ≤ 1mm → 尺寸一致性初步通过 (MATCH_TENTATIVE)",
+  "mismatch": "任一轴 |delta| > 1mm → 声明尺寸不匹配 (MISMATCH)",
+  "not_computable": "尺寸缺失或语义不一致 → NOT_COMPUTABLE",
+  "caveat": "1mm 为本轮规则包装规格比较研究级门槛; 未来按业务任务制定容差, 必须在任务实验前冻结"
+ },
+ "binding_status_enum": ["UNRESOLVED", "CANDIDATE", "CANDIDATE_REJECTED", "BINDING_ACCEPTED(未授权, 保留枚举位)"],
+ "documented_spec_match_enum": ["NOT_COMPUTABLE", "MATCH_TENTATIVE", "MISMATCH"],
+ "rejection_rules": {
+  "trigger": "任一轴超差",
+  "rejection_reason": "DIMENSION_TOLERANCE_EXCEEDED",
+  "rejection_scope": ["CURRENT_ASSET_AS_IS", "DOCUMENTED_DIMENSION_MATCH"],
+  "scope_protection": [
+   "不判家族表达能力 (双卷封家族可表达 67×67×116mm 与否需独立证据)",
+   "不判当前资产质量缺陷",
+   "不判参数化编译器不能生产该尺寸罐体",
+   "不禁止所有业务任务使用该资产"
+  ]
+ },
+ "binding_gates": {
+  "BIND-G01": "证据资格: 商品身份/声明主体/版本/单件尺寸语义明确",
+  "BIND-G02": "资产身份: 实际资产 SHA256 与冻结来源可核验",
+  "BIND-G03": "可计算性: 单位/坐标轴/尺寸语义一致, 差异可独立复算",
+  "BIND-G04": "决策正确性: 按预冻结容差正确接受/拒绝/保留未决",
+  "BIND-G05": "证据追溯: 每项计算/状态/原因可回溯原始证据",
+  "mechanism_pass_label": "DOCUMENTED_BINDING_DECISION_MECHANISM_PASS (样本范围内; ≠ PRODUCT_ASSET_BINDING_PASS)"
+ },
+ "formula": {
+  "delta_mm": "Δ_i = A_i − D_i (资产声明值 − 商品文档声明值)",
+  "delta_percent": "δ_i = Δ_i / D_i × 100%"
+ }
+}

@@ -14,7 +14,7 @@
  "retrieved_at": "2026-11-28",
  "source_snapshot_sha256": "f2aada8c8a76e2af91d83441e734c45533423c6b2cd207501db82f543d4aace9",
  "assertion_type": "DECLARED_SPECIFICATION",
- "package_version_ref": "spec Version 1.0 (2025-07-31)",
+ "package_version_ref": "spec Version 1.0, Changed 2023-12-19 (R51-A 更正: 2025-07-31 为 PDF 渲染页脚日期)",
  "verification_status": "UNVERIFIED",
  "asset_pair": {
   "asset_id": "tube_tube_double_seam_v0131",
@@ -26,5 +26,7 @@
   ],
   "virtual_brand": "TOPPRISM"
  },
- "delta_computable": true
+ "delta_computable": true,
+ "gtin_inner_component": "05449000000996",
+ "gtin_status": "GTIN_UNVERIFIED"
 }
