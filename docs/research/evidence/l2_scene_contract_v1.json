@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "date": "2026-11-28",
+    "contract": "RWI-L2 最小共享场景契约 v1.0 (R31-C)",
+    "scope": "满足 WP-L2-01 货架孪生 + WP-L2-03 Assortment 两个首轮业务任务即可; 不扩展为平台架构研发",
+    "governance": "字段语义按 GPT R31 字段清单; 禁止扩表"
+  },
+  "scene_schema_v1": {
+    "product": {
+      "product_id": "零售商品 ID (业务方)",
+      "package_version": "包装版本",
+      "asset_id": "RWI 资产 ID (build.json asset_id)",
+      "asset_sha256": "资产内容哈希 (model.usdc sha256)",
+      "asset_fidelity_status": "资产保真声明 (L1 基线口径: GEOMETRY_VALID / UV_LAYER_UNAUDITED / VISUAL_UNVERIFIED)"
+    },
+    "fixture": {
+      "fixture_id": "货架/端架/堆头 ID",
+      "shelf_level_id": "层板 ID",
+      "fixture_dimensions_mm": "fixture 三轴尺寸 (mm)"
+    },
+    "placement": {
+      "placement_id": "放置记录 ID",
+      "position_mm": "放置位置 [x,y,z] mm (fixture 坐标系)",
+      "orientation": "朝向 (front/side/rot90)",
+      "facings": "排面数",
+      "depth_count": "纵深数"
+    },
+    "scene": {
+      "constraint_set_id": "约束集 ID (planogram 规则集引用)",
+      "scene_version": "场景版本"
+    }
+  },
+  "wp_l2_03_assortment_model": {
+    "business_layers": {
+      "L1_消费者需求": "消费者/购物篮/替代互补 — RWI 不作用, 不宣称",
+      "L2_商品组合决策": "选品/保留淘汰 — RWI 不作用, 不宣称",
+      "L3_空间与陈列决策": "数量/排面/位置/空间占用 — RWI 直接作用层",
+      "L4_现实执行验证": "放得下/可取用/可执行 — RWI 直接作用层"
+    },
+    "experiment_design_ABCD": {
+      "A_粗粒度": "品类+粗粒度商品尺寸 (传统简化方案)",
+      "B_精确BBox": "精确三轴尺寸+规则 BBox (验证尺寸数据独立价值)",
+      "C_RWI几何": "同尺寸+RWI 实际几何结构 (验证复杂结构表达增量)",
+      "D_完整": "C+陈列规则与真实场景 (完整空间执行能力)",
+      "key_comparisons": "A→B 与 B→C 必测; 若 BBox 已解决规则纸盒陈列 = 高精度几何无显著增量的负结果必须接受"
+    },
+    "key_metrics": [
+      "方案可执行率 (实际能按方案完成陈列的比例)",
+      "假可行率 (求解器认为可行实际不可执行)",
+      "假不可行率 (求解器拒绝实际可执行)",
+      "容量利用率 (有效货架空间利用程度)",
+      "陈列约束违反数 (朝向/间距/叠放/高度硬约束)",
+      "调整成本 (求解后人工修正时间)",
+      "决策稳定性 (尺寸/货架信息变化后方案稳定度)"
+    ],
+    "business_value_conditions": "至少一项: 降低错误可行方案 / 降低人工调整成本 / 提高真实空间利用率 / 同质量更快出方案; 禁止以求解器目标函数提升宣称业务成立; 销售增长与毛利提升在无真实销售数据时登记为未来待验证命题"
+  }
+}
