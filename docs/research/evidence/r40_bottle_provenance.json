@@ -1,0 +1,17 @@
+[
+ {
+  "set": 0.1,
+  "readback": 0.10000000149011612,
+  "match": true
+ },
+ {
+  "set": 0.4,
+  "readback": 0.4000000059604645,
+  "match": true
+ },
+ {
+  "set": 0.7,
+  "readback": 0.699999988079071,
+  "match": true
+ }
+]

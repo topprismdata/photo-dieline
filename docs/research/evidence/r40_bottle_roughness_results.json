@@ -1,0 +1,59 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "experiment": "瓶体曲面粗糙度敏感性 (R40-2 授权)",
+  "geometry": "G0v2 旋转瓶型 (光滑柱面)",
+  "light": "定向小面积光 镜面观察几何",
+  "metric": "柱身中线水平剖面 streak 峰值/半高宽/对比度",
+  "node_provenance": [
+   {
+    "set": 0.1,
+    "readback": 0.10000000149011612,
+    "match": true
+   },
+   {
+    "set": 0.4,
+    "readback": 0.4000000059604645,
+    "match": true
+   },
+   {
+    "set": 0.7,
+    "readback": 0.699999988079071,
+    "match": true
+   }
+  ]
+ },
+ "results": {
+  "r10": {
+   "streak_peak": 239.0,
+   "streak_width_px": 360,
+   "peak_x": 139,
+   "region_p90": 236.0,
+   "region_mean": 186.1,
+   "highlight_contrast": 0.28
+  },
+  "r40": {
+   "streak_peak": 246.0,
+   "streak_width_px": 360,
+   "peak_x": 158,
+   "region_p90": 237.0,
+   "region_mean": 186.4,
+   "highlight_contrast": 0.32
+  },
+  "r70": {
+   "streak_peak": 241.0,
+   "streak_width_px": 360,
+   "peak_x": 139,
+   "region_p90": 238.0,
+   "region_mean": 186.5,
+   "highlight_contrast": 0.29
+  }
+ },
+ "attribution": {
+  "negative_result": "三粗糙度 (0.10/0.40/0.70) streak 全柱宽 360px、对比度 0.28-0.32 无判别",
+  "root_cause_attribution": "光源角尺寸主导: AREA size=0.10m @ 0.4m ≈ 14° 角尺寸 — 镜面反射展宽 ≈ 光源角尺寸 + 表面粗糙度展宽; 当光源角尺寸 ≫ 粗糙度展宽时, streak 宽度由光源决定, 粗糙度不可辨 (物理光学: 面光源每个点各自产生 lobe, 总展宽=卷积)",
+  "discrimination_condition": "需点状光源 (角尺寸 ≪ 粗糙度展宽) — POINT light (零尺寸) 是最小可行修正",
+  "not_a_claim": "非'EEVEE 无法表达粗糙度' — 是实验光学设计未满足判别条件 (GPT '光源照亮≠相机能观察镜面反射' 的光源侧对称命题)",
+  "request": "授权 POINT light 复测 (单变量: 仅换光源类型, 其余全冻结)"
+ }
+}
