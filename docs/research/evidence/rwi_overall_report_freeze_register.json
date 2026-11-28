@@ -1,0 +1,20 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "what": "RWI L1/L2/L3 总汇报最终文档冻结登记",
+  "authorization": "FREEZE_AUTHORIZED_UPON_RESIDUAL_CLOSURE (GPT, 收官文档终审轮)",
+  "residual_fixes": [
+   "RF-01 双向归因删除已采纳终措辞 (2N/0.2N 两次运行均保留, 合理性归因不登记)",
+   "RF-02 哈希清单计数资格保守登记 (不重算哈希, 不为数字闭合猜测包含关系, 独立复核 PENDING)"
+  ],
+  "review_score": "整改质量 9.3/10 (GPT 复核); 整体研究评价维持 R54 的 7.3/10 探索性研发",
+  "note": "独立文件级审计不因本冻结视为通过 (GPT 明示); 研究结项 R54 维持不变"
+ },
+ "document": {
+  "file": "docs/research/evidence/rwi_overall_report_l1_l2_l3.md",
+  "version": "v3-FINAL",
+  "sha256": "e00e2129d22e9da93c438268b252ea83f51db23ad0e97feb70588e45a12975da",
+  "bytes": 11677
+ },
+ "verdict_archive": "docs/research/evidence/gpt_overall_report_freeze_verdict.md"
+}
