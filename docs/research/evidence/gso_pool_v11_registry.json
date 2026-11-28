@@ -11,7 +11,7 @@
    "EVIDENCE_INSUFFICIENT"
   ],
   "immutability": "GSO-PN-RUN-01 原结果不可变 (R23 裁决); 本台账为资格治理新版本 v1.1",
-  "v": "1.4-final",
+  "v": "1.4-final2",
   "fix": "名称下划线归一化后再匹配 (coffee_mug 的 \\bmug\\b 因下划线属\\w而失配的假阳性已修); ACE mug → NON_PACKAGING",
   "upgrade": "21 UNRESOLVED 以 NAME+DESCRIPTION 证据核验: 16→SUPPORTED / 3→NON_PACKAGING / 2→PENDING_VISUAL (不自动准入)",
   "visual": "57/57 视觉判定完成 (GPT R25): 49 PACKAGING + 8 NON_PACKAGING + #31 SOURCE_BINDING_UNRESOLVED (Granimals 预览图显示开罐器 — 官方目录↔预览图绑定不一致, 数据质量发现)",
@@ -890,6 +890,258 @@
    "geometry_axis": "box_or_shaped",
    "status": "PACKAGING_SUPPORTED",
    "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+  },
+  {
+   "object_id": "Animal_Crossing_New_Leaf_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Brother_Printing_Cartridge_PC501",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_225226_Ink_Cartridges_BlackColor_Cyan_Magenta_Yellow_6_count",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_Ink_Cartridge_Green_6",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_251_M",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_8",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_8_Green",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_8_Red",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Canon_Pixma_Ink_Cartridge_Cyan_251",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Granimals_20_Wooden_ABC_Blocks_Wagon_g2TinmUGGHI",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "SOURCE_BINDING_UNRESOLVED",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Kid_Icarus_Uprising_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Luigis_Mansion_Dark_Moon_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Mario_Luigi_Dream_Team_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Mario_Party_9_Wii_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "New_Super_Mario_BrosWii_Wii_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Nintendo_Wii_Party_U_with_Controller_Wii_U_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_CL211XL_Remanufactured_Ink_Cartridge_TriColor",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_CLI36_Remanufactured_Ink_Cartridge_TriColor",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_CLI_221BK_Ink_Cartridge_Black_2946B001",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_CLI_8CMY_Remanufactured_Ink_Cartridges_Color_Cyan_Magenta_Yellow_3_count",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_CLI_8Y_Ink_Cartridge_Yellow_0623B002",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_CL_41_Remanufactured_Ink_Cartridge_TriColor",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_PG21XL_Remanufactured_Ink_Cartridge_Black",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_PGI22_Remanufactured_Ink_Cartridge_Black",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_PGI35_Remanufactured_Ink_Cartridge_Black",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_PGI5BK_Remanufactured_Ink_Cartridge_Black",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Office_Depot_Canon_PG_240XL_Ink_Cartridge_Black_5206B001",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Pok_mon_Yellow_Special_Pikachu_Edition_Nintendo_Game_Boy_Color",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Pokmon_Conquest_Nintendo_DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Pokmon_X_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Pokmon_Y_Nintendo_3DS_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Simon_Swipe_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "NON_PACKAGING",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Super_Mario_3D_World_Wii_U_Game",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
+  },
+  {
+   "object_id": "Wilton_Pearlized_Sugar_Sprinkles_525_oz_Gold",
+   "identity_axis": "PACKAGING",
+   "geometry_axis": "dims-pending",
+   "status": "PACKAGING_CANDIDATE",
+   "evidence": "GPT-VISUAL (R25) — 复入候选 36 件补录"
   }
  ],
  "excluded_51_recheck": {
