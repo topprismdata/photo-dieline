@@ -1,0 +1,20 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workline": "R36 WP-L2-01 证据收口 (货架孪生终证据包)",
+  "status": "GEOMETRY-PLANNING 层证据齐; 商业视觉/仿真层未验证 (分层声明)"
+ },
+ "evidence_index": {
+  "RUN-01_工程原型": "r32_scene_contract.json + r32_scene_frontview.svg (12/12放置 0违规)",
+  "变更动态实验": "r32_change_experiment.json (四动作毫秒级+违规捕获)",
+  "视觉RETAKE": "r32_cooler_v4_labels.png (7.2/10 规划评审=是) + v3/v4 判决",
+  "ABCD增量": "r34_abcd_experiment.json (规则砖货架负结果候选)",
+  "覆盖率": "r34_20sku_census.json (80.0% 更正版) + r36_tiered_fidelity_assessment.json (分层矩阵)",
+  "FG关联": "FG-001..003 (对照家族, 独立工单)"
+ },
+ "capability_verdict": {
+  "可计算的商品": "证据成立 (T1 100%条件/T2 80%)",
+  "可感知的商品": "未达业务标准 (V4 7.2 规划用途可用; 商业视觉 0%)",
+  "可决策的商品": "初步证据 (变更毫秒级捕获; 正式对照待 B1)"
+ }
+}

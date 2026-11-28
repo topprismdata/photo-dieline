@@ -1,0 +1,241 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workline": "R36 二次覆盖评估 (分层保真度架构, R35 战略原则)",
+  "principle": "每种业务需要其最低充分保真度的数字孪生 — 待验证分层架构首次实测",
+  "denominator": 20
+ },
+ "task_matrix_summary": {
+  "T1_货架容量计算": "20/20",
+  "T2_陈列规划评审": "16/20",
+  "T3_商品商业视觉": "0/20",
+  "T4_合成感知训练": "0/20",
+  "T5_物理仿真": "0/20"
+ },
+ "task_matrix": {
+  "T1_货架容量计算": {
+   "min_repr": "权威尺寸+BBox",
+   "met": 20,
+   "not_met": 0,
+   "conditional": 0,
+   "qualifier": "尺寸=业务登记值非物理实测 (条件达标)"
+  },
+  "T2_陈列规划评审": {
+   "min_repr": "轻量几何+身份标签",
+   "met": 16,
+   "not_met": 4,
+   "conditional": 0,
+   "qualifier": "UNRESOLVED 待视觉核验不达标"
+  },
+  "T3_商品商业视觉": {
+   "min_repr": "精确外形+真实印刷+材质",
+   "met": 0,
+   "not_met": 20,
+   "conditional": 0,
+   "qualifier": "参数化近似+虚拟品牌不达标"
+  },
+  "T4_合成感知训练": {
+   "min_repr": "与目标任务匹配的视觉分布",
+   "met": 0,
+   "not_met": 0,
+   "conditional": 20,
+   "qualifier": "L1 零迁移负结果在案"
+  },
+  "T5_物理仿真": {
+   "min_repr": "碰撞代理+可信物理参数",
+   "met": 0,
+   "not_met": 0,
+   "conditional": 20,
+   "qualifier": "MEASURED_MASS_STATE_UNKNOWN"
+  }
+ },
+ "per_sku": [
+  {
+   "sku": "金典纯牛奶250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "金典有机250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "安慕希原味205g",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "安慕希黄桃燕麦205g",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "舒化无乳糖250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "QQ星儿童奶195ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "优酸乳原味250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "味可滋芝士乳茶240ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "金典娟姗瓶装250ml",
+   "coverage_status": "APPROXIMATED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "味可滋瓶装450ml",
+   "coverage_status": "APPROXIMATED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "伊利纯牛奶1L屋顶包",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "娟姗酸奶杯160g",
+   "coverage_status": "APPROXIMATED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "须尽欢茉莉酸奶90g杯",
+   "coverage_status": "IDENTITY_UNRESOLVED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "NOT_MET(身份待核)",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "植选豆乳330ml瓶",
+   "coverage_status": "UNSUPPORTED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "NOT_MET(不可表达)",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "每益添100ml小瓶",
+   "coverage_status": "UNSUPPORTED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "NOT_MET(不可表达)",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "塞纳牧场鲜奶950ml瓶",
+   "coverage_status": "APPROXIMATED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "伊利巧克力奶250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "谷粒多燕麦牛奶250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "伊利谢肥鸭雪糕75g",
+   "coverage_status": "UNSUPPORTED",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "NOT_MET(不可表达)",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  },
+  {
+   "sku": "金典低脂250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "T1": "MET_CONDITIONAL(尺寸=登记值)",
+   "T2": "MET",
+   "T3": "NOT_MET(无真实印刷)",
+   "T4": "CONDITIONAL(分布匹配未验证)",
+   "T5": "CONDITIONAL(碰撞代理有/物理参数UNKNOWN)"
+  }
+ ],
+ "honest_findings": [
+  "T1 100% 条件达标(登记值)",
+  "T2 80% (与 R34 一致)",
+  "T3 0% (能力边界非缺陷)",
+  "T4 条件未验证 (L1 零迁移负结果在案)",
+  "T5 条件 (物理参数 UNKNOWN)"
+ ]
+}
