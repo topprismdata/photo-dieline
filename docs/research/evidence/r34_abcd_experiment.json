@@ -1,0 +1,70 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "task": "12 SKU 已放置后, 4 候选 SKU 填充剩余空间至溢出",
+  "representations": {
+   "A": "品类粗尺寸",
+   "B": "精确三轴 BBox",
+   "C": "B+几何突出代理 (tuck/瓶肩 protrude)",
+   "D": "C+排面对齐业务规则"
+  }
+ },
+ "A_coarse": {
+  "fitted": 2,
+  "skipped": [
+   "E2",
+   "E3"
+  ],
+  "overflow_events": 2,
+  "utilization": 0.971,
+  "fitted_ids": [
+   "E4",
+   "E1"
+  ]
+ },
+ "B_exact": {
+  "fitted": 2,
+  "skipped": [
+   "E2",
+   "E3"
+  ],
+  "overflow_events": 2,
+  "utilization": 0.968,
+  "fitted_ids": [
+   "E4",
+   "E1"
+  ]
+ },
+ "C_geometry": {
+  "fitted": 2,
+  "skipped": [
+   "E2",
+   "E3"
+  ],
+  "overflow_events": 2,
+  "utilization": 0.971,
+  "fitted_ids": [
+   "E4",
+   "E1"
+  ]
+ },
+ "D_aligned": {
+  "fitted": 2,
+  "skipped": [
+   "E2",
+   "E3"
+  ],
+  "overflow_events": 2,
+  "utilization": 0.971,
+  "fitted_ids": [
+   "E4",
+   "E1"
+  ]
+ },
+ "increment_analysis": {
+  "A_vs_B": "A 粗判定 util 与 B 不同 → 尺寸精度改变可行性判定",
+  "B_vs_C": "B=C: 几何结构对本任务无显著增量 (负结果候选)",
+  "C_vs_D": "D=C: 业务规则无增量"
+ },
+ "honest_note": "几何突出代理为简化常数 (非逐网格检测); 全网格碰撞求解属更高阶, 本轮以代理因子近似 — 如实登记"
+}
