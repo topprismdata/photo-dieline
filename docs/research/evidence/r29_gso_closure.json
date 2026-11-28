@@ -1,0 +1,19 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "task": "R29-04 GSO 完整母体计数闭合 (P0)"
+ },
+ "total_population": 1030,
+ "equation": {
+  "in_registry_124": 160,
+  "excluded_51": "excluded 清单与 registry 无交 (分账)",
+  "closure_check": "1030 = 124 (候选) + 51 (规则排除含36复入重判) + 855 (粗筛外) — 36 复入件在 124 内重判",
+  "visual_adjusted": {
+   "PACKAGING_SUPPORTED": 116,
+   "PACKAGING_CANDIDATE": 34,
+   "NON_PACKAGING": 9,
+   "SOURCE_BINDING_UNRESOLVED": 1,
+   "sum": 160
+  }
+ }
+}
