@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "date_created": "2026-11-28",
+    "pack_id": "L3-01-EVID-PACK-001",
+    "discipline": "原始数据不可覆盖; 每证据唯一 ID; verdict 保持 UNRESOLVED 至证据裁决",
+    "fill_status": "ASSET_SIDE_PRE_FILLED / REAL_PRODUCT_SIDE_PENDING_USER_MEASUREMENT"
+  },
+  "chain_link_1_real_product": {
+    "product_name": "金典纯牛奶 250ml 砖盒",
+    "purchase_status": "PENDING_USER_EXECUTION",
+    "purchase_record_uri": null,
+    "package_photos": {"front": null, "back": null, "top": null},
+    "barcode_photo": null
+  },
+  "chain_link_2_identity": {
+    "brand": "金典",
+    "gtin": null,
+    "gtin_status": "GTIN_UNVERIFIED",
+    "package_version": "PENDING_VERIFICATION"
+  },
+  "chain_link_3_package_version": {
+    "version_evidence_uri": null,
+    "note": "包装印刷版本标识待实物核验"
+  },
+  "chain_link_4_raw_measurements": {
+    "EV-001_length_mm": {"raw_values": [null, null, null], "instrument": "CAL-001", "method": "caliper_3x"},
+    "EV-002_width_mm": {"raw_values": [null, null, null], "instrument": "CAL-001", "method": "caliper_3x"},
+    "EV-003_height_mm": {"raw_values": [null, null, null], "instrument": "CAL-001", "method": "caliper_3x"},
+    "EV-004_full_mass_g": {"raw_values": [null, null, null], "instrument": "SCALE-001", "method": "scale_3x", "order_note": "先测满瓶"},
+    "EV-005_empty_mass_g": {"raw_values": [null, null, null], "instrument": "SCALE-001", "method": "scale_3x", "order_note": "开封倒空后"},
+    "EV-006_slide_angle_deg": {"raw_values": [null, null, null], "instrument": "INCLINE-001", "method": "incline_3x"}
+  },
+  "chain_link_5_print_macro": {
+    "front_uri": null, "back_uri": null, "top_uri": null
+  },
+  "chain_link_6_asset_side": {
+    "asset_id": "aseptic_aseptic_brick_v0000",
+    "asset_sha256": "3d7a5b18681ac091de223d74145e0f878bc24de4bd09ea880097b98d8d6c0b34",
+    "model_path": "output/pack10k_scale10k/aseptic_aseptic_brick_v0000/model.usdc",
+    "l1_release_member": true,
+    "virtual_brand": "TOPPRISM"
+  },
+  "chain_link_7_dims_delta": {
+    "note": "AI 侧计算: 实测均值 vs 资产声明 (55/40/115mm), 逐轴差",
+    "delta": null
+  },
+  "chain_link_8_binding_verdict": {
+    "verdict": "UNRESOLVED",
+    "note": "保持 UNRESOLVED 直至证据裁决 (GPT 治理回路)"
+  }
+}
