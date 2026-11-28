@@ -538,63 +538,63 @@
    "object_id": "Pepsi_Cola_Caffeine_Free_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Pepsi_Cola_Wild_Cherry_Diet_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Pepsi_Max_Cola_Zero_Calorie_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Perricone_MD_Health_Weight_Management_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "cylinder",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Perricone_MD_Omega_3_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Perricone_MD_Skin_Clear_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Perricone_MD_Skin_Total_Body_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Perricone_MD_Super_Berry_Powder_with_Acai_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Perricone_MD_The_Metabolic_Formula_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
@@ -664,14 +664,14 @@
    "object_id": "ReadytoUse_Rolled_Fondant_Pure_White_24_oz_box",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
    "object_id": "Remington_TStudio_Silk_Ceramic_Hair_Straightener_2_Inch_Floating_Plates",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
@@ -797,7 +797,7 @@
    "object_id": "U_By_Kotex_Sleek_Regular_Unscented_Tampons_36_Ct_Box",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "PACKAGING_CANDIDATE",
+   "status": "PACKAGING_SUPPORTED",
    "evidence": "GPT-VISUAL (R25 57件对照板直接视觉裁决) + 名称/描述证据"
   },
   {
