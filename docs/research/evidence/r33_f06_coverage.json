@@ -1,0 +1,140 @@
+{
+ "f06_hash_lock": {
+  "aseptic_aseptic_brick_v0000": {
+   "sha256": "3d7a5b18681ac091de223d74145e0f878bc24de4bd09ea880097b98d8d6c0b34",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0027": {
+   "sha256": "771d5f1444b071ba3e8703b31fce0a8ce0710fea4caec907f7783336db2de3bd",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0054": {
+   "sha256": "36037a281aef9c4e38d4c4d7ae5034e382c1e6a0392ee1aa8ee9f6518cb19504",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0081": {
+   "sha256": "5c22a5b7d21955bbdf347ddadf2cd1e6b3fecfcbaab1b983908698ee1c1c6dd5",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0108": {
+   "sha256": "3961d245e78a34af7c8660ec9f02d192a9616899e861379de1cf13bb69f7367a",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0135": {
+   "sha256": "805fd653128490b2633a40ea71a9d2c20713fd0b77c40b83b49e442cdcb6aff2",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0162": {
+   "sha256": "976410c6de6a49724fe5b6bd2d2c54066b807bb61eb556ca76d1d04e58d93c60",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "aseptic_aseptic_brick_v0189": {
+   "sha256": "661cb0a8547af61e812afd411c69349c7381635cfa2702bc3a3dee24b9d3cc5e",
+   "source": "frozen:aseptic_brick",
+   "kind": "frozen_set"
+  },
+  "milk_bottle_1000": {
+   "sha256": "hfpackage_ref",
+   "source": "hfpackage:milk_bottle_1000",
+   "kind": "hfpackage_simready_reference"
+  },
+  "gable_gable_rect_base_v0038": {
+   "sha256": "52c9a39b0c3f2a3d24d0befb8e35fe117b4c4a9f5380db64948b5c345c691477",
+   "source": "frozen:gable_top",
+   "kind": "frozen_set"
+  },
+  "yogurt_cup_160": {
+   "sha256": "hfpackage_ref",
+   "source": "hfpackage:yogurt_cup_160",
+   "kind": "hfpackage_simready_reference"
+  }
+ },
+ "coverage_5status": {
+  "_meta": {
+   "date": "2026-11-28",
+   "task": "R29/R32 五状态覆盖登记 (业务需求分母保留, 禁止隐蔽剔除)",
+   "note": "全部 12 SKU 为 GEOMETRY_EQUIVALENT/APPROXIMATED — 无一 SKU_EXACT (参数化资产无真实品牌印刷纹理, L1 已知限制); 分母 12 全保留"
+  },
+  "per_sku": [
+   {
+    "sku": "金典纯牛奶250ml",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0000"
+   },
+   {
+    "sku": "金典有机250ml",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0027"
+   },
+   {
+    "sku": "安慕希原味205g",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0054"
+   },
+   {
+    "sku": "安慕希黄桃燕麦205g",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0081"
+   },
+   {
+    "sku": "舒化无乳糖250ml",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0108"
+   },
+   {
+    "sku": "QQ星儿童奶195ml",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0135"
+   },
+   {
+    "sku": "优酸乳原味250ml",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0162"
+   },
+   {
+    "sku": "味可滋芝士乳茶240ml",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "aseptic_aseptic_brick_v0189"
+   },
+   {
+    "sku": "金典娟姗瓶装250ml",
+    "coverage_status": "APPROXIMATED",
+    "in_scene": true,
+    "asset_id": "milk_bottle_1000"
+   },
+   {
+    "sku": "味可滋瓶装450ml",
+    "coverage_status": "APPROXIMATED",
+    "in_scene": true,
+    "asset_id": "milk_bottle_1000"
+   },
+   {
+    "sku": "伊利纯牛奶1L屋顶包",
+    "coverage_status": "GEOMETRY_EQUIVALENT",
+    "in_scene": true,
+    "asset_id": "gable_gable_rect_base_v0038"
+   },
+   {
+    "sku": "娟姗酸奶杯160g",
+    "coverage_status": "APPROXIMATED",
+    "in_scene": true,
+    "asset_id": "yogurt_cup_160"
+   }
+  ]
+ }
+}
