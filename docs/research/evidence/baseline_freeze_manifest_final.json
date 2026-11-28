@@ -1,0 +1,30 @@
+{
+ "baseline_version": "1.0-FINAL",
+ "artifact_name": "RWI-QUALITY-BASELINE-V1.0-FINAL",
+ "source_commit": "a2b78efbb195cdcdedd4395aa12adaf64c968ec7",
+ "manifest_sha256": "9aa78d6b6b0bfa3003fcb09df8ccd7d0cff946d0268ca8118f4f3f4fb0f94cb9",
+ "aggregate_sha256": "9aa78d6b6b0bfa3003fcb09df8ccd7d0cff946d0268ca8118f4f3f4fb0f94cb9",
+ "aggregation_algorithm": "sorted(files) \u6309\u6587\u4ef6\u540d\u5b57\u5178\u5e8f; \u9010\u6587\u4ef6 sha256(\u5185\u5bb9) 64\u5b57\u7b26\u5c0f\u5199hex; \u6309\u5e8f\u62fc\u63a5 hex \u5b57\u7b26\u4e32(\u65e0\u5206\u9694\u7b26)\u540e\u518d sha256; \u7f16\u7801 utf-8",
+ "artifact_count": 14,
+ "per_artifact_sha256": {
+  "family_taxonomy_crosswalk.json": "fce224580ef871de55fe9b6888ab9db8370058a161bd27ba5a9561a84122285f",
+  "fg001_003_auditor_samecaliber.json": "44c28e56c47afe9f9aff43b5e3acad9b709992bd66cd560f107fd9792c47fd1b",
+  "fg001_003_recompute.json": "421a0a2e44f69677b06474c4ac44a9fee6daa56b2afb00551195cc0a804612a8",
+  "fg006_frozen_recompute.json": "21b9d333d0aae4ad4ff482fa7f14bbb077db6b67c1d79c686c553e74812247a6",
+  "fg007_dup_census.json": "12dc84fce12af52bde4ccb05f5b0ca9b774ed591f62f58bc544fd7e6fbc9cc18",
+  "granimals_glb_render.png": "e797780d06aecc281ce9aaf119909bb541ab6c5eaa16e0d6cfde41a1865dd7ad",
+  "gso_175_partition.json": "0a252f9f7856636c070524b76b76bb9c399bd06a2fbad9b2f8c5cf76767b8952",
+  "gso_pool_v11_registry.json": "165d1686f9d3cb2898240a560a709bfd24cc92fbab170f4e663776edfa6c6373",
+  "p10_run_versions_ledger.json": "fab2d0573630903ada8730020d876596a3e49995be2e5cbd95af4703a7880622",
+  "r29_final_registers.json": "d02b9c0c5332817da89de3ce1dc14856d3ee522466f833fc443e36e7cad1160f",
+  "rep_identity_governance_ledger.json": "0f4f38656d8f974c603273c6be3e840c3194a81adcba721dcb0c98d6ee00e6b1",
+  "rep_m05_mesh_audit.json": "7f151324fa45f9aa590f975945b6f0183b213b34334d01f7a5a593761860f99c",
+  "rwi_asset_quality_baseline_v1.md": "eb261f5887c387c1aad45d8536048a0f96e9cde2b3dde200a1ce4ab2a736957b",
+  "wp_rep03_full_family_matrix.json": "99213a4111d889d5ac6dca2fbd49d32ae023f1120b2cf6b3c6b1f6e1a2d968b8"
+ },
+ "release_integrity": {
+  "frozen_set": "9,386 \u8d44\u4ea7\u96f6\u8986\u76d6 (\u5168\u7a0b\u65e0\u91cd\u7f16\u8bd1; git \u5386\u53f2\u53ef\u8bc1)",
+  "scope_note": "\u53d1\u884c\u96c6\u9010\u6587\u4ef6\u54c8\u5e0c\u5c5e\u53d1\u884c\u4ed3 manifest \u8303\u7574 (hfpackage), \u672c\u57fa\u7ebf\u51bb\u7ed3\u9488\u5bf9\u8d28\u91cf\u8bc1\u636e\u6587\u4ef6; \u53d1\u884c\u96c6\u5b8c\u6574\u6027\u7531 R28 \u524d\u63d0 'ZERO OVERWRITE RETAINED' + git \u72b6\u6001\u4f50\u8bc1",
+  "hfpackage_warning": "\u5de5\u4f5c\u533a\u5b58\u5728\u4ed6\u4ee3\u7406 hfpackage \u672a\u63d0\u4ea4\u6539\u52a8, \u672c\u51bb\u7ed3\u4e0d\u7eb3\u5165\u3001\u4e0d\u89e6\u78b0"
+ }
+}

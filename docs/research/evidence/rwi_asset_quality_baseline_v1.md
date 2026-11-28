@@ -1,4 +1,4 @@
-# RWI Asset Quality Baseline v1.0 (质量基线冻结件)
+# RWI Asset Quality Baseline v1.0 FINAL (正式冻结制品)
 
 冻结日期: 2026-11-28 | 治理授权: R28 (FINAL QUALITY BASELINE FREEZE) | 治理原则: **零隐瞒、零口径混用、零无证据质量声明**
 
@@ -51,7 +51,15 @@
 
 RUN-01 5/10 → RUN-03 (契约一致) **10/10** 编译+NVSDK; DIM-01 严格 9/10 + 006 近似声明。对外限定语: "初始调用 50%, 根因=调用参数违反既有几何契约, 修正后 100% 通过编译 QA 与 NVSDK" — **不得表述为 100% 真实未见泛化能力**。十件永久退出未见测试。
 
-## 七、已声明的已知限制 (零隐瞒)
+## 七、FG-001..003 独立复算终态 (R29-01, 同口径审计器 tolerance=1e-9)
+
+| ID | 审计器 codes | 复算证据 | 执行侧判定提案 (待 GPT R30 终裁) |
+|---|---|---|---|
+| FG-001 bento | boundary_edges 仅此 (healthy=TRUE) | 开界 10 边=开壳语义; UV 层退化 8 面实锤; 3D 0; 无 dup | 开界 EXPECTED_BY_CONTRACT; UV 退化=CONFIRMED_DEFECT (可印刷层) 或条件接受 |
+| FG-002 sushi | boundary_edges + inconsistent_winding + nonmanifold_vertices (healthy=FALSE) | UV 层退化 10+ 面; MIXED winding 新发现; auditor dup16 复算 0 位置重合 (另一口径, 不可互证) | winding+nonmanifold=CONFIRMED_DEFECT 实锤; dup16=AUDITOR 口径差异 (非误报判定, 不可互证) |
+| FG-003 mailer | boundary_edges + nonmanifold_vertices (healthy=FALSE) | UV 层退化 8 面; 边级非流形 0 → 顶点级扇面分裂=刀版交汇语义候选 | nonmanifold=语义待决 (EXPECTED_BY_CONTRACT 候选); UV 退化同上 |
+
+## 七A、已知限制 (零隐瞒)
 
 1. 质量语义 = MEASURED_MASS_STATE_UNKNOWN (官方文档未注明测量状态)
 2. GSO 尺寸 = 扫描 BBox 派生 (非物理实测, 五源表第 4 类); GSO 质量字段缺失
@@ -59,7 +67,7 @@ RUN-01 5/10 → RUN-03 (契约一致) **10/10** 编译+NVSDK; DIM-01 严格 9/10
 4. #31 上游 webp 错绑 (GLB 已验正确); HF 上游 issue 非阻塞反馈授权
 5. 008 参考-规格冲突 CONFLICT_UNRESOLVED (官方规格不被推翻; 补真值=实物采购/GS1)
 6. 物理/视觉保真/消费端适用性: **未验证, 不声明**
-7. 独立资产质量审计覆盖: REP-M05 几何层全量; UV-primvar 层/顶点级非流形仅对照三件, 未全量
+7. 独立资产质量审计覆盖: REP-M05 3D 几何层全量 (0 退化/0 非流形边); UV-primvar 层退化三对照家族 8-10 面实锤但全量 UV 层扫描未做; 顶点级非流形仅对照三件
 
 ## 八、红线 (质量声明禁令)
 
