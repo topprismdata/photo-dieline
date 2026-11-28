@@ -1,0 +1,20 @@
+[
+ {
+  "asset": "aseptic_aseptic_brick_v0000",
+  "cls_id": "aseptic_brick",
+  "identity_guard": "PASS",
+  "template_id": "aseptic_brick"
+ },
+ {
+  "asset": "clv_clv_double_cover_v0084",
+  "cls_id": "clv_double_cover",
+  "identity_guard": "PASS",
+  "template_id": "clv_double_cover"
+ },
+ {
+  "asset": "envelope_envelope_square_v0036",
+  "cls_id": "envelope_square",
+  "identity_guard": "PASS",
+  "template_id": "envelope_square"
+ }
+]

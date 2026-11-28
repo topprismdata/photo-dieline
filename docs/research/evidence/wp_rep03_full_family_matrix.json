@@ -1,0 +1,488 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workline": "WP-REP-03 全家族风险矩阵 (R25 主体 P0, 只读聚合)",
+  "total_skus": 9386,
+  "families": 27,
+  "sources": "build.json 门禁 + conformance.json dim_reconciliation 逐SKU sidecar 只读聚合, 零重编译",
+  "taxonomy_reconciliation": {
+   "finding": "家族口径不一致: build.json family 字段=27 个分组 (cone/cup/food/...) vs 注册表 101 cls_id vs 历史文档'77 家族'表述",
+   "resolution": "矩阵按 build.json 分组口径登记 (27 组); 77 家族为历史表述口径, 101 为注册表口径 — 三口径并陈, 不静默互换",
+   "identity_layer_note": "口径不一致本身即身份层问题实例 (R24 五层模型第 1 层), 提交 GPT 裁决统一口径"
+  }
+ },
+ "summary": {
+  "qa_all_clean_families": 27,
+  "qa_implicated_families": 0,
+  "dim_all_ok_families": 27,
+  "dim_implicated_families": 0
+ },
+ "matrix": [
+  {
+   "family": "aseptic",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "brick",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "clamp",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "clv",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "cone",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "crashlock",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "cup",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "dispenser",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "display",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "envelope",
+   "sku": 371,
+   "qa_clean": 371,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 371,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "food",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "gable",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "handle",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "hanger",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "lockbottom",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "mailer",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "pillow",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "pyramid",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "rsc",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "slide",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "tray",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "tuck",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "two",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "window",
+   "sku": 370,
+   "qa_clean": 370,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 370,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.0,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "hexagonal",
+   "sku": 287,
+   "qa_clean": 287,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 287,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "prism",
+   "sku": 152,
+   "qa_clean": 152,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 152,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  },
+  {
+   "family": "tube",
+   "sku": 57,
+   "qa_clean": 57,
+   "qa_clean_rate": 100.0,
+   "failing_gates": {},
+   "dim_ok": 57,
+   "dim_ok_rate": 100.0,
+   "dim_worst_mm": 0.001,
+   "known_gaps": [
+    "Physics 四变体接口未实现",
+    "PhysicsMaterial 摩擦未挂",
+    "qcode 未富化",
+    "惯性由 collider 推导未显式声明"
+   ]
+  }
+ ],
+ "family_findings_merge": {
+  "FG-001_food_bento_lid_box": "OPEN (uv 退化 5, 外部审计发现 — build 门禁不可见)",
+  "FG-002_food_sushi_tray": "OPEN (dup16+nonfan2, 同上)",
+  "FG-003_mailer_diecut": "OPEN (nonfan3, 开壳语义候选)",
+  "FG-004_prism_n12": "CLOSED RETRACTED (调用方契约违反)",
+  "FG-005_prism_small": "CLOSED (经验比 0.70/0.75, 跨参数组合约束入契约)",
+  "FG-006_5htp_g03": "OPEN (side≈14.148 数值刀口 ≤0.001mm, 代码级量化阈值)"
+ },
+ "govir01_spotcheck": [
+  {
+   "asset": "aseptic_aseptic_brick_v0000",
+   "cls_id": "aseptic_brick",
+   "identity_guard": "PASS",
+   "template_id": "aseptic_brick"
+  },
+  {
+   "asset": "clv_clv_double_cover_v0084",
+   "cls_id": "clv_double_cover",
+   "identity_guard": "PASS",
+   "template_id": "clv_double_cover"
+  },
+  {
+   "asset": "envelope_envelope_square_v0036",
+   "cls_id": "envelope_square",
+   "identity_guard": "PASS",
+   "template_id": "envelope_square"
+  }
+ ],
+ "headline": {
+  "gates": "9,386/9,386 全门禁 PASS (27/27 家族组全净) — build 期筛选口径",
+  "dim_reconciliation": "9,386/9,386 ok, 最差残差 0.001mm (cone/cup/food/pyramid/tray)",
+  "external_audit_findings": "仅 G2 三件对照家族 (FG-001..003), 属 build 门禁盲区 (uv/审计器层), 与矩阵不矛盾 — 分层评价体系实证",
+  "govir01": "3/3 抽样重编译身份一致 (GOV-IR-01 生效下)"
+ }
+}
