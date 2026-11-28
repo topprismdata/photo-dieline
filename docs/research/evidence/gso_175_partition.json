@@ -3,7 +3,8 @@
   "date": "2026-11-28",
   "task": "R29-04b GSO 175 件逐 ID 互斥分区",
   "rule": "每 ID 恰好一个分区: registry 内=当前资格状态; registry 外=排除维持",
-  "closure": false
+  "closure": false,
+  "final_count": 178
  },
  "in_registry": {
   "5_HTP": "PACKAGING_SUPPORTED",
@@ -167,5 +168,25 @@
   "Super_Mario_3D_World_Wii_U_Game": "PACKAGING_CANDIDATE",
   "Wilton_Pearlized_Sugar_Sprinkles_525_oz_Gold": "PACKAGING_CANDIDATE"
  },
- "excluded_maintained": {}
+ "excluded_maintained": {
+  "Black_and_Decker_PBJ2000_FusionBlade_Blender_Jars": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Bradshaw_International_11642_7_Qt_MP_Plastic_Bowl": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Cole_Hardware_Butter_Dish_Square_Red": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Cole_Hardware_Plant_Saucer_Brown_125": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Cole_Hardware_Plant_Saucer_Glazed_9": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Cole_Hardware_Saucer_Electric": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Cole_Hardware_Saucer_Glazed_6": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Plant_Saucer_S14MOCHA": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Plant_Saucer_S14NATURAL": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Plant_Saucer_S17MOCHA": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Plant_Saucer_S20MOCHA": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Plant_Saucer_SQ1HARVEST": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Plant_Saucer_SQ8COR": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Quadra_Saucer_SQ1_Avocado": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Ecoforms_Saucer_SQ3_Turquoise": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Kotobuki_Saucer_Dragon_Fly": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Sea_to_Summit_Xl_Bowl": "EXCLUDED_HOUSEWARE_MAINTAINED",
+  "Threshold_Bamboo_Ceramic_Soap_Dish": "EXCLUDED_HOUSEWARE_MAINTAINED"
+ },
+ "closure": false
 }
