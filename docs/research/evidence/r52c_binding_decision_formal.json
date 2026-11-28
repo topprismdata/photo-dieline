@@ -1,0 +1,58 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "record_id": "R52-C-BINDING-DECISION-002",
+  "subject": "Coca-Cola Original Taste 330ml can ↔ tube_tube_double_seam_R52B_v0001_formal",
+  "protocol": "WP-L3-02-DOC (R52), 判据冻结于 r51b_decision_contract.json (未变更)",
+  "attempt_log_disclosure": "#1 门禁中止无产物 / #2 绕门禁导出→VOID (sha 4594cbcc…, 负证据保留) / #3 本正式件唯一正式配置"
+ },
+ "asset_identity": {
+  "asset_id": "tube_tube_double_seam_R52B_v0001_formal",
+  "asset_sha256": "1ab18a3f184f2290bcfa694d22e57ee8d470b8c94a5be4fc0ecb756f1388f3e9",
+  "provenance": "L1 tube_double_seam 编译器 (class_module 'tube_double_seam') 参数化派生; 最大连通 side=27.6936 标定; 研究派生目录, 未写入 L1 冻结发行集",
+  "l1_gate_inheritance": "G02..G10 全 PASS (含 G03 拓扑) — 继承满足"
+ },
+ "gates": {
+  "BIND-G01": {"verdict": "PASS_WITH_NOTE", "note": "声明主体=Erudus 厂商提交规格 (无法人字段, 附注); 单件 GTIN 05449000000996; Version 1.0 Changed 2023-12-19"},
+  "BIND-G02": {"verdict": "PASS", "note": "派生件 sha256 实测=登记; L1 门禁继承全绿; 非冻结集成员 (派生披露)"},
+  "BIND-G03": {
+   "verdict": "PASS",
+   "four_way_measurement": {
+    "A_documented_spec_mm": [67, 67, 116],
+    "B_asset_ir_declaration_mm": [66.8583, 66.8583, 116.0],
+    "C_compile_target_params": "side=27.6936, h=116.0 (解析 66.8583×66.8583×116.0)",
+    "D_actual_output_mesh_bbox_mm": [66.8583, 66.8583, 116.0],
+    "independent_measurement": "pxr UsdGeom.BBoxCache 直接解析 model.usdc (不经 IR/stage 函数)"
+   },
+   "disclosure": "截面=正八边形纸板管, 非圆柱; BBox 匹配 ≠ 截面等价 — 如实登记待裁"
+  },
+  "BIND-G04": {
+   "verdict": "PASS",
+   "frozen_tolerance": "任一轴 > 1mm → MISMATCH",
+   "per_axis_delta_mm": [-0.1417, -0.1417, 0.0],
+   "per_axis_delta_percent": [-0.2115, -0.2115, 0.0],
+   "decision": "三轴 |Δ| ≤ 1mm → documented_spec_match = MATCH_TENTATIVE; 无拒绝触发"
+  },
+  "BIND-G05": {"verdict": "PASS", "note": "EV-DOC-005 + 快照 f2aada8c… + 派生件 sha 1ab18a3f… + 尝试日志 + 作废件负证据全链可溯"}
+ },
+ "binding_decision": {
+  "binding_status": "BINDING_ACCEPTED",
+  "binding_basis": "DOCUMENTED_ONLY",
+  "verification": {
+   "verdict": "UNRESOLVED",
+   "documented_spec_match": "MATCH_TENTATIVE",
+   "physical_verification": "BLOCKED",
+   "acceptance_scope": ["DOCUMENTED_EXTERNAL_DIMENSIONS"],
+   "dimensions": {
+    "unit": "mm",
+    "documented": [67, 67, 116],
+    "asset_declared_ir": [66.8583, 66.8583, 116.0],
+    "actual_mesh_bbox": [66.8583, 66.8583, 116.0],
+    "delta_mm": [-0.1417, -0.1417, 0.0],
+    "delta_percent": [-0.2115, -0.2115, 0.0]
+   },
+   "gtin": {"inner_component": "05449000000996", "status": "GTIN_UNVERIFIED"}
+  },
+  "scope_statement": "BINDING_ACCEPTED 仅在 acceptance_scope=DOCUMENTED_EXTERNAL_DIMENSIONS 内成立: 表示声明外尺寸层级获得接受, 不是完整 SKU 绑定; 不批准 SKU_EXACT / GEOMETRY_EQUIVALENT / 罐口卷封拉环凹槽厚度容量等任何内部几何 claim"
+ }
+}

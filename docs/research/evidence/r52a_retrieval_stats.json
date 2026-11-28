@@ -1,0 +1,86 @@
+{
+ "date": "2026-11-28",
+ "task": "R52-A",
+ "family": "tube_tube_double_seam",
+ "target_mm": [
+  67,
+  67,
+  116
+ ],
+ "tolerance_mm": 1.0,
+ "scanned": 48,
+ "candidates_within_tolerance": 0,
+ "top5": [
+  {
+   "asset": "tube_tube_double_seam_v5531",
+   "dims_mm": [
+    60.928,
+    60.928,
+    121.137
+   ],
+   "delta_mm": [
+    -6.072,
+    -6.072,
+    5.137
+   ],
+   "max_abs_dev_mm": 6.072
+  },
+  {
+   "asset": "tube_tube_double_seam_v6881",
+   "dims_mm": [
+    60.259,
+    60.259,
+    119.806
+   ],
+   "delta_mm": [
+    -6.741,
+    -6.741,
+    3.806
+   ],
+   "max_abs_dev_mm": 6.741
+  },
+  {
+   "asset": "tube_tube_double_seam_v4991",
+   "dims_mm": [
+    59.614,
+    59.614,
+    118.526
+   ],
+   "delta_mm": [
+    -7.386,
+    -7.386,
+    2.526
+   ],
+   "max_abs_dev_mm": 7.386
+  },
+  {
+   "asset": "tube_tube_double_seam_v3776",
+   "dims_mm": [
+    59.522,
+    59.522,
+    118.344
+   ],
+   "delta_mm": [
+    -7.478,
+    -7.478,
+    2.344
+   ],
+   "max_abs_dev_mm": 7.478
+  },
+  {
+   "asset": "tube_tube_double_seam_v0941",
+   "dims_mm": [
+    59.334,
+    59.334,
+    117.968
+   ],
+   "delta_mm": [
+    -7.666,
+    -7.666,
+    1.968
+   ],
+   "max_abs_dev_mm": 7.666
+  }
+ ],
+ "ranking": "最大单轴绝对偏差优先, 三轴误差辅助"
+}
