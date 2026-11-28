@@ -1,0 +1,129 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "pack_id": "L3-01-DOC-EVID-001",
+  "protocol": "WP-L3-01-DOC (R49)",
+  "charter": "RWI-L3 v0.3",
+  "budget": 0,
+  "discipline": "七级来源层级 + 七字段追溯 + UNVERIFIED + 禁反向补写 + 实物原始测量 NULL"
+ },
+ "snapshots_sha256": {
+  "nlc_jindian_organic.html": "2e0f803e11867a521d496282bbed3599ce279b545d72e8af09013ec6d7efec78",
+  "off_6907992507095.json": "63d8f18603750f095c3c4063615eb1af195627b8404aa546c8e3fc4ec105f695",
+  "jd_chanpin_429580.html": "9c713d3f3b87f7c4fee39a3dc21763d848c2393977d201a5313ff5fd6a5a65a0",
+  "gs1_6907992514970.html": "038c2e4c33dd298924b28fe422a5fde26b48ad8452ffb2a792ad4609fbdfc820"
+ },
+ "evidence": [
+  {
+   "evidence_id": "EV-DOC-001",
+   "subject_id": "PRODUCT-001 (金典有机纯牛奶)",
+   "attribute": "registry_entry",
+   "value": {
+    "生产厂家": "内蒙古伊利实业集团股份有限公司",
+    "品牌": "伊利金典",
+    "食物类别": "灭菌乳",
+    "配料": "有机生牛乳",
+    "净含量": "250ml",
+    "条形码": "6907992514970",
+    "产地": "内蒙古呼和浩特"
+   },
+   "unit": null,
+   "source_level": "DOCUMENTED_REGISTRY",
+   "source_uri": "https://nlc.chinanutri.cn/food/dK7Ipz6tTQWj3kdJKp7lnA.html",
+   "source_locator": "中国疾控中心营养与健康所 预包装食品营养标签数据查询系统",
+   "retrieved_at": "2026-11-28",
+   "source_snapshot_sha256": "2e0f803e11867a521d496282bbed3599ce279b545d72e8af09013ec6d7efec78",
+   "assertion_type": "DECLARED_SPECIFICATION",
+   "package_version_ref": null,
+   "verification_status": "UNVERIFIED",
+   "note": "⚠ 变体=有机, 非配对目标 plain 金典纯牛奶 — GTIN 不可嫁接"
+  },
+  {
+   "evidence_id": "EV-DOC-002",
+   "subject_id": "PRODUCT-001-variant-unidentified",
+   "attribute": "gtin_community_entry",
+   "value": {
+    "name": "金典",
+    "brands": "伊利",
+    "quantity": "250mL",
+    "code": "6907992507095"
+   },
+   "unit": null,
+   "source_level": "DOCUMENTED_REGISTRY",
+   "source_uri": "https://world.openfoodfacts.org/api/v2/product/6907992507095.json",
+   "source_locator": "OpenFoodFacts (社区维护, 可信度低于官方登记)",
+   "retrieved_at": "2026-11-28",
+   "source_snapshot_sha256": "63d8f18603750f095c3c4063615eb1af195627b8404aa546c8e3fc4ec105f695",
+   "assertion_type": "DECLARED_SPECIFICATION",
+   "package_version_ref": null,
+   "verification_status": "UNVERIFIED",
+   "note": "⚠ 条码与 EV-DOC-001 不同; 变体归属不明 (页面自述 incomplete)"
+  },
+  {
+   "evidence_id": "EV-DOC-003",
+   "subject_id": "PRODUCT-001 (金典纯牛奶 plain)",
+   "attribute": "retailer_sku_lineup",
+   "value": {
+    "plain": "金典纯牛奶250ml*16盒 3.6g乳蛋白 纯牛奶整箱 (砖)",
+    "variants_found": [
+     "有机",
+     "娟姗",
+     "梦幻盖",
+     "低脂(FoodTalks)"
+    ]
+   },
+   "unit": null,
+   "source_level": "DOCUMENTED_RETAILER",
+   "source_uri": "https://www.jd.com/chanpin/429580.html",
+   "source_locator": "京东金典纯牛奶品类列表页 (标题行, 无规格表)",
+   "retrieved_at": "2026-11-28",
+   "source_snapshot_sha256": "9c713d3f3b87f7c4fee39a3dc21763d848c2393977d201a5313ff5fd6a5a65a0",
+   "assertion_type": "DECLARED_SPECIFICATION",
+   "package_version_ref": null,
+   "verification_status": "UNVERIFIED",
+   "note": "仅证明 SKU 存在性, 无单件规格字段"
+  },
+  {
+   "evidence_id": "EV-DOC-004",
+   "subject_id": "PRODUCT-001",
+   "attribute": "gs1_official_lookup",
+   "value": null,
+   "unit": null,
+   "source_level": "DOCUMENTED_REGISTRY",
+   "source_uri": "https://www.gs1.org/services/verified-by-gs1/results?gtin=6907992514970",
+   "source_locator": "GS1 Verified (JS渲染, 服务端存根1484B 无数据)",
+   "retrieved_at": "2026-11-28",
+   "source_snapshot_sha256": "038c2e4c33dd298924b28fe422a5fde26b48ad8452ffb2a792ad4609fbdfc820",
+   "assertion_type": "DECLARED_SPECIFICATION",
+   "package_version_ref": null,
+   "verification_status": "UNVERIFIED",
+   "note": "NOT_OBTAINABLE (非验证失败, 是服务需客户端渲染)"
+  }
+ ],
+ "conflicts_and_gaps": {
+  "C1_gtin_variant": "配对目标 plain 金典纯牛奶: 官方登记无直接命中 (NLC 只有有机变体); 有机 GTIN 6907992514970 不可嫁接 plain SKU → 商品身份登记层 UNRESOLVED",
+  "C2_dims": "单件外部尺寸: 全部公开源无字段 → NULL (保持; 禁从整箱/销售组合/资产反推)",
+  "C3_package_version": "无任何版本识别依据 → PENDING_VERIFICATION 保持",
+  "C4_manufacturer_site": "yili.com 产品页 fetch 0 bytes (反爬) → DOCUMENTED_MANUFACTURER 层本轮 UNREACHABLE"
+ },
+ "doc06_asset_vs_documented": {
+  "asset_declared": {
+   "dims_mm": [
+    55,
+    40,
+    115
+   ],
+   "virtual_brand": "TOPPRISM",
+   "sha256": "3d7a5b18…"
+  },
+  "real_documented": {
+   "dims_mm": null,
+   "brand": "伊利金典 (登记层)",
+   "gtin_plain_sku": null
+  },
+  "delta": "NOT_COMPUTABLE (实物侧尺寸 NULL)",
+  "binding_basis": "DOCUMENTED_ONLY",
+  "binding_status": "UNRESOLVED"
+ },
+ "stop_condition_assessment": "R48 终裁停止条件已触发: 无法取得可信单件外部尺寸与包装版本证据 → 建议 EVIDENCE_INSUFFICIENT 结项 (L3-01-DOC), 交治理回路裁决"
+}
