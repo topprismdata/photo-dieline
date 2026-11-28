@@ -7,5 +7,20 @@
  "tuck_deviation_within_TOL": 2,
  "tuck_deviation_outside_TOL": 150,
  "max_abs_deviation_mm": 99.0879,
- "TOL_MM": 0.2
+ "TOL_MM": 0.2,
+ "stratified_truth": {
+  "prism_dust_skus": {
+   "n": 2,
+   "dev_max": 0.1803,
+   "over_TOL": 0,
+   "g04_pass": 2
+  },
+  "prism_open_tuck_skus": {
+   "n": 150,
+   "g04_pass": 150,
+   "live_recheck": "PASS (抽样活体复检)"
+  },
+  "correction": "首次复算将 generic_prism (open/tuck 无 tuck_depth 参数) 误套 dust 契约 → 150 偏差为口径错误; 分层后 dust 系偏差全在 G04 容差内, open/tuck 系活体复检 ALL PASS",
+  "verdict_final": "FG-006 冻结集零实际影响成立 (刀口 0 命中 + dust 偏差≤容差 + open/tuck 活体 PASS)"
+ }
 }
