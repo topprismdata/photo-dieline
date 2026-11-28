@@ -1,0 +1,23 @@
+{
+ "_meta": {
+  "workorder": "FG-006 (R24-SUPPLEMENT 授权)",
+  "date": "2026-11-28",
+  "subject": "5_HTP G03 残留: df-glue 交互假设已证伪, 真实机制=side 数值刀口"
+ },
+ "hypothesis_test": {
+  "H_df_glue": "证伪 — glue_w 1.0~6.0 全域 G03 FAIL (df=4.244 恒定)",
+  "H_side": "确认 — side 为唯一触发参数 (h 40~96.6 全域, 与 h 无关)"
+ },
+ "bisection": {
+  "fail_side": 14.148,
+  "pass_side": 14.149,
+  "boundary": "side ∈ (14.148, 14.149], 窗口 ≤0.001mm",
+  "interpretation": "代码级数值量化阈值 (疑似某处 round/比较在 ~14.1485 处翻转), 非几何规律; 近邻对照 JarroDophilus side=14.402 全 h PASS"
+ },
+ "control": {
+  "JarroDophilus side=14.402": "全 h PASS",
+  "5_HTP side=14.148": "全 h G03 FAIL"
+ },
+ "next_step": "S2 源码级定位: 在 net/panel 生成路径中检查以 side 派生量的量化比较 (round(…,3)/epsilon)",
+ "scope_note": "刀口宽度 ≤0.001mm, 实际调用经 round(…,3) 落在刀口上的概率≈参数连续域上的测度零事件; 对 9,386 冻结集无影响证据 (pack10k 网格参数不落此刀口, 待 REP-03 只读审计复核)"
+}
