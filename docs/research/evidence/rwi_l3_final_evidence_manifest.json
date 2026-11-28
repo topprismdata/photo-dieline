@@ -1,0 +1,143 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "manifest": "RWI-L3 Final Evidence Manifest (R54 结项归档)",
+  "freeze_note": "归档完成即冻结 L3 基线; R55/L4 未授权; 独立文件级审计 PENDING",
+  "principles_v1": [
+   "真实知识优先",
+   "任务导向保真",
+   "最低充分表示",
+   "独立业务验收",
+   "时间有效性治理"
+  ],
+  "overall_rating": "7.3/10 (探索性研发等权, 非商业资格)"
+ },
+ "file_count": 25,
+ "files": [
+  {
+   "file": "ev_doc_005_coke_posctrl.json",
+   "sha256": "3254c1ea9e189b00c583004761b4ec44329c408be6133dd0be9acfcc02dc4865",
+   "bytes": 1137
+  },
+  {
+   "file": "gpt_r48_verdict.md",
+   "sha256": "8e88586803b19b6faa8c0b70c2fc9862a2b8436f3841de99b46e2f5f3aebe16a",
+   "bytes": 1090
+  },
+  {
+   "file": "gpt_r52_verdict.md",
+   "sha256": "59c8ec43e8fd073e1ba563fedea85d8e68424f97e7e3326e3a4072bdcbad1be7",
+   "bytes": 1766
+  },
+  {
+   "file": "gpt_r53_verdict.md",
+   "sha256": "b33dcd9caf2eb80c797b99d495cabecc193b308e534d2d99df862db4d9a94765",
+   "bytes": 1495
+  },
+  {
+   "file": "gpt_r54_final_signoff.md",
+   "sha256": "085fee19dd0d65502409282ea7dc83cb7efbb827ff6b958b4d91acdc187f6324",
+   "bytes": 2371
+  },
+  {
+   "file": "l3_01_doc_evidence_pack.json",
+   "sha256": "d93dc2f74bbeefef95e0c72129efc85e6a93a3fd0a31e99acf5b50b8c2bbba08",
+   "bytes": 5214
+  },
+  {
+   "file": "l3_binding_contract_v1.json",
+   "sha256": "59d53a75a07f9d75e8e7488c1065d545c637721a83a6636ca9292e538ae165e0",
+   "bytes": 1243
+  },
+  {
+   "file": "r50a_jindian_case_freeze.md",
+   "sha256": "4b0369cfdf2d670ae381c130368350e52bd102711f7409efdac66c735c9a82a9",
+   "bytes": 2077
+  },
+  {
+   "file": "r50bc_positive_control_package.md",
+   "sha256": "006e8c9991d6ccc6b845a7ccc150097f722e0066e7e4b843c0f5648f0bbfe944",
+   "bytes": 4532
+  },
+  {
+   "file": "r51a_source_qualification.md",
+   "sha256": "1567aa5061c48b7544b852573806568df515fc6706fd25874d38305c0a1d7949",
+   "bytes": 2000
+  },
+  {
+   "file": "r51b_decision_contract.json",
+   "sha256": "6c558c3ddd57a6bbe0087f3e477008b1f2b0535315379c408810cf95b7e719ce",
+   "bytes": 2401
+  },
+  {
+   "file": "r51c_binding_decision.json",
+   "sha256": "744b728850f6319196267020ea29c874bab60a10bf0acaf3ebca2361920d546a",
+   "bytes": 2858
+  },
+  {
+   "file": "r51d_dual_case_regression.md",
+   "sha256": "6deb4b96d0bff5e709a585e2629b03066b9975fb8cf5ceadc2d2bb76b352ae11",
+   "bytes": 1780
+  },
+  {
+   "file": "r52a_retrieval_stats.json",
+   "sha256": "addc6d9c118445f9e5361cc3e5b2a70c542bf3f98ad4b5454fc67c80d7a1f0ae",
+   "bytes": 1240
+  },
+  {
+   "file": "r52c_binding_decision_formal.json",
+   "sha256": "5e6de630583180a508fdbae558b7a57a0b12360814cb6cd1aa7ecf8fc40d0e69",
+   "bytes": 3119
+  },
+  {
+   "file": "r52d_regression_and_temporal_corrections.md",
+   "sha256": "386b8ab09d50fad1ca9c0294a7862fcaa4dc98707f3d267784a1a280ca65e64a",
+   "bytes": 2533
+  },
+  {
+   "file": "r53a_family_qualification.md",
+   "sha256": "e5f3b2f483790482b17445172746fbc7116f8ec5ba310f81c9cae3306c2b8cd0",
+   "bytes": 2585
+  },
+  {
+   "file": "r53b_t1_four_arm.json",
+   "sha256": "92a0e1be20dc3aa817f3d240045cce7d4970d03843fd6ef325064a30d433f25e",
+   "bytes": 2340
+  },
+  {
+   "file": "r53c_governance_register.md",
+   "sha256": "10e0c23f602b1d2ac241c4b5d8f4bfbd78bf533a034bbcf0836e75da45d5f4de",
+   "bytes": 2339
+  },
+  {
+   "file": "r54a_temporal_regression.json",
+   "sha256": "f427c4b3994652cdde791f2b4d56e95302dc06f7838f3bd96f2190ae063ae73b",
+   "bytes": 3805
+  },
+  {
+   "file": "r54b_binding_economics.md",
+   "sha256": "3fb3d2da74c40c8389f28a604b0619cc8e3dce8d42147de5f9306dcb48685333",
+   "bytes": 2802
+  },
+  {
+   "file": "rwi_l3_charter_v03.md",
+   "sha256": "e0fd5f34bcfce442b0beeabd17ade7065031f0c0d584361740c145a6b4b21036",
+   "bytes": 3457
+  },
+  {
+   "file": "rwi_l3_final_research_report.md",
+   "sha256": "55be26a2e32b472d5fcf71d974b73b5d2fb21383668aad1117d9e6b4b5bf5d75",
+   "bytes": 4101
+  },
+  {
+   "file": "rwi_l3_findings_register.json",
+   "sha256": "e4fd1a3617bc449f8ff96e65fbb795ac4c02202bb014c802e18deeb73cc0ec5f",
+   "bytes": 3460
+  },
+  {
+   "file": "wp_l3_01_physical_blocked.md",
+   "sha256": "d8e136b9fb1419682f1de6f1f7ab23d173e8575d2cd4fe3d393e1104fd287371",
+   "bytes": 643
+  }
+ ]
+}
