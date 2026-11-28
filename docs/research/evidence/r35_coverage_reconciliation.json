@@ -1,0 +1,163 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "task": "R35-覆盖率和解 (R34 P0 纠正落实)",
+  "denominator": 20,
+  "mutually_exclusive": true
+ },
+ "final_coverage": {
+  "task_applicable": 16,
+  "rate_pct": 80.0,
+  "gate_90pct": "未达 (缺口 4 件: UNSUPPORTED 3 + IDENTITY_UNRESOLVED 1)"
+ },
+ "partition": [
+  {
+   "sku": "金典纯牛奶250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "金典有机250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "安慕希原味205g",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "安慕希黄桃燕麦205g",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "舒化无乳糖250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "QQ星儿童奶195ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "优酸乳原味250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "味可滋芝士乳茶240ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "金典娟姗瓶装250ml",
+   "status": "APPROXIMATED",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "味可滋瓶装450ml",
+   "status": "APPROXIMATED",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "伊利纯牛奶1L屋顶包",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "娟姗酸奶杯160g",
+   "status": "APPROXIMATED",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "须尽欢茉莉酸奶90g杯",
+   "status": "IDENTITY_UNRESOLVED",
+   "task_applicable": false,
+   "in_denominator": true
+  },
+  {
+   "sku": "植选豆乳330ml瓶",
+   "status": "UNSUPPORTED",
+   "task_applicable": false,
+   "in_denominator": true
+  },
+  {
+   "sku": "每益添100ml小瓶",
+   "status": "UNSUPPORTED",
+   "task_applicable": false,
+   "in_denominator": true
+  },
+  {
+   "sku": "塞纳牧场鲜奶950ml瓶",
+   "status": "APPROXIMATED",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "伊利巧克力奶250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "谷粒多燕麦牛奶250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  },
+  {
+   "sku": "伊利谢肥鸭雪糕75g",
+   "status": "UNSUPPORTED",
+   "task_applicable": false,
+   "in_denominator": true
+  },
+  {
+   "sku": "金典低脂250ml",
+   "status": "GEOMETRY_EQUIVALENT",
+   "task_applicable": true,
+   "in_denominator": true
+  }
+ ],
+ "counts": {
+  "GEOMETRY_EQUIVALENT": 12,
+  "APPROXIMATED": 4,
+  "IDENTITY_UNRESOLVED": 1,
+  "UNSUPPORTED": 3
+ },
+ "gap_attribution": {
+  "植选豆乳330ml瓶": {
+   "gap": "PET 瓶家族未发行",
+   "layer": "结构编译层 (家族能力边界)",
+   "disposition": "UNSUPPORTED 登记进基线; PET-GAP-01 有限调查不授权新家族 (R34)"
+  },
+  "每益添100ml小瓶": {
+   "gap": "PET 瓶家族未发行 (小规格)",
+   "layer": "结构编译层",
+   "disposition": "同上"
+  },
+  "伊利谢肥鸭雪糕75g": {
+   "gap": "异形雪糕非包装家族 (形状复杂结构)",
+   "layer": "参数化表达层能力边界",
+   "disposition": "UNSUPPORTED 登记进基线 (_parametric表达边界, 非编译器缺陷)"
+  },
+  "须尽欢茉莉酸奶90g杯": {
+   "gap": "异形杯+印刷复杂 → 身份/印刷证据不足",
+   "layer": "真实对象身份层 (IDENTITY_UNRESOLVED)",
+   "disposition": "待视觉核验 (对照板路线) 或 UNRESOLVED 入基线"
+  }
+ }
+}
