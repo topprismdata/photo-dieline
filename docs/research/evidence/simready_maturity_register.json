@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "date": "2026-11-28",
+    "register": "SimReady S1-S4 成熟度登记册 (R44-A, 与 Task-Oriented Fidelity Framework v0.1 Physical 分支合并)",
+    "naming_note": "编号 S1-S4 (避免与 RWI-L1/L2 阶段冲突, R43 裁决)",
+    "scope": "hfpackage milk_bottle_1000 + MuJoCo 适配路径; 不外推至 77 发行类或 9,386 件冻结资产",
+    "rule": "前一级通过不能证明下一级成立"
+  },
+  "maturity_levels": [
+    {"level": "S1", "capability": "能加载 (USD 加载/单位/包围盒检查, 单个引用资产)", "status": "REPORTED_PASS", "evidence": "r42_sr1_loading_check.json"},
+    {"level": "S2", "capability": "能参与动态任务 (落地/推挤/堆叠可运行; 不代表响应正确)", "status": "REPORTED_PASS", "evidence": "r43_c_push_stack.json + r42_sr2_drop_result.json"},
+    {"level": "S3", "capability": "能正确接触 (6.88-9.35mm 穿透; 碰撞表示对照未完成)", "status": "NOT_ESTABLISHED", "evidence": "r43_ab_drop_collision.json"},
+    {"level": "S4", "capability": "能可信模拟真实商品 (缺独立物理参数及实际行为真值)", "status": "BLOCKED", "evidence": "r43_d_physical_reference.md"}
+  ],
+  "protocol_deviations": [
+    "G3-L 早于 G2-M2 送审执行 (时序违反) — 历史结果保留为探索性证据",
+    "50mm vs 105mm 落差口径混用 — 已和解, 双值保留",
+    "2N 推力标定失配 — 原始结果保留 + 比例修正复测分列"
+  ],
+  "gap_closure_investment_final": {
+    "实物称重": "P0 条件授权 (最小实物样本)",
+    "摩擦文献标定": "P1 资料登记不替代实测",
+    "碰撞表示升级": "P2 DEFERRED",
+    "网格水密修复": "P2 NOT AUTHORIZED",
+    "液体晃动": "OUT_OF_SCOPE"
+  }
+}
