@@ -1,0 +1,18 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "purpose": "R24-SUPPLEMENT 计数和解 (PACKAGING CANDIDATES = 135 PROVISIONAL)"
+ },
+ "equation": {
+  "v1.2_PACKAGING_SUPPORTED": 99,
+  "readmission_candidates": 36,
+  "packaging_candidates_provisional": 135,
+  "closure_check": true,
+  "note": "复入 36 件 = PACKAGING_CANDIDATE 资格 (非正式 SUPPORTED); POOL-VISUAL-01 完成前不计入正式准入分母"
+ },
+ "pool_visual_01_status": {
+  "previews_downloaded": 57,
+  "contact_sheets": 5,
+  "vision_judgment": "PENDING — 本会话 GUI 附件通道受阻, 资产与对照板就绪待下会话送审"
+ }
+}
