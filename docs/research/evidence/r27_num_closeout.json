@@ -13,6 +13,20 @@
   "match": true,
   "vs_OXO_webp": "不同文件 (非复制错位)",
   "verdict": "我方下载/拼板管线零错 (hash 链闭合); HF 上游 previews/Granimals_*.webp 内容与其对象名不符 → **上游数据集自身绑定不一致** (身份层第 4 类证据), 上游 GLB 是否同为错绑待下轮核",
-  "status": "SOURCE_BINDING_UPSTREAM_CONFIRMED"
+  "status": "UPSTREAM_WEBP_RENDER_BUG (GLB verified)",
+  "glb_identity_check": {
+   "glb_sha256": "fd84fbf923b02ef4",
+   "bytes": 858792,
+   "submeshes": 1,
+   "faces": 12336,
+   "glb_bbox_proportions": "1 : 0.3 : 0.3 (拉长体)",
+   "catalog_size_cm": [
+    19.0,
+    5.07,
+    6.35
+   ],
+   "proportion_match": "吻合 (玩具车 elongated 形态)",
+   "verdict": "GLB 本体绑定正确 (几何比例=玩具车); 仅上游 .webp 缩略图错绑 → 上游缩略图管线错误, 非身份错配"
+  }
  }
 }
