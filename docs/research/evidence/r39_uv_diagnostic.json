@@ -1,0 +1,45 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workorder": "R39-A UV 只读诊断 (不修复)",
+  "candidates": {
+   "C1_采样方向": "默认UV u/v 轴与面局部轴映射致90°采样旋转",
+   "C2_默认UV定义": "Blender 默认立方体 -Y 面 UV 本身带旋转 (非轴对齐)",
+   "C3_纹理方向": "纹理竖版方向与 UV 采样轴组合呈现旋转"
+  },
+  "discipline": "只读分析+逐项证伪/证实, 不修复"
+ },
+ "C1_逐面检验": [
+  {
+   "normal": "X-",
+   "u_with_x": false,
+   "v_with_z": false
+  },
+  {
+   "normal": "Y+",
+   "u_with_x": true,
+   "v_with_z": false
+  },
+  {
+   "normal": "X+",
+   "u_with_x": false,
+   "v_with_z": false
+  },
+  {
+   "normal": "Y-",
+   "u_with_x": false,
+   "v_with_z": false
+  },
+  {
+   "normal": "Z-",
+   "u_with_x": true,
+   "v_with_z": false
+  },
+  {
+   "normal": "Z+",
+   "u_with_x": false,
+   "v_with_z": false
+  }
+ ],
+ "C2_conclusion": "默认 -Y 面 UV 存在交叉/旋转 → C2 成立: {'normal': 'Y-', 'u_with_x': False, 'v_with_z': False}"
+}
