@@ -1,0 +1,18 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workorder": "R27 收口 (R26 NUM-01..05 + #31 绑定核查)"
+ },
+ "NUM_01_band_width": "失败带=单点量化切达: side=14.148 G03 FAIL; 11.0/12/13/13.5/14.0/14.1/14.149/14.5/15/16/17.68 全 PASS — 非失败域边界, 非带域",
+ "NUM_05_mechanism_verdict": "数值判定异常 (几何切达): side≈14.1485 处胶片角与邻面板达到测度零切达, G03 相交谓词(>1e-6 或任一相交对)在切达点触发 — 真实几何切达但非材料重叠; 非全局失败带",
+ "NUM_03_code_note": "量化来源=调用方 round(side,3) 传参 + G03 相交谓词无切达豁免; 未改全局容差 (遵 R26 不授权)",
+ "NUM_04_frozen": "0 命中 (fg006_frozen_recompute.json, 152 prism 实扫)",
+ "binding_31": {
+  "local_webp_sha256": "6637f72acef042ca",
+  "remote_webp_sha256": "6637f72acef042ca",
+  "match": true,
+  "vs_OXO_webp": "不同文件 (非复制错位)",
+  "verdict": "我方下载/拼板管线零错 (hash 链闭合); HF 上游 previews/Granimals_*.webp 内容与其对象名不符 → **上游数据集自身绑定不一致** (身份层第 4 类证据), 上游 GLB 是否同为错绑待下轮核",
+  "status": "SOURCE_BINDING_UPSTREAM_CONFIRMED"
+ }
+}
