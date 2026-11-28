@@ -10,7 +10,8 @@
    "独立业务验收",
    "时间有效性治理"
   ],
-  "overall_rating": "7.3/10 (探索性研发等权, 非商业资格)"
+  "overall_rating": "7.3/10 (探索性研发等权, 非商业资格)",
+  "addendum": "R52-B 派生件编译记录入库增补 (2026-11-28, 采纳评审建议)"
  },
  "file_count": 25,
  "files": [
@@ -138,6 +139,26 @@
    "file": "wp_l3_01_physical_blocked.md",
    "sha256": "d8e136b9fb1419682f1de6f1f7ab23d173e8575d2cd4fe3d393e1104fd287371",
    "bytes": 643
+  },
+  {
+   "file": "r52b_derived/INDEX.json",
+   "sha256": "314ca4c2032d9ace15a81bb40ab1c786647ea8f4418e1c296423cfb763e1a227",
+   "bytes": 806
+  },
+  {
+   "file": "r52b_derived/build_formal.json",
+   "sha256": "8ca849e38107533fe532e088ea911d4b014fe27dfebbf4db9c2a833c445e7b02",
+   "bytes": 1121
+  },
+  {
+   "file": "r52b_derived/build_void_asset.json",
+   "sha256": "153929e37d11f9eb96f9dcbfa1ff7e6fb0511b49eccf1817320ae781ece7714c",
+   "bytes": 855
+  },
+  {
+   "file": "r52b_derived/VOID_REGISTER_void_asset.json",
+   "sha256": "4a8cdeefa04eaec4a067a0d84b77cd95d99bead950f60edeccb90bb92f0344a5",
+   "bytes": 710
   }
  ]
 }
