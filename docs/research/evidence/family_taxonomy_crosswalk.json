@@ -1,0 +1,279 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "workorder": "GOV-TAX-01 (R25 裁决: 家族分类学交叉映射)",
+  "layers": {
+   "builder_group": 27,
+   "registered_cls": 101,
+   "released_cls": 77,
+   "released_assets": 9386,
+   "historical_family": 77,
+   "semantic_family": "待定义映射"
+  }
+ },
+ "builder_group_to_cls": {
+  "aseptic": [
+   "aseptic_brick"
+  ],
+  "brick": [
+   "brick_250ml"
+  ],
+  "clamp": [
+   "clamp_shell"
+  ],
+  "clv": [
+   "clv_double_cover",
+   "clv_double_tuck",
+   "clv_glue_seal",
+   "clv_hinged_flap",
+   "clv_partial_lid",
+   "clv_snap_lock",
+   "clv_tuck_insert"
+  ],
+  "cone": [
+   "cone_wrap_n12"
+  ],
+  "crashlock": [
+   "crashlock_rect_tuck"
+  ],
+  "cup": [
+   "cup_sleeve"
+  ],
+  "dispenser": [
+   "dispenser_top"
+  ],
+  "display": [
+   "display_counter"
+  ],
+  "envelope": [
+   "envelope_square",
+   "envelope_wedge"
+  ],
+  "food": [
+   "food_bento_lid_box",
+   "food_clamshell_burger",
+   "food_fries_sleeve",
+   "food_noodle_pail",
+   "food_sushi_tray",
+   "food_tray_liner",
+   "food_wrap_pocket"
+  ],
+  "gable": [
+   "gable_rect_base",
+   "gable_window_front"
+  ],
+  "handle": [
+   "handle_box"
+  ],
+  "hanger": [
+   "hanger_box"
+  ],
+  "hexagonal": [
+   "hexagonal_flip"
+  ],
+  "lockbottom": [
+   "lockbottom_123"
+  ],
+  "mailer": [
+   "mailer_diecut"
+  ],
+  "pillow": [
+   "pillow_box"
+  ],
+  "prism": [
+   "prism_dust_n4",
+   "prism_dust_n5",
+   "prism_n10_open",
+   "prism_n10_tuck",
+   "prism_n11_open",
+   "prism_n11_tuck",
+   "prism_n12_open",
+   "prism_n12_tuck",
+   "prism_n4_open",
+   "prism_n4_tuck",
+   "prism_n5_open",
+   "prism_n5_tuck",
+   "prism_n6_open",
+   "prism_n6_tuck",
+   "prism_n7_open",
+   "prism_n7_tuck",
+   "prism_n8_open",
+   "prism_n8_tuck",
+   "prism_n9_open",
+   "prism_n9_tuck",
+   "prism_tuck_window"
+  ],
+  "pyramid": [
+   "pyramid_frustum_n10",
+   "pyramid_frustum_n12",
+   "pyramid_frustum_n4",
+   "pyramid_frustum_n5",
+   "pyramid_frustum_n6",
+   "pyramid_frustum_n7",
+   "pyramid_frustum_n8",
+   "pyramid_frustum_n9"
+  ],
+  "rsc": [
+   "rsc_handhole",
+   "rsc_rsc"
+  ],
+  "slide": [
+   "slide_box"
+  ],
+  "tray": [
+   "tray_4corner",
+   "tray_6corner",
+   "tray_domelid",
+   "tray_lid_overfit",
+   "tray_wedge"
+  ],
+  "tube": [
+   "tube_cap_end",
+   "tube_double_seam",
+   "tube_glue",
+   "tube_glue_n24",
+   "tube_glue_n8"
+  ],
+  "tuck": [
+   "tuck_top_box"
+  ],
+  "two": [
+   "two_piece"
+  ],
+  "window": [
+   "window_box"
+  ]
+ },
+ "released_classes": [
+  "aseptic_brick",
+  "brick_250ml",
+  "clamp_shell",
+  "clv_double_cover",
+  "clv_double_tuck",
+  "clv_glue_seal",
+  "clv_hinged_flap",
+  "clv_partial_lid",
+  "clv_snap_lock",
+  "clv_tuck_insert",
+  "cone_wrap_n12",
+  "crashlock_rect_tuck",
+  "cup_sleeve",
+  "dispenser_top",
+  "display_counter",
+  "envelope_square",
+  "envelope_wedge",
+  "food_bento_lid_box",
+  "food_clamshell_burger",
+  "food_fries_sleeve",
+  "food_noodle_pail",
+  "food_sushi_tray",
+  "food_tray_liner",
+  "food_wrap_pocket",
+  "gable_rect_base",
+  "gable_window_front",
+  "handle_box",
+  "hanger_box",
+  "hexagonal_flip",
+  "lockbottom_123",
+  "mailer_diecut",
+  "pillow_box",
+  "prism_dust_n4",
+  "prism_dust_n5",
+  "prism_n10_open",
+  "prism_n10_tuck",
+  "prism_n11_open",
+  "prism_n11_tuck",
+  "prism_n12_open",
+  "prism_n12_tuck",
+  "prism_n4_open",
+  "prism_n4_tuck",
+  "prism_n5_open",
+  "prism_n5_tuck",
+  "prism_n6_open",
+  "prism_n6_tuck",
+  "prism_n7_open",
+  "prism_n7_tuck",
+  "prism_n8_open",
+  "prism_n8_tuck",
+  "prism_n9_open",
+  "prism_n9_tuck",
+  "prism_tuck_window",
+  "pyramid_frustum_n10",
+  "pyramid_frustum_n12",
+  "pyramid_frustum_n4",
+  "pyramid_frustum_n5",
+  "pyramid_frustum_n6",
+  "pyramid_frustum_n7",
+  "pyramid_frustum_n8",
+  "pyramid_frustum_n9",
+  "rsc_handhole",
+  "rsc_rsc",
+  "slide_box",
+  "tray_4corner",
+  "tray_6corner",
+  "tray_domelid",
+  "tray_lid_overfit",
+  "tray_wedge",
+  "tube_cap_end",
+  "tube_double_seam",
+  "tube_glue",
+  "tube_glue_n24",
+  "tube_glue_n8",
+  "tuck_top_box",
+  "two_piece",
+  "window_box"
+ ],
+ "unreleased_classes": [
+  "cone_wrap",
+  "cone_wrap_n20",
+  "crashlock_divider",
+  "crashlock_rect",
+  "divided_tray_3comp",
+  "egg_tray_2x4",
+  "gable_fin_gap_wide",
+  "gable_finless",
+  "gable_screw_cap",
+  "gable_top",
+  "mailer_bookwrap",
+  "mailer_rigid_pad",
+  "pizza_box_330",
+  "prism_dust_n10",
+  "prism_dust_n11",
+  "prism_dust_n12",
+  "prism_dust_n6",
+  "prism_dust_n7",
+  "prism_dust_n8",
+  "prism_dust_n9",
+  "rsc_css",
+  "rsc_display_panel",
+  "rsc_hsc",
+  "rsc_lock"
+ ],
+ "cls_asset_counts": {
+  "aseptic_brick": 371,
+  "brick_250ml": 371,
+  "clamp_shell": 371,
+  "cone_wrap_n12": 371,
+  "crashlock_rect_tuck": 371,
+  "cup_sleeve": 371,
+  "dispenser_top": 371,
+  "display_counter": 371,
+  "handle_box": 370,
+  "hanger_box": 370,
+  "lockbottom_123": 370,
+  "mailer_diecut": 370,
+  "pillow_box": 370,
+  "slide_box": 370,
+  "tuck_top_box": 370,
+  "two_piece": 370,
+  "window_box": 370,
+  "hexagonal_flip": 287,
+  "envelope_wedge": 186,
+  "envelope_square": 185
+ },
+ "set_difference_verdict": {
+  "released_cls_count": 77,
+  "historical_77_interpretation": "77=已发行类数 ✓",
+  "note": "GPT 要求: 77=101 已发行子集 的解释需集合差分证明; 实测已发行类数=77"
+ }
+}
