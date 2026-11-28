@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "date": "2026-11-28",
+    "workorder": "R34-任务2 B1 人工反事实实测 — 状态登记",
+    "protocol": "WP-L2-01 协议 v1.1 F03/F10 (B3 不得替代 B1)"
+  },
+  "status": "DEFERRED_WITH_REPRODUCER (EVIDENCE_INSUFFICIENT)",
+  "reason": "B1 要求真人 CG 从业者同规格制作全流程计时 — 执行侧无法自产人工计时 (AI 执行≠人工实测, 虚构即违反零无证据声明); 招募渠道未建立",
+  "reproducer": {
+    "recruit": "1 名 CG 从业者 (建模/渲染在职或自由职业)",
+    "task_spec": "同一乳品冷藏柜交付规格 (12 SKU + fixture + 绑定放置清单 + 3 视角渲染), Cold Start: 仅给商品资料清单不给资产",
+    "measure": "全流程壁钟 (导入/建模/装配/调整) 分阶段计时 × 2 次取均; Warm Start: 第二次同任务 (复用自有资产) 单独计时",
+    "output": "B1 计时台账 (分钟级) → 与 RWI 路线 (装配 <1s + 渲染 ~2s + 人工审核) 对比"
+  },
+  "interim_registration": {
+    "B3_estimation_only": "工程估算: 人工 CG 同规格货架 ≈ 8-24 工时 (行业常见区间, 标注为假设非实测)",
+    "comparison_claim_allowed": "无 (B1 未实测, 50% 门槛结论不签发, EVIDENCE_INSUFFICIENT)",
+    "rwi_side_measured": "场景契约装配计算 <1s + EEVEE 渲染 ~2s + 变更四动作毫秒级 (r32_change_experiment.json)"
+  },
+  "gate_impact": "经济门槛 (成本降≥50%) = EVIDENCE_INSUFFICIENT; 其余门槛 (身份 100%/硬违反 0/盲评 7.2/覆盖率 85%) 不受影响"
+}
