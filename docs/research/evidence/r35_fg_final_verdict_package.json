@@ -1,0 +1,96 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "purpose": "R29-01 遗留: FG-001..003 复算材料终裁提交",
+  "same_caliber_tool": "sdk mesh_health tolerance=1e-9 (审计器本体)",
+  "proposal_enum": [
+   "EXPECTED_BY_CONTRACT",
+   "CONFIRMED_DEFECT",
+   "AUDITOR_FALSE_POSITIVE",
+   "UNRESOLVED"
+  ]
+ },
+ "FG-001_bento": {
+  "auditor_codes": [
+   "boundary_edges"
+  ],
+  "recompute": {
+   "uv_degenerate_uv_faces": [
+    0,
+    5,
+    11,
+    12,
+    16,
+    17,
+    18,
+    19
+   ],
+   "uv_degenerate_3d": 0,
+   "pos_coincident_dup_verts": 0,
+   "nonmanifold_edges": 0,
+   "open_boundary_edges": 10,
+   "winding": "consistent",
+   "meshes": 1,
+   "uv_dim": 2,
+   "uv_present": true
+  },
+  "proposal": "boundary_edges=EXPECTED_BY_CONTRACT(开壳便当语义, GPT R25 已认); UV退化面=UNRESOLVED(需印刷面用途逐面核对, 复算证据=UV层8面/3D层0)"
+ },
+ "FG-002_sushi": {
+  "auditor_codes": [
+   "boundary_edges",
+   "inconsistent_winding",
+   "nonmanifold_vertices"
+  ],
+  "recompute": {
+   "uv_degenerate_uv_faces": [
+    9,
+    19,
+    24,
+    25,
+    29,
+    32,
+    33,
+    36,
+    37,
+    38
+   ],
+   "uv_degenerate_3d": 0,
+   "pos_coincident_dup_verts": 0,
+   "nonmanifold_edges": 0,
+   "open_boundary_edges": 26,
+   "winding": "mixed",
+   "meshes": 1,
+   "uv_dim": 2,
+   "uv_present": true
+  },
+  "proposal": "inconsistent_winding+nonmanifold_vertices=CONFIRMED_DEFECT(同口径实锤); UV退化=CONFIRMED_DEFECT(10面); auditor dup16=AUDITOR 口径差异(位置重合0, 不可互证不判误报)"
+ },
+ "FG-003_mailer": {
+  "auditor_codes": [
+   "boundary_edges",
+   "nonmanifold_vertices"
+  ],
+  "recompute": {
+   "uv_degenerate_uv_faces": [
+    1,
+    4,
+    5,
+    8,
+    9,
+    11,
+    12,
+    13
+   ],
+   "uv_degenerate_3d": 0,
+   "pos_coincident_dup_verts": 0,
+   "nonmanifold_edges": 0,
+   "open_boundary_edges": 19,
+   "winding": "consistent",
+   "meshes": 1,
+   "uv_dim": 2,
+   "uv_present": true
+  },
+  "proposal": "nonmanifold_vertices=UNRESOLVED(刀版多面交汇语义 vs 真缺陷, 需表达阶段确认=刀版折叠前平面态—折叠平面态顶点交汇天然存在, 倾向 EXPECTED_BY_CONTRACT 但证据不足如实登记); UV退化=CONFIRMED_DEFECT"
+ }
+}
