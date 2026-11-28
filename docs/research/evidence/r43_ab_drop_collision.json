@@ -1,0 +1,15 @@
+{
+ "A_drop_height_definition": "落差=瓶底初始离地高度; body原点=瓶底; z0=落差mm/1000",
+ "B_collision_comparison": {
+  "hull_default": {
+   "max_pen_mm": 6.88,
+   "settled": true,
+   "final_z_mm": -0.03
+  },
+  "hull_concave_flag": {
+   "max_pen_mm": 6.88,
+   "settled": true,
+   "final_z_mm": -0.03
+  }
+ }
+}

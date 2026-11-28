@@ -1,0 +1,17 @@
+{
+ "push": {
+  "note": "2N 首测=力/质量失配 (0.05kg 下荒谬), 0.2N=比例修正后复测",
+  "force_N": 0.2,
+  "duration_s": 0.5,
+  "displacement_mm": 1.1,
+  "tilt_after_deg": 0.0,
+  "fell_over": false
+ },
+ "stack": {
+  "config": "瓶2 同向直立叠于瓶1 顶 (凸包碰撞)",
+  "settled": true,
+  "b2_final_z_mm": 220.9,
+  "expected_z_mm": 221.0,
+  "verdict": "叠放保持"
+ }
+}
