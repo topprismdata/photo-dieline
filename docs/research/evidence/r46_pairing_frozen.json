@@ -14,7 +14,11 @@
   "asset_id": "aseptic_aseptic_brick_v0000",
   "source": "L1 冻结发行集成员",
   "virtual_brand": "TOPPRISM",
-  "note": "渲染侧虚拟品牌, 实物侧真实品牌分离"
+  "note": "渲染侧虚拟品牌, 实物侧真实品牌分离",
+  "asset_sha256": "3d7a5b18681ac091de223d74145e0f878bc24de4bd09ea880097b98d8d6c0b34",
+  "model_path": "output/pack10k_scale10k/aseptic_aseptic_brick_v0000/model.usdc",
+  "sha256_verified": true
  },
- "frozen_before_purchase": true
+ "frozen_before_purchase": true,
+ "l1_release_check": "L1 冻结发行集成员 (pack10k_scale10k 目录直读)"
 }
