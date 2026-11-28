@@ -2,8 +2,8 @@
  "baseline_version": "1.0-FINAL",
  "artifact_name": "RWI-QUALITY-BASELINE-V1.0-FINAL",
  "source_commit": "14e6ab5ee2bfc048aa239b1cf87a3952adcf4e97",
- "manifest_sha256": "d3348a04e3885ffaa292fef84281b452d8aede7e79ea7b9e80d2a0543217751f",
- "aggregate_sha256": "a9084c1b4f31d10ab16b0fb3f63b6de917446406f50d3d9437de926d91553c6d",
+ "manifest_sha256": "6ba72229ff219b60586382df60fd121a28072a915b53812cfee54a23a5f45fce",
+ "aggregate_sha256": "180c7f06a629c3106ed245be65d3cbac2f79329edaba4926af5c22fedbf33405",
  "aggregation_algorithm": "sorted(files) \u5b57\u5178\u5e8f; \u6392\u9664 manifest \u81ea\u8eab; \u9010\u6587\u4ef6 sha256 hex \u62fc\u63a5\u540e sha256",
  "artifact_count": 15,
  "per_artifact_sha256": {
@@ -21,7 +21,7 @@
   "rep_m05_mesh_audit.json": "7f151324fa45f9aa590f975945b6f0183b213b34334d01f7a5a593761860f99c",
   "rwi_asset_quality_baseline_v1.md": "eb261f5887c387c1aad45d8536048a0f96e9cde2b3dde200a1ce4ab2a736957b",
   "wp_rep03_full_family_matrix.json": "99213a4111d889d5ac6dca2fbd49d32ae023f1120b2cf6b3c6b1f6e1a2d968b8",
-  "r44_l2_stage_consolidation.md": "32db2e6582a74a0a2081b5b9bed4b87a10ca8bfe852c981a6dff2f11a6e6140b"
+  "r44_l2_stage_consolidation.md": "45fe98cf761e4816b6b31e94a9cc39a5b4801ee202a788443278de93e02ada7f"
  },
  "release_integrity": {
   "frozen_set": "9,386 \u8d44\u4ea7\u96f6\u8986\u76d6 (\u5168\u7a0b\u65e0\u91cd\u7f16\u8bd1; git \u5386\u53f2\u53ef\u8bc1)",
