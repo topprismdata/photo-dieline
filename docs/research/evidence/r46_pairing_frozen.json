@@ -1,0 +1,20 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "task": "R46 实物-资产配对冻结 (采购前, R45 终裁 3.2 要求)",
+  "route": "A (金典250ml砖盒 ↔ aseptic_aseptic_brick_v0000)"
+ },
+ "real_product": {
+  "name": "金典纯牛奶 250ml 砖盒",
+  "brand": "金典",
+  "channel": "京东在售 (L1 管线可溯)",
+  "budget": "¥15 内 (预算 ≤¥150 之实物项)"
+ },
+ "asset": {
+  "asset_id": "aseptic_aseptic_brick_v0000",
+  "source": "L1 冻结发行集成员",
+  "virtual_brand": "TOPPRISM",
+  "note": "渲染侧虚拟品牌, 实物侧真实品牌分离"
+ },
+ "frozen_before_purchase": true
+}

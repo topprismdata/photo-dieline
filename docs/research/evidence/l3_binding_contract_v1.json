@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "date": "2026-11-28",
+    "contract": "RWI-L3 最小产品-资产绑定契约 v1.0 (R46, 依 R45 终裁字段修订)",
+    "principles_frozen": [
+      "真实品牌与虚拟资产品牌分离",
+      "每字段必须有来源等级",
+      "verdict 变更走治理回路",
+      "冻结发行集零覆盖"
+    ]
+  },
+  "binding_id": "BIND-JINDIAN250-ASEPTIC-V0000",
+  "real_product": {
+    "product_name": "金典纯牛奶",
+    "spec": "250ml",
+    "package_version": "PACKAGE_VERSION_PENDING_VERIFICATION",
+    "brand": "金典",
+    "gtin": null,
+    "gtin_status": "GTIN_UNVERIFIED",
+    "note": "GTIN 待实物条码扫描核验; 禁止使用未经扫描核验的编码"
+  },
+  "asset": {
+    "asset_id": "aseptic_aseptic_brick_v0000",
+    "asset_sha256": "<frozen, 见 r43_ab_drop_collision.json 同源冻结集登记>",
+    "virtual_brand": "TOPPRISM",
+    "source": "L1 冻结发行集成员"
+  },
+  "fidelity_tiers": {
+    "T1_capacity": {"status": "NOT_TESTED", "evidence_refs": []},
+    "T2_planning": {"status": "NOT_TESTED", "evidence_refs": []},
+    "T3_commercial": {"status": "NOT_TESTED", "evidence_refs": []},
+    "T5_simulation": {"status": "NOT_TESTED", "evidence_refs": []}
+  },
+  "evidence": [
+    {
+      "evidence_id": "EV-001",
+      "subject_id": "PRODUCT-001",
+      "attribute": "width",
+      "value": null,
+      "unit": "mm",
+      "source_level": "REAL_MEASURED",
+      "method": "caliper",
+      "instrument_id": "CAL-001",
+      "repetitions": 3,
+      "raw_values": [],
+      "uncertainty": "PENDING_EVALUATION",
+      "captured_at": null,
+      "evidence_uri": null
+    }
+  ],
+  "evidence_schema_note": "每项证据 (尺寸/质量/印刷摄影/起滑角) 均按此七字段+raw_values 模板登记; 保留原始测量值而非仅平均值; captured_at 与 evidence_uri 采集后填入",
+  "verification": {
+    "dims_match_delta_mm": null,
+    "verdict": "UNRESOLVED",
+    "verdict_note": "四态: SKU_EXACT(商品+版本对应) / GEOMETRY_EQUIVALENT(几何等价但身份不同) / APPROXIMATED(工程近似) / UNRESOLVED; 几何等价≠商品身份等价"
+  },
+  "governance": {
+    "charter": "RWI-L3 v0.2",
+    "protocol_run": "WP-L3-01 (PREFLIGHT 通过后)",
+    "procurement": "AUTHORIZED_PENDING_PREFLIGHT (≤¥150, 配对冻结先行)"
+  }
+}
