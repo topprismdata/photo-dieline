@@ -1,0 +1,30 @@
+{
+ "evidence_id": "EV-DOC-005",
+ "subject_id": "PRODUCT-POSCTRL-001 (Coca-Cola Original Taste 330ml can)",
+ "attribute": "single_item_external_dims",
+ "value": {
+  "depth": 67,
+  "width": 67,
+  "height": 116
+ },
+ "unit": "mm",
+ "source_level": "DOCUMENTED_MANUFACTURER",
+ "source_uri": "https://dgduupz79pcvd.cloudfront.net/documents/cts/ct0021_spec.pdf",
+ "source_locator": "Erudus 平台托管的厂商规格表 (厂商提交, 第三方平台托管)",
+ "retrieved_at": "2026-11-28",
+ "source_snapshot_sha256": "f2aada8c8a76e2af91d83441e734c45533423c6b2cd207501db82f543d4aace9",
+ "assertion_type": "DECLARED_SPECIFICATION",
+ "package_version_ref": "spec Version 1.0 (2025-07-31)",
+ "verification_status": "UNVERIFIED",
+ "asset_pair": {
+  "asset_id": "tube_tube_double_seam_v0131",
+  "asset_sha256": "49802b254e4d67ab26bab8a53e7bc4da2eed3c8632e17b19df9e66344fc70eb8",
+  "declared_extents_m": [
+   0.053779,
+   0.053779,
+   0.106923
+  ],
+  "virtual_brand": "TOPPRISM"
+ },
+ "delta_computable": true
+}
