@@ -1,0 +1,46 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "purpose": "R25: FG-001..003 语义裁决准备 (开壳/刀版家族语义框架)"
+ },
+ "findings": [
+  {
+   "id": "control_food_bento_lid_box_v0000",
+   "audit": "FAIL",
+   "usdchecker_exit": null,
+   "findings_note": null,
+   "terminal_user": null
+  },
+  {
+   "id": "control_food_sushi_tray_v0000",
+   "audit": "FAIL",
+   "usdchecker_exit": null,
+   "findings_note": null,
+   "terminal_user": null
+  },
+  {
+   "id": "control_mailer_diecut_v0000",
+   "audit": "FAIL",
+   "usdchecker_exit": null,
+   "findings_note": null,
+   "terminal_user": null
+  }
+ ],
+ "semantic_frame": {
+  "FG-001_food_bento_lid_box": {
+   "product_semantics": "开壳便当盒 (带盖浅盘) — OPEN_SHELL/FLAT 契约候选",
+   "findings": "uv:degenerate 5",
+   "question": "UV 退化属可修复几何缺陷 (修补后可 SOLID/PASS) 或开壳语义固有的观察级特性?"
+  },
+  "FG-002_food_sushi_tray": {
+   "product_semantics": "开壳寿司托盘 — OPEN_SHELL 契约候选",
+   "findings": "dup16+nonfan2",
+   "question": "dup 顶点=刀版展开固有 (折叠粘合处双顶点) 或真拓扑缺陷?"
+  },
+  "FG-003_mailer_diecut": {
+   "product_semantics": "刀版邮封 — FLAT_PATTERN 契约候选",
+   "findings": "nonfan3 (多面交汇点)",
+   "question": "刀版多面交汇非流形顶点=刀版语义固有或需重构?"
+  }
+ }
+}
