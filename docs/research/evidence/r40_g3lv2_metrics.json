@@ -1,0 +1,48 @@
+{
+ "G3L_v2_directed": {
+  "r30": {
+   "p50": 178.0,
+   "p90": 208.0,
+   "max": 213.0,
+   "mean": 182.0,
+   "highlight_width_px": 297
+  },
+  "r55": {
+   "p50": 178.0,
+   "p90": 208.0,
+   "max": 214.0,
+   "mean": 182.2,
+   "highlight_width_px": 297
+  },
+  "r85": {
+   "p50": 178.0,
+   "p90": 209.0,
+   "max": 214.0,
+   "mean": 182.3,
+   "highlight_width_px": 297
+  }
+ },
+ "node_provenance": [
+  {
+   "set": 0.3,
+   "readback": 0.30000001192092896,
+   "match": true
+  },
+  {
+   "set": 0.55,
+   "readback": 0.550000011920929,
+   "match": true
+  },
+  {
+   "set": 0.85,
+   "readback": 0.8500000238418579,
+   "match": true
+  }
+ ],
+ "exposure_check": {
+  "r55_p50": 178,
+  "target": "150-200",
+  "ok": true
+ },
+ "honest": "高光宽度三档均297px (整面被定向光照亮, 高光与漫反射未分离); 粗糙度三档亮度分布几乎一致"
+}

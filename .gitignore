@@ -12,3 +12,8 @@ assets/pillow_designs/*.tight.png
 assets/pillow_designs/*.can*.png
 assets/pillow_designs/*.sat.png
 assets/pillow_designs/*.ar.png
+
+# 运行时产物 (实验追踪/模型权重)
+mlflow.db
+mlruns/
+yolov8n.pt
