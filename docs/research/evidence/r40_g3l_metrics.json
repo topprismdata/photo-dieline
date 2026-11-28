@@ -1,0 +1,30 @@
+{
+ "G3_L_directed_light": {
+  "r30": {
+   "p50": 226.0,
+   "p90": 246.0,
+   "max": 249.0,
+   "mean": 224.3,
+   "highlight_width_px": 297,
+   "highlight_cols": "0-296"
+  },
+  "r55": {
+   "p50": 226.0,
+   "p90": 246.0,
+   "max": 249.0,
+   "mean": 224.4,
+   "highlight_width_px": 297,
+   "highlight_cols": "0-296"
+  },
+  "r85": {
+   "p50": 226.0,
+   "p90": 247.0,
+   "max": 249.0,
+   "mean": 224.4,
+   "highlight_width_px": 297,
+   "highlight_cols": "0-296"
+  }
+ },
+ "comparison_to_M2": "M2 均匀光: 高光 0px×3 无差异; G3-L 定向光: 见上 — 差异出现则支持'摄影条件决定材质可辨识性'假设",
+ "honest": "亮度数值为渲染实测; 高光判定阈值 mean+20 固定法"
+}

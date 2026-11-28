@@ -1,0 +1,45 @@
+{
+ "r30": {
+  "brightness_dist": {
+   "p50": 228.0,
+   "p90": 233.0,
+   "p99": 235.0,
+   "max": 236.0,
+   "mean": 219.8
+  },
+  "highlight_width_px": 0,
+  "highlight_columns": "none"
+ },
+ "r55": {
+  "brightness_dist": {
+   "p50": 228.0,
+   "p90": 233.0,
+   "p99": 235.0,
+   "max": 236.0,
+   "mean": 219.9
+  },
+  "highlight_width_px": 0,
+  "highlight_columns": "none"
+ },
+ "r85": {
+  "brightness_dist": {
+   "p50": 229.0,
+   "p90": 234.0,
+   "p99": 235.0,
+   "max": 236.0,
+   "mean": 220.0
+  },
+  "highlight_width_px": 0,
+  "highlight_columns": "none"
+ },
+ "_meta": {
+  "date": "2026-11-28",
+  "task": "G2-M2 无印刷控制复验 (单对象单位置单视角单光照顺序渲染)",
+  "region": "画面中心 30%×40% (盒体正面固定区域)",
+  "metrics": [
+   "高光亮度分布 (p50/p90/p99/max)",
+   "高光宽度 (亮度>mean+20 的列跨度 px)"
+  ],
+  "honest_note": "如无可识别高光如实登记 — 见实际数据"
+ }
+}
