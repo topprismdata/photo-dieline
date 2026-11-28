@@ -11,13 +11,14 @@
    "EVIDENCE_INSUFFICIENT"
   ],
   "immutability": "GSO-PN-RUN-01 原结果不可变 (R23 裁决); 本台账为资格治理新版本 v1.1",
-  "v": "1.2",
-  "fix": "名称下划线归一化后再匹配 (coffee_mug 的 \\bmug\\b 因下划线属\\w而失配的假阳性已修); ACE mug → NON_PACKAGING"
+  "v": "1.3",
+  "fix": "名称下划线归一化后再匹配 (coffee_mug 的 \\bmug\\b 因下划线属\\w而失配的假阳性已修); ACE mug → NON_PACKAGING",
+  "upgrade": "21 UNRESOLVED 以 NAME+DESCRIPTION 证据核验: 16→SUPPORTED / 3→NON_PACKAGING / 2→PENDING_VISUAL (不自动准入)"
  },
  "counts": {
-  "PACKAGING_SUPPORTED": 99,
-  "NON_PACKAGING": 4,
-  "IDENTITY_UNRESOLVED": 21
+  "PACKAGING_SUPPORTED": 116,
+  "NON_PACKAGING": 6,
+  "IDENTITY_UNRESOLVED_PENDING_VISUAL": 2
  },
  "registry": [
   {
@@ -115,8 +116,8 @@
    "object_id": "Canon_Pixma_Chromalife_100_Magenta_8",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "CoQ10",
@@ -241,15 +242,15 @@
    "object_id": "JarroSil_Activated_Silicon",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "JarroSil_Activated_Silicon_5exdZHIeLAp",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Jarrow_Formulas_Glucosamine_Hci_Mega_1000_100_ct",
@@ -304,8 +305,8 @@
    "object_id": "Krill_Oil",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "LTyrosine",
@@ -386,10 +387,10 @@
   },
   {
    "object_id": "Melissa_Doug_Shape_Sorting_Clock",
-   "identity_axis": "IDENTITY_UNRESOLVED",
+   "identity_axis": "NON_PACKAGING",
    "geometry_axis": "cylinder",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "NON_PACKAGING",
+   "evidence": "NAME+DESCRIPTION 证据 (器皿/工具本体: 时钟/开罐器/直发器)"
   },
   {
    "object_id": "NattoMax",
@@ -505,10 +506,10 @@
   },
   {
    "object_id": "OXO_Soft_Works_Can_Opener_SnapLock",
-   "identity_axis": "IDENTITY_UNRESOLVED",
+   "identity_axis": "NON_PACKAGING",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "NON_PACKAGING",
+   "evidence": "NAME+DESCRIPTION 证据 (器皿/工具本体: 时钟/开罐器/直发器)"
   },
   {
    "object_id": "Orbit_Bubblemint_Mini_Bottle_6_ct",
@@ -535,64 +536,64 @@
    "object_id": "Pepsi_Cola_Caffeine_Free_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Pepsi_Cola_Wild_Cherry_Diet_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Pepsi_Max_Cola_Zero_Calorie_12_12_fl_oz_355_ml_cans_144_fl_oz_426_lt",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Perricone_MD_Health_Weight_Management_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "cylinder",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Perricone_MD_Omega_3_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Perricone_MD_Skin_Clear_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Perricone_MD_Skin_Total_Body_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Perricone_MD_Super_Berry_Powder_with_Acai_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Perricone_MD_The_Metabolic_Formula_Supplements",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Persona_Q_Shadow_of_the_Labyrinth_Nintendo_3DS",
@@ -661,15 +662,15 @@
    "object_id": "ReadytoUse_Rolled_Fondant_Pure_White_24_oz_box",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Remington_TStudio_Silk_Ceramic_Hair_Straightener_2_Inch_Floating_Plates",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Saccharomyces_Boulardii_MOS_Value_Size",
@@ -696,8 +697,8 @@
    "object_id": "Squirtin_Barnyard_Friends_4pk",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "IDENTITY_UNRESOLVED_PENDING_VISUAL",
+   "evidence": "名称歧义 (4pk/线缆: 对象=包装还是本体待视觉) — POOL-VISUAL-01 对照板就绪"
   },
   {
    "object_id": "Super_Mario_Kart_Super_Nintendo_Entertainment_System",
@@ -794,22 +795,22 @@
    "object_id": "U_By_Kotex_Sleek_Regular_Unscented_Tampons_36_Ct_Box",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "Ubisoft_RockSmith_Real_Tone_Cable_Xbox_360",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "IDENTITY_UNRESOLVED_PENDING_VISUAL",
+   "evidence": "名称歧义 (4pk/线缆: 对象=包装还是本体待视觉) — POOL-VISUAL-01 对照板就绪"
   },
   {
    "object_id": "Ultra_JarroDophilus",
    "identity_axis": "IDENTITY_UNRESOLVED",
    "geometry_axis": "box_or_shaped",
-   "status": "IDENTITY_UNRESOLVED",
-   "evidence": "NAME_EVIDENCE(下划线归一化修正版)"
+   "status": "PACKAGING_SUPPORTED",
+   "evidence": "NAME+DESCRIPTION 证据 (补充剂/饮料箱/墨盒/盒装, 描述明示商品包装形态)"
   },
   {
    "object_id": "VANS_FIRE_ROASTED_VEGGIE_CRACKERS_GLUTEN_FREE",
