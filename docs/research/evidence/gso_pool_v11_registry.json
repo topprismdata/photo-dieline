@@ -15,7 +15,13 @@
   "fix": "名称下划线归一化后再匹配 (coffee_mug 的 \\bmug\\b 因下划线属\\w而失配的假阳性已修); ACE mug → NON_PACKAGING",
   "upgrade": "21 UNRESOLVED 以 NAME+DESCRIPTION 证据核验: 16→SUPPORTED / 3→NON_PACKAGING / 2→PENDING_VISUAL (不自动准入)",
   "visual": "57/57 视觉判定完成 (GPT R25): 49 PACKAGING + 8 NON_PACKAGING + #31 SOURCE_BINDING_UNRESOLVED (Granimals 预览图显示开罐器 — 官方目录↔预览图绑定不一致, 数据质量发现)",
-  "status_note": "SUPPORTED=名称+描述证据+家族可表达; CANDIDATE=视觉确认包装但正式准入待逐件审计; 135 PROVISIONAL 口径不变 (99+36)"
+  "status_note": "SUPPORTED=名称+描述证据+家族可表达; CANDIDATE=视觉确认包装但正式准入待逐件审计; 135 PROVISIONAL 口径不变 (99+36)",
+  "reconciliation_note": {
+   "pre_visual_gpt_ruling": "135 PROVISIONAL = 99 SUPPORTED + 36 readmit (视觉前算术, 历史保留)",
+   "post_visual_actual": "150 = 116 SUPPORTED (含 16 NAME+DESC 证据升级件获视觉确认) + 34 CANDIDATE (复入件视觉判包装) | 另 9 NON_PACKAGING + 1 SOURCE_BINDING_UNRESOLVED",
+   "delta_explanation": "视觉核验将 16 件描述证据件转正 + 1 件 Granimals 转绑定待核 → 135→150 为核验的自然结果, 非口径漂移; 150 件为视觉后权威工作池",
+   "formal_admission": "POOL-COMP-01 6/6 已证 box 家族表达复入结构; 正式准入仍待逐件审计 (R23 纪律)"
+  }
  },
  "counts": {
   "PACKAGING_SUPPORTED": 116,
