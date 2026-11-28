@@ -1,0 +1,65 @@
+{
+ "FG-001": {
+  "healthy": true,
+  "issue_codes": [
+   "boundary_edges"
+  ],
+  "findings": [
+   {
+    "issue": "boundary_edges",
+    "severity": "warning",
+    "count": 10,
+    "message": "Edges owned by one triangle form open surface boundaries"
+   }
+  ]
+ },
+ "FG-002": {
+  "healthy": false,
+  "issue_codes": [
+   "boundary_edges",
+   "inconsistent_winding",
+   "nonmanifold_vertices"
+  ],
+  "findings": [
+   {
+    "issue": "boundary_edges",
+    "severity": "warning",
+    "count": 26,
+    "message": "Edges owned by one triangle form open surface boundaries"
+   },
+   {
+    "issue": "inconsistent_winding",
+    "severity": "error",
+    "count": 16,
+    "message": "Adjacent triangles traverse their shared edge in the same direction"
+   },
+   {
+    "issue": "nonmanifold_vertices",
+    "severity": "error",
+    "count": 2,
+    "message": "Incident triangles form multiple edge-disconnected fans at one vertex"
+   }
+  ]
+ },
+ "FG-003": {
+  "healthy": false,
+  "issue_codes": [
+   "boundary_edges",
+   "nonmanifold_vertices"
+  ],
+  "findings": [
+   {
+    "issue": "boundary_edges",
+    "severity": "warning",
+    "count": 19,
+    "message": "Edges owned by one triangle form open surface boundaries"
+   },
+   {
+    "issue": "nonmanifold_vertices",
+    "severity": "error",
+    "count": 3,
+    "message": "Incident triangles form multiple edge-disconnected fans at one vertex"
+   }
+  ]
+ }
+}
