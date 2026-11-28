@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 400" font-family="sans-serif">
+<rect x="0" y="0" width="1300" height="400" fill="white"/>
+<rect x="20" y="330" width="1260" height="14" fill="#9aa2ad"/>
+<rect x="30" y="180" width="90" height="150" fill="#3b6fb5" stroke="#333"/>
+<text x="75" y="172" font-size="13" text-anchor="middle">DAIRY-01</text>
+<rect x="132.0" y="180" width="90" height="150" fill="#4b9e5f" stroke="#333"/>
+<text x="177" y="172" font-size="13" text-anchor="middle">DAIRY-02</text>
+<rect x="234.0" y="180" width="90" height="150" fill="#c8773a" stroke="#333"/>
+<text x="279" y="172" font-size="13" text-anchor="middle">DAIRY-03</text>
+<rect x="336.0" y="180" width="90" height="150" fill="#8a56b5" stroke="#333"/>
+<text x="381" y="172" font-size="13" text-anchor="middle">DAIRY-04</text>
+<rect x="438.0" y="180" width="90" height="150" fill="#b53b52" stroke="#333"/>
+<text x="483" y="172" font-size="13" text-anchor="middle">DAIRY-05</text>
+<rect x="540.0" y="180" width="90" height="150" fill="#3bb5a6" stroke="#333"/>
+<text x="585" y="172" font-size="13" text-anchor="middle">DAIRY-06</text>
+<rect x="642.0" y="180" width="90" height="150" fill="#b5a03b" stroke="#333"/>
+<text x="687" y="172" font-size="13" text-anchor="middle">DAIRY-07</text>
+<rect x="744.0" y="180" width="90" height="150" fill="#6b3bb5" stroke="#333"/>
+<text x="789" y="172" font-size="13" text-anchor="middle">DAIRY-08</text>
+<rect x="846.0" y="180" width="90" height="150" fill="#3b8ab5" stroke="#333"/>
+<text x="891" y="172" font-size="13" text-anchor="middle">DAIRY-09</text>
+<rect x="948.0" y="180" width="90" height="150" fill="#b56b3b" stroke="#333"/>
+<text x="993" y="172" font-size="13" text-anchor="middle">DAIRY-10</text>
+<rect x="1050.0" y="180" width="90" height="150" fill="#5fb54b" stroke="#333"/>
+<text x="1095" y="172" font-size="13" text-anchor="middle">DAIRY-11</text>
+<rect x="1152.0" y="180" width="90" height="150" fill="#b53b8a" stroke="#333"/>
+<text x="1197" y="172" font-size="13" text-anchor="middle">DAIRY-12</text>
+<text x="30" y="375" font-size="15" fill="#444">R32 乳品冷藏柜单层原型 · 12 SKU · 利用率 88.3% · 0 违规</text>
+</svg>
