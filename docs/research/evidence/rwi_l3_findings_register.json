@@ -1,0 +1,137 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "register": "RWI-L3 findings register (R54-C 收口)",
+  "scope": "R48-R54"
+ },
+ "findings": [
+  {
+   "id": "F-L3-001",
+   "statement": "BBox 匹配不代表结构等价",
+   "verdict": "ACCEPTED",
+   "evidence": [
+    "r53a",
+    "r52c disclosure"
+   ]
+  },
+  {
+   "id": "F-L3-002",
+   "statement": "几何容差通过不保证离散业务决策一致",
+   "verdict": "CONFIRMED_SCOPED",
+   "evidence": [
+    "r53b 133.8mm 反例"
+   ]
+  },
+  {
+   "id": "F-L3-003",
+   "statement": "tube_double_seam 编译器局部拓扑断点 (side∈(27.6936,27.7053], 宽∈(66.86,66.89]mm)",
+   "verdict": "EXPLORATORY",
+   "evidence": [
+    "r52b 尝试日志",
+    "VOID 件 4594cbcc…"
+   ]
+  },
+  {
+   "id": "GOV-R52-01",
+   "statement": "内存探针超出'一个正式配置'字面界; 两类预算纪律 (运行预算/产物预算) 已立",
+   "verdict": "REGISTERED",
+   "evidence": [
+    "r53c",
+    "R53 终裁"
+   ]
+  },
+  {
+   "id": "GOV-R52-02",
+   "statement": "绕门禁导出=协议违反; VOID 隔离保留负证据",
+   "verdict": "REGISTERED",
+   "evidence": [
+    "VOID_REGISTER.json",
+    "R52 终裁"
+   ]
+  },
+  {
+   "id": "GAP-METALCAN",
+   "statement": "can_family 未注册 cls_id, 发行能力缺口登记",
+   "verdict": "GAP_REGISTERED",
+   "evidence": [
+    "r53a"
+   ]
+  },
+  {
+   "id": "BIND-G06",
+   "statement": "任务相关结构适用性资格门禁 (T1..T5 分任务)",
+   "verdict": "APPROVED",
+   "evidence": [
+    "r53a",
+    "R53 终裁"
+   ]
+  },
+  {
+   "id": "HIER-SOURCE",
+   "statement": "七级证据来源层级 (REAL_MEASURED > DOCUMENTED_* > BUSINESS_CLAIMED > ENGINEERING_ASSUMPTION)",
+   "verdict": "APPROVED (R48)",
+   "evidence": [
+    "rwi_l3_charter_v03"
+   ]
+  },
+  {
+   "id": "BLOCK-PHYSICAL",
+   "statement": "实物轨道合法封锁 (BLOCKED_BY_PHYSICAL_REFERENCE, resume=NEW_EXPLICIT_USER_AUTHORIZATION)",
+   "verdict": "ACTIVE",
+   "evidence": [
+    "wp_l3_01_physical_blocked"
+   ]
+  },
+  {
+   "id": "NEG-T1-MSR",
+   "statement": "T1 类任务限定负结果: 文档 BBox 代理 == 解析参考 (6/6), 完整几何资产无新增决策价值; 规格直用为默认路径",
+   "verdict": "ACCEPTED (R53)",
+   "evidence": [
+    "r53b"
+   ]
+  },
+  {
+   "id": "MECH-DECISION",
+   "statement": "文档证据绑定决策机制三分支限定通过 (BIND-G01..05, PASS_SCOPED)",
+   "verdict": "PASS_SCOPED",
+   "evidence": [
+    "r51c",
+    "r52c",
+    "r52d"
+   ]
+  },
+  {
+   "id": "MECH-TEMPORAL",
+   "statement": "时间维度契约合成机制回归全过 (TIME-01..04 SYNTHETIC)",
+   "verdict": "TEMPORAL_MECHANISM_PASS_SYNTHETIC 候选",
+   "evidence": [
+    "r54a"
+   ]
+  }
+ ],
+ "hypothesis_states": {
+  "H1_binding_executable": "限定通过",
+  "H2_cross_business_reuse": "尚未建立",
+  "H3_evidence_sustainability": "EVIDENCE_INSUFFICIENT",
+  "H4_temporal_validity": "合成机制通过/真实 NOT_TESTED",
+  "H5_spec_driven_adaptation": "限定通过 (外尺寸层)",
+  "H6_minimum_sufficient_representation": "限定实证支持"
+ },
+ "binding_cases": {
+  "jindian_250ml": {
+   "binding_status": "UNRESOLVED",
+   "case_state": "EVIDENCE_INSUFFICIENT 结项, 原样本保留"
+  },
+  "coke_330_v0131": {
+   "binding_status": "CANDIDATE_REJECTED",
+   "reason": "DIMENSION_TOLERANCE_EXCEEDED"
+  },
+  "coke_330_derived_formal": {
+   "binding_status": "BINDING_ACCEPTED",
+   "scope": [
+    "DOCUMENTED_EXTERNAL_DIMENSIONS"
+   ],
+   "verdict": "UNRESOLVED"
+  }
+ }
+}
