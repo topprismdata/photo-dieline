@@ -1,0 +1,40 @@
+{
+  "asset_id": "tube_tube_double_seam_R52B_v0001",
+  "family": "tube",
+  "class_id": "tube_double_seam",
+  "derivation_type": "R52B_minimal_parametric_adaptation (research derived, NOT in L1)",
+  "target_mm": [
+    67.0,
+    67.0,
+    116.0
+  ],
+  "params": {
+    "kind": 4,
+    "side": 27.7523,
+    "h": 116.0,
+    "g": 6.0
+  },
+  "gates": {
+    "G02": "PASS",
+    "G03": "FAIL",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+  },
+  "g3_topology_note": "FAIL: net union disconnected (2 components); panel/fold counts intact (25/24); adjacent-alignment subchecks all PASS",
+  "folded_mm": {
+    "W": 67.0,
+    "D": 67.0,
+    "H": 116.0
+  },
+  "analytic_mm": {
+    "W": 66.99997904704685,
+    "D": 66.99997904704685,
+    "H": 116.0
+  },
+  "board_kind": "carton_board"
+}

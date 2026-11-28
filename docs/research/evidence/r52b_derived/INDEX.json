@@ -1,0 +1,25 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "purpose": "R52-B 派生资产编译记录入库 (usdc 留 output/ 以哈希登记, 与 L1 发行集不入 git 惯例一致)",
+  "formal_asset_sha256": "1ab18a3f184f2290bcfa694d22e57ee8d470b8c94a5be4fc0ecb756f1388f3e9",
+  "void_asset_sha256": "4594cbcc76fc31c4b34dffe834aa22a2995ec8fea6f6879aca62075a307f8a42",
+  "independent_pxr_measurement_mm": {
+   "formal": [
+    66.8583,
+    66.8583,
+    116.0
+   ],
+   "void": [
+    67.0,
+    67.0,
+    116.0
+   ]
+  }
+ },
+ "files": {
+  "build_formal.json": "8ca849e38107533fe532e088ea911d4b014fe27dfebbf4db9c2a833c445e7b02",
+  "build_void_asset.json": "153929e37d11f9eb96f9dcbfa1ff7e6fb0511b49eccf1817320ae781ece7714c",
+  "VOID_REGISTER_void_asset.json": "4a8cdeefa04eaec4a067a0d84b77cd95d99bead950f60edeccb90bb92f0344a5"
+ }
+}

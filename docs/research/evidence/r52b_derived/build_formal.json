@@ -1,0 +1,45 @@
+{
+  "asset_id": "tube_tube_double_seam_R52B_v0001_formal",
+  "family": "tube",
+  "class_id": "tube_double_seam",
+  "derivation_type": "R52B_formal_adaptation (max-connected-side calibration; research derived, NOT in L1)",
+  "attempt_log": [
+    "#1 side=27.7523 解析精确 67.0 但 G03 FAIL → 门禁中止无产物",
+    "#2 side=27.7523 绕门禁导出 → VOID 登记作废件 (sha 4594cbcc…)",
+    "#3 side=27.6936 最大连通 side → 本正式件 (唯一正式配置)"
+  ],
+  "target_mm": [
+    67.0,
+    67.0,
+    116.0
+  ],
+  "params": {
+    "kind": 4,
+    "side": 27.6936,
+    "h": 116.0,
+    "g": 6.0
+  },
+  "gates": {
+    "G02": "PASS",
+    "G03": "PASS",
+    "G04": "PASS",
+    "G05": "PASS",
+    "G06": "PASS",
+    "G07": "PASS",
+    "G08": "PASS",
+    "G09": "PASS",
+    "G10": "PASS"
+  },
+  "folded_mm": {
+    "W": 66.8583,
+    "D": 66.8583,
+    "H": 116.0
+  },
+  "analytic_mm": {
+    "W": 66.85826471093554,
+    "D": 66.85826471093554,
+    "H": 116.0
+  },
+  "cross_section_disclosure": "正八边形纸板管截面 (BBox 匹配 ≠ 圆柱截面等价), 交 GPT 裁",
+  "board_kind": "carton_board"
+}

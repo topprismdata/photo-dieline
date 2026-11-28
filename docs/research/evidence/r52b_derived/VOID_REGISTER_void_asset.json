@@ -1,0 +1,16 @@
+{
+ "void_register": {
+  "asset_id": "tube_tube_double_seam_R52B_v0001",
+  "voided": true,
+  "void_reason": "G03_TOPOLOGY_FAIL_BYPASS_EXPORT (L1 fail-closed 违反: 门禁失败仍导出; 展开图两片=实物无法一体成型)",
+  "model_usdc_sha256": "4594cbcc76fc31c4b34dffe834aa22a2995ec8fea6f6879aca62075a307f8a42",
+  "independent_pxr_mesh_bbox_mm": [
+   67.0,
+   67.0,
+   116.0
+  ],
+  "status": "VOID_RETAINED_AS_NEGATIVE_EVIDENCE (不入候选, 不删档)",
+  "g03_detail": "网并集不连通 2 部件; 面板/折叠计数正常 (25/24), 邻接对齐子检全过",
+  "expressibility_boundary": "拓扑断点二分: side ∈ (27.6936, 27.7053] → 宽 ∈ (66.86, 66.89] mm; 断点之下 G03 PASS"
+ }
+}
