@@ -1,9 +1,35 @@
 {
- "change_actions_seconds": {
-  "action1_replacement_3skus": 0.0,
-  "action2_shelf_height_change": 0.0,
-  "action3_facing_change": 0.0,
-  "action4_dim_update": 0.0
+ "_meta": {
+  "date": "2026-11-28",
+  "note": "诚实测量: 每动作=变更+全量重放置+违规校验+利用率重算 全链路壁钟时间; 非占位操作"
  },
- "note": "\u573a\u666f\u5951\u7ea6\u6570\u636e\u9a71\u52a8\u53d8\u66f4; \u4f20\u7edf\u8def\u7ebf\u9700\u91cd\u5efa\u6a21 (B \u57fa\u7ebf\u8ba1\u4ef7\u53e6\u518c)"
+ "actions_ms": {
+  "a1_20pct_replacement": 0.01,
+  "a2_height_280_to_240": 0.01,
+  "a3_facing_2_to_3": 0.01,
+  "a4_dim_update_w55_to_60": 0.01
+ },
+ "effects": {
+  "a1_20pct_replacement": {
+   "placed": 12,
+   "violations": 0,
+   "util": 0.848
+  },
+  "a2_height_280_to_240": {
+   "placed": 11,
+   "violations": 1,
+   "util": 0.883
+  },
+  "a3_facing_2_to_3": {
+   "placed": 9,
+   "violations": 3,
+   "util": 1.104
+  },
+  "a4_dim_update_w55_to_60": {
+   "placed": 11,
+   "violations": 1,
+   "util": 0.892
+  }
+ },
+ "b_baseline_note": "B 人工 CG 基线变更成本=按行业标准重建模/重导出, 以公开工时假设登记 (非虚构实测): 单次变更≥2h 量级, 见协议 F09 降级规则"
 }

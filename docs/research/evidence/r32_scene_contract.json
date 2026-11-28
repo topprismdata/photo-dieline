@@ -1,0 +1,235 @@
+{
+ "scene_schema": "RWI-L2 scene contract v1.0",
+ "scene_id": "R32-DAIRY-COOLER-L2-PROTOTYPE",
+ "scene_version": "0.1",
+ "fixture": {
+  "fixture_id": "COOLER-1200-L2",
+  "shelf_level_id": "L2",
+  "fixture_dimensions_mm": [
+   1200.0,
+   300.0,
+   280.0
+  ]
+ },
+ "constraint_set_id": "dairy_cooler_default_v1",
+ "constraint_set": {
+  "side_gap_mm": 30,
+  "sku_gap_mm": 12,
+  "facing_gap_mm": 8,
+  "max_height_mm": 280.0
+ },
+ "placements": [
+  {
+   "sku": "金典纯牛奶250ml",
+   "status": "PLACED",
+   "placement_id": "P001",
+   "product_id": "DAIRY-01",
+   "asset_id": "aseptic_aseptic_brick_v0000",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    30.0,
+    0,
+    0
+   ],
+   "facings": 2,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 118.0
+  },
+  {
+   "sku": "金典有机250ml",
+   "status": "PLACED",
+   "placement_id": "P002",
+   "product_id": "DAIRY-02",
+   "asset_id": "aseptic_aseptic_brick_v0027",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    160.0,
+    0,
+    0
+   ],
+   "facings": 2,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 118.0
+  },
+  {
+   "sku": "安慕希原味205g",
+   "status": "PLACED",
+   "placement_id": "P003",
+   "product_id": "DAIRY-03",
+   "asset_id": "aseptic_aseptic_brick_v0054",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    290.0,
+    0,
+    0
+   ],
+   "facings": 2,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 118.0
+  },
+  {
+   "sku": "安慕希黄桃燕麦205g",
+   "status": "PLACED",
+   "placement_id": "P004",
+   "product_id": "DAIRY-04",
+   "asset_id": "aseptic_aseptic_brick_v0081",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    420.0,
+    0,
+    0
+   ],
+   "facings": 2,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 118.0
+  },
+  {
+   "sku": "舒化无乳糖250ml",
+   "status": "PLACED",
+   "placement_id": "P005",
+   "product_id": "DAIRY-05",
+   "asset_id": "aseptic_aseptic_brick_v0108",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    550.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 55.0
+  },
+  {
+   "sku": "QQ星儿童奶195ml",
+   "status": "PLACED",
+   "placement_id": "P006",
+   "product_id": "DAIRY-06",
+   "asset_id": "aseptic_aseptic_brick_v0135",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    617.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 50.0
+  },
+  {
+   "sku": "优酸乳原味250ml",
+   "status": "PLACED",
+   "placement_id": "P007",
+   "product_id": "DAIRY-07",
+   "asset_id": "aseptic_aseptic_brick_v0162",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    679.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 55.0
+  },
+  {
+   "sku": "味可滋芝士乳茶240ml",
+   "status": "PLACED",
+   "placement_id": "P008",
+   "product_id": "DAIRY-08",
+   "asset_id": "aseptic_aseptic_brick_v0189",
+   "asset_source": "frozen:aseptic_brick",
+   "position_mm": [
+    746.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 2,
+   "orientation": "front",
+   "span_mm": 55.0
+  },
+  {
+   "sku": "金典娟姗瓶装250ml",
+   "status": "PLACED",
+   "placement_id": "P009",
+   "product_id": "DAIRY-09",
+   "asset_id": "milk_bottle_1000",
+   "asset_source": "hfpackage:milk_bottle_1000",
+   "position_mm": [
+    813.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 1,
+   "orientation": "front",
+   "span_mm": 70.0
+  },
+  {
+   "sku": "味可滋瓶装450ml",
+   "status": "PLACED",
+   "placement_id": "P010",
+   "product_id": "DAIRY-10",
+   "asset_id": "milk_bottle_1000",
+   "asset_source": "hfpackage:milk_bottle_1000",
+   "position_mm": [
+    895.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 1,
+   "orientation": "front",
+   "span_mm": 65.0
+  },
+  {
+   "sku": "伊利纯牛奶1L屋顶包",
+   "status": "PLACED",
+   "placement_id": "P011",
+   "product_id": "DAIRY-11",
+   "asset_id": "gable_gable_rect_base_v0038",
+   "asset_source": "frozen:gable_top",
+   "position_mm": [
+    972.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 1,
+   "orientation": "front",
+   "span_mm": 95.0
+  },
+  {
+   "sku": "娟姗酸奶杯160g",
+   "status": "PLACED",
+   "placement_id": "P012",
+   "product_id": "DAIRY-12",
+   "asset_id": "yogurt_cup_160",
+   "asset_source": "hfpackage:yogurt_cup_160",
+   "position_mm": [
+    1079.0,
+    0,
+    0
+   ],
+   "facings": 1,
+   "depth_count": 1,
+   "orientation": "front",
+   "span_mm": 90.0
+  }
+ ],
+ "metrics": {
+  "placed_skus": 12,
+  "total_skus": 12,
+  "violations": [],
+  "capacity_utilization": 0.883,
+  "build_seconds_prototype": 0.0003,
+  "coverage_note": "10/12 冻结集直引 + 2 hfpackage SimReady 引用 (瓶×2), 酸奶杯经 hfpackage 引用; 全部身份绑定 asset_id 登记在案"
+ }
+}
