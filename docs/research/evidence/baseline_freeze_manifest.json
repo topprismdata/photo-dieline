@@ -1,0 +1,11 @@
+{
+ "rwi_asset_quality_baseline_v1.md": "9aca38620eefbeee130447f6204486cfbd4074f3ed8ed7c10619ba0d907bf358",
+ "family_taxonomy_crosswalk.json": "fce224580ef871de55fe9b6888ab9db8370058a161bd27ba5a9561a84122285f",
+ "wp_rep03_full_family_matrix.json": "99213a4111d889d5ac6dca2fbd49d32ae023f1120b2cf6b3c6b1f6e1a2d968b8",
+ "rep_m05_mesh_audit.json": "7f151324fa45f9aa590f975945b6f0183b213b34334d01f7a5a593761860f99c",
+ "fg006_frozen_recompute.json": "21b9d333d0aae4ad4ff482fa7f14bbb077db6b67c1d79c686c553e74812247a6",
+ "gso_pool_v11_registry.json": "165d1686f9d3cb2898240a560a709bfd24cc92fbab170f4e663776edfa6c6373",
+ "fg001_003_semantic_prep.json": "80612fe9200c3d42c7d0bab3f07ce6186ab2860ebe05ea1f080cd15e3e606459",
+ "p10_run_versions_ledger.json": "fab2d0573630903ada8730020d876596a3e49995be2e5cbd95af4703a7880622",
+ "_baseline_freeze_sha256": "05d91053a4b8121664bb8eedf1630f024ce689a49b884b5c44d49ffd68dec517"
+}
