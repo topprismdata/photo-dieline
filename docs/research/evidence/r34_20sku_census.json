@@ -1,0 +1,120 @@
+{
+ "_meta": {
+  "date": "2026-11-28",
+  "task": "R34-任务4 20-SKU 需求优先覆盖普查 (BUSINESS-PILOT-20 需求分母设计)",
+  "demand_list_source": "真实伊利系乳品冷藏柜业务组合 (12 基础+8 扩展)",
+  "denominator": 20,
+  "denominator_retained_all": true,
+  "note": "UNSUPPORTED 3 件留分母 (PET瓶×2/异形雪糕) — 禁止隐蔽剔除; SKU_EXACT=0 (无真实品牌纹理, L1 已知限制)"
+ },
+ "summary": {
+  "GEOMETRY_EQUIVALENT": 12,
+  "APPROXIMATED": 4,
+  "UNSUPPORTED": 3,
+  "IDENTITY_UNRESOLVED": 1,
+  "SKU_EXACT": 0
+ },
+ "rows": [
+  {
+   "sku": "金典纯牛奶250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "金典有机250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "安慕希原味205g",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "安慕希黄桃燕麦205g",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "舒化无乳糖250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "QQ星儿童奶195ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "优酸乳原味250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "味可滋芝士乳茶240ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "金典娟姗瓶装250ml",
+   "coverage_status": "APPROXIMATED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "味可滋瓶装450ml",
+   "coverage_status": "APPROXIMATED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "伊利纯牛奶1L屋顶包",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "娟姗酸奶杯160g",
+   "coverage_status": "APPROXIMATED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "须尽欢茉莉酸奶90g杯",
+   "coverage_status": "IDENTITY_UNRESOLVED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "植选豆乳330ml瓶",
+   "coverage_status": "UNSUPPORTED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "每益添100ml小瓶",
+   "coverage_status": "UNSUPPORTED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "塞纳牧场鲜奶950ml瓶",
+   "coverage_status": "APPROXIMATED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "伊利巧克力奶250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "谷粒多燕麦牛奶250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  },
+  {
+   "sku": "伊利谢肥鸭雪糕75g",
+   "coverage_status": "UNSUPPORTED",
+   "denominator_retained": true
+  },
+  {
+   "sku": "金典低脂250ml",
+   "coverage_status": "GEOMETRY_EQUIVALENT",
+   "denominator_retained": true
+  }
+ ],
+ "task_applicable_coverage": 85.0
+}
