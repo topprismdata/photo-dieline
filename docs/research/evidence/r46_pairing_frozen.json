@@ -20,5 +20,11 @@
   "sha256_verified": true
  },
  "frozen_before_purchase": true,
- "l1_release_check": "L1 冻结发行集成员 (pack10k_scale10k 目录直读)"
+ "l1_release_check": "L1 冻结发行集成员 (pack10k_scale10k 目录直读)",
+ "disambiguation": {
+  "warning": "本配对资产 = L1 冻结发行集 aseptic 砖 (output/pack10k_scale10k/...), 与 hfpackage SimReady milk_bottle_1000 是不同资产 — 勿混淆 (SR 实验用的是后者)",
+  "l3_01_asset_sha256": "3d7a5b18681ac091de223d74145e0f878bc24de4bd09ea880097b98d8d6c0b34",
+  "simready_bottle_usdc_sha256": "887550da1ae36ffe2aa5320fb328389a60904c200d804a621cde7f4401a71df7",
+  "simready_bom_self_consistency": "BOM 声明 887550da… == 实测 ✓ (hfpackage 包内自洽)"
+ }
 }
