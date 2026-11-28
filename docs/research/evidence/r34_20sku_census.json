@@ -116,5 +116,13 @@
    "denominator_retained": true
   }
  ],
- "task_applicable_coverage": 85.0
+ "task_applicable_coverage": 80.0,
+ "r35_recompute": {
+  "issue": "R34 报 85% 与五态统计不一致 (85% 含了 IDENTITY_UNRESOLVED 1 件为可适用)",
+  "correction": "任务适用 = GEOMETRY_EQUIVALENT + APPROXIMATED = 16/20 = 80.0% (IDENTITY_UNRESOLVED 不计入任务适用)",
+  "theoretical_max_80pct": "GPT 独立复算确认: 17 件可表达 (12 GEQ+4 APPROX+1 待视觉定?) — 实际: 12+4=16 可表达 → 80%",
+  "status": "覆盖率更正为 80.0% (R35 收口)",
+  "gate_90pct": "未达 (80<90), 缺口=UNSUPPORTED 3 + UNRESOLVED 1"
+ },
+ "task_applicable_coverage_corrected": 80.0
 }
